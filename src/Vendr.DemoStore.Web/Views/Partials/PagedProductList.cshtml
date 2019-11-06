@@ -1,0 +1,6 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<PagedResult<Vendr.DemoStore.Models.ProductPage>>
+
+@if (Model.TotalItems > 0)
+{
+    @Html.Partial("ProductList", Model.Items)
+}

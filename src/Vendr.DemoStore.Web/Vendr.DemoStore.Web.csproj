@@ -468,6 +468,8 @@
     <Content Include="Views\StandardPage.cshtml" />
     <Content Include="Views\Page.cshtml" />
     <Content Include="Views\CartPage.cshtml" />
+    <Content Include="Views\Partials\ProductList.cshtml" />
+    <Content Include="Views\Partials\PagedProductList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

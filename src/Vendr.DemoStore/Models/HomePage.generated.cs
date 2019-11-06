@@ -46,6 +46,13 @@ namespace Vendr.DemoStore.Models
 		// properties
 
 		///<summary>
+		/// Featured Products: Select products to feature on the home page.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("featuredProducts")]
+		public IEnumerable<IPublishedContent> FeaturedProducts => this.Value<IEnumerable<IPublishedContent>>("featuredProducts");
+
+		///<summary>
 		/// Description: A description for the site, to be used in taglines and auto-generated page titles.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]

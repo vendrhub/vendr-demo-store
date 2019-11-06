@@ -2,3 +2,5 @@
 @{
 	Layout = "Page.cshtml";
 }
+
+@Html.Action("ProductListByCollection", "ProductSurface", new { collectionId = Model.Id })
