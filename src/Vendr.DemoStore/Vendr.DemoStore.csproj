@@ -368,6 +368,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Composing\DemoStoreComponent.cs" />
+    <Compile Include="Composing\DemoStoreComposer.cs" />
     <Compile Include="Models\CartPage.generated.cs" />
     <Compile Include="Models\CategoriesPage.generated.cs" />
     <Compile Include="Models\CategoryPage.generated.cs" />

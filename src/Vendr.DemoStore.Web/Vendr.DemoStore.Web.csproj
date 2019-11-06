@@ -418,7 +418,11 @@
     <Content Include="config\Lang\sv-SE.user.xml" />
     <Content Include="config\Lang\zh-CN.user.xml" />
     <Content Include="config\logviewer.searches.config.js" />
+    <Content Include="css\gilroy.css" />
+    <Content Include="css\main.css" />
     <Content Include="Global.asax" />
+    <Content Include="scripts\main.js" />
+    <Content Include="scripts\ssm.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -437,6 +441,7 @@
     <Content Include="config\HealthChecks.config" />
     <Content Include="config\ClientDependency.config" />
     <Content Include="config\BackOfficeTours\getting-started.json" />
+    <Content Include="css\Gilroy-ExtraBold.woff2" />
     <None Include="packages.config" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Partials\Grid\Editors\Textstring.cshtml" />
@@ -462,6 +467,7 @@
     <Content Include="Views\SearchPage.cshtml" />
     <Content Include="Views\StandardPage.cshtml" />
     <Content Include="Views\Page.cshtml" />
+    <Content Include="Views\CartPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
