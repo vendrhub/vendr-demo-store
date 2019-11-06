@@ -1,4 +1,5 @@
 ﻿using Examine;
+using Examine.Search;
 using System.Linq;
 using System.Web.Mvc;
 using Umbraco.Core;
@@ -57,7 +58,7 @@ namespace Vendr.DemoStore.Web.Controllers
                     query = query.And().Field("categoryAliases", category);
                 }
 
-                var results = query.Execute(pageSize * page);
+                var results = query.OrderBy(new SortableField("name")).Execute(pageSize * page);
                 var totalResults = results.TotalItemCount;
                 var pagedResults = results.Skip(pageSize * (page - 1));
 
