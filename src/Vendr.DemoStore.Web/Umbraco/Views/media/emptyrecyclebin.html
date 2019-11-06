@@ -1,0 +1,18 @@
+<div class="umb-dialog" ng-controller="Umbraco.Editors.Media.EmptyRecycleBinController">
+    <div class="umb-dialog-body">
+        
+        <umb-pane>
+
+            <umb-loader ng-show="busy"></umb-loader>
+
+            <p class="abstract">
+                <localize key="defaultdialogs_recycleBinWarning">When items are deleted from the recycle bin, they will be gone forever</localize>.
+                <localize key="general_areyousure">Are you sure?</localize>
+            </p>
+
+            <umb-confirm on-confirm="performDelete" on-cancel="cancel">
+            </umb-confirm>
+        </umb-pane>
+
+    </div>
+</div>
