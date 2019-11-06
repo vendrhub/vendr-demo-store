@@ -44,5 +44,12 @@ namespace Vendr.DemoStore.Models
 		{ }
 
 		// properties
+
+		///<summary>
+		/// Body: The main body of the page.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("bodyText")]
+		public IHtmlString BodyText => this.Value<IHtmlString>("bodyText");
 	}
 }
