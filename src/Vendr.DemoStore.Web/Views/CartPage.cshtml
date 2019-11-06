@@ -3,17 +3,6 @@
 	Layout = "Page.cshtml";
 }
 
-@section head {
-<style>
-    .data-label-visible:before { content: attr(data-label); padding-right: 1rem; }
-    .table-row-group { display: table-row-group; }
-    @@media (min-width: 768px) {
-        .md\:table-row-group { display: table-row-group; }
-        .md\:data-label-hidden:before { display: none; }
-    }
-</style>
-}
-
 <table class="block w-full mt-6 md:table">
     <thead class="hidden md:table-row-group">
         <tr class="text-bold">

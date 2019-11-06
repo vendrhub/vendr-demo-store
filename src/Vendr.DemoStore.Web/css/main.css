@@ -1,0 +1,28 @@
+﻿/* Utilities */
+.font-heading {
+    font-family: "Gilroy", sans-serif;
+}
+
+.text-grey {
+    color: #1a1a1a;
+}
+
+/* Cart Table Styles */
+.data-label-visible:before {
+    content: attr(data-label);
+    padding-right: 1rem;
+}
+
+.table-row-group {
+    display: table-row-group;
+}
+
+@media (min-width: 768px) {
+    .md\:table-row-group {
+        display: table-row-group;
+    }
+
+    .md\:data-label-hidden:before {
+        display: none;
+    }
+}
