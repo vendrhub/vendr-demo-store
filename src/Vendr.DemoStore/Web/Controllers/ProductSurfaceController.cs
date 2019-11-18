@@ -58,7 +58,7 @@ namespace Vendr.DemoStore.Web.Controllers
                     query = query.And().Field("categoryAliases", category);
                 }
 
-                var results = query.OrderBy(new SortableField("name")).Execute(pageSize * page);
+                var results = query.OrderBy(new SortableField("name", SortType.String)).Execute(pageSize * page);
                 var totalResults = results.TotalItemCount;
                 var pagedResults = results.Skip(pageSize * (page - 1));
 

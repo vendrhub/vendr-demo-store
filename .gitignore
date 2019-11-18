@@ -193,3 +193,4 @@ Desktop.ini
 # Umbraco
 **/App_Data/Logs/
 **/App_Data/TEMP/
+**/App_Data/cache/

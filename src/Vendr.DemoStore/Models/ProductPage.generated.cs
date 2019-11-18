@@ -51,5 +51,33 @@ namespace Vendr.DemoStore.Models
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		[ImplementPropertyType("categories")]
 		public IEnumerable<IPublishedContent> Categories => this.Value<IEnumerable<IPublishedContent>>("categories");
+
+		///<summary>
+		/// Images: A select of images to display for this product. The first image will be the primary image.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("images")]
+		public IEnumerable<IPublishedContent> Images => this.Value<IEnumerable<IPublishedContent>>("images");
+
+		///<summary>
+		/// Long Description: A longer product description.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("longDescription")]
+		public IHtmlString LongDescription => this.Value<IHtmlString>("longDescription");
+
+		///<summary>
+		/// Short Description: A shot product description.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("shortDescription")]
+		public string ShortDescription => this.Value<string>("shortDescription");
+
+		///<summary>
+		/// SKU: The unique SKU of this product.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("sku")]
+		public string Sku => this.Value<string>("sku");
 	}
 }

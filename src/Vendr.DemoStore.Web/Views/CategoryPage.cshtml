@@ -3,4 +3,5 @@
 	Layout = "Page.cshtml";
 }
 
+@Html.Partial("Intro")
 @Html.Action("ProductListByCategory", "ProductSurface", new { category = Model.UrlSegment })
