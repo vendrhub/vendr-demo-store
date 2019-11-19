@@ -1,0 +1,11 @@
+﻿<div ng-controller="Vendr.Controllers.PriceController as vm" class="vendr umb-property-editor umb-contentpicker">
+
+    <div ng-if="!vm.loading && !vm.store" class="alert" style="margin:0;">Unable to locate an associated <strong>Store</strong> for this product.<br />Please make sure you have added a <strong>Vendr Store Picker</strong> to your content root node.</div>
+
+    <div class="vendr-input vendr-input--short" ng-if="!vm.loading && vm.store"
+         ng-repeat="price in vm.prices">
+        <span class="vendr-input--prefix">{{ price.currencyCode }}</span>
+        <input type="number" ng-model="price.value" pattern="[0-9]+([,\.][0-9]+)?" fix-number />
+    </div>
+
+</div>

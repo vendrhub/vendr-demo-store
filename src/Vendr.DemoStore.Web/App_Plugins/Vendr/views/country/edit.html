@@ -1,0 +1,51 @@
+﻿<div ng-controller="Vendr.Controllers.CountryEditController as vm" class="vendr">
+
+    <umb-load-indicator ng-if="vm.page.loading"></umb-load-indicator>
+
+    <form name="contentForm"
+          ng-submit="vm.save()"
+          novalidate
+          val-form-manager>
+
+        <umb-editor-view ng-if="!vm.page.loading">
+
+            <umb-editor-header name="vm.content.name"
+                hide-icon="true"
+                hide-description="true"
+                hide-alias="true"
+                show-back-button="true"
+                on-back="vm.back()"
+                menu="vm.page.menu"
+                navigation="vm.page.navigation">
+            </umb-editor-header>
+
+            <umb-editor-container class="form-horizontal">
+                <umb-editor-sub-views sub-views="vm.page.navigation" model="vm"></umb-editor-sub-views>
+            </umb-editor-container>
+
+            <umb-editor-footer>
+
+                <umb-editor-footer-content-left>
+                    <umb-breadcrumbs
+                        ng-if="vm.page.breadcrumb && vm.page.breadcrumb.items && vm.page.breadcrumb.items.length > 0"
+                        ancestors="vm.page.breadcrumb.items"
+                        on-open="vm.page.breadcrumb.itemClick(ancestor)">
+                    </umb-breadcrumbs>
+                </umb-editor-footer-content-left>
+
+                <umb-editor-footer-content-right>
+
+                    <umb-button type="submit"
+                                button-style="success"
+                                state="vm.page.saveButtonState"
+                                shortcut="ctrl+s"
+                                label="Save"
+                                label-key="buttons_save">
+                    </umb-button>
+
+                </umb-editor-footer-content-right>
+
+            </umb-editor-footer>
+        </umb-editor-view>
+    </form>
+</div>

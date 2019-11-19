@@ -1,0 +1,66 @@
+﻿<div ng-controller="Vendr.Controllers.StorePickerDialogController as vm" class="vendr ">
+
+    <umb-load-indicator ng-if="vm.loading"></umb-load-indicator>
+
+    <umb-editor-view>
+
+        <umb-editor-header name="vm.title"
+            name-locked="true"
+            hide-alias="true"
+            hide-icon="true"
+            hide-description="true">
+        </umb-editor-header>
+
+        <umb-editor-container>
+
+            <umb-box ng-if="vm.items.length > 0">
+                <umb-box-content>
+
+                    <div class="umb-control-group" ng-if="vm.enableFilter">
+                        <div class="form-search">
+                            <i class="icon-search"></i>
+                            <input type="text"
+                                ng-model="vm.searchTerm"
+                                class="umb-search-field search-query input-block-level -full-width-input"
+                                localize="placeholder"
+                                placeholder="@placeholders_filter"
+                                umb-auto-focus
+                                no-dirty-check />
+                        </div>
+                    </div>
+
+                    <ul class="umb-actions umb-actions-child">
+                        <li class="umb-action" ng-repeat="item in vm.items | filter:vm.searchTerm">
+                            <a class="umb-action-link" ng-click="vm.pick(item)">
+                                <i class="large icon {{item.icon}}"></i>
+                                <span class="menu-label">
+                                    <span ng-bind="item.name"></span>
+                                    <small ng-bind="item.id"></small>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+
+                </umb-box-content>
+            </umb-box>
+
+            <umb-empty-state ng-if="!vm.loading && vm.items.length == 0" position="center">
+                <p>There are no items available to choose from.</p>
+            </umb-empty-state>
+
+        </umb-editor-container>
+
+        <umb-editor-footer>
+            <umb-editor-footer-content-right>
+                <umb-button type="button"
+                            button-style="link"
+                            label-key="general_close"
+                            shortcut="esc"
+                            action="vm.close()">
+                </umb-button>
+            </umb-editor-footer-content-right>
+        </umb-editor-footer>
+
+    </umb-editor-view>
+
+</div>

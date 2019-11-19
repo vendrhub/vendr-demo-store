@@ -1,0 +1,136 @@
+﻿<div>
+
+    <umb-box>
+        <umb-box-content>
+
+            <umb-control-group label="Default Country">
+                <select class="umb-property-editor umb-dropdown"
+                        ng-model="model.content.defaultCountryId"
+                        ng-options="itm.id as itm.name for itm in model.options.countries">
+                    <option value="" disabled selected>-- Select a Country --</option>
+                </select>
+            </umb-control-group>
+
+            <umb-control-group label="Default Tax Class">
+                <select class="umb-property-editor umb-dropdown"
+                        ng-model="model.content.defaultTaxClassId"
+                        ng-options="itm.id as itm.name for itm in model.options.taxClasses">
+                    <option value="" disabled selected>-- Select a Tax Class --</option>
+                </select>
+            </umb-control-group>
+
+            <umb-control-group label="Default Order Status">
+                <select class="umb-property-editor umb-dropdown"
+                        ng-model="model.content.defaultOrderStatusId"
+                        ng-options="itm.id as itm.name for itm in model.options.orderStatuses">
+                    <option value="" disabled selected>-- Select an Order Status --</option>
+                </select>
+            </umb-control-group>
+
+            <umb-control-group label="Prices Include Tax" description="Flag to indicate whether prices in the CMS are defined inclusive of sales tax.">
+                <umb-toggle checked="model.content.pricesIncludeTax"
+                            on-click="model.content.pricesIncludeTax = !model.content.pricesIncludeTax" />
+            </umb-control-group>
+
+            <umb-control-group label="Use Cookies" description="Flag to indicate whether cookies should be used. If true, a Cart ID will be stored in a cookie allowing it to persist between site visits. If false, Carts will be lost when the users session expires.">
+                <umb-toggle checked="model.content.useCookies" 
+                            on-click="model.content.useCookies = !model.content.useCookies" />
+            </umb-control-group>
+
+            <div ng-if="model.content.useCookies">
+                <umb-control-group label="Cookie Timeout" description="The length of time in minutes to persist the Cart cookie. Defaults to 1 year (525600 minutes).">
+                    <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--short"
+                           ng-model="model.content.cookieTimeout" />
+                </umb-control-group>
+            </div>
+
+        </umb-box-content>
+    </umb-box>
+
+    <umb-box>
+        <umb-box-header title="Notification Settings"></umb-box-header>
+        <umb-box-content>
+
+            <umb-control-group label="Confirmation Email">
+                <select class="umb-property-editor umb-dropdown"
+                        ng-model="model.content.confirmationEmailTemplateId"
+                        ng-options="itm.id as itm.name for itm in model.options.emailTemplates">
+                    <option value="" disabled selected>-- Select an Email Template --</option>
+                </select>
+            </umb-control-group>
+            <umb-control-group label="Payment Inconsistency Email">
+                <select class="umb-property-editor umb-dropdown"
+                        ng-model="model.content.inconsistentPaymentEmailTemplateId"
+                        ng-options="itm.id as itm.name for itm in model.options.emailTemplates">
+                    <option value="" disabled selected>-- Select an Email Template --</option>
+                </select>
+            </umb-control-group>
+
+        </umb-box-content>
+    </umb-box>
+
+    <umb-box>
+        <umb-box-header title="Order Settings"></umb-box-header>
+        <umb-box-content>
+
+            <umb-control-group label="Cart Number Template" description="A string formatting template to use when generating a Cart Number, eg: 'CART-{0}'">
+                <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--short"
+                       ng-model="model.content.cartNumberTemplate" />
+            </umb-control-group>
+            <umb-control-group label="Order Number Template" description="A string formatting template to use when generating an Order Number, eg: 'ORDER-{0}'">
+                <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--short"
+                       ng-model="model.content.orderNumberTemplate" />
+            </umb-control-group>
+
+        </umb-box-content>
+    </umb-box>
+
+    <umb-box>
+        <umb-box-header title="Product Settings"></umb-box-header>
+        <umb-box-content>
+
+            <umb-control-group label="Product Property Aliases" description="Comma seperated list of property aliases to be copied to the order line when added to the cart">
+                <input type="text" class="umb-property-editor umb-textstring textstring"
+                       ng-model="model.content.productPropertyAliases" />
+            </umb-control-group>
+            <umb-control-group label="Product Uniqueness Property Aliases" description="Comma seperated list of property aliases to be used to define product uniqueness">
+                <input type="text" class="umb-property-editor umb-textstring textstring"
+                       ng-model="model.content.productUniquenessPropertyAliases" />
+            </umb-control-group>
+
+        </umb-box-content>
+    </umb-box>
+
+    <umb-box>
+        <umb-box-header title="Gift Card Settings"></umb-box-header>
+        <umb-box-content>
+
+            <umb-control-group label="Code Length" description="The length a Gift Card codes should be when auto generated">
+                <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--short"
+                       ng-model="model.content.giftCardCodeLength" />
+            </umb-control-group>
+            <umb-control-group label="Code Template" description="A string formatting template to use when generating a Gift Card code, eg: 'GIFTCARD-{0}'">
+                <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--short"
+                       ng-model="model.content.giftCardCodeTemplate" />
+            </umb-control-group>
+            <umb-control-group label="Valid For" description="The number of days Gift Cards should be valid for">
+                <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--short"
+                       ng-model="model.content.giftCardDaysValid" />
+            </umb-control-group>
+
+        </umb-box-content>
+    </umb-box>
+
+    <umb-box>
+        <umb-box-header title="UI Settings"></umb-box-header>
+        <umb-box-content>
+
+            <umb-control-group label="Edit Order View" description="A custom view file to use for the order edit UI. Useful if you capture custom information and want to easily display it within the order edit screen.">
+                <input type="text" class="umb-property-editor umb-textstring textstring" 
+                       ng-model="model.content.editOrderView" />
+            </umb-control-group>
+
+        </umb-box-content>
+    </umb-box>
+
+</div>

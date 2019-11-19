@@ -1,0 +1,53 @@
+{
+  "propertyEditors": [
+    {
+      "alias": "Vendr.StorePicker",
+      "name": "Vendr: Store Picker",
+      "editor": {
+        "view": "~/App_Plugins/Vendr/views/propertyeditors/storepicker/storepicker.html",
+        "hideLabel": false,
+        "valueType": "STRING"
+      }
+    },
+    {
+      "alias": "Vendr.TaxClassPicker",
+      "name": "Vendr: Tax Class Picker",
+      "editor": {
+        "view": "~/App_Plugins/Vendr/views/propertyeditors/taxclasspicker/taxclasspicker.html",
+        "hideLabel": false,
+        "valueType": "STRING"
+      }
+    },
+    {
+      "alias": "Vendr.StockLevel",
+      "name": "Vendr: Stock Level",
+      "editor": {
+        "view": "~/App_Plugins/Vendr/views/propertyeditors/stocklevel/stocklevel.html",
+        "hideLabel": false,
+        "valueType": "STRING"
+      }
+    },
+    {
+      "alias": "Vendr.Price",
+      "name": "Vendr: Price",
+      "editor": {
+        "view": "~/App_Plugins/Vendr/views/propertyeditors/price/price.html",
+        "hideLabel": false,
+        "valueType": "JSON"
+      }
+    }
+  ],
+  "javascript": [
+    "~/app_plugins/vendr/js/vendr.vendor.js",
+    "~/app_plugins/vendr/js/vendr.modules.js",
+    "~/app_plugins/vendr/js/vendr.interceptors.js",
+    "~/app_plugins/vendr/js/vendr.decorators.js",
+    "~/app_plugins/vendr/js/vendr.directives.js",
+    "~/app_plugins/vendr/js/vendr.resources.js",
+    "~/app_plugins/vendr/js/vendr.services.js",
+    "~/app_plugins/vendr/js/vendr.controllers.js"
+  ],
+  "css": [
+    "~/app_plugins/vendr/css/vendr.css"
+  ]
+}

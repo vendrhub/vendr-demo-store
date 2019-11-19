@@ -1,0 +1,51 @@
+﻿<div ng-controller="Vendr.Controllers.CountryCreateController as vm" class="vendr" ng-cloak>
+
+    <div class="umbracoDialog umb-dialog-body with-footer">
+
+        <h5>Create an item under Countries</h5>
+
+        <div class="umb-pane" ng-if="!vm.options.selectPreset">
+
+            <ul class="umb-actions umb-actions-child">
+                <li class="umb-action">
+                    <a href="" class="umb-action-link" ng-click="vm.createNew()" umb-auto-focus>
+                        <i class="large icon-flag-alt"></i>
+                        <span class="menu-label">New blank country</span>
+                    </a>
+                </li>
+                <li class="umb-action">
+                    <a href="" class="umb-action-link" ng-click="vm.selectPreset()">
+                        <i class="large icon icon-flag-alt"></i>
+                        <span class="menu-label">New country from IS0 3166 preset</span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="umb-pane" ng-if="vm.options.selectPreset">
+
+            <umb-control-group label="Filter" hide-label="true">
+                <input type="text" name="filter" ng-model="vm.options.presetFilter" class="umb-textstring textstring input-block-level" autocomplete="off" umb-auto-focus />
+            </umb-control-group>
+
+            <ul class="umb-actions umb-actions-child">
+                <li class="umb-action" ng-repeat="preset in vm.options.presets | filter:vm.options.presetFilter">
+                    <a href="" class="umb-action-link" ng-click="vm.createNewFromPreset(preset)" style="padding-top: 6px; padding-bottom: 6px;">
+                        <i class="icon-flag-alt icon" style="font-size: 20px;"></i>
+                        <span class="menu-label" style="margin-left: 0; padding-left: 5px;">{{ preset.name }}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Dialog footer -->
+    <div class="umb-dialog-footer btn-toolbar umb-btn-toolbar">
+        <button class="btn btn-info" ng-click="vm.close()">
+            <localize key="buttons_somethingElse">Do something else</localize>
+        </button>
+    </div>
+
+</div>

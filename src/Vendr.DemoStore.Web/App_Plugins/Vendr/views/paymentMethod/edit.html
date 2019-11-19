@@ -1,0 +1,118 @@
+﻿<div ng-controller="Vendr.Controllers.PaymentMethodEditController as vm" class="vendr">
+
+    <umb-load-indicator ng-if="vm.page.loading"></umb-load-indicator>
+
+    <form name="contentForm"
+          ng-submit="vm.save()"
+          novalidate
+          val-form-manager
+          autocomplete="off">
+
+        <umb-editor-view ng-if="!vm.page.loading">
+
+            <umb-editor-header name="vm.content.name"
+                alias="vm.content.alias"
+                hide-icon="true"
+                hide-description="true"
+                hide-alias="false"
+                show-back-button="true"
+                on-back="vm.back()"
+                menu="vm.page.menu">
+            </umb-editor-header>
+
+            <umb-editor-container class="form-horizontal">
+
+                <umb-box>
+                    <!--<umb-box-header title="Settings"></umb-box-header>-->
+                    <umb-box-content>
+
+                        <umb-control-group label="SKU">
+                            <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--short"
+                                   ng-model="vm.content.sku" />
+                        </umb-control-group>
+                        <umb-control-group label="Tax Class">
+                            <select class="umb-property-editor umb-dropdown"
+                                    ng-model="vm.content.taxClassId"
+                                    ng-options="itm.id as itm.name for itm in vm.options.taxClasses">
+                                <option value="" disabled selected>-- Select a Tax Class --</option>
+                            </select>
+                        </umb-control-group>
+
+                        <umb-control-group label="Default Pricing">
+
+                            <div class="vendr-input vendr-input--short" ng-repeat="defaultPrice in vm.content.defaultPrices">
+                                <span class="vendr-input--prefix">{{ defaultPrice.currencyCode }}</span>
+                                <input type="text" ng-model="defaultPrice.value" />
+                            </div>
+
+                        </umb-control-group>
+                        <umb-control-group label="Image">
+                            <vendr-media-picker ng-model="vm.content.imageId"
+                                multi-picker="false"
+                                only-images="true"
+                                disable-folder-select="true" />
+                        </umb-control-group>
+
+                    </umb-box-content>
+                </umb-box>
+
+                <umb-box ng-if="vm.options.paymentProviderScaffold">
+                    <umb-box-header title="{{ vm.options.paymentProviderScaffold.name }}">
+                        <label title="Toggle advanced mode" class="vendr-box-header-label" ng-if="vm.options.advancedPaymentProviderProperties && vm.options.advancedPaymentProviderProperties.length > 0">Advanced 
+                            <umb-toggle checked="vm.options.advancedPaymentProviderPropertiesShown" on-click="vm.toggleAdvancedPaymentProviderProperties()"></umb-toggle>
+                        </label>
+                    </umb-box-header>
+                    <umb-box-content>
+
+                        <umb-property ng-repeat="property in vm.options.paymentProviderProperties track by property.alias" property="property">
+                            <umb-property-editor model="property"></umb-property-editor>
+                        </umb-property>
+
+                        <div ng-if="vm.options.advancedPaymentProviderProperties && vm.options.advancedPaymentProviderProperties.length > 0 && vm.options.advancedPaymentProviderPropertiesShown">
+                            <umb-property ng-repeat="property in vm.options.advancedPaymentProviderProperties track by property.alias" property="property">
+                                <umb-property-editor model="property"></umb-property-editor>
+                            </umb-property>
+                        </div>
+
+                    </umb-box-content>
+                </umb-box>
+
+                <umb-box>
+                    <umb-box-header title="Available in Countries"></umb-box-header>
+                    <umb-box-content>
+
+                        <vendr-toggle-list ng-model="vm.options.countryRegions" 
+                            toggle-all="true" items-key="regions"
+                            checked-action-label="'Custom Pricing'"
+                            on-checked-action="vm.openCustomPricesDialog" />
+
+                    </umb-box-content>
+                </umb-box>
+
+            </umb-editor-container>
+
+            <umb-editor-footer>
+
+                <umb-editor-footer-content-left>
+                    <umb-breadcrumbs ng-if="vm.page.breadcrumb && vm.page.breadcrumb.items && vm.page.breadcrumb.items.length > 0"
+                        ancestors="vm.page.breadcrumb.items"
+                        on-open="vm.page.breadcrumb.itemClick(ancestor)">
+                    </umb-breadcrumbs>
+                </umb-editor-footer-content-left>
+
+                <umb-editor-footer-content-right>
+
+                    <umb-button type="submit"
+                                button-style="success"
+                                state="vm.page.saveButtonState"
+                                shortcut="ctrl+s"
+                                label="Save"
+                                label-key="buttons_save">
+                    </umb-button>
+
+                </umb-editor-footer-content-right>
+
+            </umb-editor-footer>
+        </umb-editor-view>
+    </form>
+</div>

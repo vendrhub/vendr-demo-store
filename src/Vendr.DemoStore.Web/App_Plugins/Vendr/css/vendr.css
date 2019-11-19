@@ -1,0 +1,718 @@
+﻿/* Overrides */
+.umb-tree-item.unselectable > .umb-tree-item__inner {
+    background-color: transparent !important;
+}
+
+.vendr .umb-editor-sub-header {
+    background-color: #f6f4f4;
+}
+
+.vendr.umb-dialog .confirm .umb-pane {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 30px;
+}
+
+.vendr .control-group--sub-group {
+    margin-top: -25px;
+    background-color: white;
+}
+
+.vendr .control-group--sub-group .control-label span {
+    position: relative;
+    padding-left: 22px !important;
+}
+
+.vendr .control-group--sub-group .control-label span:before {
+    content: "\2014";
+    margin-left: 2px;
+    position: absolute;
+    left: 0;
+    opacity: .1;
+}
+
+.vendr .umb-box-content > *:last-child, 
+.vendr .history .history-item:last-child {
+    margin-bottom: 0;
+}
+
+.vendr .history .history-line {
+    margin-top: 20px;
+    height: calc(100% - 40px);
+}
+
+.vendr .history .history-line--s {
+    margin-left: 19px;
+}
+
+/* Layouts */
+.vendr-layout--layout1 {
+    display: flex;
+}
+
+.vendr-layout--layout1 .vendr-layout__left {
+    flex: 1 1 auto;
+    margin-right: 20px;
+    width: calc(100% - 370px);
+}
+
+.vendr-layout--layout1 .vendr-layout__right {
+    flex: 0 0 350px;
+}
+
+.vendr-layout__left > *:last-child,
+.vendr-layout__right > *:last-child{
+    margin-bottom: 0 !important;
+}
+
+/* Inputs */
+.vendr-input {
+    display: flex;
+    height: 32px;
+    line-height: 32px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: #303033;
+    border-radius: 0;
+    vertical-align: middle;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #d8d7d9;
+    transition: border .2s linear,box-shadow .2s linear;
+    width: 100%;
+}
+
+@media screen and (min-width: 800px) {
+    .vendr-input {
+        width: 10%;
+        min-width: 66.66%;
+    }
+}
+
+.vendr-input:last-child {
+    margin-bottom: 0;
+}
+
+.vendr-input > span {
+    flex: 0;
+    padding: 0 5px;
+    font-size: 13px;
+    color: #68676b;
+}
+
+.vendr-input > input {
+    flex: 1;
+    padding: 4px 6px;
+    line-height: 20px;
+    border: 0;
+    height: 30px;
+    background-color: transparent;
+    width: auto;
+    min-width: 0;
+}
+
+.vendr-input > .vendr-input--prefix {
+    padding-left: 10px;
+}
+
+.vendr-input > .vendr-input--postfix,
+.vendr-input > .vendr-input--suffix {
+    padding-right: 10px;
+}
+
+.vendr-input > .vendr-input--action {
+    width: 32px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.vendr-input > .vendr-input--action:hover,
+.vendr-input > .vendr-input--action:focus {
+    color: #2152a3;
+    text-decoration: none;
+}
+
+.vendr-input > .vendr-input--action:first-child {
+    border-right: 1px solid #d8d7d9;
+}
+
+.vendr-input > .vendr-input--action:last-child {
+    border-left: 1px solid #d8d7d9;
+}
+
+.vendr-input > .vendr-input--action .icon {
+    font-size: 20px;
+}
+
+.vendr-input--right > input {
+    text-align: right;
+}
+
+.vendr-input--short {
+    min-width: 33.33%;
+}
+
+.vendr-input--shorter {
+    min-width: 20%;
+}
+
+.vendr-input--wide {
+    min-width: 100%;
+}
+
+/* Vertical Forms */
+.vendr .form-vertical .umb-control-group .control-label, 
+.vendr .form-vertical .umb-control-group label.control-label {
+    display: block;
+    padding-bottom: 5px;
+}
+
+.vendr .form-vertical .umb-control-group .controls-row {
+    margin-left: 0;
+}
+
+/* Toggle */
+.vendr-toggle--indented {
+    margin-left: 40px;
+}
+
+.vendr-toggle {
+    display: flex;
+    border-bottom: 1px solid #e9e9eb;
+    padding: 7px 0;
+}
+
+.vendr-toggle:last-of-type {
+    border-bottom: none;
+}
+
+.vendr-toggle .umb-toggle {
+    padding: 2px 20px 2px 0;
+    cursor: pointer;
+}
+
+.vendr-toggle__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1 1 auto;
+    cursor: pointer;
+}
+
+.vendr-toggle__description {
+    font-size: 13px;
+    color: #68676b;
+}
+
+.vendr-toggle__action {
+    padding-left: 20px;
+    align-self: center;
+    margin-top: -2px;
+    margin-bottom: -2px;
+}
+
+.vendr-toggle__action-btn {
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 32px;
+}
+
+.vendr-toggle-list {
+    position: relative;
+}
+
+
+/* Overrides */
+.vendr .umb-box {
+    margin-bottom: 20px;
+}
+
+.icon-indicator{
+    position: relative;
+}
+
+.icon-indicator:after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background-color: black;
+    right: -2px;
+    bottom: 0;
+}
+
+.icon-indicator--success:after {
+    background-color: #39d38b;
+}
+.icon-indicator--error:after {
+    background-color: #d42054;
+}
+
+a.no-underline,
+a.no-underline:hover,
+a.no-underline:focus {
+    text-decoration: none;
+}
+
+.umb-dialog-footer .confirm .umb-pane {
+    margin: 0 !important;
+}
+.umb-dialog-footer .confirm .control-group {
+    margin: 0 !important;
+}
+
+/* Autocomplete */
+.vendr-auto-complete-item-selected,
+.vendr-auto-complete-item-selected:hover,
+.vendr-auto-complete-item-selected:focus {
+    background: #f5c1bc;
+    color: #1b264f;
+}
+
+/* Box Header Label */
+.vendr-box-header-label {
+    display: flex;
+    align-items: center;
+    color: #a2a1a6;
+    cursor: pointer !important;
+    margin-bottom: 0;
+}
+
+.vendr-box-header-label .umb-toggle {
+    margin-left: 10px;
+}
+
+/* Tables */
+.vendr-table-cell strong {
+    color: #000;
+}
+
+.vendr-table-cell--center {
+    text-align: center;
+    justify-content: center;
+}
+
+.vendr-table-cell--right {
+    text-align: right;
+    justify-content: flex-end;
+}
+
+.vendr-table-cell-value--multiline {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.vendr-table-cell-label {
+    font-weight: normal;
+    color: #817f85;
+}
+
+/* Color Swatches */
+.vendr-color-swatch {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 3px;
+    border: 1px solid rgba(0,0,0,.15);
+}
+
+/* BG Colors */
+.vendr-bg--grey,
+.vendr-badge--initialized,
+.vendr-badge--canceled,
+.vendr-badge--cancelled,
+.vendr-badge--inconsistentcanceled,
+.vendr-badge--pendingexternalsystem,
+.vendr-header--payment-status-initialized .umb-panel-header-name:before,
+.vendr-header--payment-status-canceled .umb-panel-header-name:before,
+.vendr-header--payment-status-cancelled .umb-panel-header-name:before,
+.vendr-header--payment-status-inconsistentcanceled .umb-panel-header-name:before,
+.vendr-header--payment-status-pendingexternalsystem .umb-panel-header-name:before,
+.vendr-header--order-status-grey .umb-panel-header-name:after {
+    color: #68676b;
+    background-color: #d8d7d9;
+}
+.vendr-bg--red,
+.vendr-badge--refunded,
+.vendr-badge--inconsistentcaptured,
+.vendr-badge--error,
+.vendr-header--payment-status-refunded .umb-panel-header-name:before,
+.vendr-header--payment-status-inconsistentcaptured .umb-panel-header-name:before,
+.vendr-header--payment-status-error .umb-panel-header-name:before,
+.vendr-header--order-status-red .umb-panel-header-name:after {
+    color: white;
+    background-color: #d42054;
+}
+.vendr-bg--orange,
+.vendr-badge--authorized,
+.vendr-badge--inconsistentauthorized,
+.vendr-header--payment-status-authorized .umb-panel-header-name:before,
+.vendr-header--payment-status-inconsistentauthorized .umb-panel-header-name:before,
+.vendr-header--order-status-orange .umb-panel-header-name:after {
+    color: white;
+    background-color: #ff9800;
+}
+.vendr-bg--deep-orange,
+.vendr-header--order-status-deep-orange .umb-panel-header-name:after {
+    color: white;
+    background-color: #ff5722;
+}
+.vendr-bg--yellow,
+.vendr-header--order-status-yellow .umb-panel-header-name:after {
+    color: #655b12;
+    background-color: #ffeb3b;
+}
+.vendr-bg--amber,
+.vendr-header--order-status-amber .umb-panel-header-name:after {
+    color: #544c0f;
+    background-color: #ffc107;
+}
+.vendr-bg--green,
+.vendr-badge--captured,
+.vendr-header--payment-status-captured .umb-panel-header-name:before,
+.vendr-header--order-status-green .umb-panel-header-name:after {
+    color: white;
+    background-color: #4caf50; /* #2bc37c; */
+}
+.vendr-bg--light-green,
+.vendr-header--order-status-light-green .umb-panel-header-name:after {
+    color: white;
+    background-color: #8bc34a;
+}
+.vendr-bg--lime,
+.vendr-header--order-status-lime .umb-panel-header-name:after {
+    color: white;
+    background-color: #cddc39;
+}
+.vendr-bg--blue,
+.vendr-header--order-status-blue .umb-panel-header-name:after {
+    color: white;
+    background-color: #2196f3;
+}
+.vendr-bg--light-blue,
+.vendr-header--order-status-light-blue .umb-panel-header-name:after {
+    color: white;
+    background-color: #03a9f4;
+}
+.vendr-bg--indigo,
+.vendr-header--order-status-indigo .umb-panel-header-name:after {
+    color: white;
+    background-color: #3f51b5
+}
+.vendr-bg--pink,
+.vendr-header--order-status-pink .umb-panel-header-name:after {
+    color: white;
+    background-color: #e91e63;
+}
+.vendr-bg--purple,
+.vendr-header--order-status-purple .umb-panel-header-name:after {
+    color: white;
+    background-color: #9c27b0;
+}
+.vendr-bg--deep-purple,
+.vendr-header--order-status-deep-purble .umb-panel-header-name:after {
+    color: white;
+    background-color: #673ab7;
+}
+.vendr-bg--cyan,
+.vendr-header--order-status-cyan .umb-panel-header-name:after {
+    color: white;
+    background-color: #00bcd4;
+}
+.vendr-bg--brown,
+.vendr-header--order-status-brown .umb-panel-header-name:after {
+    color: white;
+    background-color: #795548;
+}
+
+/* Header */
+.vendr-header--order .umb-panel-header-name {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+
+.vendr-header--order .umb-panel-header-locked-description {
+    color: #817f85;
+    font-size: 12px;
+    line-height: 12px;
+    height: auto;
+    margin-top: 6px;
+}
+
+.vendr-header--order-status .umb-panel-header-name:after,
+.vendr-header--payment-status .umb-panel-header-name:before {
+    font-size: 13px;
+    font-weight: normal;
+    padding: 1px 10px;
+    display: inline-block;
+    border-radius: 100px;
+    margin-left: 10px;
+    vertical-align: bottom;
+}
+
+.vendr-header--payment-status .umb-panel-header-name:before {
+    margin-left: 5px;
+    order: 10;
+}
+
+/* Order Table */
+.vendr-order-table {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.vendr-order-table__line-item,
+.vendr-order-table__subtotal,
+.vendr-order-table__total {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.vendr-order-table__line-item {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #f3f3f5;
+}
+
+.vendr-order-table__line-item > *,
+.vendr-order-table__subtotal > *,
+.vendr-order-table__total > * {
+    width: 20%;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.vendr-order-table__line-item > *:first-child,
+.vendr-order-table__subtotal > *:first-child,
+.vendr-order-table__total > *:first-child {
+    flex: 1 0 auto;
+    width: auto;
+    text-align: left;
+    white-space: normal;
+}
+
+.vendr-order-table__subtotal > *:first-child,
+.vendr-order-table__total > *:first-child {
+    text-align: right;
+}
+
+.vendr-order-table__line-item + hr,
+.vendr-order-table__subtotal + hr,
+.vendr-order-table__total + hr {
+    margin-top: 10px;
+}
+
+.vendr-order-table__total,
+.vendr-order-table__line-item > *:last-child{
+    font-weight: bold;
+}
+
+.vendr-order-table__bundle-toggle {
+    cursor: pointer;
+    vertical-align: middle;
+    margin-right: 10px;
+    line-height: 20px;
+}
+
+.vendr-order-table__bundle-toggle:hover {
+    color: #9e9e9e;
+}
+
+.vendr-order-table__bundle {
+    background-color: #f3f3f5;
+    margin: -20px;
+    margin-top: -21px;
+    margin-bottom: 20px;
+}
+
+.vendr-order-table__bundle--inner {
+    margin: 0 20px;
+    padding-top: 10px;
+}
+
+.vendr-order-table__bundle--inner > *:last-child {
+    margin-bottom: 0;
+    border-bottom: 0;
+}
+
+.vendr-order-table__bundle .vendr-order-table__line-item {
+    border: 0;
+    padding-bottom: 0;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #777;
+    align-items: stretch;
+}
+
+.vendr-order-table__bundle .vendr-order-table__line-item > * {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid white;
+    padding-bottom: 10px;
+    justify-content: center;
+}
+
+.vendr-order-table__bundle .vendr-order-table__line-item > *:first-child {
+    margin-left: 40px;
+}
+
+.vendr-order-table__label {
+}
+
+/* License check */
+.vendr-message {
+    position: relative;
+    overflow: hidden;
+    padding: 10px 20px 10px 50px;
+    margin-bottom: 20px;
+    border-radius: 3px;
+}
+
+.vendr-message__heading {
+    font-weight: bold;
+    position: relative;
+}
+
+.vendr-message__icon {
+    position: absolute;
+    left: -30px;
+}
+
+.vendr-message__icon-watermark {
+    position: absolute;
+    right: -20px;
+    bottom: -20px;
+    font-size: 150px;
+    opacity: .1;
+    z-index: 0;
+}
+
+.vendr-message__body {
+    position: relative;
+    z-index: 1;
+}
+
+.vendr-message a {
+    text-decoration: underline;
+}
+
+.vendr-message--warn {
+    border: solid 1px #ff9800;
+    background-color: #ffeacc;
+}
+
+.vendr-message--warn .vendr-message__icon,
+.vendr-message--warn .vendr-message__icon-watermark {
+    color: #ff9800;
+}
+
+.vendr-message--info {
+    border: solid 1px #2196f3;
+    background-color: #e9f5fe;
+}
+
+.vendr-message--info .vendr-message__icon,
+.vendr-message--info .vendr-message__icon-watermark {
+    color: #2196f3;
+}
+
+/* Split */
+.vendr-split {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.vendr-icon--24 {
+    vertical-align: middle;
+    font-size: 24px;
+}
+
+.vendr .mr-5 {
+    margin-right: 5px;
+}
+
+.vendr .ml-5 {
+    margin-left: 5px;
+}
+
+.vendr .mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.vendr .nowrap {
+    white-space: nowrap;
+}
+
+/*.vendr .flex {
+    display: flex;
+}
+
+.vendr .flex--column {
+    flex-direction: column;
+}
+
+.vendr .justify-end {
+    justify-content: flex-end;
+}
+
+.vendr .justify-end {
+    justify-content: flex-end;
+}
+
+.vendr .items-end {
+    align-items: flex-end;
+}
+
+.vendr .self-end {
+    align-self: flex-end;
+}*/
+
+.vendr .text-12 {
+    font-size: 12px;
+}
+
+.vendr .block {
+    display: block;
+}
+
+.vendr .strikethrough {
+    text-decoration: line-through;
+}
+
+.vendr .w-1\/2 {
+    width: 50%;
+}
+
+.vendr .w-1\/4 {
+    width: 25%;
+}
+.vendr .w-1\/5 {
+    width: 20%;
+}
+.vendr .w-2\/5 {
+    width: 40%;
+}
+
+.copy-box {
+    position: relative;
+}
+
+.copy-box .copy-box__copy {
+    float: right;
+    display: none;
+}
+
+.copy-box:hover .copy-box__copy {
+    display: block;
+}
