@@ -1,25 +1,36 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<Vendr.DemoStore.Models.ProductPage>
+﻿@using Vendr.Core;
+@using Vendr.DemoStore;
+@using Vendr.DemoStore.Models;
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<ProductPage>
 @{
-	Layout = "Page.cshtml";
+    Layout = "Page.cshtml";
 }
 
 <div class="pt-6">
     <div class="flex mb-4">
         <div class="w-1/2 mr-6">
-            <img src="img/tea_tubes.jpg" />
-            <div class="flex flex-wrap -mx-2">
-                <a href="#" class="w-1/3 px-2 pt-4"><img src="img/tea_tubes.jpg" /></a>
-                <a href="#" class="w-1/3 px-2 pt-4"><img src="img/tea_tubes.jpg" /></a>
-                <a href="#" class="w-1/3 px-2 pt-4"><img src="img/tea_tubes.jpg" /></a>
-                <a href="#" class="w-1/3 px-2 pt-4"><img src="img/tea_tubes.jpg" /></a>
-            </div>
+            <img src="@(Model.PrimaryImage != null ? Url.GetCropUrl(Model.PrimaryImage, 500, 500).ToString() : "https://placehold.it/400x500")" class="border" />
+            @if (Model.Images.Count() > 1)
+            {
+                <div class="flex flex-wrap -mx-2">
+                    @foreach (var img in Model.Images)
+                    {
+                        <a href="#" class="w-1/3 px-2 pt-4"><img src="@Url.GetCropUrl(img, 150, 150).ToString()" class="border" /></a>
+                    }
+                </div>
+            }
         </div>
         <div class="flex-1">
             <div class="py-10">
-                <h1 class="text-2xl font-bold">@Model.Name</h1>
-                <p>$1,599.95</p>
+                <h1 class="text-2xl font-bold">@Model.Parent.Name - @Model.Name</h1>
+                <p>@(Model.GetPrice()?.Formatted())</p>
             </div>
-            <button class="font-bold border-4 border-gray-900 px-6 py-3 mb-4 w-1/2 hover:bg-teal-400 hover:border-teal-400 hover:text-white">Add to Cart</button>
+            @using (Html.BeginUmbracoForm("AddToCart", "CartSurface"))
+            {
+                @Html.Hidden("productReference", Model.GetProductReference())
+
+                <button class="font-bold border-4 border-gray-900 px-6 py-3 mb-4 w-1/2 hover:bg-teal-400 hover:border-teal-400 hover:text-white" type="submit">Add to Cart</button>
+            }
             <div class="flex">
                 <a href="#" class="mr-4 hover:text-teal-400"><i class="fa fa-facebook-square"></i> Share it</a>
                 <a href="#" class="mr-4 hover:text-teal-400"><i class="fa fa-twitter"></i> Tweet it</a>

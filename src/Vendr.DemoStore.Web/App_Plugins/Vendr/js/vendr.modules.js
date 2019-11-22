@@ -66,7 +66,7 @@
     // Inject modules into Umbraco APP
     angular.module('umbraco').requires.push('ngSanitize');
     angular.module('umbraco').requires.push('autoCompleteModule');
-    //angular.module('umbraco').requires.push('ngPatternRestrict');
+    angular.module('umbraco').requires.push('ng-currency');
 
 }());
 (function () {

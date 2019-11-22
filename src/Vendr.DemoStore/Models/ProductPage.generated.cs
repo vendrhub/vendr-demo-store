@@ -67,6 +67,13 @@ namespace Vendr.DemoStore.Models
 		public IHtmlString LongDescription => this.Value<IHtmlString>("longDescription");
 
 		///<summary>
+		/// Price: Enter a price for this product in each supported currency.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("price")]
+		public Vendr.Web.Models.PricePropertyValue Price => this.Value<Vendr.Web.Models.PricePropertyValue>("price");
+
+		///<summary>
 		/// Short Description: A shot product description.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]

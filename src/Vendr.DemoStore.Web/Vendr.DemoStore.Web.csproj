@@ -480,10 +480,12 @@
     <Content Include="Views\CartPage.cshtml" />
     <Content Include="Views\Partials\ProductList.cshtml" />
     <Content Include="Views\Partials\PagedProductList.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Partials\Intro.cshtml" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Partials\ProductListItem.cshtml" />
+    <Content Include="Views\Partials\CartCount.cshtml" />
+    <Content Include="Views\Partials\Cart.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

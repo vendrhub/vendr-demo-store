@@ -79,5 +79,12 @@ namespace Vendr.DemoStore.Models
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		[ImplementPropertyType("siteRawMarkup")]
 		public string SiteRawMarkup => this.Value<string>("siteRawMarkup");
+
+		///<summary>
+		/// Store: Select the store associated with this site.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("store")]
+		public Vendr.Core.Models.StoreReadOnly Store => this.Value<Vendr.Core.Models.StoreReadOnly>("store");
 	}
 }
