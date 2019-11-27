@@ -7,6 +7,18 @@
     <a href="@Model.Url" class="text-center hover:text-teal-400">
         <img src="@(Model.PrimaryImage != null ? Url.GetCropUrl(Model.PrimaryImage, 300, 300).ToString() : "https://placehold.it/300x300")" class="border" />
         <span class="block font-bold mt-4">@Model.Parent.Name - @Model.Name</span>
-        <span class="block ">@(Model.CalculatePrice()?.Formatted())</span>
+        <span class="block ">
+            @if (Model.Variants.Any())
+            {
+                var variantPrices = Model.Variants.Select(x => x.CalculatePrice()).OrderBy(x => x.Value).ToList();
+                var variantPricesAllSame = variantPrices.All(x => x.Value == variantPrices[0].Value);
+
+                <text>@(!variantPricesAllSame ? "From " : "") @(variantPrices.First().Formatted())</text>
+            }
+            else
+            {
+                @(Model.CalculatePrice()?.Formatted())
+            }
+        </span>
     </a>
 </div>

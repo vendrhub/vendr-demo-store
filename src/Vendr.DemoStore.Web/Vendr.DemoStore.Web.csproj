@@ -494,6 +494,7 @@
     <Content Include="Views\Partials\OrderInformationSummary.cshtml" />
     <Content Include="Views\Emails\OrderConfirmation.cshtml" />
     <Content Include="Views\Emails\OrderPaymentInconsistant.cshtml" />
+    <Content Include="Views\Partials\Breadcrumb.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

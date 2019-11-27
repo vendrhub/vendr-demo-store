@@ -35,7 +35,7 @@
                                 <span class="bg-gray-300 h-12 w-12 flex items-center justify-center rounded mr-4">
                                     <i class="fa fa-coffee fa-lg"></i>
                                 </span>
-                                <div><a href="@(UmbracoContext.Url(orderLine.ProductReference.As<Guid>()))" class="hover:text-teal-400">@(orderLine.Name)</a> x @((int)orderLine.Quantity)<br /><span class="text-xs text-gray-500">@(orderLine.Sku)</span></div>
+                                <div>@(orderLine.Name) x @((int)orderLine.Quantity)<br /><span class="text-xs text-gray-500">@(orderLine.Sku)</span></div>
                             </div>
 
                             <div class="pl-4 font-medium">@(orderLine.TotalPrice.Value.Formatted().Value)</div>

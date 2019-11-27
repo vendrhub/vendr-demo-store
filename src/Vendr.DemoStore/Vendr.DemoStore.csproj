@@ -378,38 +378,90 @@
     <Compile Include="Composing\DemoStoreComposer.cs" />
     <Compile Include="Extensions\PublishedContentExtensions.cs" />
     <Compile Include="Models\CartPage.cs" />
-    <Compile Include="Models\CartPage.generated.cs" />
-    <Compile Include="Models\CategoriesPage.generated.cs" />
-    <Compile Include="Models\CategoryPage.generated.cs" />
-    <Compile Include="Models\CheckoutConfirmationPage.generated.cs" />
+    <Compile Include="Models\CartPage.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CategoriesPage.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CategoryPage.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\CheckoutConfirmationPage.cs" />
+    <Compile Include="Models\CheckoutConfirmationPage.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CheckoutInformationPage.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CheckoutPage.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CheckoutPaymentPage.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\CheckoutReviewPage.cs" />
+    <Compile Include="Models\CheckoutReviewPage.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\CheckoutShippingPaymentMethodPage.cs" />
     <Compile Include="Models\CheckoutInformationPage.cs" />
-    <Compile Include="Models\CheckoutInformationPage.generated.cs" />
     <Compile Include="Models\CheckoutPage.cs" />
-    <Compile Include="Models\CheckoutPage.generated.cs" />
-    <Compile Include="Models\CheckoutPaymentPage.generated.cs" />
-    <Compile Include="Models\CheckoutReviewPage.generated.cs" />
-    <Compile Include="Models\CheckoutShippingPaymentMethodPage.generated.cs" />
+    <Compile Include="Models\CheckoutShippingPaymentMethodPage.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\CheckoutStepPage.cs" />
-    <Compile Include="Models\CheckoutStepPage.generated.cs" />
-    <Compile Include="Models\CollectionPage.generated.cs" />
-    <Compile Include="Models\File.generated.cs" />
-    <Compile Include="Models\Folder.generated.cs" />
+    <Compile Include="Models\CheckoutStepPage.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CollectionPage.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\File.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Folder.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Generated.cs" />
     <Compile Include="Models\HomePage.cs" />
-    <Compile Include="Models\HomePage.generated.cs" />
-    <Compile Include="Models\Image.generated.cs" />
-    <Compile Include="Models\IntroComp.generated.cs" />
+    <Compile Include="Models\HomePage.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Image.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IntroComp.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\IOrderReviewPage.cs" />
-    <Compile Include="Models\Member.generated.cs" />
+    <Compile Include="Models\Member.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Page.cs" />
-    <Compile Include="Models\Page.generated.cs" />
+    <Compile Include="Models\Page.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductComp.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ProductPage.cs" />
-    <Compile Include="Models\ProductPage.generated.cs" />
-    <Compile Include="Models\ProductsPage.generated.cs" />
-    <Compile Include="Models\SearchPage.generated.cs" />
-    <Compile Include="Models\StandardPage.generated.cs" />
+    <Compile Include="Models\ProductPage.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductsPage.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductVariant.cs" />
+    <Compile Include="Models\ProductVariant.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SearchPage.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StandardPage.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\Controllers\CartSurfaceController.cs" />
     <Compile Include="Web\Controllers\CheckoutSurfaceController.cs" />

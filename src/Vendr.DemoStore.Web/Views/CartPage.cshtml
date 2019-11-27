@@ -1,7 +1,27 @@
 ﻿@using Vendr.Core;
+@using Vendr.DemoStore.Models;
 @inherits Umbraco.Web.Mvc.UmbracoViewPage<Vendr.DemoStore.Models.CartPage>
 @{
     Layout = "Page.cshtml";
+}
+
+@section foot {
+    @if (!(TempData["cartUpdated"]?.ToString()).IsNullOrWhiteSpace())
+    {
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                Toastify({
+                    text: "Cart successfully updated",
+                    duration: 3000,
+                    gravity: "bottom", // `top` or `bottom`
+                    position: 'center', // `left`, `center` or `right`
+                    backgroundColor: "#4fd1c5",
+                    className: "",
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                }).showToast();
+            });
+        </script>
+    }
 }
 
 @if (Model != null && Model.Order != null && Model.Order.OrderLines.Count > 0)
@@ -20,6 +40,9 @@
             <tbody class="block -mt-4 md:table-row-group md:mt-0">
                 @foreach (var item in Model.Order.OrderLines.Select((ol, i) => new { OrderLine = ol, Index = i }))
                 {
+                    var node = Umbraco.Content(item.OrderLine.ProductReference.As<Guid>());
+                    var url = node.ContentType.Alias == ProductVariant.ModelTypeAlias ? node.Parent.Url : node.Url;
+
                     <tr class="block border-b py-2 md:table-row">
                         <td class="block py-4 md:table-cell">
                             <div class="flex items-center">
@@ -27,7 +50,7 @@
                                 <span class="bg-gray-300 h-16 w-16 flex items-center justify-center mr-4">
                                     <i class="fa fa-coffee fa-lg"></i>
                                 </span>
-                                <div><a href="@(UmbracoContext.Url(item.OrderLine.ProductReference.As<Guid>()))" class="hover:text-teal-400">@item.OrderLine.Name</a><br /><span class="text-xs text-gray-500">@item.OrderLine.Sku</span><br /><a href="@Url.SurfaceAction("RemoveFromCart",  "CartSurface", new { OrderLineId = item.OrderLine.Id })" class="mt-3 inline-block text-sm hover:text-teal-400">Remove</a></div>
+                                <div><a href="@(url)" class="hover:text-teal-400">@item.OrderLine.Name</a><br /><span class="text-xs text-gray-500">@item.OrderLine.Sku</span><br /><a href="@Url.SurfaceAction("RemoveFromCart",  "CartSurface", new { OrderLineId = item.OrderLine.Id })" class="mt-3 inline-block text-sm hover:text-teal-400">Remove</a></div>
                             </div>
                         </td>
                         <td class="flex w-full justify-between items-center py-1 data-label-visible md:table-cell md:data-label-hidden md:pl-4 md:w-auto" data-label="Price">@(item.OrderLine.UnitPrice.Value.Formatted())</td>

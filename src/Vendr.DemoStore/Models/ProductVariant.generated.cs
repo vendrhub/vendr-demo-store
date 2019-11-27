@@ -20,51 +20,30 @@ using Umbraco.ModelsBuilder.Umbraco;
 
 namespace Vendr.DemoStore.Models
 {
-	/// <summary>Product Page</summary>
-	[PublishedModel("productPage")]
-	public partial class ProductPage : Page, IProductComp
+	/// <summary>Product Variant</summary>
+	[PublishedModel("productVariant")]
+	public partial class ProductVariant : PublishedContentModel, IProductComp
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public new const string ModelTypeAlias = "productPage";
+		public new const string ModelTypeAlias = "productVariant";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		public new static IPublishedContentType GetModelContentType()
 			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<ProductPage, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<ProductVariant, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
 #pragma warning restore 0109
 
 		// ctor
-		public ProductPage(IPublishedContent content)
+		public ProductVariant(IPublishedContent content)
 			: base(content)
 		{ }
 
 		// properties
-
-		///<summary>
-		/// Categories: One or more categories this product belongs to
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("categories")]
-		public IEnumerable<IPublishedContent> Categories => this.Value<IEnumerable<IPublishedContent>>("categories");
-
-		///<summary>
-		/// Images: A select of images to display for this product. The first image will be the primary image.
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("images")]
-		public IEnumerable<IPublishedContent> Images => this.Value<IEnumerable<IPublishedContent>>("images");
-
-		///<summary>
-		/// Long Description: A longer product description.
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("longDescription")]
-		public IHtmlString LongDescription => this.Value<IHtmlString>("longDescription");
 
 		///<summary>
 		/// Short Description: A shot product description.

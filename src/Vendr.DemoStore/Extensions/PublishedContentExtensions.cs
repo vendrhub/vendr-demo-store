@@ -29,17 +29,17 @@ namespace Vendr.DemoStore
             return VendrApi.Instance.GetCurrentOrder(content.GetStore().Id);
         }
 
-        public static string GetProductReference(this ProductPage content)
+        public static string GetProductReference(this IProductComp content)
         {
             return content.Key.ToString();
         }
 
-        public static IProductSnapshot AsVendrProduct(this ProductPage content)
+        public static IProductSnapshot AsVendrProduct(this IProductComp content)
         {
             return VendrApi.Instance.GetProduct(content.GetProductReference());
         }
 
-        public static Price CalculatePrice(this ProductPage content)
+        public static Price CalculatePrice(this IProductComp content)
         {
             return content.AsVendrProduct()?.CalculatePrice();
         }

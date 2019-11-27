@@ -4,6 +4,27 @@
 @inherits Umbraco.Web.Mvc.UmbracoViewPage<ProductPage>
 @{
     Layout = "Page.cshtml";
+
+    var addedProductReference = TempData["addedProductReference"]?.ToString();
+}
+
+@section foot {
+    @if (!addedProductReference.IsNullOrWhiteSpace())
+    {
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                Toastify({
+                    text: "Item successfully added to cart",
+                    duration: 3000,
+                    gravity: "bottom", // `top` or `bottom`
+                    position: 'center', // `left`, `center` or `right`
+                    backgroundColor: "#4fd1c5",
+                    className: "",
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                }).showToast();
+            });
+        </script>
+    }
 }
 
 <div class="pt-6">
@@ -21,13 +42,26 @@
             }
         </div>
         <div class="flex-1">
-            <div class="py-10">
-                <h1 class="text-2xl font-bold">@Model.Parent.Name - @Model.Name</h1>
-                <p>@(Model.CalculatePrice()?.Formatted())</p>
-            </div>
             @using (Html.BeginUmbracoForm("AddToCart", "CartSurface"))
             {
-                @Html.Hidden("productReference", Model.GetProductReference())
+                <div class="py-10">
+                    <h1 class="text-2xl font-bold">@Model.Parent.Name - @Model.Name</h1>
+                    @if (Model.Variants.Any())
+                    {
+                        <select name="productReference" class="w-full border border-gray-300 p-2 mt-1">
+                            @foreach (var variant in Model.Variants)
+                            {
+                                <option value="@variant.GetProductReference()" @Html.Raw(addedProductReference == variant.GetProductReference() ? "selected=\"selected\"" : "")>@(variant.Name) - @(variant.CalculatePrice()?.Formatted())</option>
+                            }
+                        </select>
+                    }
+                    else
+                    {
+                        @Html.Hidden("productReference", Model.GetProductReference())
+
+                        <p>@(Model.CalculatePrice()?.Formatted())</p>
+                    }
+                </div>
 
                 <button class="font-bold border-4 border-gray-900 px-6 py-3 mb-4 w-1/2 hover:bg-teal-400 hover:border-teal-400 hover:text-white" type="submit">Add to Cart</button>
             }

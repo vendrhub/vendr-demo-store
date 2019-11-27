@@ -56,6 +56,8 @@ namespace Vendr.DemoStore.Web.Controllers
                 return CurrentUmbracoPage();
             }
 
+            TempData["addedProductReference"] = postModel.ProductReference;
+
             return RedirectToCurrentUmbracoPage();
         }
 
@@ -87,6 +89,8 @@ namespace Vendr.DemoStore.Web.Controllers
 
                 return CurrentUmbracoPage();
             }
+
+            TempData["cartUpdated"] = "true";
 
             return RedirectToCurrentUmbracoPage();
         }

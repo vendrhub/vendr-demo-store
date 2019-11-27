@@ -20,71 +20,64 @@ using Umbraco.ModelsBuilder.Umbraco;
 
 namespace Vendr.DemoStore.Models
 {
-	/// <summary>Product Page</summary>
-	[PublishedModel("productPage")]
-	public partial class ProductPage : Page, IProductComp
+	// Mixin Content Type with alias "productComp"
+	/// <summary>Product</summary>
+	public partial interface IProductComp : IPublishedContent
+	{
+		/// <summary>Price</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		Vendr.Web.Models.PricePropertyValue Price { get; }
+
+		/// <summary>SKU</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		string Sku { get; }
+	}
+
+	/// <summary>Product</summary>
+	[PublishedModel("productComp")]
+	public partial class ProductComp : PublishedContentModel, IProductComp
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public new const string ModelTypeAlias = "productPage";
+		public new const string ModelTypeAlias = "productComp";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		public new static IPublishedContentType GetModelContentType()
 			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<ProductPage, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<ProductComp, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
 #pragma warning restore 0109
 
 		// ctor
-		public ProductPage(IPublishedContent content)
+		public ProductComp(IPublishedContent content)
 			: base(content)
 		{ }
 
 		// properties
 
 		///<summary>
-		/// Categories: One or more categories this product belongs to
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("categories")]
-		public IEnumerable<IPublishedContent> Categories => this.Value<IEnumerable<IPublishedContent>>("categories");
-
-		///<summary>
-		/// Images: A select of images to display for this product. The first image will be the primary image.
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("images")]
-		public IEnumerable<IPublishedContent> Images => this.Value<IEnumerable<IPublishedContent>>("images");
-
-		///<summary>
-		/// Long Description: A longer product description.
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("longDescription")]
-		public IHtmlString LongDescription => this.Value<IHtmlString>("longDescription");
-
-		///<summary>
-		/// Short Description: A shot product description.
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("shortDescription")]
-		public string ShortDescription => this.Value<string>("shortDescription");
-
-		///<summary>
 		/// Price: Enter a price for this product in each supported currency.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		[ImplementPropertyType("price")]
-		public Vendr.Web.Models.PricePropertyValue Price => ProductComp.GetPrice(this);
+		public Vendr.Web.Models.PricePropertyValue Price => GetPrice(this);
+
+		/// <summary>Static getter for Price</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static Vendr.Web.Models.PricePropertyValue GetPrice(IProductComp that) => that.Value<Vendr.Web.Models.PricePropertyValue>("price");
 
 		///<summary>
 		/// SKU: The unique SKU of this product.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		[ImplementPropertyType("sku")]
-		public string Sku => ProductComp.GetSku(this);
+		public string Sku => GetSku(this);
+
+		/// <summary>Static getter for SKU</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static string GetSku(IProductComp that) => that.Value<string>("sku");
 	}
 }

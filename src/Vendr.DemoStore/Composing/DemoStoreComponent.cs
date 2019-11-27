@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Umbraco.Core;
 using Umbraco.Core.Composing;
+using Umbraco.Core.Services;
+using Umbraco.Core.Services.Implement;
 using Umbraco.Web;
 using Vendr.DemoStore.Models;
+using VendrConstants = Vendr.Core.Constants;
 
 namespace Vendr.DemoStore.Composing
 {
@@ -13,16 +16,39 @@ namespace Vendr.DemoStore.Composing
     {
         private readonly IExamineManager _examineManager;
         private readonly IUmbracoContextFactory _umbracoContextFactory;
+        private readonly IContentService _contentService;
 
         public DemoStoreComponent(IExamineManager examineManager,
-            IUmbracoContextFactory umbracoContextFactory)
+            IUmbracoContextFactory umbracoContextFactory,
+            IContentService contentService)
         {
             _examineManager = examineManager;
             _umbracoContextFactory = umbracoContextFactory;
+            _contentService = contentService;
         }
 
         public void Initialize()
         {
+            // ================================================================
+            // Generate variant product names
+            // ================================================================
+            ContentService.Saving += (s, e) =>
+            {
+                foreach (var item in e.SavedEntities)
+                {
+                    switch (item.ContentType.Alias)
+                    {
+                        case ProductVariant.ModelTypeAlias:
+                            var parent = _contentService.GetById(item.ParentId);
+                            item.SetValue(VendrConstants.Properties.Product.NamePropertyAlias, $"{parent.Name} - {item.Name}");
+                            break;
+                        case ProductPage.ModelTypeAlias:
+                            // TODO: Regenerate variant product names
+                            break;
+                    }
+                }
+            };
+
             // ================================================================
             // Make product categories searchable
             // ================================================================
