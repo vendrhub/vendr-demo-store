@@ -1,5 +1,4 @@
-﻿/* eslint-disable */
-{
+﻿{
     orderLine: {
         properties: []
     },
@@ -14,11 +13,10 @@
         addressLine2: { alias: "billingAddressLine2", label: "" },
         city: { alias: "billingCity", label: "City" },
         zipCode: { alias: "billingZipCode", label: "Zip Code" },
-        telephone: { alias: "billingTelephone", label: "Telephone", prefix: "Tel:" },
         // Country and Region are already known
+        telephone: { alias: "billingTelephone", label: "Telephone" },
     },
     shipping: {
-        enabled: false,
         sameAsBilling: { alias: "shippingSameAsBilling", label: "Same as billing address", trueValue: "1" },
         firstName: { alias: "shippingFirstName", label: "First Name" },
         lastName: { alias: "shippingLastName", label: "Last Name" },
@@ -26,14 +24,14 @@
         addressLine2: { alias: "shippingAddressLine2", label: "" },
         city: { alias: "shippingCity", label: "City" },
         zipCode: { alias: "shippingZipCode", label: "Zip Code" },
-        telephone: { alias: "shippingTelephone", label: "Telephone", prefix: "Tel:" },
         // Country and Region are already known
+        telephone: { alias: "shippingTelephone", label: "Telephone" },
     },
     notes: {
         customerNotes: { alias: "comments", label: "Customer Comments" },
         internalNotes: { alias: "notes", label: "Internal Notes" }
     },
-    additionalInfo: [
-        { alias: "ipAddress", label: "IP Address", isReadOnly: true }
-    ]
+    //additionalInfo: [
+    //    { alias: "ipAddress", label: "IP Address", isReadOnly: true }
+    //]
 }

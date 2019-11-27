@@ -23,8 +23,8 @@
                             </div>
                             <div>
                                 <span class="color-grey text-12 strikethrough block" ng-if="ol.unitPriceWithoutDiscount != ol.unitPrice">{{ol.unitPriceWithoutDiscount}}</span>
-                                    {{ ol.quantity }} x {{ ol.unitPrice }}
-                                
+                                {{ ol.quantity }} x {{ ol.unitPrice }}
+
                             </div>
                             <div>
                                 <span class="color-grey text-12 strikethrough block" ng-if="ol.totalPriceWithoutDiscount != ol.totalPrice">{{ol.totalPriceWithoutDiscount}}</span>
@@ -79,14 +79,14 @@
                     </div>
 
                     <div class="vendr-order-table__subtotal">
-                        <div>Shipping by {{ vm.content.shippingMethod.name }}</div>
+                        <div>Shipping via {{ vm.content.shippingMethod.name }}</div>
                         <div>
                             <span class="color-grey text-12 strikethrough mr-5" ng-if="vm.content.shippingMethodPriceWithoutDiscount != vm.content.shippingMethodPrice">{{ vm.content.shippingMethodPriceWithoutDiscount }}</span>
                             {{ vm.content.shippingMethodPrice }}
                         </div>
                     </div>
                     <div class="vendr-order-table__subtotal">
-                        <div>Payment by {{ vm.content.paymentMethod.name }}</div>
+                        <div>Payment via {{ vm.content.paymentMethod.name }}</div>
                         <div>
                             <span class="color-grey text-12 strikethrough mr-5" ng-if="vm.content.paymentMethodPriceWithoutDiscount != vm.content.paymentMethodPrice">{{ vm.content.paymentMethodPriceWithoutDiscount }}</span>
                             {{ vm.content.paymentMethodPrice }}
@@ -203,47 +203,47 @@
         </umb-box>
 
         <!--<umb-box>
-        <umb-box-header title="Timeline"></umb-box-header>
-        <umb-box-content>
+            <umb-box-header title="Timeline"></umb-box-header>
+            <umb-box-content>
 
-            <div class="history">
+                <div class="history">
 
-                <div class="history-line history-line--s"></div>
+                    <div class="history-line history-line--s"></div>
 
-                <div class="history-item">
+                    <div class="history-item">
 
-                    <div class="history-item__break">
-                        <div class="history-item__avatar">
-                            <div class="umb-avatar umb-avatar--s vendr-bg--grey"><span>E</span></div>
+                        <div class="history-item__break">
+                            <div class="history-item__avatar">
+                                <div class="umb-avatar umb-avatar--s vendr-bg--grey"><span>E</span></div>
+                            </div>
+
+                            <div>
+                                <div>Confirmation Email Sent</div>
+                                <div class="history-item__date">October 9, 2019 1:18 PM</div>
+                            </div>
                         </div>
 
-                        <div>
-                            <div>Confirmation Email Sent</div>
-                            <div class="history-item__date">October 9, 2019 1:18 PM</div>
+                    </div>
+
+                    <div class="history-item">
+
+                        <div class="history-item__break">
+                            <div class="history-item__avatar">
+                                <div class="umb-avatar umb-avatar--s vendr-bg--grey"><span>O</span></div>
+                            </div>
+
+                            <div>
+                                <div>Order Placed</div>
+                                <div class="history-item__date">October 9, 2019 1:18 PM</div>
+                            </div>
                         </div>
+
                     </div>
 
                 </div>
 
-                <div class="history-item">
-
-                    <div class="history-item__break">
-                        <div class="history-item__avatar">
-                            <div class="umb-avatar umb-avatar--s vendr-bg--grey"><span>O</span></div>
-                        </div>
-
-                        <div>
-                            <div>Order Placed</div>
-                            <div class="history-item__date">October 9, 2019 1:18 PM</div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </umb-box-content>
-    </umb-box>-->
+            </umb-box-content>
+        </umb-box>-->
 
     </div>
     <div class="vendr-layout__right">
@@ -251,8 +251,8 @@
         <umb-box>
             <umb-box-header title="Actions"></umb-box-header>
             <umb-box-content class="block-form">
-                <a href="" class="btn btn-block btn-action">Change Status</a>
-                <a href="" class="btn btn-block">Send Email</a>
+                <a href="#" class="btn btn-block btn-action" prevent-default>Change Status</a>
+                <a href="#" class="btn btn-block" prevent-default>Send Email</a>
             </umb-box-content>
         </umb-box>
 
@@ -285,25 +285,84 @@
                     <a href="#" prevent-default umb-clipboard umb-clipboard-target="#billing-adress" class="copy-box__copy">
                         <i class="fa fa-copy"></i>
                     </a>
-                    <p id="billing-adress"><strong>Billing Address</strong><br />10 Street Name<br />Region<br />Town<br />S76 2DG<br />United Kingdom<br /></p>
+                    <p id="billing-adress">
+                        <strong>Billing Address</strong>
+                        <div ng-if="vm.editorConfig.billing.addressLine1 && vm.content.properties[vm.editorConfig.billing.addressLine1.alias]">
+                            {{vm.content.properties[vm.editorConfig.billing.addressLine1.alias].value}}
+                        </div>
+                        <div ng-if="vm.editorConfig.billing.addressLine2 && vm.content.properties[vm.editorConfig.billing.addressLine2.alias]">
+                            {{vm.content.properties[vm.editorConfig.billing.addressLine2.alias].value}}
+                        </div>
+                        <div ng-if="vm.editorConfig.billing.city && vm.content.properties[vm.editorConfig.billing.city.alias]">
+                            {{vm.content.properties[vm.editorConfig.billing.city.alias].value}}
+                        </div>
+                        <div ng-if="vm.editorConfig.billing.zipCode && vm.content.properties[vm.editorConfig.billing.zipCode.alias]">
+                            {{vm.content.properties[vm.editorConfig.billing.zipCode.alias].value}}
+                        </div>
+                        <div ng-if="vm.content.paymentCountry">
+                            {{vm.content.paymentCountry.name}}
+                        </div>
+                        <div ng-if="vm.editorConfig.billing.telephone && vm.content.properties[vm.editorConfig.billing.telephone.alias]">
+                            <br />Tel: {{vm.content.properties[vm.editorConfig.billing.telephone.alias].value}}
+                        </div>
+                    </p>
                     <!--<p><a href="#" class="color-light-blue" ng-click="vm.viewOnMap('S75 5DF')" prevent-default>View on Map</a></p>-->
                 </div>
                 <hr />
 
-                <p><strong>Shipping Address</strong><br />Same as billing address</p>
+                <div class="relative copy-box" ng-if="vm.editorConfig.shipping.enabled !== false">
+                    <a href="#" prevent-default umb-clipboard umb-clipboard-target="#shipping-adress" class="copy-box__copy">
+                        <i class="fa fa-copy"></i>
+                    </a>
+                    <p id="shipping-adress">
+                        <strong>Shipping Address</strong>
+                        <div ng-if="vm.editorConfig.shipping.sameAsBilling && vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value == vm.editorConfig.shipping.sameAsBilling.trueValue">
+                            Same as billing address
+                        </div>
+                        <div ng-if="!vm.editorConfig.shipping.sameAsBilling || vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value != vm.editorConfig.shipping.sameAsBilling.trueValue">
+                            <div ng-if="(vm.editorConfig.shipping.firstName && vm.content.properties[vm.editorConfig.shipping.firstName.alias]) || (vm.editorConfig.shipping.lastName && vm.content.properties[vm.editorConfig.shipping.lastName.alias])">
+                                <span ng-if="vm.editorConfig.shipping.firstName && vm.content.properties[vm.editorConfig.shipping.firstName.alias]">
+                                    {{vm.content.properties[vm.editorConfig.shipping.firstName.alias].value}}
+                                </span>
+                                <span ng-if="vm.editorConfig.shipping.lastName && vm.content.properties[vm.editorConfig.shipping.lastName.alias]">
+                                    {{vm.content.properties[vm.editorConfig.shipping.lastName.alias].value}}
+                                </span>
+                            </div>
+                            <div ng-if="vm.editorConfig.shipping.addressLine1 && vm.content.properties[vm.editorConfig.shipping.addressLine1.alias]">
+                                {{vm.content.properties[vm.editorConfig.shipping.addressLine1.alias].value}}
+                            </div>
+                            <div ng-if="vm.editorConfig.shipping.addressLine2 && vm.content.properties[vm.editorConfig.shipping.addressLine2.alias]">
+                                {{vm.content.properties[vm.editorConfig.shipping.addressLine2.alias].value}}
+                            </div>
+                            <div ng-if="vm.editorConfig.shipping.city && vm.content.properties[vm.editorConfig.shipping.city.alias]">
+                                {{vm.content.properties[vm.editorConfig.shipping.city.alias].value}}
+                            </div>
+                            <div ng-if="vm.editorConfig.shipping.zipCode && vm.content.properties[vm.editorConfig.shipping.zipCode.alias]">
+                                {{vm.content.properties[vm.editorConfig.shipping.zipCode.alias].value}}
+                            </div>
+                            <div ng-if="vm.content.shippingCountry">
+                                {{vm.content.shippingCountry.name}}
+                            </div>
+                            <div ng-if="vm.editorConfig.shipping.telephone && vm.content.properties[vm.editorConfig.shipping.telephone.alias]">
+                                <br />Tel: {{vm.content.properties[vm.editorConfig.shipping.telephone.alias].value}}
+                            </div>
+                        </div>
+                    </p>
+                </div>
 
             </umb-box-content>
         </umb-box>
 
-        <umb-box>
+        <umb-box ng-if="vm.editorConfig.additionalInfo || (vm.content.appliedDiscountCodes && vm.content.appliedDiscountCodes.length > 0)">
             <umb-box-header title="Additional Information">
                 <umb-button type="button" label="Edit"></umb-button>
             </umb-box-header>
             <umb-box-content>
                 <p ng-if="vm.content.appliedDiscountCodes && vm.content.appliedDiscountCodes.length > 0"><strong>Discount Codes Used:</strong><br />{{ vm.content.appliedDiscountCodes.join(', ') }}</p>
-                <p><strong>IP Address:</strong><br />10.23.0.123</p>
+                <p ng-repeat="ai in vm.editorConfig.additionalInfo">
+                    <strong>{{ ai.label }}:</strong><br />{{vm.content.properties[ai.alias] ? vm.content.properties[ai.alias].value : 'No value'}}
+                </p>
             </umb-box-content>
         </umb-box>
-
     </div>
 </div>
