@@ -618,12 +618,12 @@
                     "Failed to get store alias");
             },
 
-            getStoreEditOrderView: function (storeId) {
+            getStoreOrderEditorConfig: function (storeId) {
                 return umbRequestHelper.resourcePromise(
-                    $http.get(vendrRequestHelper.getApiUrl("storeApiBaseUrl", "GetStoreEditOrderView", {
+                    $http.get(vendrRequestHelper.getApiUrl("storeApiBaseUrl", "GetStoreOrderEditorConfig", {
                         storeId: storeId
                     })),
-                    "Failed to get store edit order view");
+                    "Failed to get store order editor config");
             },
 
             createStore: function () {

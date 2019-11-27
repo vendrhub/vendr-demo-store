@@ -1573,13 +1573,6 @@
             expandedBundles: []
         };
         vm.content = {};
-        vm.propsConfig = false;
-
-        // Needs to be on $scope as we are going to access
-        // this outside of AngularJs
-        $scope.configureProps = function (cfg) {
-            vm.propsConfig = cfg;
-        };
 
         vm.back = function () {
             $location.path("/commerce/vendr/order-list/" + vendrUtils.createCompositeId([storeId]));
@@ -1595,18 +1588,17 @@
             var idx = vm.options.expandedBundles.findIndex(function (v) {
                 return v === id;
             });
-            console.log(idx);
             if (idx >= 0) {
                 vm.options.expandedBundles.splice(idx, 1);
             } else {
                 vm.options.expandedBundles.push(id);
             }
-            console.log(vm.options.expandedBundles);
         };
 
         vm.init = function () {
-            vendrStoreResource.getStoreEditOrderView(storeId).then(function (editView) {
-                vm.page.editView = editView;
+            vendrStoreResource.getStoreOrderEditorConfig(storeId).then(function (config) {
+                vm.editorConfig = config;
+                vm.editorConfig.view = vm.editorConfig.view || '/app_plugins/vendr/views/order/subviews/edit.html';
                 vendrOrderResource.getOrder(id).then(function (order) {
                     vm.ready(order);
                 });
@@ -3402,8 +3394,8 @@
             vm.page.loading = false;
             vm.content = model;
 
-            if (!vm.content.editOrderView || vm.content.editOrderView === "")
-                vm.content.editOrderView = "/app_plugins/vendr/views/order/edit.html";
+            if (!vm.content.orderEditorConfig || vm.content.orderEditorConfig === "")
+                vm.content.orderEditorConfig = "/app_plugins/vendr/config/order.editor.config.js";
 
             // sync state
             editorState.set(vm.content);
