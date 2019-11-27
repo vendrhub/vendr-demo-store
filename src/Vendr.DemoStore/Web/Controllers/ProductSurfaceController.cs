@@ -22,7 +22,7 @@ namespace Vendr.DemoStore.Web.Controllers
         [ChildActionOnly]
         public ActionResult FeaturedProducts()
         {
-            var featuredProducts = CurrentPage.AncestorOrSelf<HomePage>()
+            var featuredProducts = CurrentPage.GetHomePage()
                 .FeaturedProducts.OfType<ProductPage>();
 
             return PartialView("ProductList", featuredProducts);

@@ -22,7 +22,7 @@ namespace Vendr.DemoStore.Models
 {
 	/// <summary>Checkout Information Page</summary>
 	[PublishedModel("checkoutInformationPage")]
-	public partial class CheckoutInformationPage : CheckoutPage
+	public partial class CheckoutInformationPage : CheckoutStepPage
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant

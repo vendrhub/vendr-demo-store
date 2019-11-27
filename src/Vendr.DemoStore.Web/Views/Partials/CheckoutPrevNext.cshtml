@@ -1,0 +1,22 @@
+﻿@using Vendr.DemoStore.Models;
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<CheckoutStepPage>
+
+<div class="flex items-center justify-between mt-8">
+    @if (Model.CanGoBack) 
+    {
+        if (Model.PreviousStep != null)
+        {
+        <div><a href="@(Model.PreviousStep.Url)" class="text-@(Model.CheckoutPage.PrimaryColor) hover:text-gray-900 hover:underline"><i class="fa fa-angle-left"></i> Return to @(Model.PreviousStep.Name)</a></div>
+        }
+        else
+        {
+        <div><a href="@(Model.HomePage.CartPage.Url)" class="text-@(Model.CheckoutPage.PrimaryColor) hover:text-gray-900 hover:underline"><i class="fa fa-angle-left"></i> Return to Cart</a></div>
+        }
+    }
+    @if (Model.NextStep != null)
+    {
+        <div>
+            <button class="ml-4 bg-@(Model.CheckoutPage.PrimaryColor) text-white px-4 py-4 rounded hover:bg-gray-900" type="submit">Continue to @(Model.NextStep.Name)</button>
+        </div>
+    }
+</div>

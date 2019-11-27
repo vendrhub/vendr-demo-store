@@ -420,6 +420,7 @@
     <Content Include="config\logviewer.searches.config.js" />
     <Content Include="css\gilroy.css" />
     <Content Include="css\main.css" />
+    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="scripts\bootstrap.js" />
@@ -427,6 +428,7 @@
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
+    <Content Include="scripts\checkout.js" />
     <Content Include="scripts\main.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="scripts\ssm.min.js" />
@@ -466,7 +468,6 @@
     <Content Include="Views\CategoryPage.cshtml" />
     <Content Include="Views\CheckoutConfirmationPage.cshtml" />
     <Content Include="Views\CheckoutInformationPage.cshtml" />
-    <Content Include="Views\CheckoutPage.cshtml" />
     <Content Include="Views\CheckoutPaymentPage.cshtml" />
     <Content Include="Views\CheckoutReviewPage.cshtml" />
     <Content Include="Views\CheckoutShippingPaymentMethodPage.cshtml" />
@@ -485,7 +486,11 @@
     <Content Include="scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Partials\ProductListItem.cshtml" />
     <Content Include="Views\Partials\CartCount.cshtml" />
-    <Content Include="Views\Partials\Cart.cshtml" />
+    <Content Include="Views\Master.cshtml" />
+    <Content Include="Views\Blank.cshtml" />
+    <Content Include="Views\CheckoutStepPage.cshtml" />
+    <Content Include="Views\Partials\CheckoutPrevNext.cshtml" />
+    <Content Include="Views\Partials\OrderInformationSummary.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -238,7 +238,7 @@
         var directive = {
             restrict: 'E',
             replace: true,
-            template: '<div><umb-property-editor model="mediaPickerModel"></umb-property-editor></div>',
+            template: '<div><umb-property-editor model="mediaPickerModel" ng-if="mediaPickerModel"></umb-property-editor></div>',
             scope: {
                 ngModel: '=',
                 multiPicker: '<',

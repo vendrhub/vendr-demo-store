@@ -1,4 +1,40 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<Vendr.DemoStore.Models.CheckoutShippingPaymentMethodPage>
+﻿@using Vendr.Core;
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<Vendr.DemoStore.Models.CheckoutShippingPaymentMethodPage>
 @{
-	Layout = null;
+    Layout = "CheckoutStepPage.cshtml";
+}
+
+@using (Html.BeginUmbracoForm("UpdateOrderShippingAndPaymentMethod", "CheckoutSurface"))
+{
+    <input type="hidden" name="nextStep" value="@(Model.NextStep?.Id)" />
+
+    <h3 class="text-xl font-medium mb-4">Shipping Method</h3>
+    <ul class="border border-gray-300 rounded">
+        @foreach (var item in Model.ShippingMethods.Select((sm, i) => new { ShippingMethod = sm, Index = i }))
+        {
+            <li class="border-gray-300 @(item.Index > 0 ? "border-t " : "")">
+                <label class="flex items-center py-4 px-4 cursor-pointer hover:bg-gray-100">
+                    <input name="shippingMethod" type="radio" value="@item.ShippingMethod.Id" class="mr-3"  @Html.Raw(Model.Order.ShippingInfo.ShippingMethodId.HasValue && Model.Order.ShippingInfo.ShippingMethodId.Value == item.ShippingMethod.Id ? "checked=\"checked\"" : "") />
+                    <span class="font-medium">@(item.ShippingMethod.Name)</span>
+                    <span class="flex-1 text-right">@(item.ShippingMethod.CalculatePrice()?.Formatted())</span>
+                </label>
+            </li>
+        }
+    </ul>
+
+    <h3 class="text-xl font-medium mb-4 mt-8">Payment Method</h3>
+    <ul class="border border-gray-300 rounded">
+        @foreach (var item in Model.PaymentMethods.Select((pm, i) => new { PaymentMethod = pm, Index = i }))
+        {
+            <li class="border-gray-300 @(item.Index > 0 ? "border-t " : "")">
+                <label class="flex items-center py-4 px-4 cursor-pointer hover:bg-gray-100">
+                    <input name="paymentMethod" type="radio" value="@item.PaymentMethod.Id" class="mr-3" @Html.Raw(Model.Order.PaymentInfo.PaymentMethodId.HasValue && Model.Order.PaymentInfo.PaymentMethodId.Value == item.PaymentMethod.Id ? "checked=\"checked\"" : "") />
+                    <span class="font-medium">@(item.PaymentMethod.Name)</span>
+                    <span class="flex-1 text-right">@(item.PaymentMethod.CalculatePrice()?.Formatted())</span>
+                </label>
+            </li>
+        }
+    </ul>
+
+    @Html.Partial("CheckoutPrevNext")
 }

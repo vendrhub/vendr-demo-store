@@ -44,5 +44,19 @@ namespace Vendr.DemoStore.Models
 		{ }
 
 		// properties
+
+		///<summary>
+		/// Logo: Choose a logo image to display on the checkout pages.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("logo")]
+		public IPublishedContent Logo => this.Value<IPublishedContent>("logo");
+
+		///<summary>
+		/// Primary Color: The primary brand color to use for the checkout pages. Should be one of tailwind CSSs default colors. Defaults to blue-500.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("primaryColor")]
+		public string PrimaryColor => this.Value<string>("primaryColor");
 	}
 }

@@ -9,24 +9,44 @@ namespace Vendr.DemoStore
 {
     public static class PublishedContentExtensions
     {
+        public static Page AsPage(this IPublishedContent content)
+        {
+            return ((Page)content);
+        }
+
+        public static HomePage GetHomePage(this IPublishedContent content)
+        {
+            return content.AsPage().HomePage;
+        }
+
         public static StoreReadOnly GetStore(this IPublishedContent content)
         {
             return content.AncestorOrSelf<HomePage>()?.Store;
         }
 
-        public static string GetProductReference(this IPublishedContent content)
+        public static OrderReadOnly GetCurrentOrder(this IPublishedContent content)
+        {
+            return VendrApi.Instance.GetCurrentOrder(content.GetStore().Id);
+        }
+
+        public static string GetProductReference(this ProductPage content)
         {
             return content.Key.ToString();
         }
 
-        public static IProductSnapshot AsVendrProduct(this IPublishedContent content)
+        public static IProductSnapshot AsVendrProduct(this ProductPage content)
         {
             return VendrApi.Instance.GetProduct(content.GetProductReference());
         }
 
-        public static Price GetPrice(this IPublishedContent content)
+        public static Price CalculatePrice(this ProductPage content)
         {
-            return content.AsVendrProduct()?.GetPrice();
+            return content.AsVendrProduct()?.CalculatePrice();
+        }
+
+        public static CheckoutPage GetCheckoutPage(this CheckoutStepPage content)
+        {
+            return content.AncestorOrSelf<CheckoutPage>();
         }
     }
 }

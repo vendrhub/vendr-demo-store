@@ -7,6 +7,6 @@
     <a href="@Model.Url" class="text-center hover:text-teal-400">
         <img src="@(Model.PrimaryImage != null ? Url.GetCropUrl(Model.PrimaryImage, 300, 300).ToString() : "https://placehold.it/300x300")" class="border" />
         <span class="block font-bold mt-4">@Model.Parent.Name - @Model.Name</span>
-        <span class="block ">@(Model.GetPrice()?.Formatted())</span>
+        <span class="block ">@(Model.CalculatePrice()?.Formatted())</span>
     </a>
 </div>

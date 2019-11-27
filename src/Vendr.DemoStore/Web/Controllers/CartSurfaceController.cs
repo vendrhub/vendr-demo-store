@@ -32,15 +32,6 @@ namespace Vendr.DemoStore.Web.Controllers
             return PartialView("CartCount", order?.TotalQuantity ?? 0);
         }
 
-        [ChildActionOnly]
-        public ActionResult Cart()
-        {
-            var store = CurrentPage.GetStore();
-            var order = _sessionManager.GetCurrentOrder(store.Id);
-
-            return PartialView("Cart", order);
-        }
-
         [HttpPost]
         public ActionResult AddToCart(AddToCartDto postModel)
         {

@@ -1,6 +1,65 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<Vendr.DemoStore.Models.CartPage>
+﻿@using Vendr.Core;
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<Vendr.DemoStore.Models.CartPage>
 @{
-	Layout = "Page.cshtml";
+    Layout = "Page.cshtml";
 }
 
-@Html.Action("Cart", "CartSurface")
+@if (Model != null && Model.Order != null && Model.Order.OrderLines.Count > 0)
+{
+    using (Html.BeginUmbracoForm("UpdateCart", "CartSurface"))
+    {
+        <table class="block w-full mt-6 md:table">
+            <thead class="hidden md:table-row-group">
+                <tr class="text-bold">
+                    <th class="w-full text-left">Product</th>
+                    <th class="pl-4 text-right">Price</th>
+                    <th class="pl-4 text-center">Quantity</th>
+                    <th class="pl-4 text-right">Total</th>
+                </tr>
+            </thead>
+            <tbody class="block -mt-4 md:table-row-group md:mt-0">
+                @foreach (var item in Model.Order.OrderLines.Select((ol, i) => new { OrderLine = ol, Index = i }))
+                {
+                    <tr class="block border-b py-2 md:table-row">
+                        <td class="block py-4 md:table-cell">
+                            <div class="flex items-center">
+                                @*<img src="https://placehold.it/100" class="mr-4" />*@
+                                <span class="bg-gray-300 h-16 w-16 flex items-center justify-center mr-4">
+                                    <i class="fa fa-coffee fa-lg"></i>
+                                </span>
+                                <div><a href="@(UmbracoContext.Url(item.OrderLine.ProductReference.As<Guid>()))" class="hover:text-teal-400">@item.OrderLine.Name</a><br /><span class="text-xs text-gray-500">@item.OrderLine.Sku</span><br /><a href="@Url.SurfaceAction("RemoveFromCart",  "CartSurface", new { OrderLineId = item.OrderLine.Id })" class="mt-3 inline-block text-sm hover:text-teal-400">Remove</a></div>
+                            </div>
+                        </td>
+                        <td class="flex w-full justify-between items-center py-1 data-label-visible md:table-cell md:data-label-hidden md:pl-4 md:w-auto" data-label="Price">@(item.OrderLine.UnitPrice.Value.Formatted())</td>
+                        <td class="flex w-full justify-between items-center py-1 data-label-visible md:table-cell md:data-label-hidden md:pl-4 md:w-auto md:text-center" data-label="Quantity">
+                            @Html.Hidden($"orderLines[{item.Index}].Id", item.OrderLine.Id)
+                            @Html.TextBox($"orderLines[{item.Index}].Quantity", (int)item.OrderLine.Quantity, new { @type = "number", @class = "bg-gray-200 p-2 w-16" })
+                        </td>
+                        <td class="flex w-full justify-between items-center py-1 data-label-visible font-bold md:table-cell md:data-label-hidden md:pl-4 md:w-auto" data-label="Total">@(item.OrderLine.TotalPrice.Value.Formatted())</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot class="block md:table-row-group">
+                <tr class="flex justify-between w-full md:table-row">
+                    <td colspan="3" class="pb-2 pt-4 text-right font-bold md:font-normal">Subtotal</td>
+                    <td class="pt-4 pb-2 pl-4 text-right font-bold">@(Model.Order.SubtotalPrice.Value.Formatted())</td>
+                </tr>
+                <tr class="flex justify-center w-full md:table-row">
+                    <td colspan="4" class="py-2 text-right italic">Shipping calculated at checkout</td>
+                </tr>
+                <tr class="flex justify-center w-full md:table-row">
+                    <td colspan="4">
+                        <div class="pt-6 flex justify-end">
+                            <button class="align-middle font-bold text-xl border-4 border-gray-900 px-6 py-3 hover:bg-teal-400 hover:border-teal-400 hover:text-white" title="Refresh Cart"><i class="fa fa-refresh"></i></button>
+                            <a href="@(Model.CheckoutPage.Url)" class="align-middle font-bold border-4 border-gray-900 bg-gray-900 text-white px-6 py-3 ml-4 hover:bg-teal-400 hover:border-teal-400 hover:text-white">Checkout</a>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    }
+}
+else
+{
+    <h1 class="text-5xl font-bold text-center py-24 text-gray-300">Your cart is empty</h1>
+}
