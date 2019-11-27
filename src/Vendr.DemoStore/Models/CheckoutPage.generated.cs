@@ -58,5 +58,19 @@ namespace Vendr.DemoStore.Models
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		[ImplementPropertyType("primaryColor")]
 		public string PrimaryColor => this.Value<string>("primaryColor");
+
+		///<summary>
+		/// Privacy Policy: Select the content page containing the site privacy policy.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("privacyPolicy")]
+		public IPublishedContent PrivacyPolicy => this.Value<IPublishedContent>("privacyPolicy");
+
+		///<summary>
+		/// Terms of Service: Select the content page containing the sites terms of service.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("termsOfService")]
+		public IPublishedContent TermsOfService => this.Value<IPublishedContent>("termsOfService");
 	}
 }
