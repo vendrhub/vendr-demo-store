@@ -257,6 +257,30 @@
 
     'use strict';
 
+    function vendrEmailResource($http, umbRequestHelper, vendrRequestHelper) {
+
+        return {
+
+            sendEmail: function (emailTemlateId, orderId) {
+                return umbRequestHelper.resourcePromise(
+                    $http.post(vendrRequestHelper.getApiUrl("emailApiBaseUrl", "SendEmail"), { 
+                        emailTemlateId: emailTemlateId,
+                        orderId: orderId
+                    }),
+                    "Failed to send email");
+            }
+
+        };
+
+    };
+
+    angular.module('vendr.resources').factory('vendrEmailResource', vendrEmailResource);
+
+}());
+(function () {
+
+    'use strict';
+
     function vendrEmailTemplateResource($http, umbRequestHelper, vendrRequestHelper) {
 
         return {

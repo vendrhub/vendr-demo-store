@@ -1545,7 +1545,7 @@
 
     function OrderEditController($scope, $routeParams, $location, formHelper,
         appState, editorState, editorService, localizationService, notificationsService, navigationService,
-        vendrUtils, vendrOrderResource, vendrStoreResource) {
+        vendrUtils, vendrOrderResource, vendrStoreResource, vendrEmailResource) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
 
@@ -1615,6 +1615,12 @@
                 close: function () {
                     editorService.close();
                 }
+            });
+        };
+
+        vm.sendEmail = function (emailTemplateId) {
+            vendrEmailResource.sendEmail(emailTemplateId, id).then(function () {
+                //TODO: Show success
             });
         };
 
