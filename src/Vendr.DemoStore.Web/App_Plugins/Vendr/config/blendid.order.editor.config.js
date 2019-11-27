@@ -1,9 +1,8 @@
 ﻿/* eslint-disable */
 {
-    orderLine: [
-        { alias: "color", label: "Color", isReadOnly: true },
-        { alias: "size", label: "Size", isReadOnly: true }
-    ],
+    orderLine: {
+        properties: []
+    },
     customer: {
         // Firstname, Lastname and Email are already known
         company: { alias: "company", label: "Company Name" },
@@ -15,6 +14,7 @@
         addressLine2: { alias: "billingAddressLine2", label: "" },
         city: { alias: "billingCity", label: "City" },
         zipCode: { alias: "billingZipCode", label: "Zip Code" },
+        telephone: { alias: "billingTelephone", label: "Telephone", prefix: "Tel:" },
         // Country and Region are already known
     },
     shipping: {
@@ -26,6 +26,7 @@
         addressLine2: { alias: "shippingAddressLine2", label: "" },
         city: { alias: "shippingCity", label: "City" },
         zipCode: { alias: "shippingZipCode", label: "Zip Code" },
+        telephone: { alias: "shippingTelephone", label: "Telephone", prefix: "Tel:" },
         // Country and Region are already known
     },
     notes: {
