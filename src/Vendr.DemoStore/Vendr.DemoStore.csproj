@@ -382,6 +382,7 @@
     <Compile Include="Models\ProductGroupComp.generated.cs">
       <DependentUpon>Generated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Web\Controllers\SearchSurfaceController.cs" />
     <Compile Include="Web\Extensions\UriExtensions.cs" />
     <Compile Include="Web\Extractors\ChildVariantUmbracoProductSnapshotDecorator.cs" />
     <Compile Include="Web\Extractors\ChildVariantUmbracoProductInformationExtractor.cs" />

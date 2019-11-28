@@ -2,3 +2,7 @@
 @{
 	Layout = "Page.cshtml";
 }
+
+<h1 class="text-4xl font-heading leading-tight tracking-tight mt-6">Search results for "@(Request.QueryString["q"])"</h1>
+
+@Html.Action("Search", "SearchSurface")

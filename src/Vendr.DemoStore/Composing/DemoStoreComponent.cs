@@ -2,6 +2,7 @@
 using Examine.Providers;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Umbraco.Core;
 using Umbraco.Core.Composing;
 using Umbraco.Web;
@@ -23,20 +24,28 @@ namespace Vendr.DemoStore.Composing
 
         public void Initialize()
         {
-            // ================================================================
-            // Make product categories searchable
-            // ================================================================
+            ConfigureExamine();
+        }
 
+        public void Terminate()
+        { }
+
+        protected void ConfigureExamine()
+        {
             // Listen for nodes being reindexed in the external index set
             if (_examineManager.TryGetIndex("ExternalIndex", out var index))
             {
                 ((BaseIndexProvider)index).TransformingIndexValues += (object sender, IndexingItemEventArgs e) =>
                 {
+                    // ================================================================
+                    // Make product categories searchable
+                    // ================================================================
+
                     // Make sure node is a product page node
                     if (e.ValueSet.ItemType.InvariantEquals(ProductPage.ModelTypeAlias))
                     {
                         // Make sure some categories are defined
-                        if (e.ValueSet.Values.ContainsKey("categories")) 
+                        if (e.ValueSet.Values.ContainsKey("categories"))
                         {
                             // Prepare a new collection for category aliases
                             var categoryAliases = new List<string>();
@@ -64,11 +73,31 @@ namespace Vendr.DemoStore.Composing
                             }
                         }
                     }
+
+                    // ================================================================
+                    // Do some generally usefull modifications
+                    // ================================================================
+
+                    // Create searchable path
+                    if (e.ValueSet.Values.ContainsKey("path"))
+                    {
+                        e.ValueSet.Add("searchPath", e.ValueSet.Values["path"].ToString().Replace(',', ' '));
+                    }
+
+                    // Stuff all the fields into a single field for easier searching
+                    var combinedFields = new StringBuilder();
+
+                    foreach (var kvp in e.ValueSet.Values)
+                    {
+                        foreach (var value in kvp.Value)
+                        {
+                            combinedFields.AppendLine(value.ToString());
+                        }
+                    }
+
+                    e.ValueSet.Add("contents", combinedFields.ToString());
                 };
             }
         }
-
-        public void Terminate()
-        { }
     }
 }

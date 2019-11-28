@@ -498,6 +498,7 @@
     <Content Include="Views\Partials\ProductGroupList.cshtml" />
     <Content Include="Views\Partials\ProductGroupListItem.cshtml" />
     <Content Include="Views\Partials\Pagination.cshtml" />
+    <Content Include="Views\Partials\SearchResults.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
