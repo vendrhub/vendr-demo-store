@@ -377,6 +377,8 @@
     <Compile Include="Composing\DemoStoreComponent.cs" />
     <Compile Include="Composing\DemoStoreComposer.cs" />
     <Compile Include="Extensions\PublishedContentExtensions.cs" />
+    <Compile Include="Web\Extractors\ChildVariantUmbracoProductSnapshotDecorator.cs" />
+    <Compile Include="Web\Extractors\ChildVariantUmbracoProductInformationExtractor.cs" />
     <Compile Include="Models\CartPage.cs" />
     <Compile Include="Models\CartPage.generated.cs">
       <DependentUpon>Generated.cs</DependentUpon>
