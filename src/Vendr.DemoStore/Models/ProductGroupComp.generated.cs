@@ -20,9 +20,9 @@ using Umbraco.ModelsBuilder.Umbraco;
 
 namespace Vendr.DemoStore.Models
 {
-	// Mixin Content Type with alias "introComp"
-	/// <summary>Intro</summary>
-	public partial interface IIntroComp : IPublishedContent
+	// Mixin Content Type with alias "productGroupComp"
+	/// <summary>Product Group</summary>
+	public partial interface IProductGroupComp : IPublishedContent
 	{
 		/// <summary>Description</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
@@ -33,26 +33,26 @@ namespace Vendr.DemoStore.Models
 		IPublishedContent Image { get; }
 	}
 
-	/// <summary>Intro</summary>
-	[PublishedModel("introComp")]
-	public partial class IntroComp : PublishedContentModel, IIntroComp
+	/// <summary>Product Group</summary>
+	[PublishedModel("productGroupComp")]
+	public partial class ProductGroupComp : PublishedContentModel, IProductGroupComp
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public new const string ModelTypeAlias = "introComp";
+		public new const string ModelTypeAlias = "productGroupComp";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		public new static IPublishedContentType GetModelContentType()
 			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<IntroComp, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<ProductGroupComp, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
 #pragma warning restore 0109
 
 		// ctor
-		public IntroComp(IPublishedContent content)
+		public ProductGroupComp(IPublishedContent content)
 			: base(content)
 		{ }
 
@@ -67,7 +67,7 @@ namespace Vendr.DemoStore.Models
 
 		/// <summary>Static getter for Description</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public static string GetDescription(IIntroComp that) => that.Value<string>("description");
+		public static string GetDescription(IProductGroupComp that) => that.Value<string>("description");
 
 		///<summary>
 		/// Image: An image for this item
@@ -78,6 +78,6 @@ namespace Vendr.DemoStore.Models
 
 		/// <summary>Static getter for Image</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public static IPublishedContent GetImage(IIntroComp that) => that.Value<IPublishedContent>("image");
+		public static IPublishedContent GetImage(IProductGroupComp that) => that.Value<IPublishedContent>("image");
 	}
 }

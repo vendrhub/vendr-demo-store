@@ -376,7 +376,13 @@
   <ItemGroup>
     <Compile Include="Composing\DemoStoreComponent.cs" />
     <Compile Include="Composing\DemoStoreComposer.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\PagedResultExtensions.cs" />
     <Compile Include="Extensions\PublishedContentExtensions.cs" />
+    <Compile Include="Models\ProductGroupComp.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Web\Extensions\UriExtensions.cs" />
     <Compile Include="Web\Extractors\ChildVariantUmbracoProductSnapshotDecorator.cs" />
     <Compile Include="Web\Extractors\ChildVariantUmbracoProductInformationExtractor.cs" />
     <Compile Include="Models\CartPage.cs" />
@@ -431,9 +437,6 @@
       <DependentUpon>Generated.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Image.generated.cs">
-      <DependentUpon>Generated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Models\IntroComp.generated.cs">
       <DependentUpon>Generated.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\IOrderReviewPage.cs" />

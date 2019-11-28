@@ -22,7 +22,7 @@ namespace Vendr.DemoStore.Models
 {
 	/// <summary>Categories Page</summary>
 	[PublishedModel("categoriesPage")]
-	public partial class CategoriesPage : Page, IIntroComp
+	public partial class CategoriesPage : Page, IProductGroupComp
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -50,13 +50,13 @@ namespace Vendr.DemoStore.Models
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		[ImplementPropertyType("description")]
-		public string Description => IntroComp.GetDescription(this);
+		public string Description => ProductGroupComp.GetDescription(this);
 
 		///<summary>
 		/// Image: An image for this item
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		[ImplementPropertyType("image")]
-		public IPublishedContent Image => IntroComp.GetImage(this);
+		public IPublishedContent Image => ProductGroupComp.GetImage(this);
 	}
 }

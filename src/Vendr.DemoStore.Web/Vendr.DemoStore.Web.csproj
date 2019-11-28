@@ -495,6 +495,9 @@
     <Content Include="Views\Emails\OrderConfirmation.cshtml" />
     <Content Include="Views\Emails\OrderPaymentInconsistant.cshtml" />
     <Content Include="Views\Partials\Breadcrumb.cshtml" />
+    <Content Include="Views\Partials\ProductGroupList.cshtml" />
+    <Content Include="Views\Partials\ProductGroupListItem.cshtml" />
+    <Content Include="Views\Partials\Pagination.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

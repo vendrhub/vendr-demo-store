@@ -29,13 +29,13 @@ namespace Vendr.DemoStore.Web.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult ProductListByCollection(int collectionId, int p = 1, int ps = 10)
+        public ActionResult ProductListByCollection(int collectionId, int p = 1, int ps = 12)
         {
             return PartialView("PagedProductList", GetPagedProducts(collectionId, null, p, ps));
         }
 
         [ChildActionOnly]
-        public ActionResult ProductListByCategory(string category, int p = 1, int ps = 10)
+        public ActionResult ProductListByCategory(string category, int p = 1, int ps = 12)
         {
             return PartialView("PagedProductList", GetPagedProducts(null, category, p, ps));
         }
