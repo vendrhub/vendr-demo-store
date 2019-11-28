@@ -4,7 +4,7 @@
 {
     <div class="relative bg-gray-800">
 
-        <img src="@Model.Image.Url" class="w-full h-40 object-cover opacity-75" />
+        <img src="@Model.Image.Url" class="w-full h-40 object-cover opacity-50" />
 
         <div class="absolute inset-x-0 bottom-0 p-6">
             <h1 class="text-white text-4xl font-heading tracking-tight leading-none">@Model.Name.</h1>
@@ -22,5 +22,5 @@ else
         <p class="mb-4">@Html.ReplaceLineBreaksForHtml(Model.Description)</p>
     </div>
 
-    <hr class="my-6" />
+    <hr class="mt-6 mb-1" />
 }

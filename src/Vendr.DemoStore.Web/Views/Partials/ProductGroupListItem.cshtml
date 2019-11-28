@@ -3,18 +3,10 @@
 @using Vendr.DemoStore.Models;
 @inherits Umbraco.Web.Mvc.UmbracoViewPage<IProductGroupComp>
 
-@*<div class="px-3 mt-6 w-1/2 md:w-1/3">
-    <a href="@Model.Url" class="text-center hover:text-teal-400">
-        <img src="@(Model.PrimaryImage != null ? Url.GetCropUrl(Model.PrimaryImage, 300, 300).ToString() : "https://placehold.it/300x300")" class="border" />
-        <span class="block font-bold mt-4">@Model.Parent.Name - @Model.Name</span>
-        
-    </a>
-</div>*@
-
-<a href="@(Model.Url)" class="block relative bg-gray-300 text-white hover:bg-gray-800">
+<a href="@(Model.Url)" class="block relative bg-gray-600 text-white hover:bg-gray-800">
     @if (Model.Image != null)
     {
-        <img src="@(Url.GetCropUrl(Model.Image, 200, 200))" class="w-full h-40 object-cover opacity-75" />
+        <img src="@(Url.GetCropUrl(Model.Image, 200, 200))" class="w-full h-40 object-cover opacity-50" />
     }
     else
     {
