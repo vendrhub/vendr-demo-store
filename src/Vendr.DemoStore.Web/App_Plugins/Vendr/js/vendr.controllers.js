@@ -794,40 +794,25 @@
 
     'use strict';
 
-    function StorePickerDialogController($scope,
-        vendrStoreResource)
+    function EmailTemplatePickerDialogController($scope,
+        vendrEmailTemplateResource)
     {
         var defaultConfig = {
-            title: "Select Store",
+            title: "Select an Email Template",
             enableFilter: true,
             orderBy: "name"
         };
 
-        var config = angular.extend({}, defaultConfig, $scope.model.config);
-
         var vm = this;
 
-        vm.loading = true;
-        vm.title = config.title;
-        vm.enableFilter = config.enableFilter;
-        vm.orderBy = config.orderBy;
-        vm.items = [];
+        vm.config = angular.extend({}, defaultConfig, $scope.model.config);
 
-        vm.init = function () {
-
-            vendrStoreResource.getStores().then(function (data) {
-                vm.items = data;
-                vm.loading = false;
-            });
-
+        vm.loadItems = function() {
+            return vendrEmailTemplateResource.getEmailTemplates(vm.config.storeId);
         };
 
-        vm.pick = function (item) {
+        vm.select = function(item) {
             $scope.model.value = item;
-            vm.submit();
-        };
-
-        vm.submit = function () {
             if ($scope.model.submit) {
                 $scope.model.submit($scope.model.value);
             }
@@ -838,8 +823,82 @@
                 $scope.model.close();
             }
         };
+    }
 
-        vm.init();
+    angular.module('vendr').controller('Vendr.Controllers.EmailTemplatePickerDialogController', EmailTemplatePickerDialogController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function OrderStatusPickerDialogController($scope,
+        vendrOrderStatusResource)
+    {
+        var defaultConfig = {
+            title: "Select an Order Status",
+            enableFilter: true,
+            orderBy: "sortOrder"
+        };
+
+        var vm = this;
+
+        vm.config = angular.extend({}, defaultConfig, $scope.model.config);
+
+        vm.loadItems = function() {
+            return vendrOrderStatusResource.getOrderStatuses(vm.config.storeId);
+        };
+
+        vm.select = function(item) {
+            $scope.model.value = item;
+            if ($scope.model.submit) {
+                $scope.model.submit($scope.model.value);
+            }
+        };
+
+        vm.close = function() {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.OrderStatusPickerDialogController', OrderStatusPickerDialogController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function StorePickerDialogController($scope,
+        vendrStoreResource)
+    {
+        var defaultConfig = {
+            title: "Select Store",
+            enableFilter: true,
+            orderBy: "name"
+        };
+
+        var vm = this;
+
+        vm.config = angular.extend({}, defaultConfig, $scope.model.config);
+
+        vm.loadItems = function() {
+            return vendrStoreResource.getStores();
+        };
+
+        vm.select = function(item) {
+            $scope.model.value = item;
+            if ($scope.model.submit) {
+                $scope.model.submit($scope.model.value);
+            }
+        };
+
+        vm.close = function() {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
     }
 
     angular.module('vendr').controller('Vendr.Controllers.StorePickerDialogController', StorePickerDialogController);
@@ -1552,6 +1611,46 @@
         var storeId = compositeId[0];
         var id = compositeId[1];
 
+        var changeStatusDialogOptions = {
+            view: '/app_plugins/vendr/views/dialogs/orderstatuspicker.html',
+            size: 'small',
+            config: {
+                storeId: storeId
+            },
+            submit: function(model) {
+                vendrOrderResource.changeOrderStatus(id, model.id).then(function(order) {
+                    vm.content.orderStatusId = order.orderStatusId;
+                    vm.content.orderStatus = order.orderStatus;
+                    notificationsService.success("Status Changed", "Order status successfully changed to " + model.name + ".");
+                    editorService.close();
+                }).catch(function(e) {
+                    notificationsService.error("Error Changing Status", "Unabled to change status to " + model.name + ". Please check the error log for details.");
+                });
+            },
+            close: function() {
+                editorService.close();
+            }
+        };
+
+        var sendEmailDialogOptions = {
+            view: '/app_plugins/vendr/views/dialogs/emailtemplatepicker.html',
+            size: 'small',
+            config: {
+                storeId: storeId
+            },
+            submit: function(model) {
+                vendrEmailResource.sendEmail(model.id, id).then(function() {
+                    notificationsService.success("Email Sent", model.name + " email successfully sent.");
+                    editorService.close();
+                }).catch(function(e) {
+                    notificationsService.error("Error Sending Email", "Unabled to send " + model.name + " email. Please check the error log for details.");
+                });
+            },
+            close: function() {
+                editorService.close();
+            }
+        };
+
         var vm = this;
 
         vm.page = {};
@@ -1599,29 +1698,64 @@
             vendrStoreResource.getStoreOrderEditorConfig(storeId).then(function (config) {
                 vm.editorConfig = config;
                 vm.editorConfig.view = vm.editorConfig.view || '/app_plugins/vendr/views/order/subviews/edit.html';
-                vendrOrderResource.getOrder(id).then(function (order) {
+                vendrOrderResource.getOrder(id).then(function(order) {
+
+                    // Ensure notes properties
+                    if (vm.editorConfig.notes.customerNotes && !order.properties[vm.editorConfig.notes.customerNotes.alias]) {
+                        order.properties[vm.editorConfig.notes.customerNotes.alias] = { value: "" };
+                    }
+                    if (vm.editorConfig.notes.internalNotes && !order.properties[vm.editorConfig.notes.internalNotes.alias]) {
+                        order.properties[vm.editorConfig.notes.internalNotes.alias] = { value: "" };
+                    }
+
                     vm.ready(order);
                 });
             });
         };
 
-        vm.viewOnMap = function (postcode) {
-            editorService.open({
-                title: "Map",
-                view: "/app_plugins/vendr/views/dialogs/iframe.html",
-                submit: function (model) {
-                    editorService.close();
-                },
-                close: function () {
-                    editorService.close();
-                }
+        //vm.viewOnMap = function (postcode) {
+        //    editorService.open({
+        //        title: "Map",
+        //        view: "/app_plugins/vendr/views/dialogs/iframe.html",
+        //        submit: function (model) {
+        //            editorService.close();
+        //        },
+        //        close: function () {
+        //            editorService.close();
+        //        }
+        //    });
+        //};
+
+        vm.cancelPayment = function() {
+            vendrOrderResource.cancelPayment(id).then(function(order) {
+                vm.content.paymentStatus = order.paymentStatus;
+                // TODO: Update prices?
+                notificationsService.success("Payment Cancelled", "Pending payment successfully cancelled.");
             });
         };
 
-        vm.sendEmail = function (emailTemplateId) {
-            vendrEmailResource.sendEmail(emailTemplateId, id).then(function () {
-                //TODO: Show success
+        vm.capturePayment = function() {
+            vendrOrderResource.capturePayment(id).then(function(order) {
+                vm.content.paymentStatus = order.paymentStatus;
+                // TODO: Update prices?
+                notificationsService.success("Payment Captured", "Pending payment successfully captured.");
             });
+        };
+
+        vm.refundPayment = function() {
+            vendrOrderResource.capturePayment(id).then(function(order) {
+                vm.content.paymentStatus = order.paymentStatus;
+                // TODO: Update prices?
+                notificationsService.success("Payment Refunded", "Captured payment successfully refunded.");
+            });
+        };
+
+        vm.changeStatus = function() {
+            editorService.open(changeStatusDialogOptions);
+        };
+
+        vm.sendEmail = function() {
+            editorService.open(sendEmailDialogOptions);
         };
 
         vm.ready = function (model) {
@@ -1630,7 +1764,7 @@
 
             // sync state
             editorState.set(vm.content);
-
+             
             var pathToSync = vm.content.path.slice(0, -1);
             navigationService.syncTree({ tree: "vendr", path: pathToSync, forceReload: true }).then(function (syncArgs) {
 
@@ -1652,34 +1786,29 @@
 
         vm.save = function (suppressNotification) {
 
-            //if (formHelper.submitForm({ scope: $scope, statusMessage: "Saving..." })) {
+            if (formHelper.submitForm({ scope: $scope, statusMessage: "Saving..." })) {
 
-            //    vm.page.saveButtonState = "busy";
+                vm.page.saveButtonState = "busy";
 
-            //    vendrOrderStatusResource.saveOrderStatus(vm.content).then(function (saved) {
+                vendrOrderResource.saveOrder(vm.content).then(function(saved) {
 
-            //        formHelper.resetForm({ scope: $scope, notifications: saved.notifications });
+                    formHelper.resetForm({ scope: $scope, notifications: saved.notifications });
 
-            //        vm.page.saveButtonState = "success";
+                    vm.page.saveButtonState = "success";
 
-            //        if (create) {
-            //            $location.path("/settings/vendrsettings/orderstatus-edit/" + vendrUtils.createCompositeId([storeId, saved.id]));
-            //        }
-            //        else {
-            //            vm.ready(saved);
-            //        }
+                    vm.ready(saved);
 
-            //    }, function (err) {
+                }, function(err) {
 
-            //        if (!suppressNotification) {
-            //            vm.page.saveButtonState = "error";
-            //            notificationsService.error("Failed to save order status " + vm.content.name,
-            //                err.data.message || err.data.Message || err.errorMsg);
-            //        }
+                    if (!suppressNotification) {
+                        vm.page.saveButtonState = "error";
+                        notificationsService.error("Failed to save order",
+                            err.data.message || err.data.Message || err.errorMsg);
+                    }
 
-            //        vm.page.saveButtonState = "error";
-            //    });
-            //}
+                    vm.page.saveButtonState = "error";
+                });
+            }
 
         };
 

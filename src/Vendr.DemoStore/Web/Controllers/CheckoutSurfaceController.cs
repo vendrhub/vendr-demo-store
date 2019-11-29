@@ -60,7 +60,7 @@ namespace Vendr.DemoStore.Web.Controllers
                             { "shippingZipCode", model.ShippingSameAsBilling ? model.BillingZipCode : model.ShippingZipCode },
                             { "shippingTelephone", model.ShippingSameAsBilling ? model.BillingTelephone : model.ShippingTelephone },
 
-                            { "Comments", model.Comments }
+                            { "comments", model.Comments }
                         })
                         .SetPaymentCountryRegion(model.BillingCountry, null)
                         .SetShippingCountryRegion(model.ShippingSameAsBilling ? model.BillingCountry : model.ShippingCountry, null);

@@ -48,9 +48,9 @@
                         </umb-control-group>
                         <umb-control-group label="Image">
                             <vendr-media-picker ng-model="vm.content.imageId"
-                                multi-picker="false"
-                                only-images="true"
-                                disable-folder-select="true" />
+                                                multi-picker="false"
+                                                only-images="true"
+                                                disable-folder-select="true" />
                         </umb-control-group>
 
                     </umb-box-content>
@@ -58,7 +58,8 @@
 
                 <umb-box ng-if="vm.options.paymentProviderScaffold">
                     <umb-box-header title="{{ vm.options.paymentProviderScaffold.name }}">
-                        <label title="Toggle advanced mode" class="vendr-box-header-label" ng-if="vm.options.advancedPaymentProviderProperties && vm.options.advancedPaymentProviderProperties.length > 0">Advanced 
+                        <label title="Toggle advanced mode" class="vendr-box-header-label" ng-if="vm.options.advancedPaymentProviderProperties && vm.options.advancedPaymentProviderProperties.length > 0">
+                            Advanced
                             <umb-toggle checked="vm.options.advancedPaymentProviderPropertiesShown" on-click="vm.toggleAdvancedPaymentProviderProperties()"></umb-toggle>
                         </label>
                     </umb-box-header>
@@ -77,14 +78,52 @@
                     </umb-box-content>
                 </umb-box>
 
+                <umb-box ng-if="vm.content.paymentProviderSupportsFetchingOrderStatus 
+                         || vm.content.paymentProviderSupportsCancellingPayments
+                         || vm.content.paymentProviderSupportsCapturingPayments
+                         || vm.content.paymentProviderSupportsRefundingPayments">
+                    <umb-box-header title="Features"></umb-box-header>
+                    <umb-box-content>
+
+                        <umb-control-group label="Allow Fetching Payment Status"
+                                           description="Set whether fetching payment status from the payment provider API should be allowed."
+                                           ng-if="vm.content.paymentProviderSupportsFetchingOrderStatus">
+                            <umb-toggle checked="vm.content.canFetchPaymentStatus"
+                                        on-click="vm.content.canFetchPaymentStatus = !vm.content.canFetchPaymentStatus"></umb-toggle>
+                        </umb-control-group>
+
+                        <umb-control-group label="Allow Cancelling Payments"
+                                           description="Set whether cancelling payments should be allowed."
+                                           ng-if="vm.content.paymentProviderSupportsCancellingPayments">
+                            <umb-toggle checked="vm.content.canCancelPayments"
+                                        on-click="vm.content.canCancelPayments = !vm.content.canCancelPayments"></umb-toggle>
+                        </umb-control-group>
+
+                        <umb-control-group label="Allow Capturing Payments"
+                                           description="Set whether capturing payments should be allowed."
+                                           ng-if="vm.content.paymentProviderSupportsCapturingPayments">
+                            <umb-toggle checked="vm.content.canCapturePayments"
+                                        on-click="vm.content.canCapturePayments = !vm.content.canCapturePayments"></umb-toggle>
+                        </umb-control-group>
+
+                        <umb-control-group label="Allow Refunding Payments"
+                                           description="Set whether refunding payments should be allowed."
+                                           ng-if="vm.content.paymentProviderSupportsRefundingPayments">
+                            <umb-toggle checked="vm.content.canRefundPayments"
+                                        on-click="vm.content.canRefundPayments = !vm.content.canRefundPayments"></umb-toggle>
+                        </umb-control-group>
+
+                    </umb-box-content>
+                </umb-box>
+
                 <umb-box>
                     <umb-box-header title="Available in Countries"></umb-box-header>
                     <umb-box-content>
 
-                        <vendr-toggle-list ng-model="vm.options.countryRegions" 
-                            toggle-all="true" items-key="regions"
-                            checked-action-label="'Custom Pricing'"
-                            on-checked-action="vm.openCustomPricesDialog" />
+                        <vendr-toggle-list ng-model="vm.options.countryRegions"
+                                           toggle-all="true" items-key="regions"
+                                           checked-action-label="'Custom Pricing'"
+                                           on-checked-action="vm.openCustomPricesDialog" />
 
                     </umb-box-content>
                 </umb-box>

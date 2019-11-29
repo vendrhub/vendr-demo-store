@@ -401,6 +401,39 @@
                     "Failed to get order");
             },
 
+            changeOrderStatus: function(orderId, orderStatusId) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("orderApiBaseUrl", "ChangeOrderStatus", {
+                        orderId: orderId,
+                        orderStatusId: orderStatusId
+                    })),
+                    "Failed to change order status");
+            },
+
+            cancelPayment: function(orderId) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("orderApiBaseUrl", "CancelPayment", {
+                        orderId: orderId
+                    })),
+                    "Failed to cancel payment");
+            },
+
+            capturePayment: function(orderId) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("orderApiBaseUrl", "CapturePayment", {
+                        orderId: orderId
+                    })),
+                    "Failed to capture payment");
+            },
+
+            refundPayment: function(orderId) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("orderApiBaseUrl", "RefundPayment", {
+                        orderId: orderId
+                    })),
+                    "Failed to refund payment");
+            },
+
             saveOrder: function (order) {
                 return umbRequestHelper.resourcePromise(
                     $http.post(vendrRequestHelper.getApiUrl("orderApiBaseUrl", "SaveOrder"), order),

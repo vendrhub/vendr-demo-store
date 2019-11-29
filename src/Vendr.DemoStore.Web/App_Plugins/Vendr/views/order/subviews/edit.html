@@ -110,7 +110,7 @@
                     </div>
 
                     <div class="vendr-order-table__subtotal" ng-if="vm.content.totalGiftCardAmount != vm.content.zeroAmount">
-                        <div>Gift Card<span class="color-grey text-12 block">{{ vm.content.appliedGiftCards.join(', ') }}</span></div>
+                        <div>Gift Card <span class="color-grey text-12 block">{{ vm.content.appliedGiftCards.join(', ') }}</span></div>
                         <div>-{{ vm.content.totalGiftCardAmount }}</div>
                     </div>
 
@@ -172,31 +172,33 @@
                 </div>
 
                 <!-- Need to also check payment providers supports capture -->
-                <div ng-if="vm.content.paymentStatus == 'Authorized'" class="flex flex-column">
+                <div ng-if="vm.content.paymentStatus == 'Authorized' && (vm.content.paymentMethod.canCancelPayments || vm.content.paymentMethod.canCapturePayments)" class="flex flex-column">
                     <hr />
                     <div class="self-end">
-                        <umb-button type="button" label="Cancel Payment" class="mr-5"></umb-button>
-                        <umb-button type="button" button-style="success" label="Capture Payment"></umb-button>
+                        <umb-button type="button" label="Cancel Payment" class="mr-5" ng-click="vm.cancelPayment()" ng-if="vm.content.paymentMethod.canCancelPayments"></umb-button>
+                        <umb-button type="button" button-style="success" label="Capture Payment" ng-click="vm.capturePayment()" ng-if="vm.content.paymentMethod.canCapturePayments"></umb-button>
                     </div>
                 </div>
-                <div ng-if="vm.content.paymentStatus == 'Captured'" class="flex flex-column">
+                <div ng-if="vm.content.paymentStatus == 'Captured' && vm.content.paymentProvider.canRefundPayments" class="flex flex-column">
                     <hr />
-                    <umb-button type="button" label="Refund Payment" class="self-end"></umb-button>
+                    <umb-button type="button" label="Refund Payment" class="self-end" ng-click="vm.refundPayment()"></umb-button>
                 </div>
 
             </umb-box-content>
         </umb-box>
 
-        <umb-box>
+        <umb-box ng-if="vm.editorConfig.notes.customerNotes || vm.editorConfig.notes.internalNotes">
             <umb-box-header title="Order Notes"></umb-box-header>
             <umb-box-content>
 
-                <umb-control-group label="Customer Notes">
-                    <textarea class="umb-property-editor umb-textarea textstring" rows="8" style="min-width: 100%;"></textarea>
+                <umb-control-group label="{{vm.editorConfig.notes.customerNotes.label}}" ng-if="vm.editorConfig.notes.customerNotes">
+                    <textarea class="umb-property-editor umb-textarea textstring" rows="8" style="min-width: 100%;"
+                              ng-model="vm.content.properties[vm.editorConfig.notes.customerNotes.alias].value"></textarea>
                 </umb-control-group>
 
-                <umb-control-group label="Internal Notes">
-                    <textarea class="umb-property-editor umb-textarea textstring" rows="8" style="min-width: 100%;"></textarea>
+                <umb-control-group label="{{vm.editorConfig.notes.internalNotes.label}}" ng-if="vm.editorConfig.notes.internalNotes">
+                    <textarea class="umb-property-editor umb-textarea textstring" rows="8" style="min-width: 100%;"
+                              ng-model="vm.content.properties[vm.editorConfig.notes.internalNotes.alias].value"></textarea>
                 </umb-control-group>
 
             </umb-box-content>
@@ -251,14 +253,14 @@
         <umb-box>
             <umb-box-header title="Actions"></umb-box-header>
             <umb-box-content class="block-form">
-                <a href="#" class="btn btn-block btn-action" prevent-default>Change Status</a>
-                <a href="#" class="btn btn-block" prevent-default>Send Email</a>
+                <a href="#" class="btn btn-block btn-action" ng-click="vm.changeStatus()" prevent-default>Change Status</a>
+                <a href="#" class="btn btn-block" ng-click="vm.sendEmail()" prevent-default>Send Email</a>
             </umb-box-content>
         </umb-box>
 
         <umb-box>
             <umb-box-header title="Customer Details">
-                <umb-button type="button" label="Edit"></umb-button>
+                <!--<umb-button type="button" label="Edit"></umb-button>-->
             </umb-box-header>
             <umb-box-content>
 
@@ -355,7 +357,7 @@
 
         <umb-box ng-if="vm.editorConfig.additionalInfo || (vm.content.appliedDiscountCodes && vm.content.appliedDiscountCodes.length > 0)">
             <umb-box-header title="Additional Information">
-                <umb-button type="button" label="Edit"></umb-button>
+                <!--<umb-button type="button" label="Edit"></umb-button>-->
             </umb-box-header>
             <umb-box-content>
                 <p ng-if="vm.content.appliedDiscountCodes && vm.content.appliedDiscountCodes.length > 0"><strong>Discount Codes Used:</strong><br />{{ vm.content.appliedDiscountCodes.join(', ') }}</p>

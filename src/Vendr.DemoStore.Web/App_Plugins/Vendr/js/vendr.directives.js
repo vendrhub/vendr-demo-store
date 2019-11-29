@@ -186,11 +186,62 @@
 
     'use strict';
 
+    function vendrItemPicker() {
+
+        function link(scope, el, attr, ctrl) {
+
+            scope.loading = true;
+            scope.title = scope.config.title;
+            scope.enableFilter = scope.config.enableFilter;
+            scope.orderBy = scope.config.orderBy;
+            scope.items = [];
+
+            scope.init = function() {
+                scope.onLoadItems().then(function(data) {
+                    scope.items = data;
+                    scope.loading = false;
+                });
+            };
+
+            scope.select = function(item) {
+                scope.onSelect({ item: item });
+            };
+
+            scope.close = function() {
+                scope.onClose();
+            };
+
+            scope.init();
+        }
+
+        var directive = {
+            restrict: 'E',
+            replace: true,
+            templateUrl: '/app_plugins/vendr/views/directives/vendr-item-picker.html',
+            scope: {
+                config: '=',
+                onLoadItems: '&',
+                onSelect: '&',
+                onClose: '&'
+            },
+            link: link
+        };
+        
+        return directive;
+    };
+
+    angular.module('vendr.directives').directive('vendrItemPicker', vendrItemPicker);
+
+}());
+(function () {
+
+    'use strict';
+
     function vendrLicenseCheck(vendrUtils) {
 
         function link(scope, el, attr, ctrl) {
             scope.licenseInfo = vendrUtils.getSettings("vendrLicenseInfo");
-            console.log(scope.licenseInfo);
+            // console.log(scope.licenseInfo);
         }
 
         var directive = {

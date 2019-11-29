@@ -1,9 +1,10 @@
-﻿/* eslint-disable */
-{
-    orderLine: [
-        { alias: "color", label: "Color", isReadOnly: true },
-        { alias: "size", label: "Size", isReadOnly: true }
-    ],
+﻿{
+    orderLine: {
+        properties: [
+            { alias: "color", label: "Color", isReadOnly: true },
+            { alias: "size", label: "Size", isReadOnly: true }
+        ]
+    },
     customer: {
         // Firstname, Lastname and Email are already known
         company: { alias: "company", label: "Company Name" },
@@ -16,9 +17,9 @@
         city: { alias: "billingCity", label: "City" },
         zipCode: { alias: "billingZipCode", label: "Zip Code" },
         // Country and Region are already known
+        telephone: { alias: "billingTelephone", label: "Telephone" },
     },
     shipping: {
-        enabled: false,
         sameAsBilling: { alias: "shippingSameAsBilling", label: "Same as billing address", trueValue: "1" },
         firstName: { alias: "shippingFirstName", label: "First Name" },
         lastName: { alias: "shippingLastName", label: "Last Name" },
@@ -27,6 +28,7 @@
         city: { alias: "shippingCity", label: "City" },
         zipCode: { alias: "shippingZipCode", label: "Zip Code" },
         // Country and Region are already known
+        telephone: { alias: "shippingTelephone", label: "Telephone" },
     },
     notes: {
         customerNotes: { alias: "comments", label: "Customer Comments" },
