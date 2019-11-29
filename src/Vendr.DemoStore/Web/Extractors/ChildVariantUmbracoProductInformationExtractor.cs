@@ -13,7 +13,7 @@ namespace Vendr.DemoStore.Web.Extractors
 
         public override IProductSnapshot GetProductSnapshot(string productReference, string languageIsoCode)
         {
-            // Generatr the snapshot using the default extractor
+            // Generate the snapshot using the default extractor
             var snapshot = (UmbracoProductSnapshot)base.GetProductSnapshot(productReference, languageIsoCode);
                 
             // Decorate the snapshot with our custom decorator
