@@ -28,8 +28,8 @@
 }
 
 <div class="pt-6">
-    <div class="flex mb-4">
-        <div class="w-1/2 mr-6">
+    <div class="md:flex mb-4">
+        <div class="w-full md:w-1/2 md:mr-6">
             <img src="@(Model.PrimaryImage != null ? Url.GetCropUrl(Model.PrimaryImage, 500, 500).ToString() : "https://placehold.it/400x500")" class="border" />
             @if (Model.Images.Count() > 1)
             {
@@ -40,6 +40,9 @@
                     }
                 </div>
             }
+            <div class="text-center text-gray-500 mt-4 rte trim">
+                @Model.Collection.ImagesCredit
+            </div>
         </div>
         <div class="flex-1">
             @using (Html.BeginUmbracoForm("AddToCart", "CartSurface"))

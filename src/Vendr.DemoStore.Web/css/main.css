@@ -27,9 +27,24 @@
     }
 }
 
+.trim > *:last-child,
+.trim > *:last-child > *:last-child {
+    margin-bottom: 0;
+}
+
 /* RTE */
 .rte p {
     margin-bottom: 1rem;
+}
+
+.rte a {
+    color: #4fd1c5;
+}
+
+.rte a:hover,
+.rte a:focus {
+    color: #000;
+    text-decoration: underline;
 }
 
 .rte ul {

@@ -46,6 +46,13 @@ namespace Vendr.DemoStore.Models
 		// properties
 
 		///<summary>
+		/// Images Credit: Enter a credit message for images displayed in this collection.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("imagesCredit")]
+		public IHtmlString ImagesCredit => this.Value<IHtmlString>("imagesCredit");
+
+		///<summary>
 		/// Description: A short description for this item
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
