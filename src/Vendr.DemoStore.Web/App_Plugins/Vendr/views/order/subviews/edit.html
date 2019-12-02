@@ -269,7 +269,7 @@
                         <i class="fa fa-copy"></i>
                     </a>
 
-                    <p id="customer" class="flex flex-column">
+                    <div id="customer" class="flex flex-column">
                         <strong>{{ vm.content.customerFullName }}</strong>
                         <span ng-if="vm.editorConfig.customer.company && vm.content.properties[vm.editorConfig.customer.company.alias]">
                             {{vm.content.properties[vm.editorConfig.customer.company.alias].value}}
@@ -277,7 +277,7 @@
                         </span>
                         <a href="mailto:{{vm.content.customerEmail}}" class="color-light-blue" ng-if="vm.content.customerEmail">{{vm.content.customerEmail}}</a>
                         <span ng-if="vm.editorConfig.customer.telephone && vm.content.properties[vm.editorConfig.customer.telephone.alias]">{{vm.content.properties[vm.editorConfig.customer.telephone.alias].value}}</span>
-                    </p>
+                    </div>
 
                 </div>
 
@@ -287,7 +287,7 @@
                     <a href="#" prevent-default umb-clipboard umb-clipboard-target="#billing-adress" class="copy-box__copy">
                         <i class="fa fa-copy"></i>
                     </a>
-                    <p id="billing-adress">
+                    <div id="billing-adress">
                         <strong>Billing Address</strong>
                         <div ng-if="vm.editorConfig.billing.addressLine1 && vm.content.properties[vm.editorConfig.billing.addressLine1.alias]">
                             {{vm.content.properties[vm.editorConfig.billing.addressLine1.alias].value}}
@@ -307,7 +307,7 @@
                         <div ng-if="vm.editorConfig.billing.telephone && vm.content.properties[vm.editorConfig.billing.telephone.alias]">
                             <br />Tel: {{vm.content.properties[vm.editorConfig.billing.telephone.alias].value}}
                         </div>
-                    </p>
+                    </div>
                     <!--<p><a href="#" class="color-light-blue" ng-click="vm.viewOnMap('S75 5DF')" prevent-default>View on Map</a></p>-->
                 </div>
                 <hr />
@@ -316,7 +316,7 @@
                     <a href="#" prevent-default umb-clipboard umb-clipboard-target="#shipping-adress" class="copy-box__copy">
                         <i class="fa fa-copy"></i>
                     </a>
-                    <p id="shipping-adress">
+                    <div id="shipping-adress">
                         <strong>Shipping Address</strong>
                         <div ng-if="vm.editorConfig.shipping.sameAsBilling && vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value == vm.editorConfig.shipping.sameAsBilling.trueValue">
                             Same as billing address
@@ -349,7 +349,7 @@
                                 <br />Tel: {{vm.content.properties[vm.editorConfig.shipping.telephone.alias].value}}
                             </div>
                         </div>
-                    </p>
+                    </div>
                 </div>
 
             </umb-box-content>
