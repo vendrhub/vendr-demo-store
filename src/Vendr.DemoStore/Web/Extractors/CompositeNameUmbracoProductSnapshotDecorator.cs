@@ -7,22 +7,21 @@ using Vendr.Web.Extractors;
 namespace Vendr.DemoStore.Web.Extractors
 {
     /// <summary>
-    /// Snapshot decorator to allow us to manipulate the product name where the content type
-    /// is a variant product. In that situation we want to combine the variant product name
-    /// with it's parent product name.
+    /// Snapshot decorator to allow us to manipulate the product name by combinding the
+    /// product name with it's parent collection name + variant option if type is a variant.
     /// </summary>
-    public class ChildVariantUmbracoProductSnapshotDecorator : ProductSnapshotBase
+    public class CompositeNameUmbracoProductSnapshotDecorator : ProductSnapshotBase
     {
         private readonly UmbracoProductSnapshot _snapshot;
 
-        public ChildVariantUmbracoProductSnapshotDecorator(UmbracoProductSnapshot snapshot)
+        public CompositeNameUmbracoProductSnapshotDecorator(UmbracoProductSnapshot snapshot)
         {
             _snapshot = snapshot;
         }
 
         public override string Name => _snapshot.Content.ContentType.Alias == ProductVariant.ModelTypeAlias
-            ? $"{_snapshot.Content.Parent.Name} - {_snapshot.Name}"
-            : _snapshot.Name;
+            ? $"{_snapshot.Content.Parent.Parent.Name} - {_snapshot.Content.Parent.Name} - {_snapshot.Name}"
+            : $"{_snapshot.Content.Parent.Name} - {_snapshot.Name}";
 
         #region Passthrough
 

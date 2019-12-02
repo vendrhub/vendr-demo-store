@@ -12,7 +12,7 @@ namespace Vendr.DemoStore.Composing
         public void Compose(Composition composition)
         {
             // Replace the product information extractor with one that supports child variants
-            composition.RegisterUnique<IProductInformationExtractor, ChildVariantUmbracoProductInformationExtractor>();
+            composition.RegisterUnique<IProductInformationExtractor, CompositeNameUmbracoProductInformationExtractor>();
 
             // Register component
             composition.Components()

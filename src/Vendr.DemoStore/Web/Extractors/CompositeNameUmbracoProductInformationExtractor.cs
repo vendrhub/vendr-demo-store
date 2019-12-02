@@ -5,9 +5,9 @@ using Vendr.Web.Extractors;
 
 namespace Vendr.DemoStore.Web.Extractors
 {
-    public class ChildVariantUmbracoProductInformationExtractor : UmbracoProductInformationExtractor
+    public class CompositeNameUmbracoProductInformationExtractor : UmbracoProductInformationExtractor
     {
-        public ChildVariantUmbracoProductInformationExtractor(IUmbracoContextAccessor umbracoContextAccessor, VendrServiceContext vendrServices) 
+        public CompositeNameUmbracoProductInformationExtractor(IUmbracoContextAccessor umbracoContextAccessor, VendrServiceContext vendrServices) 
             : base(umbracoContextAccessor, vendrServices)
         { }
 
@@ -17,7 +17,7 @@ namespace Vendr.DemoStore.Web.Extractors
             var snapshot = (UmbracoProductSnapshot)base.GetProductSnapshot(productReference, languageIsoCode);
                 
             // Decorate the snapshot with our custom decorator
-            return new ChildVariantUmbracoProductSnapshotDecorator(snapshot);
+            return new CompositeNameUmbracoProductSnapshotDecorator(snapshot);
         }
     }
 }

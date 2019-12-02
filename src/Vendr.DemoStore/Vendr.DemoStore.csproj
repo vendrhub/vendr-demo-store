@@ -384,8 +384,8 @@
     </Compile>
     <Compile Include="Web\Controllers\SearchSurfaceController.cs" />
     <Compile Include="Web\Extensions\UriExtensions.cs" />
-    <Compile Include="Web\Extractors\ChildVariantUmbracoProductSnapshotDecorator.cs" />
-    <Compile Include="Web\Extractors\ChildVariantUmbracoProductInformationExtractor.cs" />
+    <Compile Include="Web\Extractors\CompositeNameUmbracoProductSnapshotDecorator.cs" />
+    <Compile Include="Web\Extractors\CompositeNameUmbracoProductInformationExtractor.cs" />
     <Compile Include="Models\CartPage.cs" />
     <Compile Include="Models\CartPage.generated.cs">
       <DependentUpon>Generated.cs</DependentUpon>
