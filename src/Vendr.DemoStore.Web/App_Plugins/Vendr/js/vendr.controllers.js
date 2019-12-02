@@ -603,6 +603,20 @@
 
     'use strict';
 
+    function CommerceDashboardController($scope, $routeParams, $location,
+        assetsService, dashboardResource) {
+
+        assetsService.loadCss(dashboardResource.getRemoteDashboardCssUrl("content"), $scope);
+
+    };
+
+    angular.module('vendr').controller('Vendr.Controllers.CommerceDashboardController', CommerceDashboardController);
+
+}());
+(function () {
+
+    'use strict';
+
     function CustomPricingEditDialogController($scope) {
 
         var cfg = $scope.model.config;

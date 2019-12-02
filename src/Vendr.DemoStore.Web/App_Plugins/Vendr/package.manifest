@@ -4,7 +4,7 @@
       "alias": "Vendr.StorePicker",
       "name": "Vendr: Store Picker",
       "editor": {
-        "view": "~/App_Plugins/Vendr/views/propertyeditors/storepicker/storepicker.html",
+        "view": "~/app_plugins/vendr/views/propertyeditors/storepicker/storepicker.html",
         "hideLabel": false,
         "valueType": "STRING"
       }
@@ -13,7 +13,7 @@
       "alias": "Vendr.TaxClassPicker",
       "name": "Vendr: Tax Class Picker",
       "editor": {
-        "view": "~/App_Plugins/Vendr/views/propertyeditors/taxclasspicker/taxclasspicker.html",
+        "view": "~/app_plugins/vendr/views/propertyeditors/taxclasspicker/taxclasspicker.html",
         "hideLabel": false,
         "valueType": "STRING"
       }
@@ -22,7 +22,7 @@
       "alias": "Vendr.StockLevel",
       "name": "Vendr: Stock Level",
       "editor": {
-        "view": "~/App_Plugins/Vendr/views/propertyeditors/stocklevel/stocklevel.html",
+        "view": "~/app_plugins/vendr/views/propertyeditors/stocklevel/stocklevel.html",
         "hideLabel": false,
         "valueType": "STRING"
       }
@@ -31,10 +31,20 @@
       "alias": "Vendr.Price",
       "name": "Vendr: Price",
       "editor": {
-        "view": "~/App_Plugins/Vendr/views/propertyeditors/price/price.html",
+        "view": "~/app_plugins/vendr/views/propertyeditors/price/price.html",
         "hideLabel": false,
         "valueType": "JSON"
       }
+    }
+  ],
+  "dashboards": [
+    {
+      "alias": "CommerceDashboard",
+      "view": "~/app_plugins/vendr/views/dashboards/commerce.dashboard.html",
+      "sections": [
+        "commerce"
+      ],
+      "weight": -10
     }
   ],
   "javascript": [

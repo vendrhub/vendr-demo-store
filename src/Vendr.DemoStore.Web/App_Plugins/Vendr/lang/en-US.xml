@@ -21,4 +21,7 @@
         <key alias="manageStoreSettings">Allow access to manage store settings</key>
         <key alias="manageStorePermissions">Allow access to manage store permissions</key>
     </area>
+    <area alias="dashboardTabs">
+        <key alias="CommerceDashboard">Welcome</key>
+    </area>
 </language>
