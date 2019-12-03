@@ -38,6 +38,11 @@
 
     function initCommon(){
 
+        $("body").on("click", ".product-image__thumb", function (e) {
+            e.preventDefault();
+            $(".product-image").attr("src", $(this).attr("href"));
+        });
+
     }
 
     // Setup responsive states
