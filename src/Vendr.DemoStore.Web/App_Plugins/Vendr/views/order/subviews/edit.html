@@ -268,7 +268,6 @@
                     <a href="#" prevent-default umb-clipboard umb-clipboard-target="#customer" class="copy-box__copy">
                         <i class="fa fa-copy"></i>
                     </a>
-
                     <div id="customer" class="flex flex-column">
                         <strong>{{ vm.content.customerFullName }}</strong>
                         <span ng-if="vm.editorConfig.customer.company && vm.content.properties[vm.editorConfig.customer.company.alias]">
@@ -278,7 +277,6 @@
                         <a href="mailto:{{vm.content.customerEmail}}" class="color-light-blue" ng-if="vm.content.customerEmail">{{vm.content.customerEmail}}</a>
                         <span ng-if="vm.editorConfig.customer.telephone && vm.content.properties[vm.editorConfig.customer.telephone.alias]">{{vm.content.properties[vm.editorConfig.customer.telephone.alias].value}}</span>
                     </div>
-
                 </div>
 
                 <hr />
