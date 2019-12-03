@@ -18,7 +18,7 @@
 
     <h3 class="text-xl font-medium mb-4">Contact Information</h3>
     <input name="email" type="email" placeholder="Email" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
-           value="@(Model.Order.CustomerInfo.Email)" />
+           value="@(Model.Order.CustomerInfo.Email)" required />
     <label class="flex items-center mb-2  cursor-pointer">
         <input name="marketingOptIn" type="checkbox" value="true" class="mr-2" @Html.Raw(Model.Order.Properties["marketingOptIn"] == "1" ? "checked=\"checked\"" : "") /> Keep me up to date on news and exclusive offers
     </label>
@@ -27,16 +27,16 @@
 
     <div class="flex -mx-1">
         <input name="billingFirstname" type="text" placeholder="First name" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full"
-               value="@(Model.Order.CustomerInfo.FirstName)" />
+               value="@(Model.Order.CustomerInfo.FirstName)" required />
         <input name="billingLastname" type="text" placeholder="Last name" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full"
-               value="@(Model.Order.CustomerInfo.LastName)" />
+               value="@(Model.Order.CustomerInfo.LastName)" required />
     </div>
     <input name="billingAddressLine1" type="text" placeholder="Address (line 1)" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
-           value="@(Model.Order.Properties["billingAddressLine1"])" />
+           value="@(Model.Order.Properties["billingAddressLine1"])" required />
     <input name="billingAddressLine2" type="text" placeholder="Address (line 2)" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
            value="@(Model.Order.Properties["billingAddressLine2"])" />
     <input name="billingCity" type="text" placeholder="City" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
-           value="@(Model.Order.Properties["billingCity"])" />
+           value="@(Model.Order.Properties["billingCity"])" required />
     <div class="flex -mx-1">
         <select name="billingCountry" placeholder="Country" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full">
             @foreach (var country in Model.Countries)
@@ -45,7 +45,7 @@
             }
         </select>
         <input name="billingZipCode" type="text" placeholder="Postcode" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full"
-               value="@(Model.Order.Properties["billingZipCode"])" />
+               value="@(Model.Order.Properties["billingZipCode"])" required />
     </div>
     <input name="billingTelephone" type="text" placeholder="Phone" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
            value="@(Model.Order.Properties["billingTelephone"])" />
