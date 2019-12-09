@@ -26,6 +26,8 @@ namespace Vendr.DemoStore.Web.Controllers
 
         public ActionResult ApplyDiscountOrGiftCardCode(ApplyDiscountOrGiftCardCodeDto model)
         {
+            // Not currently implemented
+
             return RedirectToCurrentUmbracoPage();
         }
 
