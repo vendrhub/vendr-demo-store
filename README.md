@@ -1,6 +1,6 @@
 # Vendr Demo Store
 
-Welcome to the Vendr Demo Store, an example webstore setup using [Vendr](https://getvendr.net) in [Umbraco v8](https://umbraco.com).
+Welcome to the Vendr Demo Store, an example webstore setup using [Vendr](http://getvendr.net) in [Umbraco v8](https://umbraco.com).
 
 ![Screenshot](assets/screenshot.png)
 
