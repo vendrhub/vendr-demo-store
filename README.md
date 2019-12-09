@@ -2,7 +2,7 @@
 
 Welcome to the Vendr Demo Store, an example webstore setup using [Vendr](https://getvendr.net) in [Umbraco v8](https://umbraco.com).
 
-<img src="assets/screenshot.png" alt="Screenshot" style="border: 1px solid #e5e5e5;" />
+![Screenshot](assets/screenshot.png)
 
 ## About this Demo
 
