@@ -458,7 +458,6 @@
     <Compile Include="Models\ProductsPage.generated.cs">
       <DependentUpon>Generated.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProductVariant.cs" />
     <Compile Include="Models\ProductVariant.generated.cs">
       <DependentUpon>Generated.cs</DependentUpon>
     </Compile>
