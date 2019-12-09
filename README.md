@@ -2,7 +2,7 @@
 
 Welcome to the Vendr Demo Store, an example webstore setup using [Vendr](https://getvendr.net) in [Umbraco v8](https://umbraco.com).
 
-![Screenshot](assets/screenshot.png)
+<im src="assets/screenshot.png" alt="Screenshot" style="border: 1px solid #e5e5e5;" />
 
 ## About this Demo
 
@@ -55,4 +55,10 @@ The intention of this repository at the moment is to offer you a preview of how 
 ### Where's the documentation at?
 
 We are still working hard on finalizing the Vendr product and this includes the documentation which is still to be done. Due to this we decided to release the preview as a demo store so that you can explore example code in situe and see how it actually works that way. Full documentation will be available on actual product release.
+
+## License
+
+Copyright © 2019 Outfield Digital Ltd
+
+This demo store is [licensed under MIT](LICENSE). The core Vendr product is licensed under an Outfield Digital commercial license (TBC).
 
