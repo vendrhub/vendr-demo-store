@@ -27,7 +27,7 @@ Clone or download this repository locally (it includes all the files you will ne
 git clone https://github.com/vendrhub/vendr-demo-store.git
 ````
 
-Once you have all the files downloaded you can open the `Vendr.DemoStore.sln` solution file in the root of the repository in Visual Studio then press `Ctrl + F5` to launch the site.
+Once you have all the files downloaded you can open the `Vendr.DemoStore.sln` solution file in the root of the repository in Visual Studio. Make sure the `Vendr.DemoStore.Web` project is the startup project by right clicking the project in the Solution Explorer and choosing `Set as StartUp Project`, and then press `Ctrl + F5` to launch the site.
 
 To login to the back office you can do so using the credentails:
 
