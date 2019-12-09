@@ -1,0 +1,7 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<Vendr.DemoStore.Models.CategoryPage>
+@{
+	Layout = "Page.cshtml";
+}
+
+@Html.Partial("Intro")
+@Html.Action("ProductListByCategory", "ProductSurface", new { category = Model.UrlSegment })

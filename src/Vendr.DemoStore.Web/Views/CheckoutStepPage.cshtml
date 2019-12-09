@@ -1,0 +1,166 @@
+﻿@using Vendr.Core;
+@using Vendr.DemoStore.Models;
+@using Umbraco.Web.Models;
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<CheckoutStepPage>
+@{
+    Layout = "Master.cshtml";
+}
+
+@section head {
+    @RenderSection("head", false)
+}
+
+@section foot {
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
+    <script src="/scripts/checkout.js"></script>
+    @RenderSection("foot", false)
+}
+
+<div class="relative text-sm">
+
+    <!-- Faux column -->
+    <div class="absolute right-0 w-1/2 h-full lg:bg-gray-100"></div>
+
+    <!-- Layout -->
+    <div class="relative flex flex-col min-h-full max-w-6xl mx-auto lg:flex-row-reverse lg:flex-row">
+
+        @if (Model.CheckoutPage.Logo != null)
+        {
+            <div class="bg-white p-8 text-center lg:hidden">
+                <a href="/"><img src="@(Url.GetCropUrl(Model.CheckoutPage.Logo, 200, 200, imageCropMode: ImageCropMode.Max))" class="inline-block" /></a>
+            </div>
+        }
+
+        <a id="order-summary-toggle" href="#" class="flex items-center justify-between border-t border-b border-gray-300 bg-gray-100 lg:hidden">
+            <span class="py-4 px-8 text-lg">
+                <span id="order-summary-toggle__text-closed"><i class="fa fa-shopping-cart mr-2"></i> Show Order Summary <i class="fa fa-angle-down ml-1"></i></span>
+                <span id="order-summary-toggle__text-open" class="hidden"><i class="fa fa-shopping-cart mr-2"></i> Hide Order Summary <i class="fa fa-angle-up ml-1"></i></span>
+            </span>
+            <span class="py-4 px-8 text-lg font-medium">@Model.Order.TotalPrice.Value.Formatted()</span>
+        </a>
+
+        <div id="order-summary" class="hidden bg-gray-100 w-full p-8 lg:w-2/5 lg:border-l lg:block">
+
+            <ul class="-mt-4">
+                @foreach (var orderLine in Model.Order.OrderLines)
+                {
+                    <li class="border-b border-gray-300 py-4">
+                        <div class="flex items-center">
+
+                            <div class="flex flex-1 items-center">
+                                @*<img src="https://placehold.it/65" class="mr-4 rounded" />*@
+                                <span class="bg-gray-300 h-12 w-12 flex items-center justify-center rounded mr-4">
+                                    <i class="fa fa-coffee fa-lg"></i>
+                                </span>
+                                <div>@(orderLine.Name) x @((int)orderLine.Quantity)<br /><span class="text-xs text-gray-500">@(orderLine.Sku)</span></div>
+                            </div>
+
+                            <div class="pl-4 font-medium">@(orderLine.TotalPrice.Value.Formatted().Value)</div>
+
+                        </div>
+                    </li>
+                }
+            </ul>
+
+            @RenderSection("aside", false)
+
+            <div class="border-b border-gray-300 py-4">
+                <div class="flex w-full justify-between items-center">
+                    <div class="">Subtotal</div>
+                    <div class="font-medium">@(Model.Order.SubtotalPrice.Value.Formatted().Value)</div>
+                </div>
+                @if (Model.TotalView == "Total")
+                {
+                    <div class="flex w-full justify-between items-center mt-2">
+                        <div class="">
+                            Shipping
+                            @if (Model.ShippingMethod != null)
+                            {
+                                <text>via @(Model.ShippingMethod.Name)</text>
+                            }
+                        </div>
+                        <div class="font-medium">@(Model.Order.ShippingInfo.TotalPrice.Value.Formatted())</div>
+                    </div>
+                    <div class="flex w-full justify-between items-center mt-2">
+                        <div class="">
+                            Payment
+                            @if (Model.PaymentMethod != null)
+                            {
+                                <text>via @(Model.PaymentMethod.Name)</text>
+                            }
+                        </div>
+                        <div class="font-medium">@(Model.Order.PaymentInfo.TotalPrice.Value.Formatted())</div>
+                    </div>
+                }
+                <div class="flex w-full justify-between items-center mt-2">
+                    <div class="">TAX</div>
+                    <div class="font-medium">@(Model.Order.SubtotalPrice.Value.Formatted().Tax)</div>
+                </div>
+
+            </div>
+
+            @if (Model.TotalView == "Subtotal")
+            {
+                <div class="py-4">
+                    <div class="flex w-full justify-between items-center">
+                        <div class="font-medium text-base">Total</div>
+                        <div class="font-medium text-2xl">@Model.Order.SubtotalPrice.Value.Formatted()</div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="py-4">
+                    <div class="flex w-full justify-between items-center">
+                        <div class="font-medium text-base">Total</div>
+                        <div class="font-medium text-2xl">@Model.Order.TotalPrice.Value.Formatted()</div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+        <div class="bg-white flex-1 p-8">
+
+            <div class="hidden lg:block">
+
+                @if (Model.CheckoutPage.Logo != null)
+                {
+                    <div class="text-center mb-4">
+                        <a href="/"><img src="@(Url.GetCropUrl(Model.CheckoutPage.Logo, 200, 200, imageCropMode: ImageCropMode.Max))" class="inline-block" /></a>
+                    </div>
+                }
+
+                <div class="mb-8">
+                    <ul class="flex justify-center">
+                        @{
+                            var passedStep = false;
+                            foreach (var item in Model.CheckoutPage.Steps.Select((s, i) => new { Step = s, Index = i }))
+                            {
+                                <li class="@(item.Index > 0 ? "pl-2" : "") flex items-baseline">
+                                    @if (item.Index > 0)
+                                    {
+                                        <i class="fa fa-angle-right text-gray-500 pr-2"></i>
+                                    }
+                                    @if (!passedStep && item.Step.Id != Model.Id && Model.CanGoBack)
+                                    {
+                                        <a href="@item.Step.Url" class="hover:text-@(Model.CheckoutPage.PrimaryColor)">@(item.Step.ShortStepName ?? item.Step.Name)</a>
+                                    }
+                                    else
+                                    {
+                                        <span class="@(item.Step.Id == Model.Id ? "font-bold" : "")">@(item.Step.ShortStepName ?? item.Step.Name)</span>
+                                    }
+                                </li>
+                                passedStep = passedStep || item.Step.Id == Model.Id;
+                            }
+                        }
+                    </ul>
+                </div>
+
+            </div>
+
+            @RenderBody()
+        </div>
+    </div>
+
+</div>

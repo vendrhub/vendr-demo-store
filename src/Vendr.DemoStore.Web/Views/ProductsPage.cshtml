@@ -1,0 +1,8 @@
+﻿@using Vendr.DemoStore.Models;
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<Vendr.DemoStore.Models.ProductsPage>
+@{
+    Layout = "Page.cshtml";
+}
+
+@Html.Partial("Intro")
+@Html.Partial("ProductGroupList", Model.Children.OfType<IProductGroupComp>())

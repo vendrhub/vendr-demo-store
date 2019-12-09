@@ -1,0 +1,26 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<Vendr.DemoStore.Models.IProductGroupComp>
+
+@if (Model.Image != null)
+{
+    <div class="relative bg-gray-800">
+
+        <img src="@Model.Image.Url" class="w-full h-40 object-cover opacity-50" />
+
+        <div class="absolute inset-x-0 bottom-0 p-6">
+            <h1 class="text-white text-4xl font-heading tracking-tight leading-none">@Model.Name.</h1>
+        </div>
+    </div>
+}
+else
+{
+    <h1 class="text-4xl font-heading leading-tight tracking-tight mt-6">@Model.Name.</h1>
+}
+
+@if (!Model.Description.IsNullOrWhiteSpace())
+{
+    <div class="my-6">
+        <p class="mb-4">@Html.ReplaceLineBreaksForHtml(Model.Description)</p>
+    </div>
+
+    <hr class="mt-6 mb-1" />
+}

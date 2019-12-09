@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<language alias="en" intName="English (US)" localName="English (US)" lcid="" culture="en-US">
+	<creator>
+		<name>Vendr</name>
+		<link>https://getVendr.com</link>
+	</creator>
+    <area alias="sections">
+        <key alias="commerce">Commerce</key>
+    </area>
+	<area alias="treeHeaders">
+		<key alias="commerceSettingsGroup">Commerce</key>
+	</area>
+    <area alias="actions">
+        <key alias="manageStoreSettings">Manage Store Settings</key>
+        <key alias="manageStorePermissions">Manage Store Permissions</key>
+    </area>
+    <area alias="actionCategories">
+        <key alias="commerce">Commerce</key>
+    </area>
+    <area alias="actionDescriptions">
+        <key alias="manageStoreSettings">Allow access to manage store settings</key>
+        <key alias="manageStorePermissions">Allow access to manage store permissions</key>
+    </area>
+    <area alias="dashboardTabs">
+        <key alias="CommerceDashboard">Welcome</key>
+    </area>
+</language>

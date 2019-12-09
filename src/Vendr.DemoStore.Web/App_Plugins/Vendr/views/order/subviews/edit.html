@@ -1,0 +1,368 @@
+﻿<div class="vendr-layout--layout1">
+    <div class="vendr-layout__left">
+
+        <umb-box>
+            <umb-box-header title="Order Details"></umb-box-header>
+            <umb-box-content class="flex flex-column">
+                <div class="vendr-order-table">
+
+                    <div ng-repeat="ol in vm.content.orderLines" data-order-line-id="{{ ol.id }}">
+
+                        <!-- Order Line -->
+                        <div class="vendr-order-table__line-item">
+                            <div class="flex">
+                                <i class="vendr-order-table__bundle-toggle fa"
+                                   title="Expand / Collapse Bundle"
+                                   ng-class="{ 'fa-plus-square-o': !vm.bundleIsExpanded(ol.bundleId), 'fa-minus-square-o': vm.bundleIsExpanded(ol.bundleId) }"
+                                   ng-click="vm.toggleBundle(ol.bundleId)"
+                                   ng-if="ol.bundleId && ol.orderLines.length > 0"></i>
+                                <div>
+                                    <strong>{{ ol.name }}</strong>
+                                    <span class="color-grey text-12 block" title="Sku: {{ ol.sku }}">{{ ol.sku }}</span>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="color-grey text-12 strikethrough block" ng-if="ol.unitPriceWithoutDiscount != ol.unitPrice">{{ol.unitPriceWithoutDiscount}}</span>
+                                {{ ol.quantity }} x {{ ol.unitPrice }}
+
+                            </div>
+                            <div>
+                                <span class="color-grey text-12 strikethrough block" ng-if="ol.totalPriceWithoutDiscount != ol.totalPrice">{{ol.totalPriceWithoutDiscount}}</span>
+                                {{ ol.totalPrice }}
+                            </div>
+                        </div>
+
+                        <!-- Bundle Order Lines (we assume a single level) -->
+                        <div class="vendr-order-table__bundle" ng-if="ol.bundleId && ol.orderLines.length > 0 && vm.bundleIsExpanded(ol.bundleId)">
+                            <div class="vendr-order-table__bundle--inner">
+
+                                <div class="vendr-order-table__line-item" ng-if="ol.unitPriceBase != vm.content.zeroAmount">
+                                    <div>
+                                        <strong>Base Price</strong>
+                                    </div>
+                                    <div>
+                                        <strong>{{ol.unitPriceBase}}</strong>
+                                    </div>
+                                    <div></div>
+                                </div>
+
+                                <div class="vendr-order-table__line-item" ng-repeat="sol in ol.orderLines" data-order-line-id="{{ sol.id }}">
+                                    <div>
+                                        <strong>{{ sol.name }}</strong>
+                                        <span class="color-grey text-12 block" title="Sku: {{ sol.sku }}">{{ sol.sku }}</span>
+                                    </div>
+                                    <div>
+                                        <span class="color-grey text-12 strikethrough block" ng-if="sol.unitPriceWithoutDiscount != sol.unitPrice">{{sol.unitPriceWithoutDiscount}}</span>
+                                        {{ sol.quantity }} x {{ sol.unitPrice }}
+
+                                    </div>
+                                    <div class="bold">
+                                        <span class="color-grey text-12 strikethrough block" ng-if="sol.totalPriceWithoutDiscount != sol.totalPrice">{{sol.totalPriceWithoutDiscount}}</span>
+                                        {{ sol.totalPrice }}
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="vendr-order-table__total">
+                        <div>Subtotal</div>
+                        <div>
+                            {{ vm.content.subtotalPriceWithPreviousDiscount }}
+                        </div>
+                    </div>
+                    <div class="vendr-order-table__subtotal" ng-if="vm.content.subtotalPriceDiscount != vm.content.zeroAmount">
+                        <div>Subtotal Discount</div>
+                        <div>-{{ vm.content.subtotalPriceDiscount }}</div>
+                    </div>
+
+                    <div class="vendr-order-table__subtotal">
+                        <div>Shipping via {{ vm.content.shippingMethod.name }}</div>
+                        <div>
+                            <span class="color-grey text-12 strikethrough mr-5" ng-if="vm.content.shippingMethodPriceWithoutDiscount != vm.content.shippingMethodPrice">{{ vm.content.shippingMethodPriceWithoutDiscount }}</span>
+                            {{ vm.content.shippingMethodPrice }}
+                        </div>
+                    </div>
+                    <div class="vendr-order-table__subtotal">
+                        <div>Payment via {{ vm.content.paymentMethod.name }}</div>
+                        <div>
+                            <span class="color-grey text-12 strikethrough mr-5" ng-if="vm.content.paymentMethodPriceWithoutDiscount != vm.content.paymentMethodPrice">{{ vm.content.paymentMethodPriceWithoutDiscount }}</span>
+                            {{ vm.content.paymentMethodPrice }}
+                        </div>
+                    </div>
+
+                    <hr class="w-2/5 self-end" />
+
+                    <div class="vendr-order-table__total">
+                        <div>Net Total</div>
+                        <div>{{ vm.content.totalPriceWithPreviousDiscount }}</div>
+                    </div>
+                    <div class="vendr-order-table__subtotal" ng-if="vm.content.totalPriceDiscount != vm.content.zeroAmount">
+                        <div>Net Total Discount</div>
+                        <div>-{{ vm.content.totalPriceDiscount }}</div>
+                    </div>
+
+                    <div class="vendr-order-table__subtotal">
+                        <div>TAX</div>
+                        <div>{{ vm.content.totalPriceTax }}</div>
+                    </div>
+
+                    <div class="vendr-order-table__subtotal" ng-if="vm.content.totalGiftCardAmount != vm.content.zeroAmount">
+                        <div>Gift Card <span class="color-grey text-12 block">{{ vm.content.appliedGiftCards.join(', ') }}</span></div>
+                        <div>-{{ vm.content.totalGiftCardAmount }}</div>
+                    </div>
+
+                    <hr class="w-2/5 self-end" />
+
+                    <div class="vendr-order-table__total mb-0">
+                        <div>Order Total</div>
+                        <div>{{ vm.content.totalPrice }}</div>
+                    </div>
+
+                </div>
+
+            </umb-box-content>
+        </umb-box>
+
+        <umb-box>
+            <umb-box-header title="Payment Details">
+                <a href="#" prevent-default><i class="fa fa-info-circle"></i></a>
+            </umb-box-header>
+            <umb-box-content class="flex flex-column">
+
+                <div class="vendr-order-table__subtotal">
+                    <div>Transaction Amount</div>
+                    <div>{{ vm.content.transactionAmount }}</div>
+                </div>
+
+                <div class="vendr-order-table__subtotal" ng-if="vm.content.transactionFee != vm.content.zeroAmount">
+                    <div>Transaction Fee</div>
+                    <div>-{{ vm.content.transactionFee }}</div>
+                </div>
+
+                <div ng-switch="vm.content.paymentStatus">
+                    <div ng-switch-when="Refunded">
+                        <div class="vendr-order-table__subtotal">
+                            <div>Refunded</div>
+                            <div>-{{ vm.content.totalReceived }}</div>
+                        </div>
+                        <div class="vendr-order-table__total mb-0">
+                            <div>Total Received</div>
+                            <div>{{ vm.content.zeroAmount }}</div>
+                        </div>
+                    </div>
+                    <div ng-switch-when="Cancelled">
+                        <div class="vendr-order-table__subtotal">
+                            <div>Cancelled</div>
+                            <div>-{{ vm.content.totalReceived }}</div>
+                        </div>
+                        <div class="vendr-order-table__total mb-0">
+                            <div>Total Received</div>
+                            <div>{{ vm.content.zeroAmount }}</div>
+                        </div>
+                    </div>
+                    <div ng-switch-default>
+                        <div class="vendr-order-table__total mb-0">
+                            <div>Total Received</div>
+                            <div>{{ vm.content.totalReceived }}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Need to also check payment providers supports capture -->
+                <div ng-if="vm.content.paymentStatus == 'Authorized' && (vm.content.paymentMethod.canCancelPayments || vm.content.paymentMethod.canCapturePayments)" class="flex flex-column">
+                    <hr />
+                    <div class="self-end">
+                        <umb-button type="button" label="Cancel Payment" class="mr-5" ng-click="vm.cancelPayment()" ng-if="vm.content.paymentMethod.canCancelPayments"></umb-button>
+                        <umb-button type="button" button-style="success" label="Capture Payment" ng-click="vm.capturePayment()" ng-if="vm.content.paymentMethod.canCapturePayments"></umb-button>
+                    </div>
+                </div>
+                <div ng-if="vm.content.paymentStatus == 'Captured' && vm.content.paymentProvider.canRefundPayments" class="flex flex-column">
+                    <hr />
+                    <umb-button type="button" label="Refund Payment" class="self-end" ng-click="vm.refundPayment()"></umb-button>
+                </div>
+
+            </umb-box-content>
+        </umb-box>
+
+        <umb-box ng-if="vm.editorConfig.notes.customerNotes || vm.editorConfig.notes.internalNotes">
+            <umb-box-header title="Order Notes"></umb-box-header>
+            <umb-box-content>
+
+                <umb-control-group label="{{vm.editorConfig.notes.customerNotes.label}}" ng-if="vm.editorConfig.notes.customerNotes">
+                    <textarea class="umb-property-editor umb-textarea textstring" rows="8" style="min-width: 100%;"
+                              ng-model="vm.content.properties[vm.editorConfig.notes.customerNotes.alias].value"></textarea>
+                </umb-control-group>
+
+                <umb-control-group label="{{vm.editorConfig.notes.internalNotes.label}}" ng-if="vm.editorConfig.notes.internalNotes">
+                    <textarea class="umb-property-editor umb-textarea textstring" rows="8" style="min-width: 100%;"
+                              ng-model="vm.content.properties[vm.editorConfig.notes.internalNotes.alias].value"></textarea>
+                </umb-control-group>
+
+            </umb-box-content>
+        </umb-box>
+
+        <!--<umb-box>
+            <umb-box-header title="Timeline"></umb-box-header>
+            <umb-box-content>
+
+                <div class="history">
+
+                    <div class="history-line history-line--s"></div>
+
+                    <div class="history-item">
+
+                        <div class="history-item__break">
+                            <div class="history-item__avatar">
+                                <div class="umb-avatar umb-avatar--s vendr-bg--grey"><span>E</span></div>
+                            </div>
+
+                            <div>
+                                <div>Confirmation Email Sent</div>
+                                <div class="history-item__date">October 9, 2019 1:18 PM</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="history-item">
+
+                        <div class="history-item__break">
+                            <div class="history-item__avatar">
+                                <div class="umb-avatar umb-avatar--s vendr-bg--grey"><span>O</span></div>
+                            </div>
+
+                            <div>
+                                <div>Order Placed</div>
+                                <div class="history-item__date">October 9, 2019 1:18 PM</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </umb-box-content>
+        </umb-box>-->
+
+    </div>
+    <div class="vendr-layout__right">
+
+        <umb-box>
+            <umb-box-header title="Actions"></umb-box-header>
+            <umb-box-content class="block-form">
+                <a href="#" class="btn btn-block btn-action" ng-click="vm.changeStatus()" prevent-default>Change Status</a>
+                <a href="#" class="btn btn-block" ng-click="vm.sendEmail()" prevent-default>Send Email</a>
+            </umb-box-content>
+        </umb-box>
+
+        <umb-box>
+            <umb-box-header title="Customer Details">
+                <!--<umb-button type="button" label="Edit"></umb-button>-->
+            </umb-box-header>
+            <umb-box-content>
+
+                <div class="relative copy-box">
+                    <a href="#" prevent-default umb-clipboard umb-clipboard-target="#customer" class="copy-box__copy">
+                        <i class="fa fa-copy"></i>
+                    </a>
+                    <div id="customer" class="flex flex-column">
+                        <strong>{{ vm.content.customerFullName }}</strong>
+                        <span ng-if="vm.editorConfig.customer.company && vm.content.properties[vm.editorConfig.customer.company.alias]">
+                            {{vm.content.properties[vm.editorConfig.customer.company.alias].value}}
+                            <small ng-if="vm.editorConfig.customer.taxCode && vm.content.properties[vm.editorConfig.customer.taxCode.alias]" class="color-grey">({{vm.content.properties[vm.editorConfig.customer.taxCode.alias].value}})</small>
+                        </span>
+                        <a href="mailto:{{vm.content.customerEmail}}" class="color-light-blue" ng-if="vm.content.customerEmail">{{vm.content.customerEmail}}</a>
+                        <span ng-if="vm.editorConfig.customer.telephone && vm.content.properties[vm.editorConfig.customer.telephone.alias]">{{vm.content.properties[vm.editorConfig.customer.telephone.alias].value}}</span>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="relative  copy-box">
+                    <a href="#" prevent-default umb-clipboard umb-clipboard-target="#billing-adress" class="copy-box__copy">
+                        <i class="fa fa-copy"></i>
+                    </a>
+                    <div id="billing-adress">
+                        <strong>Billing Address</strong>
+                        <div ng-if="vm.editorConfig.billing.addressLine1 && vm.content.properties[vm.editorConfig.billing.addressLine1.alias]">
+                            {{vm.content.properties[vm.editorConfig.billing.addressLine1.alias].value}}
+                        </div>
+                        <div ng-if="vm.editorConfig.billing.addressLine2 && vm.content.properties[vm.editorConfig.billing.addressLine2.alias]">
+                            {{vm.content.properties[vm.editorConfig.billing.addressLine2.alias].value}}
+                        </div>
+                        <div ng-if="vm.editorConfig.billing.city && vm.content.properties[vm.editorConfig.billing.city.alias]">
+                            {{vm.content.properties[vm.editorConfig.billing.city.alias].value}}
+                        </div>
+                        <div ng-if="vm.editorConfig.billing.zipCode && vm.content.properties[vm.editorConfig.billing.zipCode.alias]">
+                            {{vm.content.properties[vm.editorConfig.billing.zipCode.alias].value}}
+                        </div>
+                        <div ng-if="vm.content.paymentCountry">
+                            {{vm.content.paymentCountry.name}}
+                        </div>
+                        <div ng-if="vm.editorConfig.billing.telephone && vm.content.properties[vm.editorConfig.billing.telephone.alias]">
+                            <br />Tel: {{vm.content.properties[vm.editorConfig.billing.telephone.alias].value}}
+                        </div>
+                    </div>
+                    <!--<p><a href="#" class="color-light-blue" ng-click="vm.viewOnMap('S75 5DF')" prevent-default>View on Map</a></p>-->
+                </div>
+                <hr />
+
+                <div class="relative copy-box" ng-if="vm.editorConfig.shipping.enabled !== false">
+                    <a href="#" prevent-default umb-clipboard umb-clipboard-target="#shipping-adress" class="copy-box__copy">
+                        <i class="fa fa-copy"></i>
+                    </a>
+                    <div id="shipping-adress">
+                        <strong>Shipping Address</strong>
+                        <div ng-if="vm.editorConfig.shipping.sameAsBilling && vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value == vm.editorConfig.shipping.sameAsBilling.trueValue">
+                            Same as billing address
+                        </div>
+                        <div ng-if="!vm.editorConfig.shipping.sameAsBilling || vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value != vm.editorConfig.shipping.sameAsBilling.trueValue">
+                            <div ng-if="(vm.editorConfig.shipping.firstName && vm.content.properties[vm.editorConfig.shipping.firstName.alias]) || (vm.editorConfig.shipping.lastName && vm.content.properties[vm.editorConfig.shipping.lastName.alias])">
+                                <span ng-if="vm.editorConfig.shipping.firstName && vm.content.properties[vm.editorConfig.shipping.firstName.alias]">
+                                    {{vm.content.properties[vm.editorConfig.shipping.firstName.alias].value}}
+                                </span>
+                                <span ng-if="vm.editorConfig.shipping.lastName && vm.content.properties[vm.editorConfig.shipping.lastName.alias]">
+                                    {{vm.content.properties[vm.editorConfig.shipping.lastName.alias].value}}
+                                </span>
+                            </div>
+                            <div ng-if="vm.editorConfig.shipping.addressLine1 && vm.content.properties[vm.editorConfig.shipping.addressLine1.alias]">
+                                {{vm.content.properties[vm.editorConfig.shipping.addressLine1.alias].value}}
+                            </div>
+                            <div ng-if="vm.editorConfig.shipping.addressLine2 && vm.content.properties[vm.editorConfig.shipping.addressLine2.alias]">
+                                {{vm.content.properties[vm.editorConfig.shipping.addressLine2.alias].value}}
+                            </div>
+                            <div ng-if="vm.editorConfig.shipping.city && vm.content.properties[vm.editorConfig.shipping.city.alias]">
+                                {{vm.content.properties[vm.editorConfig.shipping.city.alias].value}}
+                            </div>
+                            <div ng-if="vm.editorConfig.shipping.zipCode && vm.content.properties[vm.editorConfig.shipping.zipCode.alias]">
+                                {{vm.content.properties[vm.editorConfig.shipping.zipCode.alias].value}}
+                            </div>
+                            <div ng-if="vm.content.shippingCountry">
+                                {{vm.content.shippingCountry.name}}
+                            </div>
+                            <div ng-if="vm.editorConfig.shipping.telephone && vm.content.properties[vm.editorConfig.shipping.telephone.alias]">
+                                <br />Tel: {{vm.content.properties[vm.editorConfig.shipping.telephone.alias].value}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </umb-box-content>
+        </umb-box>
+
+        <umb-box ng-if="vm.editorConfig.additionalInfo || (vm.content.appliedDiscountCodes && vm.content.appliedDiscountCodes.length > 0)">
+            <umb-box-header title="Additional Information">
+                <!--<umb-button type="button" label="Edit"></umb-button>-->
+            </umb-box-header>
+            <umb-box-content>
+                <p ng-if="vm.content.appliedDiscountCodes && vm.content.appliedDiscountCodes.length > 0"><strong>Discount Codes Used:</strong><br />{{ vm.content.appliedDiscountCodes.join(', ') }}</p>
+                <p ng-repeat="ai in vm.editorConfig.additionalInfo">
+                    <strong>{{ ai.label }}:</strong><br />{{vm.content.properties[ai.alias] ? vm.content.properties[ai.alias].value : 'No value'}}
+                </p>
+            </umb-box-content>
+        </umb-box>
+    </div>
+</div>

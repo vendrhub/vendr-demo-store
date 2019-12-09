@@ -1,0 +1,36 @@
+﻿<div>
+
+    <umb-box>
+        <!--<umb-box-header title="Settings"></umb-box-header>-->
+        <umb-box-content>
+
+            <umb-control-group label="ISO Code" description="2 letter ISO country code">
+                <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--short"
+                       ng-model="model.content.code" />
+            </umb-control-group>
+            <umb-control-group label="Default Currency">
+                <select class="umb-property-editor umb-dropdown"
+                        ng-model="model.content.defaultCurrencyId"
+                        ng-options="itm.id as itm.name for itm in model.options.currencies">
+                    <option value="" disabled selected>-- Select a Currency --</option>
+                </select>
+            </umb-control-group>
+            <umb-control-group label="Default Shipping Method">
+                <select class="umb-property-editor umb-dropdown"
+                        ng-model="model.content.defaultShippingMethodId"
+                        ng-options="itm.id as itm.name for itm in model.options.shippingMethods">
+                    <option value="" disabled selected>-- Select a Shipping Method --</option>
+                </select>
+            </umb-control-group>
+            <umb-control-group label="Default Payment Method">
+                <select class="umb-property-editor umb-dropdown"
+                        ng-model="model.content.defaultPaymentMethodId"
+                        ng-options="itm.id as itm.name for itm in model.options.paymentMethods">
+                    <option value="" disabled selected>-- Select a Payment Method --</option>
+                </select>
+            </umb-control-group>
+
+        </umb-box-content>
+    </umb-box>
+
+</div>

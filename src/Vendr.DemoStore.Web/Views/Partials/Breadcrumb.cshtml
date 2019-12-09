@@ -1,0 +1,13 @@
+﻿@using Vendr.DemoStore.Models;
+@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@{ 
+    var ancestors = Model.Ancestors().Reverse();
+}
+<div class="flex py-2 border-b border-gray-300">
+    @foreach(var ancestor in ancestors)
+    {
+        <a href="@ancestor.Url" class="hover:text-teal-400">@ancestor.Name</a>
+        <span class="mx-2">›</span>
+    }
+    <span>@(Model.ContentType.Alias == HomePage.ModelTypeAlias ? "Featured Products" : @Model.Name)</span>
+</div>

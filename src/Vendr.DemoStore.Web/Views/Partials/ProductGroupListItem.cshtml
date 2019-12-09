@@ -1,0 +1,14 @@
+﻿@using Vendr.DemoStore.Models;
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<IProductGroupComp>
+
+<a href="@(Model.Url)" class="block relative bg-gray-600 text-white hover:bg-gray-800">
+    @if (Model.Image != null)
+    {
+        <img src="@(Url.GetCropUrl(Model.Image, 200, 200))" class="w-full h-40 object-cover opacity-50" />
+    }
+    else
+    {
+        <div class="w-full h-40 bg-teal-400 opacity-75"></div>
+    }
+    <span class="flex flex-col absolute inset-0 justify-center text-center text-2xl font-bold p-2">@Model.Name</span>
+</a>

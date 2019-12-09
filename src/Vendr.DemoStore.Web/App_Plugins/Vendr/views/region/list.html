@@ -1,0 +1,14 @@
+﻿<div ng-controller="Vendr.Controllers.RegionListController as vm" class="vendr">
+
+    <umb-load-indicator ng-if="vm.page.loading"></umb-load-indicator>
+
+    <vendr-table-view ng-if="!vm.page.loading"
+        create-actions="vm.options.createActions"
+        bulk-actions="vm.options.bulkActions"
+        items="vm.options.items"
+        item-properties="vm.options.itemProperties"
+        item-click="vm.options.itemClick"
+        on-load-items="vm.loadItems">
+    </vendr-table-view>
+
+</div>

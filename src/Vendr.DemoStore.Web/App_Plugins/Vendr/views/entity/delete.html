@@ -1,0 +1,31 @@
+﻿<div class="umb-dialog vendr" ng-controller="Vendr.Controllers.EntityDeleteController as vm">
+
+    <div class="umb-dialog-body with-footer">
+        <div class="umb-pane ">
+            <div ng-show="vm.error">
+                <div class="alert alert-error">
+                    <div><strong>{{vm.error.errorMsg}}</strong></div>
+                    <div>{{vm.error.data.message || vm.error.data.Message}}</div>
+                </div>
+            </div>
+            <p class="abstract">
+                <localize key="defaultdialogs_confirmdelete">Are you sure you want to delete</localize> <strong>{{currentNode.name}}</strong>?
+            </p>
+        </div>
+    </div>
+
+    <div class="umb-dialog-footer">
+        <umb-button type="button"
+                    button-style="link"
+                    action="vm.cancel()"
+                    label-key="general_cancel">
+        </umb-button>
+        <umb-button type="button"
+                    action="vm.performDelete()"
+                    state="vm.saveButtonState"
+                    button-style="danger"
+                    label-key="general_ok">
+        </umb-button>
+    </div>
+
+</div>

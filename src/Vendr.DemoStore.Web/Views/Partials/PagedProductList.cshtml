@@ -1,0 +1,9 @@
+﻿@using Vendr.DemoStore;
+@using Vendr.DemoStore.Models;
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<PagedResult<ProductPage>>
+
+@if (Model.TotalItems > 0)
+{
+    @Html.Partial("ProductList", Model.Items)
+    @Html.Partial("Pagination", Model.Cast<ProductPage, object>())
+}
