@@ -7,6 +7,5 @@ using System.Threading.Tasks;
 namespace Vendr.DemoStore.Models
 {
     class Generated
-    {
-    }
+    { }
 }
