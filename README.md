@@ -40,7 +40,7 @@ If you require any help with setup or you are having problems getting it working
 
 ## Raising an Issue
 
-If you find any issues with the demo store itself please raise them in the [issues section of this repository](https://github.com/vendrhub/vendr-demo-store/issues), if the issue is a core Vendr product issue however, please raise these in the [issue tracker on the Vendr repository](https://github.com/vendrhub/vendr-demo-store/issues)
+If you find any issues with the demo store itself please raise them in the [issues section of this repository](https://github.com/vendrhub/vendr-demo-store/issues), if the issue is a core Vendr product issue however, please raise these in the [issue tracker on the Vendr repository](https://github.com/vendrhub/vendr/issues)
 
 ## (Probable) FAQs
 
