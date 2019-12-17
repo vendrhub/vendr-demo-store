@@ -253,7 +253,7 @@
                         return vendrCountryResource.deleteCountry(bulkItem.id);
                     },
                     getConfirmMessage: function (total) {
-                        return $q.resolve("Are you sure you want to delete " + total + " items?");
+                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") +"?");
                     }
                 }
             ],
@@ -525,7 +525,7 @@
                         return vendrCurrencyResource.deleteCurrency(bulkItem.id);
                     },
                     getConfirmMessage: function (total) {
-                        return $q.resolve("Are you sure you want to delete " + total + " items?");
+                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") +"?");
                     }
                 }
             ],
@@ -922,6 +922,44 @@
 
     'use strict';
 
+    function TaxClassPickerDialogController($scope,
+        vendrTaxResource)
+    {
+        var defaultConfig = {
+            title: "Select Tax Class",
+            enableFilter: true,
+            orderBy: "name"
+        };
+
+        var vm = this;
+
+        vm.config = angular.extend({}, defaultConfig, $scope.model.config);
+
+        vm.loadItems = function() {
+            return vendrTaxResource.getTaxClasses(vm.config.storeId);
+        };
+
+        vm.select = function(item) {
+            $scope.model.value = item;
+            if ($scope.model.submit) {
+                $scope.model.submit($scope.model.value);
+            }
+        };
+
+        vm.close = function() {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.TaxClassPickerDialogController', TaxClassPickerDialogController);
+
+}());
+(function () {
+
+    'use strict';
+
     function DiscountListController($scope, $rootScope, $routeParams, vendrUtils) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
@@ -1105,7 +1143,7 @@
                         return vendrEmailTemplateResource.deleteEmailTemplate(bulkItem.id);
                     },
                     getConfirmMessage: function (total) {
-                        return $q.resolve("Are you sure you want to delete " + total + " items?");
+                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") +"?");
                     }
                 }
             ],
@@ -1538,7 +1576,7 @@
                         return vendrOrderStatusResource.deleteOrderStatus(bulkItem.id);
                     },
                     getConfirmMessage: function (total) {
-                        return $q.resolve("Are you sure you want to delete " + total + " items?");
+                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") +"?");
                     }
                 }
             ],
@@ -1616,6 +1654,101 @@
 
     'use strict';
 
+    function EditCustomerDetailsController($scope, vendrOrderResource,
+        vendrCountryResource)
+    {
+        var order = $scope.model.config.order;
+
+        console.log(order);
+
+        var vm = this;
+        vm.title = "Edit Customer Details";
+        vm.editorConfig = $scope.model.config.editorConfig;
+        vm.content = {
+            customerFirstName: order.customerFirstName,
+            customerLastName: order.customerLastName,
+            customerEmail: order.customerEmail,
+            paymentCountryId: order.paymentCountryId,
+            paymentCountry: order.paymentCountry,
+            paymentRegionId: order.paymentCountryId,
+            paymentRegion: order.paymentRegion,
+            shippingCountryId: order.shippingCountryId,
+            shippingCountry: order.shippingCountry,
+            shippingRegionId: order.paymentCountryId,
+            shippingRegion: order.paymentCountry,
+            properties: {}
+        };
+
+        ensureProperties(vm.editorConfig.customer);
+        ensureProperties(vm.editorConfig.billing);
+        ensureProperties(vm.editorConfig.shipping);
+
+        vm.options = {
+            countries: [],
+            shippingSameAsBilling: vm.editorConfig.shipping.sameAsBilling && vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value == vm.editorConfig.shipping.sameAsBilling.trueValue
+        };
+
+        vm.toggleShippingSameAsBilling = function () {
+            if (vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value == vm.editorConfig.shipping.sameAsBilling.trueValue) {
+                vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value = vm.editorConfig.shipping.sameAsBilling.falseValue;
+            } else {
+                vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value = vm.editorConfig.shipping.sameAsBilling.trueValue;
+            }
+            vm.options.shippingSameAsBilling = vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value == vm.editorConfig.shipping.sameAsBilling.trueValue;
+        };
+
+        vm.save = function () {
+            if ($scope.model.submit) {
+                $scope.model.submit(vm.content);
+            }
+        };
+
+        vm.cancel = function() {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
+
+        function ensureProperties (cfg) {
+            for (const prop in cfg) {
+                var alias = cfg[prop].alias;
+                vm.content.properties[alias] = order.properties[alias] || { value: "", isReadOnly: false, isServerSideOnly: false };
+            }
+        }
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.EditCustomerDetailsController', EditCustomerDetailsController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function TransactionInfoDialogController($scope, vendrOrderResource)
+    {
+        var vm = this;
+
+        vm.title = "Transaction Info";
+        vm.properties = [];
+
+        vendrOrderResource.getOrderTransactionInfo($scope.model.config.orderId).then(function (data) {
+            vm.properties = data;
+        });
+
+        vm.close = function() {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.TransactionInfoDialogController', TransactionInfoDialogController);
+
+}());
+(function () {
+
+    'use strict';
+
     function OrderEditController($scope, $routeParams, $location, formHelper,
         appState, editorState, editorService, localizationService, notificationsService, navigationService,
         vendrUtils, vendrOrderResource, vendrStoreResource, vendrEmailResource) {
@@ -1661,6 +1794,47 @@
                 });
             },
             close: function() {
+                editorService.close();
+            }
+        };
+
+        var transactionInfoDialogOptions = {
+            view: '/app_plugins/vendr/views/order/dialogs/transactioninfo.html',
+            size: 'small',
+            config: {
+                storeId: storeId,
+                orderId: id
+            },
+            close: function () {
+                editorService.close();
+            }
+        };
+
+        var editCustomerDetailsDialogOptions = {
+            view: '/app_plugins/vendr/views/order/dialogs/editcustomerdetails.html',
+            config: {
+                storeId: storeId,
+                orderId: id
+            },
+            submit: function (model) {
+
+                // Copy model values back over
+                vm.content.customerFirstName = model.customerFirstName;
+                vm.content.customerLastName = model.customerLastName;
+                vm.content.customerEmail = model.customerEmail;
+
+                for (var key in model.properties) {
+                    var prop = model.properties[key];
+                    if (prop.value) {
+                        vm.content.properties[key] = prop;
+                    } else {
+                        delete vm.content.properties[key];
+                    }
+                }
+
+                editorService.close();
+            },
+            close: function () {
                 editorService.close();
             }
         };
@@ -1740,6 +1914,10 @@
         //    });
         //};
 
+        vm.viewTransactionInfo = function () {
+            editorService.open(transactionInfoDialogOptions);
+        };
+
         vm.cancelPayment = function() {
             vendrOrderResource.cancelPayment(id).then(function(order) {
                 vm.content.paymentStatus = order.paymentStatus;
@@ -1772,6 +1950,12 @@
             editorService.open(sendEmailDialogOptions);
         };
 
+        vm.editCustomerDetails = function () {
+            editCustomerDetailsDialogOptions.config.order = vm.content;
+            editCustomerDetailsDialogOptions.config.editorConfig = vm.editorConfig;
+            editorService.open(editCustomerDetailsDialogOptions);
+        };
+
         vm.ready = function (model) {
             vm.page.loading = false;
             vm.content = model;
@@ -1782,7 +1966,7 @@
             var pathToSync = vm.content.path.slice(0, -1);
             navigationService.syncTree({ tree: "vendr", path: pathToSync, forceReload: true }).then(function (syncArgs) {
 
-                // Fake a the current node
+                // Fake a current node
                 // This is used in the header to generate the actions menu
                 var application = syncArgs.node.metaData.application;
                 var tree = syncArgs.node.metaData.tree;
@@ -1875,7 +2059,7 @@
                         return vendrOrderResource.deleteOrder(bulkItem.id);
                     },
                     getConfirmMessage: function (total) {
-                        return $q.resolve("Are you sure you want to delete " + total + " items?");
+                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") +"?");
                     }
                 }
             ],
@@ -2433,7 +2617,7 @@
                         return vendrPaymentMethodResource.deletePaymentMethod(bulkItem.id);
                     },
                     getConfirmMessage: function (total) {
-                        return $q.resolve("Are you sure you want to delete " + total + " items?");
+                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") +"?");
                     }
                 }
             ],
@@ -2617,6 +2801,44 @@
 
     'use strict';
 
+    function StockController($scope, editorState, vendrProductResource)
+    {
+        var currentNode = editorState.getCurrent();
+        var productReference = currentNode.id > 0 ? currentNode.key : undefined;
+
+        var vm = this;
+
+        vm.model = $scope.model;
+
+        // We don't use any stored stock value as we fetch it from
+        // the product service every time. We only use the stored
+        // value as a means to pass the value to an event handler
+        // to update the stock value on save
+        vm.model.value = 0;
+
+        vm.loading = true;
+        
+        var init = function () {
+            if (productReference) {
+                vendrProductResource.getStock(productReference).then(function (stock) {
+                    vm.model.value = stock || 0;
+                    vm.loading = false;
+                });
+            } else {
+                vm.loading = false;
+            }
+        };
+
+        init();
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.StockController', StockController);
+
+}());
+(function () {
+
+    'use strict';
+
     function StorePickerController($scope, editorService,
         vendrStoreResource)
     {
@@ -2659,6 +2881,74 @@
     }
 
     angular.module('vendr').controller('Vendr.Controllers.StorePickerController', StorePickerController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function TaxClassPickerController($scope, $routeParams, vendrStoreResource,
+        vendrTaxResource, editorService)
+    {
+        var currentOrParentNodeId = $routeParams.id;
+
+        var dialogOptions = {
+            view: '/app_plugins/vendr/views/dialogs/taxclasspicker.html',
+            size: 'small',
+            config: {
+                storeId: -1
+            },
+            submit: function (model) {
+                vm.model.value = model.id;
+                vm.pickedItem = model;
+                editorService.close();
+            },
+            close: function () {
+                editorService.close();
+            }
+        };
+
+        var vm = this;
+
+        vm.model = $scope.model;
+        vm.pickedItem = false;
+        vm.loading = true;
+        vm.store = null;
+
+        vm.openPicker = function () {
+            editorService.open(dialogOptions);
+        };
+
+        vm.removeItem = function () {
+            vm.model.value = null;
+            vm.pickedItem = false;
+        };
+
+        vm.openItem = function () {
+
+        };
+
+        var init = function (value) {
+
+            vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId).then(function (store) {
+                vm.store = store;
+                dialogOptions.config.storeId = store.id;
+                if (value) {
+                    vendrTaxResource.getTaxClass(value).then(function (entity) {
+                        vm.pickedItem = entity;
+                        vm.loading = false;
+                    });
+                } else {
+                    vm.loading = false;
+                }
+            });
+
+        };
+
+        init(vm.model.value);
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.TaxClassPickerController', TaxClassPickerController);
 
 }());
 (function () {
@@ -2839,7 +3129,7 @@
                         return vendrCountryResource.deleteRegion(bulkItem.id);
                     },
                     getConfirmMessage: function (total) {
-                        return $q.resolve("Are you sure you want to delete " + total + " items?");
+                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") +"?");
                     }
                 }
             ],
@@ -3325,7 +3615,7 @@
                         return vendrShippingMethodResource.deleteShippingMethod(bulkItem.id);
                     },
                     getConfirmMessage: function (total) {
-                        return $q.resolve("Are you sure you want to delete " + total + " items?");
+                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") +"?");
                     }
                 }
             ],
@@ -3831,7 +4121,7 @@
                         return vendrTaxResource.deleteTaxClass(bulkItem.id);
                     },
                     getConfirmMessage: function (total) {
-                        return $q.resolve("Are you sure you want to delete " + total + " items?");
+                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") +"?");
                     }
                 }
             ],

@@ -11,62 +11,83 @@
         <umb-editor-view ng-if="!vm.page.loading">
 
             <umb-editor-header name="vm.content.name"
-                alias="vm.content.alias"
-                hide-icon="true"
-                hide-description="true"
-                hide-alias="false"
-                show-back-button="true"
-                on-back="vm.back()"
-                menu="vm.page.menu">
+                               alias="vm.content.alias"
+                               hide-icon="true"
+                               hide-description="true"
+                               hide-alias="false"
+                               show-back-button="true"
+                               on-back="vm.back()"
+                               menu="vm.page.menu">
             </umb-editor-header>
 
             <umb-editor-container class="form-horizontal">
 
-                <umb-box>
-                    <!--<umb-box-header title="Settings"></umb-box-header>-->
-                    <umb-box-content>
+                <div class="vendr-layout vendr-layout--layout1">
 
-                        <umb-control-group label="SKU">
-                            <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--short"
-                                   ng-model="vm.content.sku" />
-                        </umb-control-group>
-                        <umb-control-group label="Tax Class">
-                            <select class="umb-property-editor umb-dropdown"
-                                    ng-model="vm.content.taxClassId"
-                                    ng-options="itm.id as itm.name for itm in vm.options.taxClasses">
-                                <option value="" disabled selected>-- Select a Tax Class --</option>
-                            </select>
-                        </umb-control-group>
+                    <div class="vendr-layout__left">
 
-                        <umb-control-group label="Default Pricing">
+                        <umb-box>
+                            <!--<umb-box-header title="Settings"></umb-box-header>-->
+                            <umb-box-content>
 
-                            <div class="vendr-input vendr-input--short" ng-repeat="defaultPrice in vm.content.defaultPrices">
-                                <span class="vendr-input--prefix">{{ defaultPrice.currencyCode }}</span>
-                                <input type="text" ng-model="defaultPrice.value" ng-currency currency-symbol="" />
-                            </div>
+                                <umb-control-group label="SKU">
+                                    <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--short"
+                                           ng-model="vm.content.sku" />
+                                </umb-control-group>
+                                <umb-control-group label="Tax Class">
+                                    <select class="umb-property-editor umb-dropdown"
+                                            ng-model="vm.content.taxClassId"
+                                            ng-options="itm.id as itm.name for itm in vm.options.taxClasses">
+                                        <option value="" disabled selected>-- Select a Tax Class --</option>
+                                    </select>
+                                </umb-control-group>
 
-                        </umb-control-group>
-                        <umb-control-group label="Image">
-                            <vendr-media-picker ng-model="vm.content.imageId"
-                                                multi-picker="false"
-                                                only-images="true"
-                                                disable-folder-select="true" />
-                        </umb-control-group>
+                                <umb-control-group label="Default Pricing">
 
-                    </umb-box-content>
-                </umb-box>
+                                    <div class="vendr-input vendr-input--short" ng-repeat="defaultPrice in vm.content.defaultPrices">
+                                        <span class="vendr-input--prefix">{{ defaultPrice.currencyCode }}</span>
+                                        <input type="text" ng-model="defaultPrice.value" ng-currency currency-symbol="" />
+                                    </div>
 
-                <umb-box>
-                    <umb-box-header title="Available in Countries"></umb-box-header>
-                    <umb-box-content>
+                                </umb-control-group>
+                                <umb-control-group label="Image">
+                                    <vendr-media-picker ng-model="vm.content.imageId"
+                                        multi-picker="false"
+                                        only-images="true"
+                                        disable-folder-select="true" />
+                                </umb-control-group>
 
-                        <vendr-toggle-list ng-model="vm.options.countryRegions" 
-                            toggle-all="true" items-key="regions"
-                            checked-action-label="'Custom Pricing'"
-                            on-checked-action="vm.openCustomPricesDialog" />
+                            </umb-box-content>
+                        </umb-box>
 
-                    </umb-box-content>
-                </umb-box>
+                        <umb-box>
+                            <umb-box-header title="Available in Countries"></umb-box-header>
+                            <umb-box-content>
+
+                                <vendr-toggle-list ng-model="vm.options.countryRegions"
+                                    toggle-all="true" items-key="regions"
+                                    checked-action-label="'Custom Pricing'"
+                                    on-checked-action="vm.openCustomPricesDialog" />
+
+                            </umb-box-content>
+                        </umb-box>
+                    </div>
+
+                    <div class="vendr-layout__right">
+                        <umb-box>
+                            <umb-box-header title-key="general_info"></umb-box-header>
+                            <umb-box-content class="block-form">
+                                <umb-control-group label="Id">
+                                    <vendr-id-label value="vm.content.id" />
+                                </umb-control-group>
+                                <umb-control-group label="Store Id">
+                                    <vendr-id-label value="vm.content.storeId" />
+                                </umb-control-group>
+                            </umb-box-content>
+                        </umb-box>
+                    </div>
+
+                </div>
 
             </umb-editor-container>
 
@@ -74,8 +95,8 @@
 
                 <umb-editor-footer-content-left>
                     <umb-breadcrumbs ng-if="vm.page.breadcrumb && vm.page.breadcrumb.items && vm.page.breadcrumb.items.length > 0"
-                        ancestors="vm.page.breadcrumb.items"
-                        on-open="vm.page.breadcrumb.itemClick(ancestor)">
+                                     ancestors="vm.page.breadcrumb.items"
+                                     on-open="vm.page.breadcrumb.itemClick(ancestor)">
                     </umb-breadcrumbs>
                 </umb-editor-footer-content-left>
 
@@ -92,6 +113,7 @@
                 </umb-editor-footer-content-right>
 
             </umb-editor-footer>
+
         </umb-editor-view>
     </form>
 </div>

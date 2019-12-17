@@ -19,10 +19,10 @@
       }
     },
     {
-      "alias": "Vendr.StockLevel",
-      "name": "Vendr: Stock Level",
+      "alias": "Vendr.Stock",
+      "name": "Vendr: Stock",
       "editor": {
-        "view": "~/app_plugins/vendr/views/propertyeditors/stocklevel/stocklevel.html",
+        "view": "~/app_plugins/vendr/views/propertyeditors/stock/stock.html",
         "hideLabel": false,
         "valueType": "STRING"
       }

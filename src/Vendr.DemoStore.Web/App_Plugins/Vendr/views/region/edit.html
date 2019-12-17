@@ -20,31 +20,54 @@
 
             <umb-editor-container class="form-horizontal">
 
-                <umb-box>
-                    <!--<umb-box-header title="Settings"></umb-box-header>-->
-                    <umb-box-content>
+                <div class="vendr-layout vendr-layout--layout1">
 
-                        <umb-control-group label="Code">
-                            <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--short"
-                                   ng-model="vm.content.code" />
-                        </umb-control-group>
-                        <umb-control-group label="Default Shipping Method">
-                            <select class="umb-property-editor umb-dropdown"
-                                    ng-model="vm.content.defaultShippingMethodId"
-                                    ng-options="itm.id as itm.name for itm in vm.options.shippingMethods">
-                                <option value="" disabled selected>-- Select a Shipping Method --</option>
-                            </select>
-                        </umb-control-group>
-                        <umb-control-group label="Default Payment Method">
-                            <select class="umb-property-editor umb-dropdown"
-                                    ng-model="vm.content.defaultPaymentMethodId"
-                                    ng-options="itm.id as itm.name for itm in vm.options.paymentMethods">
-                                <option value="" disabled selected>-- Select a Payment Method --</option>
-                            </select>
-                        </umb-control-group>
+                    <div class="vendr-layout__left">
 
-                    </umb-box-content>
-                </umb-box>
+                        <umb-box>
+                            <!--<umb-box-header title="Settings"></umb-box-header>-->
+                            <umb-box-content>
+
+                                <umb-control-group label="Code">
+                                    <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--short"
+                                           ng-model="vm.content.code"
+                                           pattern="[A-Z]{5}"
+                                           vendr-uppercase />
+                                </umb-control-group>
+                                <umb-control-group label="Default Shipping Method">
+                                    <select class="umb-property-editor umb-dropdown"
+                                            ng-model="vm.content.defaultShippingMethodId"
+                                            ng-options="itm.id as itm.name for itm in vm.options.shippingMethods">
+                                        <option value="" disabled selected>-- Select a Shipping Method --</option>
+                                    </select>
+                                </umb-control-group>
+                                <umb-control-group label="Default Payment Method">
+                                    <select class="umb-property-editor umb-dropdown"
+                                            ng-model="vm.content.defaultPaymentMethodId"
+                                            ng-options="itm.id as itm.name for itm in vm.options.paymentMethods">
+                                        <option value="" disabled selected>-- Select a Payment Method --</option>
+                                    </select>
+                                </umb-control-group>
+
+                            </umb-box-content>
+                        </umb-box>
+                    </div>
+
+                    <div class="vendr-layout__right">
+                        <umb-box>
+                            <umb-box-header title-key="general_info"></umb-box-header>
+                            <umb-box-content class="block-form">
+                                <umb-control-group label="Id">
+                                    <vendr-id-label value="vm.content.id" />
+                                </umb-control-group>
+                                <umb-control-group label="Store Id">
+                                    <vendr-id-label value="vm.content.storeId" />
+                                </umb-control-group>
+                            </umb-box-content>
+                        </umb-box>
+                    </div>
+
+                </div>
 
             </umb-editor-container>
 

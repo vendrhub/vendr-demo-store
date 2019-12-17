@@ -401,6 +401,14 @@
                     "Failed to get order");
             },
 
+            getOrderTransactionInfo: function (orderId) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("orderApiBaseUrl", "GetOrderTransactionInfo", {
+                        orderId: orderId
+                    })),
+                    "Failed to get order transaction info");
+            },
+
             changeOrderStatus: function(orderId, orderStatusId) {
                 return umbRequestHelper.resourcePromise(
                     $http.get(vendrRequestHelper.getApiUrl("orderApiBaseUrl", "ChangeOrderStatus", {
@@ -574,6 +582,29 @@
     };
 
     angular.module('vendr.resources').factory('vendrPaymentMethodResource', vendrPaymentMethodResource);
+
+}());
+(function () {
+
+    'use strict';
+
+    function vendrProductResource($http, umbRequestHelper, vendrRequestHelper) {
+
+        return {
+
+            getStock: function (productReference) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("productApiBaseUrl", "GetStock", { 
+                        productReference: productReference 
+                    })),
+                    "Failed to get stock");
+            }
+
+        };
+
+    };
+
+    angular.module('vendr.resources').factory('vendrProductResource', vendrProductResource);
 
 }());
 (function () {

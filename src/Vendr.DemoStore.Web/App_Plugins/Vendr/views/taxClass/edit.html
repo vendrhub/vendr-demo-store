@@ -22,46 +22,73 @@
 
             <umb-editor-container class="form-horizontal">
 
-                <umb-box>
-                    
-                    <umb-box-content>
+                <div class="vendr-layout vendr-layout--layout1">
 
-                        <umb-control-group label="Default Tax Rate">
+                    <div class="vendr-layout__left">
 
-                            <div class="vendr-input vendr-input--short">
-                                <input type="text" ng-model="vm.content.defaultTaxRate" ng-model-options="{ debounce: 200 }"/>
-                                <span class="vendr-input--postfix">%</span>
-                            </div>
+                        <umb-box>
 
-                        </umb-control-group>
+                            <umb-box-content>
 
-                    </umb-box-content>
-                </umb-box>
+                                <umb-control-group label="Default Tax Rate">
 
-                <umb-box>
-                    <umb-box-header title="Country/Region Specific Tax Rates"></umb-box-header>
-                    <umb-box-content>
+                                    <div class="vendr-input vendr-input--short">
+                                        <input type="text" ng-model="vm.content.defaultTaxRate" 
+                                               ng-model-options="{ debounce: 200 }"
+                                               pattern="[0-9]*[.]?[0-9]+"/>
+                                        <span class="vendr-input--postfix">%</span>
+                                    </div>
 
-                        <umb-control-group label="{{country.name}}" ng-repeat-start="country in vm.options.countryRegions">
+                                </umb-control-group>
 
-                            <div class="vendr-input vendr-input--short">
-                                <input type="text" ng-model="country.taxRate" ng-model-options="{ debounce: 200 }" />
-                                <span class="vendr-input--postfix">%</span>
-                            </div>
+                            </umb-box-content>
+                        </umb-box>
 
-                        </umb-control-group>
+                        <umb-box>
+                            <umb-box-header title="Country/Region Specific Tax Rates"></umb-box-header>
+                            <umb-box-content>
 
-                        <umb-control-group label="{{region.name}}" class="control-group--sub-group" ng-repeat="region in country.regions" ng-repeat-end>
+                                <umb-control-group label="{{country.name}}" ng-repeat-start="country in vm.options.countryRegions">
 
-                            <div class="vendr-input vendr-input--short">
-                                <input type="text" ng-model="region.taxRate" ng-model-options="{ debounce: 200 }" />
-                                <span class="vendr-input--postfix">%</span>
-                            </div>
+                                    <div class="vendr-input vendr-input--short">
+                                        <input type="text" ng-model="country.taxRate" 
+                                               ng-model-options="{ debounce: 200 }"
+                                               pattern="[0-9]*[.]?[0-9]+" />
+                                        <span class="vendr-input--postfix">%</span>
+                                    </div>
 
-                        </umb-control-group>
+                                </umb-control-group>
 
-                    </umb-box-content>
-                </umb-box>
+                                <umb-control-group label="{{region.name}}" class="control-group--sub-group" ng-repeat="region in country.regions" ng-repeat-end>
+
+                                    <div class="vendr-input vendr-input--short">
+                                        <input type="text" ng-model="region.taxRate" 
+                                               ng-model-options="{ debounce: 200 }"
+                                               pattern="[0-9]*[.]?[0-9]+" />
+                                        <span class="vendr-input--postfix">%</span>
+                                    </div>
+
+                                </umb-control-group>
+
+                            </umb-box-content>
+                        </umb-box>
+                    </div>
+
+                    <div class="vendr-layout__right">
+                        <umb-box>
+                            <umb-box-header title-key="general_info"></umb-box-header>
+                            <umb-box-content class="block-form">
+                                <umb-control-group label="Id">
+                                    <vendr-id-label value="vm.content.id" />
+                                </umb-control-group>
+                                <umb-control-group label="Store Id">
+                                    <vendr-id-label value="vm.content.storeId" />
+                                </umb-control-group>
+                            </umb-box-content>
+                        </umb-box>
+                    </div>
+
+                </div>
 
             </umb-editor-container>
 

@@ -16,21 +16,21 @@
             <umb-box ng-if="items.length > 0">
                 <umb-box-content>
 
-                    <div class="umb-control-group" ng-if="enableFilter">
+                    <div class="umb-control-group" ng-if="filter.enabled">
                         <div class="form-search">
                             <i class="icon-search"></i>
                             <input type="text"
-                                ng-model="searchTerm"
-                                class="umb-search-field search-query input-block-level -full-width-input"
-                                localize="placeholder"
-                                placeholder="@placeholders_filter"
-                                umb-auto-focus
-                                no-dirty-check />
+                                   ng-model="filter.tearm"
+                                   class="umb-search-field search-query input-block-level -full-width-input"
+                                   localize="placeholder"
+                                   placeholder="@placeholders_filter"
+                                   umb-auto-focus
+                                   no-dirty-check />
                         </div>
                     </div>
 
                     <ul class="umb-actions umb-actions-child">
-                        <li class="umb-action" ng-repeat="item in items | filter:searchTerm">
+                        <li class="umb-action" ng-repeat="item in items | filter:filter.tearm">
                             <a class="umb-action-link" ng-click="select(item)">
                                 <i class="large icon {{item.icon}} color-{{item.color}}"></i>
                                 <span class="menu-label">

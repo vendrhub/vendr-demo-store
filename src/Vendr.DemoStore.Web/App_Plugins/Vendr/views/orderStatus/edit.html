@@ -20,14 +20,36 @@
             </umb-editor-header>
 
             <umb-editor-container class="form-horizontal">
-                <umb-box>
-                    <umb-box-header title="Settings"></umb-box-header>
-                    <umb-box-content>
-                        <umb-control-group label="Color" description="A color to use when displaying this order status in badge form">
-                            <vendr-color-picker selected-color="vm.content.color" />
-                        </umb-control-group>
-                    </umb-box-content>
-                </umb-box>
+
+                <div class="vendr-layout vendr-layout--layout1">
+
+                    <div class="vendr-layout__left">
+                        <umb-box>
+                            <umb-box-header title="Settings"></umb-box-header>
+                            <umb-box-content>
+                                <umb-control-group label="Color" description="A color to use when displaying this order status in badge form">
+                                    <vendr-color-picker selected-color="vm.content.color" />
+                                </umb-control-group>
+                            </umb-box-content>
+                        </umb-box>
+                    </div>
+
+                    <div class="vendr-layout__right">
+                        <umb-box>
+                            <umb-box-header title-key="general_info"></umb-box-header>
+                            <umb-box-content class="block-form">
+                                <umb-control-group label="Id">
+                                    <vendr-id-label value="vm.content.id" />
+                                </umb-control-group>
+                                <umb-control-group label="Store Id">
+                                    <vendr-id-label value="vm.content.storeId" />
+                                </umb-control-group>
+                            </umb-box-content>
+                        </umb-box>
+                    </div>
+
+                </div>
+
             </umb-editor-container>
 
             <umb-editor-footer>

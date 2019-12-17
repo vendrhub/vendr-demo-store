@@ -21,34 +21,58 @@
 
             <umb-editor-container class="form-horizontal">
 
-                <umb-box>
-                    <!--<umb-box-header title="Settings"></umb-box-header>-->
-                    <umb-box-content>
+                <div class="vendr-layout vendr-layout--layout1">
 
-                        <umb-control-group label="ISO Code" description="3 letter ISO currency code">
-                            <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--short" ng-model="vm.content.code" />
-                        </umb-control-group>
-                        
-                        <umb-control-group label="Culture" description="The culture to use when formatting monetary values of this currency">
-                            <select class="umb-property-editor umb-dropdown" ng-model="vm.content.cultureName">
-                                <option value="" disabled ng-attr-selected="{{ !vm.content.symbolPlacement }}">-- Select a Culture --</option>
-                                <option ng-repeat="culture in vm.options.cultures" value="{{ culture.id }}">{{ culture.name }}</option>
-                            </select>
-                        </umb-control-group>
+                    <div class="vendr-layout__left">
 
-                        <umb-control-group label="Custom Format Template" description="A string formatting template to use when formatting values with symbol in this curency, eg: 'GBP{0}'">
-                            <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--short" ng-model="vm.content.formatTemplate" />
-                        </umb-control-group>
+                        <umb-box>
+                            <!--<umb-box-header title="Settings"></umb-box-header>-->
+                            <umb-box-content>
 
-                    </umb-box-content>
-                </umb-box>
+                                <umb-control-group label="ISO Code" description="3 letter ISO currency code">
+                                    <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--short" 
+                                           ng-model="vm.content.code"
+                                           pattern="[A-Z]{3}"
+                                           vendr-uppercase />
+                                </umb-control-group>
 
-                <umb-box>
-                    <umb-box-header title="Available in Countries"></umb-box-header>
-                    <umb-box-content>
-                        <vendr-toggle-list ng-model="vm.options.countries" toggle-all="true" />
-                    </umb-box-content>
-                </umb-box>
+                                <umb-control-group label="Culture" description="The culture to use when formatting monetary values of this currency">
+                                    <select class="umb-property-editor umb-dropdown" ng-model="vm.content.cultureName">
+                                        <option value="" disabled ng-attr-selected="{{ !vm.content.symbolPlacement }}">-- Select a Culture --</option>
+                                        <option ng-repeat="culture in vm.options.cultures" value="{{ culture.id }}">{{ culture.name }}</option>
+                                    </select>
+                                </umb-control-group>
+
+                                <umb-control-group label="Custom Format Template" description="A string formatting template to use when formatting values with symbol in this curency, eg: 'GBP{0}'">
+                                    <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--short" ng-model="vm.content.formatTemplate" />
+                                </umb-control-group>
+
+                            </umb-box-content>
+                        </umb-box>
+
+                        <umb-box>
+                            <umb-box-header title="Available in Countries"></umb-box-header>
+                            <umb-box-content>
+                                <vendr-toggle-list ng-model="vm.options.countries" toggle-all="true" />
+                            </umb-box-content>
+                        </umb-box>
+                    </div>
+
+                    <div class="vendr-layout__right">
+                        <umb-box>
+                            <umb-box-header title-key="general_info"></umb-box-header>
+                            <umb-box-content class="block-form">
+                                <umb-control-group label="Id">
+                                    <vendr-id-label value="vm.content.id" />
+                                </umb-control-group>
+                                <umb-control-group label="Store Id">
+                                    <vendr-id-label value="vm.content.storeId" />
+                                </umb-control-group>
+                            </umb-box-content>
+                        </umb-box>
+                    </div>
+
+                </div>
 
             </umb-editor-container>
 

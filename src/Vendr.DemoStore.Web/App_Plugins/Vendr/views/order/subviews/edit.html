@@ -1,4 +1,4 @@
-﻿<div class="vendr-layout--layout1">
+﻿<div class="vendr-layout vendr-layout--layout1">
     <div class="vendr-layout__left">
 
         <umb-box>
@@ -128,7 +128,7 @@
 
         <umb-box>
             <umb-box-header title="Payment Details">
-                <a href="#" prevent-default><i class="fa fa-info-circle"></i></a>
+                <a href="#" ng-click="vm.viewTransactionInfo()" title="Transaction Info" prevent-default><i class="fa fa-info-circle"></i></a>
             </umb-box-header>
             <umb-box-content class="flex flex-column">
 
@@ -260,7 +260,7 @@
 
         <umb-box>
             <umb-box-header title="Customer Details">
-                <!--<umb-button type="button" label="Edit"></umb-button>-->
+                <umb-button type="button" label="Edit" ng-click="vm.editCustomerDetails()"></umb-button>
             </umb-box-header>
             <umb-box-content>
 
@@ -269,7 +269,7 @@
                         <i class="fa fa-copy"></i>
                     </a>
                     <div id="customer" class="flex flex-column">
-                        <strong>{{ vm.content.customerFullName }}</strong>
+                        <strong>{{ vm.content.customerFirstName }} {{ vm.content.customerLastName }}</strong>
                         <span ng-if="vm.editorConfig.customer.company && vm.content.properties[vm.editorConfig.customer.company.alias]">
                             {{vm.content.properties[vm.editorConfig.customer.company.alias].value}}
                             <small ng-if="vm.editorConfig.customer.taxCode && vm.content.properties[vm.editorConfig.customer.taxCode.alias]" class="color-grey">({{vm.content.properties[vm.editorConfig.customer.taxCode.alias].value}})</small>
@@ -317,7 +317,7 @@
                     <div id="shipping-adress">
                         <strong>Shipping Address</strong>
                         <div ng-if="vm.editorConfig.shipping.sameAsBilling && vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value == vm.editorConfig.shipping.sameAsBilling.trueValue">
-                            Same as billing address
+                            {{vm.editorConfig.shipping.sameAsBilling.label}}
                         </div>
                         <div ng-if="!vm.editorConfig.shipping.sameAsBilling || vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value != vm.editorConfig.shipping.sameAsBilling.trueValue">
                             <div ng-if="(vm.editorConfig.shipping.firstName && vm.content.properties[vm.editorConfig.shipping.firstName.alias]) || (vm.editorConfig.shipping.lastName && vm.content.properties[vm.editorConfig.shipping.lastName.alias])">

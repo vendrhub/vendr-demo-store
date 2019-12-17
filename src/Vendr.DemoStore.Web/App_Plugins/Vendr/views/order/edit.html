@@ -3,8 +3,8 @@
     <umb-load-indicator ng-if="vm.page.loading"></umb-load-indicator>
 
     <style>
-      .vendr-header--payment-status .umb-panel-header-name:before { content: '{{ vm.content.paymentStatus }}'; }
-      .vendr-header--order-status .umb-panel-header-name:after { content: '{{ vm.content.orderStatus.name }}'; }
+      .vendr-header--order-status .umb-panel-header-name:before { content: '{{ vm.content.orderStatus.name.replace("'","\\'") }}'; }
+      .vendr-header--payment-status .umb-panel-header-name:after { content: '{{ vm.content.paymentStatus.replace("'","\\'") }}'; }
     </style>
 
     <form name="contentForm"
@@ -29,6 +29,9 @@
 
             <umb-editor-container class="form-horizontal">
                 <vendr-license-check />
+
+                <!-- TODO: Show error block if order has error status code -->
+
                 <ng-include ng-if="vm.editorConfig.view" src="vm.editorConfig.view"></ng-include>
             </umb-editor-container>
 

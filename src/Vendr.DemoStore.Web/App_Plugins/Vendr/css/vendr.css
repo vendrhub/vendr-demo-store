@@ -7,6 +7,10 @@
     background-color: #f6f4f4;
 }
 
+.vendr .umb-editor-sub-header.--state-selection {
+    background-color: #f5c1bc;
+}
+
 .vendr.umb-dialog .confirm .umb-pane {
     margin-left: 0;
     margin-right: 0;
@@ -70,23 +74,48 @@
 }
 
 /* Layouts */
-.vendr-layout--layout1 {
+.vendr-layout,
+.vendr-layout {
     display: flex;
+    flex-direction: column;
 }
 
-.vendr-layout--layout1 .vendr-layout__left {
-    flex: 1 1 auto;
-    margin-right: 20px;
-    width: calc(100% - 370px);
-}
-
-.vendr-layout--layout1 .vendr-layout__right {
-    flex: 0 0 350px;
+.vendr-layout .vendr-layout__right {
+    margin-top: 20px;
 }
 
 .vendr-layout__left > *:last-child,
-.vendr-layout__right > *:last-child{
+.vendr-layout__right > *:last-child {
     margin-bottom: 0 !important;
+}
+
+@media screen and (min-width: 1400px) {
+    .vendr-layout {
+        flex-direction: row;
+    }
+
+    .vendr-layout--layout1 .vendr-layout__left {
+        flex: 1 1 auto;
+        margin-right: 20px;
+        width: calc(100% - 370px);
+    }
+
+    .vendr-layout--layout1 .vendr-layout__right {
+        flex: 0 0 350px;
+        margin-top: 0;
+    }
+
+    .vendr-layout--layout2 .vendr-layout__left {
+        flex: 1 1 auto;
+        margin-right: 20px;
+        width: 50%;
+    }
+
+    .vendr-layout--layout2 .vendr-layout__right {
+        flex: 1 1 auto;
+        margin-top: 0;
+        width: 50%;
+    }
 }
 
 /* Inputs */
@@ -351,12 +380,12 @@ a.no-underline:focus {
 .vendr-badge--cancelled,
 .vendr-badge--inconsistentcanceled,
 .vendr-badge--pendingexternalsystem,
-.vendr-header--payment-status-initialized .umb-panel-header-name:before,
-.vendr-header--payment-status-canceled .umb-panel-header-name:before,
-.vendr-header--payment-status-cancelled .umb-panel-header-name:before,
-.vendr-header--payment-status-inconsistentcanceled .umb-panel-header-name:before,
-.vendr-header--payment-status-pendingexternalsystem .umb-panel-header-name:before,
-.vendr-header--order-status-grey .umb-panel-header-name:after {
+.vendr-header--payment-status-initialized .umb-panel-header-name:after,
+.vendr-header--payment-status-canceled .umb-panel-header-name:after,
+.vendr-header--payment-status-cancelled .umb-panel-header-name:after,
+.vendr-header--payment-status-inconsistentcanceled .umb-panel-header-name:after,
+.vendr-header--payment-status-pendingexternalsystem .umb-panel-header-name:after,
+.vendr-header--order-status-grey .umb-panel-header-name:before {
     color: #68676b;
     background-color: #d8d7d9;
 }
@@ -364,91 +393,91 @@ a.no-underline:focus {
 .vendr-badge--refunded,
 .vendr-badge--inconsistentcaptured,
 .vendr-badge--error,
-.vendr-header--payment-status-refunded .umb-panel-header-name:before,
-.vendr-header--payment-status-inconsistentcaptured .umb-panel-header-name:before,
-.vendr-header--payment-status-error .umb-panel-header-name:before,
-.vendr-header--order-status-red .umb-panel-header-name:after {
+.vendr-header--payment-status-refunded .umb-panel-header-name:after,
+.vendr-header--payment-status-inconsistentcaptured .umb-panel-header-name:after,
+.vendr-header--payment-status-error .umb-panel-header-name:after,
+.vendr-header--order-status-red .umb-panel-header-name:before {
     color: white;
     background-color: #d42054;
 }
 .vendr-bg--orange,
 .vendr-badge--authorized,
 .vendr-badge--inconsistentauthorized,
-.vendr-header--payment-status-authorized .umb-panel-header-name:before,
-.vendr-header--payment-status-inconsistentauthorized .umb-panel-header-name:before,
-.vendr-header--order-status-orange .umb-panel-header-name:after {
+.vendr-header--payment-status-authorized .umb-panel-header-name:after,
+.vendr-header--payment-status-inconsistentauthorized .umb-panel-header-name:after,
+.vendr-header--order-status-orange .umb-panel-header-name:before {
     color: white;
     background-color: #ff9800;
 }
 .vendr-bg--deep-orange,
-.vendr-header--order-status-deep-orange .umb-panel-header-name:after {
+.vendr-header--order-status-deep-orange .umb-panel-header-name:before {
     color: white;
     background-color: #ff5722;
 }
 .vendr-bg--yellow,
-.vendr-header--order-status-yellow .umb-panel-header-name:after {
+.vendr-header--order-status-yellow .umb-panel-header-name:before {
     color: #655b12;
     background-color: #ffeb3b;
 }
 .vendr-bg--amber,
-.vendr-header--order-status-amber .umb-panel-header-name:after {
+.vendr-header--order-status-amber .umb-panel-header-name:before {
     color: #544c0f;
     background-color: #ffc107;
 }
 .vendr-bg--green,
 .vendr-badge--captured,
-.vendr-header--payment-status-captured .umb-panel-header-name:before,
-.vendr-header--order-status-green .umb-panel-header-name:after {
+.vendr-header--payment-status-captured .umb-panel-header-name:after,
+.vendr-header--order-status-green .umb-panel-header-name:before {
     color: white;
     background-color: #4caf50; /* #2bc37c; */
 }
 .vendr-bg--light-green,
-.vendr-header--order-status-light-green .umb-panel-header-name:after {
+.vendr-header--order-status-light-green .umb-panel-header-name:before {
     color: white;
     background-color: #8bc34a;
 }
 .vendr-bg--lime,
-.vendr-header--order-status-lime .umb-panel-header-name:after {
+.vendr-header--order-status-lime .umb-panel-header-name:before {
     color: white;
     background-color: #cddc39;
 }
 .vendr-bg--blue,
-.vendr-header--order-status-blue .umb-panel-header-name:after {
+.vendr-header--order-status-blue .umb-panel-header-name:before {
     color: white;
     background-color: #2196f3;
 }
 .vendr-bg--light-blue,
-.vendr-header--order-status-light-blue .umb-panel-header-name:after {
+.vendr-header--order-status-light-blue .umb-panel-header-name:before {
     color: white;
     background-color: #03a9f4;
 }
 .vendr-bg--indigo,
-.vendr-header--order-status-indigo .umb-panel-header-name:after {
+.vendr-header--order-status-indigo .umb-panel-header-name:before {
     color: white;
     background-color: #3f51b5
 }
 .vendr-bg--pink,
-.vendr-header--order-status-pink .umb-panel-header-name:after {
+.vendr-header--order-status-pink .umb-panel-header-name:before {
     color: white;
     background-color: #e91e63;
 }
 .vendr-bg--purple,
-.vendr-header--order-status-purple .umb-panel-header-name:after {
+.vendr-header--order-status-purple .umb-panel-header-name:before {
     color: white;
     background-color: #9c27b0;
 }
 .vendr-bg--deep-purple,
-.vendr-header--order-status-deep-purble .umb-panel-header-name:after {
+.vendr-header--order-status-deep-purble .umb-panel-header-name:before {
     color: white;
     background-color: #673ab7;
 }
 .vendr-bg--cyan,
-.vendr-header--order-status-cyan .umb-panel-header-name:after {
+.vendr-header--order-status-cyan .umb-panel-header-name:before {
     color: white;
     background-color: #00bcd4;
 }
 .vendr-bg--brown,
-.vendr-header--order-status-brown .umb-panel-header-name:after {
+.vendr-header--order-status-brown .umb-panel-header-name:before {
     color: white;
     background-color: #795548;
 }
@@ -468,8 +497,8 @@ a.no-underline:focus {
     margin-top: 6px;
 }
 
-.vendr-header--order-status .umb-panel-header-name:after,
-.vendr-header--payment-status .umb-panel-header-name:before {
+.vendr-header--order-status .umb-panel-header-name:before,
+.vendr-header--payment-status .umb-panel-header-name:after {
     font-size: 13px;
     font-weight: normal;
     padding: 1px 10px;
@@ -478,8 +507,10 @@ a.no-underline:focus {
     margin-left: 10px;
     vertical-align: bottom;
 }
-
-.vendr-header--payment-status .umb-panel-header-name:before {
+.vendr-header--order-status .umb-panel-header-name:before {
+    order: 5;
+}
+.vendr-header--payment-status .umb-panel-header-name:after {
     margin-left: 5px;
     order: 10;
 }
@@ -649,6 +680,15 @@ a.no-underline:focus {
     color: #2196f3;
 }
 
+/* Customer details editor */
+.vendr--customer-details-editor .umb-control-group {
+    padding-bottom: 0;
+}
+
+.vendr--customer-details-editor .umb-property:last-child .umb-property-editor {
+    margin-bottom: 0;
+}
+
 /* Split */
 .vendr-split {
     display: flex;
@@ -672,6 +712,14 @@ a.no-underline:focus {
 
 .vendr .mb-0 {
     margin-bottom: 0 !important;
+}
+
+.vendr .mt-0 {
+    margin-top: 0 !important;
+}
+
+.vendr .m-0 {
+    margin: 0 !important;
 }
 
 .vendr .nowrap {
@@ -728,8 +776,8 @@ a.no-underline:focus {
     width: 40%;
 }
 
-.vendr .mt-0 {
-    margin-top: 0;
+.vendr .-mb-10 {
+    margin-bottom: -10px;
 }
 
 .copy-box {

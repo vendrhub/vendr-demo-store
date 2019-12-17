@@ -1,0 +1,57 @@
+﻿@using Vendr.Core;
+@using Vendr.Core.Api;
+@using Vendr.Core.Models;
+@model OrderReadOnly
+@{
+    var baseUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+}
+<style type="text/css">
+    #vendr, #vendr td, #vendr p {
+        font-family: sans-serif;
+        font-size: 14px;
+        line-height: 18px;
+        color: #5f6a70;
+    }
+    #vendr td {
+        vertical-align: top;
+    }
+</style>
+<div id="vendr" style="font-family: sans-serif; font-size: 14px; line-height: 18px; color: #5f6a70;">
+    <table style="background-color: #edf2f7; width: 100%;">
+        <tr>
+            <td style="padding: 40px;">
+
+                <table style="background-color: white; width: 100%; max-width: 700px; margin: 0 auto;">
+                    <tr>
+                        <td style="padding: 40px;">
+                            <div style="text-align: center;">
+                                <a href="https://vendr.demo.outfield.digital" target="_blank"><img src="@(baseUrl)/images/logo.png?mode=max&width=200&height=200" alt="Blendid." border="0" /></a>
+
+                                <hr style="border: 0; height: 1px; background: #ebebe9; margin: 20px 0;" />
+                                <h1 style="margin: 0 0 20px; font-size: 20px; line-height: 28px; color: #4fd1c5;">Order Error - #@(Model.OrderNumber)</h1>
+                                <p>
+                                    There is a problem with your payment for order <strong>@Model.OrderNumber</strong>.
+                                </p>
+                                <p>
+                                    Please contact us by replying to this email at your earliest convenience.
+                                </p>
+                                <p class="margin: 0;">
+                                    Your order will not be shipped until this problem has been resolved.
+                                </p>
+                            </div>
+
+                            <hr style="border: 0; height: 1px; background: #ebebe9; margin: 20px 0;" />
+                            <p style="text-align: center;">
+                                <a href="@(baseUrl)/terms-and-conditions" target="_blank" style="color: #4fd1c5;">Terms of Service</a> | <a href="@(baseUrl)/privacy-and-cookies-policy" target="_blank" style="color: #4fd1c5;">Privacy Policy</a>
+                            </p>
+                            <p style="text-align: center; margin-bottom: 0;">Blendid Ltd, 10 Brew Street, Sheffield, S1 2OD</p>
+
+                        </td>
+                    </tr>
+
+                </table>
+
+            </td>
+        </tr>
+    </table>
+</div>
