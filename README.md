@@ -60,5 +60,5 @@ We are still working hard on finalizing the Vendr product and this includes the 
 
 Copyright © 2019 Outfield Digital Ltd
 
-This demo store is [licensed under MIT](LICENSE). The core Vendr product is licensed under an Outfield Digital commercial license (TBC).
+This demo store is [licensed under MIT](LICENSE.md). The core Vendr product is licensed under an Outfield Digital commercial license (TBC).
 
