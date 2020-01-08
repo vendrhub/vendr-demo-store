@@ -26,28 +26,30 @@
     <h3 class="text-xl font-medium mb-4 mt-8">Billing Address</h3>
 
     <div class="flex -mx-1">
-        <input name="billingFirstname" type="text" placeholder="First name" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full"
+        <input name="billingAddress.Firstname" type="text" placeholder="First name" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full"
                value="@(Model.Order.CustomerInfo.FirstName)" required />
-        <input name="billingLastname" type="text" placeholder="Last name" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full"
+        <input name="billingAddress.Lastname" type="text" placeholder="Last name" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full"
                value="@(Model.Order.CustomerInfo.LastName)" required />
     </div>
-    <input name="billingAddressLine1" type="text" placeholder="Address (line 1)" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
+
+    <input name="billingAddress.Line1" type="text" placeholder="Address (line 1)" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
            value="@(Model.Order.Properties["billingAddressLine1"])" required />
-    <input name="billingAddressLine2" type="text" placeholder="Address (line 2)" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
+    <input name="billingAddress.Line2" type="text" placeholder="Address (line 2)" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
            value="@(Model.Order.Properties["billingAddressLine2"])" />
-    <input name="billingCity" type="text" placeholder="City" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
+    <input name="billingAddress.City" type="text" placeholder="City" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
            value="@(Model.Order.Properties["billingCity"])" required />
+
     <div class="flex -mx-1">
-        <select name="billingCountry" placeholder="Country" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full">
+        <select name="billingAddress.Country" placeholder="Country" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full">
             @foreach (var country in Model.Countries)
             {
                 <option value="@(country.Id)" @Html.Raw(Model.Order.PaymentInfo.CountryId == country.Id ? "selected=\"selected\"" : "")>@(country.Name)</option>
             }
         </select>
-        <input name="billingZipCode" type="text" placeholder="Postcode" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full"
+        <input name="billingAddress.ZipCode" type="text" placeholder="Postcode" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full"
                value="@(Model.Order.Properties["billingZipCode"])" required />
     </div>
-    <input name="billingTelephone" type="text" placeholder="Phone" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
+    <input name="billingAddress.Telephone" type="text" placeholder="Phone" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
            value="@(Model.Order.Properties["billingTelephone"])" />
 
     <label class="flex items-center mb-2 cursor-pointer">
@@ -59,28 +61,30 @@
         <h3 class="text-xl font-medium mb-4 mt-8">Shipping Address</h3>
 
         <div class="flex -mx-1">
-            <input name="shippingFirstname" type="text" placeholder="First name" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full"
+            <input name="shippingAddress.Firstname" type="text" placeholder="First name" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full"
                    value="@(Model.Order.Properties["shippingFirstName"])" />
-            <input name="shippingLastname" type="text" placeholder="Last name" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full"
+            <input name="shippingAddress.Lastname" type="text" placeholder="Last name" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full"
                    value="@(Model.Order.Properties["shippingLastName"])" />
         </div>
-        <input name="shippingAddressLine1" type="text" placeholder="Address (line 1)" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
+
+        <input name="shippingAddress.Line1" type="text" placeholder="Address (line 1)" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
                value="@(Model.Order.Properties["shippingAddressLine1"])" />
-        <input name="shippingAddressLine2" type="text" placeholder="Address (line 2)" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
+        <input name="shippingAddress.Line2" type="text" placeholder="Address (line 2)" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
                value="@(Model.Order.Properties["shippingAddressLine2"])" />
-        <input name="shippingCity" type="text" placeholder="City" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
+        <input name="shippingAddress.City" type="text" placeholder="City" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
                value="@(Model.Order.Properties["shippingCity"])" />
+
         <div class="flex -mx-1">
-            <select name="shippingCountry" placeholder="Country" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full">
+            <select name="shippingAddress.Country" placeholder="Country" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full">
                 @foreach (var country in Model.Countries)
                 {
                     <option value="@(country.Id)" @Html.Raw(Model.Order.PaymentInfo.CountryId == country.Id ? "selected=\"selected\"" : "")>@(country.Name)</option>
                 }
             </select>
-            <input name="shippingZipCode" type="text" placeholder="Postcode" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full"
+            <input name="shippingAddress.ZipCode" type="text" placeholder="Postcode" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full"
                    value="@(Model.Order.Properties["shippingZipCode"])" />
         </div>
-        <input name="shippingTelephone" type="text" placeholder="Phone" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
+        <input name="shippingAddress.Telephone" type="text" placeholder="Phone" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
                value="@(Model.Order.Properties["shippingTelephone"])" />
 
     </div>
