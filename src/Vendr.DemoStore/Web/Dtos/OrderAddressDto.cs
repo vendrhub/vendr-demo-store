@@ -8,9 +8,9 @@ namespace Vendr.DemoStore.Web.Dtos
 
         public string LastName { get; set; }
 
-        public string AddressLine1 { get; set; }
+        public string Line1 { get; set; }
 
-        public string AddressLine2 { get; set; }
+        public string Line2 { get; set; }
 
         public string ZipCode { get; set; }
 

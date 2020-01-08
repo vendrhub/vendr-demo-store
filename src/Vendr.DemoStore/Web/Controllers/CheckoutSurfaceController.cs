@@ -45,27 +45,27 @@ namespace Vendr.DemoStore.Web.Controllers
                             { Constants.Properties.Customer.EmailPropertyAlias, model.Email },
                             { "marketingOptIn", model.MarketingOptIn ? "1" : "0" },
 
-                            { Constants.Properties.Customer.FirstNamePropertyAlias, model.Billing.FirstName },
-                            { Constants.Properties.Customer.LastNamePropertyAlias, model.Billing.LastName },
-                            { "billingAddressLine1", model.Billing.AddressLine1 },
-                            { "billingAddressLine2", model.Billing.AddressLine2 },
-                            { "billingCity", model.Billing.City },
-                            { "billingZipCode", model.Billing.ZipCode },
-                            { "billingTelephone", model.Billing.Telephone },
+                            { Constants.Properties.Customer.FirstNamePropertyAlias, model.BillingAddress.FirstName },
+                            { Constants.Properties.Customer.LastNamePropertyAlias, model.BillingAddress.LastName },
+                            { "billingAddressLine1", model.BillingAddress.Line1 },
+                            { "billingAddressLine2", model.BillingAddress.Line2 },
+                            { "billingCity", model.BillingAddress.City },
+                            { "billingZipCode", model.BillingAddress.ZipCode },
+                            { "billingTelephone", model.BillingAddress.Telephone },
 
                             { "shippingSameAsBilling", model.ShippingSameAsBilling ? "1" : "0" },
-                            { "shippingFirstName", model.ShippingSameAsBilling ? model.Billing.FirstName : model.Shipping.FirstName },
-                            { "shippingLastName", model.ShippingSameAsBilling ? model.Billing.LastName : model.Shipping.LastName },
-                            { "shippingAddressLine1", model.ShippingSameAsBilling ? model.Billing.AddressLine1 : model.Shipping.AddressLine1 },
-                            { "shippingAddressLine2", model.ShippingSameAsBilling ? model.Billing.AddressLine2 : model.Shipping.AddressLine2 },
-                            { "shippingCity", model.ShippingSameAsBilling ? model.Billing.City : model.Shipping.City },
-                            { "shippingZipCode", model.ShippingSameAsBilling ? model.Billing.ZipCode : model.Shipping.ZipCode },
-                            { "shippingTelephone", model.ShippingSameAsBilling ? model.Billing.Telephone : model.Shipping.Telephone },
+                            { "shippingFirstName", model.ShippingSameAsBilling ? model.BillingAddress.FirstName : model.ShippingAddress.FirstName },
+                            { "shippingLastName", model.ShippingSameAsBilling ? model.BillingAddress.LastName : model.ShippingAddress.LastName },
+                            { "shippingAddressLine1", model.ShippingSameAsBilling ? model.BillingAddress.Line1 : model.ShippingAddress.Line1 },
+                            { "shippingAddressLine2", model.ShippingSameAsBilling ? model.BillingAddress.Line2 : model.ShippingAddress.Line2 },
+                            { "shippingCity", model.ShippingSameAsBilling ? model.BillingAddress.City : model.ShippingAddress.City },
+                            { "shippingZipCode", model.ShippingSameAsBilling ? model.BillingAddress.ZipCode : model.ShippingAddress.ZipCode },
+                            { "shippingTelephone", model.ShippingSameAsBilling ? model.BillingAddress.Telephone : model.ShippingAddress.Telephone },
 
                             { "comments", model.Comments }
                         })
-                        .SetPaymentCountryRegion(model.Billing.Country, null)
-                        .SetShippingCountryRegion(model.ShippingSameAsBilling ? model.Billing.Country : model.Shipping.Country, null);
+                        .SetPaymentCountryRegion(model.BillingAddress.Country, null)
+                        .SetShippingCountryRegion(model.ShippingSameAsBilling ? model.BillingAddress.Country : model.ShippingAddress.Country, null);
 
                     _orderService.SaveOrder(order);
 
