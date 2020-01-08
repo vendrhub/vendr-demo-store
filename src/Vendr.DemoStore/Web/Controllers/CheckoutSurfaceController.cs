@@ -45,27 +45,27 @@ namespace Vendr.DemoStore.Web.Controllers
                             { Constants.Properties.Customer.EmailPropertyAlias, model.Email },
                             { "marketingOptIn", model.MarketingOptIn ? "1" : "0" },
 
-                            { Constants.Properties.Customer.FirstNamePropertyAlias, model.BillingFirstName },
-                            { Constants.Properties.Customer.LastNamePropertyAlias, model.BillingLastName },
-                            { "billingAddressLine1", model.BillingAddressLine1 },
-                            { "billingAddressLine2", model.BillingAddressLine2 },
-                            { "billingCity", model.BillingCity },
-                            { "billingZipCode", model.BillingZipCode },
-                            { "billingTelephone", model.BillingTelephone },
+                            { Constants.Properties.Customer.FirstNamePropertyAlias, model.Billing.FirstName },
+                            { Constants.Properties.Customer.LastNamePropertyAlias, model.Billing.LastName },
+                            { "billingAddressLine1", model.Billing.AddressLine1 },
+                            { "billingAddressLine2", model.Billing.AddressLine2 },
+                            { "billingCity", model.Billing.City },
+                            { "billingZipCode", model.Billing.ZipCode },
+                            { "billingTelephone", model.Billing.Telephone },
 
                             { "shippingSameAsBilling", model.ShippingSameAsBilling ? "1" : "0" },
-                            { "shippingFirstName", model.ShippingSameAsBilling ? model.BillingFirstName : model.ShippingFirstName },
-                            { "shippingLastName", model.ShippingSameAsBilling ? model.BillingLastName : model.ShippingLastName },
-                            { "shippingAddressLine1", model.ShippingSameAsBilling ? model.BillingAddressLine1 : model.ShippingAddressLine1 },
-                            { "shippingAddressLine2", model.ShippingSameAsBilling ? model.BillingAddressLine2 : model.ShippingAddressLine2 },
-                            { "shippingCity", model.ShippingSameAsBilling ? model.BillingCity : model.ShippingCity },
-                            { "shippingZipCode", model.ShippingSameAsBilling ? model.BillingZipCode : model.ShippingZipCode },
-                            { "shippingTelephone", model.ShippingSameAsBilling ? model.BillingTelephone : model.ShippingTelephone },
+                            { "shippingFirstName", model.ShippingSameAsBilling ? model.Billing.FirstName : model.Shipping.FirstName },
+                            { "shippingLastName", model.ShippingSameAsBilling ? model.Billing.LastName : model.Shipping.LastName },
+                            { "shippingAddressLine1", model.ShippingSameAsBilling ? model.Billing.AddressLine1 : model.Shipping.AddressLine1 },
+                            { "shippingAddressLine2", model.ShippingSameAsBilling ? model.Billing.AddressLine2 : model.Shipping.AddressLine2 },
+                            { "shippingCity", model.ShippingSameAsBilling ? model.Billing.City : model.Shipping.City },
+                            { "shippingZipCode", model.ShippingSameAsBilling ? model.Billing.ZipCode : model.Shipping.ZipCode },
+                            { "shippingTelephone", model.ShippingSameAsBilling ? model.Billing.Telephone : model.Shipping.Telephone },
 
                             { "comments", model.Comments }
                         })
-                        .SetPaymentCountryRegion(model.BillingCountry, null)
-                        .SetShippingCountryRegion(model.ShippingSameAsBilling ? model.BillingCountry : model.ShippingCountry, null);
+                        .SetPaymentCountryRegion(model.Billing.Country, null)
+                        .SetShippingCountryRegion(model.ShippingSameAsBilling ? model.Billing.Country : model.Shipping.Country, null);
 
                     _orderService.SaveOrder(order);
 

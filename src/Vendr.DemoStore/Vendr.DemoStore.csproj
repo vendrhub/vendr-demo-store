@@ -383,6 +383,7 @@
       <DependentUpon>Generated.cs</DependentUpon>
     </Compile>
     <Compile Include="Web\Controllers\SearchSurfaceController.cs" />
+    <Compile Include="Web\Dtos\OrderAddressDto.cs" />
     <Compile Include="Web\Extensions\UriExtensions.cs" />
     <Compile Include="Web\Extractors\CompositeNameUmbracoProductSnapshotDecorator.cs" />
     <Compile Include="Web\Extractors\CompositeNameUmbracoProductInformationExtractor.cs" />
