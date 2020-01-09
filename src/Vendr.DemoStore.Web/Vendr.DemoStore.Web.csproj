@@ -490,7 +490,7 @@
     <Content Include="Views\Partials\CheckoutPrevNext.cshtml" />
     <Content Include="Views\Partials\OrderInformationSummary.cshtml" />
     <Content Include="Views\Emails\OrderConfirmation.cshtml" />
-    <Content Include="Views\Emails\OrderPaymentInconsistant.cshtml" />
+    <Content Include="Views\Emails\OrderError.cshtml" />
     <Content Include="Views\Partials\Breadcrumb.cshtml" />
     <Content Include="Views\Partials\ProductGroupList.cshtml" />
     <Content Include="Views\Partials\ProductGroupListItem.cshtml" />
