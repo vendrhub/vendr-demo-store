@@ -28,16 +28,14 @@
                             <!--<umb-box-header title="Settings"></umb-box-header>-->
                             <umb-box-content>
 
-                                <h3 class="bold" style="margin-top: 0;">Getting Started with Vendr</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec elit sit amet leo ornare mollis. Donec et nisl dictum, lacinia eros ac, ullamcorper lacus. In ut est vel lectus semper volutpat. Nulla facilisi. Nunc magna felis, sagittis eu est et, accumsan porta felis. In sed risus at diam tempus pretium ac ut justo.</p>
+                                <h3 class="bold" style="margin-top: 0;">Vendr Settings</h3>
+                                <p>Welcome to the Vendr settings area. From this section you can setup and manage your Vendr store implementations as well as view relevant information about your your installation.</p>
+                                <p>If you need help getting started with Vendr you can follow the below links to get started.</p>
                                 <h5>Find out more</h5>
                                 <ul>
-                                    <li>Read more about working with the items in Settings <a class="btn-link -underline" href="https://our.umbraco.com/documentation/Getting-Started/Backoffice/Sections/" target="_blank">in the Documentation section</a> of Our Umbraco</li>
-                                    <li>Download the <a class="btn-link -underline" href="https://our.umbraco.com/projects/website-utilities/umbraco-7-editors-manual" target="_blank">Editors Manual</a> for details on working with the Umbraco UI</li>
-                                    <li>Ask a question in the <a class="btn-link -underline" href="https://our.umbraco.com/forum" target="_blank">Community Forum</a></li>
-                                    <li>Watch our <a class="btn-link -underline" href="https://umbraco.tv" target="_blank">tutorial videos</a> (some are free, some require a subscription)</li>
-                                    <li>Find out about our <a class="btn-link -underline" href="https://umbraco.com/products/" target="_blank">productivity boosting tools and commercial support</a></li>
-                                    <li>Find out about real-life <a class="btn-link -underline" href="https://umbraco.com/training/" target="_blank">training and certification</a> opportunities</li>
+                                    <li>Read guides and API reference material over on our <a class="btn-link -underline" href="https://getvendr.net/docs/" target="_blank">Documentation site</a></li>
+                                    <li>Ask a question in the <a class="btn-link -underline" href="https://our.umbraco.com/packages/website-utilities/vendr/vendr-support/" target="_blank">Vendr Community Forum</a></li>
+                                    <li>Buy a license from the <a class="btn-link -underline" href="https://getvendr.net" target="_blank">Vendr site</a></li>
                                 </ul>
 
                             </umb-box-content>
@@ -48,33 +46,19 @@
                     <div class="vendr-layout__right">
 
                         <umb-box>
-                            <umb-box-header title="Quick Links"></umb-box-header>
-                            <umb-box-content class="block-form">
-
-                                <a href="" class="btn btn-success btn-block">Buy a license</a>
-                                <a href="" class="btn btn-info btn-block">View the Docs</a>
-                                <a href="" class="btn btn-info btn-block">Get Some Help</a>
-
-                            </umb-box-content>
-
-                        </umb-box>
-
-                        <umb-box>
                             <umb-box-header title="System Info"></umb-box-header>
                             <umb-box-content class="block-form">
 
                                 <umb-control-group label="Installed Version">
                                     <div style="display: flex; justify-content: space-between;align-items: center;">
-                                        <div>Vendr v3.1.0</div>
-                                        <umb-badge color="success" size="s">Latest</umb-badge>
+                                        <div>Vendr v{{vendrInfo.version}}</div>
+                                        <!--<umb-badge color="success" size="s">Latest</umb-badge>-->
                                     </div>
                                 </umb-control-group>
 
                                 <umb-control-group label="Installed Payment Providers">
                                     <ul>
-                                        <li>Invoice v1.0.0</li>
-                                        <li>Stripe v1.0.0</li>
-                                        <li>PayPal v1.0.0</li>
+                                        <li ng-repeat="pp in vendrInfo.paymentProviders">{{ pp.name }} v{{pp.version}}</li>
                                     </ul>
                                 </umb-control-group>
 
@@ -83,24 +67,24 @@
                         </umb-box>
 
                         <umb-box>
-                            <umb-box-header title="License Info"></umb-box-header>
+                            <umb-box-header title="Installed Licenses"></umb-box-header>
                             <umb-box-content class="block-form">
 
-                                <umb-control-group label="Licensed To"><a href="mailto:hi@outfield.digital">Matt Brailsford</a></umb-control-group>
-                                <umb-control-group label="Purchased">12/03/2019</umb-control-group>
-                                <umb-control-group label="Supported Until">12/03/2020</umb-control-group>
+                                <div ng-repeat="license in vendrInfo.licenses">
+                                    <hr ng-if="$index > 0" />
+                                    <umb-control-group label="Key">{{license.key}}</umb-control-group>
+                                    <umb-control-group label="Status">
+                                        <umb-badge color="success" size="s" ng-if="license.isActive">Active</umb-badge>
+                                        <umb-badge color="grey" size="s" ng-if="!license.isActive">Inactive</umb-badge>
+                                    </umb-control-group>
+                                    <umb-control-group label="Domains">
+                                        <ul>
+                                            <li ng-repeat="domain in license.domains">{{domain}}</li>
+                                        </ul>
+                                    </umb-control-group>
+                                </div>
 
-                                <umb-control-group label="Valid Domains">
-                                    <ul>
-                                        <li>teacommerce.net</li>
-                                        <li>localhost</li>
-                                        <li>*.local</li>
-                                        <li>umbraco.io</li>
-                                        <li>azurewebsites.net</li>
-                                    </ul>
-                                </umb-control-group>
-
-                                <a href="" class="btn btn-info btn-block">Install a License</a>
+                                <!--<a href="" class="btn btn-info btn-block">Install a License</a>-->
 
                             </umb-box-content>
 

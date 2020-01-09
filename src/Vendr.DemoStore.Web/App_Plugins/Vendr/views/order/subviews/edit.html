@@ -17,8 +17,18 @@
                                    ng-click="vm.toggleBundle(ol.bundleId)"
                                    ng-if="ol.bundleId && ol.orderLines.length > 0"></i>
                                 <div>
-                                    <strong>{{ ol.name }}</strong>
-                                    <span class="color-grey text-12 block" title="Sku: {{ ol.sku }}">{{ ol.sku }}</span>
+                                    <strong>
+                                        {{ ol.name }}
+                                        <a href="" class="hover:text-light-blue ml-5" title="Edit Order Line Properties"
+                                           ng-if="vm.hadEditableOrderLineProperties(ol)"
+                                           ng-click="vm.editOrderLineProperties(ol)"
+                                           prevent-default><i class="fa fa-pencil-square-o" style="font-weight:normal; vertical-align: middle;"></i></a>
+                                    </strong>
+                                    <div class="color-grey text-12 block">
+                                        <span title="Sku: {{ ol.sku }}">{{ ol.sku }}</span>
+                                        <span ng-repeat="olp in vm.editorConfig.orderLine.properties"
+                                              ng-if="olp.showInOrderDetails !== false && ol.properties[olp.alias]">&nbsp;/&nbsp;{{ ol.properties[olp.alias].value }}</span>
+                                    </div>
                                 </div>
                             </div>
                             <div>
@@ -48,8 +58,18 @@
 
                                 <div class="vendr-order-table__line-item" ng-repeat="sol in ol.orderLines" data-order-line-id="{{ sol.id }}">
                                     <div>
-                                        <strong>{{ sol.name }}</strong>
-                                        <span class="color-grey text-12 block" title="Sku: {{ sol.sku }}">{{ sol.sku }}</span>
+                                        <strong>
+                                            {{ sol.name }}
+                                            <a href="" class="hover:text-light-blue" title="Edit Order Line Properties"
+                                                ng-if="vm.hadEditableOrderLineProperties(sol)"
+                                                ng-click="vm.editOrderLineProperties(ol)"
+                                                prevent-default><i class="fa fa-pencil-square-o" style="font-weight:normal; margin-left: 5px; vertical-align: middle;"></i></a>
+                                        </strong>
+                                        <div class="color-grey text-12 block">
+                                            <span title="Sku: {{ sol.sku }}">{{ sol.sku }}</span>
+                                            <span ng-repeat="solp in vm.editorConfig.orderLine.properties"
+                                                  ng-if="solp.showInOrderDetails !== false  && sol.properties[solp.alias]">&nbsp;/&nbsp;{{ sol.properties[solp.alias].value }}</span>
+                                        </div>
                                     </div>
                                     <div>
                                         <span class="color-grey text-12 strikethrough block" ng-if="sol.unitPriceWithoutDiscount != sol.unitPrice">{{sol.unitPriceWithoutDiscount}}</span>
@@ -128,7 +148,7 @@
 
         <umb-box>
             <umb-box-header title="Payment Details">
-                <a href="#" ng-click="vm.viewTransactionInfo()" title="Transaction Info" prevent-default><i class="fa fa-info-circle"></i></a>
+                <a href="#" class="hover:text-light-blue" ng-click="vm.viewTransactionInfo()" title="Transaction Info" prevent-default><i class="fa fa-info-circle"></i></a>
             </umb-box-header>
             <umb-box-content class="flex flex-column">
 
@@ -265,7 +285,7 @@
             <umb-box-content>
 
                 <div class="relative copy-box">
-                    <a href="#" prevent-default umb-clipboard umb-clipboard-target="#customer" class="copy-box__copy">
+                    <a href="#" prevent-default umb-clipboard umb-clipboard-target="#customer" class="copy-box__copy" title="Copy Customer Details" aria-hidden="true" >
                         <i class="fa fa-copy"></i>
                     </a>
                     <div id="customer" class="flex flex-column">
@@ -282,7 +302,7 @@
                 <hr />
 
                 <div class="relative  copy-box">
-                    <a href="#" prevent-default umb-clipboard umb-clipboard-target="#billing-adress" class="copy-box__copy">
+                    <a href="#" prevent-default umb-clipboard umb-clipboard-target="#billing-adress" class="copy-box__copy" title="Copy Billing Address" aria-hidden="true">
                         <i class="fa fa-copy"></i>
                     </a>
                     <div id="billing-adress">
@@ -311,7 +331,7 @@
                 <hr />
 
                 <div class="relative copy-box" ng-if="vm.editorConfig.shipping.enabled !== false">
-                    <a href="#" prevent-default umb-clipboard umb-clipboard-target="#shipping-adress" class="copy-box__copy">
+                    <a href="#" prevent-default umb-clipboard umb-clipboard-target="#shipping-adress" class="copy-box__copy" title="Copy Shipping Address" aria-hidden="true">
                         <i class="fa fa-copy"></i>
                     </a>
                     <div id="shipping-adress">
@@ -355,12 +375,14 @@
 
         <umb-box ng-if="vm.editorConfig.additionalInfo || (vm.content.appliedDiscountCodes && vm.content.appliedDiscountCodes.length > 0)">
             <umb-box-header title="Additional Information">
-                <!--<umb-button type="button" label="Edit"></umb-button>-->
+                <umb-button type="button" label="Edit"
+                            ng-if="vm.hadEditableOrderProperties()"
+                            ng-click="vm.editOrderProperties()"></umb-button>
             </umb-box-header>
             <umb-box-content>
                 <p ng-if="vm.content.appliedDiscountCodes && vm.content.appliedDiscountCodes.length > 0"><strong>Discount Codes Used:</strong><br />{{ vm.content.appliedDiscountCodes.join(', ') }}</p>
                 <p ng-repeat="ai in vm.editorConfig.additionalInfo">
-                    <strong>{{ ai.label }}:</strong><br />{{vm.content.properties[ai.alias] ? vm.content.properties[ai.alias].value : 'No value'}}
+                    <strong>{{ ai.label }}:</strong><br />{{vm.content.properties[ai.alias] && vm.content.properties[ai.alias].value && vm.content.properties[ai.alias].value != '' ? vm.content.properties[ai.alias].value : 'No value'}}
                 </p>
             </umb-box-content>
         </umb-box>

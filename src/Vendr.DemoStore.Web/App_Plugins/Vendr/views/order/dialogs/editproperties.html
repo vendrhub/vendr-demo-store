@@ -1,0 +1,56 @@
+﻿<div ng-controller="Vendr.Controllers.EditPropertiesController as vm" class="vendr vendr--properties-editor">
+
+    <form name="contentForm"
+          ng-submit="vm.save()"
+          novalidate
+          val-form-manager>
+
+        <umb-editor-view>
+
+            <umb-editor-header name="vm.title"
+                name-locked="true"
+                hide-alias="true"
+                hide-icon="true"
+                hide-description="true">
+            </umb-editor-header>
+
+            <umb-editor-container class="form-vertical">
+
+                <umb-box>
+                    <umb-box-content>
+
+                        <umb-property ng-repeat="property in vm.content.properties track by property.alias" property="property">
+                            <umb-property-editor model="property"></umb-property-editor>
+                            <div ng-if="property.view == 'readonlyvalue' && (!property.value || property.value == '')">No Value</div>
+                        </umb-property>
+
+                    </umb-box-content>
+                </umb-box>
+
+            </umb-editor-container>
+
+            <umb-editor-footer>
+                <umb-editor-footer-content-right>
+
+                    <umb-button type="button"
+                                button-style="link"
+                                label="Cancel"
+                                label-key="general_cancel"
+                                shortcut="esc"
+                                action="vm.cancel()">
+                    </umb-button>
+
+                    <umb-button type="submit"
+                                button-style="success"
+                                shortcut="ctrl+s"
+                                label="Done">
+                    </umb-button>
+
+                </umb-editor-footer-content-right>
+            </umb-editor-footer>
+
+        </umb-editor-view>
+
+    </form>
+
+</div>

@@ -24,7 +24,7 @@
       "editor": {
         "view": "~/app_plugins/vendr/views/propertyeditors/stock/stock.html",
         "hideLabel": false,
-        "valueType": "STRING"
+        "valueType": "INT"
       }
     },
     {

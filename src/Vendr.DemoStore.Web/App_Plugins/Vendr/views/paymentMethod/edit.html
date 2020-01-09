@@ -61,19 +61,26 @@
                         </umb-box>
 
                         <umb-box ng-if="vm.options.paymentProviderScaffold">
-                            <umb-box-header title="{{ vm.options.paymentProviderScaffold.name }}">
-                                <label title="Toggle advanced mode" class="vendr-box-header-label" ng-if="vm.options.advancedPaymentProviderProperties && vm.options.advancedPaymentProviderProperties.length > 0">
-                                    Advanced
-                                    <umb-toggle checked="vm.options.advancedPaymentProviderPropertiesShown" on-click="vm.toggleAdvancedPaymentProviderProperties()"></umb-toggle>
-                                </label>
-                            </umb-box-header>
+                            <umb-box-header title="{{ vm.options.paymentProviderScaffold.name }}"></umb-box-header>
                             <umb-box-content>
 
                                 <umb-property ng-repeat="property in vm.options.paymentProviderProperties track by property.alias" property="property">
                                     <umb-property-editor model="property"></umb-property-editor>
                                 </umb-property>
 
-                                <div ng-if="vm.options.advancedPaymentProviderProperties && vm.options.advancedPaymentProviderProperties.length > 0 && vm.options.advancedPaymentProviderPropertiesShown">
+                            </umb-box-content>
+
+                            <umb-box-content ng-if="vm.options.advancedPaymentProviderProperties && vm.options.advancedPaymentProviderProperties.length > 0" style="padding-top: 0;">
+
+                                <a href="" title="Toggle advanced settings"
+                                   class="vendr-advanced-toggle"
+                                   ng-click="vm.toggleAdvancedPaymentProviderProperties()"
+                                   prevent-default>
+                                    <span ng-if="vm.options.advancedPaymentProviderPropertiesShown">&#9650; &nbsp; Advanced &nbsp; &#9650;</span>
+                                    <span ng-if="!vm.options.advancedPaymentProviderPropertiesShown">&#9660; &nbsp; Advanced &nbsp; &#9660;</span>
+                                </a>
+
+                                <div ng-if="vm.options.advancedPaymentProviderPropertiesShown" style="padding-top: 30px;">
                                     <umb-property ng-repeat="property in vm.options.advancedPaymentProviderProperties track by property.alias" property="property">
                                         <umb-property-editor model="property"></umb-property-editor>
                                     </umb-property>
@@ -142,6 +149,9 @@
                                 </umb-control-group>
                                 <umb-control-group label="Store Id">
                                     <vendr-id-label value="vm.content.storeId" />
+                                </umb-control-group>
+                                <umb-control-group label="Payment Provider Alias">
+                                    <vendr-id-label value="vm.content.paymentProviderAlias" />
                                 </umb-control-group>
                             </umb-box-content>
                         </umb-box>

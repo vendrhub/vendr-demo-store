@@ -1724,6 +1724,77 @@
 
     'use strict';
 
+    function EditPropertiesController($scope)
+    {
+        var order = $scope.model.config.order;
+        var orderLine = $scope.model.config.orderLine;
+        var content = orderLine || order;
+
+        var vm = this;
+        vm.title = "Edit Properties";
+        vm.editorConfig = $scope.model.config.editorConfig;
+        vm.content = {
+            properties: []
+        };
+
+        mapProperties(vm.editorConfig.properties);
+        
+        vm.save = function () {
+            if ($scope.model.submit) {
+                $scope.model.submit(vm.content);
+            }
+        };
+
+        vm.cancel = function() {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
+
+        function mapProperties (cfg) {
+            for (const cfgKey in cfg) {
+
+                var alias = cfg[cfgKey].alias;
+
+                var prop = content.properties[alias] || { value: "", isReadOnly: false, isServerSideOnly: false };
+
+                var property = {
+                    alias: alias,
+                    label: cfg[cfgKey].label || alias,
+                    description: cfg[cfgKey].description,
+                    config: cfg[cfgKey].config || {},
+                    view: cfg[cfgKey].view || 'textbox',
+
+                    value: prop.value,
+                    isReadOnly: prop.isReadOnly,
+                    isServerSideOnly: prop.isServerSideOnly
+                };
+
+                // Push some additional config into the property config
+                property.config.storeId = $scope.model.config.orderId;
+                property.config.orderId = $scope.model.config.orderId;
+                property.config.orderLineId = $scope.model.config.orderLineId;
+
+                if (prop.isReadOnly || cfg[cfgKey].isReadOnly) { // isServerSideOnly?
+                    property.view = "readonlyvalue";
+                }
+
+                if (property.view === 'dropdown') {
+                    property.view = '/app_plugins/vendr/views/propertyeditors/dropdown/dropdown.html';
+                }
+
+                vm.content.properties.push(property);
+            }
+        }
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.EditPropertiesController', EditPropertiesController);
+
+}());
+(function () {
+
+    'use strict';
+
     function TransactionInfoDialogController($scope, vendrOrderResource)
     {
         var vm = this;
@@ -1839,6 +1910,18 @@
             }
         };
 
+        var editPropertiesDialogOptions = {
+            view: '/app_plugins/vendr/views/order/dialogs/editproperties.html',
+            size: 'small',
+            config: {
+                storeId: storeId,
+                orderId: id
+            },
+            close: function () {
+                editorService.close();
+            }
+        };
+
         var vm = this;
 
         vm.page = {};
@@ -1880,6 +1963,76 @@
             } else {
                 vm.options.expandedBundles.push(id);
             }
+        };
+
+        vm.hadEditableOrderLineProperties = function (orderLine) {
+            if (!vm.editorConfig.orderLine.properties)
+                return false;
+
+            var editablePropertyConfigs = vm.editorConfig.orderLine.properties
+                .filter(function (c) {
+                    return c.showInEditor !== false;
+                });
+
+            if (editablePropertyConfigs.length === 0)
+                return false;
+
+            return true;
+        };
+
+        vm.editOrderLineProperties = function (orderLine) {
+            editPropertiesDialogOptions.config.order = vm.content;
+            editPropertiesDialogOptions.config.orderLineId = orderLine.id;
+            editPropertiesDialogOptions.config.orderLine = orderLine;
+            editPropertiesDialogOptions.config.editorConfig = {
+                properties: vm.editorConfig.orderLine.properties
+            };
+            editPropertiesDialogOptions.submit = function (model) {
+                model.properties.forEach(function (itm, idx) {
+                    orderLine.properties[itm.alias] = {
+                        value: itm.value,
+                        isReadOnly: itm.isReadOnly,
+                        isServerSideOnly: itm.isServerSideOnly
+                    };
+                });
+                editorService.close();
+            };
+            editorService.open(editPropertiesDialogOptions);
+        };
+
+        vm.hadEditableOrderProperties = function () {
+            if (!vm.editorConfig.additionalInfo)
+                return false;
+
+            var editablePropertyConfigs = vm.editorConfig.additionalInfo
+                .filter(function (c) {
+                    return c.showInEditor !== false;
+                });
+
+            if (editablePropertyConfigs.length === 0)
+                return false;
+
+            return true;
+        };
+
+        vm.editOrderProperties = function () {
+            editPropertiesDialogOptions.config.order = vm.content;
+            editPropertiesDialogOptions.config.orderLineId = undefined;
+            editPropertiesDialogOptions.config.orderLine = undefined;
+            editPropertiesDialogOptions.config.editorConfig = {
+                properties: vm.editorConfig.additionalInfo
+            };
+            editPropertiesDialogOptions.submit = function (model) {
+                model.properties.forEach(function (itm, idx) {
+                    vm.content.properties[itm.alias] = {
+                        value: itm.value,
+                        isReadOnly: itm.isReadOnly,
+                        isServerSideOnly: itm.isServerSideOnly
+                    };
+                });
+                editorService.close();
+            };
+            editorService.open(editPropertiesDialogOptions);
         };
 
         vm.init = function () {
@@ -2214,6 +2367,7 @@
         };
 
         vm.toggleAdvancedPaymentProviderProperties = function () {
+            console.log(1);
             vm.options.advancedPaymentProviderPropertiesShown = !vm.options.advancedPaymentProviderPropertiesShown;
         };
 
@@ -3219,8 +3373,9 @@
 
     'use strict';
 
-    function SettingsViewController($scope, $rootScope, $routeParams, navigationService) {
+    function SettingsViewController($scope, $rootScope, $routeParams, navigationService, vendrUtils) {
         navigationService.syncTree({ tree: "vendrsettings", path: ["-1"], forceReload: false, activate: true });
+        $scope.vendrInfo = vendrUtils.getSettings("vendrInfo");
     };
 
     angular.module('vendr').controller('Vendr.Controllers.SettingsViewController', SettingsViewController);

@@ -231,7 +231,7 @@
             restrict: 'E',
             replace: true,
             template: `<div>
-                <div ng-if="value == emptyGuid"><umb-badge size="xs">Undefined</umb-badge></div>
+                <div ng-if="value == emptyGuid"><umb-badge size="xs">Unsaved</umb-badge></div>
                 <div ng-if="value != emptyGuid" > {{ value }}</div >
             </div>`,
             scope: {
@@ -306,14 +306,14 @@
     function vendrLicenseCheck(vendrUtils) {
 
         function link(scope, el, attr, ctrl) {
-            scope.licenseInfo = vendrUtils.getSettings("vendrLicenseInfo");
+            scope.vendrInfo = vendrUtils.getSettings("vendrInfo");
             // console.log(scope.licenseInfo);
         }
 
         var directive = {
             restrict: 'E',
             replace: true,
-            template:'<vendr-message ng-if="!licenseInfo.isLicensed" type="\'warn\'" heading="\'Trial Mode\'" icon="\'exclamation-triangle\'"><p>Vendr is currently running in trial mode and will be limited to a maximum of {{licenseInfo.trialMaxOrders}} finalized orders. When you are ready to go live, please purchase a license from <a href="https://getvendr.net?ref=lic-check" target="_blank">the Vendr website</a>.</p></vendr-message>',
+            template:'<vendr-message ng-if="!vendrInfo.isLicensed" type="\'warn\'" heading="\'Trial Mode\'" icon="\'exclamation-triangle\'"><p>Vendr is currently running in trial mode and will be limited to a maximum of {{vendrInfo.trialMaxOrders}} finalized orders. When you are ready to go live, please purchase a license from <a href="https://getvendr.net?ref=lic-check" target="_blank">the Vendr website</a>.</p></vendr-message>',
             link: link
         };
         

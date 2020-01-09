@@ -689,6 +689,37 @@ a.no-underline:focus {
     margin-bottom: 0;
 }
 
+/* Advanced toggle */
+.vendr-advanced-toggle {
+    display: block;
+    text-align: center;
+    position: relative;
+    color: #999;
+}
+
+.vendr-advanced-toggle:hover,
+.vendr-advanced-toggle:focus {
+    text-decoration: none;
+    color: black;
+}
+
+.vendr-advanced-toggle:after {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    border-bottom: solid 1px #f6f6f7;
+    z-index: 0;
+}
+
+.vendr-advanced-toggle span {
+    position: relative;
+    background-color: white;
+    padding: 0 10px;
+    z-index: 5;
+}
+
 /* Split */
 .vendr-split {
     display: flex;
@@ -791,4 +822,12 @@ a.no-underline:focus {
 
 .copy-box:hover .copy-box__copy {
     display: block;
+}
+
+.hover\:text-green:hover {
+    color: #2bc37c !important;
+}
+
+.hover\:text-light-blue:hover {
+    color: #03a9f4 !important;
 }
