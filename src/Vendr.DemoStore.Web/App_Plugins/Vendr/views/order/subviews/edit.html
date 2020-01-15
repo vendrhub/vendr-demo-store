@@ -199,7 +199,7 @@
                         <umb-button type="button" button-style="success" label="Capture Payment" ng-click="vm.capturePayment()" ng-if="vm.content.paymentMethod.canCapturePayments"></umb-button>
                     </div>
                 </div>
-                <div ng-if="vm.content.paymentStatus == 'Captured' && vm.content.paymentProvider.canRefundPayments" class="flex flex-column">
+                <div ng-if="vm.content.paymentStatus == 'Captured' && vm.content.paymentMethod.canRefundPayments" class="flex flex-column">
                     <hr />
                     <umb-button type="button" label="Refund Payment" class="self-end" ng-click="vm.refundPayment()"></umb-button>
                 </div>
