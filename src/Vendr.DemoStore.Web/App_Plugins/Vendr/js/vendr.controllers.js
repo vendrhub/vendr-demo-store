@@ -2088,7 +2088,7 @@
         };
 
         vm.refundPayment = function() {
-            vendrOrderResource.capturePayment(id).then(function(order) {
+            vendrOrderResource.refundPayment(id).then(function(order) {
                 vm.content.paymentStatus = order.paymentStatus;
                 // TODO: Update prices?
                 notificationsService.success("Payment Refunded", "Captured payment successfully refunded.");
