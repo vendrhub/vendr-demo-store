@@ -29,7 +29,7 @@
             showHideShippingInfo(true);
         });
 
-        $("input[name=acceptTerms]").on("click", enableDisableContinueButton);
+        $("#acceptTerms").on("click", enableDisableContinueButton);
 
         showHideShippingInfo(false);
     }
@@ -61,7 +61,7 @@
 
     function enableDisableContinueButton() {
         
-        var enableContinueButton = $("input[name=acceptTerms]").is(":checked");
+        var enableContinueButton = $("#acceptTerms").is(":checked");
         if (enableContinueButton) {
             $("#continue-disabled").hide();
             $("#continue").show();
