@@ -1,7 +1,17 @@
 ﻿<select name="dropDownList"
         class="umb-property-editor umb-dropdown"
         ng-model="model.value"
-        ng-options="item for item in model.config.items"
-        ng-required="model.validation.mandatory">
+        ng-options="item  for item in model.config.items"
+        ng-required="model.validation.mandatory"
+        ng-if="Array.isArray(model.config.items)">
+    <option value=""></option>
+</select>
+
+<select name="dropDownList"
+        class="umb-property-editor umb-dropdown"
+        ng-model="model.value"
+        ng-options="key as value for (key , value) in model.config.items"
+        ng-required="model.validation.mandatory"
+        ng-if="!Array.isArray(model.config.items)">
     <option value=""></option>
 </select>
