@@ -1939,6 +1939,10 @@
             $location.path(ancestor.routePath);
         };
 
+        vm.cancelPaymentButtonState = 'init';
+        vm.capturePaymentButtonState = 'init';
+        vm.refundPaymentButtonState = 'init';
+
         vm.options = {
             expandedBundles: []
         };
@@ -2071,27 +2075,36 @@
             editorService.open(transactionInfoDialogOptions);
         };
 
-        vm.cancelPayment = function() {
+        vm.cancelPayment = function () {
+            vm.cancelPaymentButtonState = 'busy';
             vendrOrderResource.cancelPayment(id).then(function(order) {
                 vm.content.paymentStatus = order.paymentStatus;
-                // TODO: Update prices?
+                vm.cancelPaymentButtonState = 'success';
                 notificationsService.success("Payment Cancelled", "Pending payment successfully cancelled.");
+            }, function (err) {
+                vm.cancelPaymentButtonState = 'error';
             });
         };
 
-        vm.capturePayment = function() {
+        vm.capturePayment = function () {
+            vm.capturePaymentButtonState = 'busy';
             vendrOrderResource.capturePayment(id).then(function(order) {
                 vm.content.paymentStatus = order.paymentStatus;
-                // TODO: Update prices?
+                vm.capturePaymentButtonState = 'success';
                 notificationsService.success("Payment Captured", "Pending payment successfully captured.");
+            }, function (err) {
+                    vm.capturePaymentButtonState = 'error';
             });
         };
 
-        vm.refundPayment = function() {
+        vm.refundPayment = function () {
+            vm.refundPaymentButtonState = 'busy';
             vendrOrderResource.refundPayment(id).then(function(order) {
                 vm.content.paymentStatus = order.paymentStatus;
-                // TODO: Update prices?
+                vm.refundPaymentButtonState = 'success';
                 notificationsService.success("Payment Refunded", "Captured payment successfully refunded.");
+            }, function (err) {
+                vm.refundPaymentButtonState = 'error';
             });
         };
 

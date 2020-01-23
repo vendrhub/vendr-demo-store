@@ -195,13 +195,30 @@
                 <div ng-if="vm.content.paymentStatus == 'Authorized' && (vm.content.paymentMethod.canCancelPayments || vm.content.paymentMethod.canCapturePayments)" class="flex flex-column">
                     <hr />
                     <div class="self-end">
-                        <umb-button type="button" label="Cancel Payment" class="mr-5" ng-click="vm.cancelPayment()" ng-if="vm.content.paymentMethod.canCancelPayments"></umb-button>
-                        <umb-button type="button" button-style="success" label="Capture Payment" ng-click="vm.capturePayment()" ng-if="vm.content.paymentMethod.canCapturePayments"></umb-button>
+                        <umb-button type="button" 
+                                    label="Cancel Payment" 
+                                    class="mr-5" 
+                                    action="vm.cancelPayment()" 
+                                    state="vm.cancelPaymentButtonState"
+                                    disabled="vm.cancelPaymentButtonState === 'busy'"
+                                    ng-if="vm.content.paymentMethod.canCancelPayments"></umb-button>
+                        <umb-button type="button" 
+                                    button-style="success" 
+                                    label="Capture Payment" 
+                                    action="vm.capturePayment()" 
+                                    state="vm.capturePaymentButtonState"
+                                    disabled="vm.capturePaymentButtonState === 'busy'"
+                                    ng-if="vm.content.paymentMethod.canCapturePayments"></umb-button>
                     </div>
                 </div>
                 <div ng-if="vm.content.paymentStatus == 'Captured' && vm.content.paymentMethod.canRefundPayments" class="flex flex-column">
                     <hr />
-                    <umb-button type="button" label="Refund Payment" class="self-end" ng-click="vm.refundPayment()"></umb-button>
+                    <umb-button type="button" 
+                                label="Refund Payment" 
+                                class="self-end" 
+                                action="vm.refundPayment()"
+                                state="vm.refundPaymentButtonState"
+                                disabled="vm.refundPaymentButtonState === 'busy'"></umb-button>
                 </div>
 
             </umb-box-content>
