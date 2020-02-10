@@ -31,6 +31,19 @@
 
         $("#acceptTerms").on("click", enableDisableContinueButton);
 
+        var errors = $(".validation-summary-errors");
+        if (errors.length > 0) {
+            Toastify({
+                text: errors.find("ul li:first-child").text(),
+                duration: 3000,
+                gravity: "bottom", // `top` or `bottom`
+                position: 'center', // `left`, `center` or `right`
+                backgroundColor: "#f56565",
+                className: "",
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+            }).showToast();
+        }
+
         showHideShippingInfo(false);
     }
 

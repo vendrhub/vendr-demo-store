@@ -175,6 +175,8 @@
                     </ul>
                 </div>
 
+                @Html.ValidationSummary(true, "", new { @class = "hidden" })
+
             </div>
 
             @RenderBody()

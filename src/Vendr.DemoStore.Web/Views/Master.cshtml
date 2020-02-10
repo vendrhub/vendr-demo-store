@@ -12,6 +12,8 @@
         <meta name="keywords" content="@Model.MetaKeywords" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.1.4/tailwind.min.css" rel="stylesheet">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+        <style>.toastify-center { max-width: calc(100% - 30px); }</style>
         <link href="/css/gilroy.css" rel="stylesheet">
         <link href="/css/main.css" rel="stylesheet">
         @RenderSection("head", false)
@@ -20,6 +22,7 @@
         @RenderBody()
         <script src="https://instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
         <script src="/scripts/ssm.min.js"></script>
         @RenderSection("foot", false)
     </body>

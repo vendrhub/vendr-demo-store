@@ -42,7 +42,6 @@
             e.preventDefault();
             $(".product-image").attr("src", $(this).attr("href"));
         });
-
     }
 
     // Setup responsive states
