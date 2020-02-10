@@ -1,0 +1,12 @@
+﻿<span>
+    <span ng-if="model.adjustmentType === 'Percentage'">
+        {{ model.percentage }}%
+    </span>
+    <span ng-if="model.adjustmentType === 'Amount'">
+        <span ng-repeat="(key, value) in model.amounts" ng-if="value > 0" class="vendr-comma-separate">{{ key | vendrCurrencyCode }}{{ value | number : 2 }}</span>
+    </span>
+    <span ng-if="model.adjustmentType !== ''">off Order {{ model.priceType | vendrSplitCamelCase }}</span>
+    <span ng-if="model.adjustmentType === ''">
+        Order Amount Reward
+    </span>
+</span>

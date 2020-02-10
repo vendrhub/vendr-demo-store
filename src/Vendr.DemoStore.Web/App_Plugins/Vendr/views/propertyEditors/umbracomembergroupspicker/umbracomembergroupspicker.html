@@ -1,0 +1,11 @@
+﻿<div ng-controller="Vendr.Controllers.UmbracoMemberGroupsPickerController">
+    <umb-node-preview ng-repeat="group in model.value track by group | orderBy"
+                      icon="'icon-users'"
+                      name="group"
+                      allow-remove="true"
+                      on-remove="removeGroup(group)">
+    </umb-node-preview>
+    <a href ng-click="pickGroup()" class="umb-node-preview-add" prevent-default>
+        <localize key="general_add">Add</localize>
+    </a>
+</div>

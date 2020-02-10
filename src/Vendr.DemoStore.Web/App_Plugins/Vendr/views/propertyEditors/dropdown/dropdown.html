@@ -4,7 +4,6 @@
         ng-options="item  for item in model.config.items"
         ng-required="model.validation.mandatory"
         ng-if="Array.isArray(model.config.items)">
-    <option value=""></option>
 </select>
 
 <select name="dropDownList"
@@ -13,5 +12,4 @@
         ng-options="key as value for (key , value) in model.config.items"
         ng-required="model.validation.mandatory"
         ng-if="!Array.isArray(model.config.items)">
-    <option value=""></option>
 </select>

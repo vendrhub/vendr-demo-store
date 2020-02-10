@@ -52,6 +52,7 @@
     "~/app_plugins/vendr/js/vendr.modules.js",
     "~/app_plugins/vendr/js/vendr.interceptors.js",
     "~/app_plugins/vendr/js/vendr.decorators.js",
+    "~/app_plugins/vendr/js/vendr.filters.js",
     "~/app_plugins/vendr/js/vendr.directives.js",
     "~/app_plugins/vendr/js/vendr.resources.js",
     "~/app_plugins/vendr/js/vendr.services.js",

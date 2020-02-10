@@ -1,0 +1,4 @@
+﻿<span>
+    <span ng-if="model.priceType">Order {{ model.priceType | vendrSplitCamelCase }} {{ model.comparisonOperator | vendrOperatorSymbol }} <span ng-repeat="(key, value) in model.amounts" ng-if="value > 0" class="vendr-comma-separate">{{ key | vendrCurrencyCode }}{{ value | number : 2 }}</span></span>
+    <span ng-if="!model.priceType">Order Amount Rule</span>
+</span>

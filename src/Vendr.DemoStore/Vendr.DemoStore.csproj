@@ -366,10 +366,16 @@
     <Reference Include="Umbraco.Web.UI, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\UmbracoCms.Web.8.2.1\lib\net472\Umbraco.Web.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Vendr.Core">
+    <Reference Include="Vendr.Core, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Vendr.DemoStore.Web\bin\Vendr.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Vendr.Web">
+    <Reference Include="Vendr.Core.Web, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Vendr.DemoStore.Web\bin\Vendr.Core.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Vendr.Web, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Vendr.DemoStore.Web\bin\Vendr.Web.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -472,7 +478,7 @@
     <Compile Include="Web\Controllers\CartSurfaceController.cs" />
     <Compile Include="Web\Controllers\CheckoutSurfaceController.cs" />
     <Compile Include="Web\Controllers\ProductSurfaceController.cs" />
-    <Compile Include="Web\Dtos\ApplyDiscountOrGiftCardCodeDto.cs" />
+    <Compile Include="Web\Dtos\DiscountOrGiftCardCodeDto.cs" />
     <Compile Include="Web\Dtos\RemoveFromCartDto.cs" />
     <Compile Include="Web\Dtos\AddToCartDto.cs" />
     <Compile Include="Web\Dtos\UpdateCartDto.cs" />

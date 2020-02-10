@@ -25,6 +25,19 @@
 
     'use strict';
 
+    // Create Vendr.directives module
+    angular.module('vendr.filters', [
+        'umbraco.filters'
+    ]);
+
+    // Inject module into Umbraco APP
+    angular.module('umbraco').requires.push('vendr.filters');
+
+}());
+(function () {
+
+    'use strict';
+
     // Create Vendr.interceptors module
     angular.module('vendr.interceptors', [])
         .config(['$httpProvider', function ($httpProvider) {
@@ -77,7 +90,8 @@
     angular.module('vendr', [
         'umbraco.resources',
         'vendr.interceptors',
-        'vendr.decorators'
+        'vendr.decorators',
+        'vendr.filters'
     ]);
 
     // Inject module into Umbraco APP

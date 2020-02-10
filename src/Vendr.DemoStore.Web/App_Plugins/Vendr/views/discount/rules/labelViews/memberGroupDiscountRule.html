@@ -1,0 +1,4 @@
+﻿<span>
+    <span ng-if="model.memberGroups">Member in <span ng-repeat="memberGroup in model.memberGroups" class="{{ model.matchType == 'All' ? 'vendr-and-separate' : 'vendr-or-separate' }}">'{{ memberGroup }}'</span></span>
+    <span ng-if="!model.memberGroups">Member Group Rule</span>
+</span>

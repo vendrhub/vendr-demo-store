@@ -1,6 +1,6 @@
 ﻿namespace Vendr.DemoStore.Web.Dtos
 {
-    public class ApplyDiscountOrGiftCardCodeDto
+    public class DiscountOrGiftCardCodeDto
     {
         public string Code { get; set; }
     }

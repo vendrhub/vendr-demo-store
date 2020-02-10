@@ -402,6 +402,543 @@
 
     'use strict';
 
+    // Helpers
+    function vendrDiscountRewardProviderScaffoldToConfig(scaffold, vendrUtils) {
+        return {
+            id: vendrUtils.generateGuid(),
+            rewardProviderAlias: scaffold.alias,
+            settings: scaffold.settingDefinitions.reduce(function (map, obj) {
+                map[obj.key] = null;
+                return map;
+            }, {})
+        };
+    }
+
+    // Reward Builder
+    function vendrRewardBuilder($rootScope, $timeout, editorService, vendrDiscountResource, vendrUtils, vendrRouteCache) {
+
+        function link(scope, el, attr, ctrl) {
+
+            scope.ready = false;
+
+            var discountRewardProviderPickerDialogOptions = {
+                view: '/app_plugins/vendr/views/dialogs/discountrewardproviderpicker.html',
+                size: 'small',
+                config: { },
+                submit: function (model) {
+                    vendrRouteCache.getOrFetch("discountRewardProviderScaffold_" + model.alias,
+                        () => vendrDiscountResource.getDiscountRewardProviderScaffold(model.alias)).then(function (scaffold) {
+
+                        // Create config and add to children
+                        scope.ngModel = scope.ngModel || [];
+                        scope.ngModel.push(vendrDiscountRewardProviderScaffoldToConfig(scaffold, vendrUtils));
+
+                        // Close the dialog or open the editor depending on the reward
+                        $timeout(function () {
+                            scope.$broadcast("editRewardBuilderItem", { index: scope.ngModel.length - 1 });
+                        }, 10);
+
+                    });
+                },
+                close: function () {
+                    editorService.close();
+                }
+            };
+
+            scope.sortableOptions = {
+                axis: "y",
+                cursor: "move",
+                handle: ".handle",
+                placeholder: 'sortable-placeholder',
+                items: ".vendr-reward-builder__item",
+                forcePlaceholderSize: true
+            };
+
+            scope.addReward = function () {
+                editorService.open(discountRewardProviderPickerDialogOptions);
+            };
+
+            scope.$on("deleteRewardBuilderItem", function (evt, data) {
+                scope.ngModel.splice(data.index, 1);
+            });
+
+            // We only fetch the defs here to ensure the cache is set
+            // so that child rules can reuse them
+            vendrRouteCache.getOrFetch("discountRewardProviderDefs",
+                () => vendrDiscountResource.getDiscountRewardProviderDefinitions()).then(function (defs) {
+
+                if (!scope.ngModel) {
+                    scope.ngModel = [];
+                }
+
+                scope.ready = true;
+            });
+            
+        }
+
+        var directive = {
+            restrict: 'E',
+            replace: true,
+            template: `<div class="vendr-reward-builder">
+                <div ng-if="ready">
+                    <div ui-sortable="sortableOptions" ng-model="ngModel">
+                        <div class="vendr-reward-builder__item" ng-repeat="itm in ngModel track by itm.id">
+                            <vendr-reward-builder-reward ng-model="itm" index="$index">
+                            </vendr-reward-builder-reward>
+                        </div>
+                    </div>
+                    <button type="button" class="umb-node-preview-add" ng-click="addReward()">
+                        <span>Add Reward</span>
+                        <span class="sr-only">...</span>
+                    </button>
+                </div>
+            </div>`,
+            scope: {
+                ngModel: '='
+            },
+            link: link
+        };
+        
+        return directive;
+    };
+
+    angular.module('vendr.directives').directive('vendrRewardBuilder', vendrRewardBuilder);
+
+    // Reward 
+    function vendrRewardBuilderReward($rootScope, $interpolate, editorService, vendrDiscountResource, vendrRouteCache) {
+
+        function link(scope, el, attr, ctrl) {
+
+            function generateLabelModel() {
+
+                var item = angular.copy(scope.ngModel.settings || {});
+
+                item["$index"] = scope.index;
+                item["$level"] = scope.level;
+
+                item["$rewardName"] = scope.discountRewardDefinition.name;
+                item["$rewardAlias"] = scope.discountRewardDefinition.alias;
+
+                scope.labelModel = item;
+
+            };
+
+            var settingsEditorDialogOptions = {
+                view: '/app_plugins/vendr/views/dialogs/settingseditor.html',
+                size: 'small',
+                config: {
+                    loadSettingDefinitions: function () {
+                        return vendrRouteCache.getOrFetch("discountRewardProviderScaffold_" + scope.ngModel.rewardProviderAlias, 
+                            () => vendrDiscountResource.getDiscountRewardProviderScaffold(scope.ngModel.rewardProviderAlias))
+                            .then(function (scaffold) {
+                                return scaffold.settingDefinitions;
+                            });
+                    },
+                    settings: scope.ngModel.settings
+                },
+                submit: function (settings) {
+                    // Map settings back to ngModel
+                    Object.keys(settings).forEach(function (key) {
+                        scope.ngModel.settings[key] = settings[key];
+                    });
+                    // Regenerate the label model
+                    generateLabelModel();
+                    // Close the dialog
+                    editorService.closeAll();
+                },
+                close: function () {
+                    editorService.closeAll();
+                }
+            };
+
+            scope.editReward = function () {
+                editorService.open(settingsEditorDialogOptions);
+            };
+
+            scope.deleteReward = function () {
+                // We can't delete ourselves so we emit an event for the parent group to do it
+                scope.$emit("deleteRewardBuilderItem", { index: scope.index });
+            };
+
+            scope.$on("editRewardBuilderItem", function (evt, data) {
+                if (data.index === scope.index) {
+                    scope.editReward();
+                }
+            });
+
+            vendrRouteCache.get("discountRewardProviderDefs").then(function (defs) {
+
+                scope.discountRewardDefinition = defs.find((el) => el.alias == scope.ngModel.rewardProviderAlias);
+
+                scope.labelView = scope.discountRewardDefinition.labelView.endsWith(".html")
+                    ? scope.discountRewardDefinition.labelView
+                    : "/app_plugins/vendr/views/discount/rewards/labelViews/" + scope.discountRewardDefinition.labelView + ".html";
+
+                settingsEditorDialogOptions.config.name = "Edit " + scope.discountRewardDefinition.name;
+
+                generateLabelModel();
+
+            });
+
+        }
+
+        var directive = {
+            restrict: 'E',
+            replace: true,
+            template: `<div>
+                <div class="vendr-reward-builder__reward" ng-if="discountRewardDefinition">
+                    <div class="vendr-split">
+                        <div class="flex items-center">
+                            <a href="" class="px-10 -ml-5 handle"><i class="fa fa-ellipsis-v"></i></a>
+                            <a href="" ng-click="editReward()" class="strong pr-5" prevent-default>
+                                <vendr-scoped-include view="labelView" model="labelModel" ng-if="labelView"></vendr-scoped-include>
+                            </a>
+                        </div>
+                        <div class="flex items-center">
+                            <a href="" ng-click="editReward()" prevent-default class="mr-5"><i class="fa fa-pencil"></i></a>
+                            <a href="" ng-click="deleteReward()" prevent-default><i class="fa fa-trash"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>`,
+            scope: {
+                ngModel: '=',
+                index: '='
+            },
+            link: link
+        };
+
+        return directive;
+    };
+
+    angular.module('vendr.directives').directive('vendrRewardBuilderReward', vendrRewardBuilderReward);
+
+}());
+(function () {
+
+    'use strict';
+
+    // Helpers
+    function vendrDiscountRuleProviderScaffoldToConfig(scaffold, vendrUtils) {
+        return {
+            id: vendrUtils.generateGuid(),
+            ruleProviderAlias: scaffold.alias,
+            settings: scaffold.settingDefinitions.reduce(function (map, obj) {
+                map[obj.key] = null;
+                return map;
+            }, {}),
+            children: []
+        };
+    }
+
+    // Rule Builder
+    function vendrRuleBuilder($rootScope, vendrDiscountResource, vendrUtils, vendrRouteCache) {
+
+        function link(scope, el, attr, ctrl) {
+
+            scope.ready = false;
+
+            // We only fetch the defs here to ensure the cache is set
+            // so that child rules can reuse them
+            vendrRouteCache.getOrFetch("discountRuleProviderDefs", () => vendrDiscountResource.getDiscountRuleProviderDefinitions()).then(function (defs) {
+                if (!scope.ngModel) {
+                    vendrDiscountResource.getDiscountRuleProviderScaffold("groupDiscountRule").then(function (scaffold) {
+                        scope.ngModel = vendrDiscountRuleProviderScaffoldToConfig(scaffold, vendrUtils);
+                        scope.ready = true;
+                    });
+                } else {
+                    scope.ready = true;
+                }
+            });
+            
+        }
+
+        var directive = {
+            restrict: 'E',
+            replace: true,
+            template: `<div class="vendr-rule-builder">
+                <vendr-rule-builder-item ng-if="ngModel && ready"
+                    ng-model="ngModel" level="0" index="0">
+                </vendr-rule-builder-item>
+            </div>`,
+            scope: {
+                ngModel: '='
+            },
+            link: link
+        };
+        
+        return directive;
+    };
+
+    angular.module('vendr.directives').directive('vendrRuleBuilder', vendrRuleBuilder);
+
+    // Item
+    function vendrRuleBuilderItem() {
+
+        function link(scope, el, attr, ctrl) { }
+
+        var directive = {
+            restrict: 'E',
+            replace: true,
+            template: `<div class="vendr-rule-builder__group-item">
+                <vendr-rule-builder-rule-group ng-if="ngModel.ruleProviderAlias == 'groupDiscountRule'" ng-model="ngModel" level="level" index="index"></vendr-rule-builder-rule-group>
+                <vendr-rule-builder-rule ng-if="ngModel.ruleProviderAlias != 'groupDiscountRule'" ng-model="ngModel" level="level" index="index"></vendr-rule-builder-rule>
+            </div >`,
+            scope: {
+                ngModel: '=',
+                level: '=',
+                index: '='
+            },
+            link: link
+        };
+
+        return directive;
+    };
+
+    angular.module('vendr.directives').directive('vendrRuleBuilderItem', vendrRuleBuilderItem);
+
+    // Rule Group
+    function vendrRuleBuilderRuleGroup($rootScope, $timeout, editorService, vendrDiscountResource, vendrUtils, vendrRouteCache) {
+
+        function link(scope, el, attr, ctrl) {
+
+            scope.matchTypes = ["All", "Any"];
+
+            if (!scope.ngModel.settings.matchType) {
+                scope.ngModel.settings.matchType = scope.matchTypes[0];
+            }
+
+            var discountRuleProviderPickerDialogOptions = {
+                view: '/app_plugins/vendr/views/dialogs/discountruleproviderpicker.html',
+                size: 'small',
+                config: { },
+                submit: function (model) {
+                    vendrRouteCache.getOrFetch("discountRuleProviderScaffold_" + model.alias,
+                        () => vendrDiscountResource.getDiscountRuleProviderScaffold(model.alias)).then(function (scaffold) {
+
+                        // Create config and add to children
+                        scope.ngModel.children = scope.ngModel.children || [];
+                        scope.ngModel.children.push(vendrDiscountRuleProviderScaffoldToConfig(scaffold, vendrUtils));
+
+                        // Close the dialog or open the editor depending on the rule
+                        if (scaffold.alias === "groupDiscountRule") {
+                            editorService.close();
+                        } else {
+                            $timeout(function () {
+                                scope.$broadcast("editRuleBuilderItem", { level: scope.level + 1, index: scope.ngModel.children.length - 1 });
+                            }, 10);
+                        }
+                    });
+                },
+                close: function () {
+                    editorService.close();
+                }
+            };
+
+            scope.sortableOptions = {
+                axis: "y",
+                cursor: "move",
+                handle: ".handle--" + scope.level,
+                placeholder: 'sortable-placeholder',
+                items: ".vendr-rule-builder__group-item",
+                forcePlaceholderSize: true
+            };
+
+            scope.addRule = function () {
+                editorService.open(discountRuleProviderPickerDialogOptions);
+            };
+
+            scope.deleteGroup = function () {
+                if (scope.level > 0) {
+                    // We can't delete ourselves so we emit an event for the parent group to do it
+                    scope.$emit("deleteRuleBuilderItem", { level: scope.level, index: scope.index });
+                }
+            };
+
+            scope.$on("deleteRuleBuilderItem", function (evt, data) {
+                if (data.level === scope.level + 1) {
+                    scope.ngModel.children.splice(data.index, 1);
+                }
+            });
+        }
+
+        var directive = {
+            restrict: 'E',
+            replace: true,
+            template: `<div class="vendr-rule-builder__group">
+                <div class="vendr-rule-builder__group-header py-5">
+                    <div class="vendr-split">
+                        <div class="flex items-center px-10">
+                            <a href="" class="px-10 -ml-5 handle handle--{{level - 1}}" ng-if="level > 0"><i class="fa fa-ellipsis-v"></i></a>
+                            <span class="mr-10 strong">Match:</span><select ng-model="ngModel.settings.matchType" ng-options="matchType for matchType in matchTypes"></select>
+                        </div>
+                        <div class="flex items-center"><a href="" class="btn" ng-click="deleteGroup()" ng-if="level > 0"  prevent-default><i class="fa fa-trash"></i></a></div>
+                    </div>
+                </div>
+                <div class="vendr-rule-builder__group-inner">
+                    <div ui-sortable="sortableOptions" ng-model="ngModel.children">
+                        <vendr-rule-builder-item ng-model="itm" 
+                            ng-repeat="itm in ngModel.children track by itm.id" 
+                            level="level + 1"
+                            index="$index">
+                        </vendr-rule-builder-item>
+                    </div>
+                    <button type="button" class="umb-node-preview-add" ng-click="addRule()">
+                        <span>Add Rule</span>
+                        <span class="sr-only">...</span>
+                    </button>
+                </div>
+            </div>`,
+            scope: {
+                ngModel: '=',
+                level: '=',
+                index: '='
+            },
+            link: link
+        };
+
+        return directive;
+    };
+
+    angular.module('vendr.directives').directive('vendrRuleBuilderRuleGroup', vendrRuleBuilderRuleGroup);
+
+    // Rule 
+    function vendrRuleBuilderRule($rootScope, $interpolate, editorService, vendrDiscountResource, vendrRouteCache) {
+
+        function link(scope, el, attr, ctrl) {
+
+            function generateLabelModel() {
+
+                var item = angular.copy(scope.ngModel.settings || {});
+
+                item["$index"] = scope.index;
+                item["$level"] = scope.level;
+
+                item["$ruleName"] = scope.discountRuleDefinition.name;
+                item["$ruleAlias"] = scope.discountRuleDefinition.alias;
+
+                scope.labelModel = item;
+
+            }
+
+            var settingsEditorDialogOptions = {
+                view: '/app_plugins/vendr/views/dialogs/settingseditor.html',
+                size: 'small',
+                config: {
+                    loadSettingDefinitions: function () {
+                        return vendrRouteCache.getOrFetch("discountRuleProviderScaffold_" + scope.ngModel.ruleProviderAlias, 
+                            () => vendrDiscountResource.getDiscountRuleProviderScaffold(scope.ngModel.ruleProviderAlias)).then(function (scaffold) {
+                            return scaffold.settingDefinitions;
+                        });
+                    },
+                    settings: scope.ngModel.settings
+                },
+                submit: function (settings) {
+                    // Map settings back to ngModel
+                    Object.keys(settings).forEach(function (key) {
+                        scope.ngModel.settings[key] = settings[key];
+                    });
+                    // Regenerate the label model
+                    generateLabelModel();
+                    // Close the dialog
+                    editorService.closeAll();
+                },
+                close: function () {
+                    editorService.closeAll();
+                }
+            };
+
+            scope.editRule = function () {
+                editorService.open(settingsEditorDialogOptions);
+            };
+
+            scope.deleteRule = function () {
+                if (scope.level > 0) {
+                    // We can't delete ourselves so we emit an event for the parent group to do it
+                    scope.$emit("deleteRuleBuilderItem", { level: scope.level, index: scope.index });
+                }
+            };
+
+            scope.$on("editRuleBuilderItem", function (evt, data) {
+                if (data.level === scope.level && data.index === scope.index) {
+                    scope.editRule();
+                }
+            });
+
+            vendrRouteCache.get("discountRuleProviderDefs").then(function (defs) {
+
+                scope.discountRuleDefinition = defs.find((el) => el.alias == scope.ngModel.ruleProviderAlias);
+
+                scope.labelView = scope.discountRuleDefinition.labelView.endsWith(".html")
+                    ? scope.discountRuleDefinition.labelView
+                    : "/app_plugins/vendr/views/discount/rules/labelViews/" + scope.discountRuleDefinition.labelView + ".html";
+
+                settingsEditorDialogOptions.config.name = "Edit " + scope.discountRuleDefinition.name;
+
+                generateLabelModel();
+
+            });
+        }
+
+        var directive = {
+            restrict: 'E',
+            replace: true,
+            template: `<div>
+                <div class="vendr-rule-builder__rule" ng-if="discountRuleDefinition">
+                    <div class="vendr-split">
+                        <div class="flex items-center">
+                            <a href="" class="px-10 -ml-5 handle handle--{{level - 1}}" ng-if="level > 0"><i class="fa fa-ellipsis-v"></i></a>
+                            <a href="" ng-click="editRule()" class="strong pr-5" prevent-default>
+                                <vendr-scoped-include view="labelView" model="labelModel" ng-if="labelView"></vendr-scoped-include>
+                            </a>
+                        </div>
+                        <div class="flex items-center">
+                            <a href="" ng-click="editRule()" prevent-default class="mr-5"><i class="fa fa-pencil"></i></a>
+                            <a href="" ng-click="deleteRule()" ng-if="level > 0" prevent-default><i class="fa fa-trash"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>`,
+            scope: {
+                ngModel: '=',
+                level: '=',
+                index: '='
+            },
+            link: link
+        };
+
+        return directive;
+    };
+
+    angular.module('vendr.directives').directive('vendrRuleBuilderRule', vendrRuleBuilderRule);
+
+}());
+(function () {
+
+    'use strict';
+
+    function vendrScopedInclude() {
+
+        var directive = {
+            restrict: 'E',
+            replace: true,
+            template: '<ng-include src="view"></ng-include>',
+            scope: {
+                view: '=',
+                model: '='
+            }
+        };
+        
+        return directive;
+    };
+
+    angular.module('vendr.directives').directive('vendrScopedInclude', vendrScopedInclude);
+
+}());
+(function () {
+
+    'use strict';
+
     function vendrTableController($interpolate, $sce, iconHelper) {
 
         var vm = this;

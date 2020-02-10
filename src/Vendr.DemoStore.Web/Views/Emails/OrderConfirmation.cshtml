@@ -121,22 +121,22 @@
                                             @orderLine.Name<br /><span style="color:#a0aec0; font-size: 12px;">@orderLine.Sku</span>
                                         </td>
                                         <td style="vertical-align: top;padding-top:20px; text-align: right;">
-                                            @orderLine.UnitPrice.Value.Formatted().Value
-                                            @if (orderLine.UnitPrice.Value != orderLine.UnitPrice.WithoutDiscount)
+                                            @orderLine.UnitPrice.Value.Formatted().WithoutTax
+                                            @if (orderLine.UnitPrice.Value != orderLine.UnitPrice.WithoutDiscounts)
                                             {
                                                 <br />
-                                                <span style="color:#a0aec0; font-size: 12px; text-decoration:line-through;">@orderLine.UnitPrice.WithoutDiscount.Formatted().Value</span>
+                                                <span style="color:#a0aec0; font-size: 12px; text-decoration:line-through;">@orderLine.UnitPrice.WithoutDiscounts.Formatted().WithoutTax</span>
                                             }
                                         </td>
                                         <td style="vertical-align: top;padding-top:20px; text-align: right;">
                                             @((int)orderLine.Quantity)
                                         </td>
                                         <td style="vertical-align: top;padding-top:20px; text-align: right;">
-                                            @orderLine.TotalPrice.Value.Formatted().Value
-                                            @if (orderLine.TotalPrice.Value != orderLine.TotalPrice.WithoutDiscount)
+                                            @orderLine.TotalPrice.Value.Formatted().WithoutTax
+                                            @if (orderLine.TotalPrice.Value != orderLine.TotalPrice.WithoutDiscounts)
                                             {
                                                 <br />
-                                                <span style="color:#a0aec0; font-size: 12px; text-decoration:line-through;">@orderLine.TotalPrice.WithoutDiscount.Formatted().Value</span>
+                                                <span style="color:#a0aec0; font-size: 12px; text-decoration:line-through;">@orderLine.TotalPrice.WithoutDiscounts.Formatted().WithoutTax</span>
                                             }
                                         </td>
                                     </tr>
@@ -148,18 +148,18 @@
                                     <td style="vertical-align: top;"><strong>Subtotal</strong></td>
                                     <td style="vertical-align: top; text-align: right; white-space: nowrap;">
                                         <strong>
-                                            @Model.SubtotalPrice.WithPreviousDiscount.Formatted().Value
+                                            @Model.SubtotalPrice.WithPreviousDiscounts.Formatted().WithoutTax
                                         </strong>
                                     </td>
                                 </tr>
-                                @if (Model.SubtotalPrice.TotalDiscount.Value != 0)
+                                @if (Model.SubtotalPrice.TotalDiscount.WithoutTax != 0)
                                 {
                                     <tr>
                                         <td style="vertical-align: top;">
                                             Subtotal Discount
                                         </td>
                                         <td style="vertical-align: top; text-align: right; white-space: nowrap;">
-                                            -@Model.SubtotalPrice.TotalDiscount.Formatted().Value
+                                            -@Model.SubtotalPrice.TotalDiscount.Formatted().WithoutTax
                                         </td>
                                     </tr>
                                 }
@@ -170,11 +170,11 @@
                                             Shipping via @shippingMethod.Name
                                         </td>
                                         <td style="vertical-align: top; text-align: right; white-space: nowrap;">
-                                            @if (Model.ShippingInfo.TotalPrice.WithoutDiscount.Value != Model.ShippingInfo.TotalPrice.Value.Value)
+                                            @if (Model.ShippingInfo.TotalPrice.WithoutDiscounts.WithoutTax != Model.ShippingInfo.TotalPrice.Value.WithoutTax)
                                             {
-                                                <text><span style="color:#a0aec0; font-size: 12px; text-decoration:line-through;">@Model.ShippingInfo.TotalPrice.WithoutDiscount</span> </text>
+                                                <text><span style="color:#a0aec0; font-size: 12px; text-decoration:line-through;">@Model.ShippingInfo.TotalPrice.WithoutDiscounts</span> </text>
                                             }
-                                            @Model.ShippingInfo.TotalPrice.Value.Formatted().Value
+                                            @Model.ShippingInfo.TotalPrice.Value.Formatted().WithoutTax
                                         </td>
                                     </tr>
                                 }
@@ -185,11 +185,11 @@
                                             Payment via @paymentMethod.Name
                                         </td>
                                         <td style="vertical-align: top; text-align: right; white-space: nowrap;">
-                                            @if (Model.PaymentInfo.TotalPrice.WithoutDiscount.Value != Model.PaymentInfo.TotalPrice.Value.Value)
+                                            @if (Model.PaymentInfo.TotalPrice.WithoutDiscounts.WithoutTax != Model.PaymentInfo.TotalPrice.Value.WithoutTax)
                                             {
-                                                <text><span style="color:#a0aec0; font-size: 12px; text-decoration:line-through;">@Model.PaymentInfo.TotalPrice.WithoutDiscount</span> </text>
+                                                <text><span style="color:#a0aec0; font-size: 12px; text-decoration:line-through;">@Model.PaymentInfo.TotalPrice.WithoutDiscounts</span> </text>
                                             }
-                                            @Model.PaymentInfo.TotalPrice.Value.Formatted().Value
+                                            @Model.PaymentInfo.TotalPrice.Value.Formatted().WithoutTax
                                         </td>
                                     </tr>
                                 }
@@ -208,18 +208,18 @@
                                     <td style="vertical-align: top; padding-top: 20px;"><strong>Net Total</strong></td>
                                     <td style="vertical-align: top; padding-top: 20px; text-align: right; white-space: nowrap;">
                                         <strong>
-                                            @Model.TotalPrice.WithPreviousDiscount.Formatted().Value
+                                            @Model.TotalPrice.WithPreviousDiscounts.Formatted().WithoutTax
                                         </strong>
                                     </td>
                                 </tr>
-                                @if (Model.TotalPrice.TotalDiscount.Value != 0)
+                                @if (Model.TotalPrice.TotalDiscount.WithoutTax != 0)
                                 {
                                     <tr>
                                         <td style="vertical-align: top;">
                                             Net Total Discount
                                         </td>
                                         <td style="vertical-align: top; text-align: right; white-space: nowrap;">
-                                            -@Model.TotalPrice.TotalDiscount.Formatted().Value
+                                            -@Model.TotalPrice.TotalDiscount.Formatted().WithoutTax
                                         </td>
                                     </tr>
                                 }
@@ -231,7 +231,7 @@
                                         @Model.TotalPrice.Value.Formatted().Tax
                                     </td>
                                 </tr>
-                                @if (Model.TotalPrice.GiftCardAmount.Value != 0)
+                                @if (Model.TotalPrice.GiftCardsAmount.Value != 0)
                                 {
                                     <tr>
                                         <td style="vertical-align: top;">
@@ -239,7 +239,7 @@
                                             <style class="color:#a0aec0; font-size: 12px;">@(string.Join(", ", Model.GiftCards.Select(x => x.Code)))</style>
                                         </td>
                                         <td style="vertical-align: top; text-align: right; white-space: nowrap;">
-                                            -@Model.TotalPrice.GiftCardAmount.Formatted()
+                                            -@Model.TotalPrice.GiftCardsAmount.Formatted()
                                         </td>
                                     </tr>
                                 }

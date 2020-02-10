@@ -36,15 +36,15 @@
                 <span id="order-summary-toggle__text-closed"><i class="fa fa-shopping-cart mr-2"></i> Show Order Summary <i class="fa fa-angle-down ml-1"></i></span>
                 <span id="order-summary-toggle__text-open" class="hidden"><i class="fa fa-shopping-cart mr-2"></i> Hide Order Summary <i class="fa fa-angle-up ml-1"></i></span>
             </span>
-            <span class="py-4 px-8 text-lg font-medium">@Model.Order.TotalPrice.Value.Formatted()</span>
+            <span class="py-4 px-8 text-lg font-medium">@Model.Order.TotalPrice.Value.Formatted().WithoutTax</span>
         </a>
 
         <div id="order-summary" class="hidden bg-gray-100 w-full p-8 lg:w-2/5 lg:border-l lg:block">
 
-            <ul class="-mt-4">
+            <ul>
                 @foreach (var orderLine in Model.Order.OrderLines)
                 {
-                    <li class="border-b border-gray-300 py-4">
+                    <li class="border-b border-gray-300 pb-4 mb-4">
                         <div class="flex items-center">
 
                             <div class="flex flex-1 items-center">
@@ -55,7 +55,7 @@
                                 <div>@(orderLine.Name) x @((int)orderLine.Quantity)<br /><span class="text-xs text-gray-500">@(orderLine.Sku)</span></div>
                             </div>
 
-                            <div class="pl-4 font-medium">@(orderLine.TotalPrice.Value.Formatted().Value)</div>
+                            <div class="pl-4 font-medium">@(orderLine.TotalPrice.Value.Formatted().WithoutTax)</div>
 
                         </div>
                     </li>
@@ -64,57 +64,75 @@
 
             @RenderSection("aside", false)
 
-            <div class="border-b border-gray-300 py-4">
-                <div class="flex w-full justify-between items-center">
-                    <div class="">Subtotal</div>
-                    <div class="font-medium">@(Model.Order.SubtotalPrice.Value.Formatted().Value)</div>
-                </div>
-                @if (Model.TotalView == "Total")
-                {
-                    <div class="flex w-full justify-between items-center mt-2">
-                        <div class="">
-                            Shipping
-                            @if (Model.ShippingMethod != null)
-                            {
-                                <text>via @(Model.ShippingMethod.Name)</text>
-                            }
-                        </div>
-                        <div class="font-medium">@(Model.Order.ShippingInfo.TotalPrice.Value.Formatted())</div>
-                    </div>
-                    <div class="flex w-full justify-between items-center mt-2">
-                        <div class="">
-                            Payment
-                            @if (Model.PaymentMethod != null)
-                            {
-                                <text>via @(Model.PaymentMethod.Name)</text>
-                            }
-                        </div>
-                        <div class="font-medium">@(Model.Order.PaymentInfo.TotalPrice.Value.Formatted())</div>
-                    </div>
-                }
-                <div class="flex w-full justify-between items-center mt-2">
-                    <div class="">TAX</div>
-                    <div class="font-medium">@(Model.Order.SubtotalPrice.Value.Formatted().Tax)</div>
-                </div>
-
+            <div class="flex w-full justify-between items-center">
+                <div class="">Subtotal</div>
+                <div class="font-medium">@(Model.Order.SubtotalPrice.WithoutDiscounts.Formatted().WithoutTax)</div>
             </div>
 
             @if (Model.TotalView == "Subtotal")
             {
-                <div class="py-4">
-                    <div class="flex w-full justify-between items-center">
-                        <div class="font-medium text-base">Total</div>
-                        <div class="font-medium text-2xl">@Model.Order.SubtotalPrice.Value.Formatted()</div>
+                if (Model.Order.SubtotalPrice.TotalDiscount > 0)
+                {
+                    <div class="flex w-full justify-between items-center mt-2 ">
+                        <div class="">Discounts</div>
+                        <div class="font-medium">-@Model.Order.SubtotalPrice.TotalDiscount.Formatted().WithoutTax</div>
                     </div>
+                }
+
+                <div class="flex w-full justify-between items-center mt-2 ">
+                    <div class="">TAX</div>
+                    <div class="font-medium">@(Model.Order.SubtotalPrice.Value.Formatted().Tax)</div>
+                </div>
+
+                <hr class="border-t border-gray-300 my-4" />
+
+                <div class="flex w-full justify-between items-center">
+                    <div class="font-medium text-base">Total</div>
+                    <div class="font-medium text-2xl">@Model.Order.SubtotalPrice.Value.Formatted()</div>
                 </div>
             }
             else
             {
-                <div class="py-4">
-                    <div class="flex w-full justify-between items-center">
-                        <div class="font-medium text-base">Total</div>
-                        <div class="font-medium text-2xl">@Model.Order.TotalPrice.Value.Formatted()</div>
+                <div class="flex w-full justify-between items-center mt-2">
+                    <div class="">
+                        Shipping
+                        @if (Model.ShippingMethod != null)
+                        {
+                            <text>via @(Model.ShippingMethod.Name)</text>
+                        }
                     </div>
+                    <div class="font-medium">@(Model.Order.ShippingInfo.TotalPrice.WithoutDiscounts.Formatted().WithoutTax)</div>
+                </div>
+
+                <div class="flex w-full justify-between items-center mt-2">
+                    <div class="">
+                        Payment
+                        @if (Model.PaymentMethod != null)
+                        {
+                            <text>via @(Model.PaymentMethod.Name)</text>
+                        }
+                    </div>
+                    <div class="font-medium">@(Model.Order.PaymentInfo.TotalPrice.WithoutDiscounts.Formatted().WithoutTax)</div>
+                </div>
+
+                if (Model.Order.TotalPrice.TotalDiscount > 0)
+                {
+                    <div class="flex w-full justify-between items-center mt-2 ">
+                        <div class="">Discounts</div>
+                        <div class="font-medium">-@Model.Order.TotalPrice.TotalDiscount.Formatted().WithoutTax</div>
+                    </div>
+                }
+
+                <div class="flex w-full justify-between items-center mt-2">
+                    <div class="">TAX</div>
+                    <div class="font-medium">@(Model.Order.TotalPrice.Value.Formatted().Tax)</div>
+                </div>
+
+                <hr class="border-t border-gray-300 my-4" />
+
+                <div class="flex w-full justify-between items-center">
+                    <div class="font-medium text-base">Total</div>
+                    <div class="font-medium text-2xl">@Model.Order.TotalPrice.Value.Formatted()</div>
                 </div>
             }
 

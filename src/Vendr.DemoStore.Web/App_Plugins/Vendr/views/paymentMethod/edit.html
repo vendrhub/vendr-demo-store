@@ -38,7 +38,7 @@
                                     <select class="umb-property-editor umb-dropdown"
                                             ng-model="vm.content.taxClassId"
                                             ng-options="itm.id as itm.name for itm in vm.options.taxClasses">
-                                        <option value="" disabled selected>-- Select a Tax Class --</option>
+                                        <option value="" disabled selected ng-hide="vm.content.taxClassId">-- Select a Tax Class --</option>
                                     </select>
                                 </umb-control-group>
 

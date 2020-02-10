@@ -9,7 +9,7 @@
                     <select class="umb-property-editor umb-dropdown"
                             ng-model="model.content.defaultCountryId"
                             ng-options="itm.id as itm.name for itm in model.options.countries">
-                        <option value="" disabled selected>-- Select a Country --</option>
+                        <option value="" disabled selected ng-hide="model.content.defaultCountryId">-- Select a Country --</option>
                     </select>
                 </umb-control-group>
 
@@ -17,7 +17,7 @@
                     <select class="umb-property-editor umb-dropdown"
                             ng-model="model.content.defaultTaxClassId"
                             ng-options="itm.id as itm.name for itm in model.options.taxClasses">
-                        <option value="" disabled selected>-- Select a Tax Class --</option>
+                        <option value="" disabled selected ng-hide="model.content.defaultTaxClassId">-- Select a Tax Class --</option>
                     </select>
                 </umb-control-group>
 
@@ -25,7 +25,7 @@
                     <select class="umb-property-editor umb-dropdown"
                             ng-model="model.content.defaultOrderStatusId"
                             ng-options="itm.id as itm.name for itm in model.options.orderStatuses">
-                        <option value="" disabled selected>-- Select an Order Status --</option>
+                        <option value="" disabled selected ng-hide="model.content.defaultOrderStatusId">-- Select an Order Status --</option>
                     </select>
                 </umb-control-group>
 
@@ -33,7 +33,7 @@
                     <select class="umb-property-editor umb-dropdown"
                             ng-model="model.content.errorOrderStatusId"
                             ng-options="itm.id as itm.name for itm in model.options.orderStatuses">
-                        <option value="" disabled selected>-- Select an Order Status --</option>
+                        <option value="" disabled selected ng-hide="model.content.errorOrderStatusId">-- Select an Order Status --</option>
                     </select>
                 </umb-control-group>
 
@@ -65,14 +65,14 @@
                     <select class="umb-property-editor umb-dropdown"
                             ng-model="model.content.confirmationEmailTemplateId"
                             ng-options="itm.id as itm.name for itm in model.options.emailTemplates">
-                        <option value="" disabled selected>-- Select an Email Template --</option>
+                        <option value="" disabled selected ng-hide="model.content.confirmationEmailTemplateId">-- Select an Email Template --</option>
                     </select>
                 </umb-control-group>
                 <umb-control-group label="Error Email" description="The email to send if there was an error processing an order">
                     <select class="umb-property-editor umb-dropdown"
                             ng-model="model.content.errorEmailTemplateId"
                             ng-options="itm.id as itm.name for itm in model.options.emailTemplates">
-                        <option value="" disabled selected>-- Select an Email Template --</option>
+                        <option value="" disabled selected ng-hide="model.content.errorEmailTemplateId">-- Select an Email Template --</option>
                     </select>
                 </umb-control-group>
 

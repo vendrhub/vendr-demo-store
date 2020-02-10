@@ -5,11 +5,23 @@
 }
 
 @section aside {
-    @using (Html.BeginUmbracoForm("ApplyDiscountOrGiftCardCode", "CheckoutSurface", null, new { @class = "flex py-4 w-full border-b border-gray-300 m-0" }))
-    {
-        <input type="text" name="code" placeholder="Discount / Gift Card Code" class="flex-1 py-2 px-4 border rounded placeholder-gray-700" />
-        <button class="ml-4 bg-@(Model.CheckoutPage.PrimaryColor) text-white px-4 rounded hover:bg-gray-900" type="submit">Apply</button>
-    }
+    <div class="pb-4 mb-4 border-b border-gray-300 ">
+        @using (Html.BeginUmbracoForm("ApplyDiscountOrGiftCardCode", "CheckoutSurface", null, new { @class = "flex w-full m-0" }))
+        {
+            <input type="text" name="code" placeholder="Discount / Gift Card Code" class="flex-1 py-2 px-4 border rounded placeholder-gray-700" />
+            <button class="ml-4 bg-@(Model.CheckoutPage.PrimaryColor) text-white px-4 rounded hover:bg-gray-900" type="submit">Apply</button>
+        }
+
+        @if (Model.Order.DiscountCodes.Count > 0)
+        {
+            <ul class="mt-4 block">
+                @foreach (var discountCode in Model.Order.DiscountCodes)
+                {
+                    <li class="inline-block mr-2"><a href="@Url.SurfaceAction("RemoveDiscountOrGiftCardCode",  "CheckoutSurface", new { Code = discountCode.Code })" class="inline-block bg-gray-300 px-2 rounded hover:bg-gray-900 hover:text-white"><i class="fa fa-times mr-1"></i> @discountCode.Code</a></li>
+                }
+            </ul>
+        }
+    </div>
 }
 
 @using (Html.BeginUmbracoForm("UpdateOrderInformation", "CheckoutSurface"))

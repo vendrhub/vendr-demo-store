@@ -1,0 +1,4 @@
+﻿<span>
+    <span ng-if="model.propertySource && model.propertyAlias">{{ model.propertySource | vendrSplitCamelCase }} Property '{{ model.propertyAlias }}' {{ model.comparisonOperator | vendrOperatorSymbol }} '{{ model.value }}'</span>
+    <span ng-if="!model.propertySource || !model.propertyAlias">Property Rule</span>
+</span>

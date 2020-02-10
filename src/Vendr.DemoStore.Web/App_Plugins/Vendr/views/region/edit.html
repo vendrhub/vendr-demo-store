@@ -28,24 +28,24 @@
                             <!--<umb-box-header title="Settings"></umb-box-header>-->
                             <umb-box-content>
 
-                                <umb-control-group label="Code">
+                                <umb-control-group label="Code" description="A short code to reference this region. Should be uppercase alphanumeric, ie 'ALB01'">
                                     <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--short"
                                            ng-model="vm.content.code"
-                                           pattern="[A-Z]{5}"
+                                           pattern="[A-Z0-9]+" required
                                            vendr-uppercase />
                                 </umb-control-group>
                                 <umb-control-group label="Default Shipping Method">
                                     <select class="umb-property-editor umb-dropdown"
                                             ng-model="vm.content.defaultShippingMethodId"
                                             ng-options="itm.id as itm.name for itm in vm.options.shippingMethods">
-                                        <option value="" disabled selected>-- Select a Shipping Method --</option>
+                                        <option value="" selected ng-disabled="vm.options.isCreate">{{vm.options.isCreate ? '-- Select a Shipping Method --' : 'Inherit'}}</option>
                                     </select>
                                 </umb-control-group>
                                 <umb-control-group label="Default Payment Method">
                                     <select class="umb-property-editor umb-dropdown"
                                             ng-model="vm.content.defaultPaymentMethodId"
                                             ng-options="itm.id as itm.name for itm in vm.options.paymentMethods">
-                                        <option value="" disabled selected>-- Select a Payment Method --</option>
+                                        <option value="" selected ng-disabled="vm.options.isCreate">{{vm.options.isCreate ? '-- Select a Payment Method --' : 'Inherit'}}</option>
                                     </select>
                                 </umb-control-group>
 

@@ -24,9 +24,54 @@ namespace Vendr.DemoStore.Web.Controllers
             _uowProvider = uowProvider;
         }
 
-        public ActionResult ApplyDiscountOrGiftCardCode(ApplyDiscountOrGiftCardCodeDto model)
+        public ActionResult ApplyDiscountOrGiftCardCode(DiscountOrGiftCardCodeDto model)
         {
-            // Not currently implemented
+            try
+            {
+                using (var uow = _uowProvider.Create())
+                {
+                    var store = CurrentPage.GetStore();
+                    var order = _sessionManager.GetOrCreateCurrentOrder(store.Id)
+                        .AsWritable(uow)
+                        .Redeem(model.Code);
+
+                    _orderService.SaveOrder(order);
+
+                    uow.Complete();
+                }
+            }
+            catch (ValidationException ex)
+            {
+                ModelState.AddModelError("", "Failed to redeem discount code");
+
+                return CurrentUmbracoPage();
+            }
+
+            return RedirectToCurrentUmbracoPage();
+        }
+
+        public ActionResult RemoveDiscountOrGiftCardCode(DiscountOrGiftCardCodeDto model)
+        {
+            try
+            {
+                using (var uow = _uowProvider.Create())
+                {
+                    var store = CurrentPage.GetStore();
+                    var order = _sessionManager.GetOrCreateCurrentOrder(store.Id)
+                        .AsWritable(uow)
+                        .Unredeem(model.Code);
+
+                    _orderService.SaveOrder(order);
+
+                    uow.Complete();
+                }
+            }
+            catch (ValidationException ex)
+            {
+                ModelState.AddModelError("", "Failed to redeem discount code");
+
+                return CurrentUmbracoPage();
+            }
 
             return RedirectToCurrentUmbracoPage();
         }

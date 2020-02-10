@@ -808,6 +808,86 @@
 
     'use strict';
 
+    function DiscountRewardProviderPickerDialogController($scope, $q,
+        vendrDiscountResource, vendrRouteCache)
+    {
+        var defaultConfig = {
+            title: "Select Reward",
+            enableFilter: true,
+            orderBy: "name"
+        };
+
+        var vm = this;
+
+        vm.config = angular.extend({}, defaultConfig, $scope.model.config);
+
+        vm.loadItems = function () {
+            return vendrRouteCache.getOrFetch("discountRewardProviderDefs", function () {
+                return vendrDiscountResource.getDiscountRewardProviderDefinitions();
+            });
+        };
+
+        vm.select = function(item) {
+            $scope.model.value = item;
+            if ($scope.model.submit) {
+                $scope.model.submit($scope.model.value);
+            }
+        };
+
+        vm.close = function() {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.DiscountRewardProviderPickerDialogController', DiscountRewardProviderPickerDialogController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function DiscountRuleProviderPickerDialogController($scope, $q,
+        vendrDiscountResource, vendrRouteCache)
+    {
+        var defaultConfig = {
+            title: "Select Rule",
+            enableFilter: true,
+            orderBy: "name"
+        };
+
+        var vm = this;
+
+        vm.config = angular.extend({}, defaultConfig, $scope.model.config);
+
+        vm.loadItems = function () {
+            return vendrRouteCache.getOrFetch("discountRuleProviderDefs", function () {
+                return vendrDiscountResource.getDiscountRuleProviderDefinitions();
+            });
+        };
+
+        vm.select = function(item) {
+            $scope.model.value = item;
+            if ($scope.model.submit) {
+                $scope.model.submit($scope.model.value);
+            }
+        };
+
+        vm.close = function() {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.DiscountRuleProviderPickerDialogController', DiscountRuleProviderPickerDialogController);
+
+}());
+(function () {
+
+    'use strict';
+
     function EmailTemplatePickerDialogController($scope,
         vendrEmailTemplateResource)
     {
@@ -878,6 +958,145 @@
     }
 
     angular.module('vendr').controller('Vendr.Controllers.OrderStatusPickerDialogController', OrderStatusPickerDialogController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function PaymentMethodPickerDialogController($scope,
+        vendrPaymentMethodResource)
+    {
+        var defaultConfig = {
+            title: "Select Payment Method",
+            enableFilter: true,
+            orderBy: "name"
+        };
+
+        var vm = this;
+
+        vm.config = angular.extend({}, defaultConfig, $scope.model.config);
+
+        vm.loadItems = function() {
+            return vendrPaymentMethodResource.getPaymentMethods(vm.config.storeId);
+        };
+
+        vm.select = function(item) {
+            $scope.model.value = item;
+            if ($scope.model.submit) {
+                $scope.model.submit($scope.model.value);
+            }
+        };
+
+        vm.close = function() {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.PaymentMethodPickerDialogController', PaymentMethodPickerDialogController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function SettingsEditorDialogController($scope, formHelper)
+    {
+        var cfg = $scope.model.config;
+
+        var vm = this;
+
+        vm.loading = true;
+
+        vm.page = {};
+        vm.page.name = cfg.name;
+        vm.page.saveButtonState = 'init';
+
+        vm.settings = angular.copy(cfg.settings);
+        vm.options = {
+            settingDefinitions: []
+        };
+
+        vm.init = function () {
+            cfg.loadSettingDefinitions().then(function (settingDefinitions) {
+
+                // Remap setting definitions into an Umbraco property model
+                settingDefinitions.forEach(function (itm) {
+
+                    itm.alias = itm.key;
+                    itm.label = itm.name;
+
+                    Object.defineProperty(itm, "value", {
+                        get: function () {
+                            return vm.settings[itm.alias];
+                        },
+                        set: function (value) {
+                            vm.settings[itm.alias] = value;
+                        }
+                    });
+
+                });
+
+                vm.options.settingDefinitions = settingDefinitions;
+
+                vm.loading = false;
+            });
+        };
+
+        vm.save = function () {
+            if (formHelper.submitForm({ scope: $scope })) {
+                $scope.model.submit(vm.settings);
+            }
+        };
+
+        vm.close = function () {
+            $scope.model.close();
+        };
+
+        vm.init();
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.SettingsEditorDialogController', SettingsEditorDialogController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function ShippingMethodPickerDialogController($scope,
+        vendrShippingMethodResource)
+    {
+        var defaultConfig = {
+            title: "Select Shipping Method",
+            enableFilter: true,
+            orderBy: "name"
+        };
+
+        var vm = this;
+
+        vm.config = angular.extend({}, defaultConfig, $scope.model.config);
+
+        vm.loadItems = function() {
+            return vendrShippingMethodResource.getShippingMethods(vm.config.storeId);
+        };
+
+        vm.select = function(item) {
+            $scope.model.value = item;
+            if ($scope.model.submit) {
+                $scope.model.submit($scope.model.value);
+            }
+        };
+
+        vm.close = function() {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.ShippingMethodPickerDialogController', ShippingMethodPickerDialogController);
 
 }());
 (function () {
@@ -960,11 +1179,319 @@
 
     'use strict';
 
-    function DiscountListController($scope, $rootScope, $routeParams, vendrUtils) {
+    function DiscountEditController($scope, $routeParams, $location, formHelper,
+        appState, editorState, localizationService, notificationsService, navigationService, treeService, dateHelper, userService,
+        vendrUtils, vendrDiscountResource, vendrStoreResource, vendrRouteCache) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
+        var storeId = compositeId[0];
+        var storeAlias = storeId; // Set store alias to id for now as a fallback
+        var id = compositeId[1];
+        var create = id === '-1';
 
-        $scope.storeId = compositeId[0];
+        var vm = this;
+
+        vm.page = {};
+        vm.page.loading = true;
+        vm.page.saveButtonState = 'init';
+
+        vm.page.menu = {};
+        vm.page.menu.currentSection = appState.getSectionState("currentSection");
+        vm.page.menu.currentNode = null;
+
+        vm.page.breadcrumb = {};
+        vm.page.breadcrumb.items = [];
+        vm.page.breadcrumb.itemClick = function (ancestor) {
+            $location.path(ancestor.routePath);
+        };
+
+        vm.currentUser = null;
+
+        vm.content = {};
+        vm.localStartDate = null;
+        vm.localExpiryDate = null;
+        vm.options = {
+            discountTypes: ['Automatic', 'Code']
+        };
+
+        vm.back = function () {
+            $location.path("/commerce/vendr/discount-list/" + vendrUtils.createCompositeId([storeId]));
+        };
+
+        vm.addDiscountCode = function () {
+            vm.content.codes = vm.content.codes || [];
+            vm.content.codes.push({ id: vendrUtils.generateGuid(), code: '', usageLimit: '' });
+        };
+
+        vm.removeDiscountCode = function (itm, idx) {
+            vm.content.codes = vm.content.codes || [];
+            vm.content.codes.splice(idx, 1);
+        };
+
+        vm.startDatePickerConfig = {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            time_24hr: true
+        };
+        vm.startDatePickerSetup = function (instance) {
+            vm.startDatePickerInstance = instance;
+        };
+        vm.startDatePickerChange = function (dateStr, instance) {
+            if (dateStr) {
+                // Convert dates to server timezone
+                var serverTime = dateHelper.convertToServerStringTime(moment(dateStr), Umbraco.Sys.ServerVariables.application.serverTimeOffset);
+                vm.content.startDate = serverTime;
+                // Limit expiry date
+                vm.expiryDatePickerInstance.set("minDate", dateStr);
+            }
+        };
+        vm.clearStartDate = function () {
+            vm.startDatePickerInstance.clear();
+            vm.content.startDate = null;
+            vm.expiryDatePickerInstance.set("minDate", null);
+        };
+
+        vm.expiryDatePickerConfig = {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            time_24hr: true
+        };
+        vm.expiryDatePickerSetup = function (instance) {
+            vm.expiryDatePickerInstance = instance;
+        };
+        vm.expiryDatePickerChange = function (dateStr, instance) {
+            if (dateStr) {
+                // Convert dates to server timezone
+                var serverTime = dateHelper.convertToServerStringTime(moment(dateStr), Umbraco.Sys.ServerVariables.application.serverTimeOffset);
+                vm.content.expiryDate = serverTime;
+                // Limit expiry date
+                vm.startDatePickerInstance.set("maxDate", dateStr);
+            }
+        };
+        vm.clearExpiryDate = function () {
+            vm.expiryDatePickerInstance.clear();
+            vm.content.expiryDate = null;
+            vm.startDatePickerInstance.set("maxDate", null);
+        };
+
+        vm.init = function () {
+
+            vendrRouteCache.getOrFetch("currentStore", function () {
+                return vendrStoreResource.getBasicStore(storeId);
+            })
+            .then(function (store) {
+                storeAlias = store.alias;
+            });
+            
+            userService.getCurrentUser().then(function (currentUser) {
+                vm.currentUser = currentUser;
+
+                if (create) {
+
+                    vendrDiscountResource.createDiscount(storeId).then(function (discount) {
+                        vm.ready(discount);
+                    });
+
+                } else {
+
+                    vendrDiscountResource.getDiscount(id).then(function (discount) {
+                        vm.ready(discount);
+                    });
+
+                }
+
+            });
+        };
+
+        vm.ready = function (model) {
+            vm.page.loading = false;
+
+            // Prepare model
+            model.rewards = model.rewards || [];
+
+            vm.content = model;
+
+            // sync state
+            editorState.set(vm.content);
+
+            // Localize dates
+            if (vm.content.startDate)
+                vm.localStartDate = dateHelper.getLocalDate(vm.content.startDate, vm.currentUser.locale, "YYYY-MM-DD HH:mm");
+
+            if (vm.content.expiryDate)
+                vm.localExpiryDate = dateHelper.getLocalDate(vm.content.expiryDate, vm.currentUser.locale, "YYYY-MM-DD HH:mm");
+
+
+
+            var pathToSync = create ? vm.content.path : vm.content.path.slice(0, -1);
+            navigationService.syncTree({ tree: "vendr", path: pathToSync, forceReload: true }).then(function (syncArgs) {
+                if (!create) {
+                    treeService.getChildren({ node: syncArgs.node }).then(function (children) {
+                        var node = children.find(function (itm) {
+                            return itm.id === id;
+                        });
+                        vm.page.menu.currentNode = node;
+                        vm.page.breadcrumb.items = vendrUtils.createBreadcrumbFromTreeNode(node);
+                    });
+                } else {
+                    vm.page.breadcrumb.items = vendrUtils.createBreadcrumbFromTreeNode(syncArgs.node);
+                    vm.page.breadcrumb.items.push({ name: 'Untitled' });
+                }
+            });
+        };
+
+        vm.save = function (suppressNotification) {
+
+            if (formHelper.submitForm({ scope: $scope, statusMessage: "Saving..." })) {
+
+                vm.page.saveButtonState = "busy";
+
+                vendrDiscountResource.saveDiscount(vm.content).then(function (saved) {
+
+                    formHelper.resetForm({ scope: $scope, notifications: saved.notifications });
+
+                    vm.page.saveButtonState = "success";
+
+                    if (create) {
+                        $location.path("/commerce/vendr/discount-edit/" + vendrUtils.createCompositeId([storeId, saved.id]));
+                    }
+                    else {
+                        vm.ready(saved);
+                    }
+
+                }, function (err) {
+
+                    if (!suppressNotification) {
+                        vm.page.saveButtonState = "error";
+                        notificationsService.error("Failed to save discount " + vm.content.name,
+                            err.data.message || err.data.Message || err.errorMsg);
+                    }
+
+                    vm.page.saveButtonState = "error";
+                });
+            }
+
+        };
+
+        vm.init();
+
+        $scope.$on("vendrEntityDeleted", function (evt, args) {
+            if (args.entityType === 'Discount' && args.storeId === storeId && args.entityId === id) {
+                vm.back();
+            }
+        });
+
+    };
+
+    angular.module('vendr').controller('Vendr.Controllers.DiscountEditController', DiscountEditController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function DiscountListController($scope, $location, $routeParams, $q,
+        appState, localizationService, treeService, navigationService,
+        vendrUtils, vendrDiscountResource) {
+
+        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
+        var storeId = compositeId[0];
+
+        var vm = this;
+
+        vm.page = {};
+        vm.page.loading = true;
+
+        vm.page.menu = {};
+        vm.page.menu.currentSection = appState.getSectionState("currentSection");
+        vm.page.menu.currentNode = null;
+
+        vm.page.breadcrumb = {};
+        vm.page.breadcrumb.items = [];
+        vm.page.breadcrumb.itemClick = function (ancestor) {
+            $location.path(ancestor.routePath);
+        };
+
+        vm.options = {
+            createActions: [],
+            bulkActions: [
+                {
+                    name: 'Delete',
+                    icon: 'icon-trash',
+                    doAction: function (bulkItem) {
+                        return vendrDiscountResource.deleteDiscount(bulkItem.id);
+                    },
+                    getConfirmMessage: function (total) {
+                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") +"?");
+                    }
+                }
+            ],
+            items: [],
+            itemProperties: [
+                { alias: 'name', template: '<span class="vendr-table-cell-value--multiline"><span>{{name}}</span>{{ blockFurtherDiscounts ? \'<span class="vendr-table-cell-label" style="font-size: 12px;"><i class="fa fa-minus-circle color-red"></i> Blocks all further discounts if applied</span>\' : \'\' }}{{ blockIfPreviousDiscounts ? \'<span class="vendr-table-cell-label" style="font-size: 12px;"><i class="fa fa-chevron-circle-up color-orange"></i> Is not applied if previous discounts already apply</span></span>\' : \'\' }}' },
+                { alias: 'type', header: 'Type', template: '<span class="umb-badge umb-badge--xs vendr-bg--{{ typeColor }}">{{ type }}</span>' },
+                { alias: 'status', header: 'Status', template: '<span class="umb-badge umb-badge--xs vendr-bg--{{ statusColor }}">{{ status }}</span>' }
+            ],
+            itemClick: function (itm) {
+                $location.path(itm.routePath);
+            }
+        };
+
+        vm.loadItems = function (callback) {
+            vendrDiscountResource.getDiscounts(storeId).then(function (entities) {
+                entities.forEach(function (itm) {
+                    itm.routePath = '/commerce/vendr/discount-edit/' + vendrUtils.createCompositeId([storeId, itm.id]);
+                });
+                vm.options.items = entities;
+                if (callback) callback();
+            });
+        };
+
+        vm.init = function () {
+
+            navigationService.syncTree({ tree: "vendr", path: "-1," + storeId + ",2", forceReload: true }).then(function (syncArgs) {
+                vm.page.menu.currentNode = syncArgs.node;
+                vm.page.breadcrumb.items = vendrUtils.createBreadcrumbFromTreeNode(syncArgs.node);
+                treeService.getMenu({ treeNode: vm.page.menu.currentNode }).then(function (menu) {
+
+                    var createMenuAction = menu.menuItems.find(function (itm) {
+                        return itm.alias === 'create';
+                    });
+
+                    if (createMenuAction) {
+                        vm.options.createActions.push({
+                            name: 'Create Discount',
+                            doAction: function () {
+                                appState.setMenuState("currentNode", vm.page.menu.currentNode);
+                                navigationService.executeMenuAction(createMenuAction,
+                                    vm.page.menu.currentNode,
+                                    vm.page.menu.currentSection);
+                            }
+                        });
+                    }
+
+                    vm.loadItems(function () {
+                        vm.page.loading = false;
+                    });
+
+                });
+            });
+           
+        };
+
+        vm.init();
+
+        var onVendrEvent = function (evt, args) {
+            if (args.entityType === 'Discount' && args.storeId === storeId) {
+                vm.page.loading = true;
+                vm.loadItems(function () {
+                    vm.page.loading = false;
+                });
+            }
+        };
+
+        $scope.$on("vendrEntitiesSorted", onVendrEvent);
+        $scope.$on("vendrEntityDelete", onVendrEvent);
 
     };
 
@@ -1658,8 +2185,6 @@
         vendrCountryResource)
     {
         var order = $scope.model.config.order;
-
-        console.log(order);
 
         var vm = this;
         vm.title = "Edit Customer Details";
@@ -2380,7 +2905,6 @@
         };
 
         vm.toggleAdvancedPaymentProviderProperties = function () {
-            console.log(1);
             vm.options.advancedPaymentProviderPropertiesShown = !vm.options.advancedPaymentProviderPropertiesShown;
         };
 
@@ -2862,6 +3386,78 @@
 
     'use strict';
 
+    function ConditionalInputController($scope, $timeout)
+    {
+        var vm = this;
+
+        vm.property = {
+            alias: $scope.model.alias + "_conitional",
+            view: $scope.model.config.propertyView,
+            config: $scope.model.config.propertyConfig
+        };
+
+        Object.defineProperty(vm.property, "value", {
+            get: function () {
+                return $scope.model.value;
+            },
+            set: function (value) {
+                $scope.model.value = value;
+                toggleProperties();
+            }
+        });
+
+        function toggleProperties()
+        {
+            if ($scope.model.value in $scope.model.config.map) {
+                doToggleProperties($scope.model.config.map[$scope.model.value]);
+            }
+            else if ("default" in $scope.model.config.map) {
+                doToggleProperties($scope.model.config.map["default"]);
+            }
+        }
+
+        function doToggleProperties(config) {
+
+            var $inputEl = $("div[data-element='property-" + $scope.model.alias + "']");
+            var form = $inputEl.closest("form");
+
+            var hiddenContainer = $(form).find("> .cih");
+            if (hiddenContainer.length === 0) {
+                $(form).append("<div class='cih' style='display: none;'></div>");
+                hiddenContainer = $(form).find("> .cih");
+            }
+
+            config.show.forEach(function (toShow) {
+                var $s = $("div[data-element='property-" + toShow + "']");
+                if ($s.closest(".cih").length > 0) {
+                    $(form).find(".property-" + toShow + "-placeholder").after($s);
+                    $(form).find(".property-" + toShow + "-placeholder").remove();
+                }
+            });
+
+            config.hide.forEach(function (toHide) {
+                var $s = $("div[data-element='property-" + toHide + "']");
+                if ($s.closest(".cih").length === 0) {
+                    $s.after("<span class='property-" + toHide + "-placeholder'></span>");
+                    hiddenContainer.append($s);
+                }
+            });
+
+        }
+
+        $timeout(function () {
+            toggleProperties();
+        }, 10);
+        
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.ConditionalInputController', ConditionalInputController);
+
+}());
+(function () {
+
+    'use strict';
+
     function DictionaryInputController($scope) {
 
         var vm = this;
@@ -2881,10 +3477,133 @@
 
     'use strict';
 
-    function PriceController($scope, $routeParams, vendrStoreResource,
-        vendrCurrencyResource)
+    function PaymentMethodPickerController($scope, $routeParams, editorService,
+        vendrStoreResource, vendrPaymentMethodResource, vendrUtils)
     {
-        var currentOrParentNodeId = $routeParams.id;
+        // Figure out if we are in a config area or in settings where we can
+        // parse the store ID from the querystring
+        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
+        var storeId = compositeId.length > 1 ? compositeId[0] : null;
+        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[1];
+
+        var dialogOptions = {
+            view: '/app_plugins/vendr/views/dialogs/paymentmethodpicker.html',
+            size: 'small',
+            config: {
+                storeId: -1
+            },
+            submit: function (model) {
+                vm.model.value = model.id;
+                vm.pickedItem = model;
+                editorService.close();
+            },
+            close: function () {
+                editorService.close();
+            }
+        };
+
+        var vm = this;
+
+        vm.model = $scope.model;
+        vm.pickedItem = false;
+        vm.loading = true;
+        vm.store = null;
+
+        vm.openPicker = function () {
+            editorService.open(dialogOptions);
+        };
+
+        vm.removeItem = function () {
+            vm.model.value = null;
+            vm.pickedItem = false;
+        };
+
+        vm.openItem = function () {
+
+        };
+
+        var initStore = function (store, value) {
+            vm.store = store;
+            dialogOptions.config.storeId = store.id;
+            if (value) {
+                vendrPaymentMethodResource.getPaymentMethod(value).then(function (entity) {
+                    vm.pickedItem = entity;
+                    vm.loading = false;
+                });
+            } else {
+                vm.loading = false;
+            }
+        };
+
+        var init = function (value) {
+
+            if (!storeId) {
+                vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId).then(function (store) {
+                    initStore(store, value);
+                });
+            } else {
+                vendrStoreResource.getBasicStore(storeId).then(function (store) {
+                    initStore(store, value);
+                });
+            }
+
+        };
+
+        init(vm.model.value);
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.PaymentMethodPickerController', PaymentMethodPickerController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function PricesIncludeTaxController($scope, $routeParams, vendrStoreResource, vendrUtils, vendrRouteCache)
+    {
+        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
+        var storeId = compositeId.length > 1 ? compositeId[0] : null;
+
+        var vm = this;
+
+        vm.property = {
+            alias: $scope.model.alias + "_wrapped",
+            view: "boolean",
+            config: $scope.model.config
+        };
+
+        Object.defineProperty(vm.property, "value", {
+            get: function () {
+                return $scope.model.value;
+            },
+            set: function (value) {
+                $scope.model.value = value;
+            }
+        });
+
+        if ($scope.model.value == null && storeId) {
+            vendrRouteCache.getOrFetch("currentStore", () => vendrStoreResource.getBasicStore(storeId)).then(function (store) {
+                vm.property.value = store.pricesIncludeTax;
+            });
+        }
+
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.PricesIncludeTaxController', PricesIncludeTaxController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function PriceController($scope, $routeParams, vendrStoreResource,
+        vendrCurrencyResource, vendrUtils, vendrRouteCache)
+    {
+        // Figure out if we are in a config area or in settings where we can
+        // parse the store ID from the querystring
+        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
+        var storeId = compositeId.length > 1 ? compositeId[0] : null;
+        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[1];
 
         var vm = this;
 
@@ -2894,28 +3613,42 @@
         vm.store = null;
         vm.prices = null;
 
-        var init = function (value) {
-
-            vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId).then(function (store) {
-                if (store) {
-                    vm.store = store;
-                    vendrCurrencyResource.getCurrencies(vm.store.id).then(function (currencies) {
-                        var prices = [];
-                        currencies.forEach(function (currency) {
-                            prices.push({
-                                currencyId: currency.id,
-                                currencyCode: currency.code,
-                                value: value && value[currency.id] ? value[currency.id] : ''
-                            });
+        var initStore = function (store, value) {
+            if (store) {
+                vm.store = store;
+                vendrRouteCache.getOrFetch("store_"+ store.id +"_currencies", function () {
+                    return vendrCurrencyResource.getCurrencies(vm.store.id);
+                })
+                .then(function (currencies) {
+                    var prices = [];
+                    currencies.forEach(function (currency) {
+                        prices.push({
+                            currencyId: currency.id,
+                            currencyCode: currency.code,
+                            value: value && value[currency.id] ? value[currency.id] : ''
                         });
-                        vm.prices = prices;
-                        vm.loading = false;
                     });
-                } else {
-                    vm.store = null;
-                    vm.prices = null;
+                    vm.prices = prices;
                     vm.loading = false;
+                });
+            } else {
+                vm.store = null;
+                vm.prices = null;
+                vm.loading = false;
+            }
+        };
+
+        var init = function (value) {
+            
+            vendrRouteCache.getOrFetch("currentStore", function () {
+                if (!storeId) {
+                    return vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId);
+                } else {
+                    return vendrStoreResource.getBasicStore(storeId);
                 }
+            })
+            .then(function (store) {
+                initStore(store, value);
             });
 
         };
@@ -2923,7 +3656,7 @@
         // Here we declare a special method which will be called whenever the value has changed from the server
         // this is instead of doing a watch on the model.value = faster
         $scope.model.onValueChanged = function (newVal, oldVal) {
-            console.log(newVal);
+            //console.log(newVal);
         };
         
         var unsubscribe = [
@@ -2962,6 +3695,88 @@
     }
 
     angular.module('vendr').controller('Vendr.Controllers.PriceController', PriceController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function ShippingMethodPickerController($scope, $routeParams, editorService,
+        vendrStoreResource, vendrShippingMethodResource, vendrUtils)
+    {
+        // Figure out if we are in a config area or in settings where we can
+        // parse the store ID from the querystring
+        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
+        var storeId = compositeId.length > 1 ? compositeId[0] : null;
+        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[1];
+
+        var dialogOptions = {
+            view: '/app_plugins/vendr/views/dialogs/shippingmethodpicker.html',
+            size: 'small',
+            config: {
+                storeId: -1
+            },
+            submit: function (model) {
+                vm.model.value = model.id;
+                vm.pickedItem = model;
+                editorService.close();
+            },
+            close: function () {
+                editorService.close();
+            }
+        };
+
+        var vm = this;
+
+        vm.model = $scope.model;
+        vm.pickedItem = false;
+        vm.loading = true;
+        vm.store = null;
+
+        vm.openPicker = function () {
+            editorService.open(dialogOptions);
+        };
+
+        vm.removeItem = function () {
+            vm.model.value = null;
+            vm.pickedItem = false;
+        };
+
+        vm.openItem = function () {
+
+        };
+
+        var initStore = function (store, value) {
+            vm.store = store;
+            dialogOptions.config.storeId = store.id;
+            if (value) {
+                vendrShippingMethodResource.getShippingMethod(value).then(function (entity) {
+                    vm.pickedItem = entity;
+                    vm.loading = false;
+                });
+            } else {
+                vm.loading = false;
+            }
+        };
+
+        var init = function (value) {
+
+            if (!storeId) {
+                vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId).then(function (store) {
+                    initStore(store, value);
+                });
+            } else {
+                vendrStoreResource.getBasicStore(storeId).then(function (store) {
+                    initStore(store, value);
+                });
+            }
+
+        };
+
+        init(vm.model.value);
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.ShippingMethodPickerController', ShippingMethodPickerController);
 
 }());
 (function () {
@@ -3054,10 +3869,14 @@
 
     'use strict';
 
-    function TaxClassPickerController($scope, $routeParams, vendrStoreResource,
-        vendrTaxResource, editorService)
+    function TaxClassPickerController($scope, $routeParams, editorService,
+        vendrStoreResource, vendrTaxResource, vendrUtils)
     {
-        var currentOrParentNodeId = $routeParams.id;
+        // Figure out if we are in a config area or in settings where we can
+        // parse the store ID from the querystring
+        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
+        var storeId = compositeId.length > 1 ? compositeId[0] : null;
+        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[1];
 
         var dialogOptions = {
             view: '/app_plugins/vendr/views/dialogs/taxclasspicker.html',
@@ -3095,20 +3914,30 @@
 
         };
 
+        var initStore = function (store, value) {
+            vm.store = store;
+            dialogOptions.config.storeId = store.id;
+            if (value) {
+                vendrTaxResource.getTaxClass(value).then(function (entity) {
+                    vm.pickedItem = entity;
+                    vm.loading = false;
+                });
+            } else {
+                vm.loading = false;
+            }
+        };
+
         var init = function (value) {
 
-            vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId).then(function (store) {
-                vm.store = store;
-                dialogOptions.config.storeId = store.id;
-                if (value) {
-                    vendrTaxResource.getTaxClass(value).then(function (entity) {
-                        vm.pickedItem = entity;
-                        vm.loading = false;
-                    });
-                } else {
-                    vm.loading = false;
-                }
-            });
+            if (!storeId) {
+                vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId).then(function (store) {
+                    initStore(store, value);
+                });
+            } else {
+                vendrStoreResource.getBasicStore(storeId).then(function (store) {
+                    initStore(store, value);
+                });
+            }
 
         };
 
@@ -3116,6 +3945,53 @@
     }
 
     angular.module('vendr').controller('Vendr.Controllers.TaxClassPickerController', TaxClassPickerController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function UmbracoMemberGroupsPickerController($scope, editorService, memberGroupResource) 
+    {
+        $scope.pickGroup = function() {
+            editorService.memberGroupPicker({
+                multiPicker: true,
+                submit: function (model) {
+                    var selectedGroupIds = _.map(model.selectedMemberGroups
+                        ? model.selectedMemberGroups
+                        : [model.selectedMemberGroup],
+                        function(id) { return parseInt(id) }
+                    );
+                    memberGroupResource.getByIds(selectedGroupIds).then(function (selectedGroups) {
+                        $scope.model.value = $scope.model.value || [];
+                        _.each(selectedGroups, function(group) {
+                            var foundIndex = $scope.model.value.findIndex(function (itm) {
+                                return itm == group.name;
+                            });
+                            if (foundIndex == -1){
+                                $scope.model.value.push(group.name);
+                            }
+                        });
+                    });
+                    editorService.close();
+                },
+                close: function () {
+                    editorService.close();
+                }
+            });
+        }
+
+        $scope.removeGroup = function (group) {
+            var foundIndex = $scope.model.value.findIndex(function (itm) {
+                return itm == group;
+            });
+            if (foundIndex > -1){
+                $scope.model.value.splice(foundIndex, 1);
+            }
+        }
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.UmbracoMemberGroupsPickerController', UmbracoMemberGroupsPickerController);
 
 }());
 (function () {
@@ -3149,6 +4025,7 @@
         };
 
         vm.options = {
+            isCreate: create,
             shippingMethods: [],
             paymentMethods: []
         };
@@ -3162,12 +4039,14 @@
         vm.init = function () {
             
             vendrShippingMethodResource.getShippingMethods(storeId).then(function (shippingMethods) {
-                shippingMethods.splice(0, 0, { name:'Inherit', id:'' });
+                if (create)
+                    shippingMethods.splice(0, 0, { name: 'Inherit', id: '' });
                 vm.options.shippingMethods = shippingMethods;
             });
 
             vendrPaymentMethodResource.getPaymentMethods(storeId).then(function (paymentMethods) {
-                paymentMethods.splice(0, 0, { name: 'Inherit', id: '' });
+                if (create)
+                    paymentMethods.splice(0, 0, { name: 'Inherit', id: '' });
                 vm.options.paymentMethods = paymentMethods;
             });
 
@@ -3302,7 +4181,7 @@
             ],
             items: [],
             itemProperties: [
-                { alias: 'code', header: 'ISO Code' }
+                { alias: 'code', header: 'Code' }
             ],
             itemClick: function (itm) {
                 $location.path(itm.routePath).search({});

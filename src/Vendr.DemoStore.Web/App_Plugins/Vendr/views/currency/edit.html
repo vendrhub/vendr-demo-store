@@ -32,14 +32,16 @@
                                 <umb-control-group label="ISO Code" description="3 letter ISO currency code">
                                     <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--short" 
                                            ng-model="vm.content.code"
-                                           pattern="[A-Z]{3}"
+                                           pattern="[A-Z]{3}" required
                                            vendr-uppercase />
                                 </umb-control-group>
 
                                 <umb-control-group label="Culture" description="The culture to use when formatting monetary values of this currency">
-                                    <select class="umb-property-editor umb-dropdown" ng-model="vm.content.cultureName">
-                                        <option value="" disabled ng-attr-selected="{{ !vm.content.symbolPlacement }}">-- Select a Culture --</option>
-                                        <option ng-repeat="culture in vm.options.cultures" value="{{ culture.id }}">{{ culture.name }}</option>
+                                    <select class="umb-property-editor umb-dropdown"
+                                            ng-model="vm.content.cultureName"
+                                            ng-options="itm.id as itm.name for itm in vm.options.cultures"
+                                            required>
+                                        <option value="" disabled selected ng-hide="vm.content.cultureName">-- Select a Culture --</option>
                                     </select>
                                 </umb-control-group>
 

@@ -1,4 +1,31 @@
-﻿/* Overrides */
+﻿/* Icons */
+
+@font-face {
+    font-family: 'vendr-ico';
+    src: url('/app_plugins/vendr/assets/fonts/vendr.woff2') format('woff2'), 
+        url('/app_plugins/vendr/assets/fonts/vendr.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+[class*=" icon-vendr-"],
+[class^=icon-vendr-] {
+    font-family: 'vendr-ico';
+}
+
+.icon-vendr-discount:before {
+    content: "\e900";
+}
+
+.icon-vendr-gift-card-1:before {
+    content: "\e901";
+}
+
+.icon-vendr-gift-card-2:before {
+    content: "\e902";
+}
+
+/* Overrides */
 .umb-tree-item.unselectable > .umb-tree-item__inner {
     background-color: transparent !important;
 }
@@ -71,6 +98,10 @@
     margin-left: auto;
     margin-right: auto;
     line-height: 1.6em;
+}
+
+div [ng-controller*=MemberGroupPickerController] .umb-box-content > .umb-tree {
+    padding-bottom: 0;
 }
 
 /* Layouts */
@@ -205,12 +236,26 @@
     min-width: 33.33%;
 }
 
+.vendr--narrow-view .vendr-input--short {
+    width: 100%;
+}
+
 .vendr-input--shorter {
     min-width: 20%;
 }
 
+.vendr--narrow-view .vendr-input--shorter {
+    width: 100%;
+}
+
 .vendr-input--wide {
     min-width: 100%;
+}
+
+.vendr-btn--clear {
+    margin-left: -2px;
+    border: 1px solid #d8d7d9;
+    padding: 4px 10px;
 }
 
 /* Vertical Forms */
@@ -720,6 +765,95 @@ a.no-underline:focus {
     z-index: 5;
 }
 
+/* Multi Field Table */
+.vendr-multi-field-table thead th {
+    text-align: left;
+    font-size: 14px;
+    padding-bottom: 2px;
+}
+
+.vendr-multi-field-table th,
+.vendr-multi-field-table td {
+    padding-left: 10px;
+}
+
+.vendr-multi-field-table th:first-child,
+.vendr-multi-field-table td:first-child {
+    padding-left: 0;
+}
+
+.vendr-multi-field-table tbody tr + tr td {
+    padding-top: 10px;
+}
+
+/* Rule / Reward Builder */
+.vendr-rule-builder,
+.vendr-reward-builder {
+    width: 100%;
+}
+
+.vendr-rule-builder__group {
+    background-color: #e9e9eb;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.vendr-rule-builder__group-header {
+    vertical-align: middle;
+}
+
+.vendr-rule-builder__group-inner {
+    background-color: white;
+    padding: 8px;
+    border: solid 4px #e9e9eb;
+    border-top: 0;
+}
+
+.vendr-rule-builder__group-item,
+.vendr-reward-builder__item {
+    padding-bottom: 8px;
+}
+
+.vendr-rule-builder > .vendr-rule-builder__group-item {
+    padding-bottom: 0;
+}
+
+.vendr-rule-builder__rule,
+.vendr-reward-builder__reward {
+    border: solid 2px #e9e9eb;
+    padding: 8px;
+    background-color: white;
+}
+
+.vendr .handle {
+    cursor: move;
+}
+
+.vendr-comma-separate:after {
+    content: ", "
+}
+
+.vendr-comma-separate:last-of-type:after {
+    content: ""
+}
+
+.vendr-or-separate:after {
+    content: " or "
+}
+
+.vendr-or-separate:last-of-type:after {
+    content: ""
+}
+
+.vendr-and-separate:after {
+    content: " and "
+}
+
+.vendr-and-separate:last-of-type:after {
+    content: ""
+}
+
 /* Split */
 .vendr-split {
     display: flex;
@@ -737,6 +871,18 @@ a.no-underline:focus {
     margin-right: 5px;
 }
 
+.vendr .mr-10 {
+    margin-right: 10px;
+}
+
+.vendr .-ml-5 {
+    margin-left: -5px;
+}
+
+.vendr .-ml-10 {
+    margin-left: -10px;
+}
+
 .vendr .ml-5 {
     margin-left: 5px;
 }
@@ -751,6 +897,42 @@ a.no-underline:focus {
 
 .vendr .m-0 {
     margin: 0 !important;
+}
+
+.vendr .-mb-10 {
+    margin-bottom: -10px;
+}
+
+.vendr .mt-10 {
+    margin-top: 10px;
+}
+
+.vendr .pr-5 {
+    padding-right: 5px;
+}
+
+.vendr .pr-10 {
+    padding-right: 10px;
+}
+
+.vendr .py-5 {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.vendr .py-10 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.vendr .px-5 {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.vendr .px-10 {
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .vendr .nowrap {
@@ -796,7 +978,9 @@ a.no-underline:focus {
 .vendr .w-1\/2 {
     width: 50%;
 }
-
+.vendr .w-1\/3 {
+    width: 33.33%;
+}
 .vendr .w-1\/4 {
     width: 25%;
 }
@@ -806,9 +990,11 @@ a.no-underline:focus {
 .vendr .w-2\/5 {
     width: 40%;
 }
-
-.vendr .-mb-10 {
-    margin-bottom: -10px;
+.vendr .w-3\/4 {
+    width: 75%;
+}
+.vendr .w-full {
+    width: 100%;
 }
 
 .copy-box {
