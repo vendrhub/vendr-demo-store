@@ -3484,7 +3484,7 @@
         // parse the store ID from the querystring
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId.length > 1 ? compositeId[0] : null;
-        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[1];
+        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[0];
 
         var dialogOptions = {
             view: '/app_plugins/vendr/views/dialogs/paymentmethodpicker.html',
@@ -3603,7 +3603,7 @@
         // parse the store ID from the querystring
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId.length > 1 ? compositeId[0] : null;
-        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[1];
+        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[0];
 
         var vm = this;
 
@@ -3708,7 +3708,7 @@
         // parse the store ID from the querystring
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId.length > 1 ? compositeId[0] : null;
-        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[1];
+        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[0];
 
         var dialogOptions = {
             view: '/app_plugins/vendr/views/dialogs/shippingmethodpicker.html',
@@ -3876,7 +3876,7 @@
         // parse the store ID from the querystring
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId.length > 1 ? compositeId[0] : null;
-        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[1];
+        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[0];
 
         var dialogOptions = {
             view: '/app_plugins/vendr/views/dialogs/taxclasspicker.html',
