@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Vendr.Core.Models;
 using Vendr.DemoStore.Models;
-using Vendr.Web.Extractors;
+using Vendr.Web.Adapters;
 
-namespace Vendr.DemoStore.Web.Extractors
+namespace Vendr.DemoStore.Web.Adapters
 {
     /// <summary>
     /// Snapshot decorator to allow us to manipulate the product name by combinding the

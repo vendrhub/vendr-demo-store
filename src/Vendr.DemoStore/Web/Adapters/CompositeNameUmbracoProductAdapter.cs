@@ -1,13 +1,13 @@
 ﻿using Umbraco.Web;
 using Vendr.Core.Models;
 using Vendr.Core.Services;
-using Vendr.Web.Extractors;
+using Vendr.Web.Adapters;
 
-namespace Vendr.DemoStore.Web.Extractors
+namespace Vendr.DemoStore.Web.Adapters
 {
-    public class CompositeNameUmbracoProductInformationExtractor : UmbracoProductInformationExtractor
+    public class CompositeNameUmbracoProductAdapter : UmbracoProductAdapter
     {
-        public CompositeNameUmbracoProductInformationExtractor(IUmbracoContextAccessor umbracoContextAccessor, VendrServiceContext vendrServices) 
+        public CompositeNameUmbracoProductAdapter(IUmbracoContextAccessor umbracoContextAccessor, VendrServiceContext vendrServices) 
             : base(umbracoContextAccessor, vendrServices)
         { }
 

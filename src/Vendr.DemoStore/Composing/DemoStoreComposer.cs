@@ -1,7 +1,7 @@
 ﻿using Umbraco.Core;
 using Umbraco.Core.Composing;
-using Vendr.Core.Extractors;
-using Vendr.DemoStore.Web.Extractors;
+using Vendr.Core.Adapters;
+using Vendr.DemoStore.Web.Adapters;
 using Vendr.Web.Composing;
 
 namespace Vendr.DemoStore.Composing
@@ -12,7 +12,7 @@ namespace Vendr.DemoStore.Composing
         public void Compose(Composition composition)
         {
             // Replace the product information extractor with one that supports child variants
-            composition.RegisterUnique<IProductInformationExtractor, CompositeNameUmbracoProductInformationExtractor>();
+            composition.RegisterUnique<IProductAdapter, CompositeNameUmbracoProductAdapter>();
 
             // Register component
             composition.Components()

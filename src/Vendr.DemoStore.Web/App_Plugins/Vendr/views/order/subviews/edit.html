@@ -345,7 +345,8 @@
                     </div>
                     <!--<p><a href="#" class="color-light-blue" ng-click="vm.viewOnMap('S75 5DF')" prevent-default>View on Map</a></p>-->
                 </div>
-                <hr />
+
+                <hr ng-if="vm.editorConfig.shipping.enabled !== false" />
 
                 <div class="relative copy-box" ng-if="vm.editorConfig.shipping.enabled !== false">
                     <a href="#" prevent-default umb-clipboard umb-clipboard-target="#shipping-adress" class="copy-box__copy" title="Copy Shipping Address" aria-hidden="true">

@@ -415,7 +415,7 @@
     }
 
     // Reward Builder
-    function vendrRewardBuilder($rootScope, $timeout, editorService, vendrDiscountResource, vendrUtils, vendrRouteCache) {
+    function vendrRewardBuilder($rootScope, $timeout, $q, editorService, vendrDiscountResource, vendrUtils, vendrRouteCache) {
 
         function link(scope, el, attr, ctrl) {
 
@@ -431,17 +431,51 @@
 
                         // Create config and add to children
                         scope.ngModel = scope.ngModel || [];
-                        scope.ngModel.push(vendrDiscountRewardProviderScaffoldToConfig(scaffold, vendrUtils));
 
-                        // Close the dialog or open the editor depending on the reward
-                        $timeout(function () {
-                            scope.$broadcast("editRewardBuilderItem", { index: scope.ngModel.length - 1 });
-                        }, 10);
+                        var configScaffold = vendrDiscountRewardProviderScaffoldToConfig(scaffold, vendrUtils);
+
+                        // Open the settings editor
+                        settingsEditorDialogOptions.config.name = "Edit " + scaffold.name;
+                        settingsEditorDialogOptions.config.scaffold = configScaffold;
+                        settingsEditorDialogOptions.config.settings = configScaffold.settings;
+                        settingsEditorDialogOptions.config.loadSettingDefinitions = function () {
+                            return $q.when(scaffold.settingDefinitions);
+                        };
+
+                        editorService.open(settingsEditorDialogOptions);
 
                     });
                 },
                 close: function () {
                     editorService.close();
+                }
+            };
+
+            var settingsEditorDialogOptions = {
+                view: '/app_plugins/vendr/views/dialogs/settingseditor.html',
+                size: 'small',
+                config: {},
+                submit: function (settings) {
+
+                    // NB: If you edit this, be sure to also edit the settingsEditorOptions in the
+                    // rule directive below
+
+                    // Grab scaffold from config
+                    var configScaffold = this.config.scaffold;
+
+                    // Map settings back to scaffold
+                    Object.keys(settings).forEach(function (key) {
+                        configScaffold.settings[key] = settings[key];
+                    });
+
+                    // Add scaffold to config
+                    scope.ngModel.push(configScaffold);
+
+                    // Close the dialog
+                    editorService.closeAll();
+                },
+                close: function () {
+                    editorService.closeAll();
                 }
             };
 
@@ -589,14 +623,14 @@
                 <div class="vendr-reward-builder__reward" ng-if="discountRewardDefinition">
                     <div class="vendr-split">
                         <div class="flex items-center">
-                            <a href="" class="px-10 -ml-5 handle"><i class="fa fa-ellipsis-v"></i></a>
-                            <a href="" ng-click="editReward()" class="strong pr-5" prevent-default>
+                            <a href="#" class="px-10 -ml-5 handle" prevent-default><i class="fa fa-ellipsis-v" title="Move Reward" aria-hidden="true"></i></a>
+                            <a href="#" ng-click="editReward()" class="strong pr-5" title="Edit Reward" prevent-default>
                                 <vendr-scoped-include view="labelView" model="labelModel" ng-if="labelView"></vendr-scoped-include>
                             </a>
                         </div>
                         <div class="flex items-center">
-                            <a href="" ng-click="editReward()" prevent-default class="mr-5"><i class="fa fa-pencil"></i></a>
-                            <a href="" ng-click="deleteReward()" prevent-default><i class="fa fa-trash"></i></a>
+                            <button type="button" ng-click="editReward()" class="mr-5 vendr-inline-button" title="Edit Reward" aria-hidden="true"><i class="fa fa-pencil"></i></button>
+                            <button type="button" ng-click="deleteReward()" class="vendr-inline-button" title="Remove Reward" aria-hidden="true"><i class="fa fa-trash"></i></button>
                         </div>
                     </div>
                 </div>
@@ -698,7 +732,7 @@
     angular.module('vendr.directives').directive('vendrRuleBuilderItem', vendrRuleBuilderItem);
 
     // Rule Group
-    function vendrRuleBuilderRuleGroup($rootScope, $timeout, editorService, vendrDiscountResource, vendrUtils, vendrRouteCache) {
+    function vendrRuleBuilderRuleGroup($rootScope, $timeout, $q, editorService, vendrDiscountResource, vendrUtils, vendrRouteCache) {
 
         function link(scope, el, attr, ctrl) {
 
@@ -718,20 +752,58 @@
 
                         // Create config and add to children
                         scope.ngModel.children = scope.ngModel.children || [];
-                        scope.ngModel.children.push(vendrDiscountRuleProviderScaffoldToConfig(scaffold, vendrUtils));
 
+                        var configScaffold = vendrDiscountRuleProviderScaffoldToConfig(scaffold, vendrUtils);
+                        
                         // Close the dialog or open the editor depending on the rule
                         if (scaffold.alias === "groupDiscountRule") {
+
+                            scope.ngModel.children.push(configScaffold);
                             editorService.close();
+
                         } else {
-                            $timeout(function () {
-                                scope.$broadcast("editRuleBuilderItem", { level: scope.level + 1, index: scope.ngModel.children.length - 1 });
-                            }, 10);
+
+                            settingsEditorDialogOptions.config.name = "Edit " + scaffold.name;
+                            settingsEditorDialogOptions.config.scaffold = configScaffold;
+                            settingsEditorDialogOptions.config.settings = configScaffold.settings;
+                            settingsEditorDialogOptions.config.loadSettingDefinitions = function () {
+                                return $q.when(scaffold.settingDefinitions);
+                            };
+
+                            editorService.open(settingsEditorDialogOptions);
                         }
                     });
                 },
                 close: function () {
                     editorService.close();
+                }
+            };
+
+            var settingsEditorDialogOptions = {
+                view: '/app_plugins/vendr/views/dialogs/settingseditor.html',
+                size: 'small',
+                config: { },
+                submit: function (settings) {
+
+                    // NB: If you edit this, be sure to also edit the settingsEditorOptions in the
+                    // rule directive below
+
+                    // Grab scaffold from config
+                    var configScaffold = this.config.scaffold;
+
+                    // Map settings back to scaffold
+                    Object.keys(settings).forEach(function (key) {
+                        configScaffold.settings[key] = settings[key];
+                    });
+
+                    // Add scaffold to config
+                    scope.ngModel.children.push(configScaffold);
+
+                    // Close the dialog
+                    editorService.closeAll();
+                },
+                close: function () {
+                    editorService.closeAll();
                 }
             };
 
@@ -769,10 +841,10 @@
                 <div class="vendr-rule-builder__group-header py-5">
                     <div class="vendr-split">
                         <div class="flex items-center px-10">
-                            <a href="" class="px-10 -ml-5 handle handle--{{level - 1}}" ng-if="level > 0"><i class="fa fa-ellipsis-v"></i></a>
+                            <a href="#" class="px-10 -ml-5 handle handle--{{level - 1}}" ng-if="level > 0" title="Move Rule" aria-hidden="true"><i class="fa fa-ellipsis-v"></i></a>
                             <span class="mr-10 strong">Match:</span><select ng-model="ngModel.settings.matchType" ng-options="matchType for matchType in matchTypes"></select>
                         </div>
-                        <div class="flex items-center"><a href="" class="btn" ng-click="deleteGroup()" ng-if="level > 0"  prevent-default><i class="fa fa-trash"></i></a></div>
+                        <div class="flex items-center"><button type="button" class="btn" ng-click="deleteGroup()" ng-if="level > 0" title="Remove Group" aria-hidden="true"><i class="fa fa-trash"></i></button></div>
                     </div>
                 </div>
                 <div class="vendr-rule-builder__group-inner">
@@ -834,14 +906,21 @@
                     settings: scope.ngModel.settings
                 },
                 submit: function (settings) {
+
+                    // NB: If you edit this, be sure to also edit the settingsEditorOptions in the
+                    // group directive above
+
                     // Map settings back to ngModel
                     Object.keys(settings).forEach(function (key) {
                         scope.ngModel.settings[key] = settings[key];
                     });
+
                     // Regenerate the label model
                     generateLabelModel();
+
                     // Close the dialog
                     editorService.closeAll();
+
                 },
                 close: function () {
                     editorService.closeAll();
@@ -887,14 +966,14 @@
                 <div class="vendr-rule-builder__rule" ng-if="discountRuleDefinition">
                     <div class="vendr-split">
                         <div class="flex items-center">
-                            <a href="" class="px-10 -ml-5 handle handle--{{level - 1}}" ng-if="level > 0"><i class="fa fa-ellipsis-v"></i></a>
-                            <a href="" ng-click="editRule()" class="strong pr-5" prevent-default>
+                            <a href="#" class="px-10 -ml-5 handle handle--{{level - 1}}" ng-if="level > 0" title="Move Rule" aria-hidden="true"><i class="fa fa-ellipsis-v"></i></a>
+                            <a href="#" ng-click="editRule()" class="strong pr-5" title="Edit Rule" prevent-default>
                                 <vendr-scoped-include view="labelView" model="labelModel" ng-if="labelView"></vendr-scoped-include>
                             </a>
                         </div>
                         <div class="flex items-center">
-                            <a href="" ng-click="editRule()" prevent-default class="mr-5"><i class="fa fa-pencil"></i></a>
-                            <a href="" ng-click="deleteRule()" ng-if="level > 0" prevent-default><i class="fa fa-trash"></i></a>
+                            <button type="button" ng-click="editRule()" class="vendr-inline-button mr-5" title="Edit Rule" aria-hidden="true"><i class="fa fa-pencil"></i></button>
+                            <button type="button" ng-click="deleteRule()" class="vendr-inline-button" ng-if="level > 0"  title="Remove Rule" aria-hidden="true"><i class="fa fa-trash"></i></button>
                         </div>
                     </div>
                 </div>

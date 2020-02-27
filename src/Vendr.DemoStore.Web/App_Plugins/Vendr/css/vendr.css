@@ -258,6 +258,12 @@ div [ng-controller*=MemberGroupPickerController] .umb-box-content > .umb-tree {
     padding: 4px 10px;
 }
 
+.vendr-inline-button {
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
 /* Vertical Forms */
 .vendr .form-vertical .umb-control-group .control-label, 
 .vendr .form-vertical .umb-control-group label.control-label {

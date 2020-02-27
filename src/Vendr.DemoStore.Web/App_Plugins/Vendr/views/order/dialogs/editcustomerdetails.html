@@ -37,8 +37,8 @@
                                 </umb-control-group>
 
                                 <umb-control-group label="{{ vm.editorConfig.customer.company.label }}"
-                                        description="{{ vm.editorConfig.customer.company.description }}"
-                                        ng-if="vm.editorConfig.customer.company">
+                                                   description="{{ vm.editorConfig.customer.company.description }}"
+                                                   ng-if="vm.editorConfig.customer.company">
                                     <input type="text" class="umb-property-editor umb-textstring textstring"
                                            ng-model="vm.content.properties[vm.editorConfig.customer.company.alias].value" />
                                 </umb-control-group>
@@ -120,106 +120,111 @@
                     </div>
                 </div>
 
-                <br />
-                <br />
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h4 class="mt-0 -mb-10">Shipping</h4>
-                    <label title="Toggle advanced mode" ng-if="vm.editorConfig.shipping.sameAsBilling" style="display: flex; margin: 0;">
-                        {{vm.editorConfig.shipping.sameAsBilling.label}} <umb-toggle checked="vm.options.shippingSameAsBilling" on-click="vm.toggleShippingSameAsBilling()" style="margin-left: 10px;"></umb-toggle>
-                    </label>
-                </div>                
-                <hr style="border-color: rgba(0,0,0,.03);" />
+                <div ng-if="vm.editorConfig.shipping.enabled !== false">
 
-                <div class="vendr-layout vendr-layout--layout2" ng-if="!vm.options.shippingSameAsBilling">
-                    <div class="vendr-layout__left">
+                    <br />
+                    <br />
 
-                        <umb-box>
-                            <umb-box-header title="Contact"></umb-box-header>
-                            <umb-box-content>
-
-                                <umb-control-group label="{{ vm.editorConfig.shipping.firstName.label }}"
-                                    description="{{ vm.editorConfig.shipping.firstName.description }}"
-                                    ng-if="vm.editorConfig.shipping.firstName">
-                                    <input type="text" class="umb-property-editor umb-textstring textstring"
-                                           ng-model="vm.content.properties[vm.editorConfig.shipping.firstName.alias].value" />
-                                </umb-control-group>
-
-                                <umb-control-group label="{{ vm.editorConfig.shipping.lastName.label }}"
-                                                   description="{{ vm.editorConfig.shipping.lastName.description }}"
-                                                   ng-if="vm.editorConfig.shipping.lastName">
-                                    <input type="text" class="umb-property-editor umb-textstring textstring"
-                                           ng-model="vm.content.properties[vm.editorConfig.shipping.lastName.alias].value" />
-                                </umb-control-group>
-
-                                <umb-control-group label="{{ vm.editorConfig.shipping.email.label }}"
-                                                   description="{{ vm.editorConfig.shipping.email.description }}"
-                                                   ng-if="vm.editorConfig.shipping.email">
-                                    <input type="email" class="umb-property-editor umb-textstring textstring"
-                                           ng-model="vm.content.properties[vm.editorConfig.shipping.email.alias].value" />
-                                </umb-control-group>
-
-                                <umb-control-group label="{{ vm.editorConfig.shipping.company.label }}"
-                                                   description="{{ vm.editorConfig.shipping.company.description }}"
-                                                   ng-if="vm.editorConfig.shipping.company">
-                                    <input type="text" class="umb-property-editor umb-textstring textstring"
-                                           ng-model="vm.content.properties[vm.editorConfig.shipping.company.alias].value" />
-                                </umb-control-group>
-
-                            </umb-box-content>
-                        </umb-box>
-
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h4 class="mt-0 -mb-10">Shipping</h4>
+                        <label title="Toggle advanced mode" ng-if="vm.editorConfig.shipping.sameAsBilling" style="display: flex; margin: 0;">
+                            {{vm.editorConfig.shipping.sameAsBilling.label}} <umb-toggle checked="vm.options.shippingSameAsBilling" on-click="vm.toggleShippingSameAsBilling()" style="margin-left: 10px;"></umb-toggle>
+                        </label>
                     </div>
-                    <div class="vendr-layout__right">
+                    <hr style="border-color: rgba(0,0,0,.03);" />
 
-                        <umb-box>
-                            <umb-box-header title="Address"></umb-box-header>
-                            <umb-box-content>
+                    <div class="vendr-layout vendr-layout--layout2" ng-if="!vm.options.shippingSameAsBilling">
+                        <div class="vendr-layout__left">
 
-                                <umb-control-group label="{{ vm.editorConfig.shipping.addressLine1.label }}"
-                                                   description="{{ vm.editorConfig.shipping.addressLine1.description }}"
-                                                   ng-if="vm.editorConfig.shipping.addressLine1">
-                                    <input type="text" class="umb-property-editor umb-textstring textstring"
-                                           ng-model="vm.content.properties[vm.editorConfig.shipping.addressLine1.alias].value" />
-                                </umb-control-group>
+                            <umb-box>
+                                <umb-box-header title="Contact"></umb-box-header>
+                                <umb-box-content>
 
-                                <umb-control-group label="{{ vm.editorConfig.shipping.addressLine2.label }}"
-                                                   description="{{ vm.editorConfig.shipping.addressLine2.description }}"
-                                                   ng-if="vm.editorConfig.shipping.addressLine2">
-                                    <input type="text" class="umb-property-editor umb-textstring textstring"
-                                           ng-model="vm.content.properties[vm.editorConfig.shipping.addressLine2.alias].value" />
-                                </umb-control-group>
+                                    <umb-control-group label="{{ vm.editorConfig.shipping.firstName.label }}"
+                                                       description="{{ vm.editorConfig.shipping.firstName.description }}"
+                                                       ng-if="vm.editorConfig.shipping.firstName">
+                                        <input type="text" class="umb-property-editor umb-textstring textstring"
+                                               ng-model="vm.content.properties[vm.editorConfig.shipping.firstName.alias].value" />
+                                    </umb-control-group>
 
-                                <umb-control-group label="{{ vm.editorConfig.shipping.city.label }}"
-                                                   description="{{ vm.editorConfig.shipping.city.description }}"
-                                                   ng-if="vm.editorConfig.shipping.city">
-                                    <input type="text" class="umb-property-editor umb-textstring textstring"
-                                           ng-model="vm.content.properties[vm.editorConfig.shipping.city.alias].value" />
-                                </umb-control-group>
+                                    <umb-control-group label="{{ vm.editorConfig.shipping.lastName.label }}"
+                                                       description="{{ vm.editorConfig.shipping.lastName.description }}"
+                                                       ng-if="vm.editorConfig.shipping.lastName">
+                                        <input type="text" class="umb-property-editor umb-textstring textstring"
+                                               ng-model="vm.content.properties[vm.editorConfig.shipping.lastName.alias].value" />
+                                    </umb-control-group>
 
-                                <umb-control-group label="Country">
-                                    <select class="umb-property-editor umb-dropdown" disabled>
-                                        <option value="" disabled selected>{{vm.content.shippingCountry.name}}</option>
-                                    </select>
-                                </umb-control-group>
+                                    <umb-control-group label="{{ vm.editorConfig.shipping.email.label }}"
+                                                       description="{{ vm.editorConfig.shipping.email.description }}"
+                                                       ng-if="vm.editorConfig.shipping.email">
+                                        <input type="email" class="umb-property-editor umb-textstring textstring"
+                                               ng-model="vm.content.properties[vm.editorConfig.shipping.email.alias].value" />
+                                    </umb-control-group>
 
-                                <umb-control-group label="{{ vm.editorConfig.shipping.zipCode.label }}"
-                                                   description="{{ vm.editorConfig.shipping.zipCode.description }}"
-                                                   ng-if="vm.editorConfig.shipping.zipCode">
-                                    <input type="text" class="umb-property-editor umb-textstring textstring"
-                                           ng-model="vm.content.properties[vm.editorConfig.shipping.zipCode.alias].value" />
-                                </umb-control-group>
+                                    <umb-control-group label="{{ vm.editorConfig.shipping.company.label }}"
+                                                       description="{{ vm.editorConfig.shipping.company.description }}"
+                                                       ng-if="vm.editorConfig.shipping.company">
+                                        <input type="text" class="umb-property-editor umb-textstring textstring"
+                                               ng-model="vm.content.properties[vm.editorConfig.shipping.company.alias].value" />
+                                    </umb-control-group>
 
-                                <umb-control-group label="{{ vm.editorConfig.shipping.telephone.label }}"
-                                                   description="{{ vm.editorConfig.shipping.telephone.description }}"
-                                                   ng-if="vm.editorConfig.shipping.telephone">
-                                    <input type="text" class="umb-property-editor umb-textstring textstring"
-                                           ng-model="vm.content.properties[vm.editorConfig.shipping.telephone.alias].value" />
-                                </umb-control-group>
+                                </umb-box-content>
+                            </umb-box>
 
-                            </umb-box-content>
-                        </umb-box>
+                        </div>
+                        <div class="vendr-layout__right">
 
+                            <umb-box>
+                                <umb-box-header title="Address"></umb-box-header>
+                                <umb-box-content>
+
+                                    <umb-control-group label="{{ vm.editorConfig.shipping.addressLine1.label }}"
+                                                       description="{{ vm.editorConfig.shipping.addressLine1.description }}"
+                                                       ng-if="vm.editorConfig.shipping.addressLine1">
+                                        <input type="text" class="umb-property-editor umb-textstring textstring"
+                                               ng-model="vm.content.properties[vm.editorConfig.shipping.addressLine1.alias].value" />
+                                    </umb-control-group>
+
+                                    <umb-control-group label="{{ vm.editorConfig.shipping.addressLine2.label }}"
+                                                       description="{{ vm.editorConfig.shipping.addressLine2.description }}"
+                                                       ng-if="vm.editorConfig.shipping.addressLine2">
+                                        <input type="text" class="umb-property-editor umb-textstring textstring"
+                                               ng-model="vm.content.properties[vm.editorConfig.shipping.addressLine2.alias].value" />
+                                    </umb-control-group>
+
+                                    <umb-control-group label="{{ vm.editorConfig.shipping.city.label }}"
+                                                       description="{{ vm.editorConfig.shipping.city.description }}"
+                                                       ng-if="vm.editorConfig.shipping.city">
+                                        <input type="text" class="umb-property-editor umb-textstring textstring"
+                                               ng-model="vm.content.properties[vm.editorConfig.shipping.city.alias].value" />
+                                    </umb-control-group>
+
+                                    <umb-control-group label="Country">
+                                        <select class="umb-property-editor umb-dropdown" disabled>
+                                            <option value="" disabled selected>{{vm.content.shippingCountry.name}}</option>
+                                        </select>
+                                    </umb-control-group>
+
+                                    <umb-control-group label="{{ vm.editorConfig.shipping.zipCode.label }}"
+                                                       description="{{ vm.editorConfig.shipping.zipCode.description }}"
+                                                       ng-if="vm.editorConfig.shipping.zipCode">
+                                        <input type="text" class="umb-property-editor umb-textstring textstring"
+                                               ng-model="vm.content.properties[vm.editorConfig.shipping.zipCode.alias].value" />
+                                    </umb-control-group>
+
+                                    <umb-control-group label="{{ vm.editorConfig.shipping.telephone.label }}"
+                                                       description="{{ vm.editorConfig.shipping.telephone.description }}"
+                                                       ng-if="vm.editorConfig.shipping.telephone">
+                                        <input type="text" class="umb-property-editor umb-textstring textstring"
+                                               ng-model="vm.content.properties[vm.editorConfig.shipping.telephone.alias].value" />
+                                    </umb-control-group>
+
+                                </umb-box-content>
+                            </umb-box>
+
+                        </div>
                     </div>
+
                 </div>
 
             </umb-editor-container>

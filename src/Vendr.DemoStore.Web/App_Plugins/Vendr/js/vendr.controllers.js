@@ -1022,8 +1022,10 @@
         vm.init = function () {
             cfg.loadSettingDefinitions().then(function (settingDefinitions) {
 
+                var defs = settingDefinitions.map((itm) => angular.copy(itm));
+
                 // Remap setting definitions into an Umbraco property model
-                settingDefinitions.forEach(function (itm) {
+                defs.forEach(function (itm) {
 
                     itm.alias = itm.key;
                     itm.label = itm.name;
@@ -1039,7 +1041,7 @@
 
                 });
 
-                vm.options.settingDefinitions = settingDefinitions;
+                vm.options.settingDefinitions = defs;
 
                 vm.loading = false;
             });
@@ -2985,7 +2987,7 @@
                         if (!vm.content.prices)
                             vm.content.prices = [];
                         var idx = vm.content.prices.findIndex(findFunc);
-                        if (value) {
+                        if (!isNaN(value)) {
                             if (idx === -1) {
                                 vm.content.prices.push({
                                     currencyId: defaultPrice.currencyId,
@@ -3639,7 +3641,7 @@
         };
 
         var init = function (value) {
-            
+
             vendrRouteCache.getOrFetch("currentStore", function () {
                 if (!storeId) {
                     return vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId);
@@ -4392,7 +4394,7 @@
                         if (!vm.content.prices)
                             vm.content.prices = [];
                         var idx = vm.content.prices.findIndex(findFun);
-                        if (value) {
+                        if (!isNaN(value)) {
                             if (idx === -1) {
                                 vm.content.prices.push({
                                     currencyId: defaultPrice.currencyId,

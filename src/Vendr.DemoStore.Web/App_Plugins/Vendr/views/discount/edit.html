@@ -63,9 +63,9 @@
                                                                ng-model="item.usageLimit" />
                                                     </td>
                                                     <td>
-                                                        <a ng-click="vm.removeDiscountCode(item, $index)" class="btn umb-button--xs dropdown-toggle umb-button-group__toggle">
+                                                        <button type="button" ng-click="vm.removeDiscountCode(item, $index)" class="btn umb-button--xs dropdown-toggle umb-button-group__toggle" title="Remove Discount Code" aria-hidden="true">
                                                             <span class="icon icon-trash"></span>
-                                                        </a>
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             </tbody>
