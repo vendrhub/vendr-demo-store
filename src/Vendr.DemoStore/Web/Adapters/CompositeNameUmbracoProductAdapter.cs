@@ -17,7 +17,9 @@ namespace Vendr.DemoStore.Web.Adapters
             var snapshot = (UmbracoProductSnapshot)base.GetProductSnapshot(productReference, languageIsoCode);
                 
             // Decorate the snapshot with our custom decorator
-            return new CompositeNameUmbracoProductSnapshotDecorator(snapshot);
+            return snapshot != null
+                ? new CompositeNameUmbracoProductSnapshotDecorator(snapshot)
+                : null;
         }
     }
 }
