@@ -34,6 +34,10 @@ To login to the back office you can do so using the credentails:
 * **Email** admin@admin.com
 * **Password** password1234
 
+## Documentation
+
+If you want to get a better understanding of what Vendr does under the hood then you can checkout out the [documentation on the Vendr site](https://vendr.net/docs/). There you will find information on all the key concepts as well as detailed technical references.
+
 ## Getting Help
 
 If you require any help with setup or you are having problems getting it working, please ask for help on our [Support Forums](https://our.umbraco.com/packages/website-utilities/vendr/vendr-support/)
@@ -42,23 +46,9 @@ If you require any help with setup or you are having problems getting it working
 
 If you find any issues with the demo store itself please raise them in the [issues section of this repository](https://github.com/vendrhub/vendr-demo-store/issues), if the issue is a core Vendr product issue however, please raise these in the [issue tracker on the Vendr repository](https://github.com/vendrhub/vendr/issues)
 
-## (Probable) FAQs
-
-### I have a project coming up that needs a store, can I use this and upgrade it later when Vendr is actually released?
-
-The intention of this repository at the moment is to offer you a preview of how things are going with the Vendr project. We aren't saying that the API is feature complete or that some underlying patterns / data structures won't change. We'll do our best to document any changes, but if you do use this example as a starting point, you do so at your own risk
-
-### What has happened to feature X that was in Tea Commerce?
-
- We've tried to translate all the main features from Tea Commerce, our Umbraco v7 only eCommerce solution, however some features may not have made it across yet. Our goal is to make them feature matching however in order to get an initial release out we have decided to remove some features for the time being, such as discounts and multi-variants. These will come back in future releases.
-
-### Where's the documentation at?
-
-We are still working hard on finalizing the Vendr product and this includes the documentation which is still to be done. Due to this we decided to release the preview as a demo store so that you can explore example code in situe and see how it actually works that way. Full documentation will be available on actual product release.
-
 ## License
 
 Copyright © 2019 Outfield Digital Ltd
 
-This demo store is [licensed under MIT](LICENSE.md). The core Vendr product is licensed under an Outfield Digital commercial license (TBC).
+This demo store is [licensed under MIT](LICENSE.md). The core Vendr product is licensed under an [Outfield Digital commercial license](https://vendr.net/licence-agreement/).
 
