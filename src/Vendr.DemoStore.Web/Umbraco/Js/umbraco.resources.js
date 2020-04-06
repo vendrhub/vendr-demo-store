@@ -1817,6 +1817,21 @@
             },
             /**
      * @ngdoc method
+     * @name umbraco.resources.dataTypeResource#getReferences
+     * @methodOf umbraco.resources.dataTypeResource
+     *
+     * @description
+     * Retrieves references of a given data type.
+     *
+     * @param {Int} id id of datatype to retrieve references for
+     * @returns {Promise} resourcePromise object.
+     *
+     */
+            getReferences: function getReferences(id) {
+                return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('dataTypeApiBaseUrl', 'GetReferences', { id: id })), 'Failed to retrieve usages for data type of id ' + id);
+            },
+            /**
+     * @ngdoc method
      * @name umbraco.resources.dataTypeResource#getById
      * @methodOf umbraco.resources.dataTypeResource
      *
@@ -2037,7 +2052,7 @@
             renameContainer: function renameContainer(id, name) {
                 return umbRequestHelper.resourcePromise($http.post(umbRequestHelper.getApiUrl('dataTypeApiBaseUrl', 'PostRenameContainer', {
                     id: id,
-                    name: name
+                    name: encodeURIComponent(name)
                 })), 'Failed to rename the folder with id ' + id);
             }
         };
@@ -3125,6 +3140,12 @@
             getParameterEditors: function getParameterEditors() {
                 return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('macroApiBaseUrl', 'GetParameterEditors'), 'Failed to get parameter editors'));
             },
+            getGroupedParameterEditors: function getGroupedParameterEditors() {
+                return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('macroApiBaseUrl', 'GetGroupedParameterEditors'), 'Failed to get parameter editors'));
+            },
+            getParameterEditorByAlias: function getParameterEditorByAlias(alias) {
+                return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('macroApiBaseUrl', 'GetParameterEditorByAlias', { 'alias': alias }), 'Failed to get parameter editor'));
+            },
             getById: function getById(id) {
                 return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('macroApiBaseUrl', 'GetById', { 'id': id }), 'Failed to get macro'));
             },
@@ -4069,6 +4090,21 @@
         };
     }
     angular.module('umbraco.resources').factory('memberTypeResource', memberTypeResource);
+    'use strict';
+    function modelsBuilderManagementResource($q, $http, umbRequestHelper) {
+        return {
+            getModelsOutOfDateStatus: function getModelsOutOfDateStatus() {
+                return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('modelsBuilderBaseUrl', 'GetModelsOutOfDateStatus')), 'Failed to get models out-of-date status');
+            },
+            buildModels: function buildModels() {
+                return umbRequestHelper.resourcePromise($http.post(umbRequestHelper.getApiUrl('modelsBuilderBaseUrl', 'BuildModels')), 'Failed to build models');
+            },
+            getDashboard: function getDashboard() {
+                return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('modelsBuilderBaseUrl', 'GetDashboard')), 'Failed to get dashboard');
+            }
+        };
+    }
+    angular.module('umbraco.resources').factory('modelsBuilderManagementResource', modelsBuilderManagementResource);
     'use strict';
     angular.module('umbraco.resources').factory('Umbraco.PropertyEditors.NestedContent.Resources', function ($q, $http, umbRequestHelper) {
         return {

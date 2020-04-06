@@ -188,6 +188,12 @@
             </summary>
             <param name="indexes"></param>
         </member>
+        <member name="M:Umbraco.Examine.UmbracoIndexConfig.GetMemberValueSetValidator">
+            <summary>
+            Returns the <see cref="T:Examine.IValueSetValidator"/> for the member indexer
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Umbraco.Examine.IndexPopulator`1">
             <summary>
             An <see cref="T:Umbraco.Examine.IIndexPopulator"/> that is automatically associated to any index of type <see cref="!:TIndex"/>

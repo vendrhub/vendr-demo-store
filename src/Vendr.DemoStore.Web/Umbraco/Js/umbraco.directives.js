@@ -180,7 +180,7 @@
                 transclude: true,
                 restrict: 'E',
                 replace: true,
-                template: ' <div> <div class="umb-app-header"> <umb-sections ng-if="authenticated" sections="sections"> </umb-sections> <div class="flex items-center"> <ul class="umb-app-header__actions"> <li data-element="global-search" class="umb-app-header__action"> <button class="umb-app-header__button btn-reset" hotkey="ctrl+space" ng-click="searchClick()" ng-mousedown="rememberFocus()" prevent-default style="font-size: 20px;"> <span class="sr-only">Open/Close backoffice search</span> <i class="umb-app-header__action-icon icon-search"></i> </button> </li> <li data-element="global-help" class="umb-app-header__action"> <button class="umb-app-header__button btn-reset" hotkey="ctrl+shift+h" ng-click="helpClick()" prevent-default> <span class="sr-only">Open/Close backoffice help window</span> <i class="umb-app-header__action-icon icon-help-alt"></i> </button> </li> <li data-element="global-user" class="umb-app-header__action"> <button class="umb-app-header__button btn-reset" ng-click="avatarClick()" hotkey="ctrl+shift+u" title="{{user.name}}" aria-label="Open/Close your profile options window" prevent-default> <umb-avatar class="umb-app-header__action-icon" size="xxs" color="secondary" name="{{user.name}}" img-src="{{avatar[0].value}}" img-srcset="{{avatar[1].value}} 2x, {{avatar[2].value}} 3x"> </umb-avatar> </button> </li> </ul> </div> </div> <umb-overlay data-element="overlay-user" ng-if="userDialog.show" model="userDialog" view="userDialog.view" position="right"> </umb-overlay> </div> ',
+                template: ' <div> <div class="umb-app-header"> <umb-sections ng-if="authenticated" sections="sections"> </umb-sections> <div class="flex items-center"> <ul class="umb-app-header__actions"> <li data-element="global-search" class="umb-app-header__action"> <button type="button" class="umb-app-header__button btn-reset" hotkey="ctrl+space" ng-click="searchClick()" ng-mousedown="rememberFocus()"> <span class="sr-only"> <localize key="visuallyHiddenTexts_openBackofficeSearch">Open backoffice search</localize>... </span> <i class="umb-app-header__action-icon icon-search" aria-hidden="true"></i> </button> </li> <li data-element="global-help" class="umb-app-header__action"> <button type="button" class="umb-app-header__button btn-reset" hotkey="ctrl+shift+h" ng-click="helpClick()"> <span class="sr-only"> <localize key="visuallyHiddenTexts_openCloseBackofficeHelp">Open/Close backoffice help</localize>... </span> <i class="umb-app-header__action-icon icon-help-alt" aria-hidden="true"></i> </button> </li> <li data-element="global-user" class="umb-app-header__action"> <button type="button" class="umb-app-header__button btn-reset" ng-click="avatarClick()" hotkey="ctrl+shift+u" title="{{user.name}}"> <span class="sr-only"> <localize key="visuallyHiddenTexts_openCloseBackofficeProfileOptions">Open/Close your profile options</localize>... </span> <umb-avatar class="umb-app-header__action-icon" size="xxs" color="secondary" name="{{user.name}}" img-src="{{avatar[0].value}}" img-srcset="{{avatar[1].value}} 2x, {{avatar[2].value}} 3x"> </umb-avatar> </button> </li> </ul> </div> </div> <umb-overlay data-element="overlay-user" ng-if="userDialog.show" model="userDialog" view="userDialog.view" position="right"> </umb-overlay> </div> ',
                 link: link,
                 scope: {}
             };
@@ -1023,7 +1023,7 @@ Use this directive to render drawer view
             // restrict to an element
             replace: true,
             // replace the html element with the template
-            template: '<div id="leftcolumn" ng-controller="Umbraco.NavigationController" ng-mouseleave="leaveTree($event)" ng-mouseenter="enterTree($event)">  <div id="navigation" ng-show="showNavigation" class="fill umb-modalcolumn" ng-animate="\'slide\'" nav-resize ng-class="{\'--notInFront\': infiniteMode}"> <div class="navigation-inner-container"> <div class="umb-language-picker" ng-if="currentSection === \'content\' && languages.length > 1" on-outside-click="page.languageSelectorIsOpen = false"> <div class="umb-language-picker__toggle" ng-click="toggleLanguageSelector()"> <div>{{selectedLanguage.name}}</div> <ins class="umb-language-picker__expand" ng-class="{\'icon-navigation-down\': !page.languageSelectorIsOpen, \'icon-navigation-up\': page.languageSelectorIsOpen}">&nbsp;</ins> </div> <div class="umb-language-picker__dropdown" ng-if="page.languageSelectorIsOpen"> <a class="umb-language-picker__dropdown-item" ng-class="{\'umb-language-picker__dropdown-item--current\': language.active}" ng-click="selectLanguage(language)" ng-repeat="language in languages">{{language.name}}</a> </div> </div>  <div id="tree" ng-show="authenticated"> <umb-tree api="treeApi" on-init="onTreeInit()"> </umb-tree> </div> </div> <div class="offset6" id="navOffset" style="z-index: 10">  <div id="contextMenu" class="umb-modalcolumn fill shadow" ng-if="showContextMenu" ng-animate="\'slide\'"> <umb-context-menu menu-dialog-title="{{menuDialogTitle}}" current-section="{{currentSection}}" current-node="menuNode" menu-actions="menuActions"> </umb-context-menu> </div> <umb-context-dialog ng-if="showContextMenuDialog" dialog-title="menuDialogTitle" current-node="menuNode" view="dialogTemplateUrl"> </umb-context-dialog> </div> <div class="umb-editor__overlay"></div> </div> </div> '
+            template: '<div id="leftcolumn" ng-controller="Umbraco.NavigationController" ng-mouseleave="leaveTree($event)" ng-mouseenter="enterTree($event)">  <div id="navigation" ng-show="showNavigation" class="fill umb-modalcolumn" ng-animate="\'slide\'" nav-resize ng-class="{\'--notInFront\': infiniteMode}"> <div class="navigation-inner-container"> <div class="umb-language-picker" ng-if="currentSection === \'content\' && languages.length > 1" deep-blur="page.languageSelectorIsOpen = false" on-outside-click="page.languageSelectorIsOpen = false"> <button type="button" class="umb-language-picker__toggle" ng-click="toggleLanguageSelector()" aria-haspopup="true" aria-expanded="{{page.languageSelectorIsOpen}}"> <span> <span class="sr-only"> <localize key="visuallyHiddenTexts_currentLanguage">Current language</localize> <span>: </span> </span> <span>{{selectedLanguage.name}}</span> </span> <i class="umb-language-picker__expand" ng-class="{\'icon-navigation-down\': !page.languageSelectorIsOpen, \'icon-navigation-up\': page.languageSelectorIsOpen}" aria-hidden="true"></i> </button> <div class="umb-language-picker__dropdown" ng-if="page.languageSelectorIsOpen"> <button type="button" class="umb-language-picker__dropdown-item" ng-class="{\'umb-language-picker__dropdown-item--current\': language.active}" ng-click="selectLanguage(language)" ng-repeat="language in languages"> <span class="sr-only"> <localize key="visuallyHiddenTexts_switchLanguage">Switch language to</localize> <span>: </span> </span> <span>{{language.name}}</span> </button> </div> </div>  <div id="tree" ng-show="authenticated"> <umb-tree api="treeApi" on-init="onTreeInit()"> </umb-tree> </div> </div> <div class="offset6" id="navOffset" style="z-index: 10">  <div id="contextMenu" class="umb-modalcolumn fill shadow" ng-if="showContextMenu" ng-animate="\'slide\'"> <umb-context-menu menu-dialog-title="{{menuDialogTitle}}" current-section="{{currentSection}}" current-node="menuNode" menu-actions="menuActions"> </umb-context-menu> </div> <umb-context-dialog ng-if="showContextMenuDialog" dialog-title="menuDialogTitle" current-node="menuNode" view="dialogTemplateUrl"> </umb-context-dialog> </div> <div class="umb-editor__overlay"></div> </div> </div> '
         };
     }
     angular.module('umbraco.directives').directive('umbNavigation', umbNavigationDirective);
@@ -1034,7 +1034,7 @@ Use this directive to render drawer view
    * A component to render the pop up search field
    */
         var umbSearch = {
-            template: ' <div class="umb-search" on-outside-click="vm.closeSearch()" ng-keydown="vm.handleKeyDown($event)"> <div class="flex items-center"> <i class="umb-search-input-icon icon-search" ng-click="vm.focusSearch()"></i> <input class="umb-search-input" type="text" ng-model="vm.searchQuery" ng-model-options="{ debounce: 200 }" ng-change="vm.search(vm.searchQuery)" placeholder="Search..." focus-when="{{vm.searchHasFocus}}"> <button ng-if="vm.searchQuery.length > 0" tabindex="-1" class="umb-search-input-clear umb-animated" ng-click="vm.clearSearch()">Clear</button> </div> <div class="umb-search-results"> <div class="umb-search-group" ng-repeat="(key, group) in vm.searchResults"> <div class="umb-search-group__title">{{key}}</div> <ul class="umb-search-items"> <li class="umb-search-item" ng-repeat="result in group.results" active-result="{{result === vm.activeResult}}"> <a class="umb-search-result__link" ng-href="#/{{result.editorPath}}" ng-click="vm.clickItem(result)"> <i class="umb-search-result__icon {{result.icon}}"></i> <span class="umb-search-result__meta"> <span class="umb-search-result__name">{{result.name}}</span> <span class="umb-search-result__description" ng-show="result.subTitle">{{result.subTitle}}</span> </span> </a> </li> </ul> </div> </div> </div> ',
+            template: ' <div class="umb-search" on-outside-click="vm.closeSearch()" ng-keydown="vm.handleKeyDown($event)"> <div class="flex items-center"> <i class="umb-search-input-icon icon-search" ng-click="vm.focusSearch()"></i> <input class="umb-search-input" type="text" ng-model="vm.searchQuery" ng-model-options="{ debounce: 200 }" ng-change="vm.search(vm.searchQuery)" placeholder="Search..." focus-when="{{vm.searchHasFocus}}"> <button ng-show="vm.searchQuery.length > 0" tabindex="-1" class="umb-search-input-clear umb-animated" ng-click="vm.clearSearch()">Clear</button> </div> <div class="umb-search-results"> <div class="umb-search-group" ng-repeat="(key, group) in vm.searchResults"> <div class="umb-search-group__title">{{key}}</div> <ul class="umb-search-items"> <li class="umb-search-item" ng-repeat="result in group.results" active-result="{{result === vm.activeResult}}"> <a class="umb-search-result__link" ng-href="#/{{result.editorPath}}" ng-click="vm.clickItem(result)"> <i class="umb-search-result__icon {{result.icon}}"></i> <span class="umb-search-result__meta"> <span class="umb-search-result__name">{{result.name}}</span> <span class="umb-search-result__description" ng-show="result.subTitle">{{result.subTitle}}</span> </span> </a> </li> </ul> </div> </div> </div> ',
             controllerAs: 'vm',
             controller: umbSearchController,
             bindings: { onClose: '&' }
@@ -1192,7 +1192,7 @@ Use this directive to render drawer view
             // restrict to an element
             replace: true,
             // replace the html element with the template
-            template: '<div> <div id="applications" ng-class="{faded:stickyNavigation}"> <ul class="sections" data-element="sections"> <li data-element="section-{{section.alias}}" ng-repeat="section in sections | limitTo: maxSections" ng-class="{current: section.alias == currentSection}"> <a href="#/{{section.alias}}" ng-dblclick="sectionDblClick(section)" ng-click="sectionClick($event, section)" prevent-default> <span class="section__name">{{section.name}}</span> </a> </li> <li data-element="section-expand" class="expand" ng-class="{ \'open\': showTray === true }" ng-show="needTray"> <a ng-click="trayClick()"><i></i><i></i><i></i></a> <ul id="applications-tray" class="sections-tray shadow-depth-2" ng-if="showTray" on-outside-click="trayClick()"> <li ng-repeat="section in sections | limitTo: overflowingSections" ng-class="{current: section.alias == currentSection}"> <a href="#/{{section.alias}}" ng-dblclick="sectionDblClick(section)" ng-click="sectionClick($event, section)" prevent-default> <span class="section__name">{{section.name}}</span> </a> </li> </ul> </li> </ul> </div> </div> ',
+            template: '<div> <div id="applications" ng-class="{faded:stickyNavigation}"> <ul class="sections" data-element="sections"> <li data-element="section-{{section.alias}}" ng-repeat="section in sections | limitTo: maxSections" ng-class="{current: section.alias == currentSection}"> <a href="#/{{section.alias}}" ng-dblclick="sectionDblClick(section)" ng-click="sectionClick($event, section)" prevent-default> <span class="section__name">{{section.name}}</span> </a> </li> <li data-element="section-expand" class="expand" ng-class="{ \'open\': showTray === true }" ng-show="needTray"> <a href="#" ng-click="trayClick()" prevent-default> <span class="section__name"><i></i><i></i><i></i></span> </a> <ul id="applications-tray" class="sections-tray shadow-depth-2" ng-if="showTray" on-outside-click="trayClick()"> <li ng-repeat="section in sections | limitTo: overflowingSections" ng-class="{current: section.alias == currentSection}"> <a href="#/{{section.alias}}" ng-dblclick="sectionDblClick(section)" ng-click="sectionClick($event, section)" prevent-default> <span class="section__name">{{section.name}}</span> </a> </li> </ul> </li> </ul> </div> </div> ',
             link: function link(scope, element, attr, ctrl) {
                 var sectionItemsWidth = [];
                 var evts = [];
@@ -2342,6 +2342,7 @@ Use this directive to render a button with a dropdown of alternative actions.
 </pre>
 
 @param {boolean} checked Set to <code>true</code> or <code>false</code> to toggle the switch.
+@param {string} inputId Set the <code>id</code> of the toggle.
 @param {callback} onClick The function which should be called when the toggle is clicked.
 @param {string=} showLabels Set to <code>true</code> or <code>false</code> to show a "On" or "Off" label next to the switch.
 @param {string=} labelOn Set a custom label for when the switched is turned on. It will default to "On".
@@ -2393,10 +2394,11 @@ Use this directive to render a button with a dropdown of alternative actions.
             var directive = {
                 restrict: 'E',
                 replace: true,
-                template: '<button ng-click="click()" type="button" class="umb-toggle" ng-disabled="disabled" ng-class="{\'umb-toggle--checked\': checked, \'umb-toggle--disabled\': disabled}"> <span ng-if="!labelPosition && showLabels === \'true\' || labelPosition === \'left\' && showLabels === \'true\'"> <span ng-if="!checked" class="umb-toggle__label umb-toggle__label--left">{{ displayLabelOff }}</span> <span ng-if="checked" class="umb-toggle__label umb-toggle__label--left">{{ displayLabelOn }}</span> </span> <div class="umb-toggle__toggle"> <i ng-show="hideIcons !== \'true\'" class="umb-toggle__icon umb-toggle__icon--left icon-check"></i> <i ng-show="hideIcons !== \'true\'" class="umb-toggle__icon umb-toggle__icon--right icon-wrong"></i> <div class="umb-toggle__handler"></div> </div> <span ng-if="labelPosition === \'right\' && showLabels === \'true\'"> <span ng-if="!checked" class="umb-toggle__label umb-toggle__label--right">{{ displayLabelOff }}</span> <span ng-if="checked" class="umb-toggle__label umb-toggle__label--right">{{ displayLabelOn }}</span> </span> </button> ',
+                template: '<button role="checkbox" aria-checked="{{checked}}" ng-click="click()" type="button" class="umb-toggle" ng-disabled="disabled" ng-class="{\'umb-toggle--checked\': checked, \'umb-toggle--disabled\': disabled}" id="{{inputId}}"> <span ng-if="!labelPosition && showLabels === \'true\' || labelPosition === \'left\' && showLabels === \'true\'"> <span ng-if="!checked" class="umb-toggle__label umb-toggle__label--left">{{ displayLabelOff }}</span> <span ng-if="checked" class="umb-toggle__label umb-toggle__label--left">{{ displayLabelOn }}</span> </span> <div class="umb-toggle__toggle"> <i ng-show="hideIcons !== \'true\'" class="umb-toggle__icon umb-toggle__icon--left icon-check"></i> <i ng-show="hideIcons !== \'true\'" class="umb-toggle__icon umb-toggle__icon--right icon-wrong"></i> <div class="umb-toggle__handler"></div> </div> <span ng-if="labelPosition === \'right\' && showLabels === \'true\'"> <span ng-if="!checked" class="umb-toggle__label umb-toggle__label--right">{{ displayLabelOff }}</span> <span ng-if="checked" class="umb-toggle__label umb-toggle__label--right">{{ displayLabelOn }}</span> </span> </button> ',
                 scope: {
                     checked: '=',
                     disabled: '=',
+                    inputId: '@',
                     onClick: '&',
                     labelOn: '@?',
                     labelOff: '@?',
@@ -2508,7 +2510,7 @@ Use this directive to render a group of toggle buttons.
     'use strict';
     (function () {
         'use strict';
-        function ContentEditController($rootScope, $scope, $routeParams, $q, $window, appState, contentResource, entityResource, navigationService, notificationsService, serverValidationManager, contentEditingHelper, localizationService, formHelper, umbRequestHelper, editorState, $http, eventsService, overlayService, $location, localStorageService) {
+        function ContentEditController($rootScope, $scope, $routeParams, $q, $window, appState, contentResource, entityResource, navigationService, notificationsService, serverValidationManager, contentEditingHelper, localizationService, formHelper, umbRequestHelper, editorState, $http, eventsService, overlayService, $location, localStorageService, treeService) {
             var evts = [];
             var infiniteMode = $scope.infiniteModel && $scope.infiniteModel.infiniteMode;
             var watchingCulture = false;
@@ -2533,15 +2535,11 @@ Use this directive to render a group of toggle buttons.
             $scope.app = null;
             //initializes any watches
             function startWatches(content) {
-                //watch for changes to isNew & the content.id, set the page.isNew accordingly and load the breadcrumb if we can
-                $scope.$watchGroup([
-                    'isNew',
-                    'content.id'
-                ], function (newVal, oldVal) {
-                    var contentId = newVal[1];
-                    $scope.page.isNew = Object.toBoolean(newVal[0]);
+                //watch for changes to isNew, set the page.isNew accordingly and load the breadcrumb if we can
+                $scope.$watch('isNew', function (newVal, oldVal) {
+                    $scope.page.isNew = Object.toBoolean(newVal);
                     //We fetch all ancestors of the node to generate the footer breadcrumb navigation
-                    if (!$scope.page.isNew && contentId && content.parentId && content.parentId !== -1) {
+                    if (content.parentId && content.parentId !== -1) {
                         loadBreadcrumb();
                         if (!watchingCulture) {
                             $scope.$watch('culture', function (value, oldValue) {
@@ -2593,7 +2591,12 @@ Use this directive to render a group of toggle buttons.
                 resetVariantFlags();
             }
             function loadBreadcrumb() {
-                entityResource.getAncestors($scope.content.id, 'document', $scope.culture).then(function (anc) {
+                // load the parent breadcrumb when creating new content
+                var id = $scope.page.isNew ? $scope.content.parentId : $scope.content.id;
+                if (!id) {
+                    return;
+                }
+                entityResource.getAncestors(id, 'document', $scope.culture).then(function (anc) {
                     $scope.ancestors = anc;
                 });
             }
@@ -2626,9 +2629,15 @@ Use this directive to render a group of toggle buttons.
             }
             function reload() {
                 $scope.page.loading = true;
-                loadContent().then(function () {
-                    $scope.page.loading = false;
-                });
+                if ($scope.page.isNew) {
+                    loadScaffold().then(function () {
+                        $scope.page.loading = false;
+                    });
+                } else {
+                    loadContent().then(function () {
+                        $scope.page.loading = false;
+                    });
+                }
             }
             function bindEvents() {
                 //bindEvents can be called more than once and we don't want to have multiple bound events
@@ -2656,6 +2665,11 @@ Use this directive to render a group of toggle buttons.
                     $scope.page.saveButtonState = 'success';
                     $scope.page.buttonGroupState = 'success';
                 }));
+                evts.push(eventsService.on('rte.shortcut.save', function () {
+                    if ($scope.page.showSaveButton) {
+                        $scope.save();
+                    }
+                }));
                 evts.push(eventsService.on('content.saved', function () {
                     // Clear out localstorage keys that start with tinymce__
                     // When we save/perist a content node
@@ -2678,16 +2692,30 @@ Use this directive to render a group of toggle buttons.
                 });
             }
             /**
+    *  This loads the content scaffold for when creating new content
+    */
+            function loadScaffold() {
+                //we are creating so get an empty content item
+                return $scope.getScaffoldMethod()().then(function (data) {
+                    $scope.content = data;
+                    init();
+                    startWatches($scope.content);
+                    resetLastListPageNumber($scope.content);
+                    eventsService.emit('content.newReady', { content: $scope.content });
+                    return $q.resolve($scope.content);
+                });
+            }
+            /**
      * Create the save/publish/preview buttons for the view
      * @param {any} content the content node
      * @param {any} app the active content app
      */
             function createButtons(content) {
                 // for trashed and element type items, the save button is the primary action - otherwise it's a secondary action
-                $scope.page.saveButtonStyle = content.trashed || content.isElement ? 'primary' : 'info';
+                $scope.page.saveButtonStyle = content.trashed || content.isElement || content.isBlueprint ? 'primary' : 'info';
                 // only create the save/publish/preview buttons if the
                 // content app is "Conent"
-                if ($scope.app && $scope.app.alias !== 'umbContent' && $scope.app.alias !== 'umbInfo') {
+                if ($scope.app && $scope.app.alias !== 'umbContent' && $scope.app.alias !== 'umbInfo' && $scope.app.alias !== 'umbListView') {
                     $scope.defaultButton = null;
                     $scope.subButtons = null;
                     $scope.page.showSaveButton = false;
@@ -2718,7 +2746,7 @@ Use this directive to render a group of toggle buttons.
                 $scope.page.showPreviewButton = true;
             }
             /** Syncs the content item to it's tree node - this occurs on first load and after saving */
-            function syncTreeNode(content, path, initialLoad) {
+            function syncTreeNode(content, path, initialLoad, reloadChildren) {
                 if (infiniteMode || !path) {
                     return;
                 }
@@ -2729,6 +2757,9 @@ Use this directive to render a group of toggle buttons.
                         forceReload: initialLoad !== true
                     }).then(function (syncArgs) {
                         $scope.page.menu.currentNode = syncArgs.node;
+                        if (reloadChildren && syncArgs.node.expanded) {
+                            treeService.loadNodeChildren({ node: syncArgs.node });
+                        }
                     }, function () {
                         //handle the rejection
                         console.log('A problem occurred syncing the tree! A path is probably incorrect.');
@@ -2841,7 +2872,7 @@ Use this directive to render a group of toggle buttons.
                     init();
                     //needs to be manually set for infinite editing mode
                     $scope.page.isNew = false;
-                    syncTreeNode($scope.content, data.path);
+                    syncTreeNode($scope.content, data.path, false, args.reloadChildren);
                     eventsService.emit('content.saved', {
                         content: $scope.content,
                         action: args.action
@@ -2905,13 +2936,7 @@ Use this directive to render a group of toggle buttons.
             }
             if ($scope.page.isNew) {
                 $scope.page.loading = true;
-                //we are creating so get an empty content item
-                $scope.getScaffoldMethod()().then(function (data) {
-                    $scope.content = data;
-                    init();
-                    startWatches($scope.content);
-                    resetLastListPageNumber($scope.content);
-                    eventsService.emit('content.newReady', { content: $scope.content });
+                loadScaffold().then(function () {
                     $scope.page.loading = false;
                 });
             } else {
@@ -3156,14 +3181,6 @@ Use this directive to render a group of toggle buttons.
                         scope: $scope,
                         action: 'schedule'
                     })) {
-                    //used to track the original values so if the user doesn't save the schedule and they close the dialog we reset the dates back to what they were.
-                    var origDates = [];
-                    for (var i = 0; i < $scope.content.variants.length; i++) {
-                        origDates.push({
-                            releaseDate: $scope.content.variants[i].releaseDate,
-                            expireDate: $scope.content.variants[i].expireDate
-                        });
-                    }
                     if (!isContentCultureVariant()) {
                         //ensure the flags are set
                         $scope.content.variants[0].save = true;
@@ -3171,12 +3188,18 @@ Use this directive to render a group of toggle buttons.
                     var dialog = {
                         parentScope: $scope,
                         view: 'views/content/overlays/schedule.html',
-                        variants: $scope.content.variants,
+                        variants: angular.copy($scope.content.variants),
                         //set a model property for the dialog
                         skipFormValidation: true,
                         //when submitting the overlay form, skip any client side validation
                         submitButtonLabelKey: 'buttons_schedulePublish',
                         submit: function submit(model) {
+                            for (var i = 0; i < $scope.content.variants.length; i++) {
+                                $scope.content.variants[i].releaseDate = model.variants[i].releaseDate;
+                                $scope.content.variants[i].expireDate = model.variants[i].expireDate;
+                                $scope.content.variants[i].releaseDateFormatted = model.variants[i].releaseDateFormatted;
+                                $scope.content.variants[i].expireDateFormatted = model.variants[i].expireDateFormatted;
+                            }
                             model.submitButtonState = 'busy';
                             clearNotifications($scope.content);
                             //we need to return this promise so that the dialog can handle the result and wire up the validation response
@@ -3198,18 +3221,13 @@ Use this directive to render a group of toggle buttons.
                                 }
                                 model.submitButtonState = 'error';
                                 //re-map the dialog model since we've re-bound the properties
-                                dialog.variants = $scope.content.variants;
+                                dialog.variants = angular.copy($scope.content.variants);
                                 //don't reject, we've handled the error
                                 return $q.when(err);
                             });
                         },
                         close: function close() {
                             overlayService.close();
-                            //restore the dates
-                            for (var _i = 0; _i < $scope.content.variants.length; _i++) {
-                                $scope.content.variants[_i].releaseDate = origDates[_i].releaseDate;
-                                $scope.content.variants[_i].expireDate = origDates[_i].expireDate;
-                            }
                         }
                     };
                     overlayService.open(dialog);
@@ -3246,7 +3264,8 @@ Use this directive to render a group of toggle buttons.
                                     return contentResource.publishWithDescendants(content, create, model.includeUnpublished, files, showNotifications);
                                 },
                                 action: 'publishDescendants',
-                                showNotifications: false
+                                showNotifications: false,
+                                reloadChildren: model.includeUnpublished
                             }).then(function (data) {
                                 //show all notifications manually here since we disabled showing them automatically in the save method
                                 formHelper.showNotifications(data);
@@ -3390,7 +3409,7 @@ Use this directive to render a group of toggle buttons.
             var directive = {
                 restrict: 'E',
                 replace: true,
-                template: '<div> <umb-load-indicator ng-if="page.loading"></umb-load-indicator> <form name="contentForm" ng-submit="save()" novalidate val-form-manager> <umb-editor-view ng-if="!page.loading"> <umb-variant-content-editors page="page" content="content" culture="culture" on-select-app="appChanged(app)" on-select-app-anchor="appAnchorChanged(app, anchor)" on-back="onBack()" show-back="!(infiniteModel && infiniteModel.infiniteMode)"> </umb-variant-content-editors> <umb-editor-footer> <umb-editor-footer-content-left> <umb-breadcrumbs ng-if="ancestors && ancestors.length > 0" ancestors="ancestors" entity-type="content"> </umb-breadcrumbs> </umb-editor-footer-content-left> <umb-editor-footer-content-right> <umb-button ng-if="infiniteModel.infiniteMode" action="close()" button-style="link" label-key="general_close" type="button"> </umb-button> <umb-button alias="preview" ng-if="!page.isNew && content.allowPreview && page.showPreviewButton" type="button" button-style="info" action="preview(content)" label-key="buttons_showPage"> </umb-button> <umb-button ng-if="page.showSaveButton" alias="save" type="button" button-style="{{page.saveButtonStyle}}" state="page.saveButtonState" action="save(content)" label-key="buttons_save" shortcut="ctrl+s" add-ellipsis="{{page.saveButtonEllipsis}}"> </umb-button> <umb-button-group ng-if="defaultButton && !content.trashed && !content.isElement" button-style="success" default-button="defaultButton" sub-buttons="subButtons" state="page.buttonGroupState" direction="up" float="right" label-key="buttons_morePublishingOptions" label="More publishing options"> </umb-button-group> <umb-button ng-if="infiniteModel.infiniteMode && page.allowInfiniteSaveAndClose" action="saveAndClose(content)" button-style="primary" state="saveAndCloseButtonState" label-key="buttons_saveAndClose" type="button"> </umb-button> <umb-button ng-if="infiniteModel.infiniteMode && page.allowInfinitePublishAndClose" action="publishAndClose(content)" button-style="primary" state="publishAndCloseButtonState" label-key="buttons_publishAndClose" type="button"> </umb-button> </umb-editor-footer-content-right> </umb-editor-footer> </umb-editor-view> </form> </div> ',
+                template: '<div> <umb-load-indicator ng-if="page.loading"></umb-load-indicator> <form name="contentForm" ng-submit="save()" novalidate val-form-manager> <umb-editor-view ng-if="!page.loading"> <umb-variant-content-editors page="page" content="content" culture="culture" on-select-app="appChanged(app)" on-select-app-anchor="appAnchorChanged(app, anchor)" on-back="onBack()" show-back="!(infiniteModel && infiniteModel.infiniteMode)"> </umb-variant-content-editors> <umb-editor-footer> <umb-editor-footer-content-left> <umb-breadcrumbs ng-if="ancestors && ancestors.length > 0" ancestors="ancestors" for-new-entity="page.isNew" entity-type="content"> </umb-breadcrumbs> </umb-editor-footer-content-left> <umb-editor-footer-content-right> <umb-button ng-if="infiniteModel.infiniteMode" action="close()" button-style="link" label-key="general_close" type="button"> </umb-button> <umb-button alias="preview" ng-if="!page.isNew && content.allowPreview && page.showPreviewButton" type="button" button-style="info" action="preview(content)" label-key="buttons_showPage"> </umb-button> <umb-button ng-if="page.showSaveButton" alias="save" type="button" button-style="{{page.saveButtonStyle}}" state="page.saveButtonState" action="save(content)" label-key="buttons_save" shortcut="ctrl+s" add-ellipsis="{{page.saveButtonEllipsis}}"> </umb-button> <umb-button-group ng-if="defaultButton && !content.trashed && !content.isElement" button-style="success" default-button="defaultButton" sub-buttons="subButtons" state="page.buttonGroupState" direction="up" float="right" label-key="buttons_morePublishingOptions" label="More publishing options"> </umb-button-group> <umb-button ng-if="infiniteModel.infiniteMode && page.allowInfiniteSaveAndClose" action="saveAndClose(content)" button-style="primary" state="saveAndCloseButtonState" label-key="buttons_saveAndClose" type="button"> </umb-button> <umb-button ng-if="infiniteModel.infiniteMode && page.allowInfinitePublishAndClose" action="publishAndClose(content)" button-style="primary" state="publishAndCloseButtonState" label-key="buttons_publishAndClose" type="button"> </umb-button> </umb-editor-footer-content-right> </umb-editor-footer> </umb-editor-view> </form> </div> ',
                 controller: 'Umbraco.Editors.Content.EditorDirectiveController',
                 scope: {
                     contentId: '=',
@@ -3540,8 +3559,6 @@ Use this directive to render a group of toggle buttons.
                     var editor = {
                         id: documentType.id,
                         submit: function submit(model) {
-                            var args = { node: scope.node };
-                            eventsService.emit('editors.content.reload', args);
                             editorService.close();
                         },
                         close: function close() {
@@ -3671,6 +3688,8 @@ Use this directive to render a group of toggle buttons.
                     // get current backoffice user and format dates
                     userService.getCurrentUser().then(function (currentUser) {
                         scope.currentVariant.createDateFormatted = dateHelper.getLocalDate(scope.currentVariant.createDate, currentUser.locale, 'LLL');
+                        scope.currentVariant.releaseDateFormatted = dateHelper.getLocalDate(scope.currentVariant.releaseDate, currentUser.locale, 'LLL');
+                        scope.currentVariant.expireDateFormatted = dateHelper.getLocalDate(scope.currentVariant.expireDate, currentUser.locale, 'LLL');
                     });
                 }
                 function updateCurrentUrls() {
@@ -3732,7 +3751,7 @@ Use this directive to render a group of toggle buttons.
                 require: '^^umbVariantContent',
                 restrict: 'E',
                 replace: true,
-                template: '<div class="umb-package-details"> <div class="umb-package-details__main-content"> <umb-box ng-if="currentUrls" data-element="node-info-urls"> <umb-box-header title-key="general_links"></umb-box-header> <umb-box-content class="block-form"> <ul class="nav nav-stacked" style="margin-bottom: 0;"> <li ng-repeat="url in currentUrls"> <a href="{{url.text}}" target="_blank" ng-if="url.isUrl"> <span ng-if="node.variants.length === 1 && url.culture" style="font-size: 13px; color: #cccccc; width: 50px;display: inline-block">{{url.culture}}</span> <i class="icon icon-out"></i> <span>{{url.text}}</span> </a> <div ng-if="!url.isUrl" style="margin-top: 4px;"> <span ng-if="node.variants.length === 1 && url.culture" style="font-size: 13px; color: #cccccc; width: 50px;display: inline-block">{{url.culture}}</span> <em>{{url.text}}</em> </div> </li> </ul> </umb-box-content> </umb-box> <umb-box data-element="node-info-redirects" style="display:none;" ng-cloak ng-show="!urlTrackerDisabled && hasRedirects"> <umb-box-header title-key="redirectUrls_redirectUrlManagement"></umb-box-header> <umb-box-content class="block-form"> <div style="position: relative;"> <div ng-if="loadingRedirectUrls" style="background: rgba(255, 255, 255, 0.8); position: absolute; top: 0; left: 0; right: 0; bottom: 0;"></div> <umb-load-indicator ng-if="loadingRedirectUrls"></umb-load-indicator> <div ng-show="hasRedirects"> <p><localize key="redirectUrls_panelInformation" class="ng-isolate-scope ng-scope">The following URLs redirect to this content item:</localize></p> <ul class="nav nav-stacked" style="margin-bottom: 0;"> <li ng-repeat="redirectUrl in redirectUrls"> <a href="{{redirectUrl.originalUrl}}" target="_blank"><i ng-class="value.icon" class="icon-out"></i> {{redirectUrl.originalUrl}}</a> </li> </ul> </div> </div> </umb-box-content> </umb-box> <umb-box data-element="node-info-history"> <umb-box-header title="{{historyLabel}}"> <umb-button type="button" button-style="outline" action="openRollback()" label-key="actions_rollback" size="xs" add-ellipsis="true"> </umb-button> </umb-box-header> <umb-box-content class="block-form"> <div style="position: relative;"> <div ng-show="loadingAuditTrail" style="background: rgba(255, 255, 255, 0.8); position: absolute; top: 0; left: 0; right: 0; bottom: 0;"></div> <umb-load-indicator ng-show="loadingAuditTrail"></umb-load-indicator> <div ng-show="auditTrail.length === 0" style="padding: 10px;"> <umb-empty-state position="center" size="small"> <localize key="content_noChanges"></localize> </umb-empty-state> </div> <div class="history"> <div ng-show="auditTrail.length > 1" class="history-line"></div> <div class="history-item" ng-repeat="item in auditTrail"> <div class="history-item__break"> <div class="history-item__avatar"> <umb-avatar color="secondary" size="xs" name="{{item.userName}}" img-src="{{item.userAvatars[3]}}" img-srcset="{{item.userAvatars[4]}} 2x, {{item.userAvatars[4]}} 3x"> </umb-avatar> </div> <div> <div>{{ item.userName }}</div> <div class="history-item__date">{{item.timestampFormatted}}</div> </div> </div> <div class="history-item__break"> <umb-badge class="history-item__badge" size="xs" color="{{item.logTypeColor}}"> <localize key="auditTrails_small{{ item.logType }}">{{ item.logType }}</localize> </umb-badge> <span> <localize key="auditTrails_{{ item.logType | lowercase }}" tokens="[item.parameters]">{{ item.comment }}</localize> </span> </div> </div> </div> </div> <div class="flex justify-center"> <umb-pagination ng-if="auditTrailOptions.totalPages > 1" page-number="auditTrailOptions.pageNumber" total-pages="auditTrailOptions.totalPages" on-change="auditTrailPageChange(pageNumber)"> </umb-pagination> </div> </umb-box-content> </umb-box> </div> <div class="umb-package-details__sidebar"> <umb-box data-element="node-info-general"> <umb-box-header title-key="general_general"></umb-box-header> <umb-box-content class="block-form"> <umb-control-group data-element="node-info-status" label="@general_status"> <umb-badge size="xs" color="{{status.color}}"> <umb-variant-state variant="currentVariant"></umb-variant-state> </umb-badge> </umb-control-group> <umb-control-group ng-show="node.id !== 0" data-element="node-info-create-date" label="@template_createdDate"> {{currentVariant.createDateFormatted}} </umb-control-group> <umb-control-group data-element="node-info-document-type" label="@content_documentType"> <umb-node-preview style="min-width: 100%; margin-bottom: 0;" icon="node.icon" name="node.contentTypeName" alias="documentType.alias" allow-open="allowChangeDocumentType" on-open="openDocumentType(documentType)"> </umb-node-preview> </umb-control-group> <umb-control-group ng-if="disableTemplates == false" data-element="node-info-template" label="@template_template"> <div class="flex items-center"> <select class="input-block-level" ng-model="node.template" ng-options="key as value for (key, value) in availableTemplates" ng-change="updateTemplate(node.template)"> <option>{{chooseLabel}}...</option> </select> <a ng-show="allowChangeTemplate && node.template !== null" class="umb-node-preview__action" style="margin-left:15px;" ng-click="openTemplate()"> <localize key="general_open">Open</localize> </a> </div> </umb-control-group> <umb-control-group ng-show="node.id !== 0" data-element="node-info-id" label="Id"> <div>{{ node.id }}</div> <small>{{ node.key }}</small> </umb-control-group> </umb-box-content> </umb-box> </div> </div> ',
+                template: '<div class="umb-package-details"> <div class="umb-package-details__main-content"> <umb-box ng-if="currentUrls" data-element="node-info-urls"> <umb-box-header title-key="general_links"></umb-box-header> <umb-box-content class="block-form"> <ul class="nav nav-stacked" style="margin-bottom: 0;"> <li ng-repeat="url in currentUrls"> <a href="{{url.text}}" target="_blank" ng-if="url.isUrl"> <span ng-if="node.variants.length === 1 && url.culture" style="font-size: 13px; color: #cccccc; width: 50px;display: inline-block">{{url.culture}}</span> <i class="icon icon-out"></i> <span>{{url.text}}</span> </a> <div ng-if="!url.isUrl" style="margin-top: 4px;"> <span ng-if="node.variants.length === 1 && url.culture" style="font-size: 13px; color: #cccccc; width: 50px;display: inline-block">{{url.culture}}</span> <em>{{url.text}}</em> </div> </li> </ul> </umb-box-content> </umb-box> <umb-box data-element="node-info-redirects" style="display:none;" ng-cloak ng-show="!urlTrackerDisabled && hasRedirects"> <umb-box-header title-key="redirectUrls_redirectUrlManagement"></umb-box-header> <umb-box-content class="block-form"> <div style="position: relative;"> <div ng-if="loadingRedirectUrls" style="background: rgba(255, 255, 255, 0.8); position: absolute; top: 0; left: 0; right: 0; bottom: 0;"></div> <umb-load-indicator ng-if="loadingRedirectUrls"></umb-load-indicator> <div ng-show="hasRedirects"> <p><localize key="redirectUrls_panelInformation" class="ng-isolate-scope ng-scope">The following URLs redirect to this content item:</localize></p> <ul class="nav nav-stacked" style="margin-bottom: 0;"> <li ng-repeat="redirectUrl in redirectUrls"> <a href="{{redirectUrl.originalUrl}}" target="_blank"><i ng-class="value.icon" class="icon-out"></i> {{redirectUrl.originalUrl}}</a> </li> </ul> </div> </div> </umb-box-content> </umb-box> <umb-box data-element="node-info-history"> <umb-box-header title="{{historyLabel}}"> <umb-button ng-hide="node.trashed" type="button" button-style="outline" action="openRollback()" label-key="actions_rollback" size="xs" add-ellipsis="true"> </umb-button> </umb-box-header> <umb-box-content class="block-form"> <div style="position: relative;"> <div ng-show="loadingAuditTrail" style="background: rgba(255, 255, 255, 0.8); position: absolute; top: 0; left: 0; right: 0; bottom: 0;"></div> <umb-load-indicator ng-show="loadingAuditTrail"></umb-load-indicator> <div ng-show="auditTrail.length === 0" style="padding: 10px;"> <umb-empty-state position="center" size="small"> <localize key="content_noChanges"></localize> </umb-empty-state> </div> <div class="history"> <div ng-show="auditTrail.length > 1" class="history-line"></div> <div class="history-item" ng-repeat="item in auditTrail"> <div class="history-item__break"> <div class="history-item__avatar"> <umb-avatar color="secondary" size="xs" name="{{item.userName}}" img-src="{{item.userAvatars[3]}}" img-srcset="{{item.userAvatars[4]}} 2x, {{item.userAvatars[4]}} 3x"> </umb-avatar> </div> <div> <div>{{ item.userName }}</div> <div class="history-item__date">{{item.timestampFormatted}}</div> </div> </div> <div class="history-item__break"> <umb-badge class="history-item__badge" size="xs" color="{{item.logTypeColor}}"> <localize key="auditTrails_small{{ item.logType }}">{{ item.logType }}</localize> </umb-badge> <span> <localize key="auditTrails_{{ item.logType | lowercase }}" tokens="[item.parameters]">{{ item.comment }}</localize> </span> </div> </div> </div> </div> <div class="flex justify-center"> <umb-pagination ng-if="auditTrailOptions.totalPages > 1" page-number="auditTrailOptions.pageNumber" total-pages="auditTrailOptions.totalPages" on-change="auditTrailPageChange(pageNumber)"> </umb-pagination> </div> </umb-box-content> </umb-box> </div> <div class="umb-package-details__sidebar"> <umb-box data-element="node-info-general"> <umb-box-header title-key="general_general"></umb-box-header> <umb-box-content class="block-form"> <umb-control-group data-element="node-info-status" label="@general_status"> <umb-badge size="xs" color="{{status.color}}"> <umb-variant-state variant="currentVariant"></umb-variant-state> </umb-badge> </umb-control-group> <umb-control-group ng-show="node.id !== 0" data-element="node-info-create-date" label="@template_createdDate"> {{currentVariant.createDateFormatted}} </umb-control-group> <umb-control-group ng-show="node.id !== 0 && currentVariant.releaseDateFormatted" data-element="node-info-publish-date" label="@content_releaseDate"> {{currentVariant.releaseDateFormatted}} </umb-control-group> <umb-control-group ng-show="node.id !== 0 && currentVariant.expireDateFormatted" data-element="node-info-expire-date" label="@content_expireDate"> {{currentVariant.expireDateFormatted}} </umb-control-group> <umb-control-group data-element="node-info-document-type" label="@content_documentType"> <umb-node-preview style="min-width: 100%; margin-bottom: 0;" icon="node.icon" name="node.contentTypeName" alias="documentType.alias" allow-open="allowChangeDocumentType" on-open="openDocumentType(documentType)"> </umb-node-preview> </umb-control-group> <umb-control-group ng-if="disableTemplates == false" data-element="node-info-template" label="@template_template"> <div class="flex items-center"> <select class="input-block-level" ng-model="node.template" ng-options="key as value for (key, value) in availableTemplates" ng-change="updateTemplate(node.template)"> <option>{{chooseLabel}}...</option> </select> <button ng-show="allowChangeTemplate && node.template !== null" class="umb-node-preview__action" style="margin-left:15px;" ng-click="openTemplate()"> <localize key="general_open">Open</localize> </button> </div> </umb-control-group> <umb-control-group ng-show="node.id !== 0" data-element="node-info-id" label="Id"> <div>{{ node.id }}</div> <small>{{ node.key }}</small> </umb-control-group> </umb-box-content> </umb-box> </div> </div> ',
                 scope: { node: '=' },
                 link: link
             };
@@ -3911,7 +3930,7 @@ Use this directive to render a group of toggle buttons.
                 // disable the name field if the active content app is not "Content"
                 vm.nameDisabled = false;
                 angular.forEach(vm.editor.content.apps, function (app) {
-                    if (app.active && app.alias !== 'umbContent' && app.alias !== 'umbInfo') {
+                    if (app.active && app.alias !== 'umbContent' && app.alias !== 'umbInfo' && app.alias !== 'umbListView') {
                         vm.nameDisabled = true;
                     }
                 });
@@ -3956,7 +3975,7 @@ Use this directive to render a group of toggle buttons.
                 var app = $args.app;
                 // disable the name field if the active content app is not "Content" or "Info"
                 vm.nameDisabled = false;
-                if (app && app.alias !== 'umbContent' && app.alias !== 'umbInfo') {
+                if (app && app.alias !== 'umbContent' && app.alias !== 'umbInfo' && app.alias !== 'umbListView') {
                     vm.nameDisabled = true;
                 }
             });
@@ -4629,9 +4648,10 @@ Use this directive to generate a list of breadcrumbs.
             var directive = {
                 restrict: 'E',
                 replace: true,
-                template: '<ul class="umb-breadcrumbs"> <li class="umb-breadcrumbs__ancestor" ng-repeat="ancestor in ancestors">  <a ng-if="!$last && !allowOnOpen" ng-href="#{{::pathTo(ancestor)}}" ng-click="openPath(ancestor, $event)" class="umb-breadcrumbs__ancestor-link" title="{{ancestor.name}}">{{ancestor.name}}</a>  <a ng-if="!$last && allowOnOpen" href="#" ng-click="open(ancestor)" class="umb-breadcrumbs__ancestor-link" title="{{ancestor.name}}" prevent-default>{{ancestor.name}}</a> <span ng-if="!$last" class="umb-breadcrumbs__separator">&#47;</span> <span class="umb-breadcrumbs__ancestor-text" ng-if="$last" title="{{ancestor.name}}">{{ancestor.name}}</span> </li> </ul> ',
+                template: '<ul class="umb-breadcrumbs"> <li class="umb-breadcrumbs__ancestor" ng-repeat="ancestor in ancestors">  <a ng-if="(!$last || forNewEntity) && !allowOnOpen" ng-href="#{{::pathTo(ancestor)}}" ng-click="openPath(ancestor, $event)" class="umb-breadcrumbs__ancestor-link" title="{{ancestor.name}}">{{ancestor.name}}</a>  <a ng-if="(!$last || forNewEntity) && allowOnOpen" href="#" ng-click="open(ancestor)" class="umb-breadcrumbs__ancestor-link" title="{{ancestor.name}}" prevent-default>{{ancestor.name}}</a> <span ng-if="(!$last || forNewEntity)" class="umb-breadcrumbs__separator">&#47;</span> <span class="umb-breadcrumbs__ancestor-text" ng-if="$last && !forNewEntity" title="{{ancestor.name}}">{{ancestor.name}}</span> </li> </ul> ',
                 scope: {
                     ancestors: '=',
+                    forNewEntity: '=',
                     entityType: '@',
                     onOpen: '&'
                 },
@@ -4889,7 +4909,7 @@ Use this directive to construct a main content area inside the main editor windo
                 transclude: true,
                 restrict: 'E',
                 replace: true,
-                template: '<div data-element="editor-header" class="umb-editor-header" ng-class="{\'-split-view-active\': splitViewOpen === true}"> <div class="flex items-center" style="height: 100%;"> <div ng-if="showBackButton === true && splitViewOpen !== true" style="margin-right: 15px;"> <button type="button" class="umb-editor-header__back" ng-click="goBack()" prevent-default> <i class="fa fa-arrow-left" aria-hidden="true"></i> <span class="sr-only"><localize key="visuallyHiddenTexts_goBack">Go back</localize></span> </button> </div> <div class="flex items-center" style="flex: 1;"> <div id="nameField" class="umb-editor-header__name-and-description" style="flex: 1 1 auto;"> <div> <p tabindex="0" class="sr-only"> {{a11yMessage}} </p> </div> <div class="umb-editor-header__name-wrapper"> <label for="headerName" class="sr-only">{{a11yName}}</label> <ng-form name="headerNameForm"> <input data-element="editor-name-field" type="text" class="umb-editor-header__name-input" localize="placeholder" placeholder="@placeholders_entername" name="headerName" id="headerName" ng-model="name" ng-class="{\'name-is-empty\': $parent.name===null || $parent.name===\'\'}" ng-disabled="nameDisabled" umb-auto-focus val-server-field="{{serverValidationNameField}}" required aria-required="true" aria-invalid="{{contentForm.headerNameForm.headerName.$invalid ? true : false}}" autocomplete="off" maxlength="255"> </ng-form> <a ng-if="content.variants.length > 0 && hideChangeVariant !== true" class="umb-variant-switcher__toggle" ng-click="vm.dropdownOpen = !vm.dropdownOpen" ng-class="{\'--error\': vm.errorsOnOtherVariants}"> <span>{{vm.currentVariant.language.name}}</span> <ins class="umb-variant-switcher__expand" ng-class="{\'icon-navigation-down\': !vm.dropdownOpen, \'icon-navigation-up\': vm.dropdownOpen}">&nbsp;</ins> </a> <span ng-if="hideChangeVariant" class="umb-variant-switcher__toggle"> <span>{{vm.currentVariant.language.name}}</span> </span> <umb-dropdown ng-if="vm.dropdownOpen" style="min-width: 100%; max-height: 250px; overflow-y: auto; margin-top: 5px;" on-close="vm.dropdownOpen = false" umb-keyboard-list> <umb-dropdown-item class="umb-variant-switcher__item" ng-class="{\'--current\': variant.active, \'--not-allowed\': variantIsOpen(variant.language.culture), \'--error\': variantHasError(variant.language.culture)}" ng-repeat="variant in content.variants"> <a class="umb-variant-switcher__name-wrapper" ng-click="selectVariant($event, variant)" prevent-default> <span class="umb-variant-switcher__name">{{variant.language.name}}</span> <umb-variant-state variant="variant" class="umb-variant-switcher__state"></umb-variant-state> </a> <div ng-if="splitViewOpen !== true && !variant.active" class="umb-variant-switcher__split-view" ng-click="openInSplitView($event, variant)">Open in split view</div> </umb-dropdown-item> </umb-dropdown> </div> </div> </div> <div ng-if="splitViewOpen"> <a class="umb-editor-header__close-split-view" ng-click="closeSplitView()"> <i class="icon-delete"></i> </a> </div> <div ng-if="content.apps && splitViewOpen !== true"> <umb-editor-navigation data-element="editor-sub-views" navigation="content.apps" on-select="selectNavigationItem(item)" on-anchor-select="selectAnchorItem(item, anchor)"> </umb-editor-navigation> </div> <div ng-if="menu.currentNode && splitViewOpen !== true && hideActionsMenu !== true"> <umb-editor-menu data-element="editor-actions" current-node="menu.currentNode" current-section="{{menu.currentSection}}"> </umb-editor-menu> </div> </div> </div> ',
+                template: '<div data-element="editor-header" class="umb-editor-header" ng-class="{\'-split-view-active\': splitViewOpen === true}"> <div class="flex items-center" style="height: 100%;"> <div ng-if="showBackButton === true && splitViewOpen !== true" style="margin-right: 15px;"> <button type="button" class="umb-editor-header__back" ng-click="goBack()" prevent-default> <i class="fa fa-arrow-left" aria-hidden="true"></i> <span class="sr-only"><localize key="visuallyHiddenTexts_goBack">Go back</localize></span> </button> </div> <div class="flex items-center" style="flex: 1;"> <div id="nameField" class="umb-editor-header__name-and-description" style="flex: 1 1 auto;"> <div> <p tabindex="0" class="sr-only"> {{a11yMessage}} </p> </div> <div class="umb-editor-header__name-wrapper"> <label for="headerName" class="sr-only">{{a11yName}}</label> <ng-form name="headerNameForm"> <input data-element="editor-name-field" type="text" class="umb-editor-header__name-input" localize="placeholder" placeholder="@placeholders_entername" name="headerName" id="headerName" ng-model="name" ng-class="{\'name-is-empty\': $parent.name===null || $parent.name===\'\'}" ng-disabled="nameDisabled" umb-auto-focus focus-on-filled="true" val-server-field="{{serverValidationNameField}}" required aria-required="true" aria-invalid="{{contentForm.headerNameForm.headerName.$invalid ? true : false}}" autocomplete="off" maxlength="255"> </ng-form> <a ng-if="content.variants.length > 0 && hideChangeVariant !== true" class="umb-variant-switcher__toggle" ng-click="vm.dropdownOpen = !vm.dropdownOpen" ng-class="{\'--error\': vm.errorsOnOtherVariants}"> <span>{{vm.currentVariant.language.name}}</span> <ins class="umb-variant-switcher__expand" ng-class="{\'icon-navigation-down\': !vm.dropdownOpen, \'icon-navigation-up\': vm.dropdownOpen}">&nbsp;</ins> </a> <span ng-if="hideChangeVariant" class="umb-variant-switcher__toggle"> <span>{{vm.currentVariant.language.name}}</span> </span> <umb-dropdown ng-if="vm.dropdownOpen" style="min-width: 100%; max-height: 250px; overflow-y: auto; margin-top: 5px;" on-close="vm.dropdownOpen = false" umb-keyboard-list> <umb-dropdown-item class="umb-variant-switcher__item" ng-class="{\'--current\': variant.active, \'--not-allowed\': variantIsOpen(variant.language.culture), \'--error\': variantHasError(variant.language.culture)}" ng-repeat="variant in content.variants"> <a class="umb-variant-switcher__name-wrapper" ng-click="selectVariant($event, variant)" prevent-default> <span class="umb-variant-switcher__name">{{variant.language.name}}</span> <umb-variant-state variant="variant" class="umb-variant-switcher__state"></umb-variant-state> </a> <div ng-if="splitViewOpen !== true && !variant.active" class="umb-variant-switcher__split-view" ng-click="openInSplitView($event, variant)">Open in split view</div> </umb-dropdown-item> </umb-dropdown> </div> </div> </div> <div ng-if="splitViewOpen"> <a class="umb-editor-header__close-split-view" ng-click="closeSplitView()"> <i class="icon-delete"></i> </a> </div> <div ng-if="content.apps && splitViewOpen !== true"> <umb-editor-navigation data-element="editor-sub-views" navigation="content.apps" on-select="selectNavigationItem(item)" on-anchor-select="selectAnchorItem(item, anchor)"> </umb-editor-navigation> </div> <div ng-if="menu.currentNode && splitViewOpen !== true && hideActionsMenu !== true"> <umb-editor-menu data-element="editor-actions" current-node="menu.currentNode" current-section="{{menu.currentSection}}"> </umb-editor-menu> </div> </div> </div> ',
                 scope: {
                     name: '=',
                     nameDisabled: '<?',
@@ -5287,18 +5307,47 @@ Use this directive to construct a header inside the main editor window.
 @param {string=} icon Show and edit the content icon. Opens an overlay to change the icon.
 @param {boolean=} hideIcon Set to <code>true</code> to hide icon.
 @param {string=} alias show and edit the content alias.
+@param {boolean=} aliasLocked Set to <code>true</code> to lock the alias.
 @param {boolean=} hideAlias Set to <code>true</code> to hide alias.
 @param {string=} description Add a description to the content.
 @param {boolean=} hideDescription Set to <code>true</code> to hide description.
-
+@param {boolean=} setpagetitle If true the page title will be set to reflect the type of data the header is working with 
+@param {string=} editorfor The localization to use to aid accessibility on the edit and create screen
 **/
     (function () {
         'use strict';
-        function EditorHeaderDirective(editorService) {
-            function link(scope) {
+        function EditorHeaderDirective(editorService, localizationService, editorState) {
+            function link(scope, $injector) {
                 scope.vm = {};
                 scope.vm.dropdownOpen = false;
                 scope.vm.currentVariant = '';
+                scope.loading = true;
+                scope.accessibility = {};
+                scope.accessibility.a11yMessage = '';
+                scope.accessibility.a11yName = '';
+                scope.accessibility.a11yMessageVisible = false;
+                scope.accessibility.a11yNameVisible = false;
+                // need to call localizationService service outside of routine to set a11y due to promise requirements
+                if (editorState.current) {
+                    //to do make work for user create/edit
+                    // to do make it work for user group create/ edit
+                    // to make it work for language edit/create
+                    scope.isNew = editorState.current.id === 0 || editorState.current.id === '0' || editorState.current.id === -1 || editorState.current.id === 0 || editorState.current.id === '-1';
+                    var localizeVars = [
+                        scope.isNew ? 'placeholders_a11yCreateItem' : 'placeholders_a11yEdit',
+                        'placeholders_a11yName',
+                        scope.isNew ? 'general_new' : 'general_edit'
+                    ];
+                    if (scope.editorfor) {
+                        localizeVars.push(scope.editorfor);
+                    }
+                    localizationService.localizeMany(localizeVars).then(function (data) {
+                        setAccessibilityForEditor(data);
+                        scope.loading = false;
+                    });
+                } else {
+                    scope.loading = false;
+                }
                 scope.goBack = function () {
                     if (scope.onBack) {
                         scope.onBack();
@@ -5331,12 +5380,57 @@ Use this directive to construct a header inside the main editor window.
                     };
                     editorService.iconPicker(iconPicker);
                 };
+                function setAccessibilityForEditor(data) {
+                    if (editorState.current) {
+                        if (scope.nameLocked) {
+                            scope.accessibility.a11yName = scope.name;
+                            SetPageTitle(scope.name);
+                        } else {
+                            scope.accessibility.a11yMessage = data[0];
+                            scope.accessibility.a11yName = data[1];
+                            var title = data[2] + ':';
+                            if (!scope.isNew) {
+                                scope.accessibility.a11yMessage += ' ' + scope.name;
+                                title += ' ' + scope.name;
+                            } else {
+                                var name = '';
+                                if (editorState.current.contentTypeName) {
+                                    name = editorState.current.contentTypeName;
+                                } else if (scope.editorfor) {
+                                    name = data[3];
+                                }
+                                if (name !== '') {
+                                    scope.accessibility.a11yMessage += ' ' + name;
+                                    scope.accessibility.a11yName = name + ' ' + scope.accessibility.a11yName;
+                                    title += ' ' + name;
+                                }
+                            }
+                            if (title !== data[2] + ':') {
+                                SetPageTitle(title);
+                            }
+                        }
+                        scope.accessibility.a11yMessageVisible = !isEmptyOrSpaces(scope.accessibility.a11yMessage);
+                        scope.accessibility.a11yNameVisible = !isEmptyOrSpaces(scope.accessibility.a11yName);
+                    }
+                }
+                function isEmptyOrSpaces(str) {
+                    return str === null || str === undefined || str.trim === '';
+                }
+                function SetPageTitle(title) {
+                    var setTitle = false;
+                    if (scope.setpagetitle !== undefined) {
+                        setTitle = scope.setpagetitle;
+                    }
+                    if (setTitle) {
+                        scope.$emit('$changeTitle', title);
+                    }
+                }
             }
             var directive = {
                 transclude: true,
                 restrict: 'E',
                 replace: true,
-                template: ' <div data-element="editor-header" class="umb-editor-header" ng-class="{\'-split-view-active\': splitViewOpen === true}"> <div class="flex items-center" style="height: 100%;"> <div ng-if="showBackButton === true && splitViewOpen !== true" style="margin-right: 15px;"> <button type="button" class="umb-editor-header__back" ng-click="goBack()" prevent-default> <i class="fa fa-arrow-left" aria-hidden="true"></i> <span class="sr-only"><localize key="visuallyHiddenTexts_goBack">Go back</localize></span> </button> </div> <div class="flex items-center" style="flex: 1;"> <ng-form data-element="editor-icon" name="iconForm"> <div class="umb-panel-header-icon" ng-if="!hideIcon" ng-click="openIconPicker()" ng-class="{\'-placeholder\': $parent.icon===\'\' || $parent.icon===null}" title="{{$parent.icon}}"> <i class="icon {{$parent.icon}}" ng-if="$parent.icon!==\'\' && $parent.icon!==null"></i> <div class="umb-panel-header-icon-text" ng-if="$parent.icon===\'\' || $parent.icon===null"> <localize key="settings_addIcon"></localize> </div> </div> </ng-form> <div id="nameField" class="umb-editor-header__name-and-description" style="flex: 1 1 auto;"> <div class="umb-editor-header__name-wrapper" ng-show="!nameLocked || !hideAlias"> <ng-form name="headerNameForm"> <input data-element="editor-name-field" no-password-manager title="{{key}}" type="text" class="umb-editor-header__name-input" localize="placeholder" placeholder="@placeholders_entername" name="headerName" ng-show="!nameLocked" ng-model="name" ng-class="{\'name-is-empty\': $parent.name===null || $parent.name===\'\'}" umb-auto-focus val-server-field="Name" required autocomplete="off"> </ng-form> <umb-generate-alias data-element="editor-alias" class="umb-panel-header-alias" ng-if="!hideAlias" alias="$parent.alias" alias-from="$parent.name" enable-lock="true" validation-position="\'right\'" server-validation-field="Alias"> </umb-generate-alias> </div> <div class="umb-panel-header-name" ng-if="nameLocked" title="{{key}}">{{ name }}</div> <input data-element="editor-description" no-password-manager type="text" class="umb-panel-header-description" localize="placeholder" placeholder="@placeholders_enterDescription" ng-if="!hideDescription && !descriptionLocked" ng-model="$parent.description"> <div class="umb-panel-header-locked-description" ng-if="descriptionLocked">{{ description }}</div> </div> </div> <div ng-if="navigation && splitViewOpen !== true"> <umb-editor-navigation data-element="editor-sub-views" navigation="navigation" on-select="selectNavigationItem(item)"> </umb-editor-navigation> </div> <div ng-if="menu.currentNode && splitViewOpen !== true && hideActionsMenu !== true"> <umb-editor-menu data-element="editor-actions" current-node="menu.currentNode" current-section="{{menu.currentSection}}"> </umb-editor-menu> </div> </div> </div> ',
+                template: ' <div data-element="editor-header" class="umb-editor-header" ng-class="{\'-split-view-active\': splitViewOpen === true}"> <umb-loader ng-show="loading"></umb-loader> <div class="flex items-center" style="height: 100%;" ng-hide="loading"> <div ng-if="showBackButton === true && splitViewOpen !== true" style="margin-right: 15px;"> <button type="button" class="umb-editor-header__back" ng-click="goBack()" prevent-default> <i class="fa fa-arrow-left" aria-hidden="true"></i> <span class="sr-only"><localize key="visuallyHiddenTexts_goBack">Go back</localize></span> </button> </div> <div class="flex items-center" style="flex: 1;"> <ng-form data-element="editor-icon" name="iconForm"> <div class="umb-panel-header-icon" ng-if="!hideIcon" ng-click="openIconPicker()" ng-class="{\'-placeholder\': $parent.icon===\'\' || $parent.icon===null}" title="{{$parent.icon}}"> <i class="icon {{$parent.icon}}" ng-if="$parent.icon!==\'\' && $parent.icon!==null"></i> <div class="umb-panel-header-icon-text" ng-if="$parent.icon===\'\' || $parent.icon===null"> <localize key="settings_addIcon"></localize> </div> </div> </ng-form> <div id="nameField" class="umb-editor-header__name-and-description" style="flex: 1 1 auto;"> <div> <p tabindex="0" class="sr-only" ng-show="accessibility.a11yMessageVisible"> {{accessibility.a11yMessage}} </p> </div> <div class="umb-editor-header__name-wrapper" ng-show="!nameLocked || !hideAlias"> <label for="headerName" class="sr-only" ng-show="accessibility.a11yNameVisible">{{accessibility.a11yName}}</label> <ng-form name="headerNameForm"> <input data-element="editor-name-field" no-password-manager type="text" id="headerName" class="umb-editor-header__name-input" localize="placeholder" placeholder="@placeholders_entername" name="headerName" ng-show="!nameLocked" ng-model="name" ng-class="{\'name-is-empty\': $parent.name===null || $parent.name===\'\'}" umb-auto-focus focus-on-filled="true" val-server-field="Name" required aria-required="true" aria-invalid="{{contentForm.headerNameForm.headerName.$invalid ? true : false}}" autocomplete="off" maxlength="255"> </ng-form> <umb-generate-alias data-element="editor-alias" class="umb-panel-header-alias" ng-if="!hideAlias" alias="$parent.alias" alias-from="$parent.name" enable-lock="aliasLocked !== true" validation-position="\'right\'" server-validation-field="Alias"> </umb-generate-alias> </div> <div class="umb-panel-header-name" ng-if="nameLocked" title="{{key}}">{{ name }}</div> <input data-element="editor-description" no-password-manager type="text" class="umb-panel-header-description" localize="placeholder" placeholder="@placeholders_enterDescription" ng-if="!hideDescription && !descriptionLocked" ng-model="$parent.description"> <div class="umb-panel-header-locked-description" ng-if="descriptionLocked">{{ description }}</div> </div> </div> <div ng-if="navigation && splitViewOpen !== true"> <umb-editor-navigation data-element="editor-sub-views" navigation="navigation" on-select="selectNavigationItem(item)"> </umb-editor-navigation> </div> <div ng-if="menu.currentNode && splitViewOpen !== true && hideActionsMenu !== true"> <umb-editor-menu data-element="editor-actions" current-node="menu.currentNode" current-section="{{menu.currentSection}}"> </umb-editor-menu> </div> </div> </div> ',
                 scope: {
                     name: '=',
                     nameLocked: '=',
@@ -5345,6 +5439,7 @@ Use this directive to construct a header inside the main editor window.
                     icon: '=',
                     hideIcon: '@',
                     alias: '=',
+                    aliasLocked: '<',
                     hideAlias: '=',
                     description: '=',
                     hideDescription: '@',
@@ -5353,7 +5448,9 @@ Use this directive to construct a header inside the main editor window.
                     onSelectNavigationItem: '&?',
                     key: '=',
                     onBack: '&?',
-                    showBackButton: '<?'
+                    showBackButton: '<?',
+                    editorfor: '=',
+                    setpagetitle: '='
                 },
                 link: link
             };
@@ -5650,7 +5747,7 @@ Use this directive to construct a header inside the main editor window.
             var directive = {
                 restrict: 'E',
                 replace: true,
-                template: '<div class="umb-editors"> <div class="umb-editor" ng-repeat="model in editors" ng-class="{\'umb-editor--small\': model.size === \'small\', \'umb-editor--animating\': model.animating, \'--notInFront\': model.inFront !== true, \'umb-editor--infiniteMode\': model.infiniteMode, \'moveRight\': model.moveRight, \'umb-editor--n0\': model.styleIndex === 0, \'umb-editor--n1\': model.styleIndex === 1, \'umb-editor--n2\': model.styleIndex === 2, \'umb-editor--n3\': model.styleIndex === 3, \'umb-editor--outOfRange\': model.level === -1, \'umb-editor--level0\': model.level === 0, \'umb-editor--level1\': model.level === 1, \'umb-editor--level2\': model.level === 2, \'umb-editor--level3\': model.level === 3}"> <div ng-if="!model.view && !model.animating" ng-transclude></div> <div ng-if="model.view && !model.animating" ng-include="model.view"></div> <div class="umb-editor__overlay"></div> </div> </div> ',
+                template: '<div class="umb-editors"> <div class="umb-editor" ng-repeat="model in editors" ng-class="{\'umb-editor--small\': model.size === \'small\', \'umb-editor--medium\': model.size === \'medium\', \'umb-editor--animating\': model.animating, \'umb-editor--notInFront\': model.inFront !== true, \'umb-editor--infiniteMode\': model.infiniteMode, \'umb-editor--moveRight\': model.moveRight, \'umb-editor--n0\': model.styleIndex === 0, \'umb-editor--n1\': model.styleIndex === 1, \'umb-editor--n2\': model.styleIndex === 2, \'umb-editor--n3\': model.styleIndex === 3, \'umb-editor--outOfRange\': model.level === -1, \'umb-editor--level0\': model.level === 0, \'umb-editor--level1\': model.level === 1, \'umb-editor--level2\': model.level === 2, \'umb-editor--level3\': model.level === 3}"> <div ng-if="!model.view && !model.animating" ng-transclude></div> <div ng-if="model.view && !model.animating" ng-include="model.view"></div> <div class="umb-editor__overlay"></div> </div> </div> ',
                 link: link
             };
             return directive;
@@ -5792,186 +5889,44 @@ Use this directive to construct the main editor window.
         angular.module('umbraco.directives').directive('umbEditorView', EditorViewDirective);
     }());
     'use strict';
-    /**
-* @description Utillity directives for key and field events
-**/
-    angular.module('umbraco.directives').directive('onDragEnter', function () {
-        return {
-            link: function link(scope, elm, attrs) {
-                var f = function f() {
-                    scope.$apply(attrs.onDragEnter);
-                };
-                elm.on('dragenter', f);
-                scope.$on('$destroy', function () {
-                    elm.off('dragenter', f);
-                });
-            }
-        };
-    }).directive('onDragLeave', function () {
-        return function (scope, elm, attrs) {
-            var f = function f(event) {
-                var rect = this.getBoundingClientRect();
-                var getXY = function getCursorPosition(event) {
-                    var x, y;
-                    if (typeof event.clientX === 'undefined') {
-                        // try touch screen
-                        x = event.pageX + document.documentElement.scrollLeft;
-                        y = event.pageY + document.documentElement.scrollTop;
-                    } else {
-                        x = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-                        y = event.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-                    }
-                    return {
-                        x: x,
-                        y: y
-                    };
-                };
-                var e = getXY(event.originalEvent);
-                // Check the mouseEvent coordinates are outside of the rectangle
-                if (e.x > rect.left + rect.width - 1 || e.x < rect.left || e.y > rect.top + rect.height - 1 || e.y < rect.top) {
-                    scope.$apply(attrs.onDragLeave);
-                }
-            };
-            elm.on('dragleave', f);
-            scope.$on('$destroy', function () {
-                elm.off('dragleave', f);
-            });
-        };
-    }).directive('onDragOver', function () {
-        return {
-            link: function link(scope, elm, attrs) {
-                var f = function f() {
-                    scope.$apply(attrs.onDragOver);
-                };
-                elm.on('dragover', f);
-                scope.$on('$destroy', function () {
-                    elm.off('dragover', f);
-                });
-            }
-        };
-    }).directive('onDragStart', function () {
-        return {
-            link: function link(scope, elm, attrs) {
-                var f = function f() {
-                    scope.$apply(attrs.onDragStart);
-                };
-                elm.on('dragstart', f);
-                scope.$on('$destroy', function () {
-                    elm.off('dragstart', f);
-                });
-            }
-        };
-    }).directive('onDragEnd', function () {
-        return {
-            link: function link(scope, elm, attrs) {
-                var f = function f() {
-                    scope.$apply(attrs.onDragEnd);
-                };
-                elm.on('dragend', f);
-                scope.$on('$destroy', function () {
-                    elm.off('dragend', f);
-                });
-            }
-        };
-    }).directive('onDrop', function () {
-        return {
-            link: function link(scope, elm, attrs) {
-                var f = function f() {
-                    scope.$apply(attrs.onDrop);
-                };
-                elm.on('drop', f);
-                scope.$on('$destroy', function () {
-                    elm.off('drop', f);
-                });
-            }
-        };
-    }).directive('onOutsideClick', function ($timeout, angularHelper) {
-        return function (scope, element, attrs) {
-            var eventBindings = [];
-            function oneTimeClick(event) {
-                var el = event.target.nodeName;
-                //ignore link and button clicks
-                var els = [
-                    'INPUT',
-                    'A',
-                    'BUTTON'
-                ];
-                if (els.indexOf(el) >= 0) {
-                    return;
-                }
-                // ignore clicks on new overlay
-                var parents = $(event.target).parents('a,button,.umb-overlay,.umb-tour');
-                if (parents.length > 0) {
-                    return;
-                }
-                // ignore clicks on dialog from old dialog service
-                var oldDialog = $(event.target).parents('#old-dialog-service');
-                if (oldDialog.length === 1) {
-                    return;
-                }
-                // ignore clicks in tinyMCE dropdown(floatpanel)
-                var floatpanel = $(event.target).closest('.mce-floatpanel');
-                if (floatpanel.length === 1) {
-                    return;
-                }
-                // ignore clicks in flatpickr datepicker
-                var flatpickr = $(event.target).closest('.flatpickr-calendar');
-                if (flatpickr.length === 1) {
-                    return;
-                }
-                //ignore clicks inside this element
-                if ($(element).has($(event.target)).length > 0) {
-                    return;
-                }
-                // please to not use angularHelper.safeApply here, it won't work
-                scope.$apply(attrs.onOutsideClick);
-            }
-            $timeout(function () {
-                if ('bindClickOn' in attrs) {
-                    eventBindings.push(scope.$watch(function () {
-                        return attrs.bindClickOn;
-                    }, function (newValue) {
-                        if (newValue === 'true') {
-                            $(document).on('click', oneTimeClick);
-                        } else {
-                            $(document).off('click', oneTimeClick);
+    // A slightly modified version of https://github.com/myplanet/angular-deep-blur/blob/master/angular-deep-blur.js - Kudos to Ufuk Kayserilioglu (paracycle)
+    (function () {
+        'use strict';
+        function DeepBlurDirective($timeout) {
+            function controller($scope, $element, $attrs) {
+                var leaveExpr = $attrs.deepBlur, dom = $element[0];
+                function containsDom(parent, dom) {
+                    while (dom) {
+                        if (dom === parent) {
+                            return true;
                         }
-                    }));
-                } else {
-                    $(document).on('click', oneTimeClick);
-                }
-                scope.$on('$destroy', function () {
-                    $(document).off('click', oneTimeClick);
-                    // unbind watchers
-                    for (var e in eventBindings) {
-                        eventBindings[e]();
+                        dom = dom.parentNode;
                     }
-                });
-            });    // Temp removal of 1 sec timeout to prevent bug where overlay does not open. We need to find a better solution.
-        };
-    }).directive('onRightClick', function ($parse) {
-        document.oncontextmenu = function (e) {
-            if (e.target.hasAttribute('on-right-click')) {
-                e.preventDefault();
-                e.stopPropagation();
-                return false;
+                    return false;
+                }
+                function onBlur(e) {
+                    var targetElement = e.relatedTarget;
+                    if (!containsDom(dom, targetElement)) {
+                        $timeout(function () {
+                            $scope.$apply(leaveExpr);
+                        }, 10);
+                    }
+                }
+                dom.addEventListener('blur', onBlur, true);
             }
-        };
-        return function (scope, el, attrs) {
-            el.on('contextmenu', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                var fn = $parse(attrs.onRightClick);
-                scope.$apply(function () {
-                    fn(scope, { $event: e });
-                });
-                return false;
-            });
-        };
-    }).directive('onDelayedMouseleave', function ($timeout, $parse) {
-        return {
-            restrict: 'A',
-            link: function link(scope, element, attrs, ctrl) {
+            var directive = {
+                restrict: 'A',
+                controller: controller
+            };
+            return directive;
+        }
+        angular.module('umbraco.directives').directive('deepBlur', DeepBlurDirective);
+    }());
+    'use strict';
+    (function () {
+        'use strict';
+        function onDelayedMouseleaveDirective($timeout, $parse) {
+            function link(scope, element, attrs, ctrl) {
                 var active = false;
                 var fn = $parse(attrs.onDelayedMouseleave);
                 var leave_f = function leave_f(event) {
@@ -5996,34 +5951,235 @@ Use this directive to construct the main editor window.
                     element.off('mouseenter', enter_f);
                 });
             }
-        };
-    })    // A slightly modified version of https://github.com/myplanet/angular-deep-blur/blob/master/angular-deep-blur.js - Kudos to Ufuk Kayserilioglu (paracycle)
-.directive('deepBlur', function ($timeout) {
-        return {
-            restrict: 'A',
-            controller: function controller($scope, $element, $attrs) {
-                var leaveExpr = $attrs.deepBlur, dom = $element[0];
-                function containsDom(parent, dom) {
-                    while (dom) {
-                        if (dom === parent) {
-                            return true;
+            var directive = {
+                restrict: 'A',
+                link: link
+            };
+            return directive;
+        }
+        angular.module('umbraco.directives').directive('onDelayedMouseleave', onDelayedMouseleaveDirective);
+    }());
+    'use strict';
+    (function () {
+        'use strict';
+        function onDragEndDirective() {
+            function link(scope, elm, attrs) {
+                var f = function f() {
+                    scope.$apply(attrs.onDragEnd);
+                };
+                elm.on('dragend', f);
+                scope.$on('$destroy', function () {
+                    elm.off('dragend', f);
+                });
+            }
+            var directive = { link: link };
+            return directive;
+        }
+        angular.module('umbraco.directives').directive('onDragEnd', onDragEndDirective);
+    }());
+    'use strict';
+    (function () {
+        'use strict';
+        function onDragEnterDirective() {
+            function link(scope, elm, attrs) {
+                var f = function f() {
+                    scope.$apply(attrs.onDragEnter);
+                };
+                elm.on('dragenter', f);
+                scope.$on('$destroy', function () {
+                    elm.off('dragenter', f);
+                });
+            }
+            var directive = { link: link };
+            return directive;
+        }
+        angular.module('umbraco.directives').directive('onDragEnter', onDragEnterDirective);
+    }());
+    'use strict';
+    (function () {
+        'use strict';
+        function onDragLeaveDirective($timeout) {
+            return function (scope, elm, attrs) {
+                var f = function f(event) {
+                    var rect = this.getBoundingClientRect();
+                    var getXY = function getCursorPosition(event) {
+                        var x, y;
+                        if (typeof event.clientX === 'undefined') {
+                            // try touch screen
+                            x = event.pageX + document.documentElement.scrollLeft;
+                            y = event.pageY + document.documentElement.scrollTop;
+                        } else {
+                            x = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+                            y = event.clientY + document.body.scrollTop + document.documentElement.scrollTop;
                         }
-                        dom = dom.parentNode;
+                        return {
+                            x: x,
+                            y: y
+                        };
+                    };
+                    var e = getXY(event.originalEvent);
+                    // Check the mouseEvent coordinates are outside of the rectangle
+                    if (e.x > rect.left + rect.width - 1 || e.x < rect.left || e.y > rect.top + rect.height - 1 || e.y < rect.top) {
+                        scope.$apply(attrs.onDragLeave);
                     }
+                };
+                elm.on('dragleave', f);
+                scope.$on('$destroy', function () {
+                    elm.off('dragleave', f);
+                });
+            };
+        }
+        angular.module('umbraco.directives').directive('onDragLeave', onDragLeaveDirective);
+    }());
+    'use strict';
+    (function () {
+        'use strict';
+        function onDragOverDirective() {
+            function link(scope, elm, attrs) {
+                var f = function f() {
+                    scope.$apply(attrs.onDragOver);
+                };
+                elm.on('dragover', f);
+                scope.$on('$destroy', function () {
+                    elm.off('dragover', f);
+                });
+            }
+            var directive = { link: link };
+            return directive;
+        }
+        angular.module('umbraco.directives').directive('onDragOver', onDragOverDirective);
+    }());
+    'use strict';
+    (function () {
+        'use strict';
+        function onDragStartDirective($timeout) {
+            function link(scope, elm, attrs) {
+                var f = function f() {
+                    scope.$apply(attrs.onDragStart);
+                };
+                elm.on('dragstart', f);
+                scope.$on('$destroy', function () {
+                    elm.off('dragstart', f);
+                });
+            }
+            var directive = { link: link };
+            return directive;
+        }
+        angular.module('umbraco.directives').directive('onDragStart', onDragStartDirective);
+    }());
+    'use strict';
+    (function () {
+        'use strict';
+        function onDropDirective() {
+            function link(scope, elm, attrs) {
+                var f = function f() {
+                    scope.$apply(attrs.onDrop);
+                };
+                elm.on('drop', f);
+                scope.$on('$destroy', function () {
+                    elm.off('drop', f);
+                });
+            }
+            var directive = { link: link };
+            return directive;
+        }
+        angular.module('umbraco.directives').directive('onDrop', onDropDirective);
+    }());
+    'use strict';
+    (function () {
+        'use strict';
+        function onOutsideClickDirective($timeout, angularHelper) {
+            return function (scope, element, attrs) {
+                var eventBindings = [];
+                function oneTimeClick(event) {
+                    var el = event.target.nodeName;
+                    //ignore link and button clicks
+                    var els = [
+                        'INPUT',
+                        'A',
+                        'BUTTON'
+                    ];
+                    if (els.indexOf(el) >= 0) {
+                        return;
+                    }
+                    // ignore clicks on new overlay
+                    var parents = $(event.target).parents('a,button,.umb-overlay,.umb-tour');
+                    if (parents.length > 0) {
+                        return;
+                    }
+                    // ignore clicks on dialog from old dialog service
+                    var oldDialog = $(event.target).parents('#old-dialog-service');
+                    if (oldDialog.length === 1) {
+                        return;
+                    }
+                    // ignore clicks in tinyMCE dropdown(floatpanel)
+                    var floatpanel = $(event.target).closest('.mce-floatpanel');
+                    if (floatpanel.length === 1) {
+                        return;
+                    }
+                    // ignore clicks in flatpickr datepicker
+                    var flatpickr = $(event.target).closest('.flatpickr-calendar');
+                    if (flatpickr.length === 1) {
+                        return;
+                    }
+                    //ignore clicks inside this element
+                    if ($(element).has($(event.target)).length > 0) {
+                        return;
+                    }
+                    // please to not use angularHelper.safeApply here, it won't work
+                    scope.$apply(attrs.onOutsideClick);
+                }
+                $timeout(function () {
+                    if ('bindClickOn' in attrs) {
+                        eventBindings.push(scope.$watch(function () {
+                            return attrs.bindClickOn;
+                        }, function (newValue) {
+                            if (newValue === 'true') {
+                                $(document).on('click', oneTimeClick);
+                            } else {
+                                $(document).off('click', oneTimeClick);
+                            }
+                        }));
+                    } else {
+                        $(document).on('click', oneTimeClick);
+                    }
+                    scope.$on('$destroy', function () {
+                        $(document).off('click', oneTimeClick);
+                        // unbind watchers
+                        for (var e in eventBindings) {
+                            eventBindings[e]();
+                        }
+                    });
+                });    // Temp removal of 1 sec timeout to prevent bug where overlay does not open. We need to find a better solution.
+            };
+        }
+        angular.module('umbraco.directives').directive('onOutsideClick', onOutsideClickDirective);
+    }());
+    'use strict';
+    (function () {
+        'use strict';
+        function onRightClickDirective($parse) {
+            document.oncontextmenu = function (e) {
+                if (e.target.hasAttribute('on-right-click')) {
+                    e.preventDefault();
+                    e.stopPropagation();
                     return false;
                 }
-                function onBlur(e) {
-                    var targetElement = e.relatedTarget;
-                    if (!containsDom(dom, targetElement)) {
-                        $timeout(function () {
-                            $scope.$apply(leaveExpr);
-                        }, 10);
-                    }
-                }
-                dom.addEventListener('blur', onBlur, true);
-            }
-        };
-    });
+            };
+            return function (scope, el, attrs) {
+                el.on('contextmenu', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var fn = $parse(attrs.onRightClick);
+                    scope.$apply(function () {
+                        fn(scope, { $event: e });
+                    });
+                    return false;
+                });
+            };
+        }
+        angular.module('umbraco.directives').directive('onRightClick', onRightClickDirective);
+    }());
     'use strict';
     /*
   
@@ -6541,7 +6697,9 @@ Use this directive to prevent default action of an element. Effectively implemen
                 var unbindModelWatcher = scope.$watch(function () {
                     return ngModelController.$modelValue;
                 }, function (newValue) {
-                    update(true);
+                    $timeout(function () {
+                        update(true);
+                    });
                 });
                 scope.$on('$destroy', function () {
                     element.off('keyup keydown keypress change', update);
@@ -6584,17 +6742,30 @@ Use this directive to prevent default action of an element. Effectively implemen
 @param {string} value Set the value of the checkbox.
 @param {string} name Set the name of the checkbox.
 @param {string} text Set the text for the checkbox label.
+@param {string} labelKey Set a dictinary/localization string for the checkbox label
 @param {string} serverValidationField Set the <code>val-server-field</code> of the checkbox.
 @param {boolean} disabled Set the checkbox to be disabled.
 @param {boolean} required Set the checkbox to be required.
 @param {callback} onChange Callback when the value of the checkbox change by interaction.
+@param {string} cssClass Set a css class modifier
 
 **/
     (function () {
         'use strict';
-        function UmbCheckboxController($timeout) {
+        function UmbCheckboxController($timeout, localizationService) {
             var vm = this;
+            vm.$onInit = onInit;
             vm.change = change;
+            function onInit() {
+                // If a labelKey is passed let's update the returned text if it's does not contain an opening square bracket [
+                if (vm.labelKey) {
+                    localizationService.localize(vm.labelKey).then(function (data) {
+                        if (data.indexOf('[') === -1) {
+                            vm.text = data;
+                        }
+                    });
+                }
+            }
             function change() {
                 if (vm.onChange) {
                     $timeout(function () {
@@ -6607,7 +6778,7 @@ Use this directive to prevent default action of an element. Effectively implemen
             }
         }
         var component = {
-            template: '<label class="checkbox umb-form-check umb-form-check--checkbox" ng-class="{ \'umb-form-check--disabled\': vm.disabled }"> <input type="checkbox" id="{{vm.inputId}}" name="{{vm.name}}" value="{{vm.value}}" class="umb-form-check__input" val-server-field="{{vm.serverValidationField}}" ng-model="vm.model" ng-disabled="vm.disabled" ng-required="vm.required" ng-change="vm.change()"> <span class="umb-form-check__state" aria-hidden="true"> <span class="umb-form-check__check"> <i class="umb-form-check__icon icon-check"></i> </span> </span> <span class="umb-form-check__text">{{vm.text}}</span> </label> ',
+            template: '<label class="checkbox umb-form-check umb-form-check--checkbox {{vm.cssClass}}" ng-class="{ \'umb-form-check--disabled\': vm.disabled }"> <input type="checkbox" id="{{vm.inputId}}" name="{{vm.name}}" value="{{vm.value}}" class="umb-form-check__input" val-server-field="{{vm.serverValidationField}}" ng-model="vm.model" ng-disabled="vm.disabled" ng-required="vm.required" ng-change="vm.change()"> <span class="umb-form-check__state" aria-hidden="true"> <span class="umb-form-check__check"> <i class="umb-form-check__icon icon-check"></i> </span> </span> <span class="umb-form-check__text">{{vm.text}}</span> </label> ',
             controller: UmbCheckboxController,
             controllerAs: 'vm',
             bindings: {
@@ -6616,10 +6787,12 @@ Use this directive to prevent default action of an element. Effectively implemen
                 value: '@',
                 name: '@',
                 text: '@',
+                labelKey: '@?',
                 serverValidationField: '@',
                 disabled: '<',
                 required: '<',
-                onChange: '&?'
+                onChange: '&?',
+                cssClass: '@?'
             }
         };
         angular.module('umbraco.directives').component('umbCheckbox', component);
@@ -6649,9 +6822,11 @@ Use this directive to prevent default action of an element. Effectively implemen
 </pre>
 
 @param {boolean} model Set to <code>true</code> or <code>false</code> to set the radiobutton to checked or unchecked.
+@param {string} inputId Set the <code>id</code> of the radiobutton.
 @param {string} value Set the value of the radiobutton.
 @param {string} name Set the name of the radiobutton.
 @param {string} text Set the text for the radiobutton label.
+@param {string} labelKey Set a dictinary/localization string for the checkbox label
 @param {boolean} disabled Set the radiobutton to be disabled.
 @param {boolean} required Set the radiobutton to be required.
 @param {callback} onChange Callback when the value of the radiobutton change by interaction.
@@ -6661,7 +6836,18 @@ Use this directive to prevent default action of an element. Effectively implemen
         'use strict';
         function UmbRadiobuttonController($timeout) {
             var vm = this;
+            vm.$onInit = onInit;
             vm.change = change;
+            function onInit() {
+                // If a labelKey is passed let's update the returned text if it's does not contain an opening square bracket [
+                if (vm.labelKey) {
+                    localizationService.localize(vm.labelKey).then(function (data) {
+                        if (data.indexOf('[') === -1) {
+                            vm.text = data;
+                        }
+                    });
+                }
+            }
             function change() {
                 if (vm.onChange) {
                     $timeout(function () {
@@ -6674,16 +6860,18 @@ Use this directive to prevent default action of an element. Effectively implemen
             }
         }
         var component = {
-            template: '<label class="radio umb-form-check umb-form-check--radiobutton" ng-class="{ \'umb-form-check--disabled\': vm.disabled }"> <input type="radio" name="{{vm.name}}" value="{{vm.value}}" class="umb-form-check__input" ng-model="vm.model" ng-disabled="vm.disabled" ng-required="vm.required" ng-change="vm.change()"> <span class="umb-form-check__state" aria-hidden="true"> <span class="umb-form-check__check"></span> </span> <span class="umb-form-check__text">{{vm.text}}</span> </label> ',
+            template: '<label class="radio umb-form-check umb-form-check--radiobutton" ng-class="{ \'umb-form-check--disabled\': vm.disabled }"> <input type="radio" id="{{vm.inputId}}" name="{{vm.name}}" value="{{vm.value}}" class="umb-form-check__input" ng-model="vm.model" ng-disabled="vm.disabled" ng-required="vm.required" ng-change="vm.change()"> <span class="umb-form-check__state" aria-hidden="true"> <span class="umb-form-check__check"></span> </span> <span class="umb-form-check__text">{{vm.text}}</span> </label> ',
             controller: UmbRadiobuttonController,
             controllerAs: 'vm',
             bindings: {
                 model: '=',
+                inputId: '@',
                 value: '@',
                 name: '@',
                 text: '@',
-                disabled: '=',
-                required: '=',
+                labelKey: '@?',
+                disabled: '<',
+                required: '<',
                 onChange: '&?'
             }
         };
@@ -7061,17 +7249,31 @@ Use this directive to construct a title. Recommended to use it inside an {@link 
 **/
     (function () {
         'use strict';
-        function BoxHeaderDirective() {
+        function BoxHeaderDirective(localizationService) {
             var directive = {
                 restrict: 'E',
                 replace: true,
                 transclude: true,
-                template: '<div class="umb-box-header"> <div> <div class="umb-box-header-title" ng-if="title || titleKey"> <localize ng-if="titleKey" key="{{titleKey}}"></localize> <span ng-if="title">{{title}}</span> </div> <div class="umb-box-header-description" ng-if="description || descriptionKey"> <localize ng-if="descriptionKey" key="{{descriptionKey}}"></localize> <span ng-if="description">{{description}}</span> </div> </div> <ng-transclude></ng-transclude> </div>',
+                template: '<div class="umb-box-header"> <div> <div class="umb-box-header-title" ng-if="titleLabel"> {{titleLabel}} </div> <div class="umb-box-header-description" ng-if="descriptionLabel"> {{descriptionLabel}} </div> </div> <ng-transclude></ng-transclude> </div> ',
                 scope: {
                     titleKey: '@?',
                     title: '@?',
                     descriptionKey: '@?',
                     description: '@?'
+                },
+                link: function link(scope) {
+                    scope.titleLabel = scope.title;
+                    if (scope.titleKey) {
+                        localizationService.localize(scope.titleKey, [], scope.title).then(function (data) {
+                            scope.titleLabel = data;
+                        });
+                    }
+                    scope.descriptionLabel = scope.description;
+                    if (scope.descriptionKey) {
+                        localizationService.localize(scope.descriptionKey, [], scope.description).then(function (data) {
+                            scope.descriptionLabel = data;
+                        });
+                    }
                 }
             };
             return directive;
@@ -7896,7 +8098,7 @@ Use this directive to construct a title. Recommended to use it inside an {@link 
             var directive = {
                 restrict: 'E',
                 replace: true,
-                template: '<div class="umb-notifications" id="umb-notifications-wrapper" ng-cloak> <ul class="umb-notifications__notifications"> <li ng-repeat="notification in notifications" class="alert alert-block alert-{{notification.type}} umb-notifications__notification animated -half-second fadeIn" ng-class="{\'-no-border -extra-padding\': notification.type === \'form\'}"> <a class="close -align-right" ng-click="removeNotification($index)" prevent-default>&times;</a> <div ng-if="notification.view"> <div ng-include="notification.view"></div> </div> <div ng-if="notification.headline" ng-switch on="{{notification}}"> <a ng-href="{{notification.url}}" ng-switch-when="{{notification.url && notification.url.trim() != \'\'}}" target="_blank"> <strong>{{notification.headline}}</strong> <span ng-bind-html="notification.message"></span> </a> <div ng-switch-default> <strong>{{notification.headline}}</strong> <span ng-bind-html="notification.message"></span> </div> </div> </li> </ul> </div> ',
+                template: '<div class="umb-notifications" id="umb-notifications-wrapper" ng-cloak> <ul class="umb-notifications__notifications" aria-live="assertive" aria-relevant="additions"> <li ng-repeat="notification in notifications" class="alert alert-block alert-{{notification.type}} umb-notifications__notification animated -half-second fadeIn" ng-class="{\'-no-border -extra-padding\': notification.type === \'form\'}"> <div ng-if="notification.view"> <div ng-include="notification.view"></div> </div> <div ng-if="notification.headline" ng-switch on="{{notification}}"> <a ng-href="{{notification.url}}" ng-switch-when="{{notification.url && notification.url.trim() != \'\'}}" target="_blank"> <strong>{{notification.headline}}</strong> <span ng-bind-html="notification.message"></span> </a> <div ng-switch-default> <strong>{{notification.headline}}</strong> <span ng-bind-html="notification.message"></span> </div> </div> <button type="button" class="close -align-right" ng-click="removeNotification($index)" aria-hidden="true"> <span aria-hidden="true">&times;</span> </button> </li> </ul> </div> ',
                 link: link
             };
             return directive;
@@ -7905,8 +8107,8 @@ Use this directive to construct a title. Recommended to use it inside an {@link 
     }());
     'use strict';
     /**
-@ngdoc directive
-@name umbraco.directives.directive:umbOverlay
+@name umbraco.directives.directive:umbOverlay*
+@deprecated
 @restrict E
 @scope
 
@@ -8113,8 +8315,21 @@ Opens an overlay to show a custom YSOD. </br>
                     setButtonText();
                     modelCopy = makeModelCopy(scope.model);
                     $timeout(function () {
-                        if (scope.position === 'target') {
+                        if (scope.position === 'target' && scope.model.event) {
                             setTargetPosition();
+                            // update the position of the overlay on content changes
+                            // as these affect the layout/size of the overlay
+                            if ('ResizeObserver' in window) {
+                                var resizeObserver = new ResizeObserver(setTargetPosition);
+                                var contentArea = document.getElementById('contentwrapper');
+                                resizeObserver.observe(el[0]);
+                                if (contentArea) {
+                                    resizeObserver.observe(contentArea);
+                                }
+                                unsubscribe.push(function () {
+                                    resizeObserver.disconnect();
+                                });
+                            }
                         }
                         // this has to be done inside a timeout to ensure the destroy
                         // event on other overlays is run before registering a new one
@@ -8237,40 +8452,37 @@ Opens an overlay to show a custom YSOD. </br>
                         top: 'inherit',
                         bottom: 'inherit'
                     };
-                    // if mouse click position is know place element with mouse in center
-                    if (scope.model.event && scope.model.event) {
-                        // click position
-                        mousePositionClickX = scope.model.event.pageX;
-                        mousePositionClickY = scope.model.event.pageY;
-                        // element size
-                        elementHeight = el[0].clientHeight;
-                        elementWidth = el[0].clientWidth;
-                        // move element to this position
-                        position.left = mousePositionClickX - elementWidth / 2;
-                        position.top = mousePositionClickY - elementHeight / 2;
-                        // check to see if element is outside screen
-                        // outside right
-                        if (position.left + elementWidth > containerRight) {
-                            position.right = 10;
-                            position.left = 'inherit';
-                        }
-                        // outside bottom
-                        if (position.top + elementHeight > containerBottom) {
-                            position.bottom = 10;
-                            position.top = 'inherit';
-                        }
-                        // outside left
-                        if (position.left < containerLeft) {
-                            position.left = containerLeft + 10;
-                            position.right = 'inherit';
-                        }
-                        // outside top
-                        if (position.top < containerTop) {
-                            position.top = 10;
-                            position.bottom = 'inherit';
-                        }
-                        el.css(position);
+                    // click position
+                    mousePositionClickX = scope.model.event.pageX;
+                    mousePositionClickY = scope.model.event.pageY;
+                    // element size
+                    elementHeight = el[0].clientHeight;
+                    elementWidth = el[0].clientWidth;
+                    // move element to this position
+                    position.left = mousePositionClickX - elementWidth / 2;
+                    position.top = mousePositionClickY - elementHeight / 2;
+                    // check to see if element is outside screen
+                    // outside right
+                    if (position.left + elementWidth > containerRight) {
+                        position.right = 10;
+                        position.left = 'inherit';
                     }
+                    // outside bottom
+                    if (position.top + elementHeight > containerBottom) {
+                        position.bottom = 10;
+                        position.top = 'inherit';
+                    }
+                    // outside left
+                    if (position.left < containerLeft) {
+                        position.left = containerLeft + 10;
+                        position.right = 'inherit';
+                    }
+                    // outside top
+                    if (position.top < containerTop) {
+                        position.top = 10;
+                        position.bottom = 'inherit';
+                    }
+                    el.css(position);
                 }
                 scope.submitForm = function (model) {
                     if (scope.model.submit) {
@@ -8323,7 +8535,7 @@ Opens an overlay to show a custom YSOD. </br>
                 transclude: true,
                 restrict: 'E',
                 replace: true,
-                template: '<div data-element="overlay" class="umb-overlay umb-overlay-{{position}} umb-overlay--{{size}}" on-outside-click="outSideClick()"> <ng-form class="umb-overlay__form" name="overlayForm" novalidate val-form-manager> <div data-element="overlay-header" class="umb-overlay-header"> <h4 class="umb-overlay__title">{{model.title}}</h4> <p class="umb-overlay__subtitle">{{model.subtitle}}</p> </div> <div data-element="overlay-content" class="umb-overlay-container form-horizontal"> <ng-transclude></ng-transclude> <div ng-if="view && !parentScope" ng-include="view"></div> <div class="scoped-view" style="display: none;"></div> </div> <div class="umb-overlay__item-details" ng-if="model.itemDetails"> <div class="umb-overlay__item-details-title-wrapper" ng-if="model.itemDetails.icon || model.itemDetails.title"> <i class="{{ model.itemDetails.icon }} umb-overlay__item-details-icon" ng-if="model.itemDetails.icon"></i> <h5 class="umb-overlay__item-details-title" ng-if="model.itemDetails.title">{{ model.itemDetails.title }}</h5> </div> <div class="umb-overlay__item-details-description" ng-if="model.itemDetails.description">{{ model.itemDetails.description }}</div> </div> <div data-element="overlay-footer" class="umb-overlay-drawer" ng-class="{\'-auto-height\': model.confirmSubmit.show}"> <div ng-if="model.confirmSubmit.show"> <h5 class="red" ng-if="model.confirmSubmit.title"><i class="icon-alert"></i> {{ model.confirmSubmit.title }}</h5> <p ng-if="model.confirmSubmit.description">{{ model.confirmSubmit.description }}</p> <label class="checkbox no-indent"> <input type="checkbox" ng-model="directive.enableConfirmButton"> <strong>{{model.confirmSubmit.checkboxLabel}}</strong> </label> <div class="umb-overlay-drawer__align-right"> <umb-button alias="overlayCancelSubmit" action="cancelConfirmSubmit()" button-style="link" label="Cancel" type="button"> </umb-button> <umb-button data-element="overlay-confirm-submit" button-style="success" label="Confirm" type="button" disabled="!directive.enableConfirmButton" action="submitForm(model)" auto-focus="true"> </umb-button> </div> </div> <div class="umb-overlay-drawer__align-right" ng-if="!model.confirmSubmit.show"> <umb-button alias="overlayClose" action="closeOverLay()" button-style="link" label-key="{{model.closeButtonLabelKey}}" label="{{model.closeButtonLabel}}" type="button"> </umb-button> <umb-button alias="overlaySubmit" button-style="{{model.submitButtonStyle || \'success\'}}" label-key="{{model.submitButtonLabelKey}}" label="{{model.submitButtonLabel}}" ng-if="model.submit && model.hideSubmitButton !== true" type="button" disabled="model.disableSubmitButton" action="submitForm(model)" state="model.submitButtonState" auto-focus="true"> </umb-button> </div> </div> </ng-form> </div> ',
+                template: '<div data-element="overlay" class="umb-overlay umb-overlay-{{position}} umb-overlay--{{size}}" on-outside-click="outSideClick()" role="dialog" aria-labelledby="umb-overlay-title" aria-describedby="umb-overlay-description"> <ng-form class="umb-overlay__form" name="overlayForm" novalidate val-form-manager> <div data-element="overlay-header" class="umb-overlay-header"> <h1 class="umb-overlay__title" id="umb-overlay-title">{{model.title}}</h1> <p class="umb-overlay__subtitle" id="umb-overlay-description" ng-if="model.subtitle">{{model.subtitle}}</p> </div> <div data-element="overlay-content" class="umb-overlay-container form-horizontal"> <ng-transclude></ng-transclude> <div ng-if="view && !parentScope" ng-include="view"></div> <div class="scoped-view"></div> </div>  <div class="umb-overlay__item-details" ng-if="model.itemDetails"> <div class="umb-overlay__item-details-title-wrapper" ng-if="model.itemDetails.icon || model.itemDetails.title"> <i class="{{ model.itemDetails.icon }} umb-overlay__item-details-icon" ng-if="model.itemDetails.icon" aria-hidden="true"></i> <h2 class="umb-overlay__item-details-title" ng-if="model.itemDetails.title">{{ model.itemDetails.title }}</h2> </div> <p class="umb-overlay__item-details-description" ng-if="model.itemDetails.description">{{ model.itemDetails.description }}</p> </div> <div data-element="overlay-footer" class="umb-overlay-drawer" ng-class="{\'-auto-height\': model.confirmSubmit.show}"> <div ng-if="model.confirmSubmit.show"> <h2 class="red" ng-if="model.confirmSubmit.title"> <i class="icon-alert" aria-hidden="true"></i> {{ model.confirmSubmit.title }} </h2> <p ng-if="model.confirmSubmit.description">{{ model.confirmSubmit.description }}</p> <label class="checkbox no-indent"> <input type="checkbox" ng-model="directive.enableConfirmButton"> <strong>{{model.confirmSubmit.checkboxLabel}}</strong> </label> <div class="umb-overlay-drawer__align-right"> <umb-button alias="overlayCancelSubmit" action="cancelConfirmSubmit()" button-style="link" label="Cancel" type="button"> </umb-button> <umb-button data-element="overlay-confirm-submit" button-style="success" label="Confirm" type="button" disabled="!directive.enableConfirmButton" action="submitForm(model)" auto-focus="true"> </umb-button> </div> </div> <div class="umb-overlay-drawer__align-right" ng-if="!model.confirmSubmit.show"> <umb-button alias="overlayClose" action="closeOverLay()" button-style="link" label-key="{{model.closeButtonLabelKey}}" label="{{model.closeButtonLabel}}" type="button"> </umb-button> <umb-button alias="overlaySubmit" button-style="{{model.submitButtonStyle || \'success\'}}" label-key="{{model.submitButtonLabelKey}}" label="{{model.submitButtonLabel}}" ng-if="model.submit && model.hideSubmitButton !== true" type="button" disabled="model.disableSubmitButton" action="submitForm(model)" state="model.submitButtonState" auto-focus="true"> </umb-button> </div> </div> </ng-form> </div> ',
                 scope: {
                     ngShow: '=',
                     model: '=',
@@ -8367,7 +8579,7 @@ Opens an overlay to show a custom YSOD. </br>
 * @name umbraco.directives.directive:umbProperty
 * @restrict E
 **/
-    angular.module('umbraco.directives').directive('umbProperty', function (umbPropEditorHelper, userService) {
+    angular.module('umbraco.directives').directive('umbProperty', function (userService) {
         return {
             scope: {
                 property: '=',
@@ -8377,20 +8589,24 @@ Opens an overlay to show a custom YSOD. </br>
             transclude: true,
             restrict: 'E',
             replace: true,
-            template: '<div class="umb-property"> <ng-form name="propertyForm"> <div class="control-group umb-control-group" ng-class="{hidelabel:property.hideLabel}"> <val-property-msg></val-property-msg> <div class="umb-el-wrap"> <label class="control-label" ng-hide="property.hideLabel" for="{{property.alias}}" ng-attr-title="{{propertyAlias}}"> <small ng-if="showInherit" class="db" style="padding-top: 0; margin-bottom: 5px;"> <localize key="contentTypeEditor_inheritedFrom"></localize> {{inheritsFrom}} </small> {{property.label}} <span ng-if="property.validation.mandatory"> <strong class="umb-control-required">*</strong> </span> <small ng-bind-html="property.description | preserveNewLineInHtml"></small> </label> <div class="controls" ng-transclude> </div> </div> </div> </ng-form> </div> ',
+            template: '<div class="umb-property"> <ng-form name="propertyForm"> <div class="control-group umb-control-group" ng-class="{hidelabel:property.hideLabel}"> <val-property-msg></val-property-msg> <div class="umb-el-wrap"> <div class="control-header" ng-hide="property.hideLabel === true"> <small ng-if="showInherit" class="db" style="padding-top: 0; margin-bottom: 5px;"> <localize key="contentTypeEditor_inheritedFrom"></localize> {{inheritsFrom}} </small> <label class="control-label" for="{{property.alias}}" ng-attr-title="{{propertyAlias}}"> {{property.label}} <span ng-if="property.validation.mandatory"> <strong class="umb-control-required">*</strong> </span> </label> <umb-property-actions actions="propertyActions"></umb-property-actions> <small class="control-description" ng-bind-html="property.description | preserveNewLineInHtml"></small> </div> <div class="controls" ng-transclude> </div> </div> </div> </ng-form> </div> ',
             link: function link(scope) {
+                scope.propertyActions = [];
                 userService.getCurrentUser().then(function (u) {
                     var isAdmin = u.userGroups.indexOf('admin') !== -1;
                     scope.propertyAlias = Umbraco.Sys.ServerVariables.isDebuggingEnabled === true || isAdmin ? scope.property.alias : null;
                 });
             },
             //Define a controller for this directive to expose APIs to other directives
-            controller: function controller($scope, $timeout) {
+            controller: function controller($scope) {
                 var self = this;
                 //set the API properties/methods
                 self.property = $scope.property;
                 self.setPropertyError = function (errorMsg) {
                     $scope.property.propertyErrorMessage = errorMsg;
+                };
+                self.setPropertyActions = function (actions) {
+                    $scope.propertyActions = actions;
                 };
             }
         };
@@ -8619,7 +8835,7 @@ Use this directive to render a tabs navigation.
             var directive = {
                 restrict: 'E',
                 transclude: true,
-                template: '<ul role="tablist" class="umb-tabs-nav"> <li class="umb-tab" role="tab" aria-selected="true" tabindex="0" ng-repeat="tab in vm.tabs | limitTo: vm.maxTabs" data-element="tab-{{tab.alias}}" ng-class="{\'umb-tab--active\': tab.active, \'umb-tab--error\': tabHasError}" val-tab> <a ng-href ng-click="vm.clickTab($event, tab)">{{ tab.label }}</a> </li> <li data-element="tab-expand" class="umb-tab umb-tab--expand" ng-class="{ \'open\': vm.showTray }" ng-show="vm.needTray"> <a ng-href ng-click="vm.toggleTray()"><i></i><i></i><i></i></a> <umb-dropdown class="umb-tabs-tray" ng-if="vm.showTray" on-close="vm.hideTray()"> <umb-dropdown-item ng-repeat="tab in vm.tabs | limitTo: vm.overflowingTabs" ng-class="{\'umb-tabs-tray-item--active\': tab.active}"> <a ng-href ng-click="vm.clickTab($event, tab)">{{ tab.label }}</a> </umb-dropdown-item> </umb-dropdown> </li> </ul> ',
+                template: '<ul role="tablist" class="umb-tabs-nav"> <li ng-click="vm.clickTab($event, tab)" class="umb-tab" role="tab" aria-selected="true" tabindex="0" ng-repeat="tab in vm.tabs | limitTo: vm.maxTabs" data-element="tab-{{tab.alias}}" ng-class="{\'umb-tab--active\': tab.active, \'umb-tab--error\': tabHasError}" val-tab> <a>{{ tab.label }}</a> </li> <li data-element="tab-expand" class="umb-tab umb-tab--expand" tabindex="0" ng-click="vm.toggleTray()" ng-class="{ \'open\': vm.showTray }" ng-show="vm.needTray"> <a ng-href><i></i><i></i><i></i></a> <umb-dropdown class="umb-tabs-tray" ng-if="vm.showTray" on-close="vm.hideTray()"> <umb-dropdown-item ng-repeat="tab in vm.tabs | limitTo: vm.overflowingTabs" ng-class="{\'umb-tabs-tray-item--active\': tab.active}" tabindex="0" ng-click="vm.clickTab($event, tab)"> <a ng-href>{{ tab.label }}</a> </umb-dropdown-item> </umb-dropdown> </li> </ul> ',
                 link: link,
                 bindToController: true,
                 controller: UmbTabsNavController,
@@ -8642,7 +8858,7 @@ Use this directive to render a tabs navigation.
         'use strict';
         angular.module('umbraco.directives').component('umbTagsEditor', {
             transclude: true,
-            template: '<div> <ng-form name="vm.tagEditorForm"> <div ng-if="vm.isLoading"> <localize key="loading">Loading</localize>... </div> <div ng-if="!isLoading"> <input type="hidden" name="tagCount" ng-model="vm.viewModel.length" val-property-validator="vm.validateMandatory"> <span ng-repeat="tag in vm.viewModel track by $index" class="label label-primary tag" ng-keyup="vm.onKeyUpOnTag(tag, $event)" tabindex="0"> <span ng-bind-html="tag"></span> <i class="icon-trash" ng-click="vm.showPrompt($index, tag)" localize="title" title="@buttons_deleteTag"></i> <umb-confirm-action ng-if="vm.promptIsVisible === $index" direction="left" on-confirm="vm.removeTag(tag)" on-cancel="vm.hidePrompt()"> </umb-confirm-action> </span> <input type="text" id="{{vm.htmlId}}" class="typeahead tags-{{vm.htmlId}}" ng-model="vm.tagToAdd" ng-keydown="vm.addTagOnEnter($event)" ng-blur="vm.addTag()" localize="placeholder" placeholder="@placeholders_enterTags"> </div> </ng-form> </div> ',
+            template: '<div> <ng-form name="vm.tagEditorForm"> <div ng-if="vm.isLoading"> <localize key="loading">Loading</localize>... </div> <div ng-if="!isLoading"> <input type="hidden" name="tagCount" ng-model="vm.viewModel.length" val-property-validator="vm.validateMandatory"> <span ng-repeat="tag in vm.viewModel track by $index" class="label label-primary tag" ng-keyup="vm.onKeyUpOnTag(tag, $event)" tabindex="0"> <span ng-bind-html="tag"></span> <i class="icon-trash" ng-click="vm.showPrompt($index, tag)" localize="title" title="@buttons_deleteTag"></i> <umb-confirm-action ng-if="vm.promptIsVisible === $index" direction="left" on-confirm="vm.removeTag(tag)" on-cancel="vm.hidePrompt()"> </umb-confirm-action> </span> <input type="text" id="{{vm.inputId}}" class="typeahead tags-{{vm.inputId}}" ng-model="vm.tagToAdd" ng-keydown="vm.addTagOnEnter($event)" ng-blur="vm.addTag()" localize="placeholder" placeholder="@placeholders_enterTags"> </div> </ng-form> </div> ',
             controller: umbTagsEditorController,
             controllerAs: 'vm',
             bindings: {
@@ -8650,6 +8866,7 @@ Use this directive to render a tabs navigation.
                 config: '<',
                 validation: '<',
                 culture: '<?',
+                inputId: '@?',
                 onValueChanged: '&'
             }
         });
@@ -8668,12 +8885,12 @@ Use this directive to render a tabs navigation.
             vm.showPrompt = showPrompt;
             vm.hidePrompt = hidePrompt;
             vm.onKeyUpOnTag = onKeyUpOnTag;
-            vm.htmlId = 't' + String.CreateGuid();
             vm.isLoading = true;
             vm.tagToAdd = '';
             vm.promptIsVisible = '-1';
             vm.viewModel = [];
             function onInit() {
+                vm.inputId = vm.inputId || 't' + String.CreateGuid();
                 assetsService.loadJs('lib/typeahead.js/typeahead.bundle.min.js').then(function () {
                     vm.isLoading = false;
                     //ensure that the models are formatted correctly
@@ -8729,7 +8946,7 @@ Use this directive to render a tabs navigation.
                             // Force a cache refresh each time the control is initialized
                             minLength: 1
                         };
-                        typeahead = $element.find('.tags-' + vm.htmlId).typeahead(opts, sources).bind('typeahead:selected', function (obj, datum, name) {
+                        typeahead = $element.find('.tags-' + vm.inputId).typeahead(opts, sources).bind('typeahead:selected', function (obj, datum, name) {
                             angularHelper.safeApply($rootScope, function () {
                                 addTagInternal(datum['text']);
                                 vm.tagToAdd = '';
@@ -8767,7 +8984,7 @@ Use this directive to render a tabs navigation.
                     tagsHound.clearRemoteCache();
                     tagsHound = null;
                 }
-                $element.find('.tags-' + vm.htmlId).typeahead('destroy');
+                $element.find('.tags-' + vm.inputId).typeahead('destroy');
             }
             function configureViewModel(isInitLoad) {
                 if (vm.value) {
@@ -8829,7 +9046,7 @@ Use this directive to render a tabs navigation.
                 var code = e.keyCode || e.which;
                 if (code == 13) {
                     //Enter keycode
-                    if ($element.find('.tags-' + vm.htmlId).parent().find('.tt-menu .tt-cursor').length === 0) {
+                    if ($element.find('.tags-' + vm.inputId).parent().find('.tt-menu .tt-cursor').length === 0) {
                         //this is required, otherwise the html form will attempt to submit.
                         e.preventDefault();
                         addTag();
@@ -9010,12 +9227,14 @@ Use this directive to render a tabs navigation.
                 vm.reloadNode = reloadNode;
                 vm.syncTree = syncTree;
                 vm.loadChildren = loadChildren;
+                vm.hasTree = hasTree;
                 //wire up the exposed api object for hosting controllers
                 if ($scope.api) {
                     $scope.api.callbacks = vm.callbacks;
                     $scope.api.load = vm.load;
                     $scope.api.reloadNode = vm.reloadNode;
                     $scope.api.syncTree = vm.syncTree;
+                    $scope.api.hasTree = vm.hasTree;
                 }
                 //flag to track the last loaded section when the tree 'un-loads'. We use this to determine if we should
                 // re-load the tree again. For example, if we hover over 'content' the content tree is shown. Then we hover
@@ -9133,6 +9352,20 @@ Use this directive to render a tabs navigation.
                     return _.filter(roots, function (node) {
                         return node && node.metaData && node.metaData.treeAlias;
                     });
+                }
+                //given a tree alias, this will search the current section tree for the specified tree alias and set the current active tree to it's root node
+                function hasTree(treeAlias) {
+                    if (!$scope.tree) {
+                        throw 'Err in umbtree.directive.loadActiveTree, $scope.tree is null';
+                    }
+                    if (!treeAlias) {
+                        return false;
+                    }
+                    var treeRoots = getTreeRootNodes();
+                    var foundTree = _.find(treeRoots, function (node) {
+                        return node.metaData.treeAlias.toUpperCase() === treeAlias.toUpperCase();
+                    });
+                    return foundTree !== undefined;
                 }
                 //given a tree alias, this will search the current section tree for the specified tree alias and set the current active tree to it's root node
                 function loadActiveTree(treeAlias) {
@@ -9345,7 +9578,7 @@ Use this directive to render a tabs navigation.
             restrict: 'E',
             replace: true,
             require: '^umbTree',
-            template: '<li class="umb-tree-item" data-element="tree-item-{{::node.dataElement}}" ng-class="getNodeCssClass(node)" on-right-click="altSelect(node, $event)"> <div class="umb-tree-item__inner" ng-swipe-right="options(node, $event)" ng-dblclick="load(node)"> <button data-element="tree-item-expand" class="umb-tree-item__arrow umb-outline btn-reset" ng-class="{\'icon-navigation-right\': !node.expanded || node.metaData.isContainer, \'icon-navigation-down\': node.expanded && !node.metaData.isContainer}" ng-style="{\'visibility\': (scope.enablelistviewexpand === \'true\' || node.hasChildren && (!node.metaData.isContainer || isDialog)) ? \'visible\' : \'hidden\'}" ng-click="load(node)">&nbsp;  <span class="sr-only">Expand child items for {{node.name}}</span> </button> <i class="icon umb-tree-icon sprTree" ng-class="::node.cssClass" title="{{::node.title}}" ng-click="select(node, $event)" ng-style="::node.style"></i> <span class="umb-tree-item__annotation"></span> <a class="umb-tree-item__label umb-outline" ng-href="#/{{::node.routePath}}" ng-click="select(node, $event)" title="{{::node.title}}">{{node.name}}</a>  <button data-element="tree-item-options" class="umb-options btn-reset sr-only sr-only--focusable sr-only--hoverable" ng-click="options(node, $event)" ng-if="::node.menuUrl"><i></i><i></i><i></i></button> <umb-loader ng-show="node.loading" position="bottom" class="umb-tree-item__loader"></umb-loader> </div> <ul ng-class="{collapsed: !node.expanded}"> <umb-tree-item class="umb-animated" ng-repeat="child in node.children track by child.id" enablelistviewexpand="{{enablelistviewexpand}}" tree="tree" current-node="currentNode" node="child" is-dialog="isDialog" section="{{section}}"></umb-tree-item> </ul> </li> ',
+            template: '<li class="umb-tree-item" data-element="tree-item-{{::node.dataElement}}" ng-class="getNodeCssClass(node)" on-right-click="altSelect(node, $event)"> <div class="umb-tree-item__inner" ng-swipe-right="options(node, $event)" ng-dblclick="load(node)" tabindex="-1"> <button data-element="tree-item-expand" class="umb-tree-item__arrow umb-outline btn-reset" ng-class="{\'icon-navigation-right\': !node.expanded || node.metaData.isContainer, \'icon-navigation-down\': node.expanded && !node.metaData.isContainer}" ng-style="{\'visibility\': (scope.enablelistviewexpand === \'true\' || node.hasChildren && (!node.metaData.isContainer || isDialog)) ? \'visible\' : \'hidden\'}" ng-click="load(node)">&nbsp;  <span class="sr-only">Expand child items for {{node.name}}</span> </button> <i class="icon umb-tree-icon sprTree" ng-class="::node.cssClass" title="{{::node.title}}" ng-click="select(node, $event)" ng-style="::node.style" tabindex="-1"></i> <span class="umb-tree-item__annotation"></span> <a class="umb-tree-item__label umb-outline" ng-href="#/{{::node.routePath}}" ng-click="select(node, $event)" title="{{::node.title}}">{{node.name}}</a>  <button data-element="tree-item-options" class="umb-options btn-reset sr-only sr-only--focusable sr-only--hoverable" ng-click="options(node, $event)" ng-if="::node.menuUrl" aria-label="{{optionsText}} {{node.name}}"><i></i><i></i><i></i></button> <umb-loader ng-show="node.loading" position="bottom" class="umb-tree-item__loader"></umb-loader> </div> <ul ng-class="{collapsed: !node.expanded}"> <umb-tree-item class="umb-animated" ng-repeat="child in node.children track by child.id" enablelistviewexpand="{{enablelistviewexpand}}" tree="tree" current-node="currentNode" node="child" is-dialog="isDialog" section="{{section}}"></umb-tree-item> </ul> </li> ',
             scope: {
                 section: '@',
                 currentNode: '=',
@@ -9355,8 +9588,12 @@ Use this directive to render a tabs navigation.
                 isDialog: '='
             },
             link: function link(scope, element, attrs, umbTreeCtrl) {
-                localizationService.localize('general_search').then(function (value) {
-                    scope.searchAltText = value;
+                localizationService.localizeMany([
+                    'general_search',
+                    'visuallyHiddenTexts_openContextMenu'
+                ]).then(function (value) {
+                    scope.searchAltText = value[0];
+                    scope.optionsText = value[1];
                 });
                 // updates the node's DOM/styles
                 function setupNodeDom(node, tree) {
@@ -10055,6 +10292,30 @@ Use this directive to render an avatar.
         angular.module('umbraco.directives').directive('umbAvatar', AvatarDirective);
     }());
     'use strict';
+    /**
+@ngdoc directive
+@name umbraco.directives.directive:umbBadge
+@restrict E
+@scope
+
+@description
+Use this directive to render a badge.
+
+<h3>Markup example</h3>
+<pre>
+    <div>
+
+        <umb-badge
+            size="s"
+            color="secondary">
+        </umb-badge>
+
+	</div>
+</pre>
+
+@param {string} size (<code>attribute</code>): The size (xxs, xs, s, m, l, xl).
+@param {string} color (<code>attribute</code>): The color of the highlight (primary, secondary, success, warning, danger, gray).
+**/
     (function () {
         'use strict';
         function BadgeDirective() {
@@ -10453,6 +10714,7 @@ Use this directive to generate color swatches to pick from.
 @param {string} size (<code>attribute</code>): The size (s, m).
 @param {string} useLabel (<code>attribute</code>): Specify if labels should be used.
 @param {string} useColorClass (<code>attribute</code>): Specify if color values are css classes.
+@param {string} colorClassNamePrefix (<code>attribute</code>): Specify the prefix used for the class for each color (defaults to "btn").
 @param {function} onSelect (<code>expression</code>): Callback function when the item is selected.
 **/
     (function () {
@@ -10462,6 +10724,10 @@ Use this directive to generate color swatches to pick from.
                 // Set default to true if not defined
                 if (angular.isUndefined(scope.useColorClass)) {
                     scope.useColorClass = false;
+                }
+                // Set default to "btn" if not defined
+                if (angular.isUndefined(scope.colorClassNamePrefix)) {
+                    scope.colorClassNamePrefix = 'btn';
                 }
                 scope.setColor = function (color, $index, $event) {
                     if (scope.onSelect) {
@@ -10490,14 +10756,15 @@ Use this directive to generate color swatches to pick from.
                 restrict: 'E',
                 replace: true,
                 transclude: true,
-                template: ' <div class="umb-color-swatches" ng-class="{ \'with-labels\': useLabel }"> <button type="button" class="umb-color-box umb-color-box--{{size}} btn-{{color.value}}" ng-repeat="color in colors" title="{{useLabel || useColorClass ? (color.label || color.value) : (\'#\' + color.value)}}" hex-bg-inline="{{useColorClass === false}}" hex-bg-color="{{color.value}}" ng-class="{ \'active\': isSelectedColor(color) }" ng-click="setColor(color, $index, $event)"> <div class="umb-color-box-inner"> <div class="check_circle"> <i class="icon icon-check small" ng-show="isSelectedColor(color)"></i> </div> <div class="umb-color-box__label" ng-if="useLabel"> <div class="umb-color-box__name truncate">{{ color.label || color.value }}</div> <div class="umb-color-box__description">#{{ color.value }}</div> </div> </div> </button> </div> ',
+                template: ' <div class="umb-color-swatches" ng-class="{ \'with-labels\': useLabel }"> <button type="button" class="umb-color-box umb-color-box--{{size}} {{colorClassNamePrefix}}-{{color.value}}" ng-repeat="color in colors" title="{{useLabel || useColorClass ? (color.label || color.value) : (\'#\' + color.value)}}" hex-bg-inline="{{useColorClass === false}}" hex-bg-color="{{color.value}}" ng-class="{ \'active\': isSelectedColor(color) }" ng-click="setColor(color, $index, $event)"> <div class="umb-color-box-inner"> <div class="check_circle"> <i class="icon icon-check small" ng-show="isSelectedColor(color)"></i> </div> <div class="umb-color-box__label" ng-if="useLabel"> <div class="umb-color-box__name truncate">{{ color.label || color.value }}</div> <div class="umb-color-box__description">#{{ color.value }}</div> </div> </div> </button> </div> ',
                 scope: {
                     colors: '=?',
                     size: '@',
                     selectedColor: '=',
                     onSelect: '&',
                     useLabel: '=',
-                    useColorClass: '=?'
+                    useColorClass: '=?',
+                    colorClassNamePrefix: '@?'
                 },
                 link: link
             };
@@ -10560,12 +10827,14 @@ A confirmation dialog
             // restrict to an element
             replace: true,
             // replace the html element with the template
-            template: '<div> <p ng-hide="!caption" class="umb-abstract">{{caption}}</p> <div class="umb-pane btn-toolbar umb-btn-toolbar"> <div class="control-group umb-control-group"> <umb-button ng-if="showCancel" type="button" action="onCancel()" button-style="link" disabled="confirmButtonState === \'busy\'" label-key="general_cancel"> </umb-button> <umb-button ng-if="showConfirm" type="button" action="confirm()" button-style="{{confirmButtonStyle || \'primary\'}}" state="confirmButtonState" label-key="general_ok"> </umb-button> </div> </div> </div> ',
+            template: '<div> <p ng-hide="!caption" class="umb-abstract">{{caption}}</p> <div class="umb-pane btn-toolbar umb-btn-toolbar"> <div class="control-group umb-control-group"> <umb-button ng-if="showCancel" type="button" action="onCancel()" button-style="link" disabled="confirmButtonState === \'busy\'" label-key="general_cancel"> </umb-button> <umb-button ng-if="showConfirm" type="button" action="confirm()" button-style="{{confirmButtonStyle || \'primary\'}}" state="confirmButtonState" disabled="confirmDisabled === true" label-key="{{confirmLabelKey || \'general_ok\'}}"> </umb-button> </div> </div> </div> ',
             scope: {
                 onConfirm: '=',
                 onCancel: '=',
                 caption: '@',
-                confirmButtonStyle: '@'
+                confirmButtonStyle: '@',
+                confirmDisabled: '<?',
+                confirmLabelKey: '@'
             },
             link: function link(scope, element, attr, ctrl) {
                 scope.showCancel = false;
@@ -10809,7 +11078,7 @@ Use this directive to generate a list of content items presented as a flexbox gr
             var directive = {
                 restrict: 'E',
                 replace: true,
-                template: '<div class="umb-content-grid"> <div class="umb-content-grid__item" ng-repeat="item in content" ng-class="{\'-selected\': item.selected}" ng-click="clickItem(item, $event, $index)">  <div class="umb-content-grid__content"> <a class="umb-content-grid__item-name" ng-href="{{\'#\' + item.editPath}}" ng-click="clickItemName(item, $event, $index)" ng-class="{\'-light\': !item.published && item.updater != null}"> <i class="umb-content-grid__icon {{ item.icon }}"></i> <span>{{ item.name }}</span> </a> <ul class="umb-content-grid__details-list" ng-class="{\'-light\': !item.published && item.updater != null}"> <li class="umb-content-grid__details-item" ng-if="item.state"> <div class="umb-content-grid__details-label"><localize key="general_status"></localize>:</div> <div class="umb-content-grid__details-value"><umb-variant-state variant="item"></umb-variant-state></div> </li> <li class="umb-content-grid__details-item" ng-repeat="property in contentProperties"> <div class="umb-content-grid__details-label">{{ property.header }}:</div> <div class="umb-content-grid__details-value">{{ item[property.alias] }}</div> </li> </ul> </div> </div> <umb-empty-state ng-if="!content" position="center"> <localize key="content_noItemsToShow">There are no items to show</localize> </umb-empty-state> </div> ',
+                template: '<div class="umb-content-grid"> <div class="umb-content-grid__item" ng-repeat="item in content" ng-class="{\'-selected\': item.selected}" ng-click="clickItem(item, $event, $index)"> <div class="umb-content-grid__content"> <a class="umb-content-grid__item-name" ng-href="{{\'#\' + item.editPath}}" ng-click="clickItemName(item, $event, $index)" ng-class="{\'-light\': !item.published && item.updater != null}"> <i class="umb-content-grid__icon {{ item.icon }}" aria-hidden="true"></i> <span>{{ item.name }}</span> </a> <ul class="umb-content-grid__details-list" ng-class="{\'-light\': !item.published && item.updater != null}"> <li class="umb-content-grid__details-item" ng-if="item.state"> <div class="umb-content-grid__details-label"><localize key="general_status"></localize>:</div> <div class="umb-content-grid__details-value"><umb-variant-state variant="item"></umb-variant-state></div> </li> <li class="umb-content-grid__details-item" ng-repeat="property in contentProperties"> <div class="umb-content-grid__details-label">{{ property.header }}:</div> <div class="umb-content-grid__details-value">{{ item[property.alias] }}</div> </li> </ul> </div> </div> <umb-empty-state ng-if="!content" position="center"> <localize key="content_noItemsToShow">There are no items to show</localize> </umb-empty-state> </div> ',
                 scope: {
                     content: '=',
                     contentProperties: '=',
@@ -10939,11 +11208,20 @@ Use this directive to render a date time picker
                 if (!fpLib) {
                     return console.warn('Unable to find any flatpickr installation');
                 }
+                var fpInstance;
                 setUpCallbacks();
                 if (!ctrl.options.locale) {
                     ctrl.options.locale = userLocale;
                 }
-                var fpInstance = new fpLib(element, ctrl.options);
+                // handle special keydown events
+                ctrl.options.onKeyDown = function (selectedDates, dateStr, instance, event) {
+                    var code = event.keyCode || event.which;
+                    if (code === 13) {
+                        // close the datepicker on enter (this happens when entering time)
+                        fpInstance.close();
+                    }
+                };
+                fpInstance = new fpLib(element, ctrl.options);
                 if (ctrl.onSetup) {
                     ctrl.onSetup({ fpItem: fpInstance });
                 }
@@ -11265,6 +11543,51 @@ Use this directive to show an empty state message.
     'use strict';
     /**
 @ngdoc directive
+@name umbraco.directives.directive:umbFileIcon
+@restrict E
+@scope
+
+@description
+Use this directive to render a file icon.
+
+<h3>Markup example</h3>
+<pre>
+    <div>
+
+        <umb-file-icon
+            extension="pdf"
+            size="s">
+        </umb-file-icon>
+
+	</div>
+</pre>
+
+@param {string} size (<code>attribute</code>): This parameter defines the size of the file icon (s, m).
+**/
+    (function () {
+        'use strict';
+        function umbFileIconController() {
+            var vm = this;
+            if (!vm.icon) {
+                vm.icon = 'icon-document';
+            }
+        }
+        var component = {
+            template: '<span class="umb-file-icon umb-file-icon--{{vm.size}}"> <span class="file-icon"> <i class="icon {{vm.icon}}" aria-hidden="true"></i> <span ng-if="vm.extension">.{{vm.extension}}</span> </span> <small ng-if="vm.text">{{vm.text}}</small> </span> ',
+            bindings: {
+                extension: '@?',
+                icon: '@?',
+                size: '@?',
+                text: '@?'
+            },
+            controllerAs: 'vm',
+            controller: umbFileIconController
+        };
+        angular.module('umbraco.directives').component('umbFileIcon', component);
+    }());
+    'use strict';
+    /**
+@ngdoc directive
 @name umbraco.directives.directive:umbFolderGrid
 @restrict E
 @scope
@@ -11427,7 +11750,7 @@ the directive will use {@link umbraco.directives.directive:umbLockedField umbLoc
     angular.module('umbraco.directives').directive('umbGenerateAlias', function ($timeout, entityResource, localizationService) {
         return {
             restrict: 'E',
-            template: '<div> <span ng-show="!enableLock">{{ alias }}</span> <div ng-show="enableLock"> <umb-locked-field locked="locked" ng-model="alias" placeholder-text="placeholderText" validation-position="validationPosition" server-validation-field="{{serverValidationField}}"> </umb-locked-field> </div> </div> ',
+            template: '<div> <span class="umb-locked-field__text" ng-show="!enableLock">{{ alias }}</span> <div ng-show="enableLock"> <umb-locked-field locked="locked" ng-model="alias" placeholder-text="placeholderText" validation-position="validationPosition" server-validation-field="{{serverValidationField}}"> </umb-locked-field> </div> </div> ',
             replace: true,
             scope: {
                 alias: '=',
@@ -11507,7 +11830,7 @@ the directive will use {@link umbraco.directives.directive:umbLockedField umbLoc
     'use strict';
     (function () {
         'use strict';
-        function GridSelector($location, overlayService) {
+        function GridSelector($location, overlayService, editorService) {
             function link(scope, el, attr, ctrl) {
                 var eventBindings = [];
                 scope.dialogModel = {};
@@ -11552,8 +11875,16 @@ the directive will use {@link umbraco.directives.directive:umbLockedField umbLoc
                     overlayService.open(dialogModel);
                 };
                 scope.openTemplate = function (selectedItem) {
-                    var url = '/settings/templates/edit/' + selectedItem.id;
-                    $location.url(url);
+                    var editor = {
+                        id: selectedItem.id,
+                        submit: function submit() {
+                            editorService.close();
+                        },
+                        close: function close() {
+                            editorService.close();
+                        }
+                    };
+                    editorService.templateEditor(editor);
                 };
                 scope.setAsDefaultItem = function (selectedItem) {
                     // clear default item
@@ -11947,6 +12278,11 @@ the directive will use {@link umbraco.directives.directive:umbLockedField umbLoc
                     });
                     selectedGroup.tabState = 'active';
                 };
+                scope.canRemoveGroup = function (group) {
+                    return group.inherited !== true && _.find(group.properties, function (property) {
+                        return property.locked === true;
+                    }) == null;
+                };
                 scope.removeGroup = function (groupIndex) {
                     scope.model.groups.splice(groupIndex, 1);
                 };
@@ -11989,6 +12325,24 @@ the directive will use {@link umbraco.directives.directive:umbLockedField umbLoc
                     }
                 }
                 /* ---------- PROPERTIES ---------- */
+                scope.addPropertyToActiveGroup = function () {
+                    var group = _.find(scope.model.groups, function (group) {
+                        return group.tabState === 'active';
+                    });
+                    if (!group && scope.model.groups.length) {
+                        group = scope.model.groups[0];
+                    }
+                    if (!group || !group.name) {
+                        return;
+                    }
+                    var property = _.find(group.properties, function (property) {
+                        return property.propertyState === 'init';
+                    });
+                    if (!property) {
+                        return;
+                    }
+                    scope.addProperty(property, group);
+                };
                 scope.addProperty = function (property, group) {
                     // set property sort order
                     var index = group.properties.indexOf(property);
@@ -12172,7 +12526,7 @@ the directive will use {@link umbraco.directives.directive:umbLockedField umbLoc
             var directive = {
                 restrict: 'E',
                 replace: true,
-                template: '<div data-element="groups-builder" class="clearfix"> <umb-editor-sub-header> <umb-editor-sub-header-content-right> <umb-button style="margin-right: 5px;" alias="compositions" ng-if="compositions !== false" type="button" button-style="action" label-key="contentTypeEditor_compositions" icon="icon-merge" action="openCompositionsDialog()" size="xs" add-ellipsis="true" state="compositionsButtonState"> </umb-button> <umb-button alias="reorder" ng-if="sorting !== false" type="button" button-style="action" label-key="{{sortingButtonKey}}" icon="icon-navigation" action="toggleSortingMode();" size="xs"> </umb-button> </umb-editor-sub-header-content-right> </umb-editor-sub-header> <div ng-if="sortingMode && model.groups.length <= 1" class="umb-group-builder__no-data-text"> <localize key="contentTypeEditor_noGroups"></localize> </div> <ul class="umb-group-builder__groups" ui-sortable="sortableOptionsGroup" ng-model="model.groups"> <li ng-repeat="tab in model.groups" ng-class="{\'umb-group-builder__group-sortable\': sortingMode}" data-element="group-{{tab.name}}">  <a class="umb-group-builder__group -placeholder" hotkey="alt+shift+g" ng-click="addGroup(tab)" ng-if="tab.tabState==\'init\' && !sortingMode" data-element="group-add"> <localize key="contentTypeEditor_addGroup"></localize> </a>  <div class="umb-group-builder__group" ng-if="tab.tabState !== \'init\'" ng-class="{\'-active\':tab.tabState==\'active\', \'-inherited\': tab.inherited, \'umb-group-builder__group-handle -sortable\': sortingMode && !tab.inherited}" ng-click="activateGroup(tab)"> <div class="umb-group-builder__group-title-wrapper"> <ng-form name="groupNameForm" data-element="group-name"> <div class="umb-group-builder__group-title control-group -no-margin" ng-class="{\'-active\':tab.tabState==\'active\', \'-inherited\': tab.inherited}"> <i class="umb-group-builder__group-title-icon icon-navigation" ng-if="sortingMode && !tab.inherited"></i> <input data-element="group-name-field" class="umb-group-builder__group-title-input" type="text" localize="placeholder" placeholder="@placeholders_entername" name="groupName" ng-model="tab.name" ng-class="{\'-placeholder\': tab.name == \'\'}" ng-change="updateGroupTitle(tab)" ng-disabled="tab.inherited" umb-auto-focus umb-auto-resize ng-focus="activateGroup(tab)" required val-server-field="{{\'Groups[\' + $index + \'].Name\'}}"> <div ng-messages="groupNameForm.groupName.$error" show-validation-on-submit> <div class="umb-validation-label -arrow-left" ng-message="valServerField">{{groupNameForm.groupName.errorMsg}}</div> <div class="umb-validation-label -arrow-left" ng-message="required"><localize key="required"></localize></div> </div> </div> </ng-form> <div class="umb-group-builder__group-inherited-label" ng-if="tab.inherited"> <i class="icon icon-merge"></i> <localize key="contentTypeEditor_inheritedFrom"></localize>: {{ tab.inheritedFromName }} <span ng-repeat="contentTypeName in tab.parentTabContentTypeNames"> <button type="button" class="btn-link btn-small p0" ng-click="openDocumentType(tab.parentTabContentTypes[$index])">{{ contentTypeName }}</button> <span ng-if="!$last">, </span> </span> </div> <ng-form name="groupSortOrderForm" class="umb-group-builder__group-sort-order"> <div ng-if="sortingMode"> <input name="groupSortOrder" type="number" class="umb-property-editor-tiny" style="margin-bottom: 0;" ng-model="tab.sortOrder" ng-disabled="tab.inherited" ng-blur="changeSortOrderValue(tab)" required>  <div class="umb-validation-label -arrow-left" ng-if="groupSortOrderForm.groupSortOrder.$error.required && tab.showSortOrderMissing"><localize key="required"></localize></div> <div ng-messages="groupSortOrderForm.groupSortOrder.$error" show-validation-on-submit> <div class="umb-validation-label -arrow-left" ng-message="required"><localize key="required"></localize></div> </div> </div> </ng-form> <div class="umb-group-builder__group-remove" ng-if="!sortingMode"> <i class="icon-trash" ng-click="togglePrompt(tab)"></i> <umb-confirm-action ng-if="tab.deletePrompt" direction="left" on-confirm="removeGroup($index)" on-cancel="hidePrompt(tab)"> </umb-confirm-action> </div> </div> <ul class="umb-group-builder__properties" ui-sortable="sortableOptionsProperty" ng-model="tab.properties"> <li data-element="property-{{property.alias}}" ng-class="{\'umb-group-builder__property-sortable\': sortingMode && !property.inherited}" ng-repeat="property in tab.properties">  <a data-element="property-add" class="umb-group-builder__group-add-property" ng-if="property.propertyState==\'init\' && !sortingMode" hotkey="alt+shift+p" hotkey-when="{{tab.tabState === \'active\' && property.propertyState==\'init\'}}" ng-click="addProperty(property, tab)" ng-focus="activateGroup(tab)" focus-when="{{property.focus}}"> <localize key="contentTypeEditor_addProperty"></localize> </a> <div class="umb-group-builder__property" ng-if="property.propertyState!==\'init\'" ng-class="{\'-active\': property.dialogIsOpen, \'-active\': property.propertyState==\'active\', \'-inherited\': property.inherited, \'-locked\': property.locked, \'umb-group-builder__property-handle -sortable\': sortingMode && !property.inherited, \'-sortable-locked\': sortingMode && property.inherited}">  <div class="umb-group-builder__property-meta" ng-class="{\'-full-width\': sortingMode}"> <ng-form name="propertyTypeForm"> <div class="control-group -no-margin" ng-if="!sortingMode"> <div class="umb-group-builder__property-meta-alias" ng-if="property.inherited || property.locked">{{ property.alias }}</div> <umb-locked-field ng-if="!property.inherited && !property.locked" locked="locked" ng-model="property.alias" placeholder-text="\'Alias...\'" server-validation-field="{{\'Groups[\' + $parent.$parent.$parent.$parent.$index + \'].Properties[\' + $index + \'].Alias\'}}"> </umb-locked-field> <div class="umb-group-builder__property-meta-label"> <textarea localize="placeholder" placeholder="@placeholders_label" ng-model="property.label" ng-disabled="property.inherited || property.locked" name="groupName" umb-auto-resize required val-server-field="{{\'Groups[\' + $parent.$parent.$parent.$parent.$index + \'].Properties[\' + $index + \'].Label\'}}">\r\n                                            </textarea> <div ng-messages="propertyTypeForm.groupName.$error" show-validation-on-submit> <div class="umb-validation-label" ng-message="valServerField">{{propertyTypeForm.groupName.errorMsg}}</div> <div class="umb-validation-label" ng-message="required"><localize key="contentTypeEditor_requiredLabel"></localize></div> </div> </div> <div class="umb-group-builder__property-meta-description"> <textarea localize="placeholder" placeholder="@placeholders_enterDescription" ng-model="property.description" ng-disabled="property.inherited || property.locked" umb-auto-resize>\r\n                                            </textarea> </div> </div> </ng-form> <div ng-if="sortingMode" class="flex items-center"> <i class="icon icon-navigation" ng-if="!property.inherited" style="margin-right: 10px;"></i> <span class="umb-group-builder__property-meta-label">{{ property.label }}</span> <span class="umb-group-builder__property-meta-alias" style="margin-bottom: 0; margin-left: 5px; margin-top: 1px;">({{ property.alias }})</span> <input name="propertySortOrder" type="number" class="umb-group-builder__group-sort-value umb-property-editor-tiny" ng-model="property.sortOrder" ng-disabled="property.inherited"> </div> </div> <div tabindex="-1" class="umb-group-builder__property-preview" ng-if="!sortingMode" ng-class="{\'-not-clickable\': !sortingMode && (property.inherited || property.locked)}"> <div class="umb-group-builder__property-tags"> <span class="umb-group-builder__property-tag -white"> <span ng-if="property.dataTypeName !== undefined">{{property.dataTypeName}}</span> <span ng-if="property.dataTypeName == undefined"><localize key="general_preview"></localize></span> </span> <div class="umb-group-builder__property-tag -white" ng-if="property.validation.mandatory"> <i class="umb-group-builder__property-tag-icon">*</i> <localize key="general_mandatory"></localize> </div> <div class="umb-group-builder__property-tag -white" ng-if="property.showOnMemberProfile"> <i class="icon-eye umb-group-builder__property-tag-icon"></i> <localize key="contentTypeEditor_showOnMemberProfile"></localize> </div> <div class="umb-group-builder__property-tag -white" ng-if="property.memberCanEdit"> <i class="icon-edit umb-group-builder__property-tag-icon"></i> <localize key="contentTypeEditor_memberCanEdit"></localize> </div> <div class="umb-group-builder__property-tag -white" ng-if="property.isSensitiveData"> <i class="icon-lock umb-group-builder__property-tag-icon"></i> <localize key="contentTypeEditor_isSensitiveData"></localize> </div> <div class="umb-group-builder__property-tag -white" ng-if="property.allowCultureVariant"> <i class="icon-shuffle umb-group-builder__property-tag-icon"></i> <localize key="contentTypeEditor_variantsHeading"></localize> </div> </div> <div class="umb-group-builder__property-tags -right"> <div class="umb-group-builder__property-tag" ng-if="property.inherited"> <i class="icon icon-merge"></i> <span style="margin-right: 3px"><localize key="contentTypeEditor_inheritedFrom"></localize></span> {{property.contentTypeName}} </div> <div class="umb-group-builder__property-tag" ng-if="property.locked"> <i class="icon icon-lock"></i> <localize key="general_locked"></localize> </div> </div> <ng-form inert class="umb-group-builder__property-preview-form" name="propertyEditorPreviewForm" umb-disable-form-validation ng-click="editPropertyTypeSettings(property, tab)"> <umb-property-editor ng-if="property.view !== undefined" model="property" preview="true"> </umb-property-editor> </ng-form> <button class="umb-group-builder__open-settings" ng-if="!property.inherited && !property.locked" ng-click="editPropertyTypeSettings(property, tab)"></button> </div>  <div class="umb-group-builder__property-actions"> <div ng-if="!property.inherited">  <div class="umb-group-builder__property-action"> <button class="icon icon-settings" ng-click="editPropertyTypeSettings(property, tab)"></button> </div>  <div ng-if="!property.locked" class="umb-group-builder__property-action"> <button class="icon-trash" ng-click="togglePrompt(property)"></button> <umb-confirm-action ng-if="property.deletePrompt" direction="left" on-confirm="deleteProperty(tab, $index)" on-cancel="hidePrompt(property)"> </umb-confirm-action> </div> </div> </div> </div> </li> </ul> </div> <br> </li> </ul> </div> ',
+                template: '<div data-element="groups-builder" class="clearfix"> <umb-editor-sub-header> <umb-editor-sub-header-content-right> <umb-button style="margin-right: 5px;" alias="compositions" ng-if="compositions !== false" type="button" button-style="action" label-key="contentTypeEditor_compositions" icon="icon-merge" action="openCompositionsDialog()" size="xs" add-ellipsis="true" state="compositionsButtonState"> </umb-button> <umb-button alias="reorder" ng-if="sorting !== false" type="button" button-style="action" label-key="{{sortingButtonKey}}" icon="icon-navigation" action="toggleSortingMode();" size="xs"> </umb-button> </umb-editor-sub-header-content-right> </umb-editor-sub-header> <div ng-if="sortingMode && model.groups.length <= 1" class="umb-group-builder__no-data-text"> <localize key="contentTypeEditor_noGroups"></localize> </div> <a ng-if="!sortingMode" hotkey="alt+shift+p" ng-click="addPropertyToActiveGroup()"></a> <ul class="umb-group-builder__groups" ui-sortable="sortableOptionsGroup" ng-model="model.groups"> <li ng-repeat="tab in model.groups" ng-class="{\'umb-group-builder__group-sortable\': sortingMode}" data-element="group-{{tab.name}}">  <a class="umb-group-builder__group -placeholder" hotkey="alt+shift+g" ng-click="addGroup(tab)" ng-if="tab.tabState==\'init\' && !sortingMode" data-element="group-add"> <localize key="contentTypeEditor_addGroup"></localize> </a>  <div class="umb-group-builder__group" ng-if="tab.tabState !== \'init\'" ng-class="{\'-active\':tab.tabState==\'active\', \'-inherited\': tab.inherited, \'umb-group-builder__group-handle -sortable\': sortingMode && !tab.inherited}" tabindex="0" ng-focus="activateGroup(tab)"> <div class="umb-group-builder__group-title-wrapper"> <ng-form name="groupNameForm" data-element="group-name"> <div class="umb-group-builder__group-title control-group -no-margin" ng-class="{\'-active\':tab.tabState==\'active\', \'-inherited\': tab.inherited}"> <i class="umb-group-builder__group-title-icon icon-navigation" ng-if="sortingMode && !tab.inherited"></i> <input data-element="group-name-field" class="umb-group-builder__group-title-input" type="text" localize="placeholder" placeholder="@placeholders_entername" name="groupName" ng-model="tab.name" ng-class="{\'-placeholder\': tab.name == \'\'}" ng-change="updateGroupTitle(tab)" ng-disabled="tab.inherited" umb-auto-focus umb-auto-resize ng-focus="activateGroup(tab)" required val-server-field="{{\'Groups[\' + $index + \'].Name\'}}"> <div ng-messages="groupNameForm.groupName.$error" show-validation-on-submit> <div class="umb-validation-label -arrow-left" ng-message="valServerField">{{groupNameForm.groupName.errorMsg}}</div> <div class="umb-validation-label -arrow-left" ng-message="required"><localize key="required"></localize></div> </div> </div> </ng-form> <div class="umb-group-builder__group-inherited-label" ng-if="tab.inherited"> <i class="icon icon-merge"></i> <localize key="contentTypeEditor_inheritedFrom"></localize>: {{ tab.inheritedFromName }} <span ng-repeat="contentTypeName in tab.parentTabContentTypeNames"> <button type="button" class="btn-link btn-small p0" ng-click="openDocumentType(tab.parentTabContentTypes[$index])">{{ contentTypeName }}</button> <span ng-if="!$last">, </span> </span> </div> <ng-form name="groupSortOrderForm" class="umb-group-builder__group-sort-order"> <div ng-if="sortingMode"> <input name="groupSortOrder" type="number" class="umb-property-editor-tiny" style="margin-bottom: 0;" ng-model="tab.sortOrder" ng-disabled="tab.inherited" ng-blur="changeSortOrderValue(tab)" required>  <div class="umb-validation-label -arrow-left" ng-if="groupSortOrderForm.groupSortOrder.$error.required && tab.showSortOrderMissing"><localize key="required"></localize></div> <div ng-messages="groupSortOrderForm.groupSortOrder.$error" show-validation-on-submit> <div class="umb-validation-label -arrow-left" ng-message="required"><localize key="required"></localize></div> </div> </div> </ng-form> <div class="umb-group-builder__group-remove" ng-if="!sortingMode && canRemoveGroup(tab)"> <i class="icon-trash" ng-click="togglePrompt(tab)"></i> <umb-confirm-action ng-if="tab.deletePrompt" direction="left" on-confirm="removeGroup($index)" on-cancel="hidePrompt(tab)"> </umb-confirm-action> </div> </div> <ul class="umb-group-builder__properties" ui-sortable="sortableOptionsProperty" ng-model="tab.properties"> <li data-element="property-{{property.alias}}" ng-class="{\'umb-group-builder__property-sortable\': sortingMode && !property.inherited}" ng-repeat="property in tab.properties">  <a data-element="property-add" class="umb-group-builder__group-add-property" ng-if="property.propertyState==\'init\' && !sortingMode" ng-click="addProperty(property, tab)" ng-focus="activateGroup(tab)" focus-when="{{property.focus}}"> <localize key="contentTypeEditor_addProperty"></localize> </a> <div class="umb-group-builder__property" ng-if="property.propertyState!==\'init\'" ng-class="{\'-active\': property.dialogIsOpen, \'-active\': property.propertyState==\'active\', \'-inherited\': property.inherited, \'-locked\': property.locked, \'umb-group-builder__property-handle -sortable\': sortingMode && !property.inherited, \'-sortable-locked\': sortingMode && property.inherited}">  <div class="umb-group-builder__property-meta" ng-class="{\'-full-width\': sortingMode}"> <ng-form name="propertyTypeForm"> <div class="control-group -no-margin" ng-if="!sortingMode"> <div class="umb-group-builder__property-meta-alias umb-locked-field__text cursor-not-allowed" style="padding-left: 1px" ng-if="property.inherited || property.locked">{{ property.alias }}</div> <umb-locked-field ng-if="!property.inherited && !property.locked" locked="locked" ng-model="property.alias" placeholder-text="\'Alias...\'" server-validation-field="{{\'Groups[\' + $parent.$parent.$parent.$parent.$index + \'].Properties[\' + $index + \'].Alias\'}}"> </umb-locked-field> <div class="umb-group-builder__property-meta-label"> <textarea localize="placeholder" placeholder="@placeholders_label" ng-model="property.label" ng-disabled="property.inherited || property.locked" name="groupName" umb-auto-resize required val-server-field="{{\'Groups[\' + $parent.$parent.$parent.$parent.$index + \'].Properties[\' + $index + \'].Label\'}}">\r\n                                            </textarea> <div ng-messages="propertyTypeForm.groupName.$error" show-validation-on-submit> <div class="umb-validation-label" ng-message="valServerField">{{propertyTypeForm.groupName.errorMsg}}</div> <div class="umb-validation-label" ng-message="required"><localize key="contentTypeEditor_requiredLabel"></localize></div> </div> </div> <div class="umb-group-builder__property-meta-description"> <textarea localize="placeholder" placeholder="@placeholders_enterDescription" ng-model="property.description" ng-disabled="property.inherited || property.locked" umb-auto-resize>\r\n                                            </textarea> </div> </div> </ng-form> <div ng-if="sortingMode" class="flex items-center"> <i class="icon icon-navigation" ng-if="!property.inherited" style="margin-right: 10px;"></i> <span class="umb-group-builder__property-meta-label">{{ property.label }}</span> <span class="umb-group-builder__property-meta-alias" style="margin-bottom: 0; margin-left: 5px; margin-top: 1px;">({{ property.alias }})</span> <input name="propertySortOrder" type="number" class="umb-group-builder__group-sort-value umb-property-editor-tiny" ng-model="property.sortOrder" ng-disabled="property.inherited"> </div> </div> <div tabindex="-1" class="umb-group-builder__property-preview" ng-if="!sortingMode" ng-class="{\'-not-clickable\': !sortingMode && (property.inherited || property.locked)}"> <div class="umb-group-builder__property-tags"> <span class="umb-group-builder__property-tag -white"> <span ng-if="property.dataTypeName !== undefined">{{property.dataTypeName}}</span> <span ng-if="property.dataTypeName == undefined"><localize key="general_preview"></localize></span> </span> <div class="umb-group-builder__property-tag -white" ng-if="property.validation.mandatory"> <i class="umb-group-builder__property-tag-icon">*</i> <localize key="general_mandatory"></localize> </div> <div class="umb-group-builder__property-tag -white" ng-if="property.showOnMemberProfile"> <i class="icon-eye umb-group-builder__property-tag-icon"></i> <localize key="contentTypeEditor_showOnMemberProfile"></localize> </div> <div class="umb-group-builder__property-tag -white" ng-if="property.memberCanEdit"> <i class="icon-edit umb-group-builder__property-tag-icon"></i> <localize key="contentTypeEditor_memberCanEdit"></localize> </div> <div class="umb-group-builder__property-tag -white" ng-if="property.isSensitiveData"> <i class="icon-lock umb-group-builder__property-tag-icon"></i> <localize key="contentTypeEditor_isSensitiveData"></localize> </div> <div class="umb-group-builder__property-tag -white" ng-if="property.allowCultureVariant"> <i class="icon-shuffle umb-group-builder__property-tag-icon"></i> <localize key="contentTypeEditor_variantsHeading"></localize> </div> </div> <div class="umb-group-builder__property-tags -right"> <div class="umb-group-builder__property-tag" ng-if="property.inherited"> <i class="icon icon-merge"></i> <span style="margin-right: 3px"><localize key="contentTypeEditor_inheritedFrom"></localize></span> {{property.contentTypeName}} </div> <div class="umb-group-builder__property-tag" ng-if="property.locked"> <i class="icon icon-lock"></i> <localize key="general_locked"></localize> </div> </div> <ng-form inert class="umb-group-builder__property-preview-form" name="propertyEditorPreviewForm" umb-disable-form-validation ng-click="editPropertyTypeSettings(property, tab)"> <umb-property-editor ng-if="property.view !== undefined" model="property" preview="true"> </umb-property-editor> </ng-form> <button aria-label="Open settings" class="umb-group-builder__open-settings" ng-if="!property.inherited && !property.locked" ng-click="editPropertyTypeSettings(property, tab)"></button> </div>  <div class="umb-group-builder__property-actions" ng-if="!sortingMode"> <div ng-if="!property.inherited">  <div class="umb-group-builder__property-action"> <button aria-label="Open settings" class="icon icon-settings" ng-click="editPropertyTypeSettings(property, tab)"></button> </div>  <div ng-if="!property.locked" class="umb-group-builder__property-action"> <button aria-label="Delete property" class="icon-trash" ng-click="togglePrompt(property)"></button> <umb-confirm-action ng-if="property.deletePrompt" direction="left" on-confirm="deleteProperty(tab, $index)" on-cancel="hidePrompt(property)"> </umb-confirm-action> </div> </div> </div> </div> </li> </ul> </div> <br> </li> </ul> </div> ',
                 scope: {
                     model: '=',
                     compositions: '=',
@@ -12184,6 +12538,68 @@ the directive will use {@link umbraco.directives.directive:umbLockedField umbLoc
             return directive;
         }
         angular.module('umbraco.directives').directive('umbGroupsBuilder', GroupsBuilderDirective);
+    }());
+    'use strict';
+    /**
+@ngdoc directive
+@name umbraco.directives.directive:umbImageLazyLoad
+@restrict E
+@scope
+
+@description
+Use this directive to lazy-load an image only when it is scrolled into view.
+
+<h3>Markup example</h3>
+<pre>
+    <div ng-controller="My.Controller as vm">
+        <img umb-image-lazy-load="{{vm.imageUrl}}" />
+    </div>
+</pre>
+
+<h3>Controller example</h3>
+<pre>
+    (function () {
+        "use strict";
+
+        function Controller() {
+
+            var vm = this;
+            vm.imageUrl = "/media/TODO";
+        }
+
+        angular.module("umbraco").controller("My.Controller", Controller);
+    })();
+</pre>
+
+**/
+    (function () {
+        'use strict';
+        function ImageLazyLoadDirective() {
+            var placeholder = 'assets/img/transparent.png';
+            function link(scope, element, attrs) {
+                var observer = new IntersectionObserver(loadImg);
+                var img = angular.element(element)[0];
+                img.src = placeholder;
+                observer.observe(img);
+                function loadImg(changes) {
+                    changes.forEach(function (change) {
+                        if (change.intersectionRatio > 0 && change.target.src.indexOf(placeholder) > 0) {
+                            change.target.src = attrs.umbImageLazyLoad;
+                        }
+                    });
+                }
+                // make sure to disconnect the observer when the scope is destroyed
+                scope.$on('$destroy', function () {
+                    observer.disconnect();
+                });
+            }
+            var directive = {
+                restrict: 'A',
+                link: link
+            };
+            return directive;
+        }
+        angular.module('umbraco.directives').directive('umbImageLazyLoad', ImageLazyLoadDirective);
     }());
     'use strict';
     /**
@@ -12621,13 +13037,15 @@ When this combination is hit an overview is opened with shortcuts based on the m
     'use strict';
     (function () {
         'use strict';
-        function ListViewSettingsDirective(dataTypeResource, dataTypeHelper, listViewPrevalueHelper) {
+        function ListViewSettingsDirective(dataTypeResource, dataTypeHelper, editorService, listViewPrevalueHelper) {
             function link(scope) {
                 scope.dataType = {};
-                scope.editDataTypeSettings = false;
                 scope.customListViewCreated = false;
+                var checkForCustomListView = function checkForCustomListView() {
+                    return scope.dataType.name === 'List View - ' + scope.modelAlias;
+                };
                 /* ---------- INIT ---------- */
-                function activate() {
+                var activate = function activate() {
                     if (scope.enableListView) {
                         dataTypeResource.getByName(scope.listViewName).then(function (dataType) {
                             scope.dataType = dataType;
@@ -12637,22 +13055,33 @@ When this combination is hit an overview is opened with shortcuts based on the m
                     } else {
                         scope.dataType = {};
                     }
-                }
-                /* ----------- LIST VIEW SETTINGS --------- */
-                scope.toggleEditListViewDataTypeSettings = function () {
-                    scope.editDataTypeSettings = !scope.editDataTypeSettings;
                 };
-                scope.saveListViewDataType = function () {
-                    var preValues = dataTypeHelper.createPreValueProps(scope.dataType.preValues);
-                    dataTypeResource.save(scope.dataType, preValues, false).then(function (dataType) {
-                        // store data type
-                        scope.dataType = dataType;
-                        // hide settings panel
-                        scope.editDataTypeSettings = false;
-                    });
+                /* ----------- LIST VIEW SETTINGS --------- */
+                var showSettingsOverlay = function showSettingsOverlay() {
+                    var overlay = {
+                        view: 'views/components/umb-list-view-settings-overlay.html',
+                        hideDescription: true,
+                        hideIcon: true,
+                        size: 'medium',
+                        dataType: scope.dataType,
+                        title: 'List view settings',
+                        submit: function submit(model) {
+                            var preValues = dataTypeHelper.createPreValueProps(model.dataType.preValues);
+                            // store data type   
+                            dataTypeResource.save(model.dataType, preValues, false).then(function (dataType) {
+                                return scope.dataType = dataType;
+                            });
+                            editorService.close();
+                        },
+                        close: function close() {
+                            return editorService.close();
+                        }
+                    };
+                    editorService.open(overlay);
                 };
                 /* ---------- CUSTOM LIST VIEW ---------- */
                 scope.createCustomListViewDataType = function () {
+                    scope.loading = true;
                     dataTypeResource.createCustomListView(scope.modelAlias).then(function (dataType) {
                         // store data type
                         scope.dataType = dataType;
@@ -12660,35 +13089,32 @@ When this combination is hit an overview is opened with shortcuts based on the m
                         scope.listViewName = dataType.name;
                         // change state to custom list view
                         scope.customListViewCreated = true;
-                        // show settings panel
-                        scope.editDataTypeSettings = true;
+                        // show settings overlay
+                        showSettingsOverlay();
+                        scope.loading = false;
                     });
                 };
                 scope.removeCustomListDataType = function () {
-                    scope.editDataTypeSettings = false;
+                    scope.loading = true;
                     // delete custom list view data type
                     dataTypeResource.deleteById(scope.dataType.id).then(function (dataType) {
                         // set list view name on scope
-                        if (scope.contentType === 'documentType') {
-                            scope.listViewName = 'List View - Content';
-                        } else if (scope.contentType === 'mediaType') {
-                            scope.listViewName = 'List View - Media';
-                        }
-                        // get default data type
-                        dataTypeResource.getByName(scope.listViewName).then(function (dataType) {
+                        scope.listViewName = 'List View - '.concat(scope.contentType === 'documentType' ? 'Content' : 'Media');
+                        // get default data type 
+                        dataTypeResource.getByName(scope.listViewName).then(function (defaultDataType) {
                             // store data type
-                            scope.dataType = dataType;
+                            scope.dataType = defaultDataType;
                             // change state to default list view
                             scope.customListViewCreated = false;
+                            scope.loading = false;
                         });
                     });
                 };
                 scope.toggle = function () {
-                    if (scope.enableListView) {
-                        scope.enableListView = false;
-                        return;
-                    }
-                    scope.enableListView = true;
+                    return scope.enableListView = !scope.enableListView;
+                };
+                scope.showSettingsOverlay = function () {
+                    return showSettingsOverlay();
                 };
                 /* ----------- SCOPE WATCHERS ----------- */
                 var unbindEnableListViewWatcher = scope.$watch('enableListView', function (newValue) {
@@ -12698,17 +13124,13 @@ When this combination is hit an overview is opened with shortcuts based on the m
                 });
                 // clean up
                 scope.$on('$destroy', function () {
-                    unbindEnableListViewWatcher();
+                    return unbindEnableListViewWatcher();
                 });
-                /* ----------- METHODS ---------- */
-                function checkForCustomListView() {
-                    return scope.dataType.name === 'List View - ' + scope.modelAlias;
-                }
             }
             var directive = {
                 restrict: 'E',
                 replace: true,
-                template: '<div class="umb-list-view-settings"> <div class="umb-list-view-settings__trigger"> <umb-toggle checked="enableListView" on-click="toggle()" hotkey="alt+shift+l"> </umb-toggle> </div>  <div ng-if="enableListView"> <div class="umb-list-view-settings__box" ng-class="{\'-open\': editDataTypeSettings}"> <div class="umb-list-view-settings__content"> <i class="umb-list-view-settings__list-view-icon icon-list"></i> <div> <div> <div class="umb-list-view-settings__name">{{ dataType.name }} <em ng-if="!customListViewCreated">(<localize key="general_default">default</localize>)</em></div> <a ng-click="toggleEditListViewDataTypeSettings()"><i class="umb-list-view-settings__settings-icon icon-settings"></i></a> </div> <a class="umb-list-view-settings__create-new" ng-if="!customListViewCreated" ng-click="createCustomListViewDataType()"><localize key="editcontenttype_createListView">Create custom list view</localize></a> <a class="umb-list-view-settings__remove-new" ng-if="customListViewCreated" ng-click="removeCustomListDataType()"><localize key="editcontenttype_removeListView">Remove custom list view</localize></a> </div> </div> </div>  <div class="umb-list-view-settings__settings form-horizontal" ng-if="editDataTypeSettings" ng-class="{\'-open\': editDataTypeSettings}"> <umb-property property="preValue" ng-repeat="preValue in dataType.preValues"> <umb-property-editor model="preValue" is-pre-value="true"></umb-property-editor> </umb-property> <div class="text-right"> <button type="button" class="btn btn-link" ng-click="toggleEditListViewDataTypeSettings()"><localize key="general_close">Close</localize></button> <button type="button" class="btn btn-success" ng-click="saveListViewDataType()"><localize key="buttons_saveListView"></localize></button> </div> </div> </div> </div> ',
+                template: '<div class="umb-list-view-settings"> <div class="umb-list-view-settings__trigger"> <umb-toggle checked="enableListView" on-click="toggle()" hotkey="alt+shift+l"> </umb-toggle> </div>  <div ng-if="enableListView" class="flex"> <div class="umb-list-view-settings__box"> <div class="flex"> <i class="umb-list-view-settings__list-view-icon icon-list"></i> <div> <div class="umb-list-view-settings__name"> {{ dataType.name }} <em ng-if="!customListViewCreated">(<localize key="general_default">default</localize>)</em> </div> <button type="button" class="btn-link umb-list-view-settings__create-new" ng-if="!customListViewCreated" ng-click="createCustomListViewDataType()"> <localize key="editcontenttype_createListView">Create custom list view</localize> </button> <button type="button" class="btn-link umb-list-view-settings__remove-new" ng-if="customListViewCreated" ng-click="removeCustomListDataType()"> <localize key="editcontenttype_removeListView">Remove custom list view</localize> </button> </div> </div> <umb-load-indicator ng-show="loading"></umb-load-indicator> </div> <div class="umb-group-builder__property-actions"> <div class="umb-group-builder__property-action"> <button class="btn-icon icon-settings" ng-click="showSettingsOverlay()" aria-label="Edit"></button> </div> </div> </div> </div>',
                 scope: {
                     enableListView: '=',
                     listViewName: '=',
@@ -12929,7 +13351,7 @@ Use this directive to render a value with a lock next to it. When the lock is cl
                 require: 'ngModel',
                 restrict: 'E',
                 replace: true,
-                template: '<ng-form name="lockedFieldForm" class="umb-locked-field"> <div class="umb-locked-field__wrapper"> <a ng-if="locked" ng-click="unlock()" class="umb-locked-field__toggle"> <i class="umb-locked-field__lock-icon icon-lock"></i> </a> <a ng-if="!locked" ng-click="lock()" class="umb-locked-field__toggle"> <i class="umb-locked-field__lock-icon icon-unlocked -unlocked"></i> </a> <input type="text" no-password-manager class="umb-locked-field__input" name="lockedField" ng-model="ngModel" ng-disabled="locked" ng-class="{\'-unlocked\': !locked}" placeholder="{{placeholderText}}" val-regex="{{regexValidation}}" umb-auto-resize required val-server-field="{{serverValidationField}}" title="{{ngModel}}" focus-when="{{!locked}}" umb-select-when="{{!locked}}" ng-blur="lock()"> </div> <div ng-messages="lockedFieldForm.lockedField.$error" show-validation-on-submit> <div class="umb-validation-label" ng-class="{ \'-left\': validationPosition === \'left\', \'-right\': validationPosition === \'right\' }" ng-message="required"> <localize key="general_required">Required</localize> <localize key="content_alias">alias</localize> </div> <div class="umb-validation-label" ng-class="{ \'-left\': validationPosition === \'left\', \'-right\': validationPosition === \'right\' }" ng-if="regexValidation.length > 0" ng-message="valRegex"> <localize key="general_invalid">Invalid</localize> <localize key="content_alias">alias</localize> </div> <div class="umb-validation-label" ng-class="{ \'-left\': validationPosition === \'left\', \'-right\': validationPosition === \'right\' }" ng-if="serverValidationField.length > 0" ng-message="valServerField">{{lockedFieldForm.lockedField.errorMsg}} </div> </div> </ng-form> ',
+                template: '<ng-form name="lockedFieldForm" class="umb-locked-field"> <div class="umb-locked-field__wrapper"> <button aria-label="Unlock" ng-if="locked" ng-click="unlock()" class="umb-locked-field__toggle"> <i class="umb-locked-field__lock-icon icon-lock" aria-hidden="true"></i> </button> <button aria-label="Lock" ng-if="!locked" ng-click="lock()" class="umb-locked-field__toggle"> <i class="umb-locked-field__lock-icon icon-unlocked -unlocked" aria-hidden="true"></i> </button> <input type="text" no-password-manager class="umb-locked-field__input" name="lockedField" ng-model="ngModel" ng-disabled="locked" ng-class="{\'-unlocked\': !locked}" placeholder="{{placeholderText}}" val-regex="{{regexValidation}}" umb-auto-resize required val-server-field="{{serverValidationField}}" title="{{ngModel}}" focus-when="{{!locked}}" umb-select-when="{{!locked}}" ng-blur="lock()"> </div> <div ng-messages="lockedFieldForm.lockedField.$error" show-validation-on-submit> <div class="umb-validation-label" ng-class="{ \'-left\': validationPosition === \'left\', \'-right\': validationPosition === \'right\' }" ng-message="required"> <localize key="general_required">Required</localize> <localize key="content_alias">alias</localize> </div> <div class="umb-validation-label" ng-class="{ \'-left\': validationPosition === \'left\', \'-right\': validationPosition === \'right\' }" ng-if="regexValidation.length > 0" ng-message="valRegex"> <localize key="general_invalid">Invalid</localize> <localize key="content_alias">alias</localize> </div> <div class="umb-validation-label" ng-class="{ \'-left\': validationPosition === \'left\', \'-right\': validationPosition === \'right\' }" ng-if="serverValidationField.length > 0" ng-message="valServerField">{{lockedFieldForm.lockedField.errorMsg}} </div> </div> </ng-form> ',
                 scope: {
                     ngModel: '=',
                     locked: '=?',
@@ -13114,6 +13536,9 @@ Use this directive to generate a thumbnail grid of media items.
       * Returns wether a item should be selectable or not.
       */
                 function getSelectableState(item) {
+                    if (item.filtered) {
+                        return false;
+                    }
                     // check if item is a folder or image
                     if (item.isFolder === true) {
                         return scope.disableFolderSelect !== 'true' && scope.onlyImages !== 'true';
@@ -13221,7 +13646,7 @@ Use this directive to generate a thumbnail grid of media items.
             var directive = {
                 restrict: 'E',
                 replace: true,
-                template: '<div data-element="media-grid" class="umb-media-grid"> <div data-element="media-grid-item-{{$index}}" class="umb-media-grid__item" title="{{item.name}}" ng-click="clickItem(item, $event, $index)" ng-repeat="item in items | filter:filterBy" ng-style="item.flexStyle" ng-class="{\'-selected\': item.selected, \'-file\': !item.thumbnail, \'-svg\': item.extension == \'svg\', \'-selectable\': item.selectable, \'-unselectable\': !item.selectable}"> <div>  <a ng-if="allowOnClickEdit === \'true\'" ng-click="clickEdit(item, $event)" ng-href class="icon-edit umb-media-grid__edit"></a> <div data-element="media-grid-item-edit" class="umb-media-grid__item-overlay" ng-class="{\'-locked\': item.selected || !item.file || !item.thumbnail}" ng-click="clickItemName(item, $event, $index)"> <i ng-if="onDetailsHover" class="icon-info umb-media-grid__info" ng-mouseover="hoverItemDetails(item, $event, true)" ng-mouseleave="hoverItemDetails(item, $event, false)"></i> <div class="umb-media-grid__item-name">{{item.name}}</div> </div>  <div class="umb-media-grid__image-background" ng-if="item.thumbnail || item.extension === \'svg\'"></div>  <img class="umb-media-grid__item-image" width="{{item.width}}" height="{{item.height}}" ng-if="item.thumbnail" ng-src="{{item.thumbnail}}" alt="{{item.name}}" draggable="false">  <img class="umb-media-grid__item-image" width="{{item.width}}" height="{{item.height}}" ng-if="!item.thumbnail && item.extension === \'svg\'" ng-src="{{item.image}}" alt="{{item.name}}" draggable="false">  <img class="umb-media-grid__item-image-placeholder" ng-if="!item.thumbnail && item.extension !== \'svg\'" src="assets/img/transparent.png" alt="{{item.name}}" draggable="false">  <span class="umb-media-grid__item-file-icon" ng-if="!item.thumbnail && item.extension !== \'svg\'"> <i class="umb-media-grid__item-icon {{item.icon}}"></i> <span ng-if="item.extension">.{{item.extension}}</span> </span> </div> </div> </div> ',
+                template: '<div data-element="media-grid" class="umb-media-grid"> <div data-element="media-grid-item-{{$index}}" class="umb-media-grid__item" title="{{item.name}}" ng-click="clickItem(item, $event, $index)" ng-repeat="item in items | filter:filterBy" ng-style="item.flexStyle" ng-class="{\'-selected\': item.selected, \'-file\': !item.thumbnail, \'-svg\': item.extension == \'svg\', \'-selectable\': item.selectable, \'-unselectable\': !item.selectable}"> <div>  <a ng-if="allowOnClickEdit === \'true\'" ng-click="clickEdit(item, $event)" ng-href class="icon-edit umb-media-grid__edit"></a> <div data-element="media-grid-item-edit" class="umb-media-grid__item-overlay" ng-class="{\'-locked\': item.selected || !item.file || !item.thumbnail}" ng-click="clickItemName(item, $event, $index)"> <i ng-if="onDetailsHover" class="icon-info umb-media-grid__info" ng-mouseover="hoverItemDetails(item, $event, true)" ng-mouseleave="hoverItemDetails(item, $event, false)"></i> <div class="umb-media-grid__item-name">{{item.name}}</div> </div>  <div class="umb-media-grid__image-background" ng-if="item.thumbnail || item.extension === \'svg\'"></div>  <img umb-image-lazy-load="{{item.thumbnail}}" class="umb-media-grid__item-image" width="{{item.width}}" height="{{item.height}}" ng-if="item.thumbnail" alt="{{item.name}}" draggable="false">  <img class="umb-media-grid__item-image" width="{{item.width}}" height="{{item.height}}" ng-if="!item.thumbnail && item.extension === \'svg\'" ng-src="{{item.image}}" alt="{{item.name}}" draggable="false">  <img class="umb-media-grid__item-image-placeholder" ng-if="!item.thumbnail && item.extension !== \'svg\'" src="assets/img/transparent.png" alt="{{item.name}}" draggable="false">  <umb-file-icon ng-if="!item.thumbnail && item.extension !== \'svg\'" class="umb-media-grid__item-file-icon" extension="{{item.extension}}" icon="{{item.icon}}" size="s"> </umb-file-icon> </div> </div> </div> ',
                 scope: {
                     items: '=',
                     onDetailsHover: '=',
@@ -13306,8 +13731,7 @@ Use this directive to generate a thumbnail grid of media items.
                                     c.published = c.metaData.IsPublished;
                                 }
                             }
-                            // filter items if there is a filter and it's not advanced
-                            // ** ignores advanced filter at the moment
+                            // filter items if there is a filter and it's not advanced (advanced filtering is handled below)
                             if (scope.entityTypeFilter && scope.entityTypeFilter.filter && !scope.entityTypeFilter.filterAdvanced) {
                                 var a = scope.entityTypeFilter.filter.toLowerCase().replace(/\s/g, '').split(',');
                                 var found = a.indexOf(c.metaData.ContentTypeAlias.toLowerCase()) >= 0;
@@ -13316,6 +13740,13 @@ Use this directive to generate a thumbnail grid of media items.
                                 }
                             }
                         });
+                        // advanced item filtering is handled here
+                        if (scope.entityTypeFilter && scope.entityTypeFilter.filter && scope.entityTypeFilter.filterAdvanced) {
+                            var filtered = angular.isFunction(scope.entityTypeFilter.filter) ? _.filter(miniListView.children, scope.entityTypeFilter.filter) : _.where(miniListView.children, scope.entityTypeFilter.filter);
+                            _.each(filtered, function (node) {
+                                return node.allowed = false;
+                            });
+                        }
                         // update pagination
                         miniListView.pagination.totalItems = data.totalItems;
                         miniListView.pagination.totalPages = data.totalPages;
@@ -13608,7 +14039,7 @@ Use this directive to generate a thumbnail grid of media items.
             var directive = {
                 restrict: 'E',
                 replace: true,
-                template: '<div class="umb-node-preview" ng-class="{\'umb-node-preview--sortable\': sortable, \'umb-node-preview--unpublished\': published === false }"> <i ng-if="icon" class="umb-node-preview__icon {{ icon }}" aria-hidden="true"></i> <div class="umb-node-preview__content"> <div class="umb-node-preview__name" ng-attr-title="{{alias}}">{{ name }}</div> <div class="umb-node-preview__description" ng-if="description">{{ description }}</div> <div class="umb-user-group-preview__permissions" ng-if="permissions"> <span> <span class="bold"><localize key="general_rights">Permissions</localize>:</span> <span ng-repeat="permission in permissions" class="umb-user-group-preview__permission">{{ permission.name }}</span> </span> </div> </div> <div class="umb-node-preview__actions">  <a class="umb-node-preview__action" title="Edit {{name}}" ng-href="{{editUrl}}" ng-if="allowEdit && editUrl" ng-click="onEdit()"> <localize key="general_edit">Edit</localize> <span class="sr-only">{{name}}</span> </a> <button type="button" class="umb-node-preview__action" title="Edit {{name}}" ng-if="allowEdit && !editUrl" ng-click="onEdit()"> <localize key="general_edit">Edit</localize> <span class="sr-only">{{name}}...</span> </button>  <a class="umb-node-preview__action" title="Open {{name}}" ng-href="{{openUrl}}" ng-if="allowOpen && openUrl" ng-click="onOpen()"> <localize key="general_open">Open</localize> <span class="sr-only">{{name}}</span> </a> <button type="button" class="umb-node-preview__action" title="Open {{name}}" ng-if="allowOpen && !openUrl" ng-click="onOpen()"> <localize key="general_open">Open</localize> <span class="sr-only">{{name}}...</span> </button>  <a class="umb-node-preview__action umb-node-preview__action--red" title="Remove {{name}}" ng-href="{{removeUrl}}" ng-if="allowRemove && removeUrl" ng-click="onRemove()"> <localize key="general_remove">Remove</localize> <span class="sr-only">{{name}}</span> </a> <button type="button" class="umb-node-preview__action umb-node-preview__action--red" title="Remove {{name}}" ng-if="allowRemove && !removeUrl" ng-click="onRemove()"> <localize key="general_remove">Remove</localize> <span class="sr-only">{{name}}</span> </button> </div> </div> ',
+                template: '<div class="umb-node-preview" ng-class="{\'umb-node-preview--sortable\': sortable, \'umb-node-preview--unpublished\': published === false }"> <div class="flex">  <i ng-if="icon" class="umb-node-preview__icon {{ icon }}" aria-hidden="true"></i> <div class="umb-node-preview__content"> <div class="umb-node-preview__name" ng-attr-title="{{alias}}">{{ name }}</div> <div class="umb-node-preview__description" ng-if="description">{{ description }}</div> <div class="umb-user-group-preview__permissions" ng-if="permissions"> <span> <span class="bold"><localize key="general_rights">Permissions</localize>:</span> <span ng-repeat="permission in permissions" class="umb-user-group-preview__permission">{{ permission.name }}</span> </span> </div> </div> </div> <div class="umb-node-preview__actions">  <a class="umb-node-preview__action" title="Edit {{name}}" ng-href="{{editUrl}}" ng-if="allowEdit && editUrl" ng-click="onEdit()"> <localize key="general_edit">Edit</localize> <span class="sr-only">{{name}}</span> </a> <button type="button" class="umb-node-preview__action" title="Edit {{name}}" ng-if="allowEdit && !editUrl" ng-click="onEdit()"> <localize key="general_edit">Edit</localize> <span class="sr-only">{{name}}...</span> </button>  <a class="umb-node-preview__action" title="Open {{name}}" ng-href="{{openUrl}}" ng-if="allowOpen && openUrl" ng-click="onOpen()"> <localize key="general_open">Open</localize> <span class="sr-only">{{name}}</span> </a> <button type="button" class="umb-node-preview__action" title="Open {{name}}" ng-if="allowOpen && !openUrl" ng-click="onOpen()"> <localize key="general_open">Open</localize> <span class="sr-only">{{name}}...</span> </button>  <a class="umb-node-preview__action umb-node-preview__action--red" title="Remove {{name}}" ng-href="{{removeUrl}}" ng-if="allowRemove && removeUrl" ng-click="onRemove()"> <localize key="general_remove">Remove</localize> <span class="sr-only">{{name}}</span> </a> <button type="button" class="umb-node-preview__action umb-node-preview__action--red" title="Remove {{name}}" ng-if="allowRemove && !removeUrl" ng-click="onRemove()"> <localize key="general_remove">Remove</localize> <span class="sr-only">{{name}}</span> </button> </div> </div> ',
                 scope: {
                     icon: '=?',
                     name: '=',
@@ -13934,7 +14365,7 @@ Use this directive to render a circular progressbar.
 
 @param {string} size (<code>attribute</code>): This parameter defines the width and the height of the circle in pixels.
 @param {string} percentage (<code>attribute</code>): Takes a number between 0 and 100 and applies it to the circle's highlight length.
-@param {string} color (<code>attribute</code>): the color of the highlight (primary, secondary, success, warning, danger). Success by default. 
+@param {string} color (<code>attribute</code>): The color of the highlight (primary, secondary, success, warning, danger). Success by default. 
 **/
     (function () {
         'use strict';
@@ -14438,7 +14869,7 @@ Use this directive make an element sticky and follow the page when scrolling. `u
             };
         }
         angular.module('umbraco.directives').component('umbTable', {
-            template: '<div> <div class="umb-table" ng-if="vm.items">  <div class="umb-table-head"> <div class="umb-table-row"> <div class="umb-table-cell"> <a style="text-decoration: none;" ng-show="vm.allowSelectAll" ng-click="vm.selectAll()"> <umb-checkmark checked="vm.isSelectedAll()" size="xs"></umb-checkmark> </a> </div> <div class="umb-table-cell umb-table__name"> <a class="umb-table-head__link sortable" href="#" ng-click="vm.sort(\'Name\', true, true)" prevent-default> <localize key="general_name">Name</localize> <i class="umb-table-head__icon icon" ng-class="{\'icon-navigation-up\': vm.isSortDirection(\'Name\', \'asc\'), \'icon-navigation-down\': vm.isSortDirection(\'Name\', \'desc\')}"></i> </a> </div> <div class="umb-table-cell" ng-show="vm.items[0].state"> <localize key="general_status">Status</localize> </div> <div class="umb-table-cell" ng-repeat="column in vm.itemProperties track by column.alias"> <a class="umb-table-head__link" href="#" ng-click="vm.sort(column.alias, column.allowSorting, column.isSystem)" ng-class="{\'sortable\':column.allowSorting}" prevent-default> <span ng-bind="column.header"></span> <i class="umb-table-head__icon icon" ng-class="{\'icon-navigation-up\': vm.isSortDirection(column.alias, \'asc\'), \'icon-navigation-down\': vm.isSortDirection(column.alias, \'desc\')}"></i> </a> </div> </div> </div>  <div class="umb-table-body"> <div class="umb-table-row -selectable" ng-repeat="item in vm.items track by $index" ng-class="{\'-selected\':item.selected, \'-light\':!item.published && item.updater != null}" ng-click="vm.selectItem(item, $index, $event)"> <div class="umb-table-cell"> <i class="umb-table-body__icon umb-table-body__fileicon {{item.icon}}" ng-class="vm.getIcon(item)"></i> <i class="umb-table-body__icon umb-table-body__checkicon icon-check"></i> </div> <div class="umb-table-cell umb-table__name"> <a title="{{ item.name }}" class="umb-table-body__link" ng-href="{{\'#\' + item.editPath}}" ng-click="vm.clickItem(item, $event)" ng-bind="item.name"> </a> </div> <div class="umb-table-cell" ng-show="item.state"> <umb-variant-state variant="item"> </umb-variant-state> </div> <div class="umb-table-cell" ng-repeat="column in vm.itemProperties track by column.alias"> <span title="{{column.header}}: {{item[column.alias]}}"> <div ng-if="!column.isSensitive"> {{item[column.alias]}} </div> <em ng-show="column.isSensitive" class="muted"> <localize key="content_isSensitiveValue_short"></localize> </em> </span> </div> </div> </div> </div>  <umb-empty-state ng-hide="vm.items" position="center"> <localize key="content_listViewNoItems">There are no items show in the list.</localize> </umb-empty-state> </div> ',
+            template: '<div> <div class="umb-table" ng-if="vm.items">  <div class="umb-table-head"> <div class="umb-table-row"> <div class="umb-table-cell"> <button type="button" class="umb-table__action" ng-show="vm.allowSelectAll" ng-click="vm.selectAll()"> <umb-checkmark checked="vm.isSelectedAll()" size="xs"></umb-checkmark> </button> </div> <div class="umb-table-cell umb-table__name"> <button type="button" class="umb-table-head__link sortable" ng-click="vm.sort(\'Name\', true, true)" prevent-default> <localize key="general_name">Name</localize> <i class="umb-table-head__icon icon" aria-hidden="true" ng-class="{\'icon-navigation-up\': vm.isSortDirection(\'Name\', \'asc\'), \'icon-navigation-down\': vm.isSortDirection(\'Name\', \'desc\')}"></i> </button> </div> <div class="umb-table-cell" ng-show="vm.items[0].state"> <localize key="general_status">Status</localize> </div> <div class="umb-table-cell" ng-repeat="column in vm.itemProperties track by column.alias"> <button type="button" class="umb-table-head__link" ng-click="vm.sort(column.alias, column.allowSorting, column.isSystem)" ng-class="{\'sortable\':column.allowSorting}" prevent-default> <span ng-bind="column.header"></span> <i class="umb-table-head__icon icon" aria-hidden="true" ng-class="{\'icon-navigation-up\': vm.isSortDirection(column.alias, \'asc\'), \'icon-navigation-down\': vm.isSortDirection(column.alias, \'desc\')}"></i> </button> </div> </div> </div>  <div class="umb-table-body"> <div class="umb-table-row -selectable" ng-repeat="item in vm.items track by $index" ng-class="{\'-selected\':item.selected, \'-light\':!item.published && item.updater != null}" ng-click="vm.selectItem(item, $index, $event)"> <div class="umb-table-cell"> <i class="umb-table-body__icon umb-table-body__fileicon {{item.icon}}" aria-hidden="true" ng-class="vm.getIcon(item)"></i> <i class="umb-table-body__icon umb-table-body__checkicon icon-check" aria-hidden="true"></i> </div> <div class="umb-table-cell umb-table__name"> <a title="{{ item.name }}" class="umb-table-body__link" ng-href="{{\'#\' + item.editPath}}" ng-click="vm.clickItem(item, $event)" ng-bind="item.name"> </a> </div> <div class="umb-table-cell" ng-show="item.state"> <umb-variant-state variant="item"> </umb-variant-state> </div> <div class="umb-table-cell" ng-repeat="column in vm.itemProperties track by column.alias"> <span title="{{column.header}}: {{item[column.alias]}}"> <div ng-if="!column.isSensitive"> {{item[column.alias]}} </div> <em ng-show="column.isSensitive" class="muted"> <localize key="content_isSensitiveValue_short"></localize> </em> </span> </div> </div> </div> </div>  <umb-empty-state ng-hide="vm.items" position="center"> <localize key="content_listViewNoItems">There are no items show in the list.</localize> </umb-empty-state> </div> ',
             controller: TableController,
             controllerAs: 'vm',
             bindings: {
@@ -15048,7 +15479,7 @@ TODO
         }
         ;
         var umbPropertyFileUploadComponent = {
-            template: ' <div class="umb-property-file-upload"> <ng-form name="vm.fileUploadForm"> <div class="fileinput-button umb-upload-button-big" style="margin-bottom: 5px;" ng-hide="vm.files.length > 0"> <i class="icon icon-page-up"></i> <p><localize key="media_clickToUpload">Click to upload</localize></p> <umb-single-file-upload></umb-single-file-upload> </div> <div ng-if="vm.files.length > 0"> <div ng-if="!vm.hideSelection"> <div class="umb-fileupload clearfix" ng-repeat="file in vm.files"> <div ng-if="file.isImage || file.extension === \'svg\'"> <div class="gravity-container"> <div class="viewport"> <img ng-if="file.isClientSide" ng-src="{{file.fileSrc}}" style="max-width: 100%; max-height: 100%" alt="{{file.fileName}}"> <a ng-if="!file.isClientSide" href="{{file.fileSrc}}" target="_blank"> <img ng-src="{{file.fileSrc}}" style="max-width: 100%; max-height: 100%" alt="{{file.fileName}}"> </a> </div> </div> </div> <div ng-if="!file.isImage && file.extension !== \'svg\'"> <a class="span6 thumbnail tc" ng-show="!file.isClientSide" ng-href="{{file.fileName}}" target="_blank"> <span class="umb-icon-holder"> <span class="file-icon"> <i class="icon icon-document"></i> <span ng-if="file.extension">.{{file.extension}}</span> </span> </span> <div>{{file.fileName}}</div> </a> <div class="span6 thumbnail tc" ng-show="file.isClientSide"> <span class="umb-icon-holder"> <span class="file-icon"> <i class="icon icon-document"></i> <span ng-if="file.extension">.{{file.extension}}</span> </span> </span> <div>{{file.fileName}}</div> </div> </div> </div> <div> <a class="btn btn-link btn-crop-delete" ng-click="vm.clear()"><i class="icon-delete red"></i> <localize key="content_uploadClear">Remove file</localize></a> </div> </div> <div ng-if="vm.hideSelection"> <div ng-transclude></div> </div> </div> </ng-form> </div> ',
+            template: ' <div class="umb-property-file-upload"> <ng-form name="vm.fileUploadForm"> <input type="hidden" ng-model="mandatoryValidator" ng-required="vm.required && !vm.files.length"> <div class="fileinput-button umb-upload-button-big" style="margin-bottom: 5px;" ng-hide="vm.files.length > 0"> <i class="icon icon-page-up"></i> <p><localize key="media_clickToUpload">Click to upload</localize></p> <umb-single-file-upload></umb-single-file-upload> </div> <div ng-if="vm.files.length > 0"> <div ng-if="!vm.hideSelection"> <div class="umb-fileupload clearfix" ng-repeat="file in vm.files"> <div ng-if="file.isImage || file.extension === \'svg\'"> <div class="gravity-container"> <div class="viewport"> <img ng-if="file.isClientSide" ng-src="{{file.fileSrc}}" style="max-width: 100%; max-height: 100%" alt="{{file.fileName}}"> <a ng-if="!file.isClientSide" href="{{file.fileSrc}}" target="_blank"> <img ng-src="{{file.fileSrc}}" style="max-width: 100%; max-height: 100%" alt="{{file.fileName}}"> </a> </div> </div> </div> <div ng-if="!file.isImage && file.extension !== \'svg\'"> <a class="span6 thumbnail tc" ng-show="!file.isClientSide" ng-href="{{file.fileName}}" target="_blank"> <umb-file-icon extension="{{file.extension}}" size="m"> </umb-file-icon> <div class="mt2">{{file.fileName}}</div> </a> <div class="span6 thumbnail tc" ng-show="file.isClientSide"> <umb-file-icon extension="{{file.extension}}" size="m"> </umb-file-icon> <div class="mt2">{{file.fileName}}</div> </div> </div> </div> <div> <a class="btn btn-link btn-crop-delete" ng-click="vm.clear()"><i class="icon-delete red"></i> <localize key="content_uploadClear">Remove file</localize></a> </div> </div> <div ng-if="vm.hideSelection"> <div ng-transclude></div> </div> </div> </ng-form> </div> ',
             bindings: {
                 culture: '@?',
                 propertyAlias: '@',
@@ -15062,7 +15493,8 @@ TODO
        * Called when the file collection changes (i.e. a new file has been selected but maybe it wasn't this instance that caused the change)
        */
                 onFilesChanged: '&',
-                onInit: '&'
+                onInit: '&',
+                required: '='
             },
             transclude: true,
             controllerAs: 'vm',
@@ -15231,7 +15663,7 @@ TODO
             ;
         }
         var component = {
-            template: '<div> <div class="alert alert-success text-center" ng-hide="!vm.passwordValues.generatedPassword"> <small>Password has been reset to:</small> <br> <strong>{{vm.passwordValues.generatedPassword}}</strong> </div> <div ng-switch="vm.changing"> <div ng-switch-when="false"> <a ng-click="vm.doChange()" class="btn btn-small"> <localize key="general_changePassword">Change password</localize> </a> </div> <div ng-switch-when="true"> <ng-form name="changePasswordForm"> <umb-control-group alias="resetPassword" label="@user_resetPassword" ng-show="vm.config.enableReset"> <input type="checkbox" ng-model="vm.passwordValues.reset" name="resetPassword" val-server-field="resetPassword" no-dirty-check ng-change="vm.showReset = !vm.showReset"> <span ng-messages="changePasswordForm.resetPassword.$error" show-validation-on-submit> <span class="help-inline" ng-message="valServerField">{{changePasswordForm.resetPassword.errorMsg}}</span> </span> </umb-control-group>  <umb-control-group alias="oldPassword" label="@user_oldPassword" ng-if="vm.showOldPass()" required="true"> <input type="password" name="oldPassword" ng-model="vm.passwordValues.oldPassword" class="input-block-level umb-textstring textstring" required val-server-field="oldPassword" no-dirty-check> <span ng-messages="changePasswordForm.oldPassword.$error" show-validation-on-submit> <span class="help-inline" ng-message="required">Required</span> <span class="help-inline" ng-message="valServerField">{{changePasswordForm.oldPassword.errorMsg}}</span> </span> </umb-control-group> <umb-control-group alias="password" label="@user_newPassword" ng-if="!vm.showReset" required="true"> <input type="password" name="password" ng-model="vm.passwordValues.newPassword" class="input-block-level umb-textstring textstring" required val-server-field="password" ng-minlength="{{vm.config.minPasswordLength}}" no-dirty-check> <span ng-messages="changePasswordForm.password.$error" show-validation-on-submit> <span class="help-inline" ng-message="required">Required</span> <span class="help-inline" ng-message="minlength">Minimum {{vm.config.minPasswordLength}} characters</span> <span class="help-inline" ng-message="valServerField">{{changePasswordForm.password.errorMsg}}</span> </span> </umb-control-group> <umb-control-group alias="confirmPassword" label="@user_confirmNewPassword" ng-if="!vm.showReset" required="true"> <input type="password" name="confirmPassword" ng-model="vm.passwordValues.confirm" class="input-block-level umb-textstring textstring" val-compare="password" no-dirty-check> <span ng-messages="changePasswordForm.confirmPassword.$error" show-validation-on-submit> <span class="help-inline" ng-message="valCompare"><localize key="user_passwordMismatch">The confirmed password doesn\'t match the new password!</localize></span> </span> </umb-control-group> <a ng-click="vm.cancelChange()" ng-show="vm.showCancelBtn()" class="btn btn-small"> <localize key="general_cancel">Cancel</localize> </a> </ng-form> </div> </div> </div> ',
+            template: '<div> <div class="alert alert-success text-center" ng-hide="!vm.passwordValues.generatedPassword"> <small>Password has been reset to:</small> <br> <strong>{{vm.passwordValues.generatedPassword}}</strong> </div> <div ng-switch="vm.changing"> <div ng-switch-when="false"> <button type="button" ng-click="vm.doChange()" class="btn umb-button__button btn-action"> <localize key="general_changePassword">Change password</localize> </button> </div> <div ng-switch-when="true"> <ng-form name="changePasswordForm"> <umb-control-group alias="resetPassword" label="@user_resetPassword" ng-show="vm.config.enableReset"> <umb-checkbox model="vm.passwordValues.reset" server-validation-field="resetPassword" on-change="vm.showReset = !vm.showReset"> <span ng-messages="changePasswordForm.resetPassword.$error" show-validation-on-submit> <span class="help-inline" ng-message="valServerField">{{changePasswordForm.resetPassword.errorMsg}}</span> </span> </umb-checkbox></umb-control-group>  <umb-control-group alias="oldPassword" label="@user_oldPassword" ng-if="vm.showOldPass()" required="true"> <input type="password" name="oldPassword" ng-model="vm.passwordValues.oldPassword" class="input-block-level umb-textstring textstring" required val-server-field="oldPassword" no-dirty-check> <span ng-messages="changePasswordForm.oldPassword.$error" show-validation-on-submit> <span class="help-inline" ng-message="required">Required</span> <span class="help-inline" ng-message="valServerField">{{changePasswordForm.oldPassword.errorMsg}}</span> </span> </umb-control-group> <umb-control-group alias="password" label="@user_newPassword" ng-if="!vm.showReset" required="true"> <input type="password" name="password" ng-model="vm.passwordValues.newPassword" class="input-block-level umb-textstring textstring" required val-server-field="password" ng-minlength="{{vm.config.minPasswordLength}}" no-dirty-check> <span ng-messages="changePasswordForm.password.$error" show-validation-on-submit> <span class="help-inline" ng-message="required">Required</span> <span class="help-inline" ng-message="minlength">Minimum {{vm.config.minPasswordLength}} characters</span> <span class="help-inline" ng-message="valServerField">{{changePasswordForm.password.errorMsg}}</span> </span> </umb-control-group> <umb-control-group alias="confirmPassword" label="@user_confirmNewPassword" ng-if="!vm.showReset" required="true"> <input type="password" name="confirmPassword" ng-model="vm.passwordValues.confirm" class="input-block-level umb-textstring textstring" val-compare="password" no-dirty-check> <span ng-messages="changePasswordForm.confirmPassword.$error" show-validation-on-submit> <span class="help-inline" ng-message="valCompare"><localize key="user_passwordMismatch">The confirmed password doesn\'t match the new password!</localize></span> </span> </umb-control-group> <button ng-click="vm.cancelChange()" ng-show="vm.showCancelBtn()" class="btn umb-button__button btn-cancel umb-button--"> <localize key="general_cancel">Cancel</localize> </button> </ng-form> </div> </div> </div> ',
             controller: ChangePasswordController,
             controllerAs: 'vm',
             bindings: {
@@ -15434,7 +15866,7 @@ Use this directive to render a user group preview, where you can see the permiss
                     var config = {
                         attributes: true,
                         childList: true,
-                        subtree: false
+                        subtree: true
                     };
                     observer.observe(targetNode, config);
                 }
@@ -16732,4 +17164,538 @@ Use this directive to render a user group preview, where you can see the permiss
             priority: 1
         };
     });
+    'use strict';
+    (function () {
+        'use strict';
+        /**
+   * A component to render the property action toggle
+   */
+        function umbPropertyActionsController(keyboardService) {
+            var vm = this;
+            vm.isOpen = false;
+            function initDropDown() {
+                keyboardService.bind('esc', vm.close);
+            }
+            function destroyDropDown() {
+                keyboardService.unbind('esc');
+            }
+            vm.toggle = function () {
+                if (vm.isOpen === true) {
+                    vm.close();
+                } else {
+                    vm.open();
+                }
+            };
+            vm.open = function () {
+                vm.isOpen = true;
+                initDropDown();
+            };
+            vm.close = function () {
+                vm.isOpen = false;
+                destroyDropDown();
+            };
+            vm.executeAction = function (action) {
+                action.method();
+                vm.close();
+            };
+            vm.$onDestroy = function () {
+                if (vm.isOpen === true) {
+                    destroyDropDown();
+                }
+            };
+        }
+        var umbPropertyActionsComponent = {
+            template: '<div class="umb-property-actions" ng-if="vm.actions.length > 0"> <button type="button" class="btn-reset umb-outline umb-property-actions__toggle" ng-click="vm.toggle()" localize="title" title="propertyActions_tooltipForPropertyActionsMenu"><i></i><i></i><i></i></button> <div class="umb-property-actions__menu" role="menu" ng-if="vm.isOpen" on-outside-click="vm.close()" on-close="vm.close()" deep-blur="vm.close()"> <button class="umb-property-actions__menu-open-toggle" ng-click="vm.close()" tabindex="-1"><i></i><i></i><i></i></button> <ul class="umb-contextmenu"> <li ng-repeat="action in vm.actions" role="menuitem" class="umb-contextmenu-item" ng-class="{\'-opens-dialog\': action.opensDialog}"> <button type="button" class="btn-reset umb-outline" ng-click="vm.executeAction(action)" ng-disabled="action.isDisabled === true"> <i class="icon icon-{{action.icon}}" aria-hidden="true"></i> <span class="menu-label"><localize key="{{::action.labelKey}}" tokens="action.labelTokens"></localize></span> </button> </li> </ul> </div> </div> ',
+            bindings: { actions: '<' },
+            controllerAs: 'vm',
+            controller: umbPropertyActionsController
+        };
+        angular.module('umbraco.directives').component('umbPropertyActions', umbPropertyActionsComponent);
+    }());
+    'use strict';
+    (function () {
+        'use strict';
+        angular.module('umbraco').component('nestedContentPropertyEditor', {
+            template: ' <div id="umb-nested-content--{{model.id}}" class="umb-nested-content" ng-class="{\'umb-nested-content--narrow\':!vm.wideMode, \'umb-nested-content--wide\':vm.wideMode}"> <umb-load-indicator ng-if="!vm.inited"></umb-load-indicator> <ng-form name="nestedContentForm"> <div class="umb-nested-content__items" ng-hide="vm.nodes.length === 0" ui-sortable="vm.sortableOptions" ng-model="vm.nodes"> <div class="umb-nested-content__item" ng-repeat="node in vm.nodes" ng-class="{ \'umb-nested-content__item--active\' : vm.currentNode.key === node.key, \'umb-nested-content__item--single\' : vm.singleMode }"> <div class="umb-nested-content__header-bar" ng-click="vm.editNode($index)" ng-hide="vm.singleMode"> <div class="umb-nested-content__heading"><i ng-if="vm.showIcons" class="icon" ng-class="vm.getIcon($index)"></i><span class="umb-nested-content__item-name" ng-class="{\'--has-icon\': vm.showIcons}" ng-bind="vm.getName($index)"></span></div> <div class="umb-nested-content__icons"> <a class="umb-nested-content__icon umb-nested-content__icon--copy" title="{{copyIconTitle}}" ng-click="vm.clickCopy($event, node);" ng-if="vm.showCopy" prevent-default> <i class="icon icon-documents"></i> </a> <a class="umb-nested-content__icon umb-nested-content__icon--delete" localize="title" title="general_delete" ng-click="vm.requestDeleteNode($index); $event.stopPropagation();" prevent-default> <i class="icon icon-trash"></i> </a> </div> </div> <div class="umb-nested-content__content" ng-if="vm.currentNode.key === node.key && !vm.sorting"> <umb-nested-content-editor ng-model="node" tab-alias="ncTabAlias"> </umb-nested-content-editor></div> </div> </div> <div ng-hide="vm.hasContentTypes"> <div class="umb-nested-content__help-text"> <localize key="content_nestedContentNoContentTypes"></localize> </div> </div> <div class="umb-nested-content__footer-bar" ng-hide="vm.hasContentTypes === false"> <button class="btn-reset umb-nested-content__add-content umb-focus" ng-class="{ \'--disabled\': (!vm.scaffolds.length || vm.nodes.length >= maxItems) }" ng-click="vm.openNodeTypePicker($event)" prevent-default> <localize key="grid_addElement"></localize> </button> </div>  <input type="hidden" name="minCount" ng-model="vm.nodes"> <input type="hidden" name="maxCount" ng-model="vm.nodes"> <div ng-messages="nestedContentForm.minCount.$error" show-validation-on-submit> <div class="help text-error" ng-message="minCount"> <localize key="validation_entriesShort" tokens="[vm.minItems, vm.minItems - vm.nodes.length]" watch-tokens="true">Minimum %0% entries, needs <strong>%1%</strong> more.</localize> </div> </div> <div ng-if="nestedContentForm.minCount.$error === true || vm.nodes.length > vm.maxItems"> <div class="help text-error"> <localize key="validation_entriesExceed" tokens="[vm.maxItems, vm.nodes.length - vm.maxItems]" watch-tokens="true">Maximum %0% entries, <strong>%1%</strong> too many.</localize> </div> </div> </ng-form> <umb-overlay ng-if="vm.overlayMenu.show" position="target" size="vm.overlayMenu.size" view="vm.overlayMenu.view" model="vm.overlayMenu"> </umb-overlay> </div> ',
+            controller: NestedContentController,
+            controllerAs: 'vm',
+            require: {
+                umbProperty: '?^umbProperty',
+                umbVariantContent: '?^^umbVariantContent'
+            }
+        });
+        function NestedContentController($scope, $interpolate, $filter, $timeout, contentResource, localizationService, iconHelper, clipboardService, eventsService, overlayService, $routeParams, editorState) {
+            var vm = this;
+            var model = $scope.$parent.$parent.model;
+            var contentTypeAliases = [];
+            _.each(model.config.contentTypes, function (contentType) {
+                contentTypeAliases.push(contentType.ncAlias);
+            });
+            _.each(model.config.contentTypes, function (contentType) {
+                contentType.nameExp = !!contentType.nameTemplate ? $interpolate(contentType.nameTemplate) : undefined;
+            });
+            vm.nodes = [];
+            vm.currentNode = null;
+            vm.scaffolds = null;
+            vm.sorting = false;
+            vm.inited = false;
+            vm.minItems = model.config.minItems || 0;
+            vm.maxItems = model.config.maxItems || 0;
+            if (vm.maxItems === 0)
+                vm.maxItems = 1000;
+            vm.singleMode = vm.minItems === 1 && vm.maxItems === 1;
+            vm.showIcons = Object.toBoolean(model.config.showIcons);
+            vm.wideMode = Object.toBoolean(model.config.hideLabel);
+            vm.hasContentTypes = model.config.contentTypes.length > 0;
+            var labels = {};
+            localizationService.localizeMany([
+                'grid_addElement',
+                'content_createEmpty'
+            ]).then(function (data) {
+                labels.grid_addElement = data[0];
+                labels.content_createEmpty = data[1];
+            });
+            function setCurrentNode(node) {
+                updateModel();
+                vm.currentNode = node;
+            }
+            var copyAllEntries = function copyAllEntries() {
+                syncCurrentNode();
+                // list aliases
+                var aliases = vm.nodes.map(function (node) {
+                    return node.contentTypeAlias;
+                });
+                // remove dublicates
+                aliases = aliases.filter(function (item, index) {
+                    return aliases.indexOf(item) === index;
+                });
+                var nodeName = '';
+                if (vm.umbVariantContent) {
+                    nodeName = vm.umbVariantContent.editor.content.name;
+                }
+                localizationService.localize('clipboard_labelForArrayOfItemsFrom', [
+                    model.label,
+                    nodeName
+                ]).then(function (data) {
+                    clipboardService.copyArray('elementTypeArray', aliases, vm.nodes, data, 'icon-thumbnail-list', model.id);
+                });
+            };
+            var copyAllEntriesAction = {
+                labelKey: 'clipboard_labelForCopyAllEntries',
+                labelTokens: [model.label],
+                icon: 'documents',
+                method: copyAllEntries,
+                isDisabled: true
+            };
+            // helper to force the current form into the dirty state
+            function setDirty() {
+                if ($scope.$parent.$parent.propertyForm) {
+                    $scope.$parent.$parent.propertyForm.$setDirty();
+                }
+            }
+            ;
+            function addNode(alias) {
+                var scaffold = getScaffold(alias);
+                var newNode = createNode(scaffold, null);
+                setCurrentNode(newNode);
+                setDirty();
+            }
+            ;
+            vm.openNodeTypePicker = function ($event) {
+                if (vm.nodes.length >= vm.maxItems) {
+                    return;
+                }
+                vm.overlayMenu = {
+                    show: false,
+                    style: {},
+                    filter: vm.scaffolds.length > 12 ? true : false,
+                    orderBy: '$index',
+                    view: 'itempicker',
+                    event: $event,
+                    clickPasteItem: function clickPasteItem(item) {
+                        if (item.type === 'elementTypeArray') {
+                            _.each(item.data, function (entry) {
+                                pasteFromClipboard(entry);
+                            });
+                        } else {
+                            pasteFromClipboard(item.data);
+                        }
+                        vm.overlayMenu.show = false;
+                        vm.overlayMenu = null;
+                    },
+                    submit: function submit(model) {
+                        if (model && model.selectedItem) {
+                            addNode(model.selectedItem.alias);
+                        }
+                        vm.overlayMenu.show = false;
+                        vm.overlayMenu = null;
+                    },
+                    close: function close() {
+                        vm.overlayMenu.show = false;
+                        vm.overlayMenu = null;
+                    }
+                };
+                // this could be used for future limiting on node types
+                vm.overlayMenu.availableItems = [];
+                _.each(vm.scaffolds, function (scaffold) {
+                    vm.overlayMenu.availableItems.push({
+                        alias: scaffold.contentTypeAlias,
+                        name: scaffold.contentTypeName,
+                        icon: iconHelper.convertFromLegacyIcon(scaffold.icon)
+                    });
+                });
+                if (vm.overlayMenu.availableItems.length === 0) {
+                    return;
+                }
+                vm.overlayMenu.size = vm.overlayMenu.availableItems.length > 6 ? 'medium' : 'small';
+                vm.overlayMenu.pasteItems = [];
+                var singleEntriesForPaste = clipboardService.retriveEntriesOfType('elementType', contentTypeAliases);
+                _.each(singleEntriesForPaste, function (entry) {
+                    vm.overlayMenu.pasteItems.push({
+                        type: 'elementType',
+                        name: entry.label,
+                        data: entry.data,
+                        icon: entry.icon
+                    });
+                });
+                var arrayEntriesForPaste = clipboardService.retriveEntriesOfType('elementTypeArray', contentTypeAliases);
+                _.each(arrayEntriesForPaste, function (entry) {
+                    vm.overlayMenu.pasteItems.push({
+                        type: 'elementTypeArray',
+                        name: entry.label,
+                        data: entry.data,
+                        icon: entry.icon
+                    });
+                });
+                vm.overlayMenu.title = vm.overlayMenu.pasteItems.length > 0 ? labels.grid_addElement : labels.content_createEmpty;
+                vm.overlayMenu.clickClearPaste = function ($event) {
+                    $event.stopPropagation();
+                    $event.preventDefault();
+                    clipboardService.clearEntriesOfType('elementType', contentTypeAliases);
+                    clipboardService.clearEntriesOfType('elementTypeArray', contentTypeAliases);
+                    vm.overlayMenu.pasteItems = [];    // This dialog is not connected via the clipboardService events, so we need to update manually.
+                };
+                if (vm.overlayMenu.availableItems.length === 1 && vm.overlayMenu.pasteItems.length === 0) {
+                    // only one scaffold type - no need to display the picker
+                    addNode(vm.scaffolds[0].contentTypeAlias);
+                    return;
+                }
+                vm.overlayMenu.show = true;
+            };
+            vm.editNode = function (idx) {
+                if (vm.currentNode && vm.currentNode.key === vm.nodes[idx].key) {
+                    setCurrentNode(null);
+                } else {
+                    setCurrentNode(vm.nodes[idx]);
+                }
+            };
+            function deleteNode(idx) {
+                vm.nodes.splice(idx, 1);
+                setDirty();
+                updateModel();
+            }
+            ;
+            vm.requestDeleteNode = function (idx) {
+                if (model.config.confirmDeletes === true) {
+                    localizationService.localizeMany([
+                        'content_nestedContentDeleteItem',
+                        'general_delete',
+                        'general_cancel',
+                        'contentTypeEditor_yesDelete'
+                    ]).then(function (data) {
+                        var overlay = {
+                            title: data[1],
+                            content: data[0],
+                            closeButtonLabel: data[2],
+                            submitButtonLabel: data[3],
+                            submitButtonStyle: 'danger',
+                            close: function close() {
+                                overlayService.close();
+                            },
+                            submit: function submit() {
+                                deleteNode(idx);
+                                overlayService.close();
+                            }
+                        };
+                        overlayService.open(overlay);
+                    });
+                } else {
+                    deleteNode(idx);
+                }
+            };
+            vm.getName = function (idx) {
+                var name = '';
+                if (model.value[idx]) {
+                    var contentType = getContentTypeConfig(model.value[idx].ncContentTypeAlias);
+                    if (contentType != null) {
+                        // first try getting a name using the configured label template
+                        if (contentType.nameExp) {
+                            // Run the expression against the stored dictionary value, NOT the node object
+                            var item = model.value[idx];
+                            // Add a temporary index property
+                            item['$index'] = idx + 1;
+                            var newName = contentType.nameExp(item);
+                            if (newName && (newName = $.trim(newName))) {
+                                name = newName;
+                            }
+                            // Delete the index property as we don't want to persist it
+                            delete item['$index'];
+                        }
+                        // if we still do not have a name and we have multiple content types to choose from, use the content type name (same as is shown in the content type picker)
+                        if (!name && vm.scaffolds.length > 1) {
+                            var scaffold = getScaffold(contentType.ncAlias);
+                            if (scaffold) {
+                                name = scaffold.contentTypeName;
+                            }
+                        }
+                    }
+                }
+                if (!name) {
+                    name = 'Item ' + (idx + 1);
+                }
+                // Update the nodes actual name value
+                if (vm.nodes[idx].name !== name) {
+                    vm.nodes[idx].name = name;
+                }
+                return name;
+            };
+            vm.getIcon = function (idx) {
+                var scaffold = getScaffold(model.value[idx].ncContentTypeAlias);
+                return scaffold && scaffold.icon ? iconHelper.convertFromLegacyIcon(scaffold.icon) : 'icon-folder';
+            };
+            vm.sortableOptions = {
+                axis: 'y',
+                cursor: 'move',
+                handle: '.umb-nested-content__header-bar',
+                distance: 10,
+                opacity: 0.7,
+                tolerance: 'pointer',
+                scroll: true,
+                start: function start(ev, ui) {
+                    updateModel();
+                    // Yea, yea, we shouldn't modify the dom, sue me
+                    $('#umb-nested-content--' + model.id + ' .umb-rte textarea').each(function () {
+                        tinymce.execCommand('mceRemoveEditor', false, $(this).attr('id'));
+                        $(this).css('visibility', 'hidden');
+                    });
+                    $scope.$apply(function () {
+                        vm.sorting = true;
+                    });
+                },
+                update: function update(ev, ui) {
+                    setDirty();
+                },
+                stop: function stop(ev, ui) {
+                    $('#umb-nested-content--' + model.id + ' .umb-rte textarea').each(function () {
+                        tinymce.execCommand('mceAddEditor', true, $(this).attr('id'));
+                        $(this).css('visibility', 'visible');
+                    });
+                    $scope.$apply(function () {
+                        vm.sorting = false;
+                        updateModel();
+                    });
+                }
+            };
+            function getScaffold(alias) {
+                return _.find(vm.scaffolds, function (scaffold) {
+                    return scaffold.contentTypeAlias === alias;
+                });
+            }
+            function getContentTypeConfig(alias) {
+                return _.find(model.config.contentTypes, function (contentType) {
+                    return contentType.ncAlias === alias;
+                });
+            }
+            vm.showCopy = clipboardService.isSupported();
+            vm.showPaste = false;
+            vm.clickCopy = function ($event, node) {
+                syncCurrentNode();
+                clipboardService.copy('elementType', node.contentTypeAlias, node);
+                $event.stopPropagation();
+            };
+            function pasteFromClipboard(newNode) {
+                if (newNode === undefined) {
+                    return;
+                }
+                // generate a new key.
+                newNode.key = String.CreateGuid();
+                vm.nodes.push(newNode);
+                setDirty();
+                //updateModel();// done by setting current node...
+                setCurrentNode(newNode);
+            }
+            function checkAbilityToPasteContent() {
+                vm.showPaste = clipboardService.hasEntriesOfType('elementType', contentTypeAliases) || clipboardService.hasEntriesOfType('elementTypeArray', contentTypeAliases);
+            }
+            eventsService.on('clipboardService.storageUpdate', checkAbilityToPasteContent);
+            var notSupported = [
+                'Umbraco.Tags',
+                'Umbraco.UploadField',
+                'Umbraco.ImageCropper'
+            ];
+            // Initialize
+            var scaffoldsLoaded = 0;
+            vm.scaffolds = [];
+            _.each(model.config.contentTypes, function (contentType) {
+                contentResource.getScaffold(-20, contentType.ncAlias).then(function (scaffold) {
+                    // make sure it's an element type before allowing the user to create new ones
+                    if (scaffold.isElement) {
+                        // remove all tabs except the specified tab
+                        var tabs = scaffold.variants[0].tabs;
+                        var tab = _.find(tabs, function (tab) {
+                            return tab.id !== 0 && (tab.alias.toLowerCase() === contentType.ncTabAlias.toLowerCase() || contentType.ncTabAlias === '');
+                        });
+                        scaffold.variants[0].tabs = [];
+                        if (tab) {
+                            scaffold.variants[0].tabs.push(tab);
+                            angular.forEach(tab.properties, function (property) {
+                                if (_.find(notSupported, function (x) {
+                                        return x === property.editor;
+                                    })) {
+                                    property.notSupported = true;
+                                    // TODO: Not supported message to be replaced with 'content_nestedContentEditorNotSupported' dictionary key. Currently not possible due to async/timing quirk.
+                                    property.notSupportedMessage = 'Property ' + property.label + ' uses editor ' + property.editor + ' which is not supported by Nested Content.';
+                                }
+                            });
+                        }
+                        // Store the scaffold object
+                        vm.scaffolds.push(scaffold);
+                    }
+                    scaffoldsLoaded++;
+                    initIfAllScaffoldsHaveLoaded();
+                }, function (error) {
+                    scaffoldsLoaded++;
+                    initIfAllScaffoldsHaveLoaded();
+                });
+            });
+            var initIfAllScaffoldsHaveLoaded = function initIfAllScaffoldsHaveLoaded() {
+                // Initialize when all scaffolds have loaded
+                if (model.config.contentTypes.length === scaffoldsLoaded) {
+                    // Because we're loading the scaffolds async one at a time, we need to
+                    // sort them explicitly according to the sort order defined by the data type.
+                    contentTypeAliases = [];
+                    _.each(model.config.contentTypes, function (contentType) {
+                        contentTypeAliases.push(contentType.ncAlias);
+                    });
+                    vm.scaffolds = $filter('orderBy')(vm.scaffolds, function (s) {
+                        return contentTypeAliases.indexOf(s.contentTypeAlias);
+                    });
+                    // Convert stored nodes
+                    if (model.value) {
+                        for (var i = 0; i < model.value.length; i++) {
+                            var item = model.value[i];
+                            var scaffold = getScaffold(item.ncContentTypeAlias);
+                            if (scaffold == null) {
+                                // No such scaffold - the content type might have been deleted. We need to skip it.
+                                continue;
+                            }
+                            createNode(scaffold, item);
+                        }
+                    }
+                    // Auto-fill with elementTypes, but only if we have one type to choose from, and if this property is empty.
+                    if (vm.singleMode === true && vm.nodes.length === 0 && model.config.minItems > 0) {
+                        for (var i = vm.nodes.length; i < model.config.minItems; i++) {
+                            addNode(vm.scaffolds[0].contentTypeAlias);
+                        }
+                    }
+                    // If there is only one item, set it as current node
+                    if (vm.singleMode || vm.nodes.length === 1 && vm.maxItems === 1) {
+                        setCurrentNode(vm.nodes[0]);
+                    }
+                    vm.inited = true;
+                    updatePropertyActionStates();
+                    checkAbilityToPasteContent();
+                }
+            };
+            function createNode(scaffold, fromNcEntry) {
+                var node = angular.copy(scaffold);
+                node.key = fromNcEntry && fromNcEntry.key ? fromNcEntry.key : String.CreateGuid();
+                var variant = node.variants[0];
+                for (var t = 0; t < variant.tabs.length; t++) {
+                    var tab = variant.tabs[t];
+                    for (var p = 0; p < tab.properties.length; p++) {
+                        var prop = tab.properties[p];
+                        prop.propertyAlias = prop.alias;
+                        prop.alias = model.alias + '___' + prop.alias;
+                        // Force validation to occur server side as this is the
+                        // only way we can have consistency between mandatory and
+                        // regex validation messages. Not ideal, but it works.
+                        prop.validation = {
+                            mandatory: false,
+                            pattern: ''
+                        };
+                        if (fromNcEntry && fromNcEntry[prop.propertyAlias]) {
+                            prop.value = fromNcEntry[prop.propertyAlias];
+                        }
+                    }
+                }
+                vm.nodes.push(node);
+                return node;
+            }
+            function convertNodeIntoNCEntry(node) {
+                var obj = {
+                    key: node.key,
+                    name: node.name,
+                    ncContentTypeAlias: node.contentTypeAlias
+                };
+                for (var t = 0; t < node.variants[0].tabs.length; t++) {
+                    var tab = node.variants[0].tabs[t];
+                    for (var p = 0; p < tab.properties.length; p++) {
+                        var prop = tab.properties[p];
+                        if (typeof prop.value !== 'function') {
+                            obj[prop.propertyAlias] = prop.value;
+                        }
+                    }
+                }
+                return obj;
+            }
+            function syncCurrentNode() {
+                if (vm.currentNode) {
+                    $scope.$broadcast('ncSyncVal', { key: vm.currentNode.key });
+                }
+            }
+            function updateModel() {
+                syncCurrentNode();
+                if (vm.inited) {
+                    var newValues = [];
+                    for (var i = 0; i < vm.nodes.length; i++) {
+                        newValues.push(convertNodeIntoNCEntry(vm.nodes[i]));
+                    }
+                    model.value = newValues;
+                }
+                updatePropertyActionStates();
+            }
+            function updatePropertyActionStates() {
+                copyAllEntriesAction.isDisabled = !model.value || model.value.length === 0;
+            }
+            var propertyActions = [copyAllEntriesAction];
+            this.$onInit = function () {
+                if (this.umbProperty) {
+                    this.umbProperty.setPropertyActions(propertyActions);
+                }
+            };
+            var unsubscribe = $scope.$on('formSubmitting', function (ev, args) {
+                updateModel();
+            });
+            var watcher = $scope.$watch(function () {
+                return vm.nodes.length;
+            }, function () {
+                //Validate!
+                if (vm.nodes.length < vm.minItems) {
+                    $scope.nestedContentForm.minCount.$setValidity('minCount', false);
+                } else {
+                    $scope.nestedContentForm.minCount.$setValidity('minCount', true);
+                }
+                if (vm.nodes.length > vm.maxItems) {
+                    $scope.nestedContentForm.maxCount.$setValidity('maxCount', false);
+                } else {
+                    $scope.nestedContentForm.maxCount.$setValidity('maxCount', true);
+                }
+            });
+            $scope.$on('$destroy', function () {
+                unsubscribe();
+                watcher();
+            });
+        }
+    }());
 }());

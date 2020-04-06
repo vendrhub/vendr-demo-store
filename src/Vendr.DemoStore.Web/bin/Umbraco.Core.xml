@@ -7507,6 +7507,117 @@
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "P:Umbraco.Core.Migrations.MigrationExpressionBase.Name" -->
+        <member name="T:Umbraco.Core.Models.ContentEditing.ContentAppBadge">
+            <summary>
+            Represents a content app badge
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Models.ContentEditing.ContentAppBadge.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umbraco.Core.Models.ContentEditing.ContentAppBadge"/> class.
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.ContentEditing.ContentAppBadge.Count">
+            <summary>
+            Gets or sets the number displayed in the badge
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.ContentEditing.ContentAppBadge.Type">
+            <summary>
+            Gets or sets the type of badge to display
+            </summary>
+            <remarks>
+            <para>This controls the background color of the badge.</para>
+            <para>Warning will display a dark yellow badge</para>
+            <para>Alert will display a red badge</para>
+            <para>Default will display a turquoise badge</para>
+            </remarks>
+        </member>
+        <member name="T:Umbraco.Core.Models.ContentEditing.ContentAppBadgeType">
+            <summary>
+            Represent the content app badge types
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Models.ContentEditing.ContentApp">
+            <summary>
+            Represents a content app.
+            </summary>
+            <remarks>
+            <para>Content apps are editor extensions.</para>
+            </remarks>
+        </member>
+        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Name">
+            <summary>
+            Gets the name of the content app.
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Alias">
+            <summary>
+            Gets the unique alias of the content app.
+            </summary>
+            <remarks>
+            <para>Must be a valid javascript identifier, ie no spaces etc.</para>
+            </remarks>
+        </member>
+        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Weight">
+            <summary>
+            Gets or sets the weight of the content app.
+            </summary>
+            <remarks>
+            <para>Content apps are ordered by weight, from left (lowest values) to right (highest values).</para>
+            <para>Some built-in apps have special weights: listview is -666, content is -100 and infos is +100.</para>
+            <para>The default weight is 0, meaning somewhere in-between content and infos, but weight could
+            be used for ordering between user-level apps, or anything really.</para>
+            </remarks>
+        </member>
+        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Icon">
+            <summary>
+            Gets the icon of the content app.
+            </summary>
+            <remarks>
+            <para>Must be a valid helveticons class name (see http://hlvticons.ch/).</para>
+            </remarks>
+        </member>
+        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.View">
+            <summary>
+            Gets the view for rendering the content app.
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.ViewModel">
+            <summary>
+            The view model specific to this app
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Active">
+            <summary>
+            Gets a value indicating whether the app is active.
+            </summary>
+            <remarks>
+            <para>Normally reserved for Angular to deal with but in some cases this can be set on the server side.</para>
+            </remarks>
+        </member>
+        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Badge">
+            <summary>
+            Gets or sets the content app badge.
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Models.ContentEditing.IContentAppFactory">
+            <summary>
+            Represents a content app factory.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Models.ContentEditing.IContentAppFactory.GetContentAppFor(System.Object,System.Collections.Generic.IEnumerable{Umbraco.Core.Models.Membership.IReadOnlyUserGroup})">
+            <summary>
+            Gets the content app for an object.
+            </summary>
+            <param name="source">The source object.</param>
+            <returns>The content app for the object, or null.</returns>
+            <remarks>
+            <para>The definition must determine, based on <paramref name="source"/>, whether
+            the content app should be displayed or not, and return either a <see cref="T:Umbraco.Core.Models.ContentEditing.ContentApp"/>
+            instance, or null.</para>
+            </remarks>
+        </member>
         <member name="M:Umbraco.Core.Models.Entities.EntityExtensions.UpdatingEntity(Umbraco.Core.Models.Entities.IEntity)">
             <summary>
             Updates the entity when it is being saved.
@@ -7531,6 +7642,12 @@
             <summary>
             Implements <see cref="T:Umbraco.Core.Models.Entities.IMediaEntitySlim"/>.
             </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Entities.MemberEntitySlim.ContentTypeIcon">
+            <inheritdoc />
+        </member>
+        <member name="P:Umbraco.Core.Models.Entities.MemberEntitySlim.ContentTypeThumbnail">
+            <inheritdoc />
         </member>
         <member name="T:Umbraco.Core.Models.Entities.BeingDirty">
             <summary>
@@ -8200,6 +8317,20 @@
             even though it does not impact the invariant culture, neither directly (ImpactsInvariantCulture)
             nor indirectly (ImpactsAllCultures).
             </summary>
+        </member>
+        <member name="T:Umbraco.Core.Models.PagedResult">
+            <summary>
+            Represents a paged result for a model collection
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Umbraco.Core.Models.PagedResult.GetSkipSize">
+            <summary>
+            Calculates the skip size based on the paged parameters specified
+            </summary>
+            <remarks>
+            Returns 0 if the page number or page size is zero
+            </remarks>
         </member>
         <member name="T:Umbraco.Core.Models.PublishedContent.ILivePublishedModelFactory">
             <summary>
@@ -9790,81 +9921,6 @@
             <summary>
             Consent has been revoked.
             </summary>
-        </member>
-        <member name="T:Umbraco.Core.Models.ContentEditing.ContentApp">
-            <summary>
-            Represents a content app.
-            </summary>
-            <remarks>
-            <para>Content apps are editor extensions.</para>
-            </remarks>
-        </member>
-        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Name">
-            <summary>
-            Gets the name of the content app.
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Alias">
-            <summary>
-            Gets the unique alias of the content app.
-            </summary>
-            <remarks>
-            <para>Must be a valid javascript identifier, ie no spaces etc.</para>
-            </remarks>
-        </member>
-        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Weight">
-            <summary>
-            Gets or sets the weight of the content app.
-            </summary>
-            <remarks>
-            <para>Content apps are ordered by weight, from left (lowest values) to right (highest values).</para>
-            <para>Some built-in apps have special weights: listview is -666, content is -100 and infos is +100.</para>
-            <para>The default weight is 0, meaning somewhere in-between content and infos, but weight could
-            be used for ordering between user-level apps, or anything really.</para>
-            </remarks>
-        </member>
-        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Icon">
-            <summary>
-            Gets the icon of the content app.
-            </summary>
-            <remarks>
-            <para>Must be a valid helveticons class name (see http://hlvticons.ch/).</para>
-            </remarks>
-        </member>
-        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.View">
-            <summary>
-            Gets the view for rendering the content app.
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.ViewModel">
-            <summary>
-            The view model specific to this app
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Active">
-            <summary>
-            Gets a value indicating whether the app is active.
-            </summary>
-            <remarks>
-            <para>Normally reserved for Angular to deal with but in some cases this can be set on the server side.</para>
-            </remarks>
-        </member>
-        <member name="T:Umbraco.Core.Models.ContentEditing.IContentAppFactory">
-            <summary>
-            Represents a content app factory.
-            </summary>
-        </member>
-        <member name="M:Umbraco.Core.Models.ContentEditing.IContentAppFactory.GetContentAppFor(System.Object,System.Collections.Generic.IEnumerable{Umbraco.Core.Models.Membership.IReadOnlyUserGroup})">
-            <summary>
-            Gets the content app for an object.
-            </summary>
-            <param name="source">The source object.</param>
-            <returns>The content app for the object, or null.</returns>
-            <remarks>
-            <para>The definition must determine, based on <paramref name="source"/>, whether
-            the content app should be displayed or not, and return either a <see cref="T:Umbraco.Core.Models.ContentEditing.ContentApp"/>
-            instance, or null.</para>
-            </remarks>
         </member>
         <member name="T:Umbraco.Core.Models.ContentRepositoryExtensions">
             <summary>
@@ -13951,14 +14007,6 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="M:Umbraco.Core.Models.PagedResult`1.GetSkipSize">
-            <summary>
-            Calculates the skip size based on the paged parameters specified
-            </summary>
-            <remarks>
-            Returns 0 if the page number or page size is zero
-            </remarks>
-        </member>
         <member name="T:Umbraco.Core.Models.PartialView">
             <summary>
             Represents a Partial View file
@@ -17024,11 +17072,19 @@
             <remarks>Exposes shared functionality</remarks>
             <typeparam name="TEntity"></typeparam>
         </member>
+        <member name="M:Umbraco.Core.Persistence.Repositories.Implement.ContentTypeRepositoryBase`1.CorrectPropertyTypeVariations(Umbraco.Core.Models.IContentTypeComposition)">
+            <summary>
+            Corrects the property type variations for the given entity
+            to make sure the property type variation is compatible with the
+            variation set on the entity itself.
+            </summary>
+            <param name="entity">Entity to correct properties for</param>
+        </member>
         <member name="M:Umbraco.Core.Persistence.Repositories.Implement.ContentTypeRepositoryBase`1.ValidateVariations(Umbraco.Core.Models.IContentTypeComposition)">
             <summary>
             Ensures that no property types are flagged for a variance that is not supported by the content type itself
             </summary>
-            <param name="entity"></param>
+            <param name="entity">The entity for which the property types will be validated</param>
         </member>
         <member name="M:Umbraco.Core.Persistence.Repositories.Implement.ContentTypeRepositoryBase`1.Clear301Redirects(Umbraco.Core.Models.IContentTypeComposition)">
             <summary>
@@ -17934,6 +17990,13 @@
             Gets a value indicating whether there is a list view content item in the path.
             </summary>
             <param name="contentPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Persistence.Repositories.IDataTypeRepository.FindUsages(System.Int32)">
+            <summary>
+            Returns a dictionary of content type <see cref="T:Umbraco.Core.Udi"/>s and the property type aliases that use a <see cref="T:Umbraco.Core.Models.IDataType"/>
+            </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:Umbraco.Core.Persistence.Repositories.ILanguageRepository.GetIdByIsoCode(System.String,System.Boolean)">
@@ -21798,6 +21861,11 @@
             <remarks>
             <para>Matches "(table.column) AS (alias)" where table, column and alias are properly escaped.</para>
             </remarks>
+        </member>
+        <member name="P:Umbraco.Core.Persistence.SqlSyntax.ISqlSyntaxProvider.DefaultIsolationLevel">
+            <summary>
+            Returns the default isolation level for the database
+            </summary>
         </member>
         <member name="M:Umbraco.Core.Persistence.SqlSyntax.ISqlSyntaxProvider.GetConstraintsPerTable(NPoco.IDatabase)">
             <summary>
@@ -26373,6 +26441,13 @@
             Defines the DataType Service, which is an easy access to operations involving <see cref="T:Umbraco.Core.Models.IDataType"/>
             </summary>
         </member>
+        <member name="M:Umbraco.Core.Services.IDataTypeService.GetReferences(System.Int32)">
+            <summary>
+            Returns a dictionary of content type <see cref="T:Umbraco.Core.Udi"/>s and the property type aliases that use a <see cref="T:Umbraco.Core.Models.IDataType"/>
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="M:Umbraco.Core.Services.IDataTypeService.GetDataType(System.String)">
             <summary>
             Gets a <see cref="T:Umbraco.Core.Models.IDataType"/> by its Name
@@ -30928,11 +31003,6 @@
         <member name="F:Umbraco.Core.Constants.PropertyEditors.Aliases.ListView">
             <summary>
             ListView.
-            </summary>
-        </member>
-        <member name="F:Umbraco.Core.Constants.PropertyEditors.Aliases.MacroContainer">
-            <summary>
-            Macro Container.
             </summary>
         </member>
         <member name="F:Umbraco.Core.Constants.PropertyEditors.Aliases.MediaPicker">
@@ -36806,29 +36876,32 @@
             <summary>
             Generates a hash of a string based on the FIPS compliance setting.
             </summary>
-            <param name="str">Refers to itself</param>
-            <returns>The hashed string</returns>
+            <param name="str">The <see cref="T:System.String" /> to hash.</param>
+            <returns>
+            The hashed string.
+            </returns>
         </member>
-        <member name="M:Umbraco.Core.StringExtensions.ToMd5(System.String)">
+        <member name="M:Umbraco.Core.StringExtensions.GenerateHash``1(System.String)">
             <summary>
-            Converts the string to MD5
+            Generate a hash of a string based on the specified hash algorithm.
             </summary>
-            <param name="stringToConvert">Refers to itself</param>
-            <returns>The MD5 hashed string</returns>
-        </member>
-        <member name="M:Umbraco.Core.StringExtensions.ToSHA1(System.String)">
-            <summary>
-            Converts the string to SHA1
-            </summary>
-            <param name="stringToConvert">refers to itself</param>
-            <returns>The SHA1 hashed string</returns>
+            <typeparam name="T">The hash algorithm implementation to use.</typeparam>
+            <param name="str">The <see cref="T:System.String" /> to hash.</param>
+            <returns>
+            The hashed string.
+            </returns>
         </member>
         <member name="M:Umbraco.Core.StringExtensions.GenerateHash(System.String,System.String)">
-            <summary>Generate a hash of a string based on the hashType passed in
+            <summary>
+            Generate a hash of a string based on the specified <paramref name="hashType" />.
             </summary>
-            <param name="str">Refers to itself</param>
-            <param name="hashType">String with the hash type.  See remarks section of the CryptoConfig Class in MSDN docs for a list of possible values.</param>
-            <returns>The hashed string</returns>
+            <param name="str">The <see cref="T:System.String" /> to hash.</param>
+            <param name="hashType">The hash algorithm implementation to use.</param>
+            <returns>
+            The hashed string.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">No hashing type found by name <paramref name="hashType" />.</exception>
+            <seealso cref="!:https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.hashalgorithm.create#System_Security_Cryptography_HashAlgorithm_Create_System_String_" />
         </member>
         <member name="M:Umbraco.Core.StringExtensions.UrlTokenDecode(System.String)">
             <summary>
