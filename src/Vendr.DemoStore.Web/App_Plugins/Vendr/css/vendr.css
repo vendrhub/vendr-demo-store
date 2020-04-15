@@ -441,10 +441,8 @@ a.no-underline:focus {
     background-color: #d8d7d9;
 }
 .vendr-bg--red,
-.vendr-badge--refunded,
 .vendr-badge--inconsistentcaptured,
 .vendr-badge--error,
-.vendr-header--payment-status-refunded .umb-panel-header-name:after,
 .vendr-header--payment-status-inconsistentcaptured .umb-panel-header-name:after,
 .vendr-header--payment-status-error .umb-panel-header-name:after,
 .vendr-header--order-status-red .umb-panel-header-name:before {
@@ -452,10 +450,8 @@ a.no-underline:focus {
     background-color: #d42054;
 }
 .vendr-bg--orange,
-.vendr-badge--authorized,
-.vendr-badge--inconsistentauthorized,
-.vendr-header--payment-status-authorized .umb-panel-header-name:after,
-.vendr-header--payment-status-inconsistentauthorized .umb-panel-header-name:after,
+.vendr-badge--refunded,
+.vendr-header--payment-status-refunded .umb-panel-header-name:after,
 .vendr-header--order-status-orange .umb-panel-header-name:before {
     color: white;
     background-color: #ff9800;
@@ -498,6 +494,10 @@ a.no-underline:focus {
     background-color: #2196f3;
 }
 .vendr-bg--light-blue,
+.vendr-badge--authorized,
+.vendr-badge--inconsistentauthorized,
+.vendr-header--payment-status-authorized .umb-panel-header-name:after,
+.vendr-header--payment-status-inconsistentauthorized .umb-panel-header-name:after,
 .vendr-header--order-status-light-blue .umb-panel-header-name:before {
     color: white;
     background-color: #03a9f4;

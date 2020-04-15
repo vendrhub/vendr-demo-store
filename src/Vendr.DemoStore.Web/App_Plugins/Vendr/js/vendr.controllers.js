@@ -902,7 +902,7 @@
         vm.config = angular.extend({}, defaultConfig, $scope.model.config);
 
         vm.loadItems = function() {
-            return vendrEmailTemplateResource.getEmailTemplates(vm.config.storeId);
+            return vendrEmailTemplateResource.getEmailTemplates(vm.config.storeId, vm.config.onlySendable);
         };
 
         vm.select = function(item) {
@@ -2381,7 +2381,8 @@
             view: '/app_plugins/vendr/views/dialogs/emailtemplatepicker.html',
             size: 'small',
             config: {
-                storeId: storeId
+                storeId: storeId,
+                onlySendable: true
             },
             submit: function(model) {
                 vendrEmailResource.sendEmail(model.id, id).then(function() {
@@ -2659,17 +2660,26 @@
             var pathToSync = vm.content.path.slice(0, -1);
             navigationService.syncTree({ tree: "vendr", path: pathToSync, forceReload: true }).then(function (syncArgs) {
 
+                var orderOrCartNumber = '#' + (vm.content.orderNumber || vm.content.cartNumber);
+
                 // Fake a current node
                 // This is used in the header to generate the actions menu
                 var application = syncArgs.node.metaData.application;
                 var tree = syncArgs.node.metaData.tree;
                 vm.page.menu.currentNode = {
-                    menuUrl: "/umbraco/backoffice/Vendr/StoresTree/GetMenu?application=" + application + "&tree=" + tree + "&nodeType=Order&storeId=" + storeId + "&id=" + id
+                    id: id,
+                    name: orderOrCartNumber,
+                    nodeType: "Order",
+                    menuUrl: "/umbraco/backoffice/Vendr/StoresTree/GetMenu?application=" + application + "&tree=" + tree + "&nodeType=Order&storeId=" + storeId + "&id=" + id,
+                    metaData: {
+                        tree: tree,
+                        storeId: storeId
+                    }
                 };
 
                 // Build breadcrumb for parent then append current node
                 var breadcrumb = vendrUtils.createBreadcrumbFromTreeNode(syncArgs.node);
-                breadcrumb.push({ name: '#' + (vm.content.orderNumber || vm.content.cartNumber), routePath: "" });
+                breadcrumb.push({ name: orderOrCartNumber, routePath: "" });
                 vm.page.breadcrumb.items = breadcrumb;
 
             });
@@ -2987,7 +2997,7 @@
                         if (!vm.content.prices)
                             vm.content.prices = [];
                         var idx = vm.content.prices.findIndex(findFunc);
-                        if (!isNaN(value)) {
+                        if (value !== "" && !isNaN(value)) {
                             if (idx === -1) {
                                 vm.content.prices.push({
                                     currencyId: defaultPrice.currencyId,
@@ -3668,7 +3678,7 @@
                     var value = {};
 
                     vm.prices.forEach(function (price) {
-                        if (!isNaN(price.value) && price.value !== 0) {
+                        if (price.value !== "" && !isNaN(price.value)) {
                             value[price.currencyId] = price.value;
                         }
                     });
@@ -4394,7 +4404,7 @@
                         if (!vm.content.prices)
                             vm.content.prices = [];
                         var idx = vm.content.prices.findIndex(findFun);
-                        if (!isNaN(value)) {
+                        if (value !== "" && !isNaN(value)) {
                             if (idx === -1) {
                                 vm.content.prices.push({
                                     currencyId: defaultPrice.currencyId,

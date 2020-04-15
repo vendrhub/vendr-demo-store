@@ -366,10 +366,11 @@
 
         return {
 
-            getEmailTemplates: function (storeId) {
+            getEmailTemplates: function (storeId, onlySendable) {
                 return umbRequestHelper.resourcePromise(
                     $http.get(vendrRequestHelper.getApiUrl("emailTemplateApiBaseUrl", "GetEmailTemplates", { 
-                        storeId: storeId 
+                        storeId: storeId,
+                        onlySendable: !!onlySendable
                     })),
                     "Failed to get email templates");
             },

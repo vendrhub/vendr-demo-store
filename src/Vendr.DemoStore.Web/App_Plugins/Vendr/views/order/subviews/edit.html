@@ -27,7 +27,7 @@
                                     <div class="color-grey text-12 block">
                                         <span title="Sku: {{ ol.sku }}">{{ ol.sku }}</span>
                                         <span ng-repeat="olp in vm.editorConfig.orderLine.properties"
-                                              ng-if="olp.showInOrderDetails !== false && ol.properties[olp.alias]">&nbsp;/&nbsp;{{ ol.properties[olp.alias].value }}</span>
+                                              ng-if="olp.showInOrderLineSummary !== false && ol.properties[olp.alias]">&nbsp;/&nbsp;{{ ol.properties[olp.alias].value }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                                         <div class="color-grey text-12 block">
                                             <span title="Sku: {{ sol.sku }}">{{ sol.sku }}</span>
                                             <span ng-repeat="solp in vm.editorConfig.orderLine.properties"
-                                                  ng-if="solp.showInOrderDetails !== false  && sol.properties[solp.alias]">&nbsp;/&nbsp;{{ sol.properties[solp.alias].value }}</span>
+                                                  ng-if="solp.showInOrderLineSummary !== false  && sol.properties[solp.alias]">&nbsp;/&nbsp;{{ sol.properties[solp.alias].value }}</span>
                                         </div>
                                     </div>
                                     <div>

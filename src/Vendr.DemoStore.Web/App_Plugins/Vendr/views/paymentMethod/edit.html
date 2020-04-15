@@ -61,7 +61,7 @@
                         </umb-box>
 
                         <umb-box ng-if="vm.options.paymentProviderScaffold">
-                            <umb-box-header title="{{ vm.options.paymentProviderScaffold.name }}"></umb-box-header>
+                            <umb-box-header title="{{ vm.options.paymentProviderScaffold.name }}" ng-if="vm.options.paymentProviderScaffold.name"></umb-box-header>
                             <umb-box-content>
 
                                 <umb-property ng-repeat="property in vm.options.paymentProviderProperties track by property.alias" property="property">

@@ -1,5 +1,5 @@
 ﻿<div ng-controller="Vendr.Controllers.StockController as vm" class="vendr umb-property-editor">
     <div class="vendr-input vendr-input--short" ng-if="!vm.loading">
-        <input type="number" ng-model="vm.model.value" fix-number />
+        <input id="{{vm.model.alias}}" type="number" ng-model="vm.model.value" fix-number />
     </div>
 </div>
