@@ -964,44 +964,6 @@
 
     'use strict';
 
-    function PaymentMethodPickerDialogController($scope,
-        vendrPaymentMethodResource)
-    {
-        var defaultConfig = {
-            title: "Select Payment Method",
-            enableFilter: true,
-            orderBy: "name"
-        };
-
-        var vm = this;
-
-        vm.config = angular.extend({}, defaultConfig, $scope.model.config);
-
-        vm.loadItems = function() {
-            return vendrPaymentMethodResource.getPaymentMethods(vm.config.storeId);
-        };
-
-        vm.select = function(item) {
-            $scope.model.value = item;
-            if ($scope.model.submit) {
-                $scope.model.submit($scope.model.value);
-            }
-        };
-
-        vm.close = function() {
-            if ($scope.model.close) {
-                $scope.model.close();
-            }
-        };
-    }
-
-    angular.module('vendr').controller('Vendr.Controllers.PaymentMethodPickerDialogController', PaymentMethodPickerDialogController);
-
-}());
-(function () {
-
-    'use strict';
-
     function SettingsEditorDialogController($scope, formHelper)
     {
         var cfg = $scope.model.config;
@@ -1067,11 +1029,10 @@
 
     'use strict';
 
-    function ShippingMethodPickerDialogController($scope,
-        vendrShippingMethodResource)
+    function StoreEntityPickerDialogController($scope, vendrEntityResource)
     {
         var defaultConfig = {
-            title: "Select Shipping Method",
+            title: "Select Entity",
             enableFilter: true,
             orderBy: "name"
         };
@@ -1080,8 +1041,10 @@
 
         vm.config = angular.extend({}, defaultConfig, $scope.model.config);
 
+        vm.config.title = "Select "+ vm.config.entityType.replace(/([A-Z])/g, ' $1');
+
         vm.loadItems = function() {
-            return vendrShippingMethodResource.getShippingMethods(vm.config.storeId);
+            return vendrEntityResource.getEntities(vm.config.entityType, vm.config.storeId);
         };
 
         vm.select = function(item) {
@@ -1098,7 +1061,7 @@
         };
     }
 
-    angular.module('vendr').controller('Vendr.Controllers.ShippingMethodPickerDialogController', ShippingMethodPickerDialogController);
+    angular.module('vendr').controller('Vendr.Controllers.StoreEntityPickerDialogController', StoreEntityPickerDialogController);
 
 }());
 (function () {
@@ -2497,7 +2460,7 @@
             }
         };
 
-        vm.hadEditableOrderLineProperties = function (orderLine) {
+        vm.hasEditableOrderLineProperties = function (orderLine) {
             if (!vm.editorConfig.orderLine.properties)
                 return false;
 
@@ -2532,7 +2495,7 @@
             editorService.open(editPropertiesDialogOptions);
         };
 
-        vm.hadEditableOrderProperties = function () {
+        vm.hasEditableOrderProperties = function () {
             if (!vm.editorConfig.additionalInfo)
                 return false;
 
@@ -2565,6 +2528,10 @@
                 editorService.close();
             };
             editorService.open(editPropertiesDialogOptions);
+        };
+
+        vm.copySuccess = function (description) {
+            notificationsService.success("Copy Successful", description + " successfully copied to the clipboard.");
         };
 
         vm.init = function () {
@@ -2732,7 +2699,7 @@
 
     function OrderListController($scope, $location, $routeParams, $q,
         appState, localizationService, treeService, navigationService,
-        vendrUtils, vendrOrderResource) {
+        vendrUtils, vendrOrderResource, vendrOrderStatusResource, vendrRouteCache, vendrLocalStorage) {
         
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
@@ -2754,6 +2721,41 @@
 
         vm.options = {
             createActions: [],
+            filters: [
+                {
+                    name: 'Order Status',
+                    alias: 'orderStatusIds',
+                    localStorageKey: 'store_' + storeId + '_orderStatusFilter',
+                    getFilterOptions: function () {
+                        return vendrRouteCache.getOrFetch("store_" + storeId + "_orderStatuses", function () {
+                            return vendrOrderStatusResource.getOrderStatuses(storeId);
+                        })
+                        .then(function (items) {
+                            return items.map(function (itm) {
+                                return {
+                                    id: itm.id,
+                                    name: itm.name,
+                                    color: itm.color
+                                };
+                            });
+                        });
+                    }
+                },
+                {
+                    name: 'Payment Status',
+                    alias: 'paymentStatuses',
+                    localStorageKey: 'store_' + storeId + '_paymentStatusFilter',
+                    getFilterOptions: function () {
+                        return $q.resolve([
+                            { id: 1, name: 'Authorized', color: 'light-blue' },
+                            { id: 2, name: 'Captured', color: 'green' },
+                            { id: 3, name: 'Cancelled', color: 'grey' },
+                            { id: 4, name: 'Refunded', color: 'orange' },
+                            { id: 200, name: 'Error', color: 'red' }
+                        ]);
+                    }
+                }
+            ],
             bulkActions: [
                 {
                     name: 'Delete',
@@ -2779,7 +2781,29 @@
             }
         };
 
+        vm.options.filters.forEach(fltr => {
+            Object.defineProperty(fltr, "value", {
+                get: function () {
+                    return vendrLocalStorage.get(fltr.localStorageKey) || [];
+                },
+                set: function (value) {
+                    vendrLocalStorage.set(fltr.localStorageKey, value);
+                }
+            });
+        });
+
         vm.loadItems = function (opts, callback) {
+
+            // Apply filters
+            vm.options.filters.forEach(fltr => {
+                if (fltr.value && fltr.value.length > 0) {
+                    opts[fltr.alias] = fltr.value;
+                } else {
+                    delete opts[fltr.alias];
+                }
+            });
+
+            // Perform search
             vendrOrderResource.searchOrders(storeId, opts).then(function (entities) {
                 entities.items.forEach(function (itm) {
                     itm.routePath = '/commerce/vendr/order-edit/' + vendrUtils.createCompositeId([storeId, itm.id]);
@@ -3489,88 +3513,6 @@
 
     'use strict';
 
-    function PaymentMethodPickerController($scope, $routeParams, editorService,
-        vendrStoreResource, vendrPaymentMethodResource, vendrUtils)
-    {
-        // Figure out if we are in a config area or in settings where we can
-        // parse the store ID from the querystring
-        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
-        var storeId = compositeId.length > 1 ? compositeId[0] : null;
-        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[0];
-
-        var dialogOptions = {
-            view: '/app_plugins/vendr/views/dialogs/paymentmethodpicker.html',
-            size: 'small',
-            config: {
-                storeId: -1
-            },
-            submit: function (model) {
-                vm.model.value = model.id;
-                vm.pickedItem = model;
-                editorService.close();
-            },
-            close: function () {
-                editorService.close();
-            }
-        };
-
-        var vm = this;
-
-        vm.model = $scope.model;
-        vm.pickedItem = false;
-        vm.loading = true;
-        vm.store = null;
-
-        vm.openPicker = function () {
-            editorService.open(dialogOptions);
-        };
-
-        vm.removeItem = function () {
-            vm.model.value = null;
-            vm.pickedItem = false;
-        };
-
-        vm.openItem = function () {
-
-        };
-
-        var initStore = function (store, value) {
-            vm.store = store;
-            dialogOptions.config.storeId = store.id;
-            if (value) {
-                vendrPaymentMethodResource.getPaymentMethod(value).then(function (entity) {
-                    vm.pickedItem = entity;
-                    vm.loading = false;
-                });
-            } else {
-                vm.loading = false;
-            }
-        };
-
-        var init = function (value) {
-
-            if (!storeId) {
-                vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId).then(function (store) {
-                    initStore(store, value);
-                });
-            } else {
-                vendrStoreResource.getBasicStore(storeId).then(function (store) {
-                    initStore(store, value);
-                });
-            }
-
-        };
-
-        init(vm.model.value);
-    }
-
-    angular.module('vendr').controller('Vendr.Controllers.PaymentMethodPickerController', PaymentMethodPickerController);
-
-}());
-(function () {
-
-    'use strict';
-
     function PricesIncludeTaxController($scope, $routeParams, vendrStoreResource, vendrUtils, vendrRouteCache)
     {
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
@@ -3713,20 +3655,60 @@
 
     'use strict';
 
-    function ShippingMethodPickerController($scope, $routeParams, editorService,
-        vendrStoreResource, vendrShippingMethodResource, vendrUtils)
+    function StockController($scope, editorState, vendrProductResource)
+    {
+        var currentNode = editorState.getCurrent();
+        var productReference = currentNode.id > 0 ? currentNode.key : undefined;
+
+        var vm = this;
+
+        vm.model = $scope.model;
+
+        // We don't use any stored stock value as we fetch it from
+        // the product service every time. We only use the stored
+        // value as a means to pass the value to an event handler
+        // to update the stock value on save
+        vm.model.value = 0;
+
+        vm.loading = true;
+        
+        var init = function () {
+            if (productReference) {
+                vendrProductResource.getStock(productReference).then(function (stock) {
+                    vm.model.value = stock || 0;
+                    vm.loading = false;
+                });
+            } else {
+                vm.loading = false;
+            }
+        };
+
+        init();
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.StockController', StockController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function StoreEntityPickerController($scope, $routeParams, editorService,
+        vendrStoreResource, vendrEntityResource, vendrUtils, vendrRouteCache)
     {
         // Figure out if we are in a config area or in settings where we can
         // parse the store ID from the querystring
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId.length > 1 ? compositeId[0] : null;
         var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[0];
+        var entityType = $scope.model.config.entityType;
 
         var dialogOptions = {
-            view: '/app_plugins/vendr/views/dialogs/shippingmethodpicker.html',
+            view: '/app_plugins/vendr/views/dialogs/storeentitypicker.html',
             size: 'small',
             config: {
-                storeId: -1
+                storeId: -1,
+                entityType: entityType
             },
             submit: function (model) {
                 vm.model.value = model.id;
@@ -3760,9 +3742,11 @@
 
         var initStore = function (store, value) {
             vm.store = store;
-            dialogOptions.config.storeId = store.id;
+            if (store) {
+                dialogOptions.config.storeId = store.id;
+            }
             if (value) {
-                vendrShippingMethodResource.getShippingMethod(value).then(function (entity) {
+                vendrEntityResource.getEntity(entityType, value).then(function (entity) {
                     vm.pickedItem = entity;
                     vm.loading = false;
                 });
@@ -3785,48 +3769,29 @@
 
         };
 
+        //$scope.model.onValueChanged = function (newVal, oldVal) {
+        //    //console.log(newVal);
+        //};
+
+        var unsubscribe = [
+            $scope.$on("formSubmitted", function () {
+                init($scope.model.value);
+            })
+        ];
+
+        // When the element is disposed we need to unsubscribe!
+        // NOTE: this is very important otherwise if this is part of a modal, the listener still exists because the dom
+        // element might still be there even after the modal has been hidden.
+        $scope.$on('$destroy', function () {
+            unsubscribe.forEach(function (u) {
+                u();
+            });
+        });
+
         init(vm.model.value);
     }
 
-    angular.module('vendr').controller('Vendr.Controllers.ShippingMethodPickerController', ShippingMethodPickerController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function StockController($scope, editorState, vendrProductResource)
-    {
-        var currentNode = editorState.getCurrent();
-        var productReference = currentNode.id > 0 ? currentNode.key : undefined;
-
-        var vm = this;
-
-        vm.model = $scope.model;
-
-        // We don't use any stored stock value as we fetch it from
-        // the product service every time. We only use the stored
-        // value as a means to pass the value to an event handler
-        // to update the stock value on save
-        vm.model.value = 0;
-
-        vm.loading = true;
-        
-        var init = function () {
-            if (productReference) {
-                vendrProductResource.getStock(productReference).then(function (stock) {
-                    vm.model.value = stock || 0;
-                    vm.loading = false;
-                });
-            } else {
-                vm.loading = false;
-            }
-        };
-
-        init();
-    }
-
-    angular.module('vendr').controller('Vendr.Controllers.StockController', StockController);
+    angular.module('vendr').controller('Vendr.Controllers.StoreEntityPickerController', StoreEntityPickerController);
 
 }());
 (function () {

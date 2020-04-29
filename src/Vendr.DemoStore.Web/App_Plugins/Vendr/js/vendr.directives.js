@@ -221,6 +221,109 @@
 
     'use strict';
 
+
+    function vendrFilter() {
+
+        function VendrFunctionController($scope) {
+
+            var vm = this;
+
+            vm.loading = true;
+            vm.filter = $scope.filter;
+
+            vm.showFilterOptions = false;
+            vm.filterOptions = [];
+
+            vm.getFilterNames = function () {
+                var names = vm.filterOptions.filter(function (itm) {
+                    return itm.selected;
+                }).map(function (itm) {
+                    return itm.name;
+                });
+                return names.length > 0 ? names.join(", ") : "All";
+            };
+
+            vm.setFilter = function (filterOption) {
+
+                var filters = vm.filter.value;
+
+                if (filterOption.selected) {
+                    filters.push(filterOption.id);
+                } else {
+                    var index = filters.indexOf(filterOption.id);
+                    filters.splice(index, 1);
+                }
+
+                vm.filter.value = filters;
+
+                $scope.onChange({ filter: { alias: vm.alias, options: vm.filter.value } });
+
+            };
+
+            vm.clearFilter = function () {
+                if (vm.filter.value.length > 0) {
+                    vm.filterOptions.forEach(opt => {
+                        opt.selected = false;
+                    });
+                    vm.filter.value = [];
+                    $scope.onChange({ filter: { alias: vm.alias, options: vm.filter.value } });
+                }
+            };
+
+            vm.filter.getFilterOptions().then(function (filterOptions) {
+                filterOptions.forEach(itm => {
+                    itm.selected = vm.filter.value.findIndex(itm2 => itm2 === itm.id) > -1;
+                });
+                vm.filterOptions = filterOptions;
+                vm.loading = false;
+            });
+        }
+
+        var directive = {
+            restrict: 'E',
+            replace: true,
+            template: `<div class="vendr flex" style="position: relative;">
+                <div class="flex" style="position: relative;" ng-show="!vm.loading">
+                    <button type="button" class="btn btn-link dropdown-toggle flex" ng-click="vm.showFilterOptions = !vm.showFilterOptions" title="{{ vm.getFilterNames() }}" aria-haspopup="true" aria-expanded="{{vm.showFilterOptions === undefined ? false : vm.showFilterOptions}}">
+                        <span>{{vm.filter.name}}:</span>
+                        <span class="bold truncate dib" style="margin-left: 5px; margin-right: 3px; max-width: 150px;">{{ vm.getFilterNames() }}</span>
+                        <span class="caret"></span>
+                    </button>
+                    <umb-dropdown class="pull-left" ng-if="vm.showFilterOptions" on-close="vm.showFilterOptions = false;" style="padding-top: 8px">
+                        <umb-dropdown-item ng-repeat="filterOption in vm.filterOptions" style="padding: 8px 20px 8px 16px;">
+                            <div class="flex items-center">
+                                <umb-checkbox input-id="filter-{{vm.filter.alias}}-{{$index}}" name="filter-{{vm.filter.alias}}" model="filterOption.selected" on-change="vm.setFilter(filterOption)" />
+                                <label for="filter-{{vm.filter.alias}}-{{$index}}" class="m-0">
+                                    <umb-badge class="{{ 'm-0 umb-badge--s vendr-bg--' + filterOption.color }}">{{filterOption.name}}</umb-badge>
+                                </label>
+                            </div>
+                        </umb-dropdown-item>
+                        <umb-dropdown-item style="padding-top: 8px"></umb-dropdown-item>
+                        <umb-dropdown-item ng-if="vm.filter.value.length > 0">
+                            <hr class="m-0" />
+                            <button type="button" ng-click="vm.clearFilter()" style="padding-left: 16px; display: flex; width: 100%;"><i class="icon icon-delete mr-10" aria-hidden="true"></i> Clear</button>
+                        </umb-dropdown-item>
+                    </umb-dropdown>
+                </div>
+            </div>`,
+            scope: {
+                filter: '=',
+                onChange: "&"
+            },
+            controller: VendrFunctionController,
+            controllerAs: 'vm'
+        };
+        
+        return directive;
+    };
+
+    angular.module('vendr.directives').directive('vendrFilter', vendrFilter);
+
+}());
+(function () {
+
+    'use strict';
+
     function vendrIdLabel() {
 
         function link(scope, el, attr, ctrl) {
@@ -475,7 +578,7 @@
                     editorService.closeAll();
                 },
                 close: function () {
-                    editorService.closeAll();
+                    editorService.close();
                 }
             };
 
@@ -803,7 +906,7 @@
                     editorService.closeAll();
                 },
                 close: function () {
-                    editorService.closeAll();
+                    editorService.close();
                 }
             };
 
@@ -1223,7 +1326,7 @@
                     scope.pagination.pageNumber = 1;
                     scope.loadItems();
                 });
-            }, 500);
+            }, 750);
 
             scope.doNonPaginatedFilter = function () {
                 var items = scope.items || [];
@@ -1320,11 +1423,12 @@
         var directive = {
             restrict: 'E',
             replace: true,
-            template:'<div class="vendr"><div class="umb-property-editor umb-listview"><umb-editor-sub-header ng-class="{\'--state-selection\':(selection.length > 0)}"><umb-editor-sub-header-content-left><umb-editor-sub-header-section ng-if="(createActions && createActions.length > 0 && (selection.length == 0))"><div class="btn-group" ng-show="createActions.length == 1"><a class="btn btn-white" ng-click="createActions[0].doAction()"><i class="{{createActions[0].icon}}"></i> {{createActions[0].name}}</a></div><div class="btn-group" ng-show="createActions.length > 1"><a class="btn btn-white dropdown-toggle" data-toggle="dropdown" ng-href><span ng-click="createActions[0].doAction()"><i class="{{createActions[0].icon}}"></i> {{createActions[0].name}}</span> <span class="caret" ng-click="page.createDropdownOpen = !page.createDropdownOpen"></span></a><umb-dropdown ng-if="page.createDropdownOpen" on-close="page.createDropdownOpen = false"><umb-dropdown-item ng-repeat="createAction in createActions" ng-if="$index > 0"><a ng-click="createAction.doAction()"><i class="{{createAction.icon}}"></i> {{createAction.name}}</a></umb-dropdown-item></umb-dropdown></div></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length > 0)"><umb-button type="button" label="Clear selection" label-key="buttons_clearSelection" button-style="white" action="clearSelection()" disabled="bulkActionInProgress"></umb-button></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length > 0)"><strong ng-show="!bulkActionInProgress">{{ selection.length }}<localize key="general_of">of</localize>{{ options.filteredItems.length }}<localize key="general_selected">items selected</localize></strong> <strong ng-show="bulkActionInProgress" ng-bind="bulkActionStatus"></strong><div class="umb-loader-wrapper -bottom" style="margin-bottom: 0;" ng-show="bulkActionInProgress"><div class="umb-loader"></div></div></umb-editor-sub-header-section></umb-editor-sub-header-content-left><umb-editor-sub-header-content-right><umb-editor-sub-header-section ng-show="(selection.length == 0)"><div class="form-search -no-margin-bottom pull-right" novalidate><div class="inner-addon left-addon"><i class="icon icon-search" ng-click="doFilter()"></i> <input class="form-control search-input" type="text" localize="placeholder" placeholder="@general_typeToSearch" ng-model="options.filterTerm" ng-change="doFilter()" ng-keydown="doFilter()" prevent-enter-submit no-dirty-check></div></div></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length > 0) && (options.bulkActionsAllowed)"><umb-button ng-repeat="bulkAction in bulkActions" type="button" button-style="white" label="{{ bulkAction.name }}" icon="{{ bulkAction.icon }}" action="doBulkAction(bulkAction)" disabled="bulkActionInProgress" size="xs" add-ellipsis="true"></umb-button></umb-editor-sub-header-section></umb-editor-sub-header-content-right></umb-editor-sub-header><div ng-if="!loading"><vendr-table ng-if="options.filteredItems && options.filteredItems.length > 0" items="options.filteredItems" allow-select-all="options.bulkActionsAllowed" item-properties="itemProperties" on-select="selectItem(item, $index, $event)" on-click="itemClick(item)" on-select-all="selectAll($event)" on-selected-all="areAllSelected()"></vendr-table><umb-empty-state ng-if="!options.filteredItems || options.filteredItems.length === 0" position="center"><div>No items found</div></umb-empty-state></div><umb-load-indicator ng-show="loading"></umb-load-indicator><div class="flex justify-center"><umb-pagination ng-show="!loading && paginated && pagination.totalPages" page-number="pagination.pageNumber" total-pages="pagination.totalPages" on-next="goToPage" on-prev="goToPage" on-go-to-page="goToPage"></umb-pagination></div></div><umb-overlay ng-if="ysodOverlay.show" model="ysodOverlay" position="right" view="ysodOverlay.view"></umb-overlay></div>',
+            template:'<div class="vendr"><div class="umb-property-editor umb-listview"><umb-editor-sub-header ng-class="{\'--state-selection\':(selection.length > 0)}"><umb-editor-sub-header-content-left><umb-editor-sub-header-section ng-if="(createActions && createActions.length > 0 && (selection.length == 0))"><div class="btn-group" ng-show="createActions.length == 1"><a class="btn btn-white" ng-click="createActions[0].doAction()"><i class="{{createActions[0].icon}}"></i> {{createActions[0].name}}</a></div><div class="btn-group" ng-show="createActions.length > 1"><a class="btn btn-white dropdown-toggle" data-toggle="dropdown" ng-href><span ng-click="createActions[0].doAction()"><i class="{{createActions[0].icon}}"></i> {{createActions[0].name}}</span> <span class="caret" ng-click="page.createDropdownOpen = !page.createDropdownOpen"></span></a><umb-dropdown ng-if="page.createDropdownOpen" on-close="page.createDropdownOpen = false"><umb-dropdown-item ng-repeat="createAction in createActions" ng-if="$index > 0"><a ng-click="createAction.doAction()"><i class="{{createAction.icon}}"></i> {{createAction.name}}</a></umb-dropdown-item></umb-dropdown></div></umb-editor-sub-header-section><vendr-filter ng-repeat="fltr in filters" ng-show="!selection || selection.length == 0" filter="fltr" on-change="doFilter()"></vendr-filter><umb-editor-sub-header-section ng-show="(selection.length > 0)"><umb-button type="button" label="Clear selection" label-key="buttons_clearSelection" button-style="white" action="clearSelection()" disabled="bulkActionInProgress"></umb-button></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length > 0)"><strong ng-show="!bulkActionInProgress">{{ selection.length }}<localize key="general_of">of</localize>{{ options.filteredItems.length }}<localize key="general_selected">items selected</localize></strong> <strong ng-show="bulkActionInProgress" ng-bind="bulkActionStatus"></strong><div class="umb-loader-wrapper -bottom" style="margin-bottom: 0;" ng-show="bulkActionInProgress"><div class="umb-loader"></div></div></umb-editor-sub-header-section></umb-editor-sub-header-content-left><umb-editor-sub-header-content-right><umb-editor-sub-header-section ng-show="(selection.length == 0)"><div class="form-search -no-margin-bottom pull-right" novalidate><div class="inner-addon left-addon"><i class="icon icon-search" ng-click="doFilter()"></i> <input class="form-control search-input" type="text" localize="placeholder" placeholder="@general_typeToSearch" ng-model="options.filterTerm" ng-change="doFilter()" ng-keydown="doFilter()" prevent-enter-submit no-dirty-check></div></div></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length > 0) && (options.bulkActionsAllowed)"><umb-button ng-repeat="bulkAction in bulkActions" type="button" button-style="white" label="{{ bulkAction.name }}" icon="{{ bulkAction.icon }}" action="doBulkAction(bulkAction)" disabled="bulkActionInProgress" size="xs" add-ellipsis="true"></umb-button></umb-editor-sub-header-section></umb-editor-sub-header-content-right></umb-editor-sub-header><div ng-if="!loading"><vendr-table ng-if="options.filteredItems && options.filteredItems.length > 0" items="options.filteredItems" allow-select-all="options.bulkActionsAllowed" item-properties="itemProperties" on-select="selectItem(item, $index, $event)" on-click="itemClick(item)" on-select-all="selectAll($event)" on-selected-all="areAllSelected()"></vendr-table><umb-empty-state ng-if="!options.filteredItems || options.filteredItems.length === 0" position="center"><div>No items found</div></umb-empty-state></div><umb-load-indicator ng-show="loading"></umb-load-indicator><div class="flex justify-center"><umb-pagination ng-show="!loading && paginated && pagination.totalPages" page-number="pagination.pageNumber" total-pages="pagination.totalPages" on-next="goToPage" on-prev="goToPage" on-go-to-page="goToPage"></umb-pagination></div></div><umb-overlay ng-if="ysodOverlay.show" model="ysodOverlay" position="right" view="ysodOverlay.view"></umb-overlay></div>',
             scope: {
                 loading: "<",
                 createActions: "<",
                 bulkActions: "<",
+                filters: "<",
                 items: "<",
                 itemProperties: "<",
                 paginated: "<",
