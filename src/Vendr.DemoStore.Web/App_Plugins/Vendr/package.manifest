@@ -11,11 +11,42 @@
     },
     {
       "alias": "Vendr.TaxClassPicker",
-      "name": "Vendr: Tax Class Picker",
+      "name": "Vendr: Tax Class Picker [Obsolete, use Store Entity Picker instead]",
       "editor": {
         "view": "~/app_plugins/vendr/views/propertyeditors/taxclasspicker/taxclasspicker.html",
         "hideLabel": false,
         "valueType": "STRING"
+      }
+    },
+    {
+      "alias": "Vendr.StoreEntityPicker",
+      "name": "Vendr: Store Entity Picker",
+      "editor": {
+        "view": "~/app_plugins/vendr/views/propertyeditors/storeentitypicker/storeentitypicker.html",
+        "hideLabel": false,
+        "valueType": "STRING"
+      },
+      "prevalues": {
+        "fields": [
+          {
+            "label": "Store Entity Type",
+            "description": "The type of store entity to pick from",
+            "key": "entityType",
+            "view": "~/app_plugins/vendr/views/propertyeditors/dropdown/dropdown.html",
+            "config": {
+              "items": {
+                "OrderStatus": "Order Status",
+                "Country": "Country",
+                "ShippingMethod": "Shipping Method",
+                "PaymentMethod": "Payment Method",
+                "Currency": "Currency",
+                "TaxClass": "Tax Class",
+                "EmailTemplate": "Email Template",
+                "Discount": "Discount"
+              }
+            }
+          }
+        ]
       }
     },
     {
@@ -48,15 +79,15 @@
     }
   ],
   "javascript": [
-    "~/app_plugins/vendr/js/vendr.vendor.js",
-    "~/app_plugins/vendr/js/vendr.modules.js",
-    "~/app_plugins/vendr/js/vendr.interceptors.js",
-    "~/app_plugins/vendr/js/vendr.decorators.js",
-    "~/app_plugins/vendr/js/vendr.filters.js",
-    "~/app_plugins/vendr/js/vendr.directives.js",
-    "~/app_plugins/vendr/js/vendr.resources.js",
-    "~/app_plugins/vendr/js/vendr.services.js",
-    "~/app_plugins/vendr/js/vendr.controllers.js"
+    "~/App_Plugins/vendr/js/vendr.vendor.js",
+    "~/App_Plugins/vendr/js/vendr.modules.js",
+    "~/App_Plugins/vendr/js/vendr.interceptors.js",
+    "~/App_Plugins/vendr/js/vendr.decorators.js",
+    "~/App_Plugins/vendr/js/vendr.filters.js",
+    "~/App_Plugins/vendr/js/vendr.directives.js",
+    "~/App_Plugins/vendr/js/vendr.resources.js",
+    "~/App_Plugins/vendr/js/vendr.services.js",
+    "~/App_Plugins/vendr/js/vendr.controllers.js"
   ],
   "css": [
     "~/app_plugins/vendr/css/vendr.css"

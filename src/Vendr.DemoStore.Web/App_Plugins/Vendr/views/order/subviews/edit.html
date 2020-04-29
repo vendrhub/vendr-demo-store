@@ -20,7 +20,7 @@
                                     <strong>
                                         {{ ol.name }}
                                         <a href="" class="hover:text-light-blue ml-5" title="Edit Order Line Properties"
-                                           ng-if="vm.hadEditableOrderLineProperties(ol)"
+                                           ng-if="vm.hasEditableOrderLineProperties(ol)"
                                            ng-click="vm.editOrderLineProperties(ol)"
                                            prevent-default><i class="fa fa-pencil-square-o" style="font-weight:normal; vertical-align: middle;"></i></a>
                                     </strong>
@@ -302,7 +302,7 @@
             <umb-box-content>
 
                 <div class="relative copy-box">
-                    <a href="#" prevent-default umb-clipboard umb-clipboard-target="#customer" class="copy-box__copy" title="Copy Customer Details" aria-hidden="true" >
+                    <a href="#" prevent-default umb-clipboard umb-clipboard-target="#customer" umb-clipboard-success="vm.copySuccess('Customer details')" class="copy-box__copy" title="Copy Customer Details" aria-hidden="true" >
                         <i class="fa fa-copy"></i>
                     </a>
                     <div id="customer" class="flex flex-column">
@@ -319,7 +319,7 @@
                 <hr />
 
                 <div class="relative  copy-box">
-                    <a href="#" prevent-default umb-clipboard umb-clipboard-target="#billing-adress" class="copy-box__copy" title="Copy Billing Address" aria-hidden="true">
+                    <a href="#" prevent-default umb-clipboard umb-clipboard-target="#billing-adress" umb-clipboard-success="vm.copySuccess('Billing address')" class="copy-box__copy" title="Copy Billing Address" aria-hidden="true">
                         <i class="fa fa-copy"></i>
                     </a>
                     <div id="billing-adress">
@@ -349,7 +349,7 @@
                 <hr ng-if="vm.editorConfig.shipping.enabled !== false" />
 
                 <div class="relative copy-box" ng-if="vm.editorConfig.shipping.enabled !== false">
-                    <a href="#" prevent-default umb-clipboard umb-clipboard-target="#shipping-adress" class="copy-box__copy" title="Copy Shipping Address" aria-hidden="true">
+                    <a href="#" prevent-default umb-clipboard umb-clipboard-target="#shipping-adress" umb-clipboard-success="vm.copySuccess('Shipping address')" class="copy-box__copy" title="Copy Shipping Address" aria-hidden="true">
                         <i class="fa fa-copy"></i>
                     </a>
                     <div id="shipping-adress">
@@ -394,7 +394,7 @@
         <umb-box ng-if="vm.editorConfig.additionalInfo || (vm.content.appliedDiscountCodes && vm.content.appliedDiscountCodes.length > 0)">
             <umb-box-header title="Additional Information">
                 <umb-button type="button" label="Edit"
-                            ng-if="vm.hadEditableOrderProperties()"
+                            ng-if="vm.hasEditableOrderProperties()"
                             ng-click="vm.editOrderProperties()"></umb-button>
             </umb-box-header>
             <umb-box-content>

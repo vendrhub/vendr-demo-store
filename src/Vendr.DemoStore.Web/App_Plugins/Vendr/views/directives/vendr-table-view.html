@@ -36,13 +36,19 @@
 
                 </umb-editor-sub-header-section>
 
+                <vendr-filter ng-repeat="fltr in filters"
+                    ng-show="!selection || selection.length == 0"
+                    filter="fltr"
+                    on-change="doFilter()">
+                </vendr-filter>
+
                 <umb-editor-sub-header-section ng-show="(selection.length > 0)">
                     <umb-button type="button"
-                        label="Clear selection"
-                        label-key="buttons_clearSelection"
-                        button-style="white"
-                        action="clearSelection()"
-                        disabled="bulkActionInProgress">
+                                label="Clear selection"
+                                label-key="buttons_clearSelection"
+                                button-style="white"
+                                action="clearSelection()"
+                                disabled="bulkActionInProgress">
                     </umb-button>
                 </umb-editor-sub-header-section>
 

@@ -46,13 +46,15 @@
                                         <table class="vendr-multi-field-table w-full" ng-if="vm.content.codes && vm.content.codes.length > 0">
                                             <thead>
                                                 <tr>
-                                                    <th class="w-3/4">Code</th>
-                                                    <th>Usage Limit</th>
+                                                    <th>Code</th>
+                                                    <th style="width: 100px;">Usage Limit</th>
+                                                    <th style="width: 1px;">Unlimited</th>
+                                                    <th style="width: 1px;"></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr ng-repeat="item in vm.content.codes">
-                                                    <td>
+                                                    <td class="vendr-multi-field-table__divide-right">
                                                         <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--wide"
                                                                ng-model="item.code"
                                                                pattern="[A-Z0-9_\-]+"
@@ -60,7 +62,10 @@
                                                     </td>
                                                     <td>
                                                         <input type="number" pattern="[0-9]*" class="umb-property-editor umb-textstring textstring vendr-input vendr-input--wide"
-                                                               ng-model="item.usageLimit" />
+                                                               ng-model="item.usageLimit" ng-disabled="item.isUnlimited" />
+                                                    </td>
+                                                    <td>
+                                                        <vendr-toggle checked="item.isUnlimited" class="vendr-toggle--center"></vendr-toggle>
                                                     </td>
                                                     <td>
                                                         <button type="button" ng-click="vm.removeDiscountCode(item, $index)" class="btn umb-button--xs dropdown-toggle umb-button-group__toggle" title="Remove Discount Code" aria-hidden="true">

@@ -17,11 +17,11 @@
     content: "\e900";
 }
 
-.icon-vendr-gift-card-1:before {
+/*.icon-vendr-gift-card-1:before {
     content: "\e901";
-}
+}*/
 
-.icon-vendr-gift-card-2:before {
+.icon-vendr-gift-card:before {
     content: "\e902";
 }
 
@@ -278,6 +278,17 @@ div [ng-controller*=MemberGroupPickerController] .umb-box-content > .umb-tree {
 /* Toggle */
 .vendr-toggle--indented {
     margin-left: 40px;
+}
+
+.vendr-toggle.vendr-toggle--center {
+    display: block;
+}
+
+.vendr-toggle.vendr-toggle--center > .umb-toggle {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .vendr-toggle {
@@ -790,6 +801,11 @@ a.no-underline:focus {
 
 .vendr-multi-field-table tbody tr + tr td {
     padding-top: 10px;
+}
+
+.vendr-multi-field-table__divide-right {
+    border-right: solid 1px #e9e9eb;
+    padding-right: 10px;
 }
 
 /* Rule / Reward Builder */
