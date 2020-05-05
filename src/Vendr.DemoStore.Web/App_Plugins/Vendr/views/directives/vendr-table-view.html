@@ -9,20 +9,20 @@
                 <umb-editor-sub-header-section ng-if="(createActions && createActions.length > 0 && (selection.length == 0))">
 
                     <div class="btn-group" ng-show="createActions.length == 1">
-                        <a class="btn btn-white" ng-click="createActions[0].doAction()">
+                        <button type="button" class="btn btn-white" ng-click="createActions[0].doAction()">
                             <i class="{{createActions[0].icon}}"></i>
                             {{createActions[0].name}}
-                        </a>
+                        </button>
                     </div>
 
                     <div class="btn-group" ng-show="createActions.length > 1">
-                        <a class="btn btn-white dropdown-toggle" data-toggle="dropdown" ng-href="">
+                        <button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">
                             <span ng-click="createActions[0].doAction()">
                                 <i class="{{createActions[0].icon}}"></i>
                                 {{createActions[0].name}}
                             </span>
                             <span class="caret" ng-click="page.createDropdownOpen = !page.createDropdownOpen"></span>
-                        </a>
+                        </button>
 
                         <umb-dropdown ng-if="page.createDropdownOpen" on-close="page.createDropdownOpen = false">
                             <umb-dropdown-item ng-repeat="createAction in createActions" ng-if="$index > 0">
