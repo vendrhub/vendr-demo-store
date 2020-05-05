@@ -16,14 +16,14 @@
             on-open="vm.openItem()">
         </umb-node-preview>
 
-        <a ng-show="!vm.pickedItem" href="#"
+        <button type="button" ng-show="!vm.pickedItem" 
                 class="umb-node-preview-add"
                 ng-click="vm.openPicker()"
                 id="{{vm.pickedItem.alias}}"
                 aria-label="Add item" prevent-default>
             <localize key="general_add">Add</localize>
             <span class="sr-only">...</span>
-        </a>
+        </button>
 
     </ng-form>
 
