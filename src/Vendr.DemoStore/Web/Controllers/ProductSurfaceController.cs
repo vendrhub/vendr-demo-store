@@ -13,10 +13,12 @@ namespace Vendr.DemoStore.Web.Controllers
     public class ProductSurfaceController : SurfaceController
     {
         private readonly IExamineManager _examineManager;
+        private readonly IUmbracoContextAccessor _umbracoContextAccessor;
 
-        public ProductSurfaceController(IExamineManager examineManager)
+        public ProductSurfaceController(IExamineManager examineManager, IUmbracoContextAccessor umbracoContextAccessor)
         {
             _examineManager = examineManager;
+            _umbracoContextAccessor = umbracoContextAccessor;
         }
 
         [ChildActionOnly]
@@ -62,9 +64,13 @@ namespace Vendr.DemoStore.Web.Controllers
                 var totalResults = results.TotalItemCount;
                 var pagedResults = results.Skip(pageSize * (page - 1));
 
+                var items = pagedResults.ToPublishedSearchResults(_umbracoContextAccessor.UmbracoContext.Content)
+                                        .Select(x => x.Content)
+                                        .OfType<ProductPage>();
+
                 return new PagedResult<ProductPage>(totalResults, page, pageSize)
                 {
-                    Items = pagedResults.Select(x => UmbracoContext.Content.GetById(int.Parse(x.Id))).OfType<ProductPage>()
+                    Items = items
                 };
             }
 
