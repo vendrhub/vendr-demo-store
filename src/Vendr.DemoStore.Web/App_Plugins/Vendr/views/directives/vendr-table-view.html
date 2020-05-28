@@ -53,7 +53,7 @@
                 </umb-editor-sub-header-section>
 
                 <umb-editor-sub-header-section ng-show="(selection.length > 0)">
-                    <strong ng-show="!bulkActionInProgress">{{ selection.length }} <localize key="general_of">of</localize> {{ options.filteredItems.length }} <localize key="general_selected">items selected</localize></strong>
+                    <strong ng-show="!bulkActionInProgress">{{ selection.length }}&nbsp;<localize key="general_of">of</localize>&nbsp;{{ options.filteredItems.length }}&nbsp;<localize key="general_selected">items selected</localize></strong>
                     <strong ng-show="bulkActionInProgress" ng-bind="bulkActionStatus"></strong>
                     <div class="umb-loader-wrapper -bottom" style="margin-bottom: 0;" ng-show="bulkActionInProgress">
                         <div class="umb-loader"></div>

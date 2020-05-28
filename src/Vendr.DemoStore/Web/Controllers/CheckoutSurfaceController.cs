@@ -130,7 +130,7 @@ namespace Vendr.DemoStore.Web.Controllers
             return RedirectToCurrentUmbracoPage();
         }
 
-        public ActionResult UpdateOrderShippingAndPaymentMethod(UpdateOrderShippingPaymentMethodDto model)
+        public ActionResult UpdateOrderShippingMethod(UpdateOrderShippingMethodDto model)
         {
             try
             {
@@ -139,7 +139,35 @@ namespace Vendr.DemoStore.Web.Controllers
                     var store = CurrentPage.GetStore();
                     var order = _sessionManager.GetOrCreateCurrentOrder(store.Id)
                         .AsWritable(uow)
-                        .SetShippingMethod(model.ShippingMethod)
+                        .SetShippingMethod(model.ShippingMethod);
+
+                    _orderService.SaveOrder(order);
+
+                    uow.Complete();
+                }
+            }
+            catch (ValidationException ex)
+            {
+                ModelState.AddModelError("", "Failed to set order shipping method");
+
+                return CurrentUmbracoPage();
+            }
+
+            if (model.NextStep.HasValue)
+                return RedirectToUmbracoPage(model.NextStep.Value);
+
+            return RedirectToCurrentUmbracoPage();
+        }
+
+        public ActionResult UpdateOrderPaymentMethod(UpdateOrderPaymentMethodDto model)
+        {
+            try
+            {
+                using (var uow = _uowProvider.Create())
+                {
+                    var store = CurrentPage.GetStore();
+                    var order = _sessionManager.GetOrCreateCurrentOrder(store.Id)
+                        .AsWritable(uow)
                         .SetPaymentMethod(model.PaymentMethod);
 
                     _orderService.SaveOrder(order);
@@ -149,7 +177,7 @@ namespace Vendr.DemoStore.Web.Controllers
             }
             catch (ValidationException ex)
             {
-                ModelState.AddModelError("", "Failed to shipping / payment method");
+                ModelState.AddModelError("", "Failed to set order payment method");
 
                 return CurrentUmbracoPage();
             }

@@ -25,7 +25,26 @@
     content: "\e902";
 }
 
+.vendr-progress-bar {
+    background-color: #e9e9eb;
+    display: block;
+    border-radius: 100px;
+    height: 2px;
+}
+
+.vendr-progress-bar__bar {
+    background-color: #4caf50;
+    display: block;
+    border-radius: 100px;
+    height: 2px;
+}
+
 /* Overrides */
+.vendr .umb-table-cell > span {
+    display: block;
+    width: 100%;
+}
+
 .umb-tree-item.unselectable > .umb-tree-item__inner {
     background-color: transparent !important;
 }
@@ -226,6 +245,7 @@ div [ng-controller*=MemberGroupPickerController] .umb-box-content > .umb-tree {
 
 .vendr-input > .vendr-input--action .icon {
     font-size: 20px;
+    vertical-align: middle;
 }
 
 .vendr-input--right > input {
@@ -274,6 +294,23 @@ div [ng-controller*=MemberGroupPickerController] .umb-box-content > .umb-tree {
 .vendr .form-vertical .umb-control-group .controls-row {
     margin-left: 0;
 }
+
+/* Horizontal Form */
+.form-horizontal .umb-property:last-of-type .control-group .umb-property:not(:last-of-type) .control-group {
+    margin-bottom: 20px !important;
+}
+
+.umb-property:last-of-type .umb-control-group .umb-property .umb-control-group {
+    border-bottom: 1px solid #f6f6f7;
+    padding-bottom: 20px;
+}
+
+.umb-property:last-of-type .umb-control-group .umb-property:last-of-type .umb-control-group {
+    border: none;
+    margin-bottom: 0 !important;
+    padding-bottom: 0;
+}
+
 
 /* Toggle */
 .vendr-toggle--indented {
@@ -923,6 +960,10 @@ a.no-underline:focus {
 
 .vendr .-mb-10 {
     margin-bottom: -10px;
+}
+
+.vendr .mt-5 {
+    margin-top: 5px;
 }
 
 .vendr .mt-10 {

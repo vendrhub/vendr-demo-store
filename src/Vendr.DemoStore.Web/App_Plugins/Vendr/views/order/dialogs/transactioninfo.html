@@ -17,7 +17,7 @@
                 <umb-box-content>
 
                     <umb-control-group label="{{prop.name}}" description="{{prop.description}}" ng-repeat="prop in vm.properties">
-                        <div style="word-break: break-all">{{prop.value}}</div>
+                        <div style="word-break: break-all">{{ prop.value && prop.value != '' ? prop.value : 'No Value' }}</div>
                     </umb-control-group>
 
                 </umb-box-content>

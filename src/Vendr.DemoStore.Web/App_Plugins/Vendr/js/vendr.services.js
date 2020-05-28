@@ -123,17 +123,14 @@
 
     'use strict';
 
-    function vendrUtils () {
+    function vendrUtils() {
 
         return {
             getSettings: function (key) {
-
                 if (!Umbraco || !Umbraco.Sys || !Umbraco.Sys.ServerVariables || !Umbraco.Sys.ServerVariables["vendr"] || !Umbraco.Sys.ServerVariables["vendr"][key]) {
                     throw "No Vendr setting found with key " + key;
                 }
-
                 return Umbraco.Sys.ServerVariables["vendr"][key];
-
             },
             parseCompositeId: function (id) {
                 return id.split('_');
