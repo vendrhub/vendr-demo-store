@@ -127,6 +127,31 @@
                     <input type="number" pattern="[0-9]*" class="umb-property-editor umb-textstring textstring vendr-input vendr-input--short"
                            ng-model="model.content.giftCardDaysValid" />
                 </umb-control-group>
+                <umb-control-group label="Gift Card Property Aliases" description="Comma seperated list of property aliases to be copied to the gift card from the order line">
+                    <input type="text" class="umb-property-editor umb-textstring textstring"
+                           ng-model="model.content.giftCardPropertyAliases" />
+                </umb-control-group>
+                <umb-control-group label="Activation Method" description="The method by which Gift Cards become active">
+                    <select class="umb-property-editor umb-dropdown"
+                            ng-model="model.content.giftCardActivationMethod"
+                            ng-options="itm.key as itm.value  for itm in model.options.giftCardActivationMethods">
+                        <option value="" disabled selected ng-hide="model.content.giftCardActivationMethod">-- Select an Activation Method --</option>
+                    </select>
+                </umb-control-group>
+                <umb-control-group label="Activation Order Status" description="The Order Status a Gift Card order must enter to become active" ng-if="model.content.giftCardActivationMethod == 'OrderStatus'">
+                    <select class="umb-property-editor umb-dropdown"
+                            ng-model="model.content.giftCardActivationOrderStatusId"
+                            ng-options="itm.id as itm.name for itm in model.options.orderStatuses">
+                        <option value="" disabled selected ng-hide="model.content.giftCardActivationOrderStatusId">-- Select an Order Status --</option>
+                    </select>
+                </umb-control-group>
+                <umb-control-group label="Default Gift Card Email" description="The default email template to use for gift cards">
+                    <select class="umb-property-editor umb-dropdown"
+                            ng-model="model.content.defaultGiftCardEmailTemplateId"
+                            ng-options="itm.id as itm.name for itm in model.options.emailTemplates">
+                        <option value="" disabled selected ng-hide="model.content.defaultGiftCardEmailTemplateId">-- Select an Email Template --</option>
+                    </select>
+                </umb-control-group>
 
             </umb-box-content>
         </umb-box>

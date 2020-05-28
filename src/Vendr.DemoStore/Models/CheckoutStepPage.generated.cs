@@ -58,12 +58,5 @@ namespace Vendr.DemoStore.Models
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		[ImplementPropertyType("shortStepName")]
 		public string ShortStepName => this.Value<string>("shortStepName");
-
-		///<summary>
-		/// Total View: Select what value to display as the order total.
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("totalView")]
-		public string TotalView => this.Value<string>("totalView");
 	}
 }

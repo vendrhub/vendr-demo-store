@@ -37,6 +37,8 @@ namespace Vendr.DemoStore.Web.Adapters
 
         public override IDictionary<string, string> Properties => _snapshot.Properties;
 
+        public override bool IsGiftCard => _snapshot.IsGiftCard;
+
         #endregion
     }
 }

@@ -1,4 +1,38 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<Vendr.DemoStore.Models.CheckoutPaymentPage>
+﻿@using Vendr.Core;
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<Vendr.DemoStore.Models.CheckoutPaymentMethodPage>
 @{
-	Layout = "CheckoutStepPage.cshtml";
+    Layout = "CheckoutStepPage.cshtml";
+
+    var zeroValuePaymentMethod = Model.PaymentMethods.FirstOrDefault(x => x.Alias == "zeroValue");
+}
+
+@using (Html.BeginUmbracoForm("UpdateOrderPaymentMethod", "CheckoutSurface"))
+{
+    <input type="hidden" name="nextStep" value="@(Model.NextStep?.Id)" />
+
+    <h3 class="text-xl font-medium mb-4 mt-8">Payment Method</h3>
+
+    if (Model.Order.TotalPrice.Value.WithTax > 0)
+    {
+        <ul class="border border-gray-300 rounded">
+            @foreach (var item in Model.PaymentMethods.Where(x => x.Alias != "zeroValue")
+                .Select((pm, i) => new { PaymentMethod = pm, Index = i }))
+            {
+                <li class="border-gray-300 @(item.Index > 0 ? "border-t " : "")">
+                    <label class="flex items-center py-4 px-4 cursor-pointer hover:bg-gray-100">
+                        <input name="paymentMethod" type="radio" value="@item.PaymentMethod.Id" class="mr-3" @Html.Raw(Model.Order.PaymentInfo.PaymentMethodId.HasValue && Model.Order.PaymentInfo.PaymentMethodId.Value == item.PaymentMethod.Id ? "checked=\"checked\"" : "") required />
+                        <span class="font-medium">@(item.PaymentMethod.Name)</span>
+                        <span class="flex-1 text-right">@(item.PaymentMethod.CalculatePrice()?.Formatted())</span>
+                    </label>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <input type="hidden" name="paymentMethod" value="@(zeroValuePaymentMethod.Id)" />
+        <div class="border border-gray-300 rounded py-4 px-4 text-center">It looks like today is your lucky day, there is nothing for you to pay 🎉</div>
+    }
+
+    @Html.Partial("CheckoutPrevNext")
 }

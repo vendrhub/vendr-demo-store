@@ -12,12 +12,18 @@
             <button class="ml-4 bg-@(Model.CheckoutPage.PrimaryColor) text-white px-4 rounded hover:bg-gray-900" type="submit">Apply</button>
         }
 
-        @if (Model.Order.DiscountCodes.Count > 0)
+        @Html.ValidationMessage("code", new { @class = "block text-red-900 bg-red-300 rounded p-2 mt-4" })
+
+        @if (Model.Order.DiscountCodes.Count > 0 || Model.Order.GiftCards.Count > 0)
         {
             <ul class="mt-4 block">
                 @foreach (var discountCode in Model.Order.DiscountCodes)
                 {
                     <li class="inline-block mr-2"><a href="@Url.SurfaceAction("RemoveDiscountOrGiftCardCode",  "CheckoutSurface", new { Code = discountCode.Code })" class="inline-block bg-gray-300 px-2 rounded hover:bg-gray-900 hover:text-white"><i class="fa fa-times mr-1"></i> @discountCode.Code</a></li>
+                }
+                @foreach (var giftCard in Model.Order.GiftCards)
+                {
+                    <li class="inline-block mr-2"><a href="@Url.SurfaceAction("RemoveDiscountOrGiftCardCode",  "CheckoutSurface", new { Code = giftCard.Code })" class="inline-block bg-gray-300 px-2 rounded hover:bg-gray-900 hover:text-white"><i class="fa fa-times mr-1"></i> @giftCard.Code</a></li>
                 }
             </ul>
         }

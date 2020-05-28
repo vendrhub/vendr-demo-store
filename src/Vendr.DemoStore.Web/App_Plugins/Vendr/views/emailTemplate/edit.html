@@ -30,6 +30,14 @@
                             <!--<umb-box-header title="Settings"></umb-box-header>-->
                             <umb-box-content>
 
+                                <umb-control-group label="Category" description="Select a category for this email">
+                                    <select class="umb-property-editor umb-dropdown"
+                                            ng-model="vm.content.category"
+                                            ng-options="itm.key as itm.value for itm in vm.options.emailTemplateCategories"
+                                            required>
+                                        <option value="" disabled selected ng-hide="vm.content.category">-- Select a Category --</option>
+                                    </select>
+                                </umb-control-group>
                                 <umb-control-group label="Subject Line" description="The main subject line of the email">
                                     <vendr-dictionary-input name="subject"
                                                             ng-model="vm.content.subject"
