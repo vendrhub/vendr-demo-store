@@ -48,7 +48,7 @@ namespace Vendr.DemoStore.Composing
                         if (e.ValueSet.Values.ContainsKey("categories"))
                         {
                             // Prepare a new collection for category aliases
-                            var categoryAliases = new List<string>();
+                            var categoryAliases = new List<string>(new[] { "all" });
 
                             // Parse the comma separated list of category UDIs
                             var categoryIds = e.ValueSet.GetValue("categories").ToString().Split(',').Select(GuidUdi.Parse).ToList();
@@ -67,10 +67,11 @@ namespace Vendr.DemoStore.Composing
                             }
 
                             // If we have some aliases, add these to the lucene index in a searchable way
-                            if (categoryAliases.Count > 0)
-                            {
-                                e.ValueSet.Add("categoryAliases", string.Join(" ", categoryAliases));
-                            }
+                            e.ValueSet.Add("categoryAliases", string.Join(" ", categoryAliases));
+                        }
+                        else
+                        {
+                            e.ValueSet.Add("categoryAliases", "all");
                         }
                     }
 

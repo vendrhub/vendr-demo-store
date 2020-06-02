@@ -1,5 +1,14 @@
 ﻿using Examine;
+using Examine.LuceneEngine.Providers;
+using Examine.LuceneEngine.Search;
+using Lucene.Net.Analysis;
+using Lucene.Net.Analysis.Standard;
+using Lucene.Net.QueryParsers;
+using Lucene.Net.Search;
+using Lucene.Net.Store;
+using Lucene.Net.Util;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -33,12 +42,11 @@ namespace Vendr.DemoStore.Web.Controllers
                 var searchTerms = Tokenize(q);
                 var searchFields = new[] { "nodeName", "metaTitle", "description", "shortDescription", "longDescription", "metaDescription", "bodyText", "content" };
 
-                var searcher = index.GetSearcher();
-                var query = new StringBuilder();
+                var sb = new StringBuilder();
 
-                query.Append("+__IndexType:content "); // Must be content
-                query.Append("-templateID:0 "); // Must have a template
-                query.Append("-umbracoNaviHide:1 "); // Must no be hidden
+                sb.Append("+__IndexType:content "); // Must be content
+                sb.Append("-templateID:0 "); // Must have a template
+                sb.Append("-umbracoNaviHide:1 "); // Must no be hidden
 
                 // Ensure page contains all search terms in some way
                 foreach (var term in searchTerms)
@@ -50,7 +58,7 @@ namespace Vendr.DemoStore.Web.Controllers
                         return innerQuery;
                     });
 
-                    query.Append("+(" + groupedOr.ToString() + ") ");
+                    sb.Append("+(" + groupedOr.ToString() + ") ");
                 }
 
                 // Rank content based on positon of search terms in fields
@@ -60,19 +68,43 @@ namespace Vendr.DemoStore.Web.Controllers
                     {
                         var searchField = searchFields[i];
                         var format = searchField.Contains(" ") ? @"{0}:""{1}""^{2} " : "{0}:{1}*^{2} ";
-                        query.AppendFormat(format, searchField, term, searchFields.Length - i);
+                        sb.AppendFormat(format, searchField, term, searchFields.Length - i);
                     }
                 }
 
-                var examineQuery = searcher.CreateQuery().NativeQuery(query.ToString());
-                var results = examineQuery.Execute(ps * p);
-                var totalResults = results.TotalItemCount;
-                var pagedResults = results.Skip(ps * (p - 1));
-
-                result = new PagedResult<IPublishedContent>(totalResults, p, ps)
+                // Perform a faceted search based on product categories
+                var dir = new DirectoryInfo(((LuceneIndex)index).LuceneIndexFolder.FullName);
+                using (var searcher = new IndexSearcher(FSDirectory.Open(dir), false))
+                using (var factedSearcher = new SimpleFacetedSearch(searcher.IndexReader, new string[] { "categoryAliases" }))
                 {
-                    Items = pagedResults.Select(x => UmbracoContext.Content.GetById(int.Parse(x.Id)))
-                };
+                    var queryParser = new QueryParser(Version.LUCENE_30, "", new KeywordAnalyzer());
+                    var query = queryParser.Parse(sb.ToString());
+
+                    var results = factedSearcher.Search(query);
+
+                    var totalResults = results.TotalHitCount; 
+
+                    foreach (SimpleFacetedSearch.HitsPerFacet hpg in results.HitsPerFacet)
+                    {
+                        var hitCountPerGroup = hpg.HitCount;
+                        var facetName = hpg.Name;
+                        var items = hpg.Documents.Select(x => UmbracoContext.Content.GetById(int.Parse(x.GetField("id").StringValue))).ToList();
+
+                        //foreach (Document doc in hpg.Documents)
+                        //{
+                        //    string text = doc.GetField("text").StringValue();
+
+                        //    // replace with logging or your desired output writer
+                        //    System.Diagnostics.Debug.WriteLine(">>" + facetName + ": " + text);
+
+                        //}
+                    }
+
+                    result = new PagedResult<IPublishedContent>(totalResults, p, ps)
+                    {
+                        Items = null //pagedResults.Select(x => UmbracoContext.Content.GetById(int.Parse(x.Id)))
+                    };
+                }
             }
 
             return PartialView("SearchResults", result);
