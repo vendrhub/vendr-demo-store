@@ -1,8 +1,6 @@
 ﻿using Examine;
 using Examine.LuceneEngine.Providers;
-using Examine.LuceneEngine.Search;
 using Lucene.Net.Analysis;
-using Lucene.Net.Analysis.Standard;
 using Lucene.Net.QueryParsers;
 using Lucene.Net.Search;
 using Lucene.Net.Store;
@@ -36,16 +34,17 @@ namespace Vendr.DemoStore.Web.Controllers
             // The logic for searching is mostly pulled from ezSearch
             // https://github.com/umco/umbraco-ezsearch/blob/master/Src/Our.Umbraco.ezSearch/Web/UI/Views/MacroPartials/ezSearch.cshtml
 
-            // Create the view model
+            // Prepair a view model to return
             var result = new SearchViewModel();
 
-            // Populate category names collection
+            // Populate category names collection which will be used to
+            // provide friendly names for the facet categories
             var homePage = CurrentPage.GetHomePage();
             var categoriesNode = homePage.Children.OfType<CategoriesPage>().FirstOrDefault();
             var categoryNodes = categoriesNode.Children.OfType<CategoryPage>();
             result.CategoryNames = categoryNodes.ToDictionary(x => x.UrlSegment.MakeSearchTermSafe(), x => x.Name);
 
-            // Perform the search
+            // Perform the faceted search
             if (!q.IsNullOrWhiteSpace() && _examineManager.TryGetIndex("ExternalIndex", out var index))
             {
                 var searchTerms = Tokenize(q);
@@ -81,7 +80,7 @@ namespace Vendr.DemoStore.Web.Controllers
                     }
                 }
 
-                // Perform a faceted search based on product categories
+                // Perform a faceted search based on search categories
                 var dir = new DirectoryInfo(((LuceneIndex)index).LuceneIndexFolder.FullName);
                 using (var searcher = new IndexSearcher(FSDirectory.Open(dir), false))
                 using (var factedSearcher = new SimpleFacetedSearch(searcher.IndexReader, new string[] { "searchCategory" }))
@@ -92,6 +91,7 @@ namespace Vendr.DemoStore.Web.Controllers
 
                     var facetedResults = new Dictionary<string, PagedResult<IPublishedContent>>();
 
+                    // Loop through each facet converting the results to IPulishedContent
                     foreach (SimpleFacetedSearch.HitsPerFacet hpg in queryResults.HitsPerFacet)
                     {
                         facetedResults.Add(hpg.Name.ToString(), new PagedResult<IPublishedContent>(hpg.HitCount, p, ps)
