@@ -55,7 +55,7 @@ namespace Vendr.DemoStore.Web.Controllers
 
                 if (!category.IsNullOrWhiteSpace())
                 {
-                    query = query.And().Field("categoryAliases", category);
+                    query = query.And().Field("category", category.Replace("-", "").Replace("_", ""));
                 }
 
                 var results = query.OrderBy(new SortableField("name", SortType.String)).Execute(pageSize * page);

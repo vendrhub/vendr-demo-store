@@ -41,38 +41,38 @@ namespace Vendr.DemoStore.Composing
                     // Make product categories searchable
                     // ================================================================
 
-                    // Make sure node is a product page node
-                    if (e.ValueSet.ItemType.InvariantEquals(ProductPage.ModelTypeAlias))
+                    // See if it's a product node with categories defined
+                    if (e.ValueSet.ItemType.InvariantEquals(ProductPage.ModelTypeAlias) && e.ValueSet.Values.ContainsKey("categories"))
                     {
-                        // Make sure some categories are defined
-                        if (e.ValueSet.Values.ContainsKey("categories"))
+                        // Prepare a new collection for category aliases
+                        var categories = new List<string>();
+
+                        // Parse the comma separated list of category UDIs
+                        var categoryIds = e.ValueSet.GetValue("categories").ToString().Split(',').Select(GuidUdi.Parse).ToList();
+
+                        // Fetch the category nodes and extract the category alias, adding it to the aliases collection
+                        using (var ctx = _umbracoContextFactory.EnsureUmbracoContext())
                         {
-                            // Prepare a new collection for category aliases
-                            var categoryAliases = new List<string>(new[] { "all" });
-
-                            // Parse the comma separated list of category UDIs
-                            var categoryIds = e.ValueSet.GetValue("categories").ToString().Split(',').Select(GuidUdi.Parse).ToList();
-
-                            // Fetch the category nodes and extract the category alias, adding it to the aliases collection
-                            using (var ctx = _umbracoContextFactory.EnsureUmbracoContext())
+                            foreach (var categoryId in categoryIds)
                             {
-                                foreach (var categoryId in categoryIds)
+                                var category = ctx.UmbracoContext.Content.GetById(categoryId);
+                                if (category != null)
                                 {
-                                    var category = ctx.UmbracoContext.Content.GetById(categoryId);
-                                    if (category != null)
-                                    {
-                                        categoryAliases.Add(category.UrlSegment);
-                                    }
+                                    categories.Add(category.UrlSegment.Replace("-", "").Replace("_", ""));
                                 }
                             }
+                        }
 
-                            // If we have some aliases, add these to the lucene index in a searchable way
-                            e.ValueSet.Add("categoryAliases", string.Join(" ", categoryAliases));
-                        }
-                        else
-                        {
-                            e.ValueSet.Add("categoryAliases", "all");
-                        }
+                        // If we have some aliases, add these to the lucene index in a searchable way
+                        e.ValueSet.Add("category", string.Join(" ", categories));
+
+                        // Also define a search category including an "all" entry
+                        e.ValueSet.Add("searchCategory", string.Join(" ", categories.Union(new[] { "all" })));
+                    }
+                    else
+                    {
+                        // If it's not a product, add everything to the all search category
+                        e.ValueSet.Add("searchCategory", "all");
                     }
 
                     // ================================================================

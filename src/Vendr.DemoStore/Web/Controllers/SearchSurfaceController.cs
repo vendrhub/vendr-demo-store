@@ -17,6 +17,7 @@ using Umbraco.Core;
 using Umbraco.Core.Models;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web.Mvc;
+using Vendr.DemoStore.Models;
 
 namespace Vendr.DemoStore.Web.Controllers
 {
@@ -35,7 +36,7 @@ namespace Vendr.DemoStore.Web.Controllers
             // The logic for searching is mostly pulled from ezSearch
             // https://github.com/umco/umbraco-ezsearch/blob/master/Src/Our.Umbraco.ezSearch/Web/UI/Views/MacroPartials/ezSearch.cshtml
 
-            var result = new PagedResult<IPublishedContent>(0, 1, ps);
+            var result = new FacetedPagedResult<IPublishedContent>();
 
             if (!q.IsNullOrWhiteSpace() && _examineManager.TryGetIndex("ExternalIndex", out var index))
             {
@@ -75,35 +76,23 @@ namespace Vendr.DemoStore.Web.Controllers
                 // Perform a faceted search based on product categories
                 var dir = new DirectoryInfo(((LuceneIndex)index).LuceneIndexFolder.FullName);
                 using (var searcher = new IndexSearcher(FSDirectory.Open(dir), false))
-                using (var factedSearcher = new SimpleFacetedSearch(searcher.IndexReader, new string[] { "categoryAliases" }))
+                using (var factedSearcher = new SimpleFacetedSearch(searcher.IndexReader, new string[] { "searchCategory" }))
                 {
                     var queryParser = new QueryParser(Version.LUCENE_30, "", new KeywordAnalyzer());
                     var query = queryParser.Parse(sb.ToString());
+                    var queryResults = factedSearcher.Search(query);
 
-                    var results = factedSearcher.Search(query);
+                    var facetedResults = new Dictionary<string, PagedResult<IPublishedContent>>();
 
-                    var totalResults = results.TotalHitCount; 
-
-                    foreach (SimpleFacetedSearch.HitsPerFacet hpg in results.HitsPerFacet)
+                    foreach (SimpleFacetedSearch.HitsPerFacet hpg in queryResults.HitsPerFacet)
                     {
-                        var hitCountPerGroup = hpg.HitCount;
-                        var facetName = hpg.Name;
-                        var items = hpg.Documents.Select(x => UmbracoContext.Content.GetById(int.Parse(x.GetField("id").StringValue))).ToList();
-
-                        //foreach (Document doc in hpg.Documents)
-                        //{
-                        //    string text = doc.GetField("text").StringValue();
-
-                        //    // replace with logging or your desired output writer
-                        //    System.Diagnostics.Debug.WriteLine(">>" + facetName + ": " + text);
-
-                        //}
+                        facetedResults.Add(hpg.Name.ToString(), new PagedResult<IPublishedContent>(hpg.HitCount, p, ps)
+                        {
+                            Items = hpg.Documents.Select(x => UmbracoContext.Content.GetById(int.Parse(x.Get("id")))).ToList()
+                        });
                     }
 
-                    result = new PagedResult<IPublishedContent>(totalResults, p, ps)
-                    {
-                        Items = null //pagedResults.Select(x => UmbracoContext.Content.GetById(int.Parse(x.Id)))
-                    };
+                    result.Facets = facetedResults;
                 }
             }
 

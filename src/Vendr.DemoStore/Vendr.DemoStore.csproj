@@ -433,6 +433,7 @@
     <Compile Include="Models\CheckoutShippingMethodPage.generated.cs">
       <DependentUpon>Generated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\FacetedPagedResult.cs" />
     <Compile Include="Models\ProductGroupComp.generated.cs">
       <DependentUpon>Generated.cs</DependentUpon>
     </Compile>
