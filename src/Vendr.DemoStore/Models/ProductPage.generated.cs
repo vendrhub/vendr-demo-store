@@ -60,6 +60,13 @@ namespace Vendr.DemoStore.Models
 		public IEnumerable<IPublishedContent> Images => this.Value<IEnumerable<IPublishedContent>>("images");
 
 		///<summary>
+		/// Is Gift Card: Set whether this product is a gift card or not.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("isGiftCard")]
+		public bool IsGiftCard => this.Value<bool>("isGiftCard");
+
+		///<summary>
 		/// Long Description: A longer product description.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
