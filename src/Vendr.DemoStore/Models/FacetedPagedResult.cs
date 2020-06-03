@@ -6,8 +6,6 @@ namespace Vendr.DemoStore.Models
 {
     public class FacetedPagedResult<TResult>
     {
-
-
         public IDictionary<string, PagedResult<TResult>> Facets { get; set; }
     }
 }

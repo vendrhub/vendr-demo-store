@@ -425,6 +425,7 @@
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\PagedResultExtensions.cs" />
     <Compile Include="Extensions\PublishedContentExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Models\CheckoutPaymentMethodPage.cs" />
     <Compile Include="Models\CheckoutPaymentMethodPage.generated.cs">
       <DependentUpon>Generated.cs</DependentUpon>
@@ -437,6 +438,7 @@
     <Compile Include="Models\ProductGroupComp.generated.cs">
       <DependentUpon>Generated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Web\Controllers\SearchSurfaceController.cs" />
     <Compile Include="Web\Dtos\OrderAddressDto.cs" />
     <Compile Include="Web\Dtos\UpdateOrderPaymentMethodDto.cs" />

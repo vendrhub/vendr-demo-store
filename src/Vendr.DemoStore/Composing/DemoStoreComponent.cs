@@ -58,7 +58,7 @@ namespace Vendr.DemoStore.Composing
                                 var category = ctx.UmbracoContext.Content.GetById(categoryId);
                                 if (category != null)
                                 {
-                                    categories.Add(category.UrlSegment.Replace("-", "").Replace("_", ""));
+                                    categories.Add(category.UrlSegment.MakeSearchTermSafe());
                                 }
                             }
                         }

@@ -36,8 +36,16 @@ namespace Vendr.DemoStore.Web.Controllers
             // The logic for searching is mostly pulled from ezSearch
             // https://github.com/umco/umbraco-ezsearch/blob/master/Src/Our.Umbraco.ezSearch/Web/UI/Views/MacroPartials/ezSearch.cshtml
 
-            var result = new FacetedPagedResult<IPublishedContent>();
+            // Create the view model
+            var result = new SearchViewModel();
 
+            // Populate category names collection
+            var homePage = CurrentPage.GetHomePage();
+            var categoriesNode = homePage.Children.OfType<CategoriesPage>().FirstOrDefault();
+            var categoryNodes = categoriesNode.Children.OfType<CategoryPage>();
+            result.CategoryNames = categoryNodes.ToDictionary(x => x.UrlSegment.MakeSearchTermSafe(), x => x.Name);
+
+            // Perform the search
             if (!q.IsNullOrWhiteSpace() && _examineManager.TryGetIndex("ExternalIndex", out var index))
             {
                 var searchTerms = Tokenize(q);
@@ -80,7 +88,7 @@ namespace Vendr.DemoStore.Web.Controllers
                 {
                     var queryParser = new QueryParser(Version.LUCENE_30, "", new KeywordAnalyzer());
                     var query = queryParser.Parse(sb.ToString());
-                    var queryResults = factedSearcher.Search(query);
+                    var queryResults = factedSearcher.Search(query, ps * p);
 
                     var facetedResults = new Dictionary<string, PagedResult<IPublishedContent>>();
 
@@ -88,7 +96,7 @@ namespace Vendr.DemoStore.Web.Controllers
                     {
                         facetedResults.Add(hpg.Name.ToString(), new PagedResult<IPublishedContent>(hpg.HitCount, p, ps)
                         {
-                            Items = hpg.Documents.Select(x => UmbracoContext.Content.GetById(int.Parse(x.Get("id")))).ToList()
+                            Items = hpg.Documents.Skip(ps * (p - 1)).Select(x => UmbracoContext.Content.GetById(int.Parse(x.Get("id")))).ToList()
                         });
                     }
 

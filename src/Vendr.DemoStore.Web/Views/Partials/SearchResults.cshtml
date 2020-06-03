@@ -1,18 +1,19 @@
 ﻿@using Vendr.DemoStore;
 @using Vendr.DemoStore.Models;
-@inherits Umbraco.Web.Mvc.UmbracoViewPage<FacetedPagedResult<IPublishedContent>>
+@using Vendr.DemoStore.Web;
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<SearchViewModel>
 @{
     var activeFacet = Request.QueryString["facet"] ?? "all";
 }
 
-<ul class="flex justify-between py-2 border-b border-gray-300">
+<ul class="md:flex md:justify-between text-center py-2 border-b border-gray-300">
     @if (Model.Facets.ContainsKey("all"))
     {
-        <li><a href="?q=@(Request.QueryString["q"])&facet=all" class="@(activeFacet == "all" ? "font-bold" : "")">All (@Model.Facets["all"].TotalItems)</a></li>
+        <li><a href="@(Request.Url.RemoveQueryStringParam("p").AddOrUpdateQueryStringParam("facet", "all"))" class="@(activeFacet == "all" ? "font-bold" : "")">All (@Model.Facets["all"].TotalItems)</a></li>
     }
-    @foreach (var facet in Model.Facets.Where(x => x.Key != "all").OrderBy(x => x.Key))
+    @foreach (var facet in Model.CategoryNames)
     {
-        <li><a href="?q=@(Request.QueryString["q"])&facet=@(facet.Key)" class="@(activeFacet == facet.Key ? "font-bold" : "")">@facet.Key (@facet.Value.TotalItems)</a></li>
+        <li><a href="@(Request.Url.RemoveQueryStringParam("p").AddOrUpdateQueryStringParam("facet", facet.Key))" class="@(activeFacet == facet.Key ? "font-bold" : "")">@(Model.CategoryNames[facet.Key]) (@Model.Facets[facet.Key].TotalItems)</a></li>
     }
 </ul>
 
