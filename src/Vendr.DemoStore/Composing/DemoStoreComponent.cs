@@ -38,7 +38,8 @@ namespace Vendr.DemoStore.Composing
                 ((BaseIndexProvider)index).TransformingIndexValues += (object sender, IndexingItemEventArgs e) =>
                 {
                     // ================================================================
-                    // Make product categories searchable
+                    // 1. Make product categories searchable
+                    // 2. Give all nodes a searchCategory field for faceted searching
                     // ================================================================
 
                     // See if it's a product node with categories defined
@@ -76,7 +77,7 @@ namespace Vendr.DemoStore.Composing
                     }
 
                     // ================================================================
-                    // Do some generally usefull modifications
+                    // 3. Do some generally usefull modifications
                     // ================================================================
 
                     // Create searchable path
