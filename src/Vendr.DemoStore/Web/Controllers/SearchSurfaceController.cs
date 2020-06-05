@@ -1,6 +1,7 @@
 ﻿using Examine;
 using Examine.LuceneEngine.Providers;
 using Lucene.Net.Analysis;
+using Lucene.Net.Index;
 using Lucene.Net.QueryParsers;
 using Lucene.Net.Search;
 using Lucene.Net.Store;
@@ -81,9 +82,8 @@ namespace Vendr.DemoStore.Web.Controllers
                 }
 
                 // Perform a faceted search based on search categories
-                var dir = new DirectoryInfo(((LuceneIndex)index).LuceneIndexFolder.FullName);
-                using (var searcher = new IndexSearcher(FSDirectory.Open(dir), false))
-                using (var factedSearcher = new SimpleFacetedSearch(searcher.IndexReader, new string[] { "searchCategory" }))
+                using (var reader = IndexReader.Open(((LuceneIndex)index).GetLuceneDirectory(), true))
+                using (var factedSearcher = new SimpleFacetedSearch(reader, new string[] { "searchCategory" }))
                 {
                     var queryParser = new QueryParser(Version.LUCENE_30, "", new KeywordAnalyzer());
                     var query = queryParser.Parse(sb.ToString());
@@ -91,7 +91,6 @@ namespace Vendr.DemoStore.Web.Controllers
 
                     var facetedResults = new Dictionary<string, PagedResult<IPublishedContent>>();
 
-                    // Loop through each facet converting the results to IPulishedContent
                     foreach (SimpleFacetedSearch.HitsPerFacet hpg in queryResults.HitsPerFacet)
                     {
                         facetedResults.Add(hpg.Name.ToString(), new PagedResult<IPublishedContent>(hpg.HitCount, p, ps)
