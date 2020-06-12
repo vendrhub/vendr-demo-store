@@ -99,14 +99,14 @@
                     </div>
 
                     <div class="vendr-order-table__subtotal">
-                        <div>Shipping via {{ vm.content.shippingMethod.name }}</div>
+                        <div>Shipping<span ng-if="vm.content.shippingMethod"> via {{ vm.content.shippingMethod.name }}</span></div>
                         <div>
                             <span class="color-grey text-12 strikethrough mr-5" ng-if="vm.content.shippingMethodPriceWithoutDiscount != vm.content.shippingMethodPrice">{{ vm.content.shippingMethodPriceWithoutDiscount }}</span>
                             {{ vm.content.shippingMethodPrice }}
                         </div>
                     </div>
                     <div class="vendr-order-table__subtotal">
-                        <div>Payment via {{ vm.content.paymentMethod.name }}</div>
+                        <div>Payment<span ng-if="vm.content.paymentMethod"> via {{ vm.content.paymentMethod.name }}</span></div>
                         <div>
                             <span class="color-grey text-12 strikethrough mr-5" ng-if="vm.content.paymentMethodPriceWithoutDiscount != vm.content.paymentMethodPrice">{{ vm.content.paymentMethodPriceWithoutDiscount }}</span>
                             {{ vm.content.paymentMethodPrice }}

@@ -1946,7 +1946,7 @@
 
         };
 
-        vm.cancel = function () {
+        vm.close = function () {
             navigationService.hideDialog();
         };
 
@@ -4100,7 +4100,7 @@
 
     'use strict';
 
-    function StockController($scope, editorState, vendrProductResource)
+    function StockController($scope, $timeout, editorState, vendrProductResource)
     {
         var currentNode = editorState.getCurrent();
         var productReference = currentNode.id > 0 ? currentNode.key : undefined;
@@ -4127,6 +4127,31 @@
                 vm.loading = false;
             }
         };
+
+        // When we save a stock property, it's value is entered into the stock db table
+        // and the content items stock property is reset to -1. We don't want the stock
+        // input field to update on save, so we store the posted value, then once the
+        // form is submitted, reset it back to that value in the next tick after formSubmitted
+        var postedValue = 0;
+        var unsubscribe = [
+            $scope.$on("formSubmitting", function () {
+                postedValue = vm.model.value;
+            }),
+            $scope.$on("formSubmitted", function () {
+                $timeout(function () {
+                    vm.model.value = postedValue;
+                }, 1);
+            })
+        ];
+
+        // When the element is disposed we need to unsubscribe!
+        // NOTE: this is very important otherwise if this is part of a modal, the listener still exists because the dom
+        // element might still be there even after the modal has been hidden.
+        $scope.$on('$destroy', function () {
+            unsubscribe.forEach(function (u) {
+                u();
+            });
+        });
 
         init();
     }
@@ -5247,23 +5272,23 @@
                 vm.options.users = pagedUsers.items.map(function (itm) {
 
                     var user = {
-                        id: itm.id.toString(),
+                        id: itm.id.toString(), // Umbraco members don't really have a key
                         name: itm.name
                     };
 
                     Object.defineProperty(user, "checked", {
                         get: function () {
-                            return vm.content.allowedUserIds
-                                && vm.content.allowedUserIds.indexOf(user.id) > -1;
+                            return vm.content.allowedUsers
+                                && vm.content.allowedUsers.indexOf(user.id) > -1;
                         },
                         set: function (value) {
-                            if (!vm.content.allowedUserIds)
-                                vm.content.allowedUserIds = [];
-                            var idx = vm.content.allowedUserIds.indexOf(user.id);
+                            if (!vm.content.allowedUsers)
+                                vm.content.allowedUsers = [];
+                            var idx = vm.content.allowedUsers.indexOf(user.id);
                             if (value) {
-                                if (idx === -1) vm.content.allowedUserIds.push(user.id);
+                                if (idx === -1) vm.content.allowedUsers.push(user.id);
                             } else {
-                                if (idx !== -1) vm.content.allowedUserIds.splice(idx, 1);
+                                if (idx !== -1) vm.content.allowedUsers.splice(idx, 1);
                             }
                         }
                     });
