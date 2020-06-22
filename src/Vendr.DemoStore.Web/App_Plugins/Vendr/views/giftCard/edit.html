@@ -21,6 +21,7 @@
             </umb-editor-header>
 
             <umb-editor-container class="form-horizontal">
+                <vendr-license-check />
 
                 <div class="vendr-layout vendr-layout--layout1">
 
@@ -51,7 +52,7 @@
                                     <div class="vendr-input vendr-input--short">
                                         <span class="vendr-input--prefix" ng-if="vm.content.currencyId">{{ vm.options.currencyCodes[vm.content.currencyId] }}</span>
                                         <input type="text" ng-model="vm.content.originalAmount" ng-currency currency-symbol="" min="0"
-                                               ng-change="vm.syncOriginalAmountWithRemainingAmount()"/>
+                                               ng-change="vm.syncOriginalAmountWithRemainingAmount()" />
                                     </div>
                                 </umb-control-group>
 
@@ -68,9 +69,9 @@
 
                                         <div class="btn-group flex" style="font-size: 15px;">
                                             <umb-date-time-picker ng-model="vm.localExpiryDate"
-                                                options="vm.expiryDatePickerConfig"
-                                                on-setup="vm.expiryDatePickerSetup(fpItem)"
-                                                on-change="vm.expiryDatePickerChange(dateStr, instance)">
+                                                                  options="vm.expiryDatePickerConfig"
+                                                                  on-setup="vm.expiryDatePickerSetup(fpItem)"
+                                                                  on-change="vm.expiryDatePickerChange(dateStr, instance)">
                                             </umb-date-time-picker>
                                             <a ng-show="vm.content.expiryDate" ng-click="vm.clearExpiryDate()" class="btn umb-button--xs dropdown-toggle umb-button-group__toggle vendr-btn--clear">
                                                 <span class="icon icon-wrong"></span>

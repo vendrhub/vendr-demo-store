@@ -471,7 +471,7 @@
                         storeId: storeId,
                         parentId: parentId
                     }),
-                    "Failed to delete entity");
+                    "Failed to sort entities");
             }
 
         };
