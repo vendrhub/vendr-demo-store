@@ -85,7 +85,7 @@
 
                     <span class="relative">
                         <input type="radio" class="form-radio absolute w-0 h-0" name="productReference" id="giftcard-@productReference" value="@productReference" @Html.Raw(selectedReference == productReference ? "checked=\"checked\"" : "") />
-                        <label class="bg-gray-300 hover:bg-gray-400 border-2 text-gray-800 font-semibold py-2 px-4 cursor-pointer" for="giftcard-@productReference">@(variant.CalculatePrice()?.Formatted())</label>
+                        <label class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 cursor-pointer" for="giftcard-@productReference">@(variant.CalculatePrice()?.Formatted())</label>
                     </span>
                 }
             </div>

@@ -10,7 +10,6 @@
 /* Product Page */
 .gift-cards input[type="radio"]:checked + label {
     background-color: #81e6d9;
-    border-color: #4fd1c5;
 }
 
 /* Cart Table Styles */
