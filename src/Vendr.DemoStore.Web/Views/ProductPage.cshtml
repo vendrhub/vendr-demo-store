@@ -78,13 +78,15 @@
         {
             var selectedReference = addedProductReference ?? product.Variants.FirstOrDefault()?.GetProductReference();
 
-            <div class="gift-cards flex justify-start space-x-2 space-y-2 -mx-2">
+            <div class="gift-cards flex justify-start space-x-2 mt-4">
                 @foreach (var variant in product.Variants)
                 {
                     var productReference = variant.GetProductReference();
 
-                    <input type="radio" class="form-radio" name="productReference" id="giftcard-@productReference" value="@productReference" @Html.Raw(selectedReference == productReference ? "checked=\"checked\"" : "") />
-                    <label class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 border-2 cursor-pointer rounded" for="giftcard-@productReference">@(variant.CalculatePrice()?.Formatted())</label>
+                    <span class="relative">
+                        <input type="radio" class="form-radio absolute w-0 h-0" name="productReference" id="giftcard-@productReference" value="@productReference" @Html.Raw(selectedReference == productReference ? "checked=\"checked\"" : "") />
+                        <label class="bg-gray-300 hover:bg-gray-400 border-2 text-gray-800 font-semibold py-2 px-4  cursor-pointer rounded" for="giftcard-@productReference">@(variant.CalculatePrice()?.Formatted())</label>
+                    </span>
                 }
             </div>
         }

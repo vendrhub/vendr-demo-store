@@ -8,12 +8,8 @@
 }
 
 /* Product Page */
-.gift-cards input:checked + label {
-    border: 2px solid #757575;
-}
-.gift-cards .form-radio {
-    width: 0;
-    height: 0;
+.gift-cards input[type="radio"]:checked + label {
+    border-color: #757575;
 }
 
 /* Cart Table Styles */
