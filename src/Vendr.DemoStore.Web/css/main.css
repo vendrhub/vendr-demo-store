@@ -7,6 +7,11 @@
     color: #1a1a1a;
 }
 
+/* Product Page */
+.gift-cards input[type="radio"]:checked + label {
+    background-color: #81e6d9;
+}
+
 /* Cart Table Styles */
 .data-label-visible:before {
     content: attr(data-label);
