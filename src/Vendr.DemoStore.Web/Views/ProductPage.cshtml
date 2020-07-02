@@ -49,21 +49,7 @@
             {
                 <div class="py-10">
                     <h1 class="text-2xl font-bold">@Model.Parent.Name - @Model.Name</h1>
-                    @if (Model.Variants.Any())
-                    {
-                        <select name="productReference" class="w-full border border-gray-300 p-2 mt-1">
-                            @foreach (var variant in Model.Variants)
-                            {
-                                <option value="@variant.GetProductReference()" @Html.Raw(addedProductReference == variant.GetProductReference() ? "selected=\"selected\"" : "")>@(variant.Name) - @(variant.CalculatePrice()?.Formatted())</option>
-                            }
-                        </select>
-                    }
-                    else
-                    {
-                        @Html.Hidden("productReference", Model.GetProductReference())
-
-                        <p>@(Model.CalculatePrice()?.Formatted())</p>
-                    }
+                    @RenderVariants(Model, addedProductReference)
                 </div>
 
                 <button class="font-bold border-4 border-gray-900 px-6 py-3 mb-4 lg:w-1/2 hover:bg-teal-400 hover:border-teal-400 hover:text-white" type="submit">Add to Cart</button>
@@ -83,3 +69,43 @@
         </div>
     </div>
 </div>
+
+@helper RenderVariants(ProductPage product, string addedProductReference)
+{
+    if (product.Variants.Any())
+    {
+        if (product.IsGiftCard)
+        {
+            var selectedReference = addedProductReference ?? product.Variants.FirstOrDefault()?.GetProductReference();
+
+            <div class="gift-cards flex justify-start space-x-2 mt-4">
+                @foreach (var variant in product.Variants)
+                {
+                    var productReference = variant.GetProductReference();
+
+                    <span class="relative">
+                        <input type="radio" class="form-radio absolute w-0 h-0" name="productReference" id="giftcard-@productReference" value="@productReference" @Html.Raw(selectedReference == productReference ? "checked=\"checked\"" : "") />
+                        <label class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 cursor-pointer" for="giftcard-@productReference">@(variant.CalculatePrice()?.Formatted())</label>
+                    </span>
+                }
+            </div>
+        }
+        else
+        {
+            <select name="productReference" class="w-full border border-gray-300 p-2 mt-1">
+                @foreach (var variant in product.Variants)
+                {
+                    var productReference = variant.GetProductReference();
+
+                    <option value="@productReference" @Html.Raw(addedProductReference == productReference ? "selected=\"selected\"" : "")>@(variant.Name) - @(variant.CalculatePrice()?.Formatted())</option>
+                }
+            </select>
+        }
+    }
+    else
+    {
+        @Html.Hidden("productReference", product.GetProductReference())
+
+        <p>@(product.CalculatePrice()?.Formatted())</p>
+    }
+}
