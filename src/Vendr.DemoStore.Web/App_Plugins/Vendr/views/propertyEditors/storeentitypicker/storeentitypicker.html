@@ -10,7 +10,7 @@
 
             <umb-node-preview ng-if="vm.pickedItem"
                 icon="vm.pickedItem.icon"
-                name="vm.pickedItem.name"
+                name="(vm.showStoreInName ? vm.store.name +' : ' : '') + vm.pickedItem.name"
                 published="true"
                 description="vm.pickedItem.id"
                 sortable="false"

@@ -89,7 +89,7 @@
                             </umb-box-content>
                         </umb-box>
 
-                        <umb-box ng-if="vm.content.paymentProviderSupportsFetchingOrderStatus
+                        <umb-box ng-if="vm.content.paymentProviderSupportsFetchingPaymentStatus
                          || vm.content.paymentProviderSupportsCancellingPayments
                          || vm.content.paymentProviderSupportsCapturingPayments
                          || vm.content.paymentProviderSupportsRefundingPayments">
@@ -98,9 +98,9 @@
 
                                 <umb-control-group label="Allow Fetching Payment Status"
                                                    description="Set whether fetching payment status from the payment provider API should be allowed."
-                                                   ng-if="vm.content.paymentProviderSupportsFetchingOrderStatus">
-                                    <umb-toggle checked="vm.content.canFetchPaymentStatus"
-                                                on-click="vm.content.canFetchPaymentStatus = !vm.content.canFetchPaymentStatus"></umb-toggle>
+                                                   ng-if="vm.content.paymentProviderSupportsFetchingPaymentStatus">
+                                    <umb-toggle checked="vm.content.canFetchPaymentStatuses"
+                                                on-click="vm.content.canFetchPaymentStatuses = !vm.content.canFetchPaymentStatuses"></umb-toggle>
                                 </umb-control-group>
 
                                 <umb-control-group label="Allow Cancelling Payments"

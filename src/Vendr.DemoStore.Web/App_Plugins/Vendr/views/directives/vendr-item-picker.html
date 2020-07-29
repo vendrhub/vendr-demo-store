@@ -16,6 +16,16 @@
             <umb-box ng-if="items.length > 0">
                 <umb-box-content>
 
+                    <div style="display: flex; margin-bottom: 20px;" ng-if="parentItem">
+                        <button type="button" class="umb-editor-header__back" style="width: 30px;" ng-click="back()" prevent-default>
+                            <i class="fa fa-arrow-left" aria-hidden="true"></i> <span class="sr-only">Go back</span>
+                        </button>
+                        <div style="padding-left: 10px;">
+                            <h4 style="margin: 0; font-weight: bold; font-size: 16px;">{{ parentItem.name }}</h4>
+                            <small style="margin: 0; font-size: 12px; color: #a2a1a6;">{{ parentItem.id }}</small>
+                        </div>
+                    </div>
+
                     <div class="umb-control-group" ng-if="filter.enabled">
                         <div class="form-search">
                             <i class="icon-search"></i>

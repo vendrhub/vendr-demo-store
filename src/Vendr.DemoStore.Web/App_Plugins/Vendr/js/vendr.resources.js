@@ -433,6 +433,15 @@
 
         return {
 
+            getStoreByEntityId: function (entityType, entityId) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("entityApiBaseUrl", "GetStoreByEntityId", {
+                        entityType: entityType,
+                        entityId: entityId
+                    })),
+                    "Failed to get basic store by entity id");
+            },
+
             getEntity: function (entityType, entityId) {
                 return umbRequestHelper.resourcePromise(
                     $http.get(vendrRequestHelper.getApiUrl("entityApiBaseUrl", "GetEntity", {
@@ -598,6 +607,14 @@
                         orderStatusId: orderStatusId
                     })),
                     "Failed to change order status");
+            },
+
+            syncPaymentStatus: function (orderId) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("orderApiBaseUrl", "SyncPaymentStatus", {
+                        orderId: orderId
+                    })),
+                    "Failed to sync payment");
             },
 
             cancelPayment: function(orderId) {

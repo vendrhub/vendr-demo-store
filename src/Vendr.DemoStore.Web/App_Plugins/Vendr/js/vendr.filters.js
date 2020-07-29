@@ -195,7 +195,7 @@
             GreaterThan: ">",
             GreaterThanOrEqual: ">=",
             LessThan: "<",
-            LessThanOrEqual: "<",
+            LessThanOrEqual: "<=",
             NotEqual: "!="
         };
 
