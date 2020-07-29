@@ -14,7 +14,7 @@
         {
             <li class="border-gray-300 @(item.Index > 0 ? "border-t " : "")">
                 <label class="flex items-center py-4 px-4 cursor-pointer hover:bg-gray-100">
-                    <input name="shippingMethod" type="radio" value="@item.ShippingMethod.Id" class="mr-3" @Html.Raw(Model.Order.ShippingInfo.ShippingMethodId.HasValue && Model.Order.ShippingInfo.ShippingMethodId.Value == item.ShippingMethod.Id ? "checked=\"checked\"" : "") required />
+                    <input name="shippingMethod" type="radio" value="@item.ShippingMethod.Id" class="mr-3" @Html.Raw((Model.Order.ShippingInfo.ShippingMethodId.HasValue && Model.Order.ShippingInfo.ShippingMethodId.Value == item.ShippingMethod.Id) || (!Model.Order.ShippingInfo.ShippingMethodId.HasValue && Model.ShippingCountry != null && Model.ShippingCountry.DefaultShippingMethodId == item.ShippingMethod.Id) ? "checked=\"checked\"" : "") required />
                     <span class="font-medium">@(item.ShippingMethod.Name)</span>
                     <span class="flex-1 text-right">@(item.ShippingMethod.CalculatePrice()?.Formatted())</span>
                 </label>

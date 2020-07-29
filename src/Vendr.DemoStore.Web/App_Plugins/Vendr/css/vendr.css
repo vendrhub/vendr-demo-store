@@ -478,16 +478,15 @@ a.no-underline:focus {
 .vendr-badge--canceled,
 .vendr-badge--cancelled,
 .vendr-badge--inconsistentcanceled,
-.vendr-badge--pendingexternalsystem,
 .vendr-header--payment-status-initialized .umb-panel-header-name:after,
 .vendr-header--payment-status-canceled .umb-panel-header-name:after,
 .vendr-header--payment-status-cancelled .umb-panel-header-name:after,
 .vendr-header--payment-status-inconsistentcanceled .umb-panel-header-name:after,
-.vendr-header--payment-status-pendingexternalsystem .umb-panel-header-name:after,
 .vendr-header--order-status-grey .umb-panel-header-name:before {
     color: #68676b;
     background-color: #d8d7d9;
 }
+
 .vendr-bg--red,
 .vendr-badge--inconsistentcaptured,
 .vendr-badge--error,
@@ -566,6 +565,8 @@ a.no-underline:focus {
     background-color: #9c27b0;
 }
 .vendr-bg--deep-purple,
+.vendr-badge--pendingexternalsystem,
+.vendr-header--payment-status-pendingexternalsystem .umb-panel-header-name:after,
 .vendr-header--order-status-deep-purble .umb-panel-header-name:before {
     color: white;
     background-color: #673ab7;

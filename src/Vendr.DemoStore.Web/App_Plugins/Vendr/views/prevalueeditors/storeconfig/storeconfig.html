@@ -1,0 +1,32 @@
+﻿<div ng-controller="Vendr.Controllers.StoreConfigController as vm">
+    <umb-control-group label="Store Mode" description="Select the mode for resolving the store">
+        <div class="flex" style="margin-bottom: 5px; padding: 10px;">
+            <div>
+                <input type="radio" id="storemode_search" value="Search" ng-model="vm.model.value.storeMode" />
+            </div>
+            <div>
+                <label for="storemode_search" style="margin: 0;"><strong>Search</strong><br /><small style="padding: 0;">Search for the store by looking up the content tree for a store picker</small></label>
+            </div>
+        </div>
+        <div class="flex" style="border-top: solid 1px #f6f6f7; margin-bottom: 5px; padding: 10px;">
+            <div>
+                <input type="radio" id="storemode_explicit" value="Explicit" ng-model="vm.model.value.storeMode" />
+            </div>
+            <div>
+                <label for="storemode_explicit" style="margin: 0;"><strong>Explicit</strong><br /><small style="padding: 0;">Define an explicit store to pick entities from</small></label>
+            </div>
+        </div>
+        <div class="flex" style="border-top: solid 1px #f6f6f7; margin-bottom: 5px; padding: 10px;">
+            <div>
+                <input type="radio" id="storemode_all" value="All" ng-model="vm.model.value.storeMode" />
+            </div>
+            <div>
+                <label for="storemode_all" style="margin: 0;"><strong>All</strong><br /><small style="padding: 0;">Pick entities from across all available stores</small></label>
+            </div>
+        </div>
+    </umb-control-group>
+    <umb-control-group label="Store" description="Select the explicit store to select entities from" 
+        ng-if="vm.model.value.storeMode == 'Explicit'">
+        <umb-property-editor model="vm.storePickerProperty"></umb-property-editor>
+    </umb-control-group>
+</div>

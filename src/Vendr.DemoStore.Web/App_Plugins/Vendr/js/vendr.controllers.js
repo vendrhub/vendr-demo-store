@@ -1102,14 +1102,44 @@
 
         vm.config.title = "Select "+ vm.config.entityType.replace(/([A-Z])/g, ' $1');
 
-        vm.loadItems = function() {
-            return vendrEntityResource.getEntities(vm.config.entityType, vm.config.storeId);
+        vm.store = undefined;
+        vm.currentStore = undefined;
+
+        vm.loadItems = function (storeId) {
+            if (storeId) {
+                return vendrEntityResource.getEntities(vm.config.entityType, storeId);
+            } else if (vm.config.storeId === -1) {
+                return vendrEntityResource.getEntities("Store").then(function (stores) {
+                    if (stores.length == 1) {
+                        vm.config.storeId = stores[0].id;
+                        vm.store = stores[0];
+                        return vm.loadItems();
+                    } else {
+                        return stores;
+                    }
+                });
+            } else {
+                return vendrEntityResource.getEntities(vm.config.entityType, vm.config.storeId);
+            }
         };
 
-        vm.select = function(item) {
-            $scope.model.value = item;
-            if ($scope.model.submit) {
-                $scope.model.submit($scope.model.value);
+        vm.back = function (scope) {
+            vm.currentStore = undefined;
+            scope.reset();
+            scope.loadItems();
+        };
+
+        vm.select = function (item, scope) {
+            if (vm.config.storeId === -1 && !vm.currentStore) {
+                vm.currentStore = item;
+                scope.reset();
+                scope.loadItems(item.id);
+            } else {
+                $scope.model.value = item;
+                $scope.model.value.store = vm.currentStore ?? vm.store;
+                if ($scope.model.submit) {
+                    $scope.model.submit($scope.model.value);
+                }
             }
         };
 
@@ -2970,7 +3000,7 @@
             vendrStoreResource.getStoreOrderEditorConfig(storeId).then(function (config) {
                 vm.editorConfig = config;
                 vm.editorConfig.view = vm.editorConfig.view || '/app_plugins/vendr/views/order/subviews/edit.html';
-                vendrOrderResource.getOrder(id).then(function(order) {
+                vendrOrderResource.getOrder(id).then(function (order) {
 
                     // Ensure notes properties
                     if (vm.editorConfig.notes.customerNotes && !order.properties[vm.editorConfig.notes.customerNotes.alias]) {
@@ -2981,6 +3011,12 @@
                     }
 
                     vm.ready(order);
+
+                    // Sync payment status
+                    vendrOrderResource.syncPaymentStatus(id).then(function (order) {
+                        vm.content.paymentStatus = order.paymentStatus;
+                        vm.content.paymentStatusName = order.paymentStatusName;
+                    });
                 });
             });
         };
@@ -3006,6 +3042,7 @@
             vm.cancelPaymentButtonState = 'busy';
             vendrOrderResource.cancelPayment(id).then(function(order) {
                 vm.content.paymentStatus = order.paymentStatus;
+                vm.content.paymentStatusName = order.paymentStatusName;
                 vm.cancelPaymentButtonState = 'success';
                 notificationsService.success("Payment Cancelled", "Pending payment successfully cancelled.");
             }, function (err) {
@@ -3017,6 +3054,7 @@
             vm.capturePaymentButtonState = 'busy';
             vendrOrderResource.capturePayment(id).then(function(order) {
                 vm.content.paymentStatus = order.paymentStatus;
+                vm.content.paymentStatusName = order.paymentStatusName;
                 vm.capturePaymentButtonState = 'success';
                 notificationsService.success("Payment Captured", "Pending payment successfully captured.");
             }, function (err) {
@@ -3028,6 +3066,7 @@
             vm.refundPaymentButtonState = 'busy';
             vendrOrderResource.refundPayment(id).then(function(order) {
                 vm.content.paymentStatus = order.paymentStatus;
+                vm.content.paymentStatusName = order.paymentStatusName;
                 vm.refundPaymentButtonState = 'success';
                 notificationsService.success("Payment Refunded", "Captured payment successfully refunded.");
             }, function (err) {
@@ -3183,6 +3222,7 @@
                             { id: 2, name: 'Captured', color: 'green' },
                             { id: 3, name: 'Cancelled', color: 'grey' },
                             { id: 4, name: 'Refunded', color: 'orange' },
+                            { id: 5, name: 'Pending', color: 'deep-purple' },
                             { id: 200, name: 'Error', color: 'red' }
                         ]);
                     }
@@ -3205,7 +3245,7 @@
                 { alias: 'name', template: '<span class="vendr-table-cell-value--multiline"><span>{{customerFullName}}</span><span class="vendr-table-cell-label">#{{orderNumber}}</span></span>' },
                 { alias: 'finalizedDate', header: 'Date', template: "{{ finalizedDate  | date : 'MMMM d, yyyy h:mm a' }}" },
                 { alias: 'orderStatusId', header: 'Order Status', align: 'right', template: '<span class="umb-badge umb-badge--xs vendr-bg--{{ orderStatus.color }}" title="Order Status: {{ orderStatus.name }}">{{ orderStatus.name }}</span>' },
-                { alias: 'paymentStatus', header: 'Payment Status', align: 'right', template: '<span class="umb-badge umb-badge--xs vendr-badge--{{ paymentStatus.toLowerCase() }}">{{paymentStatus}}</span>' },
+                { alias: 'paymentStatus', header: 'Payment Status', align: 'right', template: '<span class="umb-badge umb-badge--xs vendr-badge--{{ paymentStatus.toLowerCase() }}">{{paymentStatusName}}</span>' },
                 { alias: 'payment', header: 'Payment', align: 'right', template: '<span class="vendr-table-cell-value--multiline"><strong>{{totalPrice}}</strong><span>{{paymentMethod.name}}</span></span>' }
             ],
             itemClick: function (itm) {
@@ -3867,6 +3907,35 @@
 
     'use strict';
 
+    function StoreConfigController($scope) {
+
+        var vm = this;
+
+        vm.storePickerProperty = {
+            alias: "storeId",
+            view: '/app_plugins/vendr/views/propertyeditors/storepicker/storepicker.html'
+        };
+
+        Object.defineProperty(vm.storePickerProperty, "value", {
+            get: () => vm.model.value.storeId,
+            set: (value) => vm.model.value.storeId = value
+        });
+
+        vm.model = $scope.model;
+        vm.model.value = vm.model.value || {
+            storeMode: 'Search',
+            storeId: undefined
+        };
+
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.StoreConfigController', StoreConfigController);
+
+}());
+(function () {
+
+    'use strict';
+
     function ConditionalInputController($scope, $timeout)
     {
         var vm = this;
@@ -4110,48 +4179,26 @@
         vm.model = $scope.model;
 
         // We don't use any stored stock value as we fetch it from
-        // the product service every time. We only use the stored
-        // value as a means to pass the value to an event handler
-        // to update the stock value on save
-        vm.model.value = 0;
+        // the product service every time. 
+        // So we store a stock value in a seperate varaiablts and 
+        // only submit it's value if it changes.
+        vm.stockLevel = 0;
+        vm.syncStockLevel = function () {
+            vm.model.value = vm.stockLevel;
+        };
 
         vm.loading = true;
         
         var init = function () {
             if (productReference) {
                 vendrProductResource.getStock(productReference).then(function (stock) {
-                    vm.model.value = stock || 0;
+                    vm.stockLevel = stock || 0;
                     vm.loading = false;
                 });
             } else {
                 vm.loading = false;
             }
         };
-
-        // When we save a stock property, it's value is entered into the stock db table
-        // and the content items stock property is reset to -1. We don't want the stock
-        // input field to update on save, so we store the posted value, then once the
-        // form is submitted, reset it back to that value in the next tick after formSubmitted
-        var postedValue = 0;
-        var unsubscribe = [
-            $scope.$on("formSubmitting", function () {
-                postedValue = vm.model.value;
-            }),
-            $scope.$on("formSubmitted", function () {
-                $timeout(function () {
-                    vm.model.value = postedValue;
-                }, 1);
-            })
-        ];
-
-        // When the element is disposed we need to unsubscribe!
-        // NOTE: this is very important otherwise if this is part of a modal, the listener still exists because the dom
-        // element might still be there even after the modal has been hidden.
-        $scope.$on('$destroy', function () {
-            unsubscribe.forEach(function (u) {
-                u();
-            });
-        });
 
         init();
     }
@@ -4172,6 +4219,13 @@
         var storeId = compositeId.length > 1 ? compositeId[0] : null;
         var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[0];
         var entityType = $scope.model.config.entityType;
+        var storeConfig = $scope.model.config.storeConfig || { storeMode: 'Search' };
+
+        if (storeConfig.storeMode === 'All')
+            storeId = -1;
+
+        if (storeConfig.storeMode === 'Explicit')
+            storeId = storeConfig.storeId;
 
         var dialogOptions = {
             view: '/app_plugins/vendr/views/dialogs/storeentitypicker.html',
@@ -4181,6 +4235,9 @@
                 entityType: entityType
             },
             submit: function (model) {
+                if (model.store) {
+                    vm.store = model.store;
+                }
                 vm.model.value = model.id;
                 vm.pickedItem = model;
                 editorService.close();
@@ -4196,6 +4253,7 @@
         vm.pickedItem = false;
         vm.loading = true;
         vm.store = null;
+        vm.showStoreInName = storeConfig.storeMode === 'All';
 
         vm.openPicker = function () {
             editorService.open(dialogOptions);
@@ -4212,7 +4270,7 @@
 
         var initStore = function (store, value) {
             vm.store = store;
-            if (store) {
+            if (store && storeConfig.storeMode !== 'All') {
                 dialogOptions.config.storeId = store.id;
             }
             if (value) {
@@ -4228,20 +4286,25 @@
         var init = function (value) {
 
             if (!storeId) {
+                // Search for Store ID
                 vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId).then(function (store) {
                     initStore(store, value);
                 });
-            } else {
+            } else if (storeId !== -1) {
+                // Explicit store
                 vendrStoreResource.getBasicStore(storeId).then(function (store) {
                     initStore(store, value);
                 });
+            } else if (value) {
+                vendrEntityResource.getStoreByEntityId(entityType, value).then(function (store) {
+                    initStore(store, value);
+                });
+            } else {
+                // All store
+                initStore({ id: -1 }, value);
             }
 
         };
-
-        //$scope.model.onValueChanged = function (newVal, oldVal) {
-        //    //console.log(newVal);
-        //};
 
         var unsubscribe = [
             $scope.$on("formSubmitted", function () {

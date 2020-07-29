@@ -29,6 +29,12 @@
       "prevalues": {
         "fields": [
           {
+            "label": "Store Config",
+            "key": "storeConfig",
+            "view": "~/app_plugins/vendr/views/prevalueeditors/storeconfig/storeconfig.html",
+            "hideLabel": true
+          },
+          {
             "label": "Store Entity Type",
             "description": "The type of store entity to pick from",
             "key": "entityType",

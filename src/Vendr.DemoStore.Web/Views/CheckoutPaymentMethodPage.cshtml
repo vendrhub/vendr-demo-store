@@ -20,7 +20,7 @@
             {
                 <li class="border-gray-300 @(item.Index > 0 ? "border-t " : "")">
                     <label class="flex items-center py-4 px-4 cursor-pointer hover:bg-gray-100">
-                        <input name="paymentMethod" type="radio" value="@item.PaymentMethod.Id" class="mr-3" @Html.Raw(Model.Order.PaymentInfo.PaymentMethodId.HasValue && Model.Order.PaymentInfo.PaymentMethodId.Value == item.PaymentMethod.Id ? "checked=\"checked\"" : "") required />
+                        <input name="paymentMethod" type="radio" value="@item.PaymentMethod.Id" class="mr-3" @Html.Raw((Model.Order.PaymentInfo.PaymentMethodId.HasValue && Model.Order.PaymentInfo.PaymentMethodId.Value == item.PaymentMethod.Id) || (!Model.Order.PaymentInfo.PaymentMethodId.HasValue && Model.PaymentCountry != null && Model.PaymentCountry.DefaultPaymentMethodId == item.PaymentMethod.Id) ? "checked=\"checked\"" : "") required />
                         <span class="font-medium">@(item.PaymentMethod.Name)</span>
                         <span class="flex-1 text-right">@(item.PaymentMethod.CalculatePrice()?.Formatted())</span>
                     </label>
