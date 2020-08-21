@@ -123,6 +123,12 @@ div [ng-controller*=MemberGroupPickerController] .umb-box-content > .umb-tree {
     padding-bottom: 0;
 }
 
+.vendr .umb-actions-child .umb-action-link {
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box; /* Firefox, other Gecko */
+    box-sizing: border-box;
+}
+
 /* Layouts */
 .vendr-layout,
 .vendr-layout {
@@ -650,7 +656,7 @@ a.no-underline:focus {
 .vendr-order-table__subtotal > *:first-child,
 .vendr-order-table__total > *:first-child {
     flex: 1 0 auto;
-    width: auto;
+    width: 60%;
     text-align: left;
     white-space: normal;
 }
@@ -850,6 +856,7 @@ a.no-underline:focus {
 .vendr-rule-builder,
 .vendr-reward-builder {
     width: 100%;
+    max-width: 800px;
 }
 
 .vendr-rule-builder__group {
@@ -934,6 +941,9 @@ a.no-underline:focus {
 .vendr .mr-10 {
     margin-right: 10px;
 }
+.vendr .-mr-5 {
+    margin-right: -5px;
+}
 
 .vendr .-ml-5 {
     margin-left: -5px;
@@ -969,6 +979,19 @@ a.no-underline:focus {
 
 .vendr .mt-10 {
     margin-top: 10px;
+}
+
+.vendr .mt-20 {
+    margin-top: 20px;
+}
+
+.vendr .pl-0 {
+    padding-left: 0;
+}
+
+.vendr .px-0 {
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .vendr .pr-5 {
@@ -1027,6 +1050,14 @@ a.no-underline:focus {
     align-self: flex-end;
 }*/
 
+.vendr .items-start {
+    align-items: flex-start;
+}
+
+.vendr .items-baseline {
+    align-items: baseline;
+}
+
 .vendr .text-12 {
     font-size: 12px;
 }
@@ -1037,6 +1068,10 @@ a.no-underline:focus {
 
 .vendr .strikethrough {
     text-decoration: line-through;
+}
+
+.vendr .border-0 {
+    border-width: 0;
 }
 
 .vendr .w-1\/2 {

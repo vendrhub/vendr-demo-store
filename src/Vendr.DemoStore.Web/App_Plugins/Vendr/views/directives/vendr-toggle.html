@@ -5,6 +5,6 @@
         <div class="vendr-toggle__description">{{ description }}</div>
     </div>
     <div class="vendr-toggle__action" ng-if="checkedActionLabel && onCheckedAction && checked">
-        <a class="vendr-toggle__action-btn btn btn-info" ng-click="onCheckedAction()" prevent-default>{{ checkedActionLabel }}</a>
+        <button type="button" class="vendr-toggle__action-btn btn btn-info" ng-click="onCheckedAction()">{{ checkedActionLabel }}</button>
     </div>
 </div>

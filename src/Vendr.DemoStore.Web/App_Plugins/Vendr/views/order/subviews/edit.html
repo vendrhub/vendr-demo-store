@@ -10,20 +10,20 @@
 
                         <!-- Order Line -->
                         <div class="vendr-order-table__line-item">
-                            <div class="flex">
+                            <div class="flex items-baseline">
                                 <i class="vendr-order-table__bundle-toggle fa"
                                    title="Expand / Collapse Bundle"
                                    ng-class="{ 'fa-plus-square-o': !vm.bundleIsExpanded(ol.bundleId), 'fa-minus-square-o': vm.bundleIsExpanded(ol.bundleId) }"
                                    ng-click="vm.toggleBundle(ol.bundleId)"
-                                   ng-if="ol.bundleId && ol.orderLines.length > 0"></i>
-                                <div>
-                                    <strong>
-                                        {{ ol.name }}
-                                        <a href="" class="hover:text-light-blue ml-5" title="Edit Order Line Properties"
+                                   ng-if="ol.bundleId && ol.orderLines.length > 0" 
+                                   aria-hidden="true"></i>
+                                <div class="flex flex-column w-full">
+                                    <div class="flex items-baseline w-full">
+                                        <strong title="{{ ol.name }}" class="truncate">{{ ol.name }}</strong>
+                                        <button type="button" class="btn-link hover:text-light-blue" title="Edit Order Line Properties"
                                            ng-if="vm.hasEditableOrderLineProperties(ol)"
-                                           ng-click="vm.editOrderLineProperties(ol)"
-                                           prevent-default><i class="fa fa-pencil-square-o" style="font-weight:normal; vertical-align: middle;"></i></a>
-                                    </strong>
+                                           ng-click="vm.editOrderLineProperties(ol)"><i class="fa fa-pencil-square-o" style="font-weight:normal; vertical-align: middle;" aria-hidden="true"></i></button>
+                                    </div>
                                     <div class="color-grey text-12 block">
                                         <span title="Sku: {{ ol.sku }}">{{ ol.sku }}</span>
                                         <span ng-repeat="olp in vm.editorConfig.orderLine.properties"
@@ -57,14 +57,13 @@
                                 </div>
 
                                 <div class="vendr-order-table__line-item" ng-repeat="sol in ol.orderLines" data-order-line-id="{{ sol.id }}">
-                                    <div>
-                                        <strong>
-                                            {{ sol.name }}
-                                            <a href="" class="hover:text-light-blue" title="Edit Order Line Properties"
+                                    <div class="flex flex-column w-full">
+                                        <div class="flex items-baseline w-full">
+                                            <strong>{{ sol.name }}</strong>
+                                            <button type="button" class="btn-link hover:text-light-blue" title="Edit Order Line Properties"
                                                 ng-if="vm.hadEditableOrderLineProperties(sol)"
-                                                ng-click="vm.editOrderLineProperties(ol)"
-                                                prevent-default><i class="fa fa-pencil-square-o" style="font-weight:normal; margin-left: 5px; vertical-align: middle;"></i></a>
-                                        </strong>
+                                                ng-click="vm.editOrderLineProperties(ol)"><i class="fa fa-pencil-square-o" style="font-weight:normal; margin-left: 5px; vertical-align: middle;" aria-hidden="true"></i></button>
+                                        </div>
                                         <div class="color-grey text-12 block">
                                             <span title="Sku: {{ sol.sku }}">{{ sol.sku }}</span>
                                             <span ng-repeat="solp in vm.editorConfig.orderLine.properties"
@@ -148,7 +147,7 @@
 
         <umb-box>
             <umb-box-header title="Payment Details">
-                <a href="#" class="hover:text-light-blue" ng-click="vm.viewTransactionInfo()" title="Transaction Info" prevent-default><i class="fa fa-info-circle"></i></a>
+                <button type="button" class="btn-link -mr-5 hover:text-light-blue" ng-click="vm.viewTransactionInfo()" title="Transaction Info"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
             </umb-box-header>
             <umb-box-content class="flex flex-column">
 
@@ -290,8 +289,8 @@
         <umb-box>
             <umb-box-header title="Actions"></umb-box-header>
             <umb-box-content class="block-form">
-                <button type="button" class="btn btn-block btn-action" ng-click="vm.changeStatus()" prevent-default>Change Status</button>
-                <button type="button" class="btn btn-block" ng-click="vm.sendEmail()" prevent-default>Send Email</button>
+                <button type="button" class="btn btn-block btn-action" ng-click="vm.changeStatus()">Change Status</button>
+                <button type="button" class="btn btn-block" ng-click="vm.sendEmail()">Send Email</button>
             </umb-box-content>
         </umb-box>
 
@@ -302,26 +301,32 @@
             <umb-box-content>
 
                 <div class="relative copy-box">
-                    <a href="#" prevent-default umb-clipboard umb-clipboard-target="#customer" umb-clipboard-success="vm.copySuccess('Customer details')" class="copy-box__copy" title="Copy Customer Details" aria-hidden="true" >
-                        <i class="fa fa-copy"></i>
-                    </a>
+                    <button type="button" umb-clipboard umb-clipboard-target="#customer" umb-clipboard-success="vm.copySuccess('Customer details')" class="btn-link copy-box__copy -mr-5" title="Copy Customer Details" aria-hidden="true">
+                        <i class="fa fa-copy" aria-hidden="true"></i>
+                    </button>
                     <div id="customer" class="flex flex-column">
-                        <strong>{{ vm.content.customerFirstName }} {{ vm.content.customerLastName }}</strong>
+                        <strong>
+                            {{ vm.content.customerFirstName }} {{ vm.content.customerLastName }}
+                            <button type="button" class="btn-link hover:text-light-blue" ng-click="vm.viewCustomerInfo()" title="Customer Info"><i class="fa fa-user" aria-hidden="true"></i></button>
+                        </strong>
                         <span ng-if="vm.editorConfig.customer.company && vm.content.properties[vm.editorConfig.customer.company.alias]">
                             {{vm.content.properties[vm.editorConfig.customer.company.alias].value}}
                             <small ng-if="vm.editorConfig.customer.taxCode && vm.content.properties[vm.editorConfig.customer.taxCode.alias]" class="color-grey">({{vm.content.properties[vm.editorConfig.customer.taxCode.alias].value}})</small>
                         </span>
-                        <a href="mailto:{{vm.content.customerEmail}}" class="color-light-blue" ng-if="vm.content.customerEmail">{{vm.content.customerEmail}}</a>
+                        <span ng-if="vm.content.customerEmail">
+                            <a href="mailto:{{vm.content.customerEmail}}" class="color-light-blue">{{vm.content.customerEmail}}</a>
+                        </span>
                         <span ng-if="vm.editorConfig.customer.telephone && vm.content.properties[vm.editorConfig.customer.telephone.alias]">{{vm.content.properties[vm.editorConfig.customer.telephone.alias].value}}</span>
+
                     </div>
                 </div>
 
                 <hr />
 
                 <div class="relative  copy-box">
-                    <a href="#" prevent-default umb-clipboard umb-clipboard-target="#billing-adress" umb-clipboard-success="vm.copySuccess('Billing address')" class="copy-box__copy" title="Copy Billing Address" aria-hidden="true">
-                        <i class="fa fa-copy"></i>
-                    </a>
+                    <button type="button" umb-clipboard umb-clipboard-target="#billing-adress" umb-clipboard-success="vm.copySuccess('Billing address')" class="btn-link copy-box__copy -mr-5" title="Copy Billing Address" aria-hidden="true">
+                        <i class="fa fa-copy" aria-hidden="true"></i>
+                    </button>
                     <div id="billing-adress">
                         <strong>Billing Address</strong>
                         <div ng-if="vm.editorConfig.billing.addressLine1 && vm.content.properties[vm.editorConfig.billing.addressLine1.alias]">
@@ -343,15 +348,14 @@
                             <br />Tel: {{vm.content.properties[vm.editorConfig.billing.telephone.alias].value}}
                         </div>
                     </div>
-                    <!--<p><a href="#" class="color-light-blue" ng-click="vm.viewOnMap('S75 5DF')" prevent-default>View on Map</a></p>-->
                 </div>
 
                 <hr ng-if="vm.editorConfig.shipping.enabled !== false" />
 
                 <div class="relative copy-box" ng-if="vm.editorConfig.shipping.enabled !== false">
-                    <a href="#" prevent-default umb-clipboard umb-clipboard-target="#shipping-adress" umb-clipboard-success="vm.copySuccess('Shipping address')" class="copy-box__copy" title="Copy Shipping Address" aria-hidden="true">
-                        <i class="fa fa-copy"></i>
-                    </a>
+                    <button type="button" umb-clipboard umb-clipboard-target="#shipping-adress" umb-clipboard-success="vm.copySuccess('Shipping address')" class="btn-link copy-box__copy -mr-5" title="Copy Shipping Address" aria-hidden="true">
+                        <i class="fa fa-copy" aria-hidden="true"></i>
+                    </button>
                     <div id="shipping-adress">
                         <strong>Shipping Address</strong>
                         <div ng-if="vm.editorConfig.shipping.sameAsBilling && vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value == vm.editorConfig.shipping.sameAsBilling.trueValue">

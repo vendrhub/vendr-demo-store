@@ -18,22 +18,22 @@
                     <thead>
                         <tr>
                             <th>
-                                <a ng-href="#" ng-click="vm.sort('name')" prevent-default>
+                                <button type="button" ng-click="vm.sort('name')" class="btn-reset">
                                     <localize key="general_name"></localize>
                                     <span ng-if="vm.sortOrder.column === 'name'">
-                                        <i ng-if="vm.sortOrder.reverse" class="icon-navigation-up"></i>
-                                        <i ng-if="!vm.sortOrder.reverse" class="icon-navigation-down"></i>
+                                        <i ng-if="vm.sortOrder.reverse" class="icon-navigation-up" aria-hidden="true"></i>
+                                        <i ng-if="!vm.sortOrder.reverse" class="icon-navigation-down" aria-hidden="true"></i>
                                     </span>
-                                </a>
+                                </button>
                             </th>
                             <th>
-                                <a ng-href="#" ng-click="vm.sort('sortOrder')" prevent-default>
+                                <button type="button" ng-click="vm.sort('sortOrder')" class="btn-reset">
                                     <localize key="sort_sortOrder"></localize>
                                     <span ng-if="vm.sortOrder.column === 'sortOrder'">
-                                        <i ng-if="vm.sortOrder.reverse" class="icon-navigation-up"></i>
-                                        <i ng-if="!vm.sortOrder.reverse" class="icon-navigation-down"></i>
+                                        <i ng-if="vm.sortOrder.reverse" class="icon-navigation-up" aria-hidden="true"></i>
+                                        <i ng-if="!vm.sortOrder.reverse" class="icon-navigation-down" aria-hidden="true"></i>
                                     </span>
-                                </a>
+                                </button>
                             </th>
                         </tr>
                     </thead>

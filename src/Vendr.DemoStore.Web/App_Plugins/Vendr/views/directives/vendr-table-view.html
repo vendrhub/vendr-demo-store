@@ -10,7 +10,7 @@
 
                     <div class="btn-group" ng-show="createActions.length == 1">
                         <button type="button" class="btn btn-white" ng-click="createActions[0].doAction()">
-                            <i class="{{createActions[0].icon}}"></i>
+                            <i class="{{createActions[0].icon}}" aria-hidden="true"></i>
                             {{createActions[0].name}}
                         </button>
                     </div>
@@ -18,7 +18,7 @@
                     <div class="btn-group" ng-show="createActions.length > 1">
                         <button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">
                             <span ng-click="createActions[0].doAction()">
-                                <i class="{{createActions[0].icon}}"></i>
+                                <i class="{{createActions[0].icon}}" aria-hidden="true"></i>
                                 {{createActions[0].name}}
                             </span>
                             <span class="caret" ng-click="page.createDropdownOpen = !page.createDropdownOpen"></span>
@@ -27,7 +27,7 @@
                         <umb-dropdown ng-if="page.createDropdownOpen" on-close="page.createDropdownOpen = false">
                             <umb-dropdown-item ng-repeat="createAction in createActions" ng-if="$index > 0">
                                 <a ng-click="createAction.doAction()">
-                                    <i class="{{createAction.icon}}"></i>
+                                    <i class="{{createAction.icon}}" aria-hidden="true"></i>
                                     {{createAction.name}}
                                 </a>
                             </umb-dropdown-item>
@@ -44,20 +44,18 @@
 
                 <umb-editor-sub-header-section ng-show="(selection.length > 0)">
                     <umb-button type="button"
-                                label="Clear selection"
-                                label-key="buttons_clearSelection"
-                                button-style="white"
-                                action="clearSelection()"
-                                disabled="bulkActionInProgress">
+                        label="Clear selection"
+                        label-key="buttons_clearSelection"
+                        button-style="white"
+                        action="clearSelection()"
+                        disabled="bulkActionInProgress">
                     </umb-button>
                 </umb-editor-sub-header-section>
 
                 <umb-editor-sub-header-section ng-show="(selection.length > 0)">
                     <strong ng-show="!bulkActionInProgress">{{ selection.length }}&nbsp;<localize key="general_of">of</localize>&nbsp;{{ options.filteredItems.length }}&nbsp;<localize key="general_selected">items selected</localize></strong>
                     <strong ng-show="bulkActionInProgress" ng-bind="bulkActionStatus"></strong>
-                    <div class="umb-loader-wrapper -bottom" style="margin-bottom: 0;" ng-show="bulkActionInProgress">
-                        <div class="umb-loader"></div>
-                    </div>
+                    <umb-loader position="bottom" ng-show="bulkActionInProgress"></umb-loader>
                 </umb-editor-sub-header-section>
 
             </umb-editor-sub-header-content-left>
@@ -67,7 +65,7 @@
                 <umb-editor-sub-header-section ng-show="(selection.length == 0)">
                     <div class="form-search -no-margin-bottom pull-right" novalidate>
                         <div class="inner-addon left-addon">
-                            <i class="icon icon-search" ng-click="doFilter()"></i>
+                            <i class="icon icon-search" ng-click="doFilter()" aria-hidden="true"></i>
                             <input class="form-control search-input"
                                 type="text"
                                 localize="placeholder"
@@ -132,12 +130,5 @@
       </div>
 
     </div>
-
-    <umb-overlay
-        ng-if="ysodOverlay.show"
-        model="ysodOverlay"
-        position="right"
-        view="ysodOverlay.view">
-    </umb-overlay>
 
 </div>

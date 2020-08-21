@@ -1482,7 +1482,7 @@
             ],
             items: [],
             itemProperties: [
-                { alias: 'name', template: '<span class="vendr-table-cell-value--multiline"><span>{{name}}</span>{{ blockFurtherDiscounts ? \'<span class="vendr-table-cell-label" style="font-size: 12px;"><i class="fa fa-minus-circle color-red"></i> Blocks all further discounts if applied</span>\' : \'\' }}{{ blockIfPreviousDiscounts ? \'<span class="vendr-table-cell-label" style="font-size: 12px;"><i class="fa fa-chevron-circle-up color-orange"></i> Is not applied if previous discounts already apply</span></span>\' : \'\' }}' },
+                { alias: 'name', template: '<span class="vendr-table-cell-value--multiline"><span>{{name}}</span>{{ blockFurtherDiscounts ? \'<span class="vendr-table-cell-label" style="font-size: 12px;"><i class="fa fa-minus-circle color-red" aria-hidden="true"></i> Blocks all further discounts if applied</span>\' : \'\' }}{{ blockIfPreviousDiscounts ? \'<span class="vendr-table-cell-label" style="font-size: 12px;"><i class="fa fa-chevron-circle-up color-orange"></i> Is not applied if previous discounts already apply</span></span>\' : \'\' }}' },
                 { alias: 'type', header: 'Type', template: '<span class="umb-badge umb-badge--xs vendr-bg--{{ typeColor }}">{{ type }}</span>' },
                 { alias: 'status', header: 'Status', template: '<span class="umb-badge umb-badge--xs vendr-bg--{{ statusColor }}">{{ status }}</span>' }
             ],
@@ -2583,6 +2583,76 @@
 
     'use strict';
 
+    function CustomerInfoDialogController($scope, $location, editorService, vendrOrderResource)
+    {
+        var vm = this;
+
+        vm.loading = true;
+        vm.title = "Customer Info";
+        vm.registeredCustomer = {
+            properties: [],
+            isUmbracoMember: false
+        };
+        vm.orderHistory = [];
+
+        vm.openMember = function (memberKey) {
+            editorService.memberEditor({
+                id: memberKey,
+                submit: function (model) {
+                    vendrOrderResource.getOrderRegisteredCustomerInfo($scope.model.config.orderId).then(function (data) {
+                        vm.registeredCustomer = data;
+                        editorService.close();
+                    });
+                },
+                close: function () {
+                    editorService.close();
+                }
+            });
+        }
+
+        vm.openOrder = function (order) {
+            if (order.id === $scope.model.config.orderId) {
+                vm.close();
+            } else {
+                editorService.open({
+                    view: '/app_plugins/vendr/views/order/edit.html',
+                    infiniteMode: true,
+                    config: {
+                        storeId: order.storeId,
+                        orderId: order.id
+                    },
+                    submit: function (model) {
+                        editorService.close();
+                    },
+                    close: function () {
+                        editorService.close();
+                    }
+                });
+            }
+        }
+
+        vendrOrderResource.getOrderRegisteredCustomerInfo($scope.model.config.orderId).then(function (data) {
+            vm.registeredCustomer = data;
+            vendrOrderResource.getOrderHistoryByOrder($scope.model.config.orderId).then(function (data) {
+                vm.orderHistory = data;
+                vm.loading = false;
+            });
+        });
+
+        vm.close = function() {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.CustomerInfoDialogController', CustomerInfoDialogController);
+
+}());
+(function () {
+
+    'use strict';
+
     function EditCustomerDetailsController($scope, vendrOrderResource,
         vendrCountryResource)
     {
@@ -2748,10 +2818,13 @@
     'use strict';
 
     function OrderEditController($scope, $routeParams, $location, formHelper,
-        appState, editorState, editorService, localizationService, notificationsService, navigationService,
+        appState, editorState, editorService, localizationService, notificationsService, navigationService, memberResource,
         vendrUtils, vendrOrderResource, vendrStoreResource, vendrEmailResource) {
 
-        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
+        var infiniteMode = editorService.getNumberOfEditors() > 0 ? true : false;
+        var compositeId = infiniteMode
+            ? [$scope.model.config.storeId, $scope.model.config.orderId] 
+            : vendrUtils.parseCompositeId($routeParams.id);
 
         var storeId = compositeId[0];
         var id = compositeId[1];
@@ -2834,6 +2907,18 @@
             }
         };
 
+        var customerInfoDialogOptions = {
+            view: '/app_plugins/vendr/views/order/dialogs/customerinfo.html',
+            size: 'small',
+            config: {
+                storeId: storeId,
+                orderId: id
+            },
+            close: function () {
+                editorService.close();
+            }
+        };
+
         var editCustomerDetailsDialogOptions = {
             view: '/app_plugins/vendr/views/order/dialogs/editcustomerdetails.html',
             config: {
@@ -2881,6 +2966,7 @@
         vm.page.loading = true;
         vm.page.saveButtonState = 'init';
         vm.page.editView = false;
+        vm.page.isInfiniteMode = infiniteMode;
 
         vm.page.menu = {};
         vm.page.menu.currentSection = appState.getSectionState("currentSection");
@@ -2900,6 +2986,13 @@
             expandedBundles: []
         };
         vm.content = {};
+        vm.orderMember = undefined;
+
+        vm.close = function () {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        }
 
         vm.back = function () {
             $location.path("/commerce/vendr/order-list/" + vendrUtils.createCompositeId([storeId]));
@@ -3010,7 +3103,15 @@
                         order.properties[vm.editorConfig.notes.internalNotes.alias] = { value: "" };
                     }
 
-                    vm.ready(order);
+                    // Check to see if we have a customer ref, and if so, try and fetch a member
+                    if (order.customerReference) {
+                        memberResource.getByKey(order.customerReference).then(function (member) {
+                            vm.orderMember = member;
+                            vm.ready(order);
+                        });
+                    } else {
+                        vm.ready(order);
+                    }
 
                     // Sync payment status
                     vendrOrderResource.syncPaymentStatus(id).then(function (order) {
@@ -3036,6 +3137,10 @@
 
         vm.viewTransactionInfo = function () {
             editorService.open(transactionInfoDialogOptions);
+        };
+
+        vm.viewCustomerInfo = function () {
+            editorService.open(customerInfoDialogOptions);
         };
 
         vm.cancelPayment = function () {
@@ -3094,6 +3199,9 @@
 
             // sync state
             editorState.set(vm.content);
+
+            if (infiniteMode)
+                return;
              
             var pathToSync = vm.content.path.slice(0, -1);
             navigationService.syncTree({ tree: "vendr", path: pathToSync, forceReload: true }).then(function (syncArgs) {
