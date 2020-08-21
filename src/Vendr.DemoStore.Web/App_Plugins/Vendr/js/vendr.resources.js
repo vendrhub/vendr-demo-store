@@ -600,6 +600,24 @@
                     "Failed to get order transaction info");
             },
 
+
+            getOrderRegisteredCustomerInfo: function (orderId) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("orderApiBaseUrl", "GetOrderRegisteredCustomerInfo", {
+                        orderId: orderId
+                    })),
+                    "Failed to get order registered customer info");
+            },
+
+
+            getOrderHistoryByOrder: function (orderId) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("orderApiBaseUrl", "GetOrderHistoryByOrder", {
+                        orderId: orderId
+                    })),
+                    "Failed to get order history");
+            },
+
             changeOrderStatus: function(orderId, orderStatusId) {
                 return umbRequestHelper.resourcePromise(
                     $http.get(vendrRequestHelper.getApiUrl("orderApiBaseUrl", "ChangeOrderStatus", {

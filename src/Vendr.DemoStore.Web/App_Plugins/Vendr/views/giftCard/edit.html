@@ -21,7 +21,8 @@
             </umb-editor-header>
 
             <umb-editor-container class="form-horizontal">
-                <vendr-license-check />
+
+                <vendr-license-check></vendr-license-check>
 
                 <div class="vendr-layout vendr-layout--layout1">
 
@@ -35,7 +36,7 @@
                                     <div class="vendr-input" style="position: relative">
                                         <input type="text" class="umb-property-editor umb-textstring textstring"
                                                ng-model="vm.content.code" />
-                                        <button type="button" ng-click="vm.generateCode()" class="btn-link vendr-input--action"><i class="icon icon-flash"></i></button>
+                                        <button type="button" ng-click="vm.generateCode()" class="btn-link vendr-input--action"><i class="icon icon-flash" aria-hidden="true"></i></button>
                                     </div>
                                 </umb-control-group>
 
@@ -96,7 +97,7 @@
                         <umb-box ng-if="!vm.create">
                             <umb-box-header title="Actions"></umb-box-header>
                             <umb-box-content class="block-form">
-                                <button type="button" class="btn btn-block btn-action" ng-click="vm.sendEmail()" prevent-default>Send Email</button>
+                                <button type="button" class="btn btn-block btn-action" ng-click="vm.sendEmail()">Send Email</button>
                             </umb-box-content>
                         </umb-box>
 

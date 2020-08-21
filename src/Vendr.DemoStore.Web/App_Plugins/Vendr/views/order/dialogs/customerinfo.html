@@ -1,0 +1,63 @@
+﻿<div ng-controller="Vendr.Controllers.CustomerInfoDialogController as vm" class="vendr " noDirtyCheck>
+
+    <umb-load-indicator ng-if="vm.loading"></umb-load-indicator>
+
+    <umb-editor-view>
+
+        <umb-editor-header name="vm.title"
+            name-locked="true"
+            hide-alias="true"
+            hide-icon="true"
+            hide-description="true">
+        </umb-editor-header>
+
+        <umb-editor-container class="form-vertical">
+
+            <umb-box ng-if="vm.registeredCustomer.properties && vm.registeredCustomer.properties.length > 0">
+                <umb-box-content>
+
+                    <umb-control-group label="{{prop.name}}" description="{{prop.description}}" ng-repeat="prop in vm.registeredCustomer.properties">
+                        <div style="word-break: break-all">
+                            <span ng-if="prop.alias == 'customerReference' && vm.registeredCustomer.isUmbracoMember">{{ prop.value }} <button type="button" ng-click="vm.openMember(prop.value)" class="btn-link hover:text-light-blue" prevent-default><i class="fa fa-external-link" aria-hidden="true"></i></button></span>
+                            <span ng-if="!(prop.alias == 'customerReference' && vm.registeredCustomer.isUmbracoMember)">{{ prop.value && prop.value != '' ? prop.value : 'No Value' }}</span>
+                        </div>
+                    </umb-control-group>
+
+                </umb-box-content>
+            </umb-box>
+
+            <umb-box>
+                <umb-box-header title="Order History"></umb-box-header>
+                <umb-box-content>
+
+                    <ul class="umb-actions umb-actions-child">
+                        <li class="umb-action" ng-repeat="order in vm.orderHistory">
+                            <button type="button" ng-click="vm.openOrder(order)" class="btn-link umb-action-link" >
+                                <i class="large icon icon-receipt-euro" aria-hidden="true"></i>
+                                <span class="menu-label">
+                                    <span>{{ order.orderNumber }}</span>
+                                    <small>{{ order.finalizedDate  | date : 'MMMM d, yyyy h:mm a' }}</small>
+                                </span>
+                            </button>
+                        </li>
+                    </ul>
+
+                </umb-box-content>
+            </umb-box>
+
+        </umb-editor-container>
+
+        <umb-editor-footer>
+            <umb-editor-footer-content-right>
+                <umb-button type="button"
+                    button-style="link"
+                    label-key="general_close"
+                    shortcut="esc"
+                    action="vm.close()">
+                </umb-button>
+            </umb-editor-footer-content-right>
+        </umb-editor-footer>
+
+    </umb-editor-view>
+
+</div>

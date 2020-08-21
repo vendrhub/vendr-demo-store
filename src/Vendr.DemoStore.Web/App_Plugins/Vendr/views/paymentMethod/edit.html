@@ -72,13 +72,12 @@
 
                             <umb-box-content ng-if="vm.options.advancedPaymentProviderProperties && vm.options.advancedPaymentProviderProperties.length > 0" style="padding-top: 0;">
 
-                                <a href="" title="Toggle advanced settings"
-                                   class="vendr-advanced-toggle"
-                                   ng-click="vm.toggleAdvancedPaymentProviderProperties()"
-                                   prevent-default>
+                                <button type="button" title="Toggle advanced settings"
+                                        class="btn-reset w-full vendr-advanced-toggle"
+                                        ng-click="vm.toggleAdvancedPaymentProviderProperties()">
                                     <span ng-if="vm.options.advancedPaymentProviderPropertiesShown">&#9650; &nbsp; Advanced &nbsp; &#9650;</span>
                                     <span ng-if="!vm.options.advancedPaymentProviderPropertiesShown">&#9660; &nbsp; Advanced &nbsp; &#9660;</span>
-                                </a>
+                                </button>
 
                                 <div ng-if="vm.options.advancedPaymentProviderPropertiesShown" style="padding-top: 30px;">
                                     <umb-property ng-repeat="property in vm.options.advancedPaymentProviderProperties track by property.alias" property="property">

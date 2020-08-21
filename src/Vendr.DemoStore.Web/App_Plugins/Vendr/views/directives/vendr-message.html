@@ -1,6 +1,6 @@
 ﻿<div class="vendr-message vendr-message--{{type}}">
-    <h4 ng-if="heading" class="vendr-message__heading"><i class="fa fa-{{icon}} vendr-message__icon" ng-if="icon"></i>{{heading}}</h4>
-    <i class="fa fa-{{icon}} vendr-message__icon-watermark" ng-if="icon"></i>
+    <h4 ng-if="heading" class="vendr-message__heading"><i class="fa fa-{{icon}} vendr-message__icon" ng-if="icon" aria-hidden="true"></i>{{heading}}</h4>
+    <i class="fa fa-{{icon}} vendr-message__icon-watermark" ng-if="icon" aria-hidden="true"></i>
     <div class="vendr-message__body">
         <ng-transclude></ng-transclude>
         <div class="vendr-message__body">

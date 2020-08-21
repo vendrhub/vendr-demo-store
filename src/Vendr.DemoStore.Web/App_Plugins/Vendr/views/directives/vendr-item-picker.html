@@ -17,7 +17,7 @@
                 <umb-box-content>
 
                     <div style="display: flex; margin-bottom: 20px;" ng-if="parentItem">
-                        <button type="button" class="umb-editor-header__back" style="width: 30px;" ng-click="back()" prevent-default>
+                        <button type="button" class="umb-editor-header__back" style="width: 30px;" ng-click="back()">
                             <i class="fa fa-arrow-left" aria-hidden="true"></i> <span class="sr-only">Go back</span>
                         </button>
                         <div style="padding-left: 10px;">
@@ -28,7 +28,7 @@
 
                     <div class="umb-control-group" ng-if="filter.enabled">
                         <div class="form-search">
-                            <i class="icon-search"></i>
+                            <i class="icon-search" aria-hidden="true"></i>
                             <input type="text"
                                    ng-model="filter.tearm"
                                    class="umb-search-field search-query input-block-level -full-width-input"
@@ -42,7 +42,7 @@
                     <ul class="umb-actions umb-actions-child">
                         <li class="umb-action" ng-repeat="item in items | filter:filter.tearm">
                             <a class="umb-action-link" ng-click="select(item)">
-                                <i class="large icon {{item.icon}} color-{{item.color}}"></i>
+                                <i class="large icon {{item.icon}} color-{{item.color}}" aria-hidden="true"></i>
                                 <span class="menu-label">
                                     <span ng-bind="item.name"></span>
                                     <small ng-bind="item.id"></small>
