@@ -81,7 +81,7 @@ namespace Vendr.DemoStore.Composing
                     // Create searchable path
                     if (e.ValueSet.Values.ContainsKey("path"))
                     {
-                        e.ValueSet.Add("searchPath", e.ValueSet.Values["path"].ToString().Replace(',', ' '));
+                        e.ValueSet.Add("searchPath", e.ValueSet.GetValue("path").ToString().Replace(',', ' '));
                     }
 
                     // Stuff all the fields into a single field for easier searching
