@@ -535,6 +535,12 @@
         <member name="M:Umbraco.ModelsBuilder.Embedded.PureLiveModelFactory.Refresh">
             <inheritdoc />
         </member>
+        <member name="P:Umbraco.ModelsBuilder.Embedded.PureLiveModelFactory.Enabled">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.ModelsBuilder.Embedded.PureLiveModelFactory.Reset">
+            <inheritdoc />
+        </member>
         <member name="T:Umbraco.Web.PublishedElementExtensions">
             <summary>
             Provides extension methods to models.
