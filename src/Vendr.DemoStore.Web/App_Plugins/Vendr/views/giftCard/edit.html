@@ -85,7 +85,7 @@
 
                                 <umb-control-group label="Active" description="Activate / deactivate this gift card">
                                     <umb-toggle checked="vm.content.isActive"
-                                                on-click="vm.content.isActive = !vm.content.isActive" />
+                                                on-click="vm.content.isActive = !vm.content.isActive"></umb-toggle>
                                 </umb-control-group>
 
                             </umb-box-content>
@@ -105,16 +105,16 @@
                             <umb-box-header title-key="general_info"></umb-box-header>
                             <umb-box-content class="block-form">
                                 <umb-control-group label="Id">
-                                    <vendr-id-label value="vm.content.id" />
+                                    <vendr-id-label value="vm.content.id"></vendr-id-label>
                                 </umb-control-group>
                                 <umb-control-group label="Store Id">
-                                    <vendr-id-label value="vm.content.storeId" />
+                                    <vendr-id-label value="vm.content.storeId"></vendr-id-label>
                                 </umb-control-group>
                                 <umb-control-group label="Order Id" ng-if="vm.content.orderId">
-                                    <vendr-id-label value="vm.content.orderId" />
+                                    <vendr-id-label value="vm.content.orderId"></vendr-id-label>
                                 </umb-control-group>
                                 <umb-control-group label="Order Number" ng-if="vm.content.orderNumber">
-                                    <vendr-id-label value="'#' + vm.content.orderNumber" />
+                                    <vendr-id-label value="'#' + vm.content.orderNumber"></vendr-id-label>
                                 </umb-control-group>
                             </umb-box-content>
                         </umb-box>

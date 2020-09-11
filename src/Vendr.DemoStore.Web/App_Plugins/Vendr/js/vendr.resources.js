@@ -61,6 +61,15 @@
                     "Failed to create country");
             },
 
+            createAllCountryRegions: function (storeId, defaultCurrencyId) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("countryApiBaseUrl", "CreateAllCountryRegions", {
+                        storeId: storeId,
+                        defaultCurrencyId: defaultCurrencyId
+                    })),
+                    "Failed to create all countries and regions");
+            },
+
             createRegion: function (storeId, countryId) {
                 return umbRequestHelper.resourcePromise(
                     $http.get(vendrRequestHelper.getApiUrl("countryApiBaseUrl", "CreateRegion", {

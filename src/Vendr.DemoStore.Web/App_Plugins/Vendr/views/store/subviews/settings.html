@@ -39,12 +39,12 @@
 
                 <umb-control-group label="Prices Include Tax" description="Flag to indicate whether prices in the CMS are defined inclusive of sales tax.">
                     <umb-toggle checked="model.content.pricesIncludeTax"
-                                on-click="model.content.pricesIncludeTax = !model.content.pricesIncludeTax" />
+                                on-click="model.content.pricesIncludeTax = !model.content.pricesIncludeTax"></umb-toggle>
                 </umb-control-group>
 
                 <umb-control-group label="Use Cookies" description="Flag to indicate whether cookies should be used. If true, a Cart ID will be stored in a cookie allowing it to persist between site visits. If false, Carts will be lost when the users session expires.">
                     <umb-toggle checked="model.content.useCookies"
-                                on-click="model.content.useCookies = !model.content.useCookies" />
+                                on-click="model.content.useCookies = !model.content.useCookies"></umb-toggle>
                 </umb-control-group>
 
                 <div ng-if="model.content.useCookies">
@@ -175,7 +175,7 @@
             <umb-box-header title-key="general_info"></umb-box-header>
             <umb-box-content class="block-form">
                 <umb-control-group label="Id">
-                    <vendr-id-label value="model.content.id" />
+                    <vendr-id-label value="model.content.id"></vendr-id-label>
                 </umb-control-group>
             </umb-box-content>
         </umb-box>
