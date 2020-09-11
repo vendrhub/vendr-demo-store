@@ -140,13 +140,13 @@
                 html += '               <auto-complete-item index="$index"';
                 html += '                      item-template-link-fn="ctrl.itemTemplateLinkFn"';
                 html += '                      render-item="renderItem"';
-                html += '                      search-text="ctrl.searchText" />';
+                html += '                      search-text="ctrl.searchText"></auto-complete-item>';
                 html += '         </li>';
                 html += '         <li ng-if="!ctrl.renderItems.length && ctrl.options.noMatchTemplateEnabled"';
                 html += '             class="auto-complete-item auto-complete-no-match">';
                 html += '               <auto-complete-no-match';
                 html += '                      template="ctrl.options.noMatchTemplate"';
-                html += '                      search-text="ctrl.searchText" />';
+                html += '                      search-text="ctrl.searchText"></auto-complete-no-match>';
                 html += '         </li>';
                 html += '     </ul>';
 

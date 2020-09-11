@@ -49,13 +49,13 @@
     background-color: transparent !important;
 }
 
-.vendr .umb-editor-sub-header {
+/*.vendr .umb-editor-sub-header {
     background-color: #f6f4f4;
 }
 
 .vendr .umb-editor-sub-header.--state-selection {
     background-color: #f5c1bc;
-}
+}*/
 
 .vendr.umb-dialog .confirm .umb-pane {
     margin-left: 0;
@@ -302,21 +302,34 @@ div [ng-controller*=MemberGroupPickerController] .umb-box-content > .umb-tree {
 }
 
 /* Horizontal Form */
-.form-horizontal .umb-property:last-of-type .control-group .umb-property:not(:last-of-type) .control-group {
+/* 
+    In Umbraco 8.7 .umb-property becames wrapping in a umb-property tag which
+    broke all the 'last-of-type' rules because they were all now last of type.
+    To make work, we now use a not rule to make sure that the .umb-property is
+    not wrapped in a umb-property tag, thus maintaining backwards compat.
+    Thankfully it appears things look ok in 8.7 without these rules so I don't
+    think we need any special alternatives.
+*/
+.vendr .form-horizontal *:not([property="setting"]) > .umb-property:last-of-type .control-group *:not([property="setting"]) > .umb-property:not(:last-of-type) .control-group {
     margin-bottom: 20px !important;
 }
 
-.umb-property:last-of-type .umb-control-group .umb-property .umb-control-group {
+.vendr *:not([property="setting"]) > .umb-property:last-of-type .umb-control-group *:not([property="setting"]) > .umb-property .umb-control-group {
     border-bottom: 1px solid #f6f6f7;
     padding-bottom: 20px;
 }
 
-.umb-property:last-of-type .umb-control-group .umb-property:last-of-type .umb-control-group {
+.vendr *:not([property="setting"]) > .umb-property:last-of-type .umb-control-group,
+.vendr *:not([property="setting"]) > .umb-property:last-of-type .umb-control-group *:not([property="setting"]) > .umb-property:last-of-type .umb-control-group {
     border: none;
     margin-bottom: 0 !important;
     padding-bottom: 0;
 }
 
+.vendr *:not([property="setting"]) > .umb-property:last-of-type .umb-control-group:after {
+    margin-top: 0;
+    background-color: transparent;
+}
 
 /* Toggle */
 .vendr-toggle--indented {
@@ -593,6 +606,8 @@ a.no-underline:focus {
     display: flex;
     align-items: center;
     font-size: 18px;
+    margin: 0;
+    line-height: 20px;
 }
 
 .vendr-header--order .umb-panel-header-locked-description {
@@ -600,7 +615,7 @@ a.no-underline:focus {
     font-size: 12px;
     line-height: 12px;
     height: auto;
-    margin-top: 6px;
+    margin: 6px 0 0;
 }
 
 .vendr-header--order-status .umb-panel-header-name:before,
