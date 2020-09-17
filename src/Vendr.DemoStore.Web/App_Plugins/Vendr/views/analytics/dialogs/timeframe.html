@@ -1,0 +1,91 @@
+﻿<div ng-controller="Vendr.Controllers.AnalyticsTimeframeDialogController as vm" class="vendr " noDirtyCheck>
+
+    <umb-load-indicator ng-if="vm.loading"></umb-load-indicator>
+
+    <umb-editor-view>
+
+        <umb-editor-header name="vm.title"
+            name-locked="true"
+            hide-alias="true"
+            hide-icon="true"
+            hide-description="true">
+        </umb-editor-header>
+
+        <umb-editor-container class="form-vertical">
+
+            <umb-box>
+                <umb-box-content>
+
+                    <umb-control-group label="Date Range">
+
+                        <div class="mt-5">
+                            <div class="input-prepend flex">
+                                <span class="add-on">
+                                    <i class="icon-calendar"></i>
+                                </span>
+                                <select class="flex-1" ng-model="vm.namedDateRange">
+                                    <option ng-repeat="nr in vm.namedDateRanges" value="{{nr.alias}}">{{nr.name}}</option>
+                                    <option value="custom">Custom</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mt-5" ng-if="vm.namedDateRange == 'custom'">
+                            <div class="input-prepend flex">
+                                <span class="add-on">
+                                    <i class="icon-calendar"></i>
+                                </span>
+                                <umb-date-time-picker ng-model="vm.initCustomDateRange"
+                                    options="vm.datePickerConfig"
+                                    on-change="vm.datePickerChange(selectedDates, dateStr, instance)"
+                                    class="flex-1">
+                                </umb-date-time-picker>
+                            </div>
+                        </div>
+
+                        <div>
+                            <vendr-toggle name="'Compare to previous dates'" checked="vm.compare" class="py-0"></vendr-toggle>
+                        </div>
+
+                        <div class="mt-10" ng-if="vm.compare">
+                            <div class="input-prepend flex m-0">
+                                <span class="add-on">
+                                    <i class="icon-calendar"></i>
+                                </span>
+                                <select class="flex-1" ng-model="vm.compareType">
+                                    <option value="prevPeriod">Previous period</option>
+                                    <option value="prevYear">Previous year</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </umb-control-group>
+
+                </umb-box-content>
+            </umb-box>
+
+        </umb-editor-container>
+
+        <umb-editor-footer>
+            <umb-editor-footer-content-right>
+
+                <umb-button type="button"
+                            button-style="link"
+                            label="Cancel"
+                            label-key="general_cancel"
+                            shortcut="esc"
+                            action="vm.close()">
+                </umb-button>
+
+                <umb-button type="button"
+                            button-style="success"
+                            label="Apply"
+                            action="vm.apply()">
+                </umb-button>
+
+            </umb-editor-footer-content-right>
+        </umb-editor-footer>
+
+    </umb-editor-view>
+
+</div>

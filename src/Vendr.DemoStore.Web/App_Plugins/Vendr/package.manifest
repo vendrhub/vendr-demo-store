@@ -86,6 +86,7 @@
   ],
   "javascript": [
     "~/App_Plugins/vendr/js/vendr.vendor.js",
+    "~/App_Plugins/vendr/js/vendr.extensions.js",
     "~/App_Plugins/vendr/js/vendr.modules.js",
     "~/App_Plugins/vendr/js/vendr.interceptors.js",
     "~/App_Plugins/vendr/js/vendr.decorators.js",

@@ -1,0 +1,109 @@
+﻿<div ng-controller="Vendr.Controllers.AnalyticsViewController as vm" class="vendr">
+
+    <umb-load-indicator ng-if="vm.page.loading"></umb-load-indicator>
+
+    <umb-editor-view ng-if="!vm.page.loading">
+
+        <umb-editor-header name="vm.page.menu.currentNode.name"
+            name-locked="true"
+            hide-icon="true"
+            hide-description="true"
+            hide-alias="true"
+            show-back-button="false"
+            menu="vm.page.menu">
+        </umb-editor-header>
+
+        <umb-editor-container class="form-horizontal" style="overflow-x: hidden;">
+
+            <vendr-license-check></vendr-license-check>
+
+            <umb-editor-sub-header>
+
+                <umb-editor-sub-header-content-left>
+
+                    <div class="btn-group">
+
+                        <div class="flex items-center">
+                            <button type="button" class="btn btn-outline umb-outline dropdown-toggle" data-toggle="dropdown" ng-click="vm.selectTimeframe()">
+                                <span>
+                                    <i class="icon icon-calendar" aria-hidden="true"></i>
+                                    {{ vm.filterTimeframe.dateRange.name }}
+                                </span>
+                            </button>
+                            <span ng-if="vm.filterTimeframe.compareTo" class="text-base color-grey mx-10">compared to {{ vm.filterTimeframe.compareTo.name }}</span>
+                        </div>
+
+                        <div class="dropdown-menu dropdown-menu--analytics p-20" ng-if="page.createDropdownOpen">
+                            <div class="mb-10">
+                                <div class="input-prepend">
+                                    <span class="add-on">
+                                        <i class="icon-calendar"></i>
+                                    </span>
+                                    <select>
+                                        <option>This month</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-10">
+                                <div class="input-prepend">
+                                    <span class="add-on">
+                                        <i class="icon-calendar"></i>
+                                    </span>
+                                    <umb-date-time-picker ng-model="vm.dateRange"
+                                        options="vm.datePickerConfig"
+                                        on-change="vm.datePickerChange(selectedDates, dateStr, instance)">
+                                    </umb-date-time-picker>
+                                </div>
+                            </div>
+                            <hr class="mt-15 mb-10" />
+                            <div>
+                                <vendr-toggle name="'Compare to previous dates'" class="py-0"></vendr-toggle>
+                            </div>
+                            <div class="mt-10">
+                                <div class="input-prepend">
+                                    <span class="add-on">
+                                        <i class="icon-calendar"></i>
+                                    </span>
+                                    <select>
+                                        <option>Previous period</option>
+                                        <option>Previous year</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <hr class="mt-15 mb-10" />
+
+                            <div class="flex justify-end mt-10">
+                                <button type="button" class="btn btn-link mr-5" ng-click="page.createDropdownOpen = false">Cancel</button>
+                                <button type="button" class="btn btn-success">Apply</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </umb-editor-sub-header-content-left>
+
+            </umb-editor-sub-header>
+
+            <div vendr-masonry-grid="{ baseWidth: 375, gutter: 0 }" class="vendr-masonry-grid vendr-analytics-widget-grid">
+                <vendr-analytics-widget ng-repeat="widget in vm.widgets" 
+                    config="widget" 
+                    timeframe="vm.filterTimeframe" 
+                    class="vendr-masonry-grid-item"></vendr-analytics-widget>
+            </div>
+
+        </umb-editor-container>
+
+        <umb-editor-footer>
+            <umb-editor-footer-content-left>
+                <umb-breadcrumbs ng-if="vm.page.breadcrumb && vm.page.breadcrumb.items && vm.page.breadcrumb.items.length > 0"
+                                 ancestors="vm.page.breadcrumb.items"
+                                 on-open="vm.page.breadcrumb.itemClick(ancestor)">
+                </umb-breadcrumbs>
+            </umb-editor-footer-content-left>
+        </umb-editor-footer>
+
+    </umb-editor-view>
+
+
+</div>

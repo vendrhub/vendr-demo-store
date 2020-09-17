@@ -2,6 +2,419 @@
 
     'use strict';
 
+    function AnalyticsViewController($scope, $rootScope, $routeParams, $location, appState, editorService,
+        vendrAnalyticsResource, navigationService, vendrUtils, vendrLocalStorage, vendrDateHelper) {
+
+        var storeId = $routeParams.id;
+
+        var vm = this;
+        vm.widgets = [];
+
+        vm.page = {};
+        vm.page.loading = true;
+
+        vm.page.menu = {};
+        vm.page.menu.currentSection = appState.getSectionState("currentSection");
+        vm.page.menu.currentNode = null;
+
+        vm.page.breadcrumb = {};
+        vm.page.breadcrumb.items = [];
+        vm.page.breadcrumb.itemClick = function (ancestor) {
+            $location.path(ancestor.routePath);
+        };
+
+        // Listen for widgets loading then get the colcade grid to re-render
+        $rootScope.$on('VendrAnalyticsWidgetChanged', function () {
+            $rootScope.$broadcast("vendrMasonryGridChanged", null);
+        });
+
+        var today = vendrDateHelper.getToday();
+        var filterTimeframeKey = "vendr_analytics_timeframe";
+
+        vm.filterTimeframe = vendrLocalStorage.get(filterTimeframeKey) || {
+            dateRange: {
+                name: "This Month",
+                alias: "thisMonth",
+                from: vendrDateHelper.getISODateString(new Date(today.getFullYear(), today.getMonth(), 1)),
+                to: vendrDateHelper.getISODateString(new Date(today.getFullYear(), today.getMonth() + 1, 1).addDays(-1))
+            },
+            compareTo: {
+                name: vendrDateHelper.formatDateRange([new Date(today.getFullYear(), today.getMonth(), 1).addMonths(-1), new Date(today.getFullYear(), today.getMonth(), 1).addDays(-1)]),
+                type: "prevPeriod",
+                from: vendrDateHelper.getISODateString(new Date(today.getFullYear(), today.getMonth(), 1).addMonths(-1)),
+                to: vendrDateHelper.getISODateString(new Date(today.getFullYear(), today.getMonth(), 1).addDays(-1))
+            }
+        };
+
+        var timeframeDialogOptions = {
+            view: '/app_plugins/vendr/views/analytics/dialogs/timeframe.html',
+            size: 'small',
+            config: {
+                currentTimeframe: vm.filterTimeframe
+            },
+            apply: function (model) {
+                vendrLocalStorage.set(filterTimeframeKey, model);
+                vm.filterTimeframe = model;
+                $rootScope.$broadcast('VendrAnalyticsTimeframeChanged', model);
+                editorService.close();
+            },
+            close: function () {
+                editorService.close();
+            }
+        };
+
+
+        vm.selectTimeframe = function () {
+            timeframeDialogOptions.config.currentTimeframe = vm.filterTimeframe;
+            editorService.open(timeframeDialogOptions);
+        };
+
+        vm.init = function () {
+            vendrAnalyticsResource.getAnalyticsDashboardConfig(storeId).then(function (config) {
+                config.widgets.forEach(function (widget) {
+                    widget.storeId = storeId;
+                });
+                vm.widgets = config.widgets;
+                vm.ready();
+            });
+        };  
+
+        vm.ready = function () {
+            vm.page.loading = false;
+            navigationService.syncTree({ tree: "vendr", path: "-1," + storeId + ",4", forceReload: true }).then(function (syncArgs) {
+                vm.page.menu.currentNode = syncArgs.node;
+                vm.page.breadcrumb.items = vendrUtils.createBreadcrumbFromTreeNode(syncArgs.node);
+            });
+        }
+
+        vm.init();
+
+    };
+
+    angular.module('vendr').controller('Vendr.Controllers.AnalyticsViewController', AnalyticsViewController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function AnalyticsTimeframeDialogController($scope, $location, vendrDateHelper)
+    {
+        var vm = this;
+
+        var currentTimeframe = $scope.model.config.currentTimeframe;
+
+        var today = vendrDateHelper.getToday();
+
+        vm.loading = true;
+        vm.title = "Timeframe";
+
+        vm.namedDateRange = currentTimeframe && currentTimeframe.dateRange.alias ? currentTimeframe.dateRange.alias : "thisMonth";
+        vm.namedDateRanges = [
+            {
+                name: "Last 7 days",
+                alias: "last7",
+                range: [today.addDays(-6), today],
+                prevPeriod: [today.addDays(-13), today.addDays(-7)],
+                prevYear: [today.addDays(-6).addYears(-1), today.addYears(-1)]
+            },
+            {
+                name: "Last 30 days",
+                alias: "last30",
+                range: [today.addDays(-29), today],
+                prevPeriod: [today.addDays(-59), today.addDays(-30)],
+                prevYear: [today.addDays(-29).addYears(-1), today.addYears(-1)]
+            },
+            {
+                name: "This Month",
+                alias: "thisMonth",
+                range: [new Date(today.getFullYear(), today.getMonth(), 1), new Date(today.getFullYear(), today.getMonth() + 1, 1).addDays(-1)],
+                prevPeriod: [new Date(today.getFullYear(), today.getMonth(), 1).addMonths(-1), new Date(today.getFullYear(), today.getMonth(), 1).addDays(-1)],
+                prevYear: [new Date(today.getFullYear(), today.getMonth(), 1).addYears(-1), new Date(today.getFullYear(), today.getMonth() + 1, 1).addDays(-1).addYears(-1)]
+            },
+            {
+                name: "Last Month",
+                alias: "lastMonth",
+                range: [new Date(today.getFullYear(), today.getMonth() - 1, 1), new Date(today.getFullYear(), today.getMonth(), 1).addDays(-1)],
+                prevPeriod: [new Date(today.getFullYear(), today.getMonth() - 2, 1), new Date(today.getFullYear(), today.getMonth() - 1, 1).addDays(-1)],
+                prevYear: [new Date(today.getFullYear(), today.getMonth() - 1, 1).addYears(-1), new Date(today.getFullYear(), today.getMonth(), 1).addDays(-1).addYears(-1)]
+            }
+        ];
+
+        vm.initCustomDateRange = vm.customDateRange = currentTimeframe && (!currentTimeframe.dateRange.alias || currentTimeframe.dateRange.alias == "custom")
+            ? [new Date(currentTimeframe.dateRange.from), new Date(currentTimeframe.dateRange.to)]
+            : [vm.namedDateRanges[2].range[0], today];
+       
+        vm.compare = currentTimeframe && currentTimeframe.compareTo;
+        vm.compareType = currentTimeframe && currentTimeframe.compareTo && currentTimeframe.compareTo.type
+            ? currentTimeframe.compareTo.type
+            : "prevPeriod";
+
+        vm.datePickerConfig = {
+            mode: "range",
+            maxDate: "today",
+            dateFormat: "Y-m-d",
+            showMonths: 2,
+            enableTime: false
+        };
+
+        vm.datePickerChange = function (selectedDates, dateStr, instance) {
+            if (selectedDates.length == 2) {
+                vm.customDateRange = selectedDates;
+            }
+        }
+
+        vm.apply = function () {
+
+            if ($scope.model.apply) {
+
+                var model = {
+                    dateRange: { }
+                };
+
+                if (vm.namedDateRange == "custom") {
+
+                    model.dateRange = {
+                        name: vendrDateHelper.formatDateRange(vm.customDateRange),
+                        alias: "custom",
+                        from: vendrDateHelper.getISODateString(vm.customDateRange[0]),
+                        to: vendrDateHelper.getISODateString(vm.customDateRange[1])
+                    }
+
+                    if (vm.compare) {
+                        if (vm.compareType == "prevPeriod") {
+
+                            var rangeDays = vendrDateHelper.getDaysBetween(vm.customDateRange[0], vm.customDateRange[1], true);
+                            var compareFrom = vm.customDateRange[0].addDays((rangeDays + 1) * -1);
+                            var compareTo = vm.customDateRange[0].addDays(-1);
+
+                            model.compareTo = {
+                                name: vendrDateHelper.formatDateRange([compareFrom, compareTo]),
+                                type: 'prevPeriod',
+                                from: vendrDateHelper.getISODateString(compareFrom),
+                                to: vendrDateHelper.getISODateString(compareTo)
+                            }
+
+                        } else if (vm.compareType == "prevYear") {
+
+                            var compareFrom = vm.customDateRange[0].addYears(-1);
+                            var compareTo = vm.customDateRange[1].addYears(-1);
+
+                            model.compareTo = {
+                                name: vendrDateHelper.formatDateRange([compareFrom, compareTo]),
+                                type: 'prevYear',
+                                from: vendrDateHelper.getISODateString(compareFrom),
+                                to: vendrDateHelper.getISODateString(compareTo)
+                            }
+
+                        }
+                    }
+
+                } else {
+
+                    var namedDateRange = vm.namedDateRanges.find(function (itm) {
+                        return itm.alias == vm.namedDateRange;
+                    });
+
+                    model.dateRange = {
+                        name: namedDateRange.name,
+                        alias: namedDateRange.alias,
+                        from: vendrDateHelper.getISODateString(namedDateRange.range[0]),
+                        to: vendrDateHelper.getISODateString(namedDateRange.range[1])
+                    }
+
+                    if (vm.compare) {
+                        if (vm.compareType == "prevPeriod") {
+                            model.compareTo = {
+                                name: vendrDateHelper.formatDateRange(namedDateRange.prevPeriod),
+                                type: 'prevPeriod',
+                                from: vendrDateHelper.getISODateString(namedDateRange.prevPeriod[0]),
+                                to: vendrDateHelper.getISODateString(namedDateRange.prevPeriod[1])
+                            }
+                        } else if (vm.compareType == "prevYear") {
+                            model.compareTo = {
+                                name: vendrDateHelper.formatDateRange(namedDateRange.prevYear),
+                                type: 'prevYear',
+                                from: vendrDateHelper.getISODateString(namedDateRange.prevYear[0]),
+                                to: vendrDateHelper.getISODateString(namedDateRange.prevYear[1])
+                            }
+                        }
+                    }
+
+                }
+
+                $scope.model.apply(model);
+            }
+        };
+
+        vm.close = function() {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.AnalyticsTimeframeDialogController', AnalyticsTimeframeDialogController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function AvgOrderValueWidgetController($scope, vendrAnalyticsResource) {
+
+        var vm = this;
+
+        vm.loadData = function (timeframe) {
+            return vendrAnalyticsResource.getAverageOrderValueReport($scope.config.storeId,
+                timeframe.dateRange.from, timeframe.dateRange.to,
+                timeframe.compareTo ? timeframe.compareTo.from : undefined,
+                timeframe.compareTo ? timeframe.compareTo.to : undefined);
+        }
+    };
+
+    angular.module('vendr').controller('Vendr.Controllers.AvgOrderValueWidgetController', AvgOrderValueWidgetController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function CartConversionRatesWidgetController($scope, $rootScope, $timeout, vendrAnalyticsResource) {
+
+        var vm = this;
+
+        vm.comparing = false;
+        vm.data = {};
+
+        vm.loadData = function (timeframe) {
+            return vendrAnalyticsResource.getCartConversionRatesReport($scope.config.storeId,
+                timeframe.dateRange.from, timeframe.dateRange.to,
+                timeframe.compareTo ? timeframe.compareTo.from : undefined,
+                timeframe.compareTo ? timeframe.compareTo.to : undefined).then(function (data) {
+
+                    vm.data = data;
+                    vm.comparing = timeframe.compareTo;
+
+                    return data;
+                });
+        }
+    };
+
+    angular.module('vendr').controller('Vendr.Controllers.CartConversionRatesWidgetController', CartConversionRatesWidgetController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function RepeatCustomerRatesWidgetController($scope, vendrAnalyticsResource) {
+
+        var vm = this;
+
+        vm.loadData = function (timeframe) {
+            return vendrAnalyticsResource.getRepeatCustomerRatesReport($scope.config.storeId,
+                timeframe.dateRange.from, timeframe.dateRange.to,
+                timeframe.compareTo ? timeframe.compareTo.from : undefined,
+                timeframe.compareTo ? timeframe.compareTo.to : undefined);
+        }
+    };
+
+    angular.module('vendr').controller('Vendr.Controllers.RepeatCustomerRatesWidgetController', RepeatCustomerRatesWidgetController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function TopSellingProductsWidgetController($scope, $rootScope, $timeout, vendrAnalyticsResource) {
+
+        var vm = this;
+
+        vm.loading = true;
+        vm.comparing = false;
+        vm.timeframe = $scope.timeframe;
+        vm.data = {};
+
+        vm.init = function () {
+
+            vm.loading = true;
+
+            $timeout(function () {
+                $rootScope.$broadcast("VendrAnalyticsWidgetChanged", $scope.config);
+            }, 1);
+
+            vendrAnalyticsResource.getTopSellingProductsReport($scope.config.storeId,
+                vm.timeframe.dateRange.from, vm.timeframe.dateRange.to,
+                vm.timeframe.compareTo ? vm.timeframe.compareTo.from : undefined,
+                vm.timeframe.compareTo ? vm.timeframe.compareTo.to : undefined).then(function (data) {
+
+                    vm.data = data;
+
+                    vm.comparing = vm.timeframe.compareTo;
+                    vm.loading = false;
+
+                    $timeout(function () {
+                        $rootScope.$broadcast("VendrAnalyticsWidgetChanged", $scope.config);
+                    }, 1);
+
+                });
+        }
+
+        vm.init();
+
+        $rootScope.$on("VendrAnalyticsTimeframeChanged", function (evt, timeframe) {
+            vm.timeframe = timeframe;
+            vm.init();
+        });
+    };
+
+    angular.module('vendr').controller('Vendr.Controllers.TopSellingProductsWidgetController', TopSellingProductsWidgetController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function TotalOrdersWidgetController($scope, vendrAnalyticsResource) {
+
+        var vm = this;
+
+        vm.loadData = function (timeframe) {
+            return vendrAnalyticsResource.getTotalOrdersReport($scope.config.storeId,
+                timeframe.dateRange.from, timeframe.dateRange.to,
+                timeframe.compareTo ? timeframe.compareTo.from : undefined,
+                timeframe.compareTo ? timeframe.compareTo.to : undefined);
+        }
+    };
+
+    angular.module('vendr').controller('Vendr.Controllers.TotalOrdersWidgetController', TotalOrdersWidgetController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function TotalRevenueWidgetController($scope, vendrAnalyticsResource) {
+
+        var vm = this;
+
+        vm.loadData = function (timeframe) {
+            return vendrAnalyticsResource.getTotalRevenueReport($scope.config.storeId,
+                timeframe.dateRange.from, timeframe.dateRange.to,
+                timeframe.compareTo ? timeframe.compareTo.from : undefined,
+                timeframe.compareTo ? timeframe.compareTo.to : undefined);
+        }
+
+    };
+
+    angular.module('vendr').controller('Vendr.Controllers.TotalRevenueWidgetController', TotalRevenueWidgetController);
+
+}());
+(function () {
+
+    'use strict';
+
     function CountryCreateController($scope, $rootScope, $location, formHelper,
         appState, editorState, localizationService, notificationsService, navigationService,
         vendrUtils, vendrCountryResource, vendrCurrencyResource) {
@@ -652,10 +1065,29 @@
 
     'use strict';
 
-    function CommerceDashboardController($scope, $routeParams, $location,
-        assetsService, dashboardResource) {
+    function CommerceDashboardController($scope, $routeParams, $location, vendrStoreResource) {
 
-        assetsService.loadCss(dashboardResource.getRemoteDashboardCssUrl("content"), $scope);
+        var vm = this;
+
+        vm.loading = true;
+        vm.stores = [];
+
+        vm.goToStore = function (storeId) {
+            $location.path("/commerce/vendr/store-view/" + storeId);
+        }
+
+        vendrStoreResource.getStoreSummariesForCurrentUser().then(function (stores) {
+
+            vm.stores = stores;
+
+            if (vm.stores.length == 1) {
+                vm.goToStore(vm.stores[0].id);
+                //vm.loading = false;
+            } else {
+                vm.loading = false;
+            }
+
+        });
 
     };
 
@@ -3328,7 +3760,7 @@
     function OrderListController($scope, $location, $routeParams, $q,
         appState, localizationService, treeService, navigationService,
         vendrUtils, vendrOrderResource, vendrOrderStatusResource, vendrRouteCache, vendrLocalStorage) {
-        
+
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
 
@@ -3410,6 +3842,8 @@
             }
         };
 
+        var hasFilterRouteParams = false;
+
         vm.options.filters.forEach(fltr => {
             Object.defineProperty(fltr, "value", {
                 get: function () {
@@ -3419,7 +3853,28 @@
                     vendrLocalStorage.set(fltr.localStorageKey, value);
                 }
             });
+
+            // Initially just check to see if any of the filter are in the route params
+            // as if they are, we will reset filters accordingly in a moment, but we
+            // need to know if any params exist as we'll wipe out anything that isn't
+            // in the querystring
+            if ($routeParams[fltr.alias])
+                hasFilterRouteParams = true;
         });
+
+        // If we have some filters in the querystring then
+        // set the filter values by default, wiping out any
+        // cached value they previously had
+        if (hasFilterRouteParams) {
+            vm.options.filters.forEach(fltr => {
+                if ($routeParams[fltr.alias]) {
+                    fltr.value = $routeParams[fltr.alias].split(",");
+                    $location.search(fltr.alias, null);
+                } else {
+                    fltr.value = [];
+                }
+            });
+        }
 
         vm.loadItems = function (opts, callback) {
 
@@ -4932,9 +5387,12 @@
 
     'use strict';
 
-    function SettingsViewController($scope, $rootScope, $routeParams, navigationService, vendrUtils) {
-        navigationService.syncTree({ tree: "vendrsettings", path: ["-1"], forceReload: false, activate: true });
+    function SettingsViewController($scope, $rootScope, $routeParams, navigationService, vendrUtils)
+    {
         $scope.vendrInfo = vendrUtils.getSettings("vendrInfo");
+
+        navigationService.syncTree({ tree: "vendrsettings", path: ["-1"], forceReload: false, activate: true });
+
     };
 
     angular.module('vendr').controller('Vendr.Controllers.SettingsViewController', SettingsViewController);
@@ -5409,7 +5867,7 @@
 
     function StoreEditController($scope, $routeParams, $location, formHelper,
         appState, editorState, localizationService, notificationsService, navigationService, userGroupsResource, usersResource,
-        vendrStoreResource, vendrCountryResource, vendrTaxResource,
+        vendrStoreResource, vendrCurrencyResource, vendrCountryResource, vendrTaxResource,
         vendrOrderStatusResource, vendrEmailTemplateResource) {
 
         var id = $routeParams.id;
@@ -5442,6 +5900,7 @@
         ];
 
         vm.options = {
+            currencies: [],
             countries: [],
             taxClasses: [],
             orderStatuses: [],
@@ -5525,6 +5984,10 @@
 
             } else {
 
+                vendrCurrencyResource.getCurrencies(id).then(function (currencies) {
+                    vm.options.currencies = currencies;
+                });
+
                 vendrCountryResource.getCountries(id).then(function (countries) {
                     vm.options.countries = countries;
                 });
@@ -5603,6 +6066,100 @@
     };
 
     angular.module('vendr').controller('Vendr.Controllers.StoreEditController', StoreEditController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function StoreViewController($scope, $routeParams, $location,
+        vendrStoreResource, navigationService, vendrActivityLogResource) {
+
+        var id = $routeParams.id;
+
+        var vm = this;
+
+        vm.loading = true;
+        vm.stats = undefined;
+
+        vm.activityLogLoading = true;
+        vm.activityLogs = {
+            items: [],
+            pageNumber: 1,
+            pageSize: 10
+        };
+
+        vm.loadActivityLog = function (page) {
+            vm.activityLogLoading = true;
+            vendrActivityLogResource.getActivityLogs(id, page, vm.activityLogs.pageSize).then(function (activityLogs) {
+                vm.activityLogs = activityLogs;
+                vm.activityLogLoading = false;
+            });
+        }
+
+        // TODO: Make this extendable in some way
+        vm.getEventTypeName = function (eventType) {
+            switch (eventType) {
+                case "vendr/order/new":
+                    return "Order";
+                case "vendr/order/payment/capture":
+                    return "Capture";
+                case "vendr/order/payment/refund":
+                    return "Refund";
+                case "vendr/order/payment/authorize":
+                    return "Authorize";
+                case "vendr/order/status/change":
+                    return "Status";
+                default:
+                    return "Unknown";
+            }
+        }
+
+        vm.getEventTypeColor = function (eventType) {
+            switch (eventType) {
+                case "vendr/order/new":
+                    return "vendr-bg--indigo";
+                case "vendr/order/payment/capture":
+                    return "vendr-bg--green";
+                case "vendr/order/payment/refund":
+                    return "vendr-bg--orange";
+                case "vendr/order/payment/authorize":
+                    return "vendr-bg--light-blue";
+                case "vendr/order/status/change":
+                    return "vendr-bg--dark-grey";
+                default:
+                    return "vendr-bg--grey";
+            }
+        }
+
+        vm.refresh = function () {
+            vm.loading = true;
+            vm.init(true);
+        }
+
+        vm.init = function (noSync) {
+
+            if (!noSync) {
+                navigationService.syncTree({ tree: "vendr", path: "-1," + id, forceReload: true });
+            }
+
+            vendrStoreResource.getStore(id).then(function (store) {
+                vm.store = store;
+                vendrStoreResource.getStoreStatsForToday(id).then(function (stats) {
+                    vm.stats = stats;
+                    vm.loading = false;
+                })
+            });
+
+            vm.loadActivityLog(1);
+
+        };  
+
+        vm.init();
+
+    };
+
+    angular.module('vendr').controller('Vendr.Controllers.StoreViewController', StoreViewController);
 
 }());
 (function () {

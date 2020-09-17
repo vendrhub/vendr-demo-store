@@ -1,101 +1,95 @@
-﻿<div ng-controller="Vendr.Controllers.SettingsViewController as vm">
+﻿<div ng-controller="Vendr.Controllers.SettingsViewController" class="vendr">
 
-    <umb-load-indicator ng-if="vm.page.loading"></umb-load-indicator>
+    <umb-editor-view class="vendr">
 
-    <form name="contentForm"
-          ng-submit="vm.save()"
-          novalidate
-          val-form-manager>
+        <umb-editor-header name="'Vendr'"
+            name-locked="true"
+            hide-icon="true"
+            hide-description="true"
+            hide-alias="true"
+            show-back-button="false">
+        </umb-editor-header>
 
-        <umb-editor-view ng-if="!vm.page.loading" class="vendr">
+        <umb-editor-container class="form-horizontal" style="bottom: 0;">
 
-            <umb-editor-header name="'Vendr'"
-                alias="vm.content.alias"
-                name-locked="true"
-                hide-icon="true"
-                hide-description="true"
-                hide-alias="true"
-                show-back-button="false">
-            </umb-editor-header>
+            <vendr-license-check></vendr-license-check>
 
-            <umb-editor-container class="form-horizontal" style="bottom: 0;">
+            <div class="vendr-layout vendr-layout--layout1">
 
-                <div class="vendr-layout vendr-layout--layout1">
+                <div class="vendr-layout__left">
 
-                    <div class="vendr-layout__left">
+                    <umb-box>
+                        <!--<umb-box-header title="Settings"></umb-box-header>-->
+                        <umb-box-content>
 
-                        <umb-box>
-                            <!--<umb-box-header title="Settings"></umb-box-header>-->
-                            <umb-box-content>
+                            <h3 class="bold" style="margin-top: 0;">Vendr Settings</h3>
+                            <p>Welcome to the Vendr settings area. From this section you can setup and manage your Vendr store implementations as well as view relevant information about your your installation.</p>
+                            <p>If you need help getting started with Vendr you can follow the below links to get started.</p>
+                            <h5>Find out more</h5>
+                            <ul>
+                                <li>Read guides and API reference material over on our <a class="btn-link -underline" href="https://vendr.net/docs/" target="_blank">Documentation site</a></li>
+                                <li>Ask a question in the <a class="btn-link -underline" href="https://our.umbraco.com/packages/website-utilities/vendr/vendr-support/" target="_blank">Vendr Community Forum</a></li>
+                                <li>Buy a license from the <a class="btn-link -underline" href="https://vendr.net" target="_blank">Vendr site</a></li>
+                            </ul>
 
-                                <h3 class="bold" style="margin-top: 0;">Vendr Settings</h3>
-                                <p>Welcome to the Vendr settings area. From this section you can setup and manage your Vendr store implementations as well as view relevant information about your your installation.</p>
-                                <p>If you need help getting started with Vendr you can follow the below links to get started.</p>
-                                <h5>Find out more</h5>
-                                <ul>
-                                    <li>Read guides and API reference material over on our <a class="btn-link -underline" href="https://vendr.net/docs/" target="_blank">Documentation site</a></li>
-                                    <li>Ask a question in the <a class="btn-link -underline" href="https://our.umbraco.com/packages/website-utilities/vendr/vendr-support/" target="_blank">Vendr Community Forum</a></li>
-                                    <li>Buy a license from the <a class="btn-link -underline" href="https://vendr.net" target="_blank">Vendr site</a></li>
-                                </ul>
-
-                            </umb-box-content>
-                        </umb-box>
-
-                    </div>
-
-                    <div class="vendr-layout__right">
-
-                        <umb-box>
-                            <umb-box-header title="System Info"></umb-box-header>
-                            <umb-box-content class="block-form">
-
-                                <umb-control-group label="Installed Version">
-                                    <div style="display: flex; justify-content: space-between;align-items: center;">
-                                        <div>Vendr v{{vendrInfo.version}}</div>
-                                        <!--<umb-badge color="success" size="s">Latest</umb-badge>-->
-                                    </div>
-                                </umb-control-group>
-
-                                <umb-control-group label="Installed Payment Providers">
-                                    <ul>
-                                        <li ng-repeat="pp in vendrInfo.paymentProviders">{{ pp.name }} v{{pp.version}}</li>
-                                    </ul>
-                                </umb-control-group>
-
-                            </umb-box-content>
-
-                        </umb-box>
-
-                        <umb-box>
-                            <umb-box-header title="Installed Licenses"></umb-box-header>
-                            <umb-box-content class="block-form">
-
-                                <div ng-repeat="license in vendrInfo.licenses">
-                                    <hr ng-if="$index > 0" />
-                                    <umb-control-group label="Key">{{license.key}}</umb-control-group>
-                                    <umb-control-group label="Status">
-                                        <umb-badge color="success" size="s" ng-if="license.isActive">Active</umb-badge>
-                                        <umb-badge color="grey" size="s" ng-if="!license.isActive">Inactive</umb-badge>
-                                    </umb-control-group>
-                                    <umb-control-group label="Domains">
-                                        <ul>
-                                            <li ng-repeat="domain in license.domains">{{domain}}</li>
-                                        </ul>
-                                    </umb-control-group>
-                                </div>
-
-                                <!--<a href="" class="btn btn-info btn-block">Install a License</a>-->
-
-                            </umb-box-content>
-
-                        </umb-box>
-
-                    </div>
+                        </umb-box-content>
+                    </umb-box>
 
                 </div>
 
-            </umb-editor-container>
+                <div class="vendr-layout__right">
 
-        </umb-editor-view>
-    </form>
+                    <umb-box>
+                        <umb-box-header title="System Info"></umb-box-header>
+                        <umb-box-content class="block-form">
+
+                            <umb-control-group label="Installed Version">
+                                <div style="display: flex; justify-content: space-between;align-items: center;">
+                                    <div>Vendr v{{vendrInfo.version}}</div>
+                                    <!--<umb-badge color="success" size="s">Latest</umb-badge>-->
+                                </div>
+                            </umb-control-group>
+
+                            <umb-control-group label="Installed Payment Providers">
+                                <ul>
+                                    <li ng-repeat="pp in vendrInfo.paymentProviders">{{ pp.name }} v{{pp.version}}</li>
+                                </ul>
+                            </umb-control-group>
+
+                        </umb-box-content>
+
+                    </umb-box>
+
+                    <umb-box>
+                        <umb-box-header title="Installed Licenses"></umb-box-header>
+                        <umb-box-content class="block-form">
+
+                            <div ng-repeat="license in vendrInfo.licenses">
+                                <hr ng-if="$index > 0" />
+                                <umb-control-group label="Key">{{license.key}}</umb-control-group>
+                                <umb-control-group label="Status">
+                                    <umb-badge color="success" size="s" ng-if="license.isActive">Active</umb-badge>
+                                    <umb-badge color="grey" size="s" ng-if="!license.isActive">Inactive</umb-badge>
+                                </umb-control-group>
+                                <umb-control-group label="Domains">
+                                    <ul>
+                                        <li ng-repeat="domain in license.domains">{{domain}}</li>
+                                    </ul>
+                                </umb-control-group>
+                                <umb-control-group label="Expires" ng-if="license.expiryDate">{{license.expiryDate}}</umb-control-group>
+                            </div>
+
+                            <!--<a href="" class="btn btn-info btn-block">Install a License</a>-->
+
+                        </umb-box-content>
+
+                    </umb-box>
+
+                </div>
+
+            </div>
+
+        </umb-editor-container>
+
+    </umb-editor-view>
 </div>

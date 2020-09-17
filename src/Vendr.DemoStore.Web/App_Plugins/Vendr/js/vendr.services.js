@@ -2,6 +2,58 @@
 
     'use strict';
 
+    function vendrDateHelper() {
+
+        function treatAsUTC(date) {
+            var result = new Date(date);
+            result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
+            return result;
+        }
+
+        function daysBetween(startDate, endDate) {
+            var millisecondsPerDay = 24 * 60 * 60 * 1000;
+            return (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay;
+        }
+
+        return {
+
+            getISODateString: function (date) {
+                return new Date(date.getTime() - (date.getTimezoneOffset() * 60000))
+                    .toISOString()
+                    .split("T")[0];
+            },
+
+            getToday: function () {
+                var now = new Date();
+                return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            },
+
+            getDaysBetween: function (from, to, inclusive) {
+                var days = daysBetween(from, to);
+                return days + (inclusive ? 1 : 0);
+            },
+
+            formatDateRange: function (range) {
+                var str = range[0].toLocaleString('default', { month: 'short' }) + " " + range[0].getDate();
+                if (range[0].getFullYear() != range[1].getFullYear()) {
+                    str += ", " + range[0].getFullYear();
+                }
+                str += " - ";
+                str += range[1].toLocaleString('default', { month: 'short' }) + " " + range[1].getDate() + ", " + range[1].getFullYear();
+                return str;
+            }
+
+        };
+
+    };
+
+    angular.module('vendr.services').factory('vendrDateHelper', vendrDateHelper);
+
+}());
+(function () {
+
+    'use strict';
+
     function vendrLocalStorage($cookies) {
 
         var supportsLocalStorage = (function () {

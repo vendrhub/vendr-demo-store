@@ -9,14 +9,14 @@
                 <umb-editor-sub-header-section ng-if="(createActions && createActions.length > 0 && (selection.length == 0))">
 
                     <div class="btn-group" ng-show="createActions.length == 1">
-                        <button type="button" class="btn btn-white" ng-click="createActions[0].doAction()">
+                        <button type="button" class="btn btn-outline umb-outline" ng-click="createActions[0].doAction()">
                             <i class="{{createActions[0].icon}}" aria-hidden="true"></i>
                             {{createActions[0].name}}
                         </button>
                     </div>
 
                     <div class="btn-group" ng-show="createActions.length > 1">
-                        <button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">
+                        <button type="button" class="btn btn-outline umb-outline dropdown-toggle" data-toggle="dropdown">
                             <span ng-click="createActions[0].doAction()">
                                 <i class="{{createActions[0].icon}}" aria-hidden="true"></i>
                                 {{createActions[0].name}}

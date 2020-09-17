@@ -1,0 +1,28 @@
+﻿<div ng-controller="Vendr.Controllers.TopSellingProductsWidgetController as vm" class="vendr">
+
+    <umb-load-indicator ng-if="vm.loading"></umb-load-indicator>
+
+    <div ng-if="!vm.loading">
+        <table class="row-spacing-10" ng-if="vm.data.products.length > 0">
+            <tr ng-repeat="product in vm.data.products">
+                <td class="w-full">
+                    <div>{{ product.name }}</div>
+                    <div><small class="color-grey">{{ product.sku }}</small></div>
+                </td>
+                <td class="nowrap text-right align-top pl-10">
+                    {{ product.totalQuantity }}
+                </td>
+                <td class="nowrap text-right align-top pl-10"
+                    ng-class="{ 'color-grey' : !product.percentageChange || product.percentageChange.value == 0, 'color-green' : product.percentageChange.value >= 0, 'color-red' : product.percentageChange.value < 0 }"
+                    ng-if="vm.comparing">
+                    <i class="fa" ng-class="{ 'fa-caret-up': product.percentageChange.value > 0, 'fa-caret-down': product.percentageChange.value < 0 }" ng-if="product.percentageChange && product.percentageChange.value != 0"></i>
+                    {{ product.percentageChange ? product.percentageChange.valueFormatted.replace("-", "") : 'N/A' }}
+                </td>
+            </tr>
+        </table>
+        <umb-empty-state ng-if="vm.data.products.length == 0" position="center">
+            No results to display
+        </umb-empty-state>
+    </div>
+
+</div>

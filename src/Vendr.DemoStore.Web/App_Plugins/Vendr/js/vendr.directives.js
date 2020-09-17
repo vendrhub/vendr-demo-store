@@ -2,6 +2,188 @@
 
     'use strict';
 
+    function vendrAnalyticsChartWidget($rootScope, $timeout) {
+
+        function link(scope, el, attr, ctrl) {
+
+            scope.errored = false;
+            scope.loading = true;
+
+            scope.comparing = false;
+
+            scope.value;
+            scope.percentageChange;
+            scope.percentagePointChange;
+
+            scope.chart = {
+                type: scope.chartType || 'line',
+                labels: [],
+                data: [],
+                series: [],
+                colors: ['#63aeec', '#f5c1bc'],
+                options: angular.merge({}, {
+                    legend: {
+                        display: true,
+                        position: 'bottom'
+                    },
+                    scales: {
+                        xAxes: [{
+                            gridLines: {
+                                display: false
+                            }
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                    elements: {
+                        line: {
+                            tension: 0
+                        }
+                    }
+                }, scope.chartOptions || {})
+            };
+
+            var init = function () {
+
+                scope.errored = false;
+                scope.loading = true;
+
+                $timeout(function () {
+                    $rootScope.$broadcast("VendrAnalyticsWidgetChanged", scope.config);
+                }, 1);
+
+                scope.onLoadData({ timeframe: scope.timeframe }).then(function (data) {
+
+                    scope.comparing = scope.timeframe.compareTo;
+
+                    scope.value = data.value;
+                    scope.percentageChange = data.percentageChange;
+                    scope.percentagePointChange = data.percentagePointChange;
+
+                    scope.chart.labels = data.datasets[0].labels;
+                    scope.chart.series = data.datasets.map(function (ds) {
+                        return ds.name;
+                    });
+                    scope.chart.data = data.datasets.map(function (ds) {
+                        return ds.data;
+                    });
+
+                    scope.chart.options.legend.display = data.datasets.length > 1;
+
+                    scope.loading = false;
+
+                    $timeout(function () {
+                        $rootScope.$broadcast("VendrAnalyticsWidgetChanged", scope.config);
+                    }, 1);
+                }, function (err) {
+                    scope.loading = false;
+                    scope.errored = true;
+                    scope.errorMessage = err.data.message || err.data.Message || err.errorMsg;
+                });
+
+            };
+
+            init();
+
+            $rootScope.$on("VendrAnalyticsTimeframeChanged", function (evt, timeframe) {
+                scope.timeframe = timeframe;
+                init();
+            });
+
+        }
+
+        var directive = {
+            restrict: 'E',
+            replace: true,
+            transclude: true,
+            template: `<div>
+    <umb-load-indicator ng-if="loading"></umb-load-indicator>
+
+    <div ng-if="!loading && !errored">
+        <div class="vendr-split">
+            <h3 class="mt-0">{{ value.valueFormatted }}</h3>
+            <h4 class="mt-0 "
+                ng-class="{ 'color-grey': !percentageChange || percentageChange.value == 0, 'color-green' : percentageChange && percentageChange.value > 0, 'color-red' : percentageChange && percentageChange.value < 0 }"
+                ng-if="comparing">
+                <i class="fa" ng-class="{ 'fa-caret-up': percentageChange.value > 0, 'fa-caret-down': percentageChange.value < 0 }" ng-if="percentageChange"></i> 
+                {{ percentageChange ? percentageChange.valueFormatted.replace('-', '') : 'N/A' }}
+                <span class="text-12" ng-if="percentagePointChange">({{ percentagePointChange.valueFormatted.replace('-', '') }})</span>
+            </h4>
+        </div>
+        <ng-transclude></ng-transclude>
+        <canvas chart-base
+                chart-type="chart.type"
+                chart-data="chart.data"
+                chart-labels="chart.labels"
+                chart-series="chart.series"
+                chart-colors="chart.colors"
+                chart-options="chart.options">
+        </canvas>
+    </div>
+
+    <umb-empty-state
+        ng-if="!loading && errored"
+        position="center">
+        Unable to load report: {{errorMessage}}
+    </umb-empty-state>  
+</div>`,
+            scope: {
+                config: '=',
+                timeframe: '<',
+                chartType: '=?',
+                chartOptions: '=?',
+                onLoadData: '&'
+            },
+            link: link
+        };
+        
+        return directive;
+    };
+
+    angular.module('vendr.directives').directive('vendrAnalyticsChartWidget', vendrAnalyticsChartWidget);
+
+}());
+(function () {
+
+    'use strict';
+
+    function vendrAnalyticsWidget() {
+
+        function link(scope, el, attr, ctrl) {
+            
+        }
+
+        var directive = {
+            restrict: 'E',
+            replace: true,
+            template: `<div class="vendr-analytics-widget">
+    <umb-box class="mb-0">
+        <umb-box-header title="{{config.name}}"><i class="fa fa-info-circle" ng-if="config.description" title="{{config.description}}"></i></umb-box-header>
+        <umb-box-content class="block-form">
+            <div ng-include="config.view" style="position: relative; min-height: 100px;"></div>
+        </umb-box-content>
+    </umb-box>
+</div>`,
+            scope: {
+                config: '=',
+                timeframe: '<'
+            },
+            link: link
+        };
+        
+        return directive;
+    };
+
+    angular.module('vendr.directives').directive('vendrAnalyticsWidget', vendrAnalyticsWidget);
+
+}());
+(function () {
+
+    'use strict';
+
     function vendrColorPicker() {
 
         function link(scope, el, attr, ctrl) {
@@ -272,7 +454,7 @@
 
             vm.filter.getFilterOptions().then(function (filterOptions) {
                 filterOptions.forEach(itm => {
-                    itm.selected = vm.filter.value.findIndex(itm2 => itm2 === itm.id) > -1;
+                    itm.selected = vm.filter.value.findIndex(itm2 => itm2.toString() === itm.id.toString()) > -1;
                 });
                 vm.filterOptions = filterOptions;
                 vm.loading = false;
@@ -432,7 +614,7 @@
         var directive = {
             restrict: 'E',
             replace: true,
-            template:'<vendr-message ng-if="!vendrInfo.isLicensed" type="\'warn\'" heading="\'Trial Mode\'" icon="\'exclamation-triangle\'"><p>Vendr is currently running in trial mode and will be limited to a maximum of {{vendrInfo.trialMaxOrders}} finalized orders. When you are ready to go live, please purchase a license from <a href="https://vendr.net?ref=lic-check" target="_blank">the Vendr website</a>.</p></vendr-message>',
+            template:'<div><vendr-message ng-if="!vendrInfo.isLicensed" type="\'warn\'" heading="\'Trial Mode\'" icon="\'exclamation-triangle\'"><p>Vendr is currently running in unlicensed mode and will be limited to a maximum of {{vendrInfo.trialMaxOrders}} finalized orders. You can purchase a license from <a href="https://vendr.net?ref=lic-check" target="_blank">the Vendr website</a>.</p></vendr-message><vendr-message ng-if="vendrInfo.isLicensed && vendrInfo.isExpiring" type="\'warn\'" heading="\'License Expiring\'" icon="\'exclamation-triangle\'"><p>You are currently using Vendr with a license that is due to expire. If you have a trial license, please purchase a full license from <a href="https://vendr.net?ref=lic-check" target="_blank">the Vendr website</a>. If you are using a subscription license, this should have renewed by now so please review your error log for any issues with the renewal process.</p></vendr-message></div>',
             link: link
         };
         
@@ -440,6 +622,52 @@
     };
 
     angular.module('vendr.directives').directive('vendrLicenseCheck', vendrLicenseCheck);
+
+}());
+(function () {
+
+    'use strict';
+
+    function vendrMasonryGrid($rootScope, $timeout, assetsService) {
+
+        function link(scope, el, attr, ctrl)
+        {
+            var masonry = null;
+
+            var cfg = {
+                container: '#vendr-masonry-grid-' + scope.$id
+            };
+
+            if (scope.vendrMasonryGrid) {
+                cfg = Object.assign(cfg, scope.vendrMasonryGrid)
+            }
+
+            $timeout(function () { // Give angular time to do it's firt render of child items
+                masonry = new MiniMasonry(cfg);
+            }, 1);
+
+            $rootScope.$on('vendrMasonryGridChanged', function () {
+                if (masonry) {
+                    masonry.layout();
+                }
+            });
+        }
+
+        var directive = {
+            restrict: 'A',
+            replace: true,
+            transclude: true,
+            link: link,
+            template: `<div id="vendr-masonry-grid-{{$id}}" ng-transclude></div>`,
+            scope: {
+                vendrMasonryGrid: '='
+            }
+        };
+        
+        return directive;
+    };
+
+    angular.module('vendr.directives').directive('vendrMasonryGrid', vendrMasonryGrid);
 
 }());
 (function () {
@@ -515,6 +743,83 @@
     };
 
     angular.module('vendr.directives').directive('vendrMessage', vendrMessage);
+
+}());
+(function () {
+
+    'use strict';
+
+    function vendrOrderSearch($rootScope, $timeout, $location, angularHelper, assetsService, vendrOrderResource, vendrUtils) {
+
+        function link(scope, el, attr, ctrl) {
+
+            var typeahead;
+
+            assetsService.loadJs("lib/typeahead.js/typeahead.bundle.min.js").then(function () {
+
+                var sources = {
+                    // see: https://github.com/twitter/typeahead.js/blob/master/doc/jquery_typeahead.md#options
+                    // name = the data set name, we'll make this the tag group name + culture
+                    name: "vendr_order_search_" + scope.storeId,
+                    display: "orderNumber",
+                    //source: tagsHound
+                    source: function (query, syncCallback, asyncCallback) {
+                        vendrOrderResource.searchOrders(scope.storeId, {
+                            pageNumber: 1,
+                            pageSize: 10,
+                            searchTerm: query
+                        }).then(function (entities) {
+                            entities.items.forEach(function (itm) {
+                                itm.routePath = '/commerce/vendr/order-edit/' + vendrUtils.createCompositeId([scope.storeId, itm.id]);
+                            });
+                            asyncCallback(entities.items);
+                        });
+                    },
+                    templates: {
+                        suggestion: function (data) {
+                            return '<div class="vendr-search__result"><span class="vendr-search__result__icon"><i class="icon ' + data.icon + '"></i></span><span class="vendr-search__result__body"><span class="vendr-search__result__heading">#' + data.orderNumber + '</span><br /><span class="vendr-search__result__sub-heading">' + data.customerFullName + '</span></span></div>';
+                        }
+                    }
+                };
+
+                var opts = {
+                    hint: true,
+                    highlight: true,
+                    cacheKey: new Date(),
+                    minLength: 1
+                };
+
+                typeahead = el.find('input').typeahead(opts, sources)
+                    .bind("typeahead:selected", function (obj, datum, name) {
+                        angularHelper.safeApply($rootScope, function () {
+                            $location.path(datum.routePath);
+                        });
+                    }).bind("typeahead:autocompleted", function (obj, datum, name) {
+                        angularHelper.safeApply($rootScope, function () {
+                            $location.path(datum.routePath);
+                        });
+                    });
+
+            });
+
+        }
+
+        var directive = {
+            restrict: 'E',
+            replace: true,
+            template: `<div class="vendr-search">
+    <span><i class="fa fa-search vendr-search__icon"></i></span><span class="vendr-search__input-wrapper"><input type="text" placeholder="Search for an Order" class="vendr-search__input" /></span>
+</div>`,
+            scope: {
+                storeId: '='
+            },
+            link: link
+        };
+        
+        return directive;
+    };
+
+    angular.module('vendr.directives').directive('vendrOrderSearch', vendrOrderSearch);
 
 }());
 (function () {
@@ -1435,7 +1740,7 @@
         var directive = {
             restrict: 'E',
             replace: true,
-            template:'<div class="vendr"><div class="umb-property-editor umb-listview"><umb-editor-sub-header ng-class="{\'--state-selection\':(selection.length > 0)}"><umb-editor-sub-header-content-left><umb-editor-sub-header-section ng-if="(createActions && createActions.length > 0 && (selection.length == 0))"><div class="btn-group" ng-show="createActions.length == 1"><button type="button" class="btn btn-white" ng-click="createActions[0].doAction()"><i class="{{createActions[0].icon}}" aria-hidden="true"></i> {{createActions[0].name}}</button></div><div class="btn-group" ng-show="createActions.length > 1"><button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown"><span ng-click="createActions[0].doAction()"><i class="{{createActions[0].icon}}" aria-hidden="true"></i> {{createActions[0].name}}</span> <span class="caret" ng-click="page.createDropdownOpen = !page.createDropdownOpen"></span></button><umb-dropdown ng-if="page.createDropdownOpen" on-close="page.createDropdownOpen = false"><umb-dropdown-item ng-repeat="createAction in createActions" ng-if="$index > 0"><a ng-click="createAction.doAction()"><i class="{{createAction.icon}}" aria-hidden="true"></i> {{createAction.name}}</a></umb-dropdown-item></umb-dropdown></div></umb-editor-sub-header-section><vendr-filter ng-repeat="fltr in filters" ng-show="!selection || selection.length == 0" filter="fltr" on-change="doFilter()"></vendr-filter><umb-editor-sub-header-section ng-show="(selection.length > 0)"><umb-button type="button" label="Clear selection" label-key="buttons_clearSelection" button-style="white" action="clearSelection()" disabled="bulkActionInProgress"></umb-button></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length > 0)"><strong ng-show="!bulkActionInProgress">{{ selection.length }}&nbsp;<localize key="general_of">of</localize>&nbsp;{{ options.filteredItems.length }}&nbsp;<localize key="general_selected">items selected</localize></strong> <strong ng-show="bulkActionInProgress" ng-bind="bulkActionStatus"></strong><umb-loader position="bottom" ng-show="bulkActionInProgress"></umb-loader></umb-editor-sub-header-section></umb-editor-sub-header-content-left><umb-editor-sub-header-content-right><umb-editor-sub-header-section ng-show="(selection.length == 0)"><div class="form-search -no-margin-bottom pull-right" novalidate><div class="inner-addon left-addon"><i class="icon icon-search" ng-click="doFilter()" aria-hidden="true"></i> <input class="form-control search-input" type="text" localize="placeholder" placeholder="@general_typeToSearch" ng-model="options.filterTerm" ng-change="doFilter()" ng-keydown="doFilter()" prevent-enter-submit no-dirty-check></div></div></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length > 0) && (options.bulkActionsAllowed)"><umb-button ng-repeat="bulkAction in bulkActions" type="button" button-style="white" label="{{ bulkAction.name }}" icon="{{ bulkAction.icon }}" action="doBulkAction(bulkAction)" disabled="bulkActionInProgress" size="xs" add-ellipsis="true"></umb-button></umb-editor-sub-header-section></umb-editor-sub-header-content-right></umb-editor-sub-header><div ng-if="!loading"><vendr-table ng-if="options.filteredItems && options.filteredItems.length > 0" items="options.filteredItems" allow-select-all="options.bulkActionsAllowed" item-properties="itemProperties" on-select="selectItem(item, $index, $event)" on-click="itemClick(item)" on-select-all="selectAll($event)" on-selected-all="areAllSelected()"></vendr-table><umb-empty-state ng-if="!options.filteredItems || options.filteredItems.length === 0" position="center"><div>No items found</div></umb-empty-state></div><umb-load-indicator ng-show="loading"></umb-load-indicator><div class="flex justify-center"><umb-pagination ng-show="!loading && paginated && pagination.totalPages" page-number="pagination.pageNumber" total-pages="pagination.totalPages" on-next="goToPage" on-prev="goToPage" on-go-to-page="goToPage"></umb-pagination></div></div></div>',
+            template:'<div class="vendr"><div class="umb-property-editor umb-listview"><umb-editor-sub-header ng-class="{\'--state-selection\':(selection.length > 0)}"><umb-editor-sub-header-content-left><umb-editor-sub-header-section ng-if="(createActions && createActions.length > 0 && (selection.length == 0))"><div class="btn-group" ng-show="createActions.length == 1"><button type="button" class="btn btn-outline umb-outline" ng-click="createActions[0].doAction()"><i class="{{createActions[0].icon}}" aria-hidden="true"></i> {{createActions[0].name}}</button></div><div class="btn-group" ng-show="createActions.length > 1"><button type="button" class="btn btn-outline umb-outline dropdown-toggle" data-toggle="dropdown"><span ng-click="createActions[0].doAction()"><i class="{{createActions[0].icon}}" aria-hidden="true"></i> {{createActions[0].name}}</span> <span class="caret" ng-click="page.createDropdownOpen = !page.createDropdownOpen"></span></button><umb-dropdown ng-if="page.createDropdownOpen" on-close="page.createDropdownOpen = false"><umb-dropdown-item ng-repeat="createAction in createActions" ng-if="$index > 0"><a ng-click="createAction.doAction()"><i class="{{createAction.icon}}" aria-hidden="true"></i> {{createAction.name}}</a></umb-dropdown-item></umb-dropdown></div></umb-editor-sub-header-section><vendr-filter ng-repeat="fltr in filters" ng-show="!selection || selection.length == 0" filter="fltr" on-change="doFilter()"></vendr-filter><umb-editor-sub-header-section ng-show="(selection.length > 0)"><umb-button type="button" label="Clear selection" label-key="buttons_clearSelection" button-style="white" action="clearSelection()" disabled="bulkActionInProgress"></umb-button></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length > 0)"><strong ng-show="!bulkActionInProgress">{{ selection.length }}&nbsp;<localize key="general_of">of</localize>&nbsp;{{ options.filteredItems.length }}&nbsp;<localize key="general_selected">items selected</localize></strong> <strong ng-show="bulkActionInProgress" ng-bind="bulkActionStatus"></strong><umb-loader position="bottom" ng-show="bulkActionInProgress"></umb-loader></umb-editor-sub-header-section></umb-editor-sub-header-content-left><umb-editor-sub-header-content-right><umb-editor-sub-header-section ng-show="(selection.length == 0)"><div class="form-search -no-margin-bottom pull-right" novalidate><div class="inner-addon left-addon"><i class="icon icon-search" ng-click="doFilter()" aria-hidden="true"></i> <input class="form-control search-input" type="text" localize="placeholder" placeholder="@general_typeToSearch" ng-model="options.filterTerm" ng-change="doFilter()" ng-keydown="doFilter()" prevent-enter-submit no-dirty-check></div></div></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length > 0) && (options.bulkActionsAllowed)"><umb-button ng-repeat="bulkAction in bulkActions" type="button" button-style="white" label="{{ bulkAction.name }}" icon="{{ bulkAction.icon }}" action="doBulkAction(bulkAction)" disabled="bulkActionInProgress" size="xs" add-ellipsis="true"></umb-button></umb-editor-sub-header-section></umb-editor-sub-header-content-right></umb-editor-sub-header><div ng-if="!loading"><vendr-table ng-if="options.filteredItems && options.filteredItems.length > 0" items="options.filteredItems" allow-select-all="options.bulkActionsAllowed" item-properties="itemProperties" on-select="selectItem(item, $index, $event)" on-click="itemClick(item)" on-select-all="selectAll($event)" on-selected-all="areAllSelected()"></vendr-table><umb-empty-state ng-if="!options.filteredItems || options.filteredItems.length === 0" position="center"><div>No items found</div></umb-empty-state></div><umb-load-indicator ng-show="loading"></umb-load-indicator><div class="flex justify-center"><umb-pagination ng-show="!loading && paginated && pagination.totalPages" page-number="pagination.pageNumber" total-pages="pagination.totalPages" on-next="goToPage" on-prev="goToPage" on-go-to-page="goToPage"></umb-pagination></div></div></div>',
             scope: {
                 loading: "<",
                 createActions: "<",

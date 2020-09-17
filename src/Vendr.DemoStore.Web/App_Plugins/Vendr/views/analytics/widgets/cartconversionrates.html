@@ -1,0 +1,45 @@
+﻿<div ng-controller="Vendr.Controllers.CartConversionRatesWidgetController as vm" class="vendr">
+
+    <vendr-analytics-chart-widget 
+        config="config" 
+        timeframe="timeframe"
+        on-load-data="vm.loadData(timeframe)">
+
+        <table class="row-spacing-10 mb-10">
+            <tr>
+                <td class="w-full">
+                    <div>Reached Checkout</div>
+                    <div><small class="color-grey">{{ vm.data.totalCartsReachedCheckout.currentCarts }} Carts</small></div>
+                </td>
+                <td class="nowrap text-right align-top pl-10">
+                    {{ vm.data.totalCartsReachedCheckout.currentPercentageOfTotalCarts.valueFormatted }}
+                </td>
+                <td class="nowrap text-right align-top pl-10"
+                    ng-class="{ 'color-grey' : !vm.data.totalCartsReachedCheckout.percentageChange || vm.data.totalCartsReachedCheckout.percentageChange.value == 0, 'color-green' : vm.data.totalCartsReachedCheckout.percentageChange.value >= 0, 'color-red' : vm.data.totalCartsReachedCheckout.percentageChange.value < 0 }"
+                    ng-if="vm.comparing">
+                    <i class="fa" ng-class="{ 'fa-caret-up': vm.data.totalCartsReachedCheckout.percentageChange.value > 0, 'fa-caret-down': vm.data.totalCartsReachedCheckout.percentageChange.value < 0 }" ng-if="vm.data.totalCartsReachedCheckout.percentageChange && vm.data.totalCartsReachedCheckout.percentageChange.value != 0"></i>
+                    {{ vm.data.totalCartsReachedCheckout.percentageChange ? vm.data.totalCartsReachedCheckout.percentageChange.valueFormatted.replace("-", "") : 'N/A' }}
+                    <span class="text-12" ng-if="vm.data.totalCartsReachedCheckout.percentagePointChange">({{ vm.data.totalCartsReachedCheckout.percentagePointChange.valueFormatted.replace('-', '') }})</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="w-full">
+                    <div>Purchased</div>
+                    <div><small class="color-grey">{{ vm.data.totalCartsFinalized.currentCarts }} Carts</small></div>
+                </td>
+                <td class="nowrap text-right align-top pl-10">
+                    {{ vm.data.totalCartsFinalized.currentPercentageOfTotalCarts.valueFormatted }}
+                </td>
+                <td class="nowrap text-right align-top pl-10"
+                    ng-class="{ 'color-grey' : !vm.data.totalCartsFinalized.percentageChange || vm.data.totalCartsFinalized.percentageChange.value == 0, 'color-green' : vm.data.totalCartsFinalized.percentageChange.value >= 0, 'color-red' : vm.data.totalCartsFinalized.percentageChange.value < 0 }"
+                    ng-if="vm.comparing">
+                    <i class="fa" ng-class="{ 'fa-caret-up': vm.data.totalCartsFinalized.percentageChange.value > 0, 'fa-caret-down': vm.data.totalCartsFinalized.percentageChange.value < 0 }" ng-if="vm.data.totalCartsFinalized.percentageChange && vm.data.totalCartsFinalized.percentageChange.value != 0"></i>
+                    {{ vm.data.totalCartsFinalized.percentageChange ? vm.data.totalCartsFinalized.percentageChange.valueFormatted.replace("-", "") : 'N/A' }}
+                    <span class="text-12" ng-if="vm.data.totalCartsFinalized.percentagePointChange">({{ vm.data.totalCartsFinalized.percentagePointChange.valueFormatted.replace('-', '') }})</span>
+                </td>
+            </tr>
+        </table>
+
+    </vendr-analytics-chart-widget>
+
+</div>

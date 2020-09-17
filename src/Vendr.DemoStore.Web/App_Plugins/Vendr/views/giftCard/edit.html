@@ -74,9 +74,9 @@
                                                                   on-setup="vm.expiryDatePickerSetup(fpItem)"
                                                                   on-change="vm.expiryDatePickerChange(dateStr, instance)">
                                             </umb-date-time-picker>
-                                            <a ng-show="vm.content.expiryDate" ng-click="vm.clearExpiryDate()" class="btn umb-button--xs dropdown-toggle umb-button-group__toggle vendr-btn--clear">
-                                                <span class="icon icon-wrong"></span>
-                                            </a>
+                                            <button ng-show="vm.content.expiryDate" ng-click="vm.clearExpiryDate()" class="btn umb-button--xs dropdown-toggle umb-button-group__toggle vendr-btn--clear">
+                                                <i class="icon icon-wrong"></i>
+                                            </button>
                                         </div>
 
                                     </div>

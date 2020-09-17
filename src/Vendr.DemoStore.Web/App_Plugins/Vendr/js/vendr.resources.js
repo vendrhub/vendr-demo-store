@@ -2,6 +2,126 @@
 
     'use strict';
 
+    function vendrActivityLogResource($http, umbRequestHelper, vendrRequestHelper) {
+
+        return {
+            
+            getActivityLogs: function (storeId, currentPage, itemsPerPage) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("activityLogApiBaseUrl", "GetActivityLogs", {
+                        storeId: storeId,
+                        currentPage: currentPage,
+                        itemsPerPage: itemsPerPage
+                    })),
+                    "Failed to get activity logs");
+            }
+
+        };
+
+    };
+
+    angular.module('vendr.resources').factory('vendrActivityLogResource', vendrActivityLogResource);
+
+}());
+(function () {
+
+    'use strict';
+
+    function vendrAnalyticsResource($http, umbRequestHelper, vendrRequestHelper) {
+
+        return {
+            
+            getAnalyticsDashboardConfig: function (storeId) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("analyticsApiBaseUrl", "GetAnalyticsDashboardConfig", {
+                        storeId: storeId
+                    })),
+                    "Failed to get analytics dashboard config");
+            },
+
+            getTotalOrdersReport: function (storeId, from, to, compareFrom, compareTo) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("analyticsApiBaseUrl", "GetTotalOrdersReport", {
+                        storeId: storeId,
+                        from: from,
+                        to: to,
+                        compareFrom: compareFrom,
+                        compareTo: compareTo
+                    })),
+                    "Failed to get total orders report");
+            },
+
+            getTotalRevenueReport: function (storeId, from, to, compareFrom, compareTo) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("analyticsApiBaseUrl", "GetTotalRevenueReport", {
+                        storeId: storeId,
+                        from: from,
+                        to: to,
+                        compareFrom: compareFrom,
+                        compareTo: compareTo
+                    })),
+                    "Failed to get total revenue report");
+            },
+
+            getAverageOrderValueReport: function (storeId, from, to, compareFrom, compareTo) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("analyticsApiBaseUrl", "GetAverageOrderValueReport", {
+                        storeId: storeId,
+                        from: from,
+                        to: to,
+                        compareFrom: compareFrom,
+                        compareTo: compareTo
+                    })),
+                    "Failed to get average order value report");
+            },
+
+            getCartConversionRatesReport: function (storeId, from, to, compareFrom, compareTo) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("analyticsApiBaseUrl", "GetCartConversionRatesReport", {
+                        storeId: storeId,
+                        from: from,
+                        to: to,
+                        compareFrom: compareFrom,
+                        compareTo: compareTo
+                    })),
+                    "Failed to get cart conversion rates report");
+            },
+
+            getRepeatCustomerRatesReport: function (storeId, from, to, compareFrom, compareTo) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("analyticsApiBaseUrl", "GetRepeatCustomerRatesReport", {
+                        storeId: storeId,
+                        from: from,
+                        to: to,
+                        compareFrom: compareFrom,
+                        compareTo: compareTo
+                    })),
+                    "Failed to get repeat customer rates report");
+            },
+
+            getTopSellingProductsReport: function (storeId, from, to, compareFrom, compareTo) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("analyticsApiBaseUrl", "GetTopSellingProductsReport", {
+                        storeId: storeId,
+                        from: from,
+                        to: to,
+                        compareFrom: compareFrom,
+                        compareTo: compareTo
+                    })),
+                    "Failed to get top selling products report");
+            },
+
+        };
+
+    };
+
+    angular.module('vendr.resources').factory('vendrAnalyticsResource', vendrAnalyticsResource);
+
+}());
+(function () {
+
+    'use strict';
+
     function vendrCountryResource($http, umbRequestHelper, vendrRequestHelper) {
 
         return {
@@ -188,6 +308,29 @@
     angular.module('vendr.resources').factory('vendrCurrencyResource', vendrCurrencyResource);
 
 }());
+//(function () {
+
+//    'use strict';
+
+//    function vendrDashboardResource($http, umbRequestHelper, vendrRequestHelper) {
+
+//        return {
+            
+//            getStoreStatsForToday: function (storeId) {
+//                return umbRequestHelper.resourcePromise(
+//                    $http.get(vendrRequestHelper.getApiUrl("dashboardApiBaseUrl", "GetStoreStatsForToday", {
+//                        storeId: storeId
+//                    })),
+//                    "Failed to get store stats for today");
+//            }
+
+//        };
+
+//    };
+
+//    angular.module('vendr.resources').factory('vendrDashboardResource', vendrDashboardResource);
+
+//}());
 (function () {
 
     'use strict';
@@ -900,6 +1043,12 @@
                     "Failed to get stores");
             },
 
+            getStoreSummariesForCurrentUser: function () {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("storeApiBaseUrl", "GetStoreSummariesForCurrentUser")),
+                    "Failed to get store summaries for current user");
+            },
+
             getBasicStore: function (storeId) {
                 return umbRequestHelper.resourcePromise(
                     $http.get(vendrRequestHelper.getApiUrl("storeApiBaseUrl", "GetBasicStore", { 
@@ -958,6 +1107,14 @@
                         storeId: storeId
                     })),
                     "Failed to delete store");
+            },
+
+            getStoreStatsForToday: function (storeId) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("storeApiBaseUrl", "GetStoreStatsForToday", {
+                        storeId: storeId
+                    })),
+                    "Failed to get store stats for today");
             }
 
         };

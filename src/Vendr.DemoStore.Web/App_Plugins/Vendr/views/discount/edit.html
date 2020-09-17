@@ -71,7 +71,7 @@
                                                     </td>
                                                     <td>
                                                         <button type="button" ng-click="vm.removeDiscountCode(item, $index)" class="btn umb-button--xs dropdown-toggle umb-button-group__toggle" title="Remove Discount Code" aria-hidden="true">
-                                                            <span class="icon icon-trash"></span>
+                                                            <i class="icon icon-trash"></i>
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -125,25 +125,27 @@
                                                     <td>
                                                         <div class="btn-group flex" style="font-size: 15px;">
                                                             <umb-date-time-picker ng-model="vm.localStartDate"
-                                                                                  options="vm.startDatePickerConfig"
-                                                                                  on-setup="vm.startDatePickerSetup(fpItem)"
-                                                                                  on-change="vm.startDatePickerChange(dateStr, instance)">
+                                                                options="vm.startDatePickerConfig"
+                                                                on-setup="vm.startDatePickerSetup(fpItem)"
+                                                                on-change="vm.startDatePickerChange(dateStr, instance)">
                                                             </umb-date-time-picker>
-                                                            <a ng-show="vm.content.startDate" ng-click="vm.clearStartDate()" class="btn umb-button--xs dropdown-toggle umb-button-group__toggle vendr-btn--clear">
-                                                                <span class="icon icon-wrong"></span>
-                                                            </a>
+                                                            <button ng-show="vm.content.startDate" ng-click="vm.clearStartDate()" 
+                                                                    class="btn umb-button--xs dropdown-toggle umb-button-group__toggle vendr-btn--clear">
+                                                                <i class="icon icon-wrong"></i>
+                                                            </button>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="btn-group flex" style="font-size: 15px;">
                                                             <umb-date-time-picker ng-model="vm.localExpiryDate"
-                                                                                  options="vm.expiryDatePickerConfig"
-                                                                                  on-setup="vm.expiryDatePickerSetup(fpItem)"
-                                                                                  on-change="vm.expiryDatePickerChange(dateStr, instance)">
+                                                                options="vm.expiryDatePickerConfig"
+                                                                on-setup="vm.expiryDatePickerSetup(fpItem)"
+                                                                on-change="vm.expiryDatePickerChange(dateStr, instance)">
                                                             </umb-date-time-picker>
-                                                            <a ng-show="vm.content.expiryDate" ng-click="vm.clearExpiryDate()" class="btn umb-button--xs dropdown-toggle umb-button-group__toggle vendr-btn--clear">
-                                                                <span class="icon icon-wrong"></span>
-                                                            </a>
+                                                            <button ng-show="vm.content.expiryDate" ng-click="vm.clearExpiryDate()" 
+                                                                    class="btn umb-button--xs dropdown-toggle umb-button-group__toggle vendr-btn--clear">
+                                                                <i class="icon icon-wrong"></i>
+                                                            </button>
                                                         </div>
                                                     </td>
                                                 </tr>
