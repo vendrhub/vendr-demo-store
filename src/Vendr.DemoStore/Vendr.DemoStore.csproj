@@ -39,8 +39,8 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Portable.BouncyCastle.1.8.5\lib\net40\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
-    <Reference Include="C5, Version=2.2.4822.42600, Culture=neutral, PublicKeyToken=282361b99ded7e8e, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\C5.2.2.4822.42600\lib\portable-win+net40+sl40+wp+Xbox40\C5.dll</HintPath>
+    <Reference Include="C5, Version=2.5.0.0, Culture=neutral, PublicKeyToken=282361b99ded7e8e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\C5.2.5.3\lib\net45\C5.dll</HintPath>
     </Reference>
     <Reference Include="ClientDependency.Core, Version=1.9.9.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\ClientDependency.1.9.9\lib\net45\ClientDependency.Core.dll</HintPath>
@@ -48,11 +48,11 @@
     <Reference Include="ClientDependency.Core.Mvc, Version=1.9.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\ClientDependency-Mvc5.1.9.3\lib\net45\ClientDependency.Core.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Common.Logging.3.0.0\lib\net40\Common.Logging.dll</HintPath>
+    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
     <Reference Include="CSharpTest.Net.Collections, Version=14.906.1403.1082, Culture=neutral, PublicKeyToken=06aee00cce822474, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CSharpTest.Net.Collections.14.906.1403.1082\lib\net40\CSharpTest.Net.Collections.dll</HintPath>
@@ -532,7 +532,6 @@
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.Analyzers.2.6.1\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
