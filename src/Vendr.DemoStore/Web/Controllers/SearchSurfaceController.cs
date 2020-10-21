@@ -1,20 +1,18 @@
-﻿using Examine;
-using Examine.LuceneEngine.Providers;
-using Lucene.Net.Analysis;
-using Lucene.Net.Index;
-using Lucene.Net.QueryParsers;
-using Lucene.Net.Search;
-using Lucene.Net.Store;
-using Lucene.Net.Util;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
+using Examine;
+using Examine.Facets;
+using Lucene.Net.Search;
+using Our.Umbraco.Extensions.Facets;
+using Our.Umbraco.Extensions.Search;
 using Umbraco.Core;
 using Umbraco.Core.Models;
 using Umbraco.Core.Models.PublishedContent;
+using Umbraco.Web;
 using Umbraco.Web.Mvc;
 using Vendr.DemoStore.Models;
 
@@ -30,32 +28,34 @@ namespace Vendr.DemoStore.Web.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult Search(string q = "", int p = 1, int ps = 12)
+        public ActionResult Search(string q = "", string category = "", int p = 1, int ps = 12)
         {
             // The logic for searching is mostly pulled from ezSearch
             // https://github.com/umco/umbraco-ezsearch/blob/master/Src/Our.Umbraco.ezSearch/Web/UI/Views/MacroPartials/ezSearch.cshtml
 
             // Prepair a view model to return
-            var result = new SearchViewModel();
+            var model = new SearchViewModel();
 
-            // Populate category names collection which will be used to
-            // provide friendly names for the facet categories
-            var homePage = CurrentPage.GetHomePage();
-            var categoriesNode = homePage.Children.OfType<CategoriesPage>().FirstOrDefault();
-            var categoryNodes = categoriesNode.Children.OfType<CategoryPage>();
-            result.CategoryNames = categoryNodes.ToDictionary(x => x.UrlSegment.MakeSearchTermSafe(), x => x.Name);
+            // Check if the searcher is available
+            if (_examineManager.TryGetSearcher("FacetSearcher", out ISearcher searcher) == false)
+            {
+                throw new Exception("Failed to find searcher");
+            }
 
-            // Perform the faceted search
-            if (!q.IsNullOrWhiteSpace() && _examineManager.TryGetIndex("ExternalIndex", out var index))
+            // Build the query
+            var query = searcher.CreateQuery("Content")
+                .IsVisble()
+                .And()
+                .HasTemplate();
+
+            // Perform the keyword search
+            if (q.IsNullOrWhiteSpace() == false)
             {
                 var searchTerms = Tokenize(q);
+
                 var searchFields = new[] { "nodeName", "metaTitle", "description", "shortDescription", "longDescription", "metaDescription", "bodyText", "content" };
 
                 var sb = new StringBuilder();
-
-                sb.Append("+__IndexType:content "); // Must be content
-                sb.Append("-templateID:0 "); // Must have a template
-                sb.Append("-umbracoNaviHide:1 "); // Must no be hidden
 
                 // Ensure page contains all search terms in some way
                 foreach (var term in searchTerms)
@@ -71,7 +71,7 @@ namespace Vendr.DemoStore.Web.Controllers
                 }
 
                 // Rank content based on positon of search terms in fields
-                for(var i = 0; i < searchFields.Length; i++) 
+                for (var i = 0; i < searchFields.Length; i++) 
                 {
                     foreach (var term in searchTerms)
                     {
@@ -81,29 +81,38 @@ namespace Vendr.DemoStore.Web.Controllers
                     }
                 }
 
-                // Perform a faceted search based on search categories
-                using (var reader = IndexReader.Open(((LuceneIndex)index).GetLuceneDirectory(), true))
-                using (var factedSearcher = new SimpleFacetedSearch(reader, new string[] { "searchCategory" }))
-                {
-                    var queryParser = new QueryParser(Version.LUCENE_30, "", new KeywordAnalyzer());
-                    var query = queryParser.Parse(sb.ToString());
-                    var queryResults = factedSearcher.Search(query, ps * p);
-
-                    var facetedResults = new Dictionary<string, PagedResult<IPublishedContent>>();
-
-                    foreach (SimpleFacetedSearch.HitsPerFacet hpg in queryResults.HitsPerFacet)
-                    {
-                        facetedResults.Add(hpg.Name.ToString(), new PagedResult<IPublishedContent>(hpg.HitCount, p, ps)
-                        {
-                            Items = hpg.Documents.Skip(ps * (p - 1)).Select(x => UmbracoContext.Content.GetById(int.Parse(x.Get("id")))).ToList()
-                        });
-                    }
-
-                    result.Facets = facetedResults;
-                }
+                query.And().ManagedQuery(sb.ToString());
+            }
+            
+            // Search for the category alias
+            if (category.IsNullOrWhiteSpace() == false)
+            {
+                query.And().Field("__Search_categories", category);
             }
 
-            return PartialView("SearchResults", result);
+            // Fetch facets for categories
+            query.And().Facet("categories");
+
+            // Execute search
+            var searchResults = query.Execute();
+
+            var results = searchResults
+                .GetResults<IPublishedContent>()
+                .Skip(ps * (p - 1))
+                .Take(ps);
+
+            model.Results = new PagedResult<IPublishedContent>(searchResults.TotalItemCount, p, ps)
+            {
+                Items = results
+            };
+
+            var categories = searchResults
+                .GetFacet("categories")
+                .ToDictionary(x => UmbracoContext.Content.GetById(Udi.Parse(x.Value.ToString())), x => x.Hits);
+
+            model.Categories = categories;
+
+            return PartialView("SearchResults", model);
         }
 
         public IEnumerable<string> Tokenize(string input)
