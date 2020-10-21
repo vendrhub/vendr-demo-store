@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web.Http;
 using System.Web.Mvc;
 using Examine;
 using Examine.Facets;
@@ -28,7 +29,7 @@ namespace Vendr.DemoStore.Web.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult Search(string q = "", string category = "", int p = 1, int ps = 12)
+        public ActionResult Search([FromUri] SearchQuery request)
         {
             // The logic for searching is mostly pulled from ezSearch
             // https://github.com/umco/umbraco-ezsearch/blob/master/Src/Our.Umbraco.ezSearch/Web/UI/Views/MacroPartials/ezSearch.cshtml
@@ -49,9 +50,9 @@ namespace Vendr.DemoStore.Web.Controllers
                 .HasTemplate();
 
             // Perform the keyword search
-            if (q.IsNullOrWhiteSpace() == false)
+            if (request.Query.IsNullOrWhiteSpace() == false)
             {
-                var searchTerms = Tokenize(q);
+                var searchTerms = Tokenize(request.Query);
 
                 var searchFields = new[] { "nodeName", "metaTitle", "description", "shortDescription", "longDescription", "metaDescription", "bodyText", "content" };
 
@@ -85,9 +86,9 @@ namespace Vendr.DemoStore.Web.Controllers
             }
             
             // Search for the category alias
-            if (category.IsNullOrWhiteSpace() == false)
+            if (request.Category.IsNullOrWhiteSpace() == false)
             {
-                query.And().Field("__Search_categories", category);
+                query.And().Field("__Search_categories", request.Category);
             }
 
             // Fetch facets for categories
@@ -98,10 +99,10 @@ namespace Vendr.DemoStore.Web.Controllers
 
             var results = searchResults
                 .GetResults<IPublishedContent>()
-                .Skip(ps * (p - 1))
-                .Take(ps);
+                .Skip(request.PerPage * (request.Page - 1))
+                .Take(request.PerPage);
 
-            model.Results = new PagedResult<IPublishedContent>(searchResults.TotalItemCount, p, ps)
+            model.Results = new PagedResult<IPublishedContent>(searchResults.TotalItemCount, request.Page, request.PerPage)
             {
                 Items = results
             };

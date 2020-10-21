@@ -446,6 +446,7 @@
     <Compile Include="Models\ProductGroupComp.generated.cs">
       <DependentUpon>Generated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\SearchQuery.cs" />
     <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Web\Controllers\SearchSurfaceController.cs" />
     <Compile Include="Web\Dtos\OrderAddressDto.cs" />
