@@ -1,25 +1,17 @@
-﻿using Examine;
+﻿using System.Text;
+using Examine;
 using Examine.Providers;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Umbraco.Core;
 using Umbraco.Core.Composing;
-using Umbraco.Web;
-using Vendr.DemoStore.Models;
 
 namespace Vendr.DemoStore.Composing
 {
     public class DemoStoreComponent : IComponent
     {
         private readonly IExamineManager _examineManager;
-        private readonly IUmbracoContextFactory _umbracoContextFactory;
 
-        public DemoStoreComponent(IExamineManager examineManager,
-            IUmbracoContextFactory umbracoContextFactory)
+        public DemoStoreComponent(IExamineManager examineManager)
         {
             _examineManager = examineManager;
-            _umbracoContextFactory = umbracoContextFactory;
         }
 
         public void Initialize()
@@ -35,57 +27,11 @@ namespace Vendr.DemoStore.Composing
             // Listen for nodes being reindexed in the external index set
             if (_examineManager.TryGetIndex("ExternalIndex", out var index))
             {
+                index.FieldDefinitionCollection.AddOrUpdate(new FieldDefinition("path", "list"));
+                index.FieldDefinitionCollection.AddOrUpdate(new FieldDefinition("categories", "picker"));
+
                 ((BaseIndexProvider)index).TransformingIndexValues += (object sender, IndexingItemEventArgs e) =>
                 {
-                    // ================================================================
-                    // 1. Make product categories searchable
-                    // 2. Give all nodes a searchCategory field for faceted searching
-                    // ================================================================
-
-                    // See if it's a product node with categories defined
-                    if (e.ValueSet.ItemType.InvariantEquals(ProductPage.ModelTypeAlias) && e.ValueSet.Values.ContainsKey("categories"))
-                    {
-                        // Prepare a new collection for category aliases
-                        var categories = new List<string>();
-
-                        // Parse the comma separated list of category UDIs
-                        var categoryIds = e.ValueSet.GetValue("categories").ToString().Split(',').Select(GuidUdi.Parse).ToList();
-
-                        // Fetch the category nodes and extract the category alias, adding it to the aliases collection
-                        using (var ctx = _umbracoContextFactory.EnsureUmbracoContext())
-                        {
-                            foreach (var categoryId in categoryIds)
-                            {
-                                var category = ctx.UmbracoContext.Content.GetById(categoryId);
-                                if (category != null)
-                                {
-                                    categories.Add(category.UrlSegment.MakeSearchTermSafe());
-                                }
-                            }
-                        }
-
-                        // If we have some aliases, add these to the lucene index in a searchable way
-                        e.ValueSet.Add("category", string.Join(" ", categories));
-
-                        // Also define a search category including an "all" entry
-                        e.ValueSet.Add("searchCategory", string.Join(" ", categories.Union(new[] { "all" })));
-                    }
-                    else
-                    {
-                        // If it's not a product, add everything to the all search category
-                        e.ValueSet.Add("searchCategory", "all");
-                    }
-
-                    // ================================================================
-                    // 3. Do some generally usefull modifications
-                    // ================================================================
-
-                    // Create searchable path
-                    if (e.ValueSet.Values.ContainsKey("path"))
-                    {
-                        e.ValueSet.Add("searchPath", e.ValueSet.Values["path"].ToString().Replace(',', ' '));
-                    }
-
                     // Stuff all the fields into a single field for easier searching
                     var combinedFields = new StringBuilder();
 
