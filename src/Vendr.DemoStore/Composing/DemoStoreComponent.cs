@@ -1,5 +1,7 @@
 ﻿using System.Text;
 using Examine;
+using Examine.Facets.BoboBrowse;
+using Examine.LuceneEngine.Providers;
 using Examine.Providers;
 using Umbraco.Core.Composing;
 
@@ -29,6 +31,18 @@ namespace Vendr.DemoStore.Composing
             {
                 index.FieldDefinitionCollection.AddOrUpdate(new FieldDefinition("path", "list"));
                 index.FieldDefinitionCollection.AddOrUpdate(new FieldDefinition("categories", "picker"));
+
+                if (index is LuceneIndex luceneIndex)
+                {
+                    var searcher = new BoboFacetSearcher(
+                        "FacetSearcher",
+                        luceneIndex.GetIndexWriter(),
+                        luceneIndex.DefaultAnalyzer,
+                        luceneIndex.FieldValueTypeCollection
+                    );
+
+                    _examineManager.AddSearcher(searcher);
+                }
 
                 ((BaseIndexProvider)index).TransformingIndexValues += (object sender, IndexingItemEventArgs e) =>
                 {
