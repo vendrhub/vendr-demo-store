@@ -370,6 +370,14 @@
         <member name="M:Umbraco.Web.Composing.ModuleInjector`1.Dispose">
             <inheritdoc />
         </member>
+        <member name="M:Umbraco.Web.Dashboards.DashboardCollectionBuilder.SetWeight``1(System.Int32)">
+            <summary>
+            Changes the default weight of a dashboard
+            </summary>
+            <typeparam name="T">The type of dashboard</typeparam>
+            <param name="weight">The new dashboard weight</param>
+            <returns></returns>
+        </member>
         <member name="T:Umbraco.Web.Editors.Filters.ContentSaveModelValidator">
             <summary>
             Validator for <see cref="T:Umbraco.Web.Models.ContentEditing.ContentItemSave"/>
@@ -566,6 +574,19 @@
             <param name="requiredDefaultMessages"></param>
             <param name="formatDefaultMessages"></param>
         </member>
+        <member name="M:Umbraco.Web.Editors.IconController.GetIcon(System.String)">
+            <summary>
+            Gets an IconModel containing the icon name and SvgString according to an icon name found at the global icons path
+            </summary>
+            <param name="iconName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Editors.IconController.GetAllIcons">
+            <summary>
+            Gets a list of all svg icons found at at the global icons path.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Umbraco.Web.Editors.ImageUrlGeneratorController">
             <summary>
             The API controller used for getting URLs for images with parameters
@@ -726,9 +747,28 @@
             The API controller for editing relation types.
             </summary>
         </member>
+        <member name="T:Umbraco.Web.Editors.RelationTypeController.RelationTypeControllerConfigurationAttribute">
+            <summary>
+            Configures this controller with a custom action selector
+            </summary>
+        </member>
         <member name="M:Umbraco.Web.Editors.RelationTypeController.GetById(System.Int32)">
             <summary>
-            Gets a relation type by ID.
+            Gets a relation type by id
+            </summary>
+            <param name="id">The relation type ID.</param>
+            <returns>Returns the <see cref="T:Umbraco.Web.Models.ContentEditing.RelationTypeDisplay"/>.</returns>
+        </member>
+        <member name="M:Umbraco.Web.Editors.RelationTypeController.GetById(System.Guid)">
+            <summary>
+            Gets a relation type by guid
+            </summary>
+            <param name="id">The relation type ID.</param>
+            <returns>Returns the <see cref="T:Umbraco.Web.Models.ContentEditing.RelationTypeDisplay"/>.</returns>
+        </member>
+        <member name="M:Umbraco.Web.Editors.RelationTypeController.GetById(Umbraco.Core.Udi)">
+            <summary>
+            Gets a relation type by udi
             </summary>
             <param name="id">The relation type ID.</param>
             <returns>Returns the <see cref="T:Umbraco.Web.Models.ContentEditing.RelationTypeDisplay"/>.</returns>
@@ -965,6 +1005,11 @@
             Dictionary
             </remarks>
         </member>
+        <member name="T:Umbraco.Web.Editors.DictionaryController.DictionaryControllerConfigurationAttribute">
+            <summary>
+            Configures this controller with a custom action selector
+            </summary>
+        </member>
         <member name="M:Umbraco.Web.Editors.DictionaryController.DeleteById(System.Int32)">
             <summary>
             Deletes a data type with a given ID
@@ -1000,6 +1045,34 @@
              Returns a not found response when dictionary item does not exist
             </exception>
         </member>
+        <member name="M:Umbraco.Web.Editors.DictionaryController.GetById(System.Guid)">
+            <summary>
+            Gets a dictionary item by guid
+            </summary>
+            <param name="id">
+            The id.
+            </param>
+            <returns>
+            The <see cref="T:Umbraco.Web.Models.ContentEditing.DictionaryDisplay"/>.
+            </returns>
+            <exception cref="T:System.Web.Http.HttpResponseException">
+             Returns a not found response when dictionary item does not exist
+            </exception>
+        </member>
+        <member name="M:Umbraco.Web.Editors.DictionaryController.GetById(Umbraco.Core.Udi)">
+            <summary>
+            Gets a dictionary item by udi
+            </summary>
+            <param name="id">
+            The id.
+            </param>
+            <returns>
+            The <see cref="T:Umbraco.Web.Models.ContentEditing.DictionaryDisplay"/>.
+            </returns>
+            <exception cref="T:System.Web.Http.HttpResponseException">
+             Returns a not found response when dictionary item does not exist
+            </exception>
+        </member>
         <member name="M:Umbraco.Web.Editors.DictionaryController.PostSave(Umbraco.Web.Models.ContentEditing.DictionarySave)">
             <summary>
             Saves a dictionary item
@@ -1018,20 +1091,6 @@
             <returns>
             The <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
             </returns>
-        </member>
-        <member name="M:Umbraco.Web.Editors.DictionaryController.GetChildItemsForList(Umbraco.Core.Models.IDictionaryItem,System.Int32,System.Collections.Generic.ICollection{Umbraco.Web.Models.ContentEditing.DictionaryOverviewDisplay})">
-            <summary>
-            Get child items for list.
-            </summary>
-            <param name="dictionaryItem">
-            The dictionary item.
-            </param>
-            <param name="level">
-            The level.
-            </param>
-            <param name="list">
-            The list.
-            </param>
         </member>
         <member name="T:Umbraco.Web.Editors.EditorValidator`1">
             <summary>
@@ -1143,6 +1202,11 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Umbraco.Web.Editors.TemplateController.TemplateControllerConfigurationAttribute">
+            <summary>
+            Configures this controller with a custom action selector
+            </summary>
+        </member>
         <member name="M:Umbraco.Web.Editors.TemplateController.GetByAlias(System.String)">
             <summary>
             Gets data type by alias
@@ -1158,7 +1222,21 @@
         </member>
         <member name="M:Umbraco.Web.Editors.TemplateController.GetById(System.Int32)">
             <summary>
-            Gets the content json for the content id
+            Gets the template json for the template id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Editors.TemplateController.GetById(System.Guid)">
+            <summary>
+            Gets the template json for the template guid
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Editors.TemplateController.GetById(Umbraco.Core.Udi)">
+            <summary>
+            Gets the template json for the template udi
             </summary>
             <param name="id"></param>
             <returns></returns>
@@ -1224,6 +1302,13 @@
             Gets a user by Id
             </summary>
             <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Editors.UsersController.GetByIds(System.Int32[])">
+            <summary>
+            Get users by integer ids
+            </summary>
+            <param name="ids"></param>
             <returns></returns>
         </member>
         <member name="M:Umbraco.Web.Editors.UsersController.GetPagedUsers(System.Int32,System.Int32,System.String,Umbraco.Core.Persistence.DatabaseModelDefinitions.Direction,System.String[],Umbraco.Core.Models.Membership.UserState[],System.String)">
@@ -1314,6 +1399,32 @@
             <summary>
             An API controller used for dealing with member groups
             </summary>
+        </member>
+        <member name="T:Umbraco.Web.Editors.MemberGroupController.MemberGroupControllerConfigurationAttribute">
+            <summary>
+            Configures this controller with a custom action selector
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Editors.MemberGroupController.GetById(System.Int32)">
+            <summary>
+            Gets the member group json for the member group id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Editors.MemberGroupController.GetById(System.Guid)">
+            <summary>
+            Gets the member group json for the member group guid
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Editors.MemberGroupController.GetById(Umbraco.Core.Udi)">
+            <summary>
+            Gets the member group json for the member group udi
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
         </member>
         <member name="T:Umbraco.Web.Editors.EditorValidator">
             <summary>
@@ -2187,9 +2298,35 @@
             An API controller used for dealing with member types
             </summary>
         </member>
+        <member name="T:Umbraco.Web.Editors.MemberTypeController.MemberTypeControllerConfigurationAttribute">
+            <summary>
+            Configures this controller with a custom action selector
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Editors.MemberTypeController.GetById(System.Int32)">
+            <summary>
+            Gets the member type a given id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Editors.MemberTypeController.GetById(System.Guid)">
+            <summary>
+            Gets the member type a given guid
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Editors.MemberTypeController.GetById(Umbraco.Core.Udi)">
+            <summary>
+            Gets the member type a given udi
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="M:Umbraco.Web.Editors.MemberTypeController.DeleteById(System.Int32)">
             <summary>
-            Deletes a document type with a given ID
+            Deletes a document type with a given id
             </summary>
             <param name="id"></param>
             <returns></returns>
@@ -2638,6 +2775,32 @@
             An API controller used for dealing with content types
             </summary>
         </member>
+        <member name="T:Umbraco.Web.Editors.ContentTypeController.ContentTypeControllerConfigurationAttribute">
+            <summary>
+            Configures this controller with a custom action selector
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Editors.ContentTypeController.GetById(System.Int32)">
+            <summary>
+            Gets the document type a given id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Editors.ContentTypeController.GetById(System.Guid)">
+            <summary>
+            Gets the document type a given guid
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Editors.ContentTypeController.GetById(Umbraco.Core.Udi)">
+            <summary>
+            Gets the document type a given udi
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="M:Umbraco.Web.Editors.ContentTypeController.DeleteById(System.Int32)">
             <summary>
             Deletes a document type with a given ID
@@ -2722,9 +2885,30 @@
             Configures this controller with a custom action selector
             </summary>
         </member>
+        <member name="M:Umbraco.Web.Editors.MediaTypeController.GetById(System.Int32)">
+            <summary>
+            Gets the media type a given id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Editors.MediaTypeController.GetById(System.Guid)">
+            <summary>
+            Gets the media type a given guid
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Editors.MediaTypeController.GetById(Umbraco.Core.Udi)">
+            <summary>
+            Gets the media type a given udi
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="M:Umbraco.Web.Editors.MediaTypeController.DeleteById(System.Int32)">
             <summary>
-            Deletes a media type with a given ID
+            Deletes a media type with a given id
             </summary>
             <param name="id"></param>
             <returns></returns>
@@ -7598,7 +7782,7 @@
         </member>
         <member name="T:Umbraco.Web.Models.ContentEditing.MediaItemDisplay">
             <summary>
-            A model representing a content item to be displayed in the back office
+            A model representing a media item to be displayed in the back office
             </summary>
         </member>
         <member name="T:Umbraco.Web.Models.ContentEditing.Section">
@@ -9896,6 +10080,26 @@
             <param name="pageId"></param>
             <param name="queryString"></param>
         </member>
+        <member name="M:Umbraco.Web.Mvc.RedirectToUmbracoPageResult.#ctor(System.Guid)">
+            <summary>
+            Creates a new RedirectToUmbracoResult
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:Umbraco.Web.Mvc.RedirectToUmbracoPageResult.#ctor(System.Guid,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Creates a new RedirectToUmbracoResult
+            </summary>
+            <param name="key"></param>
+            <param name="queryStringValues"></param>
+        </member>
+        <member name="M:Umbraco.Web.Mvc.RedirectToUmbracoPageResult.#ctor(System.Guid,System.String)">
+            <summary>
+            Creates a new RedirectToUmbracoResult
+            </summary>
+            <param name="key"></param>
+            <param name="queryString"></param>
+        </member>
         <member name="M:Umbraco.Web.Mvc.RedirectToUmbracoPageResult.#ctor(Umbraco.Core.Models.PublishedContent.IPublishedContent)">
             <summary>
             Creates a new RedirectToUmbracoResult
@@ -9936,6 +10140,29 @@
             Creates a new RedirectToUmbracoResult
             </summary>
             <param name="pageId"></param>
+            <param name="queryString"></param>
+            <param name="umbracoContextAccessor"></param>
+        </member>
+        <member name="M:Umbraco.Web.Mvc.RedirectToUmbracoPageResult.#ctor(System.Guid,Umbraco.Web.IUmbracoContextAccessor)">
+            <summary>
+            Creates a new RedirectToUmbracoResult
+            </summary>
+            <param name="key"></param>
+            <param name="umbracoContextAccessor"></param>
+        </member>
+        <member name="M:Umbraco.Web.Mvc.RedirectToUmbracoPageResult.#ctor(System.Guid,System.Collections.Specialized.NameValueCollection,Umbraco.Web.IUmbracoContextAccessor)">
+            <summary>
+            Creates a new RedirectToUmbracoResult
+            </summary>
+            <param name="key"></param>
+            <param name="queryStringValues"></param>
+            <param name="umbracoContextAccessor"></param>
+        </member>
+        <member name="M:Umbraco.Web.Mvc.RedirectToUmbracoPageResult.#ctor(System.Guid,System.String,Umbraco.Web.IUmbracoContextAccessor)">
+            <summary>
+            Creates a new RedirectToUmbracoResult
+            </summary>
+            <param name="key"></param>
             <param name="queryString"></param>
             <param name="umbracoContextAccessor"></param>
         </member>
@@ -10010,6 +10237,29 @@
             <returns></returns>
         </member>
         <member name="M:Umbraco.Web.Mvc.SurfaceController.RedirectToUmbracoPage(System.Int32,System.String)">
+            <summary>
+            Redirects to the Umbraco page with the given id and passes provided querystring
+            </summary>
+            <param name="pageId"></param>
+            <param name="queryString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Mvc.SurfaceController.RedirectToUmbracoPage(System.Guid)">
+            <summary>
+            Redirects to the Umbraco page with the given id
+            </summary>
+            <param name="pageId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Mvc.SurfaceController.RedirectToUmbracoPage(System.Guid,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Redirects to the Umbraco page with the given id and passes provided querystring
+            </summary>
+            <param name="pageId"></param>
+            <param name="queryStringValues"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Mvc.SurfaceController.RedirectToUmbracoPage(System.Guid,System.String)">
             <summary>
             Redirects to the Umbraco page with the given id and passes provided querystring
             </summary>
@@ -14072,6 +14322,11 @@
             <returns>A value indicating whether an Umbraco document was found and assigned.</returns>
             <remarks>Optionally, can also assign the template or anything else on the document request, although that is not required.</remarks>
         </member>
+        <member name="T:Umbraco.Web.Scheduling.SimpleTask">
+            <summary>
+            A simple task that executes a delegate synchronously
+            </summary>
+        </member>
         <member name="T:Umbraco.Web.Scheduling.TempFileCleanup">
             <summary>
             Used to cleanup temporary file locations
@@ -14702,6 +14957,1522 @@
             If false it will delete this from all indexes regardless.
             </param>
         </member>
+        <member name="T:Umbraco.Web.Search.ExamineComponent.DeferedAction">
+            <summary>
+            An action that will execute at the end of the Scope being completed
+            </summary>
+        </member>
+        <member name="T:Umbraco.Web.Search.ExamineComponent.DeferedReIndexForContent">
+            <summary>
+            Re-indexes an <see cref="T:Umbraco.Core.Models.IContent"/> item on a background thread
+            </summary>
+        </member>
+        <member name="T:Umbraco.Web.Search.ExamineComponent.DeferedReIndexForMedia">
+            <summary>
+            Re-indexes an <see cref="T:Umbraco.Core.Models.IMedia"/> item on a background thread
+            </summary>
+        </member>
+        <member name="T:Umbraco.Web.Search.ExamineComponent.DeferedReIndexForMember">
+            <summary>
+            Re-indexes an <see cref="T:Umbraco.Core.Models.IMember"/> item on a background thread
+            </summary>
+        </member>
+        <member name="T:Umbraco.Web.Security.BackOfficeExternalLoginProviderErrorMiddlware">
+            <summary>
+            Used to handle errors registered by external login providers
+            </summary>
+            <remarks>
+            When an external login provider registers an error with <see cref="M:Umbraco.Web.OwinExtensions.SetExternalLoginProviderErrors(Microsoft.Owin.IOwinContext,Umbraco.Web.Security.BackOfficeExternalLoginProviderErrors)"/> during the OAuth process,
+            this middleware will detect that, store the errors into cookie data and redirect to the back office login so we can read the errors back out.
+            </remarks>
+        </member>
+        <member name="T:Umbraco.Web.Security.BackOfficeExternalLoginProviderOptions">
+            <summary>
+            Options used to configure back office external login providers
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.Security.BackOfficeExternalLoginProviderOptions.OnChallenge">
+            <summary>
+            When specified this will be called to retrieve the <see cref="T:Microsoft.Owin.Security.AuthenticationProperties"/> used during the authentication Challenge response.
+            </summary>
+            <remarks>
+            This will generally not be needed since OpenIdConnect.RedirectToIdentityProvider options should be used instead
+            </remarks>
+        </member>
+        <member name="P:Umbraco.Web.Security.BackOfficeExternalLoginProviderOptions.AutoLinkOptions">
+            <summary>
+            Options used to control how users can be auto-linked/created/updated based on the external login provider
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.Security.BackOfficeExternalLoginProviderOptions.DenyLocalLogin">
+            <summary>
+            When set to true will disable all local user login functionality
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.Security.BackOfficeExternalLoginProviderOptions.AutoRedirectLoginToExternalProvider">
+            <summary>
+            When specified this will automatically redirect to the OAuth login provider instead of prompting the user to click on the OAuth button first.
+            </summary>
+            <remarks>
+            This is generally used in conjunction with <see cref="P:Umbraco.Web.Security.BackOfficeExternalLoginProviderOptions.DenyLocalLogin"/>. If more than one OAuth provider specifies this, the last registered
+            provider's redirect settings will win.
+            </remarks>
+        </member>
+        <member name="P:Umbraco.Web.Security.BackOfficeExternalLoginProviderOptions.CustomBackOfficeView">
+            <summary>
+            A virtual path to a custom angular view that is used to replace the entire UI that renders the external login button that the user interacts with
+            </summary>
+            <remarks>
+            If this view is specified it is 100% up to the user to render the html responsible for rendering the link/un-link buttons along with showing any errors
+            that occur. This overrides what Umbraco normally does by default.
+            </remarks>
+        </member>
+        <member name="T:Umbraco.Web.Security.SignOutAuditEventArgs">
+            <summary>
+            Event args used when signing out
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.Security.SignOutAuditEventArgs.SignOutRedirectUrl">
+            <summary>
+            Allows event handlers to set a GET absolute URL to be redirected to after successful logout out of the back office. This
+            can be used for external login providers.
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.Security.UserInviteEventArgs.InvitedUser">
+            <summary>
+            The model used to invite the user
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.Security.UserInviteEventArgs.InviteHandled">
+            <summary>
+            If event handler sets this to true it indicates that Umbraco will no try to send the invite itself
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.Security.UserInviteEventArgs.User">
+            <summary>
+            The local user that has been created that is pending the invite
+            </summary>        
+        </member>
+        <member name="P:Umbraco.Web.Security.UserInviteEventArgs.ShowUserResult">
+            <summary>
+            if set to true will show the edit user button in the UI, else it will not be shown
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeClaimsIdentityFactory`1.CreateAsync(Microsoft.AspNet.Identity.UserManager{`0,System.Int32},`0,System.String)">
+            <summary>
+            Create a ClaimsIdentity from a user
+            </summary>
+            <param name="manager"/><param name="user"/><param name="authenticationType"/>
+            <returns/>
+        </member>
+        <member name="T:Umbraco.Web.Security.BackOfficeUserManagerMarker`2">
+            <summary>
+            This class is only here due to the fact that IOwinContext Get / Set only work in generics, if they worked
+            with regular 'object' then we wouldn't have to use this work around but because of that we have to use this
+            class to resolve the 'real' type of the registered user manager
+            </summary>
+            <typeparam name="TManager"></typeparam>
+            <typeparam name="TUser"></typeparam>
+        </member>
+        <member name="T:Umbraco.Web.Security.BackOfficeUserPasswordCheckerResult">
+            <summary>
+            The result returned from the IBackOfficeUserPasswordChecker
+            </summary>
+        </member>
+        <member name="T:Umbraco.Web.Security.IBackOfficeUserManagerMarker">
+            <summary>
+            This interface is only here due to the fact that IOwinContext Get / Set only work in generics, if they worked
+            with regular 'object' then we wouldn't have to use this work around but because of that we have to use this
+            class to resolve the 'real' type of the registered user manager
+            </summary>
+        </member>
+        <member name="T:Umbraco.Web.Security.IBackOfficeUserPasswordChecker">
+            <summary>
+            Used by the BackOfficeUserManager to check the username/password which allows for developers to more easily
+            set the logic for this procedure.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.IBackOfficeUserPasswordChecker.CheckPasswordAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.String)">
+            <summary>
+            Checks a password for a user
+            </summary>
+            <param name="user"></param>
+            <param name="password"></param>
+            <returns></returns>
+            <remarks>
+            This will allow a developer to auto-link a local account which is required if the user queried doesn't exist locally.
+            The user parameter will always contain the username, if the user doesn't exist locally, the other properties will not be filled in.
+            A developer can then create a local account by filling in the properties and using UserManager.CreateAsync
+            </remarks>
+        </member>
+        <member name="T:Umbraco.Web.Security.IdentityAuditEventArgs">
+            <summary>
+            This class is used by events raised from the BackofficeUserManager
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.Security.IdentityAuditEventArgs.Action">
+            <summary>
+            The action that got triggered from the audit event
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.Security.IdentityAuditEventArgs.DateTimeUtc">
+            <summary>
+            Current date/time in UTC format
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.Security.IdentityAuditEventArgs.IpAddress">
+            <summary>
+            The source IP address of the user performing the action
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.Security.IdentityAuditEventArgs.AffectedUser">
+            <summary>
+            The user affected by the event raised
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.Security.IdentityAuditEventArgs.PerformingUser">
+            <summary>
+            If a user is performing an action on a different user, then this will be set. Otherwise it will be -1
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.Security.IdentityAuditEventArgs.Comment">
+            <summary>
+            An optional comment about the action being logged
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.Security.IdentityAuditEventArgs.Username">
+            <summary>
+            This property is always empty except in the LoginFailed event for an unknown user trying to login
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.IdentityAuditEventArgs.#ctor(Umbraco.Web.Security.AuditEvent,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Default constructor
+            </summary>
+            <param name="action"></param>
+            <param name="ipAddress"></param>
+            <param name="comment"></param>
+            <param name="performingUser"></param>
+            <param name="affectedUser"></param>
+        </member>
+        <member name="M:Umbraco.Web.Security.IdentityAuditEventArgs.#ctor(Umbraco.Web.Security.AuditEvent,System.String,System.String,System.String)">
+            <summary>
+            Creates an instance without a performing or affected user (the id will be set to -1)
+            </summary>
+            <param name="action"></param>
+            <param name="ipAddress"></param>
+            <param name="username"></param>
+            <param name="comment"></param>
+        </member>
+        <member name="M:Umbraco.Web.Security.IdentityAuditEventArgs.GetCurrentRequestBackofficeUserId">
+            <summary>
+            Returns the current logged in backoffice user's Id logging if there is one
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeCookieAuthenticationProvider.ValidateIdentity(Microsoft.Owin.Security.Cookies.CookieValidateIdentityContext)">
+            <summary>
+            Ensures that the culture is set correctly for the current back office user and that the user's session token is valid
+            </summary>
+            <param name="context"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeCookieAuthenticationProvider.EnsureValidSessionId(Microsoft.Owin.Security.Cookies.CookieValidateIdentityContext)">
+            <summary>
+            Ensures that the user has a valid session id
+            </summary>
+            <remarks>
+            So that we are not overloading the database this throttles it's check to every minute
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeSignInManager.PasswordSignInAsync(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Sign in the user in using the user name and password
+            </summary>
+            <param name="userName"/><param name="password"/><param name="isPersistent"/><param name="shouldLockout"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeSignInManager.PasswordSignInAsyncImpl(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Borrowed from Microsoft's underlying sign in manager which is not flexible enough to tell it to use a different cookie type
+            </summary>
+            <param name="userName"></param>
+            <param name="password"></param>
+            <param name="isPersistent"></param>
+            <param name="shouldLockout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeSignInManager.SignInOrTwoFactor(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.Boolean)">
+            <summary>
+            Borrowed from Microsoft's underlying sign in manager which is not flexible enough to tell it to use a different cookie type
+            </summary>
+            <param name="user"></param>
+            <param name="isPersistent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeSignInManager.SignInAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.Boolean,System.Boolean)">
+            <summary>
+            Creates a user identity and then signs the identity using the AuthenticationManager
+            </summary>
+            <param name="user"></param>
+            <param name="isPersistent"></param>
+            <param name="rememberBrowser"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeSignInManager.GetVerifiedUserIdAsync">
+            <summary>
+            Get the user id that has been verified already or int.MinValue if the user has not been verified yet
+            </summary>
+            <returns></returns>
+            <remarks>
+            Replaces the underlying call which is not flexible and doesn't support a custom cookie
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeSignInManager.GetVerifiedUserNameAsync">
+            <summary>
+            Get the username that has been verified already or null.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeSignInManager.TwoFactorSignInAsync(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Two factor verification step
+            </summary>
+            <param name="provider"></param>
+            <param name="code"></param>
+            <param name="isPersistent"></param>
+            <param name="rememberBrowser"></param>
+            <returns></returns>
+            <remarks>
+            This is implemented because we cannot override GetVerifiedUserIdAsync and instead we have to shadow it
+            so due to this and because we are using an INT as the TKey and not an object, it can never be null. Adding to that
+            the default(int) value returned by the base class is always a valid user (i.e. the admin) so we just have to duplicate
+            all of this code to check for int.MinValue
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeSignInManager.SendTwoFactorCodeAsync(System.String)">
+            <summary>Send a two factor code to a user</summary>
+            <param name="provider"></param>
+            <returns></returns>
+            <remarks>
+            This is implemented because we cannot override GetVerifiedUserIdAsync and instead we have to shadow it
+            so due to this and because we are using an INT as the TKey and not an object, it can never be null. Adding to that
+            the default(int) value returned by the base class is always a valid user (i.e. the admin) so we just have to duplicate
+            all of this code to check for int.MinVale instead.
+            </remarks>
+        </member>
+        <member name="T:Umbraco.Web.Security.BackOfficeUserManager">
+            <summary>
+            Default back office user manager
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeUserManager.Create(Microsoft.AspNet.Identity.Owin.IdentityFactoryOptions{Umbraco.Web.Security.BackOfficeUserManager},Umbraco.Core.Services.IUserService,Umbraco.Core.Services.IMemberTypeService,Umbraco.Core.Services.IEntityService,Umbraco.Core.Services.IExternalLoginService,Umbraco.Core.Security.MembershipProviderBase,Umbraco.Core.Mapping.UmbracoMapper,Umbraco.Core.Configuration.UmbracoSettings.IContentSection,Umbraco.Core.Configuration.IGlobalSettings)">
+            <summary>
+            Creates a BackOfficeUserManager instance with all default options and the default BackOfficeUserManager
+            </summary>
+            <param name="options"></param>
+            <param name="userService"></param>
+            <param name="memberTypeService"></param>
+            <param name="entityService"></param>
+            <param name="externalLoginService"></param>
+            <param name="membershipProvider"></param>
+            <param name="contentSectionConfig"></param>
+            <param name="globalSettings"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeUserManager.Create(Microsoft.AspNet.Identity.Owin.IdentityFactoryOptions{Umbraco.Web.Security.BackOfficeUserManager},Umbraco.Core.Security.BackOfficeUserStore,Umbraco.Core.Security.MembershipProviderBase,Umbraco.Core.Configuration.UmbracoSettings.IContentSection)">
+            <summary>
+            Creates a BackOfficeUserManager instance with all default options and a custom BackOfficeUserManager instance
+            </summary>
+            <param name="options"></param>
+            <param name="customUserStore"></param>
+            <param name="membershipProvider"></param>
+            <param name="contentSectionConfig"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeUserManager.InitUserManager(Umbraco.Web.Security.BackOfficeUserManager,Umbraco.Core.Security.MembershipProviderBase,Umbraco.Core.Configuration.UmbracoSettings.IContentSection,Microsoft.AspNet.Identity.Owin.IdentityFactoryOptions{Umbraco.Web.Security.BackOfficeUserManager})">
+            <summary>
+            Initializes the user manager with the correct options
+            </summary>
+            <param name="manager"></param>
+            <param name="membershipProvider"></param>
+            <param name="contentSectionConfig"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Umbraco.Web.Security.BackOfficeUserManager`1">
+            <summary>
+            Generic Back office user manager
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.Security.BackOfficeUserManager`1.SupportsUserTwoFactor">
+            <summary>
+            Developers will need to override this to support custom 2 factor auth
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.InitUserManager(Umbraco.Web.Security.BackOfficeUserManager{`0},Umbraco.Core.Security.MembershipProviderBase,Microsoft.Owin.Security.DataProtection.IDataProtectionProvider,Umbraco.Core.Configuration.UmbracoSettings.IContentSection)">
+            <summary>
+            Initializes the user manager with the correct options
+            </summary>
+            <param name="manager"></param>
+            <param name="membershipProvider">
+            The <see cref="T:Umbraco.Core.Security.MembershipProviderBase"/> for the users called UsersMembershipProvider
+            </param>
+            <param name="dataProtectionProvider"></param>
+            <param name="contentSectionConfig"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.ValidateSessionIdAsync(System.Int32,System.String)">
+            <summary>
+            Used to validate a user's session
+            </summary>
+            <param name="userId"></param>
+            <param name="sessionId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.GetDefaultPasswordHasher(Umbraco.Core.Security.MembershipProviderBase)">
+            <summary>
+            This will determine which password hasher to use based on what is defined in config
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Umbraco.Web.Security.BackOfficeUserManager`1.BackOfficeUserPasswordChecker">
+            <summary>
+            Gets/sets the default back office user password checker
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.GeneratePassword">
+            <summary>
+            Helper method to generate a password for a user based on the current password validator
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.IsLockedOutAsync(System.Int32)">
+            <summary>
+            Override to check the user approval value as well as the user lock out date, by default this only checks the user's locked out date
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+            <remarks>
+            In the ASP.NET Identity world, there is only one value for being locked out, in Umbraco we have 2 so when checking this for Umbraco we need to check both values
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.CheckPasswordAsync(`0,System.String)">
+             <summary>
+             Logic used to validate a username and password
+             </summary>
+             <param name="user"></param>
+             <param name="password"></param>
+             <returns></returns>
+             <remarks>
+             By default this uses the standard ASP.Net Identity approach which is:
+             * Get password store
+             * Call VerifyPasswordAsync with the password store + user + password
+             * Uses the PasswordHasher.VerifyHashedPassword to compare the stored password
+            
+             In some cases people want simple custom control over the username/password check, for simplicity
+             sake, developers would like the users to simply validate against an LDAP directory but the user
+             data remains stored inside of Umbraco.
+             See: http://issues.umbraco.org/issue/U4-7032 for the use cases.
+            
+             We've allowed this check to be overridden with a simple callback so that developers don't actually
+             have to implement/override this class.
+             </remarks>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.ChangePasswordWithResetAsync(System.Int32,System.String,System.String)">
+            <summary>
+            This is a special method that will reset the password but will raise the Password Changed event instead of the reset event
+            </summary>
+            <param name="userId"></param>
+            <param name="token"></param>
+            <param name="newPassword"></param>
+            <returns></returns>
+            <remarks>
+            We use this because in the back office the only way an admin can change another user's password without first knowing their password
+            is to generate a token and reset it, however, when we do this we want to track a password change, not a password reset
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.VerifyPasswordAsync(Microsoft.AspNet.Identity.IUserPasswordStore{`0,System.Int32},`0,System.String)">
+            <summary>
+            Override to determine how to hash the password
+            </summary>
+            <param name="store"></param>
+            <param name="user"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.UpdatePassword(Microsoft.AspNet.Identity.IUserPasswordStore{`0,System.Int32},`0,System.String)">
+            <summary>
+            Override to determine how to hash the password
+            </summary>
+            <param name="passwordStore"></param>
+            <param name="user"></param>
+            <param name="newPassword"></param>
+            <returns></returns>
+            <remarks>
+            This method is called anytime the password needs to be hashed for storage (i.e. including when reset password is used)
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.UpdateSecurityStampInternal(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
+            <summary>
+            This is copied from the underlying .NET base class since they decided to not expose it
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.GetSecurityStore">
+            <summary>
+            This is copied from the underlying .NET base class since they decided to not expose it
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.NewSecurityStamp">
+            <summary>
+            This is copied from the underlying .NET base class since they decided to not expose it
+            </summary>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Umbraco.Web.Security.BackOfficeUserManager`1.AccessFailedAsync(System.Int32)" -->
+        <member name="E:Umbraco.Web.Security.BackOfficeUserManager`1.SendingUserInvite">
+            <summary>
+            Raised when a user is invited
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.GetCurrentRequestIpAddress">
+            <summary>
+            Returns the current request IP address for logging if there is one
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Umbraco.Web.Security.SessionIdValidator">
+            <summary>
+            Static helper class used to configure a CookieAuthenticationProvider to validate a cookie against a user's session id
+            </summary>
+            <remarks>
+            This uses another cookie to track the last checked time which is done for a few reasons:    
+            * We can't use the user's auth ticket to do this because we'd be re-issuing the auth ticket all of the time and it would never expire
+                plus the auth ticket size is much larger than this small value
+            * This will execute quite often (every minute per user) and in some cases there might be several requests that end up re-issuing the cookie so the cookie value should be small
+            * We want to avoid the user lookup if it's not required so that will only happen when the time diff is great enough in the cookie
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.Security.UmbracoAntiForgeryAdditionalDataProvider.#ctor(System.Web.Helpers.IAntiForgeryAdditionalDataProvider)">
+            <summary>
+            Constructor, allows wrapping a default provider
+            </summary>
+            <param name="defaultProvider"></param>
+        </member>
+        <member name="T:Umbraco.Web.Security.AuthenticationExtensions">
+            <summary>
+            Extensions to create and renew and remove authentication tickets for the Umbraco back office
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.AuthenticationExtensions.AuthenticateCurrentRequest(System.Web.HttpContextBase,Microsoft.Owin.Security.AuthenticationTicket,System.Boolean)">
+            <summary>
+            This will check the ticket to see if it is valid, if it is it will set the current thread's user and culture
+            </summary>
+            <param name="http"></param>
+            <param name="ticket"></param>
+            <param name="renewTicket">If true will attempt to renew the ticket</param>
+        </member>
+        <member name="M:Umbraco.Web.Security.AuthenticationExtensions.GetCurrentIdentity(System.Web.HttpContextBase,System.Boolean)">
+            <summary>
+            This will return the current back office identity.
+            </summary>
+            <param name="http"></param>
+            <param name="authenticateRequestIfNotFound">
+            If set to true and a back office identity is not found and not authenticated, this will attempt to authenticate the
+            request just as is done in the Umbraco module and then set the current identity if it is valid.
+            Just like in the UmbracoModule, if this is true then the user's culture will be assigned to the request.
+            </param>
+            <returns>
+            Returns the current back office identity if an admin is authenticated otherwise null
+            </returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.AuthenticationExtensions.GetCurrentIdentity(System.Web.HttpContext,System.Boolean)">
+            <summary>
+            This will return the current back office identity.
+            </summary>
+            <param name="http"></param>
+            <param name="authenticateRequestIfNotFound">
+            If set to true and a back office identity is not found and not authenticated, this will attempt to authenticate the
+            request just as is done in the Umbraco module and then set the current identity if it is valid
+            </param>
+            <returns>
+            Returns the current back office identity if an admin is authenticated otherwise null
+            </returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.AuthenticationExtensions.UmbracoLogout(System.Web.HttpContext)">
+            <summary>
+            This clears the forms authentication cookie
+            </summary>
+            <param name="http"></param>
+        </member>
+        <member name="M:Umbraco.Web.Security.AuthenticationExtensions.RenewUmbracoAuthTicket(System.Web.HttpContextBase)">
+            <summary>
+            This will force ticket renewal in the OWIN pipeline
+            </summary>
+            <param name="http"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.AuthenticationExtensions.RenewUmbracoAuthTicket(System.Web.HttpContext)">
+            <summary>
+            This will force ticket renewal in the OWIN pipeline
+            </summary>
+            <param name="http"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.AuthenticationExtensions.GetRemainingAuthSeconds(System.Web.HttpContextBase)">
+            <summary>
+            returns the number of seconds the user has until their auth session times out
+            </summary>
+            <param name="http"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.AuthenticationExtensions.GetRemainingAuthSeconds(Microsoft.Owin.Security.AuthenticationTicket)">
+            <summary>
+            returns the number of seconds the user has until their auth session times out
+            </summary>
+            <param name="ticket"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.AuthenticationExtensions.GetUmbracoAuthTicket(System.Web.HttpContextBase)">
+            <summary>
+            Gets the umbraco auth ticket
+            </summary>
+            <param name="http"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.AuthenticationExtensions.Logout(System.Web.HttpContextBase,System.String)">
+            <summary>
+            This clears the forms authentication cookie
+            </summary>
+            <param name="http"></param>
+            <param name="cookieName"></param>
+        </member>
+        <member name="T:Umbraco.Web.Security.UmbracoSecureDataFormat">
+            <summary>
+            Custom secure format that ensures the Identity in the ticket is <see cref="T:Umbraco.Core.Security.UmbracoBackOfficeIdentity"/> and not just a ClaimsIdentity
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.UmbracoSecureDataFormat.Unprotect(System.String)">
+            <summary>
+            Un-protects the cookie
+            </summary>
+            <param name="protectedText"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Umbraco.Web.Security.UmbracoAuthTicketDataProtector">
+            <summary>
+            This is used so that we can retrieve the auth ticket protector from an IOwinContext
+            </summary>
+        </member>
+        <member name="T:Umbraco.Web.Security.ExternalSignInAutoLinkOptions">
+            <summary>
+            Options used to configure auto-linking external OAuth providers
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.ExternalSignInAutoLinkOptions.#ctor(System.Boolean,System.String[],System.String)">
+            <summary>
+            Creates a new <see cref="T:Umbraco.Web.Security.ExternalSignInAutoLinkOptions"/> instance
+            </summary>
+            <param name="autoLinkExternalAccount"></param>
+            <param name="defaultUserGroups">If null, the default will be the 'editor' group</param>
+            <param name="defaultCulture"></param>
+        </member>
+        <member name="P:Umbraco.Web.Security.ExternalSignInAutoLinkOptions.AllowManualLinking">
+            <summary>
+            By default this is true which allows the user to manually link and unlink the external provider, if set to false the back office user
+            will not see and cannot perform manual linking or unlinking of the external provider.
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.Security.ExternalSignInAutoLinkOptions.OnAutoLinking">
+            <summary>
+            A callback executed during account auto-linking and before the user is persisted
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.Security.ExternalSignInAutoLinkOptions.OnExternalLogin">
+            <summary>
+            A callback executed during every time a user authenticates using an external login.
+            returns a boolean indicating if sign in should continue or not.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.ExternalSignInAutoLinkOptions.GetDefaultUserGroups(Umbraco.Web.UmbracoContext,Microsoft.AspNet.Identity.Owin.ExternalLoginInfo)">
+            <summary>
+            The default User group aliases to use for auto-linking users
+            </summary>
+            <param name="umbracoContext"></param>
+            <param name="loginInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.ExternalSignInAutoLinkOptions.ShouldAutoLinkExternalAccount(Umbraco.Web.UmbracoContext,Microsoft.AspNet.Identity.Owin.ExternalLoginInfo)">
+             <summary>
+             For private external auth providers such as Active Directory, which when set to true will automatically
+             create a local user if the external provider login was successful.
+            
+             For public auth providers this should always be false!!!
+             </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.ExternalSignInAutoLinkOptions.GetDefaultCulture(Umbraco.Web.UmbracoContext,Microsoft.AspNet.Identity.Owin.ExternalLoginInfo)">
+            <summary>
+            The default Culture to use for auto-linking users
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Umbraco.Web.Security.FixWindowsAuthMiddlware" -->
+        <member name="T:Umbraco.Web.Security.ForceRenewalCookieAuthenticationHandler">
+            <summary>
+            If a flag is set on the context to force renew the ticket, this will do it
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.ForceRenewalCookieAuthenticationHandler.AuthenticateCoreAsync">
+            <summary>
+            This handler doesn't actually do any auth so we return null;
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.ForceRenewalCookieAuthenticationHandler.GetTicket">
+            <summary>
+            Gets the ticket from the request
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.ForceRenewalCookieAuthenticationHandler.ApplyResponseGrantAsync">
+            <summary>
+            This will check if the token exists in the request to force renewal
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Umbraco.Web.Security.ForceRenewalCookieAuthenticationMiddleware">
+            <summary>
+            This middleware is used simply to force renew the auth ticket if a flag to do so is found in the request
+            </summary>
+        </member>
+        <member name="T:Umbraco.Web.Security.GetUserSecondsMiddleWare">
+            <summary>
+            Custom middleware to return the remaining seconds the user has before they are logged out
+            </summary>
+            <remarks>
+            This is quite a custom request because in most situations we just want to return the seconds and don't want
+            to renew the auth ticket, however if KeepUserLoggedIn is true, then we do want to renew the auth ticket for
+            this request!
+            </remarks>
+        </member>
+        <member name="T:Umbraco.Web.Security.IUmbracoBackOfficeTwoFactorOptions">
+            <summary>
+            Used to display a custom view in the back office if developers choose to implement their own custom 2 factor authentication
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.PreviewAuthenticationMiddleware.#ctor(Microsoft.Owin.OwinMiddleware,Umbraco.Web.Security.UmbracoBackOfficeCookieAuthOptions,Umbraco.Core.Configuration.IGlobalSettings)">
+            <summary>
+            Instantiates the middleware with an optional pointer to the next component.
+            </summary>
+            <param name="next"/>
+            <param name="cookieOptions"></param>
+            <param name="globalSettings"></param>
+        </member>
+        <member name="M:Umbraco.Web.Security.PreviewAuthenticationMiddleware.Invoke(Microsoft.Owin.IOwinContext)">
+            <summary>
+            Process an individual request.
+            </summary>
+            <param name="context"/>
+            <returns/>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Umbraco.Web.Security.WebAuthExtensions.SetPrincipalForRequest(System.Net.Http.HttpRequestMessage,System.Security.Principal.IPrincipal)" -->
+        <member name="M:Umbraco.Web.Security.WebAuthExtensions.SetPrincipalForRequest(System.Web.HttpContextBase,System.Security.Principal.IPrincipal)">
+            <summary>
+            This will set a an authenticated IPrincipal to the current request given the IUser object
+            </summary>
+            <param name="httpContext"></param>
+            <param name="principal"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Umbraco.Web.Security.AppBuilderExtensions">
+            <summary>
+            Provides security/identity extension methods to IAppBuilder.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.ConfigureUserManagerForUmbracoBackOffice(Owin.IAppBuilder,Umbraco.Core.Services.ServiceContext,Umbraco.Core.Mapping.UmbracoMapper,Umbraco.Core.Configuration.UmbracoSettings.IContentSection,Umbraco.Core.Configuration.IGlobalSettings,Umbraco.Core.Security.MembershipProviderBase)">
+            <summary>
+            Configure Default Identity User Manager for Umbraco
+            </summary>
+            <param name="app"></param>
+            <param name="services"></param>
+            <param name="contentSettings"></param>
+            <param name="globalSettings"></param>
+            <param name="userMembershipProvider"></param>
+        </member>
+        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.ConfigureUserManagerForUmbracoBackOffice(Owin.IAppBuilder,Umbraco.Core.IRuntimeState,Umbraco.Core.Configuration.UmbracoSettings.IContentSection,Umbraco.Core.Configuration.IGlobalSettings,Umbraco.Core.Security.MembershipProviderBase,Umbraco.Core.Security.BackOfficeUserStore)">
+            <summary>
+            Configure a custom UserStore with the Identity User Manager for Umbraco
+            </summary>
+            <param name="app"></param>
+            <param name="runtimeState"></param>
+            <param name="globalSettings"></param>
+            <param name="userMembershipProvider"></param>
+            <param name="customUserStore"></param>
+            <param name="contentSettings"></param>
+        </member>
+        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.ConfigureUserManagerForUmbracoBackOffice``2(Owin.IAppBuilder,Umbraco.Core.IRuntimeState,Umbraco.Core.Configuration.IGlobalSettings,System.Func{Microsoft.AspNet.Identity.Owin.IdentityFactoryOptions{``0},Microsoft.Owin.IOwinContext,``0})">
+            <summary>
+            Configure a custom BackOfficeUserManager for Umbraco
+            </summary>
+            <param name="app"></param>
+            <param name="runtimeState"></param>
+            <param name="globalSettings"></param>
+            <param name="userManager"></param>
+        </member>
+        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.UseUmbracoBackOfficeCookieAuthentication(Owin.IAppBuilder,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Core.IRuntimeState,Umbraco.Core.Services.IUserService,Umbraco.Core.Configuration.IGlobalSettings,Umbraco.Core.Configuration.UmbracoSettings.ISecuritySection)">
+            <summary>
+            Ensures that the UmbracoBackOfficeAuthenticationMiddleware is assigned to the pipeline
+            </summary>
+            <param name="app"></param>
+            <param name="umbracoContextAccessor"></param>
+            <param name="runtimeState"></param>
+            <param name="userService"></param>
+            <param name="globalSettings"></param>
+            <param name="securitySection"></param>
+            <returns></returns>
+            <remarks>
+            By default this will be configured to execute on PipelineStage.Authenticate
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.UseUmbracoBackOfficeCookieAuthentication(Owin.IAppBuilder,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Core.IRuntimeState,Umbraco.Core.Services.IUserService,Umbraco.Core.Configuration.IGlobalSettings,Umbraco.Core.Configuration.UmbracoSettings.ISecuritySection,Owin.PipelineStage)">
+            <summary>
+            Ensures that the UmbracoBackOfficeAuthenticationMiddleware is assigned to the pipeline
+            </summary>
+            <param name="app"></param>
+            <param name="umbracoContextAccessor"></param>
+            <param name="runtimeState"></param>
+            <param name="userService"></param>
+            <param name="globalSettings"></param>
+            <param name="securitySection"></param>
+            <param name="stage">
+            Configurable pipeline stage
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.UseUmbracoBackOfficeCookieAuthentication(Owin.IAppBuilder,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Core.IRuntimeState,Umbraco.Core.Configuration.IGlobalSettings,Umbraco.Core.Configuration.UmbracoSettings.ISecuritySection,Microsoft.Owin.Security.Cookies.CookieAuthenticationOptions,Owin.PipelineStage)">
+            <summary>
+            Ensures that the UmbracoBackOfficeAuthenticationMiddleware is assigned to the pipeline
+            </summary>
+            <param name="app"></param>
+            <param name="umbracoContextAccessor"></param>
+            <param name="runtimeState"></param>
+            <param name="globalSettings"></param>
+            <param name="securitySection"></param>
+            <param name="cookieOptions">Custom auth cookie options can be specified to have more control over the cookie authentication logic</param>
+            <param name="stage">
+            Configurable pipeline stage
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.SetBackOfficeUserManagerType``2(Owin.IAppBuilder)">
+            <summary>
+            This registers the exact type of the user manager in owin so we can extract it
+            when required in order to extract the user manager instance
+            </summary>
+            <typeparam name="TManager"></typeparam>
+            <typeparam name="TUser"></typeparam>
+            <param name="app"></param>
+            <remarks>
+            This is required because a developer can specify a custom user manager and due to generic types the key name will registered
+            differently in the owin context
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.UseUmbracoBackOfficeExternalCookieAuthentication(Owin.IAppBuilder,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Core.IRuntimeState,Umbraco.Core.Configuration.IGlobalSettings)">
+            <summary>
+            Ensures that the cookie middleware for validating external logins is assigned to the pipeline with the correct
+            Umbraco back office configuration
+            </summary>
+            <param name="app"></param>
+            <param name="umbracoContextAccessor"></param>
+            <param name="runtimeState"></param>
+            <param name="globalSettings"></param>
+            <returns></returns>
+            <remarks>
+            By default this will be configured to execute on PipelineStage.Authenticate
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.UseUmbracoBackOfficeExternalCookieAuthentication(Owin.IAppBuilder,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Core.IRuntimeState,Umbraco.Core.Configuration.IGlobalSettings,Owin.PipelineStage)">
+            <summary>
+            Ensures that the cookie middleware for validating external logins is assigned to the pipeline with the correct
+            Umbraco back office configuration
+            </summary>
+            <param name="app"></param>
+            <param name="umbracoContextAccessor"></param>
+            <param name="runtimeState"></param>
+            <param name="globalSettings"></param>
+            <param name="stage"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.UseUmbracoPreviewAuthentication(Owin.IAppBuilder,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Core.IRuntimeState,Umbraco.Core.Configuration.IGlobalSettings,Umbraco.Core.Configuration.UmbracoSettings.ISecuritySection)">
+            <summary>
+            In order for preview to work this needs to be called
+            </summary>
+            <param name="app"></param>
+            <param name="umbracoContextAccessor"></param>
+            <param name="runtimeState"></param>
+            <param name="globalSettings"></param>
+            <param name="securitySettings"></param>
+            <returns></returns>
+            <remarks>
+            This ensures that during a preview request that the back office use is also Authenticated and that the back office Identity
+            is added as a secondary identity to the current IPrincipal so it can be used to Authorize the previewed document.
+            </remarks>
+            <remarks>
+            By default this will be configured to execute on PipelineStage.PostAuthenticate
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.UseUmbracoPreviewAuthentication(Owin.IAppBuilder,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Core.IRuntimeState,Umbraco.Core.Configuration.IGlobalSettings,Umbraco.Core.Configuration.UmbracoSettings.ISecuritySection,Owin.PipelineStage)">
+            <summary>
+            In order for preview to work this needs to be called
+            </summary>
+            <param name="app"></param>
+            <param name="umbracoContextAccessor"></param>
+            <param name="runtimeState"></param>
+            <param name="globalSettings"></param>
+            <param name="securitySettings"></param>
+            <param name="stage"></param>
+            <returns></returns>
+            <remarks>
+            This ensures that during a preview request that the back office use is also Authenticated and that the back office Identity
+            is added as a secondary identity to the current IPrincipal so it can be used to Authorize the previewed document.
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.UseUmbracoBackOfficeExternalLoginErrors(Owin.IAppBuilder,Owin.PipelineStage)">
+            <summary>
+            Enable the back office to detect and handle errors registered with external login providers
+            </summary>
+            <param name="app"></param>
+            <param name="stage"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.CreateUmbracoCookieAuthOptions(Owin.IAppBuilder,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Core.Configuration.IGlobalSettings,Umbraco.Core.IRuntimeState,Umbraco.Core.Configuration.UmbracoSettings.ISecuritySection,System.String[])">
+            <summary>
+            Create the default umb cookie auth options
+            </summary>
+            <param name="app"></param>
+            <param name="umbracoContextAccessor"></param>
+            <param name="globalSettings"></param>
+            <param name="runtimeState"></param>
+            <param name="securitySettings"></param>
+            <param name="explicitPaths"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.AuthenticationOptionsExtensions.SetBackOfficeExternalLoginProviderOptions(Microsoft.Owin.Security.AuthenticationOptions,Umbraco.Web.Security.BackOfficeExternalLoginProviderOptions)">
+            <summary>
+            Used to specify all back office external login options
+            </summary>
+            <param name="authOptions"></param>
+            <param name="externalLoginProviderOptions"></param>
+        </member>
+        <member name="M:Umbraco.Web.Security.AuthenticationOptionsExtensions.ForUmbracoBackOffice(Microsoft.Owin.Security.AuthenticationOptions,System.String,System.String,System.String)">
+             <summary>
+             Configures the properties of the authentication description instance for use with Umbraco back office
+             </summary>
+             <param name="options"></param>
+             <param name="style"></param>
+             <param name="icon"></param>
+             <param name="callbackPath">
+             This is important if the identity provider is to be able to authenticate when upgrading Umbraco. We will try to extract this from
+             any options passed in via reflection since none of the default OWIN providers inherit from a base class but so far all of them have a consistent
+             name for the 'CallbackPath' property which is of type PathString. So we'll try to extract it if it's not found or supplied.
+            
+             If a value is extracted or supplied, this will be added to an internal list which the UmbracoModule will use to allow the request to pass
+             through without redirecting to the installer.
+             </param>
+        </member>
+        <member name="M:Umbraco.Web.Security.AuthenticationManagerExtensions.GetAutoLoginProvider(Microsoft.Owin.Security.IAuthenticationManager)">
+            <summary>
+            Returns the authentication type for the last registered external login (oauth) provider that specifies an auto-login redirect option
+            </summary>
+            <param name="manager"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.AuthenticationManagerExtensions.GetExternalLoginInfoAsync(Microsoft.Owin.Security.IAuthenticationManager,System.String,System.String,System.String)">
+            <summary>
+                Extracts login info out of an external identity
+            </summary>
+            <param name="manager"></param>
+            <param name="authenticationType"></param>
+            <param name="xsrfKey">key that will be used to find the userId to verify</param>
+            <param name="expectedValue">
+                the value expected to be found using the xsrfKey in the AuthenticationResult.Properties
+                dictionary
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.AuthenticationManagerExtensions.GetExternalLoginInfoAsync(Microsoft.Owin.Security.IAuthenticationManager,System.String)">
+            <summary>
+                Extracts login info out of an external identity
+            </summary>
+            <param name="manager"></param>
+            <param name="authenticationType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Umbraco.Web.Security.BackOfficeCookieManager">
+            <summary>
+            A custom cookie manager that is used to read the cookie from the request.
+            </summary>
+            <remarks>
+            Umbraco's back office cookie needs to be read on two paths: /umbraco and /install and /base therefore we cannot just set the cookie path to be /umbraco,
+            instead we'll specify our own cookie manager and return null if the request isn't for an acceptable path.
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeCookieManager.Microsoft#Owin#Infrastructure#ICookieManager#GetRequestCookie(Microsoft.Owin.IOwinContext,System.String)">
+            <summary>
+            Explicitly implement this so that we filter the request
+            </summary>
+            <param name="context"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.BackOfficeCookieManager.ShouldAuthenticateRequest(Microsoft.Owin.IOwinContext,System.Uri,System.Boolean)">
+            <summary>
+            Determines if we should authenticate the request
+            </summary>
+            <param name="owinContext"></param>
+            <param name="originalRequestUrl"></param>
+            <param name="checkForceAuthTokens"></param>
+            <returns></returns>
+            <remarks>
+            We auth the request when:
+            * it is a back office request
+            * it is an installer request
+            * it is a /base request
+            * it is a preview request
+            </remarks>
+        </member>
+        <member name="T:Umbraco.Web.Security.UmbracoBackOfficeCookieAuthOptions">
+            <summary>
+            Umbraco auth cookie options
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.UmbracoBackOfficeCookieAuthOptions.CreateRequestCookieOptions(Microsoft.Owin.IOwinContext,Microsoft.Owin.Security.AuthenticationTicket)">
+            <summary>
+            Creates the cookie options for saving the auth cookie
+            </summary>
+            <param name="ctx"></param>
+            <param name="ticket"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Umbraco.Web.Security.MembershipHelper">
+            <summary>
+            A helper class for handling Members
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.IsProtected(System.String)">
+            <summary>
+            Check if a document object is protected by the "Protect Pages" functionality in umbraco
+            </summary>
+            <param name="path">The full path of the document object to check</param>
+            <returns>True if the document object is protected</returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.MemberHasAccess(System.String)">
+            <summary>
+            Check if the current user has access to a document
+            </summary>
+            <param name="path">The full path of the document object to check</param>
+            <returns>True if the current user has access or if the current document isn't protected</returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.MemberHasAccess(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Checks if the current user has access to the paths
+            </summary>
+            <param name="paths"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.HasAccess(System.String,System.Web.Security.RoleProvider)">
+            <summary>
+            This will check if the member has access to this path
+            </summary>
+            <param name="path"></param>
+            <param name="roleProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.IsUmbracoMembershipProviderActive">
+            <summary>
+            Returns true if the current membership provider is the Umbraco built-in one.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.UpdateMemberProfile(Umbraco.Web.Models.ProfileModel)">
+            <summary>
+            Updates the currently logged in members profile
+            </summary>
+            <param name="model"></param>
+            <returns>
+            The updated MembershipUser object
+            </returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.RegisterMember(Umbraco.Web.Models.RegisterModel,System.Web.Security.MembershipCreateStatus@,System.Boolean)">
+            <summary>
+            Registers a new member
+            </summary>
+            <param name="model"></param>
+            <param name="status"></param>
+            <param name="logMemberIn">
+            true to log the member in upon successful registration
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.Login(System.String,System.String)">
+            <summary>
+            A helper method to perform the validation and logging in of a member - this is simply wrapping standard membership provider and asp.net forms auth logic.
+            </summary>
+            <param name="username"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.Logout">
+            <summary>
+            Logs out the current member
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.GetCurrentMember">
+            <summary>
+            Returns the currently logged in member as IPublishedContent
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.GetCurrentMemberId">
+            <summary>
+            Returns the currently logged in member id, -1 if they are not logged in
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.GetCurrentMemberProfileModel">
+            <summary>
+            Creates a new profile model filled in with the current members details if they are logged in which allows for editing
+            profile properties
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.CreateRegistrationModel(System.String)">
+            <summary>
+            Creates a model to use for registering new members with custom member properties
+            </summary>
+            <param name="memberTypeAlias"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.GetCurrentUserRoles">
+            <summary>
+            Gets the current user's roles.
+            </summary>
+            <remarks>Roles are cached per user name, at request level.</remarks>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.GetUserRoles(System.String)">
+            <summary>
+            Gets a user's roles.
+            </summary>
+            <remarks>Roles are cached per user name, at request level.</remarks>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.GetCurrentLoginStatus">
+            <summary>
+            Returns the login status model of the currently logged in member.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.IsLoggedIn">
+            <summary>
+            Check if a member is logged in
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Umbraco.Web.Security.MembershipHelper.CurrentUserName">
+            <summary>
+            Returns the currently logged in username
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.IsMemberAuthorized(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Returns true or false if the currently logged in member is authorized based on the parameters provided
+            </summary>
+            <param name="allowTypes"></param>
+            <param name="allowGroups"></param>
+            <param name="allowMembers"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.ChangePassword(System.String,Umbraco.Web.Models.ChangingPasswordModel,System.String)">
+            <summary>
+            Changes password for a member/user given the membership provider name and the password change model
+            </summary>
+            <param name="username"></param>
+            <param name="passwordModel"></param>
+            <param name="membershipProviderName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.ChangePassword(System.String,Umbraco.Web.Models.ChangingPasswordModel,System.Web.Security.MembershipProvider)">
+            <summary>
+            Changes password for a member/user given the membership provider and the password change model
+            </summary>
+            <param name="username"></param>
+            <param name="passwordModel"></param>
+            <param name="membershipProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.UpdateMember(System.Web.Security.MembershipUser,System.Web.Security.MembershipProvider,System.String,System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
+            <summary>
+            Updates a membership user with all of it's writable properties
+            </summary>
+            <param name="member"></param>
+            <param name="provider"></param>
+            <param name="email"></param>
+            <param name="isApproved"></param>
+            <param name="lastLoginDate"></param>
+            <param name="lastActivityDate"></param>
+            <param name="comment"></param>
+            <returns>
+            Returns successful if the membership user required updating, otherwise returns failed if it didn't require updating.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.MembershipHelper.GetCurrentPersistedMember">
+            <summary>
+            Returns the currently logged in IMember object - this should never be exposed to the front-end since it's returning a business logic entity!
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Umbraco.Web.Security.Providers.MembersMembershipProvider">
+            <summary>
+            Custom Membership Provider for Umbraco Members (User authentication for Frontend applications NOT umbraco CMS)
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.Security.Providers.MembersRoleProvider.ApplicationName">
+            <summary>
+            The name of the application using the custom role provider.
+            </summary>
+            <value></value>
+            <returns>The name of the application using the custom membership provider.</returns>
+        </member>
+        <member name="T:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2">
+            <summary>
+            Abstract Membership Provider that users any implementation of IMembershipMemberService{TEntity} service
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.AllowManuallyChangingPassword">
+            <summary>
+            For backwards compatibility, this provider supports this option by default it is false
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.Initialize(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Initializes the provider.
+            </summary>
+            <param name="name">The friendly name of the provider.</param>
+            <param name="config">A collection of the name/value pairs representing the provider-specific attributes specified in the configuration for this provider.</param>
+            <exception cref="T:System.ArgumentNullException">The name of the provider is null.</exception>
+            <exception cref="T:System.InvalidOperationException">An attempt is made to call
+            <see cref="M:System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)"></see> on a provider after the provider
+            has already been initialized.</exception>
+            <exception cref="T:System.ArgumentException">The name of the provider has a length of zero.</exception>
+        </member>
+        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.PerformChangePassword(System.String,System.String,System.String)">
+            <summary>
+            Processes a request to update the password for a membership user.
+            </summary>
+            <param name="username">The user to update the password for.</param>
+            <param name="oldPassword">This property is ignore for this provider</param>
+            <param name="newPassword">The new password for the specified user.</param>
+            <returns>
+            true if the password was updated successfully; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.PerformChangePasswordQuestionAndAnswer(System.String,System.String,System.String,System.String)">
+            <summary>
+            Processes a request to update the password question and answer for a membership user.
+            </summary>
+            <param name="username">The user to change the password question and answer for.</param>
+            <param name="password">The password for the specified user.</param>
+            <param name="newPasswordQuestion">The new password question for the specified user.</param>
+            <param name="newPasswordAnswer">The new password answer for the specified user.</param>
+            <returns>
+            true if the password question and answer are updated successfully; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.PerformCreateUser(System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object,System.Web.Security.MembershipCreateStatus@)">
+            <summary>
+            Adds a new membership user to the data source with the specified member type
+            </summary>
+            <param name="memberTypeAlias">A specific member type to create the member for</param>
+            <param name="username">The user name for the new user.</param>
+            <param name="password">The password for the new user.</param>
+            <param name="email">The e-mail address for the new user.</param>
+            <param name="passwordQuestion">The password question for the new user.</param>
+            <param name="passwordAnswer">The password answer for the new user</param>
+            <param name="isApproved">Whether or not the new user is approved to be validated.</param>
+            <param name="providerUserKey">The unique identifier from the membership data source for the user.</param>
+            <param name="status">A <see cref="T:System.Web.Security.MembershipCreateStatus"></see> enumeration value indicating whether the user was created successfully.</param>
+            <returns>
+            A <see cref="T:System.Web.Security.MembershipUser"></see> object populated with the information for the newly created user.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.DeleteUser(System.String,System.Boolean)">
+            <summary>
+            Removes a user from the membership data source.
+            </summary>
+            <param name="username">The name of the user to delete.</param>
+            <param name="deleteAllRelatedData">
+            TODO: This setting currently has no effect
+            </param>
+            <returns>
+            true if the user was successfully deleted; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.FindUsersByEmail(System.String,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            Gets a collection of membership users where the e-mail address contains the specified e-mail address to match.
+            </summary>
+            <param name="emailToMatch">The e-mail address to search for.</param>
+            <param name="pageIndex">The index of the page of results to return. pageIndex is zero-based.</param>
+            <param name="pageSize">The size of the page of results to return.</param>
+            <param name="totalRecords">The total number of matched users.</param>
+            <returns>
+            A <see cref="T:System.Web.Security.MembershipUserCollection"></see> collection that contains a page of pageSize<see cref="T:System.Web.Security.MembershipUser"></see> objects beginning at the page specified by pageIndex.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.FindUsersByName(System.String,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            Gets a collection of membership users where the user name contains the specified user name to match.
+            </summary>
+            <param name="usernameToMatch">The user name to search for.</param>
+            <param name="pageIndex">The index of the page of results to return. pageIndex is zero-based.</param>
+            <param name="pageSize">The size of the page of results to return.</param>
+            <param name="totalRecords">The total number of matched users.</param>
+            <returns>
+            A <see cref="T:System.Web.Security.MembershipUserCollection"></see> collection that contains a page of pageSize<see cref="T:System.Web.Security.MembershipUser"></see> objects beginning at the page specified by pageIndex.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.GetAllUsers(System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            Gets a collection of all the users in the data source in pages of data.
+            </summary>
+            <param name="pageIndex">The index of the page of results to return. pageIndex is zero-based.</param>
+            <param name="pageSize">The size of the page of results to return.</param>
+            <param name="totalRecords">The total number of matched users.</param>
+            <returns>
+            A <see cref="T:System.Web.Security.MembershipUserCollection"></see> collection that contains a page of pageSize<see cref="T:System.Web.Security.MembershipUser"></see> objects beginning at the page specified by pageIndex.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.GetNumberOfUsersOnline">
+            <summary>
+            Gets the number of users currently accessing the application.
+            </summary>
+            <returns>
+            The number of users currently accessing the application.
+            </returns>
+            <remarks>
+            The way this is done is the same way that it is done in the MS SqlMembershipProvider - We query for any members
+            that have their last active date within the Membership.UserIsOnlineTimeWindow (which is in minutes). It isn't exact science
+            but that is how MS have made theirs so we'll follow that principal.
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.PerformGetPassword(System.String,System.String)">
+            <summary>
+            Gets the password for the specified user name from the data source.
+            </summary>
+            <param name="username">The user to retrieve the password for.</param>
+            <param name="answer">The password answer for the user.</param>
+            <returns>
+            The password for the specified user name.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.GetUser(System.String,System.Boolean)">
+            <summary>
+            Gets information from the data source for a user. Provides an option to update the last-activity date/time stamp for the user.
+            </summary>
+            <param name="username">The name of the user to get information for.</param>
+            <param name="userIsOnline">true to update the last-activity date/time stamp for the user; false to return user information without updating the last-activity date/time stamp for the user.</param>
+            <returns>
+            A <see cref="T:System.Web.Security.MembershipUser"></see> object populated with the specified user's information from the data source.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.GetUser(System.Object,System.Boolean)">
+            <summary>
+            Gets information from the data source for a user based on the unique identifier for the membership user. Provides an option to update the last-activity date/time stamp for the user.
+            </summary>
+            <param name="providerUserKey">The unique identifier for the membership user to get information for.</param>
+            <param name="userIsOnline">true to update the last-activity date/time stamp for the user; false to return user information without updating the last-activity date/time stamp for the user.</param>
+            <returns>
+            A <see cref="T:System.Web.Security.MembershipUser"></see> object populated with the specified user's information from the data source.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.GetUserNameByEmail(System.String)">
+            <summary>
+            Gets the user name associated with the specified e-mail address.
+            </summary>
+            <param name="email">The e-mail address to search for.</param>
+            <returns>
+            The user name associated with the specified e-mail address. If no match is found, return null.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.PerformResetPassword(System.String,System.String,System.String)">
+            <summary>
+            Resets a user's password to a new, automatically generated password.
+            </summary>
+            <param name="username">The user to reset the password for.</param>
+            <param name="answer">The password answer for the specified user (not used with Umbraco).</param>
+            <param name="generatedPassword"></param>
+            <returns>The new password for the specified user.</returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.UnlockUser(System.String)">
+            <summary>
+            Clears a lock so that the membership user can be validated.
+            </summary>
+            <param name="username">The membership user to clear the lock status for.</param>
+            <returns>
+            true if the membership user was successfully unlocked; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.UpdateUser(System.Web.Security.MembershipUser)">
+            <summary>
+            Updates e-mail  approved status, lock status and comment on a user.
+            </summary>
+            <param name="user">A <see cref="T:System.Web.Security.MembershipUser"></see> object that represents the user to update and the updated information for the user.</param>
+        </member>
+        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.ValidateUser(System.String,System.String)">
+            <summary>
+            Verifies that the specified user name and password exist in the data source.
+            </summary>
+            <param name="username">The name of the user to validate.</param>
+            <param name="password">The password for the specified user.</param>
+            <returns>
+            true if the specified username and password are valid; otherwise, false.
+            </returns>
+        </member>
+        <member name="T:Umbraco.Web.Security.Providers.UsersMembershipProvider">
+            <summary>
+            Custom Membership Provider for Umbraco Users (User authentication for Umbraco Backend CMS)
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.Security.Providers.UsersMembershipProvider.EnablePasswordReset">
+            <summary>
+            Indicates whether the membership provider is configured to allow users to reset their passwords.
+            </summary>
+            <value></value>
+            <returns>true if the membership provider supports password reset; otherwise, false. The default is FALSE for users.</returns>
+        </member>
+        <member name="P:Umbraco.Web.Security.Providers.UsersMembershipProvider.AllowManuallyChangingPassword">
+            <summary>
+            For backwards compatibility, this provider supports this option by default it is FALSE for users
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.Providers.UsersMembershipProvider.PerformUnlockUser(System.String,Umbraco.Core.Models.Membership.IUser@)">
+            <summary>
+            Overridden in order to call the BackOfficeUserManager.UnlockUser method in order to raise the user audit events
+            </summary>
+            <param name="username"></param>
+            <param name="member"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.Providers.UsersMembershipProvider.PerformValidateUser(System.String,System.String)">
+            <summary>
+            Override in order to raise appropriate events via the <see cref="T:Umbraco.Web.Security.BackOfficeUserManager"/>
+            </summary>
+            <param name="username"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Umbraco.Web.Security.WebSecurity">
+            <summary>
+            A utility class used for dealing with USER security in Umbraco
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.Security.WebSecurity.CurrentUser">
+            <summary>
+            Gets the current user.
+            </summary>
+            <value>The current user.</value>
+        </member>
+        <member name="M:Umbraco.Web.Security.WebSecurity.PerformLogin(System.Int32)">
+            <summary>
+            Logs a user in.
+            </summary>
+            <param name="userId">The user Id</param>
+            <returns>returns the number of seconds until their session times out</returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.WebSecurity.ClearCurrentLogin">
+            <summary>
+            Clears the current login for the currently logged in user
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.WebSecurity.RenewLoginTimeout">
+            <summary>
+            Renews the user's login ticket
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Security.WebSecurity.ValidateBackOfficeCredentials(System.String,System.String)">
+            <summary>
+            Validates credentials for a back office user
+            </summary>
+            <param name="username"></param>
+            <param name="password"></param>
+            <returns></returns>
+            <remarks>
+            This uses ASP.NET Identity to perform the validation
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.Security.WebSecurity.ValidateUserApp(System.String)">
+            <summary>
+            Validates the current user to see if they have access to the specified app
+            </summary>
+            <param name="app"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.WebSecurity.GetUserId">
+            <summary>
+            Gets the current user's id.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.WebSecurity.GetSessionId">
+            <summary>
+            Returns the current user's unique session id - used to mitigate csrf attacks or any other reason to validate a request
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.WebSecurity.ValidateCurrentUser">
+            <summary>
+            Validates the currently logged in user and ensures they are not timed out
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.WebSecurity.ValidateCurrentUser(System.Boolean,System.Boolean)">
+            <summary>
+            Validates the current user assigned to the request and ensures the stored user data is valid
+            </summary>
+            <param name="throwExceptions">set to true if you want exceptions to be thrown if failed</param>
+            <param name="requiresApproval">If true requires that the user is approved to be validated</param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.WebSecurity.AuthorizeRequest(System.Boolean)">
+            <summary>
+            Authorizes the full request, checks for SSL and validates the current user
+            </summary>
+            <param name="throwExceptions">set to true if you want exceptions to be thrown if failed</param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.WebSecurity.UserHasSectionAccess(System.String,Umbraco.Core.Models.Membership.IUser)">
+            <summary>
+            Checks if the specified user as access to the app
+            </summary>
+            <param name="section"></param>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.WebSecurity.UserHasSectionAccess(System.String,System.String)">
+            <summary>
+            Checks if the specified user by username as access to the app
+            </summary>
+            <param name="section"></param>
+            <param name="username"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Security.WebSecurity.IsAuthenticated">
+            <summary>
+            Ensures that a back office user is logged in
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Umbraco.Web.Services.DashboardService">
             <summary>
             A utility class for determine dashboard security
@@ -14712,6 +16483,27 @@
         </member>
         <member name="M:Umbraco.Web.Services.DashboardService.GetDashboards(Umbraco.Core.Models.Membership.IUser)">
             <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Web.Services.IconService.GetAllIcons">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Web.Services.IconService.GetIcon(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Web.Services.IconService.GetIcon(System.IO.FileInfo)">
+            <summary>
+            Gets an IconModel using values from a FileInfo model
+            </summary>
+            <param name="fileInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Services.IconService.CreateIconModel(System.String,System.String)">
+            <summary>
+            Gets an IconModel containing the icon name and SvgString
+            </summary>
+            <param name="iconName"></param>
+            <param name="iconPath"></param>
+            <returns></returns>
         </member>
         <member name="M:Umbraco.Web.Services.IDashboardService.GetDashboards(System.String,Umbraco.Core.Models.Membership.IUser)">
             <summary>
@@ -14945,6 +16737,35 @@
         </member>
         <member name="M:Umbraco.Web.UmbracoContextReference.Dispose">
             <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Web.ViewDataExtensions.FromBase64CookieData``1(System.Web.Mvc.ViewDataDictionary,System.Web.HttpContextBase,System.String)">
+            <summary>
+            Copies data from a request cookie to view data and then clears the cookie in the response
+            </summary>
+            <param name="viewData"></param>
+            <param name="httpContext"></param>
+            <param name="cookieName"></param>
+            <returns></returns>
+            <remarks>
+            <para>
+            This is similar to TempData but in some cases we cannot use TempData which relies on the temp data provider and session.
+            The cookie value can either be a simple string value
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.ViewDataExtensions.GetExternalSignInProviderErrors(System.Web.Mvc.ViewDataDictionary)">
+            <summary>
+            Used by the back office login screen to get any registered external login provider errors
+            </summary>
+            <param name="viewData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.ViewDataExtensions.SetExternalSignInProviderErrors(System.Web.Mvc.ViewDataDictionary,Umbraco.Web.Security.BackOfficeExternalLoginProviderErrors)">
+            <summary>
+            Used by the back office controller to register any external login provider errors
+            </summary>
+            <param name="viewData"></param>
+            <param name="errors"></param>
         </member>
         <member name="T:Umbraco.Web.WebApi.Filters.AdminUsersAuthorizeAttribute">
             <summary>
@@ -16525,1407 +18346,6 @@
         <member name="M:Umbraco.Web.Runtime.WebRuntime.Boot(Umbraco.Core.Composing.IRegister)">
             <inheritdoc/>
         </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeClaimsIdentityFactory`1.CreateAsync(Microsoft.AspNet.Identity.UserManager{`0,System.Int32},`0,System.String)">
-            <summary>
-            Create a ClaimsIdentity from a user
-            </summary>
-            <param name="manager"/><param name="user"/><param name="authenticationType"/>
-            <returns/>
-        </member>
-        <member name="T:Umbraco.Web.Security.BackOfficeUserManagerMarker`2">
-            <summary>
-            This class is only here due to the fact that IOwinContext Get / Set only work in generics, if they worked
-            with regular 'object' then we wouldn't have to use this work around but because of that we have to use this
-            class to resolve the 'real' type of the registered user manager
-            </summary>
-            <typeparam name="TManager"></typeparam>
-            <typeparam name="TUser"></typeparam>
-        </member>
-        <member name="T:Umbraco.Web.Security.BackOfficeUserPasswordCheckerResult">
-            <summary>
-            The result returned from the IBackOfficeUserPasswordChecker
-            </summary>
-        </member>
-        <member name="T:Umbraco.Web.Security.IBackOfficeUserManagerMarker">
-            <summary>
-            This interface is only here due to the fact that IOwinContext Get / Set only work in generics, if they worked
-            with regular 'object' then we wouldn't have to use this work around but because of that we have to use this
-            class to resolve the 'real' type of the registered user manager
-            </summary>
-        </member>
-        <member name="T:Umbraco.Web.Security.IBackOfficeUserPasswordChecker">
-            <summary>
-            Used by the BackOfficeUserManager to check the username/password which allows for developers to more easily
-            set the logic for this procedure.
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.Security.IBackOfficeUserPasswordChecker.CheckPasswordAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.String)">
-            <summary>
-            Checks a password for a user
-            </summary>
-            <param name="user"></param>
-            <param name="password"></param>
-            <returns></returns>
-            <remarks>
-            This will allow a developer to auto-link a local account which is required if the user queried doesn't exist locally.
-            The user parameter will always contain the username, if the user doesn't exist locally, the other properties will not be filled in.
-            A developer can then create a local account by filling in the properties and using UserManager.CreateAsync
-            </remarks>
-        </member>
-        <member name="T:Umbraco.Web.Security.IdentityAuditEventArgs">
-            <summary>
-            This class is used by events raised from the BackofficeUserManager
-            </summary>
-        </member>
-        <member name="P:Umbraco.Web.Security.IdentityAuditEventArgs.Action">
-            <summary>
-            The action that got triggered from the audit event
-            </summary>
-        </member>
-        <member name="P:Umbraco.Web.Security.IdentityAuditEventArgs.DateTimeUtc">
-            <summary>
-            Current date/time in UTC format
-            </summary>
-        </member>
-        <member name="P:Umbraco.Web.Security.IdentityAuditEventArgs.IpAddress">
-            <summary>
-            The source IP address of the user performing the action
-            </summary>
-        </member>
-        <member name="P:Umbraco.Web.Security.IdentityAuditEventArgs.AffectedUser">
-            <summary>
-            The user affected by the event raised
-            </summary>
-        </member>
-        <member name="P:Umbraco.Web.Security.IdentityAuditEventArgs.PerformingUser">
-            <summary>
-            If a user is performing an action on a different user, then this will be set. Otherwise it will be -1
-            </summary>
-        </member>
-        <member name="P:Umbraco.Web.Security.IdentityAuditEventArgs.Comment">
-            <summary>
-            An optional comment about the action being logged
-            </summary>
-        </member>
-        <member name="P:Umbraco.Web.Security.IdentityAuditEventArgs.Username">
-            <summary>
-            This property is always empty except in the LoginFailed event for an unknown user trying to login
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.Security.IdentityAuditEventArgs.#ctor(Umbraco.Web.Security.AuditEvent,System.String,System.String,System.Int32,System.Int32)">
-            <summary>
-            Default constructor
-            </summary>
-            <param name="action"></param>
-            <param name="ipAddress"></param>
-            <param name="comment"></param>
-            <param name="performingUser"></param>
-            <param name="affectedUser"></param>
-        </member>
-        <member name="M:Umbraco.Web.Security.IdentityAuditEventArgs.#ctor(Umbraco.Web.Security.AuditEvent,System.String,System.String,System.String)">
-            <summary>
-            Creates an instance without a performing or affected user (the id will be set to -1)
-            </summary>
-            <param name="action"></param>
-            <param name="ipAddress"></param>
-            <param name="username"></param>
-            <param name="comment"></param>
-        </member>
-        <member name="M:Umbraco.Web.Security.IdentityAuditEventArgs.GetCurrentRequestBackofficeUserId">
-            <summary>
-            Returns the current logged in backoffice user's Id logging if there is one
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeCookieAuthenticationProvider.ValidateIdentity(Microsoft.Owin.Security.Cookies.CookieValidateIdentityContext)">
-            <summary>
-            Ensures that the culture is set correctly for the current back office user and that the user's session token is valid
-            </summary>
-            <param name="context"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeCookieAuthenticationProvider.EnsureValidSessionId(Microsoft.Owin.Security.Cookies.CookieValidateIdentityContext)">
-            <summary>
-            Ensures that the user has a valid session id
-            </summary>
-            <remarks>
-            So that we are not overloading the database this throttles it's check to every minute
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeSignInManager.PasswordSignInAsync(System.String,System.String,System.Boolean,System.Boolean)">
-            <summary>
-            Sign in the user in using the user name and password
-            </summary>
-            <param name="userName"/><param name="password"/><param name="isPersistent"/><param name="shouldLockout"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeSignInManager.PasswordSignInAsyncImpl(System.String,System.String,System.Boolean,System.Boolean)">
-            <summary>
-            Borrowed from Microsoft's underlying sign in manager which is not flexible enough to tell it to use a different cookie type
-            </summary>
-            <param name="userName"></param>
-            <param name="password"></param>
-            <param name="isPersistent"></param>
-            <param name="shouldLockout"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeSignInManager.SignInOrTwoFactor(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.Boolean)">
-            <summary>
-            Borrowed from Microsoft's underlying sign in manager which is not flexible enough to tell it to use a different cookie type
-            </summary>
-            <param name="user"></param>
-            <param name="isPersistent"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeSignInManager.SignInAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.Boolean,System.Boolean)">
-            <summary>
-            Creates a user identity and then signs the identity using the AuthenticationManager
-            </summary>
-            <param name="user"></param>
-            <param name="isPersistent"></param>
-            <param name="rememberBrowser"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeSignInManager.GetVerifiedUserIdAsync">
-            <summary>
-            Get the user id that has been verified already or int.MinValue if the user has not been verified yet
-            </summary>
-            <returns></returns>
-            <remarks>
-            Replaces the underlying call which is not flexible and doesn't support a custom cookie
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeSignInManager.GetVerifiedUserNameAsync">
-            <summary>
-            Get the username that has been verified already or null.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeSignInManager.TwoFactorSignInAsync(System.String,System.String,System.Boolean,System.Boolean)">
-            <summary>
-            Two factor verification step
-            </summary>
-            <param name="provider"></param>
-            <param name="code"></param>
-            <param name="isPersistent"></param>
-            <param name="rememberBrowser"></param>
-            <returns></returns>
-            <remarks>
-            This is implemented because we cannot override GetVerifiedUserIdAsync and instead we have to shadow it
-            so due to this and because we are using an INT as the TKey and not an object, it can never be null. Adding to that
-            the default(int) value returned by the base class is always a valid user (i.e. the admin) so we just have to duplicate
-            all of this code to check for int.MinValue
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeSignInManager.SendTwoFactorCodeAsync(System.String)">
-            <summary>Send a two factor code to a user</summary>
-            <param name="provider"></param>
-            <returns></returns>
-            <remarks>
-            This is implemented because we cannot override GetVerifiedUserIdAsync and instead we have to shadow it
-            so due to this and because we are using an INT as the TKey and not an object, it can never be null. Adding to that
-            the default(int) value returned by the base class is always a valid user (i.e. the admin) so we just have to duplicate
-            all of this code to check for int.MinVale instead.
-            </remarks>
-        </member>
-        <member name="T:Umbraco.Web.Security.BackOfficeUserManager">
-            <summary>
-            Default back office user manager
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeUserManager.Create(Microsoft.AspNet.Identity.Owin.IdentityFactoryOptions{Umbraco.Web.Security.BackOfficeUserManager},Umbraco.Core.Services.IUserService,Umbraco.Core.Services.IMemberTypeService,Umbraco.Core.Services.IEntityService,Umbraco.Core.Services.IExternalLoginService,Umbraco.Core.Security.MembershipProviderBase,Umbraco.Core.Mapping.UmbracoMapper,Umbraco.Core.Configuration.UmbracoSettings.IContentSection,Umbraco.Core.Configuration.IGlobalSettings)">
-            <summary>
-            Creates a BackOfficeUserManager instance with all default options and the default BackOfficeUserManager
-            </summary>
-            <param name="options"></param>
-            <param name="userService"></param>
-            <param name="memberTypeService"></param>
-            <param name="entityService"></param>
-            <param name="externalLoginService"></param>
-            <param name="membershipProvider"></param>
-            <param name="contentSectionConfig"></param>
-            <param name="globalSettings"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeUserManager.Create(Microsoft.AspNet.Identity.Owin.IdentityFactoryOptions{Umbraco.Web.Security.BackOfficeUserManager},Umbraco.Core.Security.BackOfficeUserStore,Umbraco.Core.Security.MembershipProviderBase,Umbraco.Core.Configuration.UmbracoSettings.IContentSection)">
-            <summary>
-            Creates a BackOfficeUserManager instance with all default options and a custom BackOfficeUserManager instance
-            </summary>
-            <param name="options"></param>
-            <param name="customUserStore"></param>
-            <param name="membershipProvider"></param>
-            <param name="contentSectionConfig"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeUserManager.InitUserManager(Umbraco.Web.Security.BackOfficeUserManager,Umbraco.Core.Security.MembershipProviderBase,Umbraco.Core.Configuration.UmbracoSettings.IContentSection,Microsoft.AspNet.Identity.Owin.IdentityFactoryOptions{Umbraco.Web.Security.BackOfficeUserManager})">
-            <summary>
-            Initializes the user manager with the correct options
-            </summary>
-            <param name="manager"></param>
-            <param name="membershipProvider"></param>
-            <param name="contentSectionConfig"></param>
-            <param name="options"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Umbraco.Web.Security.BackOfficeUserManager`1">
-            <summary>
-            Generic Back office user manager
-            </summary>
-        </member>
-        <member name="P:Umbraco.Web.Security.BackOfficeUserManager`1.SupportsUserTwoFactor">
-            <summary>
-            Developers will need to override this to support custom 2 factor auth
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.InitUserManager(Umbraco.Web.Security.BackOfficeUserManager{`0},Umbraco.Core.Security.MembershipProviderBase,Microsoft.Owin.Security.DataProtection.IDataProtectionProvider,Umbraco.Core.Configuration.UmbracoSettings.IContentSection)">
-            <summary>
-            Initializes the user manager with the correct options
-            </summary>
-            <param name="manager"></param>
-            <param name="membershipProvider">
-            The <see cref="T:Umbraco.Core.Security.MembershipProviderBase"/> for the users called UsersMembershipProvider
-            </param>
-            <param name="dataProtectionProvider"></param>
-            <param name="contentSectionConfig"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.ValidateSessionIdAsync(System.Int32,System.String)">
-            <summary>
-            Used to validate a user's session
-            </summary>
-            <param name="userId"></param>
-            <param name="sessionId"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.GetDefaultPasswordHasher(Umbraco.Core.Security.MembershipProviderBase)">
-            <summary>
-            This will determine which password hasher to use based on what is defined in config
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:Umbraco.Web.Security.BackOfficeUserManager`1.BackOfficeUserPasswordChecker">
-            <summary>
-            Gets/sets the default back office user password checker
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.GeneratePassword">
-            <summary>
-            Helper method to generate a password for a user based on the current password validator
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.IsLockedOutAsync(System.Int32)">
-            <summary>
-            Override to check the user approval value as well as the user lock out date, by default this only checks the user's locked out date
-            </summary>
-            <param name="userId"></param>
-            <returns></returns>
-            <remarks>
-            In the ASP.NET Identity world, there is only one value for being locked out, in Umbraco we have 2 so when checking this for Umbraco we need to check both values
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.CheckPasswordAsync(`0,System.String)">
-             <summary>
-             Logic used to validate a username and password
-             </summary>
-             <param name="user"></param>
-             <param name="password"></param>
-             <returns></returns>
-             <remarks>
-             By default this uses the standard ASP.Net Identity approach which is:
-             * Get password store
-             * Call VerifyPasswordAsync with the password store + user + password
-             * Uses the PasswordHasher.VerifyHashedPassword to compare the stored password
-            
-             In some cases people want simple custom control over the username/password check, for simplicity
-             sake, developers would like the users to simply validate against an LDAP directory but the user
-             data remains stored inside of Umbraco.
-             See: http://issues.umbraco.org/issue/U4-7032 for the use cases.
-            
-             We've allowed this check to be overridden with a simple callback so that developers don't actually
-             have to implement/override this class.
-             </remarks>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.ChangePasswordWithResetAsync(System.Int32,System.String,System.String)">
-            <summary>
-            This is a special method that will reset the password but will raise the Password Changed event instead of the reset event
-            </summary>
-            <param name="userId"></param>
-            <param name="token"></param>
-            <param name="newPassword"></param>
-            <returns></returns>
-            <remarks>
-            We use this because in the back office the only way an admin can change another user's password without first knowing their password
-            is to generate a token and reset it, however, when we do this we want to track a password change, not a password reset
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.VerifyPasswordAsync(Microsoft.AspNet.Identity.IUserPasswordStore{`0,System.Int32},`0,System.String)">
-            <summary>
-            Override to determine how to hash the password
-            </summary>
-            <param name="store"></param>
-            <param name="user"></param>
-            <param name="password"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.UpdatePassword(Microsoft.AspNet.Identity.IUserPasswordStore{`0,System.Int32},`0,System.String)">
-            <summary>
-            Override to determine how to hash the password
-            </summary>
-            <param name="passwordStore"></param>
-            <param name="user"></param>
-            <param name="newPassword"></param>
-            <returns></returns>
-            <remarks>
-            This method is called anytime the password needs to be hashed for storage (i.e. including when reset password is used)
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.UpdateSecurityStampInternal(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
-            <summary>
-            This is copied from the underlying .NET base class since they decided to not expose it
-            </summary>
-            <param name="user"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.GetSecurityStore">
-            <summary>
-            This is copied from the underlying .NET base class since they decided to not expose it
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.NewSecurityStamp">
-            <summary>
-            This is copied from the underlying .NET base class since they decided to not expose it
-            </summary>
-            <returns></returns>
-        </member>
-        <!-- Badly formed XML comment ignored for member "M:Umbraco.Web.Security.BackOfficeUserManager`1.AccessFailedAsync(System.Int32)" -->
-        <member name="M:Umbraco.Web.Security.BackOfficeUserManager`1.GetCurrentRequestIpAddress">
-            <summary>
-            Returns the current request IP address for logging if there is one
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:Umbraco.Web.Security.SessionIdValidator">
-            <summary>
-            Static helper class used to configure a CookieAuthenticationProvider to validate a cookie against a user's session id
-            </summary>
-            <remarks>
-            This uses another cookie to track the last checked time which is done for a few reasons:    
-            * We can't use the user's auth ticket to do this because we'd be re-issuing the auth ticket all of the time and it would never expire
-                plus the auth ticket size is much larger than this small value
-            * This will execute quite often (every minute per user) and in some cases there might be several requests that end up re-issuing the cookie so the cookie value should be small
-            * We want to avoid the user lookup if it's not required so that will only happen when the time diff is great enough in the cookie
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Web.Security.UmbracoAntiForgeryAdditionalDataProvider.#ctor(System.Web.Helpers.IAntiForgeryAdditionalDataProvider)">
-            <summary>
-            Constructor, allows wrapping a default provider
-            </summary>
-            <param name="defaultProvider"></param>
-        </member>
-        <member name="T:Umbraco.Web.Security.AuthenticationExtensions">
-            <summary>
-            Extensions to create and renew and remove authentication tickets for the Umbraco back office
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.Security.AuthenticationExtensions.AuthenticateCurrentRequest(System.Web.HttpContextBase,Microsoft.Owin.Security.AuthenticationTicket,System.Boolean)">
-            <summary>
-            This will check the ticket to see if it is valid, if it is it will set the current thread's user and culture
-            </summary>
-            <param name="http"></param>
-            <param name="ticket"></param>
-            <param name="renewTicket">If true will attempt to renew the ticket</param>
-        </member>
-        <member name="M:Umbraco.Web.Security.AuthenticationExtensions.GetCurrentIdentity(System.Web.HttpContextBase,System.Boolean)">
-            <summary>
-            This will return the current back office identity.
-            </summary>
-            <param name="http"></param>
-            <param name="authenticateRequestIfNotFound">
-            If set to true and a back office identity is not found and not authenticated, this will attempt to authenticate the
-            request just as is done in the Umbraco module and then set the current identity if it is valid.
-            Just like in the UmbracoModule, if this is true then the user's culture will be assigned to the request.
-            </param>
-            <returns>
-            Returns the current back office identity if an admin is authenticated otherwise null
-            </returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.AuthenticationExtensions.GetCurrentIdentity(System.Web.HttpContext,System.Boolean)">
-            <summary>
-            This will return the current back office identity.
-            </summary>
-            <param name="http"></param>
-            <param name="authenticateRequestIfNotFound">
-            If set to true and a back office identity is not found and not authenticated, this will attempt to authenticate the
-            request just as is done in the Umbraco module and then set the current identity if it is valid
-            </param>
-            <returns>
-            Returns the current back office identity if an admin is authenticated otherwise null
-            </returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.AuthenticationExtensions.UmbracoLogout(System.Web.HttpContext)">
-            <summary>
-            This clears the forms authentication cookie
-            </summary>
-            <param name="http"></param>
-        </member>
-        <member name="M:Umbraco.Web.Security.AuthenticationExtensions.RenewUmbracoAuthTicket(System.Web.HttpContextBase)">
-            <summary>
-            This will force ticket renewal in the OWIN pipeline
-            </summary>
-            <param name="http"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.AuthenticationExtensions.RenewUmbracoAuthTicket(System.Web.HttpContext)">
-            <summary>
-            This will force ticket renewal in the OWIN pipeline
-            </summary>
-            <param name="http"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.AuthenticationExtensions.GetRemainingAuthSeconds(System.Web.HttpContextBase)">
-            <summary>
-            returns the number of seconds the user has until their auth session times out
-            </summary>
-            <param name="http"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.AuthenticationExtensions.GetRemainingAuthSeconds(Microsoft.Owin.Security.AuthenticationTicket)">
-            <summary>
-            returns the number of seconds the user has until their auth session times out
-            </summary>
-            <param name="ticket"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.AuthenticationExtensions.GetUmbracoAuthTicket(System.Web.HttpContextBase)">
-            <summary>
-            Gets the umbraco auth ticket
-            </summary>
-            <param name="http"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.AuthenticationExtensions.Logout(System.Web.HttpContextBase,System.String)">
-            <summary>
-            This clears the forms authentication cookie
-            </summary>
-            <param name="http"></param>
-            <param name="cookieName"></param>
-        </member>
-        <member name="T:Umbraco.Web.Security.UmbracoSecureDataFormat">
-            <summary>
-            Custom secure format that ensures the Identity in the ticket is <see cref="T:Umbraco.Core.Security.UmbracoBackOfficeIdentity"/> and not just a ClaimsIdentity
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.Security.UmbracoSecureDataFormat.Unprotect(System.String)">
-            <summary>
-            Un-protects the cookie
-            </summary>
-            <param name="protectedText"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Umbraco.Web.Security.UmbracoAuthTicketDataProtector">
-            <summary>
-            This is used so that we can retrieve the auth ticket protector from an IOwinContext
-            </summary>
-        </member>
-        <member name="T:Umbraco.Web.Security.ExternalSignInAutoLinkOptions">
-            <summary>
-            Options used to configure auto-linking external OAuth providers
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.Security.ExternalSignInAutoLinkOptions.#ctor(System.Boolean,System.String[],System.String)">
-            <summary>
-            Creates a new <see cref="T:Umbraco.Web.Security.ExternalSignInAutoLinkOptions"/> instance
-            </summary>
-            <param name="autoLinkExternalAccount"></param>
-            <param name="defaultUserGroups">If null, the default will be the 'editor' group</param>
-            <param name="defaultCulture"></param>
-        </member>
-        <member name="P:Umbraco.Web.Security.ExternalSignInAutoLinkOptions.OnAutoLinking">
-            <summary>
-            A callback executed during account auto-linking and before the user is persisted
-            </summary>
-        </member>
-        <member name="P:Umbraco.Web.Security.ExternalSignInAutoLinkOptions.OnExternalLogin">
-            <summary>
-            A callback executed during every time a user authenticates using an external login.
-            returns a boolean indicating if sign in should continue or not.
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.Security.ExternalSignInAutoLinkOptions.GetDefaultUserGroups(Umbraco.Web.UmbracoContext,Microsoft.AspNet.Identity.Owin.ExternalLoginInfo)">
-            <summary>
-            The default User group aliases to use for auto-linking users
-            </summary>
-            <param name="umbracoContext"></param>
-            <param name="loginInfo"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.ExternalSignInAutoLinkOptions.ShouldAutoLinkExternalAccount(Umbraco.Web.UmbracoContext,Microsoft.AspNet.Identity.Owin.ExternalLoginInfo)">
-             <summary>
-             For private external auth providers such as Active Directory, which when set to true will automatically
-             create a local user if the external provider login was successful.
-            
-             For public auth providers this should always be false!!!
-             </summary>
-        </member>
-        <member name="M:Umbraco.Web.Security.ExternalSignInAutoLinkOptions.GetDefaultCulture(Umbraco.Web.UmbracoContext,Microsoft.AspNet.Identity.Owin.ExternalLoginInfo)">
-            <summary>
-            The default Culture to use for auto-linking users
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "T:Umbraco.Web.Security.FixWindowsAuthMiddlware" -->
-        <member name="T:Umbraco.Web.Security.ForceRenewalCookieAuthenticationHandler">
-            <summary>
-            If a flag is set on the context to force renew the ticket, this will do it
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.Security.ForceRenewalCookieAuthenticationHandler.AuthenticateCoreAsync">
-            <summary>
-            This handler doesn't actually do any auth so we return null;
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.ForceRenewalCookieAuthenticationHandler.GetTicket">
-            <summary>
-            Gets the ticket from the request
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.ForceRenewalCookieAuthenticationHandler.ApplyResponseGrantAsync">
-            <summary>
-            This will check if the token exists in the request to force renewal
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:Umbraco.Web.Security.ForceRenewalCookieAuthenticationMiddleware">
-            <summary>
-            This middleware is used simply to force renew the auth ticket if a flag to do so is found in the request
-            </summary>
-        </member>
-        <member name="T:Umbraco.Web.Security.GetUserSecondsMiddleWare">
-            <summary>
-            Custom middleware to return the remaining seconds the user has before they are logged out
-            </summary>
-            <remarks>
-            This is quite a custom request because in most situations we just want to return the seconds and don't want
-            to renew the auth ticket, however if KeepUserLoggedIn is true, then we do want to renew the auth ticket for
-            this request!
-            </remarks>
-        </member>
-        <member name="T:Umbraco.Web.Security.IUmbracoBackOfficeTwoFactorOptions">
-            <summary>
-            Used to display a custom view in the back office if developers choose to implement their own custom 2 factor authentication
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.Security.PreviewAuthenticationMiddleware.#ctor(Microsoft.Owin.OwinMiddleware,Umbraco.Web.Security.UmbracoBackOfficeCookieAuthOptions,Umbraco.Core.Configuration.IGlobalSettings)">
-            <summary>
-            Instantiates the middleware with an optional pointer to the next component.
-            </summary>
-            <param name="next"/>
-            <param name="cookieOptions"></param>
-            <param name="globalSettings"></param>
-        </member>
-        <member name="M:Umbraco.Web.Security.PreviewAuthenticationMiddleware.Invoke(Microsoft.Owin.IOwinContext)">
-            <summary>
-            Process an individual request.
-            </summary>
-            <param name="context"/>
-            <returns/>
-        </member>
-        <!-- Badly formed XML comment ignored for member "M:Umbraco.Web.Security.WebAuthExtensions.SetPrincipalForRequest(System.Net.Http.HttpRequestMessage,System.Security.Principal.IPrincipal)" -->
-        <member name="M:Umbraco.Web.Security.WebAuthExtensions.SetPrincipalForRequest(System.Web.HttpContextBase,System.Security.Principal.IPrincipal)">
-            <summary>
-            This will set a an authenticated IPrincipal to the current request given the IUser object
-            </summary>
-            <param name="httpContext"></param>
-            <param name="principal"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Umbraco.Web.Security.AppBuilderExtensions">
-            <summary>
-            Provides security/identity extension methods to IAppBuilder.
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.ConfigureUserManagerForUmbracoBackOffice(Owin.IAppBuilder,Umbraco.Core.Services.ServiceContext,Umbraco.Core.Mapping.UmbracoMapper,Umbraco.Core.Configuration.UmbracoSettings.IContentSection,Umbraco.Core.Configuration.IGlobalSettings,Umbraco.Core.Security.MembershipProviderBase)">
-            <summary>
-            Configure Default Identity User Manager for Umbraco
-            </summary>
-            <param name="app"></param>
-            <param name="services"></param>
-            <param name="contentSettings"></param>
-            <param name="globalSettings"></param>
-            <param name="userMembershipProvider"></param>
-        </member>
-        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.ConfigureUserManagerForUmbracoBackOffice(Owin.IAppBuilder,Umbraco.Core.IRuntimeState,Umbraco.Core.Configuration.UmbracoSettings.IContentSection,Umbraco.Core.Configuration.IGlobalSettings,Umbraco.Core.Security.MembershipProviderBase,Umbraco.Core.Security.BackOfficeUserStore)">
-            <summary>
-            Configure a custom UserStore with the Identity User Manager for Umbraco
-            </summary>
-            <param name="app"></param>
-            <param name="runtimeState"></param>
-            <param name="globalSettings"></param>
-            <param name="userMembershipProvider"></param>
-            <param name="customUserStore"></param>
-            <param name="contentSettings"></param>
-        </member>
-        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.ConfigureUserManagerForUmbracoBackOffice``2(Owin.IAppBuilder,Umbraco.Core.IRuntimeState,Umbraco.Core.Configuration.IGlobalSettings,System.Func{Microsoft.AspNet.Identity.Owin.IdentityFactoryOptions{``0},Microsoft.Owin.IOwinContext,``0})">
-            <summary>
-            Configure a custom BackOfficeUserManager for Umbraco
-            </summary>
-            <param name="app"></param>
-            <param name="runtimeState"></param>
-            <param name="globalSettings"></param>
-            <param name="userManager"></param>
-        </member>
-        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.UseUmbracoBackOfficeCookieAuthentication(Owin.IAppBuilder,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Core.IRuntimeState,Umbraco.Core.Services.IUserService,Umbraco.Core.Configuration.IGlobalSettings,Umbraco.Core.Configuration.UmbracoSettings.ISecuritySection)">
-            <summary>
-            Ensures that the UmbracoBackOfficeAuthenticationMiddleware is assigned to the pipeline
-            </summary>
-            <param name="app"></param>
-            <param name="umbracoContextAccessor"></param>
-            <param name="runtimeState"></param>
-            <param name="userService"></param>
-            <param name="globalSettings"></param>
-            <param name="securitySection"></param>
-            <returns></returns>
-            <remarks>
-            By default this will be configured to execute on PipelineStage.Authenticate
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.UseUmbracoBackOfficeCookieAuthentication(Owin.IAppBuilder,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Core.IRuntimeState,Umbraco.Core.Services.IUserService,Umbraco.Core.Configuration.IGlobalSettings,Umbraco.Core.Configuration.UmbracoSettings.ISecuritySection,Owin.PipelineStage)">
-            <summary>
-            Ensures that the UmbracoBackOfficeAuthenticationMiddleware is assigned to the pipeline
-            </summary>
-            <param name="app"></param>
-            <param name="umbracoContextAccessor"></param>
-            <param name="runtimeState"></param>
-            <param name="userService"></param>
-            <param name="globalSettings"></param>
-            <param name="securitySection"></param>
-            <param name="stage">
-            Configurable pipeline stage
-            </param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.UseUmbracoBackOfficeCookieAuthentication(Owin.IAppBuilder,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Core.IRuntimeState,Umbraco.Core.Configuration.IGlobalSettings,Umbraco.Core.Configuration.UmbracoSettings.ISecuritySection,Microsoft.Owin.Security.Cookies.CookieAuthenticationOptions,Owin.PipelineStage)">
-            <summary>
-            Ensures that the UmbracoBackOfficeAuthenticationMiddleware is assigned to the pipeline
-            </summary>
-            <param name="app"></param>
-            <param name="umbracoContextAccessor"></param>
-            <param name="runtimeState"></param>
-            <param name="globalSettings"></param>
-            <param name="securitySection"></param>
-            <param name="cookieOptions">Custom auth cookie options can be specified to have more control over the cookie authentication logic</param>
-            <param name="stage">
-            Configurable pipeline stage
-            </param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.SetBackOfficeUserManagerType``2(Owin.IAppBuilder)">
-            <summary>
-            This registers the exact type of the user manager in owin so we can extract it
-            when required in order to extract the user manager instance
-            </summary>
-            <typeparam name="TManager"></typeparam>
-            <typeparam name="TUser"></typeparam>
-            <param name="app"></param>
-            <remarks>
-            This is required because a developer can specify a custom user manager and due to generic types the key name will registered
-            differently in the owin context
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.UseUmbracoBackOfficeExternalCookieAuthentication(Owin.IAppBuilder,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Core.IRuntimeState,Umbraco.Core.Configuration.IGlobalSettings)">
-            <summary>
-            Ensures that the cookie middleware for validating external logins is assigned to the pipeline with the correct
-            Umbraco back office configuration
-            </summary>
-            <param name="app"></param>
-            <param name="umbracoContextAccessor"></param>
-            <param name="runtimeState"></param>
-            <param name="globalSettings"></param>
-            <returns></returns>
-            <remarks>
-            By default this will be configured to execute on PipelineStage.Authenticate
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.UseUmbracoBackOfficeExternalCookieAuthentication(Owin.IAppBuilder,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Core.IRuntimeState,Umbraco.Core.Configuration.IGlobalSettings,Owin.PipelineStage)">
-            <summary>
-            Ensures that the cookie middleware for validating external logins is assigned to the pipeline with the correct
-            Umbraco back office configuration
-            </summary>
-            <param name="app"></param>
-            <param name="umbracoContextAccessor"></param>
-            <param name="runtimeState"></param>
-            <param name="globalSettings"></param>
-            <param name="stage"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.UseUmbracoPreviewAuthentication(Owin.IAppBuilder,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Core.IRuntimeState,Umbraco.Core.Configuration.IGlobalSettings,Umbraco.Core.Configuration.UmbracoSettings.ISecuritySection)">
-            <summary>
-            In order for preview to work this needs to be called
-            </summary>
-            <param name="app"></param>
-            <param name="umbracoContextAccessor"></param>
-            <param name="runtimeState"></param>
-            <param name="globalSettings"></param>
-            <param name="securitySettings"></param>
-            <returns></returns>
-            <remarks>
-            This ensures that during a preview request that the back office use is also Authenticated and that the back office Identity
-            is added as a secondary identity to the current IPrincipal so it can be used to Authorize the previewed document.
-            </remarks>
-            <remarks>
-            By default this will be configured to execute on PipelineStage.PostAuthenticate
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.UseUmbracoPreviewAuthentication(Owin.IAppBuilder,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Core.IRuntimeState,Umbraco.Core.Configuration.IGlobalSettings,Umbraco.Core.Configuration.UmbracoSettings.ISecuritySection,Owin.PipelineStage)">
-            <summary>
-            In order for preview to work this needs to be called
-            </summary>
-            <param name="app"></param>
-            <param name="umbracoContextAccessor"></param>
-            <param name="runtimeState"></param>
-            <param name="globalSettings"></param>
-            <param name="securitySettings"></param>
-            <param name="stage"></param>
-            <returns></returns>
-            <remarks>
-            This ensures that during a preview request that the back office use is also Authenticated and that the back office Identity
-            is added as a secondary identity to the current IPrincipal so it can be used to Authorize the previewed document.
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Web.Security.AppBuilderExtensions.CreateUmbracoCookieAuthOptions(Owin.IAppBuilder,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Core.Configuration.IGlobalSettings,Umbraco.Core.IRuntimeState,Umbraco.Core.Configuration.UmbracoSettings.ISecuritySection,System.String[])">
-            <summary>
-            Create the default umb cookie auth options
-            </summary>
-            <param name="app"></param>
-            <param name="umbracoContextAccessor"></param>
-            <param name="globalSettings"></param>
-            <param name="runtimeState"></param>
-            <param name="securitySettings"></param>
-            <param name="explicitPaths"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.AuthenticationOptionsExtensions.SetSignInChallengeResultCallback(Microsoft.Owin.Security.AuthenticationOptions,System.Func{Microsoft.Owin.IOwinContext,Microsoft.Owin.Security.AuthenticationProperties})">
-            <summary>
-            When trying to implement an Azure AD B2C provider or other OAuth provider that requires a customized Challenge Result in order to work then
-            this must be used.
-            </summary>
-            <param name="authOptions"></param>
-            <param name="authProperties"></param>
-            <remarks>
-            See: http://issues.umbraco.org/issue/U4-7353
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Web.Security.AuthenticationOptionsExtensions.SetExternalSignInAutoLinkOptions(Microsoft.Owin.Security.AuthenticationOptions,Umbraco.Web.Security.ExternalSignInAutoLinkOptions)">
-            <summary>
-            Used during the External authentication process to assign external sign-in options
-            that are used by the Umbraco authentication process.
-            </summary>
-            <param name="authOptions"></param>
-            <param name="options"></param>
-        </member>
-        <member name="M:Umbraco.Web.Security.AuthenticationOptionsExtensions.GetExternalAuthenticationOptions(Microsoft.Owin.Security.AuthenticationDescription)">
-            <summary>
-            Used during the External authentication process to retrieve external sign-in options
-            that have been set with SetExternalAuthenticationOptions
-            </summary>
-            <param name="authenticationDescription"></param>
-        </member>
-        <member name="M:Umbraco.Web.Security.AuthenticationOptionsExtensions.ForUmbracoBackOffice(Microsoft.Owin.Security.AuthenticationOptions,System.String,System.String,System.String)">
-             <summary>
-             Configures the properties of the authentication description instance for use with Umbraco back office
-             </summary>
-             <param name="options"></param>
-             <param name="style"></param>
-             <param name="icon"></param>
-             <param name="callbackPath">
-             This is important if the identity provider is to be able to authenticate when upgrading Umbraco. We will try to extract this from
-             any options passed in via reflection since none of the default OWIN providers inherit from a base class but so far all of them have a consistent
-             name for the 'CallbackPath' property which is of type PathString. So we'll try to extract it if it's not found or supplied.
-            
-             If a value is extracted or supplied, this will be added to an internal list which the UmbracoModule will use to allow the request to pass
-             through without redirecting to the installer.
-             </param>
-        </member>
-        <member name="M:Umbraco.Web.Security.AuthenticationManagerExtensions.GetExternalLoginInfoAsync(Microsoft.Owin.Security.IAuthenticationManager,System.String,System.String,System.String)">
-            <summary>
-                Extracts login info out of an external identity
-            </summary>
-            <param name="manager"></param>
-            <param name="authenticationType"></param>
-            <param name="xsrfKey">key that will be used to find the userId to verify</param>
-            <param name="expectedValue">
-                the value expected to be found using the xsrfKey in the AuthenticationResult.Properties
-                dictionary
-            </param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.AuthenticationManagerExtensions.GetExternalLoginInfoAsync(Microsoft.Owin.Security.IAuthenticationManager,System.String)">
-            <summary>
-                Extracts login info out of an external identity
-            </summary>
-            <param name="manager"></param>
-            <param name="authenticationType"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Umbraco.Web.Security.BackOfficeCookieManager">
-            <summary>
-            A custom cookie manager that is used to read the cookie from the request.
-            </summary>
-            <remarks>
-            Umbraco's back office cookie needs to be read on two paths: /umbraco and /install and /base therefore we cannot just set the cookie path to be /umbraco,
-            instead we'll specify our own cookie manager and return null if the request isn't for an acceptable path.
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeCookieManager.Microsoft#Owin#Infrastructure#ICookieManager#GetRequestCookie(Microsoft.Owin.IOwinContext,System.String)">
-            <summary>
-            Explicitly implement this so that we filter the request
-            </summary>
-            <param name="context"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.BackOfficeCookieManager.ShouldAuthenticateRequest(Microsoft.Owin.IOwinContext,System.Uri,System.Boolean)">
-            <summary>
-            Determines if we should authenticate the request
-            </summary>
-            <param name="owinContext"></param>
-            <param name="originalRequestUrl"></param>
-            <param name="checkForceAuthTokens"></param>
-            <returns></returns>
-            <remarks>
-            We auth the request when:
-            * it is a back office request
-            * it is an installer request
-            * it is a /base request
-            * it is a preview request
-            </remarks>
-        </member>
-        <member name="T:Umbraco.Web.Security.UmbracoBackOfficeCookieAuthOptions">
-            <summary>
-            Umbraco auth cookie options
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.Security.UmbracoBackOfficeCookieAuthOptions.CreateRequestCookieOptions(Microsoft.Owin.IOwinContext,Microsoft.Owin.Security.AuthenticationTicket)">
-            <summary>
-            Creates the cookie options for saving the auth cookie
-            </summary>
-            <param name="ctx"></param>
-            <param name="ticket"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Umbraco.Web.Security.MembershipHelper">
-            <summary>
-            A helper class for handling Members
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.Security.MembershipHelper.IsProtected(System.String)">
-            <summary>
-            Check if a document object is protected by the "Protect Pages" functionality in umbraco
-            </summary>
-            <param name="path">The full path of the document object to check</param>
-            <returns>True if the document object is protected</returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.MembershipHelper.MemberHasAccess(System.String)">
-            <summary>
-            Check if the current user has access to a document
-            </summary>
-            <param name="path">The full path of the document object to check</param>
-            <returns>True if the current user has access or if the current document isn't protected</returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.MembershipHelper.HasAccess(System.String,System.Web.Security.RoleProvider)">
-            <summary>
-            This will check if the member has access to this path
-            </summary>
-            <param name="path"></param>
-            <param name="roleProvider"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.MembershipHelper.IsUmbracoMembershipProviderActive">
-            <summary>
-            Returns true if the current membership provider is the Umbraco built-in one.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.MembershipHelper.UpdateMemberProfile(Umbraco.Web.Models.ProfileModel)">
-            <summary>
-            Updates the currently logged in members profile
-            </summary>
-            <param name="model"></param>
-            <returns>
-            The updated MembershipUser object
-            </returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.MembershipHelper.RegisterMember(Umbraco.Web.Models.RegisterModel,System.Web.Security.MembershipCreateStatus@,System.Boolean)">
-            <summary>
-            Registers a new member
-            </summary>
-            <param name="model"></param>
-            <param name="status"></param>
-            <param name="logMemberIn">
-            true to log the member in upon successful registration
-            </param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.MembershipHelper.Login(System.String,System.String)">
-            <summary>
-            A helper method to perform the validation and logging in of a member - this is simply wrapping standard membership provider and asp.net forms auth logic.
-            </summary>
-            <param name="username"></param>
-            <param name="password"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.MembershipHelper.Logout">
-            <summary>
-            Logs out the current member
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.Security.MembershipHelper.GetCurrentMember">
-            <summary>
-            Returns the currently logged in member as IPublishedContent
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.MembershipHelper.GetCurrentMemberId">
-            <summary>
-            Returns the currently logged in member id, -1 if they are not logged in
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.MembershipHelper.GetCurrentMemberProfileModel">
-            <summary>
-            Creates a new profile model filled in with the current members details if they are logged in which allows for editing
-            profile properties
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.MembershipHelper.CreateRegistrationModel(System.String)">
-            <summary>
-            Creates a model to use for registering new members with custom member properties
-            </summary>
-            <param name="memberTypeAlias"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.MembershipHelper.GetCurrentUserRoles">
-            <summary>
-            Gets the current user's roles.
-            </summary>
-            <remarks>Roles are cached per user name, at request level.</remarks>
-        </member>
-        <member name="M:Umbraco.Web.Security.MembershipHelper.GetUserRoles(System.String)">
-            <summary>
-            Gets a user's roles.
-            </summary>
-            <remarks>Roles are cached per user name, at request level.</remarks>
-        </member>
-        <member name="M:Umbraco.Web.Security.MembershipHelper.GetCurrentLoginStatus">
-            <summary>
-            Returns the login status model of the currently logged in member.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.MembershipHelper.IsLoggedIn">
-            <summary>
-            Check if a member is logged in
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:Umbraco.Web.Security.MembershipHelper.CurrentUserName">
-            <summary>
-            Returns the currently logged in username
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.Security.MembershipHelper.IsMemberAuthorized(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.Int32})">
-            <summary>
-            Returns true or false if the currently logged in member is authorized based on the parameters provided
-            </summary>
-            <param name="allowTypes"></param>
-            <param name="allowGroups"></param>
-            <param name="allowMembers"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.MembershipHelper.ChangePassword(System.String,Umbraco.Web.Models.ChangingPasswordModel,System.String)">
-            <summary>
-            Changes password for a member/user given the membership provider name and the password change model
-            </summary>
-            <param name="username"></param>
-            <param name="passwordModel"></param>
-            <param name="membershipProviderName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.MembershipHelper.ChangePassword(System.String,Umbraco.Web.Models.ChangingPasswordModel,System.Web.Security.MembershipProvider)">
-            <summary>
-            Changes password for a member/user given the membership provider and the password change model
-            </summary>
-            <param name="username"></param>
-            <param name="passwordModel"></param>
-            <param name="membershipProvider"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.MembershipHelper.UpdateMember(System.Web.Security.MembershipUser,System.Web.Security.MembershipProvider,System.String,System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
-            <summary>
-            Updates a membership user with all of it's writable properties
-            </summary>
-            <param name="member"></param>
-            <param name="provider"></param>
-            <param name="email"></param>
-            <param name="isApproved"></param>
-            <param name="lastLoginDate"></param>
-            <param name="lastActivityDate"></param>
-            <param name="comment"></param>
-            <returns>
-            Returns successful if the membership user required updating, otherwise returns failed if it didn't require updating.
-            </returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.MembershipHelper.GetCurrentPersistedMember">
-            <summary>
-            Returns the currently logged in IMember object - this should never be exposed to the front-end since it's returning a business logic entity!
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:Umbraco.Web.Security.Providers.MembersMembershipProvider">
-            <summary>
-            Custom Membership Provider for Umbraco Members (User authentication for Frontend applications NOT umbraco CMS)
-            </summary>
-        </member>
-        <member name="P:Umbraco.Web.Security.Providers.MembersRoleProvider.ApplicationName">
-            <summary>
-            The name of the application using the custom role provider.
-            </summary>
-            <value></value>
-            <returns>The name of the application using the custom membership provider.</returns>
-        </member>
-        <member name="T:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2">
-            <summary>
-            Abstract Membership Provider that users any implementation of IMembershipMemberService{TEntity} service
-            </summary>
-        </member>
-        <member name="P:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.AllowManuallyChangingPassword">
-            <summary>
-            For backwards compatibility, this provider supports this option by default it is false
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.Initialize(System.String,System.Collections.Specialized.NameValueCollection)">
-            <summary>
-            Initializes the provider.
-            </summary>
-            <param name="name">The friendly name of the provider.</param>
-            <param name="config">A collection of the name/value pairs representing the provider-specific attributes specified in the configuration for this provider.</param>
-            <exception cref="T:System.ArgumentNullException">The name of the provider is null.</exception>
-            <exception cref="T:System.InvalidOperationException">An attempt is made to call
-            <see cref="M:System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)"></see> on a provider after the provider
-            has already been initialized.</exception>
-            <exception cref="T:System.ArgumentException">The name of the provider has a length of zero.</exception>
-        </member>
-        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.PerformChangePassword(System.String,System.String,System.String)">
-            <summary>
-            Processes a request to update the password for a membership user.
-            </summary>
-            <param name="username">The user to update the password for.</param>
-            <param name="oldPassword">This property is ignore for this provider</param>
-            <param name="newPassword">The new password for the specified user.</param>
-            <returns>
-            true if the password was updated successfully; otherwise, false.
-            </returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.PerformChangePasswordQuestionAndAnswer(System.String,System.String,System.String,System.String)">
-            <summary>
-            Processes a request to update the password question and answer for a membership user.
-            </summary>
-            <param name="username">The user to change the password question and answer for.</param>
-            <param name="password">The password for the specified user.</param>
-            <param name="newPasswordQuestion">The new password question for the specified user.</param>
-            <param name="newPasswordAnswer">The new password answer for the specified user.</param>
-            <returns>
-            true if the password question and answer are updated successfully; otherwise, false.
-            </returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.PerformCreateUser(System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object,System.Web.Security.MembershipCreateStatus@)">
-            <summary>
-            Adds a new membership user to the data source with the specified member type
-            </summary>
-            <param name="memberTypeAlias">A specific member type to create the member for</param>
-            <param name="username">The user name for the new user.</param>
-            <param name="password">The password for the new user.</param>
-            <param name="email">The e-mail address for the new user.</param>
-            <param name="passwordQuestion">The password question for the new user.</param>
-            <param name="passwordAnswer">The password answer for the new user</param>
-            <param name="isApproved">Whether or not the new user is approved to be validated.</param>
-            <param name="providerUserKey">The unique identifier from the membership data source for the user.</param>
-            <param name="status">A <see cref="T:System.Web.Security.MembershipCreateStatus"></see> enumeration value indicating whether the user was created successfully.</param>
-            <returns>
-            A <see cref="T:System.Web.Security.MembershipUser"></see> object populated with the information for the newly created user.
-            </returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.DeleteUser(System.String,System.Boolean)">
-            <summary>
-            Removes a user from the membership data source.
-            </summary>
-            <param name="username">The name of the user to delete.</param>
-            <param name="deleteAllRelatedData">
-            TODO: This setting currently has no effect
-            </param>
-            <returns>
-            true if the user was successfully deleted; otherwise, false.
-            </returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.FindUsersByEmail(System.String,System.Int32,System.Int32,System.Int32@)">
-            <summary>
-            Gets a collection of membership users where the e-mail address contains the specified e-mail address to match.
-            </summary>
-            <param name="emailToMatch">The e-mail address to search for.</param>
-            <param name="pageIndex">The index of the page of results to return. pageIndex is zero-based.</param>
-            <param name="pageSize">The size of the page of results to return.</param>
-            <param name="totalRecords">The total number of matched users.</param>
-            <returns>
-            A <see cref="T:System.Web.Security.MembershipUserCollection"></see> collection that contains a page of pageSize<see cref="T:System.Web.Security.MembershipUser"></see> objects beginning at the page specified by pageIndex.
-            </returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.FindUsersByName(System.String,System.Int32,System.Int32,System.Int32@)">
-            <summary>
-            Gets a collection of membership users where the user name contains the specified user name to match.
-            </summary>
-            <param name="usernameToMatch">The user name to search for.</param>
-            <param name="pageIndex">The index of the page of results to return. pageIndex is zero-based.</param>
-            <param name="pageSize">The size of the page of results to return.</param>
-            <param name="totalRecords">The total number of matched users.</param>
-            <returns>
-            A <see cref="T:System.Web.Security.MembershipUserCollection"></see> collection that contains a page of pageSize<see cref="T:System.Web.Security.MembershipUser"></see> objects beginning at the page specified by pageIndex.
-            </returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.GetAllUsers(System.Int32,System.Int32,System.Int32@)">
-            <summary>
-            Gets a collection of all the users in the data source in pages of data.
-            </summary>
-            <param name="pageIndex">The index of the page of results to return. pageIndex is zero-based.</param>
-            <param name="pageSize">The size of the page of results to return.</param>
-            <param name="totalRecords">The total number of matched users.</param>
-            <returns>
-            A <see cref="T:System.Web.Security.MembershipUserCollection"></see> collection that contains a page of pageSize<see cref="T:System.Web.Security.MembershipUser"></see> objects beginning at the page specified by pageIndex.
-            </returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.GetNumberOfUsersOnline">
-            <summary>
-            Gets the number of users currently accessing the application.
-            </summary>
-            <returns>
-            The number of users currently accessing the application.
-            </returns>
-            <remarks>
-            The way this is done is the same way that it is done in the MS SqlMembershipProvider - We query for any members
-            that have their last active date within the Membership.UserIsOnlineTimeWindow (which is in minutes). It isn't exact science
-            but that is how MS have made theirs so we'll follow that principal.
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.PerformGetPassword(System.String,System.String)">
-            <summary>
-            Gets the password for the specified user name from the data source.
-            </summary>
-            <param name="username">The user to retrieve the password for.</param>
-            <param name="answer">The password answer for the user.</param>
-            <returns>
-            The password for the specified user name.
-            </returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.GetUser(System.String,System.Boolean)">
-            <summary>
-            Gets information from the data source for a user. Provides an option to update the last-activity date/time stamp for the user.
-            </summary>
-            <param name="username">The name of the user to get information for.</param>
-            <param name="userIsOnline">true to update the last-activity date/time stamp for the user; false to return user information without updating the last-activity date/time stamp for the user.</param>
-            <returns>
-            A <see cref="T:System.Web.Security.MembershipUser"></see> object populated with the specified user's information from the data source.
-            </returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.GetUser(System.Object,System.Boolean)">
-            <summary>
-            Gets information from the data source for a user based on the unique identifier for the membership user. Provides an option to update the last-activity date/time stamp for the user.
-            </summary>
-            <param name="providerUserKey">The unique identifier for the membership user to get information for.</param>
-            <param name="userIsOnline">true to update the last-activity date/time stamp for the user; false to return user information without updating the last-activity date/time stamp for the user.</param>
-            <returns>
-            A <see cref="T:System.Web.Security.MembershipUser"></see> object populated with the specified user's information from the data source.
-            </returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.GetUserNameByEmail(System.String)">
-            <summary>
-            Gets the user name associated with the specified e-mail address.
-            </summary>
-            <param name="email">The e-mail address to search for.</param>
-            <returns>
-            The user name associated with the specified e-mail address. If no match is found, return null.
-            </returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.PerformResetPassword(System.String,System.String,System.String)">
-            <summary>
-            Resets a user's password to a new, automatically generated password.
-            </summary>
-            <param name="username">The user to reset the password for.</param>
-            <param name="answer">The password answer for the specified user (not used with Umbraco).</param>
-            <param name="generatedPassword"></param>
-            <returns>The new password for the specified user.</returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.UnlockUser(System.String)">
-            <summary>
-            Clears a lock so that the membership user can be validated.
-            </summary>
-            <param name="username">The membership user to clear the lock status for.</param>
-            <returns>
-            true if the membership user was successfully unlocked; otherwise, false.
-            </returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.UpdateUser(System.Web.Security.MembershipUser)">
-            <summary>
-            Updates e-mail  approved status, lock status and comment on a user.
-            </summary>
-            <param name="user">A <see cref="T:System.Web.Security.MembershipUser"></see> object that represents the user to update and the updated information for the user.</param>
-        </member>
-        <member name="M:Umbraco.Web.Security.Providers.UmbracoMembershipProvider`2.ValidateUser(System.String,System.String)">
-            <summary>
-            Verifies that the specified user name and password exist in the data source.
-            </summary>
-            <param name="username">The name of the user to validate.</param>
-            <param name="password">The password for the specified user.</param>
-            <returns>
-            true if the specified username and password are valid; otherwise, false.
-            </returns>
-        </member>
-        <member name="T:Umbraco.Web.Security.Providers.UsersMembershipProvider">
-            <summary>
-            Custom Membership Provider for Umbraco Users (User authentication for Umbraco Backend CMS)
-            </summary>
-        </member>
-        <member name="P:Umbraco.Web.Security.Providers.UsersMembershipProvider.EnablePasswordReset">
-            <summary>
-            Indicates whether the membership provider is configured to allow users to reset their passwords.
-            </summary>
-            <value></value>
-            <returns>true if the membership provider supports password reset; otherwise, false. The default is FALSE for users.</returns>
-        </member>
-        <member name="P:Umbraco.Web.Security.Providers.UsersMembershipProvider.AllowManuallyChangingPassword">
-            <summary>
-            For backwards compatibility, this provider supports this option by default it is FALSE for users
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.Security.Providers.UsersMembershipProvider.PerformUnlockUser(System.String,Umbraco.Core.Models.Membership.IUser@)">
-            <summary>
-            Overridden in order to call the BackOfficeUserManager.UnlockUser method in order to raise the user audit events
-            </summary>
-            <param name="username"></param>
-            <param name="member"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.Providers.UsersMembershipProvider.PerformValidateUser(System.String,System.String)">
-            <summary>
-            Override in order to raise appropriate events via the <see cref="T:Umbraco.Web.Security.BackOfficeUserManager"/>
-            </summary>
-            <param name="username"></param>
-            <param name="password"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Umbraco.Web.Security.WebSecurity">
-            <summary>
-            A utility class used for dealing with USER security in Umbraco
-            </summary>
-        </member>
-        <member name="P:Umbraco.Web.Security.WebSecurity.CurrentUser">
-            <summary>
-            Gets the current user.
-            </summary>
-            <value>The current user.</value>
-        </member>
-        <member name="M:Umbraco.Web.Security.WebSecurity.PerformLogin(System.Int32)">
-            <summary>
-            Logs a user in.
-            </summary>
-            <param name="userId">The user Id</param>
-            <returns>returns the number of seconds until their session times out</returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.WebSecurity.ClearCurrentLogin">
-            <summary>
-            Clears the current login for the currently logged in user
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.Security.WebSecurity.RenewLoginTimeout">
-            <summary>
-            Renews the user's login ticket
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.Security.WebSecurity.ValidateBackOfficeCredentials(System.String,System.String)">
-            <summary>
-            Validates credentials for a back office user
-            </summary>
-            <param name="username"></param>
-            <param name="password"></param>
-            <returns></returns>
-            <remarks>
-            This uses ASP.NET Identity to perform the validation
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Web.Security.WebSecurity.ValidateUserApp(System.String)">
-            <summary>
-            Validates the current user to see if they have access to the specified app
-            </summary>
-            <param name="app"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.WebSecurity.GetUserId">
-            <summary>
-            Gets the current user's id.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.WebSecurity.GetSessionId">
-            <summary>
-            Returns the current user's unique session id - used to mitigate csrf attacks or any other reason to validate a request
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.WebSecurity.ValidateCurrentUser">
-            <summary>
-            Validates the currently logged in user and ensures they are not timed out
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.WebSecurity.ValidateCurrentUser(System.Boolean,System.Boolean)">
-            <summary>
-            Validates the current user assigned to the request and ensures the stored user data is valid
-            </summary>
-            <param name="throwExceptions">set to true if you want exceptions to be thrown if failed</param>
-            <param name="requiresApproval">If true requires that the user is approved to be validated</param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.WebSecurity.AuthorizeRequest(System.Boolean)">
-            <summary>
-            Authorizes the full request, checks for SSL and validates the current user
-            </summary>
-            <param name="throwExceptions">set to true if you want exceptions to be thrown if failed</param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.WebSecurity.UserHasSectionAccess(System.String,Umbraco.Core.Models.Membership.IUser)">
-            <summary>
-            Checks if the specified user as access to the app
-            </summary>
-            <param name="section"></param>
-            <param name="user"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.WebSecurity.UserHasSectionAccess(System.String,System.String)">
-            <summary>
-            Checks if the specified user by username as access to the app
-            </summary>
-            <param name="section"></param>
-            <param name="username"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.Security.WebSecurity.IsAuthenticated">
-            <summary>
-            Ensures that a back office user is logged in
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:Umbraco.Web.WebCompositionExtensions">
             <summary>
             Provides extension methods to the <see cref="T:Umbraco.Core.Composing.Composition"/> class.
@@ -18127,6 +18547,20 @@
             <param name="text">The message to log.</param>
             <param name="callerName">The property or method name calling the log.</param>
             <param name="lineNumber">The line number where the method is called.</param>
+        </member>
+        <member name="M:Umbraco.Web.OwinExtensions.SetExternalLoginProviderErrors(Microsoft.Owin.IOwinContext,Umbraco.Web.Security.BackOfficeExternalLoginProviderErrors)">
+            <summary>
+            Used by external login providers to set any errors that occur during the OAuth negotiation
+            </summary>
+            <param name="owinContext"></param>
+            <param name="errors"></param>
+        </member>
+        <member name="M:Umbraco.Web.OwinExtensions.GetExternalLoginProviderErrors(Microsoft.Owin.IOwinContext)">
+            <summary>
+            Retrieve any errors set by external login providers during OAuth negotiation
+            </summary>
+            <param name="owinContext"></param>
+            <returns></returns>
         </member>
         <member name="M:Umbraco.Web.OwinExtensions.GetUmbracoAuthTicketDataProtector(Microsoft.Owin.IOwinContext)">
             <summary>
@@ -18553,7 +18987,7 @@
             we will load the rest of the server vars after the user is authenticated.
             </remarks>
         </member>
-        <member name="M:Umbraco.Web.HtmlHelperBackOfficeExtensions.AngularValueExternalLoginInfoScript(System.Web.Mvc.HtmlHelper,System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:Umbraco.Web.HtmlHelperBackOfficeExtensions.AngularValueExternalLoginInfoScript(System.Web.Mvc.HtmlHelper,Umbraco.Web.Security.BackOfficeExternalLoginProviderErrors)">
             <summary>
             Used to render the script that will pass in the angular "externalLoginInfo" service/value on page load
             </summary>

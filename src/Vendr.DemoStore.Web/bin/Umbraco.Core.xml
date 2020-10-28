@@ -40,6 +40,21 @@
             Constants all the identifiers within the Umbraco core.
             </summary>
         </member>
+        <member name="T:Umbraco.Core.Constants.SvgSanitizer">
+            <summary>
+            Defines the alias identifiers for Umbraco's core application sections.
+            </summary>
+        </member>
+        <member name="F:Umbraco.Core.Constants.SvgSanitizer.Attributes">
+            <summary>
+            Allowlist for SVG attributes.
+            </summary>
+        </member>
+        <member name="F:Umbraco.Core.Constants.SvgSanitizer.Tags">
+            <summary>
+            Allowlist for SVG tabs.
+            </summary>
+        </member>
         <member name="T:Umbraco.Core.Constants.Applications">
             <summary>
             Defines the alias identifiers for Umbraco's core application sections.
@@ -1146,6 +1161,11 @@
             Gets the path to umbraco's root directory (/umbraco by default).
             </summary>
         </member>
+        <member name="F:Umbraco.Core.Constants.AppSettings.IconsPath">
+            <summary>
+            Gets the path to umbraco's icons directory (/umbraco/assets/icons by default).
+            </summary>
+        </member>
         <member name="F:Umbraco.Core.Constants.AppSettings.CssPath">
             <summary>
             Gets the path to the css directory (/css by default).
@@ -1379,6 +1399,11 @@
         <member name="T:Umbraco.Core.Migrations.Upgrade.V_8_0_0.UserForeignKeys">
             <summary>
             Creates/Updates non mandatory FK columns to the user table
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Migrations.Upgrade.V_8_9_0.ExternalLoginTableUserData.Migrate">
+            <summary>
+            Adds new column to the External Login table
             </summary>
         </member>
         <member name="M:Umbraco.Core.Migrations.Upgrade.V_8_6_0.MissingDictionaryIndex.Migrate">
@@ -3427,6 +3452,371 @@
         <member name="P:Umbraco.Core.Models.ContentDataIntegrityReportOptions.FixIssues">
             <summary>
             Set to true to try to automatically resolve data integrity issues
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Models.Identity.ExternalLogin">
+            <inheritdoc />
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.ExternalLogin.LoginProvider">
+            <inheritdoc />
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.ExternalLogin.ProviderKey">
+            <inheritdoc />
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.ExternalLogin.UserData">
+            <inheritdoc />
+        </member>
+        <member name="T:Umbraco.Core.Models.Identity.IExternalLogin">
+            <summary>
+            Used to persist external login data for a user
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.CreateNew(System.String,System.String,System.String)">
+            <summary>
+             Used to construct a new instance without an identity
+            </summary>
+            <param name="username"></param>
+            <param name="email">This is allowed to be null (but would need to be filled in if trying to persist this instance)</param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.#ctor(System.Int32,System.Collections.Generic.IEnumerable{Umbraco.Core.Models.Membership.IReadOnlyUserGroup})">
+            <summary>
+            Creates an existing user with the specified groups
+            </summary>
+            <param name="userId"></param>
+            <param name="groups"></param>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.HasIdentity">
+            <summary>
+            Returns true if an Id has been set on this object this will be false if the object is new and not persisted to the database
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.Email">
+            <summary>
+            Override Email so we can track changes to it
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.UserName">
+            <summary>
+            Override UserName so we can track changes to it
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.LastPasswordChangeDateUtc">
+            <summary>
+            LastPasswordChangeDateUtc so we can track changes to it
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.LastLoginDateUtc">
+            <summary>
+            Override LastLoginDateUtc so we can track changes to it
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.EmailConfirmed">
+            <summary>
+            Override EmailConfirmed so we can track changes to it
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.Name">
+            <summary>
+            Gets/sets the user's real name
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.AccessFailedCount">
+            <summary>
+            Override AccessFailedCount so we can track changes to it
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.PasswordHash">
+            <summary>
+            Override PasswordHash so we can track changes to it
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.StartContentIds">
+            <summary>
+            Content start nodes assigned to the User (not ones assigned to the user's groups)
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.StartMediaIds">
+            <summary>
+            Media start nodes assigned to the User (not ones assigned to the user's groups)
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.AllowedSections">
+            <summary>
+            This is a readonly list of the user's allowed sections which are based on it's user groups
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.LockoutEnabled">
+            <summary>
+            Lockout is always enabled
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.IsLockedOut">
+            <summary>
+            Based on the user's lockout end date, this will determine if they are locked out
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.IsApproved">
+            <summary>
+            This is a 1:1 mapping with IUser.IsApproved
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.Logins">
+            <summary>
+            Overridden to make the retrieval lazy
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.AddRole(System.String)">
+            <summary>
+            helper method to easily add a role without having to deal with IdentityUserRole{T}
+            </summary>
+            <param name="role"></param>
+            <remarks>
+            Adding a role this way will not reflect on the user's group's collection or it's allowed sections until the user is persisted
+            </remarks>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.Roles">
+            <summary>
+            Override Roles because the value of these are the user's group aliases
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.SetLoginsCallback(System.Lazy{System.Collections.Generic.IEnumerable{Umbraco.Core.Models.Identity.IIdentityUserLogin}})">
+            <summary>
+            Used to set a lazy call back to populate the user's Login list
+            </summary>
+            <param name="callback"></param>
+        </member>
+        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.IsDirty">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.IsPropertyDirty(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.GetDirtyProperties">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.ResetDirtyProperties">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.WasDirty">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.WasPropertyDirty(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.ResetWereDirtyProperties">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.ResetDirtyProperties(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.GetWereDirtyProperties">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.DisableChangeTracking">
+            <summary>
+            Disables change tracking.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.EnableChangeTracking">
+            <summary>
+            Enables change tracking.
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Models.Identity.IdentityUser`4">
+            <summary>
+            Default IUser implementation
+            </summary>
+            <typeparam name="TKey"/><typeparam name="TLogin"/><typeparam name="TRole"/><typeparam name="TClaim"/>
+            <remarks>
+            This class normally exists inside of the EntityFramework library, not sure why MS chose to explicitly put it there but we don't want
+            references to that so we will create our own here
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Core.Models.Identity.IdentityUser`4.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umbraco.Core.Models.Identity.IdentityUser`4"/> class.
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.LastLoginDateUtc">
+            <summary>
+            Last login date
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.Email">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.EmailConfirmed">
+            <summary>
+            True if the email is confirmed, default is false
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.PasswordHash">
+            <summary>
+            The salted/hashed form of the user password
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.SecurityStamp">
+            <summary>
+            A random value that should change whenever a users credentials have changed (password changed, login removed)
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.PhoneNumber">
+            <summary>
+            PhoneNumber for the user
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.PhoneNumberConfirmed">
+            <summary>
+            True if the phone number is confirmed, default is false
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.TwoFactorEnabled">
+            <summary>
+            Is two factor enabled for the user
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.LockoutEndDateUtc">
+            <summary>
+            DateTime in UTC when lockout ends, any time in the past is considered not locked out.
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.LastPasswordChangeDateUtc">
+            <summary>
+            DateTime in UTC when the password was last changed.
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.LockoutEnabled">
+            <summary>
+            Is lockout enabled for this user
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.AccessFailedCount">
+            <summary>
+            Used to record failures for the purposes of lockout
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.Roles">
+            <summary>
+            Navigation property for user roles
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.Claims">
+            <summary>
+            Navigation property for user claims
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.Logins">
+            <summary>
+            Navigation property for user logins
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.Id">
+            <summary>
+            User ID (Primary Key)
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.UserName">
+            <summary>
+            User name
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Models.Identity.IdentityUserClaim`1">
+             <summary>
+             EntityType that represents one specific user claim
+            
+             </summary>
+             <typeparam name="TKey"/>
+             <remarks>
+             This class normally exists inside of the EntityFramework library, not sure why MS chose to explicitly put it there but we don't want
+             references to that so we will create our own here
+             </remarks>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUserClaim`1.Id">
+             <summary>
+             Primary key
+            
+             </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUserClaim`1.UserId">
+             <summary>
+             User Id for the user who owns this login
+            
+             </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUserClaim`1.ClaimType">
+             <summary>
+             Claim type
+            
+             </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUserClaim`1.ClaimValue">
+             <summary>
+             Claim value
+            
+             </summary>
+        </member>
+        <member name="T:Umbraco.Core.Models.Identity.IdentityUserLogin">
+            <summary>
+            Entity type for a user's login (i.e. Facebook, Google)
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUserLogin.LoginProvider">
+            <inheritdoc />
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUserLogin.ProviderKey">
+            <inheritdoc />
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUserLogin.UserId">
+            <inheritdoc />
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUserLogin.UserData">
+            <inheritdoc />
+        </member>
+        <member name="T:Umbraco.Core.Models.Identity.IdentityUserRole`1">
+             <summary>
+             EntityType that represents a user belonging to a role
+            
+             </summary>
+             <typeparam name="TKey"/>
+             <remarks>
+             This class normally exists inside of the EntityFramework library, not sure why MS chose to explicitly put it there but we don't want
+             references to that so we will create our own here
+             </remarks>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUserRole`1.UserId">
+             <summary>
+             UserId for the user that is in the role
+            
+             </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IdentityUserRole`1.RoleId">
+             <summary>
+             RoleId for the role
+            
+             </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IIdentityUserLoginExtended.UserData">
+            <summary>
+            Used to store any arbitrary data for the user and external provider - like user tokens returned from the provider
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IIdentityUserLogin.LoginProvider">
+            <summary>
+            The login provider for the login (i.e. Facebook, Google)
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IIdentityUserLogin.ProviderKey">
+            <summary>
+            Key representing the login for the provider
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.Identity.IIdentityUserLogin.UserId">
+            <summary>
+            User Id for the user who owns this login
             </summary>
         </member>
         <member name="M:Umbraco.Core.Models.PublishedContent.PublishedContentTypeExtensions.TryGetKey(Umbraco.Core.Models.PublishedContent.IPublishedContentType,System.Guid@)">
@@ -6804,359 +7194,6 @@
             then an invariant culture is valid, because some properties may be invariant. On the other hand, if the content type is invariant,
             then a variant culture is invalid, because no property could possibly vary by culture.</para>
             </remarks>
-        </member>
-        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.CreateNew(System.String,System.String,System.String)">
-            <summary>
-             Used to construct a new instance without an identity
-            </summary>
-            <param name="username"></param>
-            <param name="email">This is allowed to be null (but would need to be filled in if trying to persist this instance)</param>
-            <param name="culture"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.#ctor(System.Int32,System.Collections.Generic.IEnumerable{Umbraco.Core.Models.Membership.IReadOnlyUserGroup})">
-            <summary>
-            Creates an existing user with the specified groups
-            </summary>
-            <param name="userId"></param>
-            <param name="groups"></param>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.HasIdentity">
-            <summary>
-            Returns true if an Id has been set on this object this will be false if the object is new and not persisted to the database
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.Email">
-            <summary>
-            Override Email so we can track changes to it
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.UserName">
-            <summary>
-            Override UserName so we can track changes to it
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.LastPasswordChangeDateUtc">
-            <summary>
-            LastPasswordChangeDateUtc so we can track changes to it
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.LastLoginDateUtc">
-            <summary>
-            Override LastLoginDateUtc so we can track changes to it
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.EmailConfirmed">
-            <summary>
-            Override EmailConfirmed so we can track changes to it
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.Name">
-            <summary>
-            Gets/sets the user's real name
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.AccessFailedCount">
-            <summary>
-            Override AccessFailedCount so we can track changes to it
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.PasswordHash">
-            <summary>
-            Override PasswordHash so we can track changes to it
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.StartContentIds">
-            <summary>
-            Content start nodes assigned to the User (not ones assigned to the user's groups)
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.StartMediaIds">
-            <summary>
-            Media start nodes assigned to the User (not ones assigned to the user's groups)
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.AllowedSections">
-            <summary>
-            This is a readonly list of the user's allowed sections which are based on it's user groups
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.LockoutEnabled">
-            <summary>
-            Lockout is always enabled
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.IsLockedOut">
-            <summary>
-            Based on the user's lockout end date, this will determine if they are locked out
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.IsApproved">
-            <summary>
-            This is a 1:1 mapping with IUser.IsApproved
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.Logins">
-            <summary>
-            Overridden to make the retrieval lazy
-            </summary>
-        </member>
-        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.AddRole(System.String)">
-            <summary>
-            helper method to easily add a role without having to deal with IdentityUserRole{T}
-            </summary>
-            <param name="role"></param>
-            <remarks>
-            Adding a role this way will not reflect on the user's group's collection or it's allowed sections until the user is persisted
-            </remarks>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.Roles">
-            <summary>
-            Override Roles because the value of these are the user's group aliases
-            </summary>
-        </member>
-        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.SetLoginsCallback(System.Lazy{System.Collections.Generic.IEnumerable{Umbraco.Core.Models.Identity.IIdentityUserLogin}})">
-            <summary>
-            Used to set a lazy call back to populate the user's Login list
-            </summary>
-            <param name="callback"></param>
-        </member>
-        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.IsDirty">
-            <inheritdoc />
-        </member>
-        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.IsPropertyDirty(System.String)">
-            <inheritdoc />
-        </member>
-        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.GetDirtyProperties">
-            <inheritdoc />
-        </member>
-        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.ResetDirtyProperties">
-            <inheritdoc />
-        </member>
-        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.WasDirty">
-            <inheritdoc />
-        </member>
-        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.WasPropertyDirty(System.String)">
-            <inheritdoc />
-        </member>
-        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.ResetWereDirtyProperties">
-            <inheritdoc />
-        </member>
-        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.ResetDirtyProperties(System.Boolean)">
-            <inheritdoc />
-        </member>
-        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.GetWereDirtyProperties">
-            <inheritdoc />
-        </member>
-        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.DisableChangeTracking">
-            <summary>
-            Disables change tracking.
-            </summary>
-        </member>
-        <member name="M:Umbraco.Core.Models.Identity.BackOfficeIdentityUser.EnableChangeTracking">
-            <summary>
-            Enables change tracking.
-            </summary>
-        </member>
-        <member name="T:Umbraco.Core.Models.Identity.IdentityUser`4">
-            <summary>
-            Default IUser implementation
-            </summary>
-            <typeparam name="TKey"/><typeparam name="TLogin"/><typeparam name="TRole"/><typeparam name="TClaim"/>
-            <remarks>
-            This class normally exists inside of the EntityFramework library, not sure why MS chose to explicitly put it there but we don't want
-            references to that so we will create our own here
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Core.Models.Identity.IdentityUser`4.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Umbraco.Core.Models.Identity.IdentityUser`4"/> class.
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.LastLoginDateUtc">
-            <summary>
-            Last login date
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.Email">
-            <summary>
-            Email
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.EmailConfirmed">
-            <summary>
-            True if the email is confirmed, default is false
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.PasswordHash">
-            <summary>
-            The salted/hashed form of the user password
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.SecurityStamp">
-            <summary>
-            A random value that should change whenever a users credentials have changed (password changed, login removed)
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.PhoneNumber">
-            <summary>
-            PhoneNumber for the user
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.PhoneNumberConfirmed">
-            <summary>
-            True if the phone number is confirmed, default is false
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.TwoFactorEnabled">
-            <summary>
-            Is two factor enabled for the user
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.LockoutEndDateUtc">
-            <summary>
-            DateTime in UTC when lockout ends, any time in the past is considered not locked out.
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.LastPasswordChangeDateUtc">
-            <summary>
-            DateTime in UTC when the password was last changed.
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.LockoutEnabled">
-            <summary>
-            Is lockout enabled for this user
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.AccessFailedCount">
-            <summary>
-            Used to record failures for the purposes of lockout
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.Roles">
-            <summary>
-            Navigation property for user roles
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.Claims">
-            <summary>
-            Navigation property for user claims
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.Logins">
-            <summary>
-            Navigation property for user logins
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.Id">
-            <summary>
-            User ID (Primary Key)
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUser`4.UserName">
-            <summary>
-            User name
-            </summary>
-        </member>
-        <member name="T:Umbraco.Core.Models.Identity.IdentityUserClaim`1">
-             <summary>
-             EntityType that represents one specific user claim
-            
-             </summary>
-             <typeparam name="TKey"/>
-             <remarks>
-             This class normally exists inside of the EntityFramework library, not sure why MS chose to explicitly put it there but we don't want
-             references to that so we will create our own here
-             </remarks>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUserClaim`1.Id">
-             <summary>
-             Primary key
-            
-             </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUserClaim`1.UserId">
-             <summary>
-             User Id for the user who owns this login
-            
-             </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUserClaim`1.ClaimType">
-             <summary>
-             Claim type
-            
-             </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUserClaim`1.ClaimValue">
-             <summary>
-             Claim value
-            
-             </summary>
-        </member>
-        <member name="T:Umbraco.Core.Models.Identity.IdentityUserLogin">
-             <summary>
-             Entity type for a user's login (i.e. Facebook, Google)
-            
-             </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUserLogin.LoginProvider">
-             <summary>
-             The login provider for the login (i.e. Facebook, Google)
-            
-             </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUserLogin.ProviderKey">
-             <summary>
-             Key representing the login for the provider
-            
-             </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUserLogin.UserId">
-             <summary>
-             User Id for the user who owns this login
-            
-             </summary>
-        </member>
-        <member name="T:Umbraco.Core.Models.Identity.IdentityUserRole`1">
-             <summary>
-             EntityType that represents a user belonging to a role
-            
-             </summary>
-             <typeparam name="TKey"/>
-             <remarks>
-             This class normally exists inside of the EntityFramework library, not sure why MS chose to explicitly put it there but we don't want
-             references to that so we will create our own here
-             </remarks>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUserRole`1.UserId">
-             <summary>
-             UserId for the user that is in the role
-            
-             </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IdentityUserRole`1.RoleId">
-             <summary>
-             RoleId for the role
-            
-             </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IIdentityUserLogin.LoginProvider">
-             <summary>
-             The login provider for the login (i.e. Facebook, Google)
-            
-             </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IIdentityUserLogin.ProviderKey">
-             <summary>
-             Key representing the login for the provider
-            
-             </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.Identity.IIdentityUserLogin.UserId">
-             <summary>
-             User Id for the user who owns this login
-            
-             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "T:Umbraco.Core.Models.Membership.ContentPermissionSet" -->
         <member name="T:Umbraco.Core.Models.Membership.EntityPermission">
@@ -11894,6 +11931,9 @@
             <param name="groupName"></param>
             <returns></returns>
         </member>
+        <member name="M:Umbraco.Core.Persistence.Repositories.Implement.MemberRepository.SetLastLogin(System.String,System.DateTime)">
+            <inheritdoc />
+        </member>
         <member name="M:Umbraco.Core.Persistence.Repositories.Implement.MemberRepository.GetPage(Umbraco.Core.Persistence.Querying.IQuery{Umbraco.Core.Models.IMember},System.Int64,System.Int32,System.Int64@,Umbraco.Core.Persistence.Querying.IQuery{Umbraco.Core.Models.IMember},Umbraco.Core.Services.Ordering)">
             <summary>
             Gets paged member results.
@@ -12725,6 +12765,13 @@
             <para>This can be optimized and bypass all deep cloning.</para>
             </remarks>
         </member>
+        <member name="M:Umbraco.Core.Persistence.Repositories.IMemberGroupRepository.Get(System.Guid)">
+            <summary>
+            Gets a member group by it's uniqueId
+            </summary>
+            <param name="uniqueId"></param>
+            <returns></returns>
+        </member>
         <member name="M:Umbraco.Core.Persistence.Repositories.IMemberGroupRepository.GetByName(System.String)">
             <summary>
             Gets a member group by it's name
@@ -12781,6 +12828,18 @@
             </summary>
             <param name="query"></param>
             <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Persistence.Repositories.IMemberRepository.SetLastLogin(System.String,System.DateTime)">
+            <summary>
+            Sets a members last login date based on their username
+            </summary>
+            <param name="username"></param>
+            <param name="date"></param>
+            <remarks>
+            This is a specialized method because whenever a member logs in, the membership provider requires us to set the 'online' which requires
+            updating their login date. This operation must be fast and cannot use database locks which is fine if we are only executing a single query
+            for this data since there won't be any other data contention issues.
+            </remarks>
         </member>
         <member name="T:Umbraco.Core.Persistence.Repositories.IRedirectUrlRepository">
             <summary>
@@ -13196,6 +13255,11 @@
         <member name="P:Umbraco.Core.Persistence.Dtos.DomainDto.IsoCode">
             <summary>
             Used for a result on the query to get the associated language for a domain if there is one
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Persistence.Dtos.ExternalLoginDto.UserData">
+            <summary>
+            Used to store any arbitrary data for the user and external provider - like user tokens returned from the provider
             </summary>
         </member>
         <member name="P:Umbraco.Core.Persistence.Dtos.LanguageDto.Id">
@@ -18562,8 +18626,15 @@
         </member>
         <member name="T:Umbraco.Core.PropertyEditors.PropertyValueConverterBase">
             <summary>
-            Provides a default overridable implementation for <see cref="T:Umbraco.Core.PropertyEditors.IPropertyValueConverter"/> that does nothing.
+            Provides a default implementation for <see cref="T:Umbraco.Core.PropertyEditors.IPropertyValueConverter" />.
             </summary>
+            <seealso cref="T:Umbraco.Core.PropertyEditors.IPropertyValueConverter" />
+        </member>
+        <member name="M:Umbraco.Core.PropertyEditors.PropertyValueConverterBase.IsConverter(Umbraco.Core.Models.PublishedContent.IPublishedPropertyType)">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Core.PropertyEditors.PropertyValueConverterBase.IsValue(System.Object,Umbraco.Core.PropertyEditors.PropertyValueLevel)">
+            <inheritdoc />
         </member>
         <member name="M:Umbraco.Core.PropertyEditors.PropertyValueConverterBase.GetPropertyValueType(Umbraco.Core.Models.PublishedContent.IPublishedPropertyType)">
             <inheritdoc />
@@ -18750,6 +18821,19 @@
             <summary>
             Gets the type of the dynamic configuration provider.
             </summary>
+        </member>
+        <member name="M:Umbraco.Core.Services.IIconService.GetIcon(System.String)">
+            <summary>
+            Gets an IconModel containing the icon name and SvgString according to an icon name found at the global icons path
+            </summary>
+            <param name="iconName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Services.IIconService.GetAllIcons">
+            <summary>
+            Gets a list of all svg icons found at at the global icons path.
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Umbraco.Core.Services.Implement.AuditService.GetPagedItemsByEntity(System.Int32,System.Int64,System.Int32,System.Int64@,Umbraco.Core.Persistence.DatabaseModelDefinitions.Direction,Umbraco.Core.Models.AuditType[],Umbraco.Core.Persistence.Querying.IQuery{Umbraco.Core.Models.IAuditItem})">
             <summary>
@@ -19767,32 +19851,19 @@
             <returns><see cref="T:System.Xml.Linq.XElement"/> containing the xml representation of the IMacro objects</returns>
         </member>
         <member name="M:Umbraco.Core.Services.Implement.ExternalLoginService.GetAll(System.Int32)">
-            <summary>
-            Returns all user logins assigned
-            </summary>
-            <param name="userId"></param>
-            <returns></returns>
+            <inheritdoc />
         </member>
-        <member name="M:Umbraco.Core.Services.Implement.ExternalLoginService.Find(Microsoft.AspNet.Identity.UserLoginInfo)">
-            <summary>
-            Returns all logins matching the login info - generally there should only be one but in some cases
-            there might be more than one depending on if an administrator has been editing/removing members
-            </summary>
-            <param name="login"></param>
-            <returns></returns>
+        <member name="M:Umbraco.Core.Services.Implement.ExternalLoginService.Find(System.String,System.String)">
+            <inheritdoc />
         </member>
-        <member name="M:Umbraco.Core.Services.Implement.ExternalLoginService.SaveUserLogins(System.Int32,System.Collections.Generic.IEnumerable{Microsoft.AspNet.Identity.UserLoginInfo})">
-            <summary>
-            Save user logins
-            </summary>
-            <param name="userId"></param>
-            <param name="logins"></param>
+        <member name="M:Umbraco.Core.Services.Implement.ExternalLoginService.Save(System.Int32,System.Collections.Generic.IEnumerable{Umbraco.Core.Models.Identity.IExternalLogin})">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Core.Services.Implement.ExternalLoginService.Save(Umbraco.Core.Models.Identity.IIdentityUserLoginExtended)">
+            <inheritdoc />
         </member>
         <member name="M:Umbraco.Core.Services.Implement.ExternalLoginService.DeleteUserLogins(System.Int32)">
-            <summary>
-            Deletes all user logins - normally used when a member is deleted
-            </summary>
-            <param name="userId"></param>
+            <inheritdoc />
         </member>
         <member name="T:Umbraco.Core.Services.Implement.FileService">
             <summary>
@@ -21072,21 +21143,14 @@
             <param name="username">Username to check</param>
             <returns><c>True</c> if the Member exists otherwise <c>False</c></returns>
         </member>
+        <member name="M:Umbraco.Core.Services.Implement.MemberService.SetLastLogin(System.String,System.DateTime)">
+            <inheritdoc />
+        </member>
         <member name="M:Umbraco.Core.Services.Implement.MemberService.Save(Umbraco.Core.Models.IMember,System.Boolean)">
-            <summary>
-            Saves an <see cref="T:Umbraco.Core.Models.IMember"/>
-            </summary>
-            <param name="member"><see cref="T:Umbraco.Core.Models.IMember"/> to Save</param>
-            <param name="raiseEvents">Optional parameter to raise events.
-            Default is <c>True</c> otherwise set to <c>False</c> to not raise events</param>
+            <inheritdoc />
         </member>
         <member name="M:Umbraco.Core.Services.Implement.MemberService.Save(System.Collections.Generic.IEnumerable{Umbraco.Core.Models.IMember},System.Boolean)">
-            <summary>
-            Saves a list of <see cref="T:Umbraco.Core.Models.IMember"/> objects
-            </summary>
-            <param name="members"><see cref="T:System.Collections.Generic.IEnumerable`1"/> to save</param>
-            <param name="raiseEvents">Optional parameter to raise events.
-            Default is <c>True</c> otherwise set to <c>False</c> to not raise events</param>
+            <inheritdoc />
         </member>
         <member name="M:Umbraco.Core.Services.Implement.MemberService.Delete(Umbraco.Core.Models.IMember)">
             <summary>
@@ -23210,20 +23274,32 @@
             <param name="userId"></param>
             <returns></returns>
         </member>
-        <member name="M:Umbraco.Core.Services.IExternalLoginService.Find(Microsoft.AspNet.Identity.UserLoginInfo)">
+        <member name="M:Umbraco.Core.Services.IExternalLoginService.Find(System.String,System.String)">
             <summary>
             Returns all logins matching the login info - generally there should only be one but in some cases
             there might be more than one depending on if an administrator has been editing/removing members
             </summary>
-            <param name="login"></param>
+            <param name="loginProvider"></param>
+            <param name="providerKey"></param>
             <returns></returns>
         </member>
-        <member name="M:Umbraco.Core.Services.IExternalLoginService.SaveUserLogins(System.Int32,System.Collections.Generic.IEnumerable{Microsoft.AspNet.Identity.UserLoginInfo})">
+        <member name="M:Umbraco.Core.Services.IExternalLoginService.Save(System.Int32,System.Collections.Generic.IEnumerable{Umbraco.Core.Models.Identity.IExternalLogin})">
             <summary>
-            Save user logins
+            Saves the external logins associated with the user
             </summary>
-            <param name="userId"></param>
+            <param name="userId">
+            The user associated with the logins
+            </param>
             <param name="logins"></param>
+            <remarks>
+            This will replace all external login provider information for the user
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Core.Services.IExternalLoginService.Save(Umbraco.Core.Models.Identity.IIdentityUserLoginExtended)">
+            <summary>
+            Save a single external login record
+            </summary>
+            <param name="login"></param>
         </member>
         <member name="M:Umbraco.Core.Services.IExternalLoginService.DeleteUserLogins(System.Int32)">
             <summary>
@@ -24467,6 +24543,18 @@
             </summary>
             <remarks>An <see cref="T:Umbraco.Core.Models.Membership.IMembershipUser"/> can be of type <see cref="T:Umbraco.Core.Models.IMember"/> or <see cref="T:Umbraco.Core.Models.Membership.IUser"/></remarks>
             <param name="membershipUser"><see cref="T:Umbraco.Core.Models.IMember"/> or <see cref="T:Umbraco.Core.Models.Membership.IUser"/> to Delete</param>
+        </member>
+        <member name="M:Umbraco.Core.Services.IMembershipMemberService`1.SetLastLogin(System.String,System.DateTime)">
+            <summary>
+            Sets the last login date for the member if they are found by username
+            </summary>
+            <param name="username"></param>
+            <param name="date"></param>
+            <remarks>
+            This is a specialized method because whenever a member logs in, the membership provider requires us to set the 'online' which requires
+            updating their login date. This operation must be fast and cannot use database locks which is fine if we are only executing a single query
+            for this data since there won't be any other data contention issues.
+            </remarks>
         </member>
         <member name="M:Umbraco.Core.Services.IMembershipMemberService`1.Save(`0,System.Boolean)">
             <summary>
@@ -32671,6 +32759,12 @@
             </summary>
             <value>The path.</value>
         </member>
+        <member name="P:Umbraco.Core.Configuration.GlobalSettings.IconsPath">
+            <summary>
+            Gets the path to folder containing the icons used in the umbraco backoffice (/umbraco/assets/icons by default).
+            </summary>
+            <value>The icons path.</value>
+        </member>
         <member name="P:Umbraco.Core.Configuration.GlobalSettings.ConfigurationStatus">
             <summary>
             Gets or sets the configuration status. This will return the version number of the currently installed umbraco instance.
@@ -32748,7 +32842,7 @@
         </member>
         <member name="T:Umbraco.Core.Configuration.IGlobalSettings">
             <summary>
-            Contains general settings information for the entire Umbraco instance based on information from  web.config appsettings 
+            Contains general settings information for the entire Umbraco instance based on information from  web.config appsettings
             </summary>
         </member>
         <member name="P:Umbraco.Core.Configuration.IGlobalSettings.ReservedUrls">
@@ -32766,6 +32860,11 @@
         <member name="P:Umbraco.Core.Configuration.IGlobalSettings.Path">
             <summary>
             Gets the path to umbraco's root directory (/umbraco by default).
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Configuration.IGlobalSettings.IconsPath">
+            <summary>
+            Gets the path to umbraco's icons directory (/umbraco/assets/icons by default).
             </summary>
         </member>
         <member name="P:Umbraco.Core.Configuration.IGlobalSettings.ConfigurationStatus">
