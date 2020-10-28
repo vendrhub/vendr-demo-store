@@ -25,14 +25,12 @@
             </vendr-order-search>
 
             <ul class="vendr-action-list mt-20">
-                <li ng-if="vm.stats.totalNewOrders > 0"><a ng-href="#/commerce/vendr/order-list/{{vm.store.id}}?orderStatusIds={{vm.store.defaultOrderStatusId}}"><i class="icon icon-inbox vendr-action-list__icon"></i> <strong>{{ vm.stats.totalNewOrders }} new orders</strong> require processing</a></li>
-                <li ng-if="vm.stats.totalAuthorizedOrders > 0"><a ng-href="#/commerce/vendr/order-list/{{vm.store.id}}?paymentStatuses=1"><i class="icon icon-credit-card vendr-action-list__icon"></i> <strong>{{ vm.stats.totalAuthorizedOrders }} payments</strong> to capture</a></li>
-                <li ng-if="vm.stats.totalErroredOrders > 0"><a ng-href="#/commerce/vendr/order-list/{{vm.store.id}}?orderStatusIds={{vm.store.errorOrderStatusId}}"><i class="icon icon-alert vendr-action-list__icon"></i> <strong>{{ vm.stats.totalErroredOrders }} order</strong> has errored</a></li>
-                <li><span><i class="icon icon-rate vendr-action-list__icon"></i> There are no actions currently requiring your attention</span></li>
+                <li ng-repeat="action in vm.actions"><a ng-href="{{action.routePath}}"><i class="icon {{action.icon}} vendr-action-list__icon"></i> <span ng-bind-html="action.description"></span></a></li>
+                <li><span><i class="icon icon-rate vendr-action-list__icon"></i> <span>There are no actions currently requiring your attention</span></span></li>
             </ul>
 
             <umb-box class="mt-20">
-                <umb-box-header title="Activity"></umb-box-header>
+                <umb-box-header title="Recent Activity"></umb-box-header>
                 <umb-box-content class="block-form relative" style="min-height: 40px;">
 
                     <umb-load-indicator ng-if="vm.activityLogLoading"></umb-load-indicator>
@@ -40,10 +38,10 @@
                     <table class="vendr-activity-list" ng-if="!vm.activityLogLoading">
                         <tr ng-repeat="log in vm.activityLogs.items">
                             <td class="mr-20">
-                                <span class="vendr-activity-list__pill {{vm.getEventTypeColor(log.eventType)}}">{{ vm.getEventTypeName(log.eventType) }}</span>
+                                <span class="vendr-activity-list__pill {{log.badgeColorClass}}">{{ log.badgeLabel }}</span>
                             </td>
                             <td>
-                                <strong><a ng-href="#/commerce/vendr/{{log.entityType.toLowerCase()}}-edit/{{log.storeId}}_{{log.entityId}}">{{ log.eventSummary }}</a></strong><br />
+                                <strong><a ng-href="{{log.routePath}}">{{ log.eventSummary }}</a></strong><br />
                                 <span class="color-midgrey">{{ log.eventDateUtc  | date:'MMMM d, yyyy h:mm a' }}</span>
                             </td>
                         </tr>

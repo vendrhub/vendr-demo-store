@@ -30,7 +30,7 @@
                         <div class="form-search">
                             <i class="icon-search" aria-hidden="true"></i>
                             <input type="text"
-                                   ng-model="filter.tearm"
+                                   ng-model="filter.term"
                                    class="umb-search-field search-query input-block-level -full-width-input"
                                    localize="placeholder"
                                    placeholder="@placeholders_filter"
@@ -40,7 +40,7 @@
                     </div>
 
                     <ul class="umb-actions umb-actions-child">
-                        <li class="umb-action" ng-repeat="item in items | filter:filter.tearm">
+                        <li class="umb-action" ng-repeat="item in items | filter:filter.term">
                             <a class="umb-action-link" ng-click="select(item)">
                                 <i class="large icon {{item.icon}} color-{{item.color}}" aria-hidden="true"></i>
                                 <span class="menu-label">

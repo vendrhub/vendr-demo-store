@@ -344,6 +344,9 @@
                         <div ng-if="vm.content.paymentCountry">
                             {{vm.content.paymentCountry.name}}
                         </div>
+                        <div ng-if="vm.content.paymentRegion">
+                            {{vm.content.paymentRegion.name}}
+                        </div>
                         <div ng-if="vm.editorConfig.billing.telephone && vm.content.properties[vm.editorConfig.billing.telephone.alias]">
                             <br />Tel: {{vm.content.properties[vm.editorConfig.billing.telephone.alias].value}}
                         </div>
@@ -384,6 +387,9 @@
                             </div>
                             <div ng-if="vm.content.shippingCountry">
                                 {{vm.content.shippingCountry.name}}
+                            </div>
+                            <div ng-if="vm.content.shippingRegion">
+                                {{vm.content.shippingRegion.name}}
                             </div>
                             <div ng-if="vm.editorConfig.shipping.telephone && vm.content.properties[vm.editorConfig.shipping.telephone.alias]">
                                 <br />Tel: {{vm.content.properties[vm.editorConfig.shipping.telephone.alias].value}}

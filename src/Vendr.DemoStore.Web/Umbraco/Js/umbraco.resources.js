@@ -909,13 +909,13 @@
      */
             getByIds: function getByIds(ids) {
                 var idQuery = '';
-                _.each(ids, function (item) {
-                    idQuery += 'ids=' + item + '&';
+                ids.forEach(function (id) {
+                    return idQuery += 'ids='.concat(id, '&');
                 });
                 return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('contentApiBaseUrl', 'GetByIds', idQuery)), 'Failed to retrieve data for content with multiple ids').then(function (result) {
                     //each item needs to be re-formatted
-                    _.each(result, function (r) {
-                        umbDataFormatter.formatContentGetData(r);
+                    result.forEach(function (r) {
+                        return umbDataFormatter.formatContentGetData(r);
                     });
                     return $q.when(result);
                 });
@@ -2440,7 +2440,7 @@
             },
             getAnchors: function getAnchors(rteContent) {
                 if (!rteContent || rteContent.length === 0) {
-                    return [];
+                    return $q.when([]);
                 }
                 return umbRequestHelper.resourcePromise($http.post(umbRequestHelper.getApiUrl('entityApiBaseUrl', 'GetAnchors'), { rteContent: rteContent }), 'Failed to anchors data for rte content ' + rteContent);
             },
@@ -3472,8 +3472,8 @@
      */
             getByIds: function getByIds(ids) {
                 var idQuery = '';
-                _.each(ids, function (item) {
-                    idQuery += 'ids=' + item + '&';
+                ids.forEach(function (id) {
+                    return idQuery += 'ids='.concat(id, '&');
                 });
                 return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('mediaApiBaseUrl', 'GetByIds', idQuery)), 'Failed to retrieve data for media ids ' + ids);
             },
@@ -4143,8 +4143,8 @@
             },
             getByIds: function getByIds(ids) {
                 var idQuery = '';
-                _.each(ids, function (item) {
-                    idQuery += 'ids=' + item + '&';
+                ids.forEach(function (id) {
+                    return idQuery += 'ids='.concat(id, '&');
                 });
                 return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('memberGroupApiBaseUrl', 'GetByIds', idQuery)), 'Failed to retrieve member group');
             },
@@ -4188,15 +4188,15 @@
                     filterPropertyTypes = [];
                 }
                 var query = '';
-                _.each(filterContentTypes, function (item) {
-                    query += 'filterContentTypes=' + item + '&';
+                filterContentTypes.forEach(function (fct) {
+                    return query += 'filterContentTypes='.concat(fct, '&');
                 });
                 // if filterContentTypes array is empty we need a empty variable in the querystring otherwise the service returns a error
                 if (filterContentTypes.length === 0) {
                     query += 'filterContentTypes=&';
                 }
-                _.each(filterPropertyTypes, function (item) {
-                    query += 'filterPropertyTypes=' + item + '&';
+                filterPropertyTypes.forEach(function (fpt) {
+                    return query += 'filterPropertyTypes='.concat(fpt, '&');
                 });
                 // if filterPropertyTypes array is empty we need a empty variable in the querystring otherwise the service returns a error
                 if (filterPropertyTypes.length === 0) {
@@ -5457,6 +5457,29 @@
             }
             /**
       * @ngdoc method
+      * @name umbraco.resources.usersResource#getUsers
+      * @methodOf umbraco.resources.usersResource
+      *
+      * @description
+      * Gets users from ids
+      *
+      * ##usage
+      * <pre>
+      * usersResource.getUsers([1,2,3])
+      *    .then(function(data) {
+      *        alert("It's here");
+      *    });
+      * </pre>
+      * 
+      * @param {Array} userIds user ids.
+      * @returns {Promise} resourcePromise object containing the users array.
+      *
+      */
+            function getUsers(userIds) {
+                return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('userApiBaseUrl', 'GetByIds', { ids: userIds })), 'Failed to retrieve data for users ' + userIds);
+            }
+            /**
+      * @ngdoc method
       * @name umbraco.resources.usersResource#createUser
       * @methodOf umbraco.resources.usersResource
       *
@@ -5597,6 +5620,7 @@
                 setUserGroupsOnUsers: setUserGroupsOnUsers,
                 getPagedResults: getPagedResults,
                 getUser: getUser,
+                getUsers: getUsers,
                 createUser: createUser,
                 inviteUser: inviteUser,
                 saveUser: saveUser,

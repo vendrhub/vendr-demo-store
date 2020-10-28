@@ -113,7 +113,7 @@
 
                                     <div class="umb-property-editor umb-contentpicker">
 
-                                        <table class="vendr-multi-field-table w-1/4">
+                                        <table class="vendr-multi-field-table w-full" style="max-width: 500px;">
                                             <thead>
                                                 <tr>
                                                     <th class="w-1/2">Start Date</th>
@@ -127,7 +127,8 @@
                                                             <umb-date-time-picker ng-model="vm.localStartDate"
                                                                 options="vm.startDatePickerConfig"
                                                                 on-setup="vm.startDatePickerSetup(fpItem)"
-                                                                on-change="vm.startDatePickerChange(dateStr, instance)">
+                                                                on-change="vm.startDatePickerChange(dateStr, instance)"
+                                                                class="flex-1" style="width: auto;">
                                                             </umb-date-time-picker>
                                                             <button ng-show="vm.content.startDate" ng-click="vm.clearStartDate()" 
                                                                     class="btn umb-button--xs dropdown-toggle umb-button-group__toggle vendr-btn--clear">
@@ -140,7 +141,8 @@
                                                             <umb-date-time-picker ng-model="vm.localExpiryDate"
                                                                 options="vm.expiryDatePickerConfig"
                                                                 on-setup="vm.expiryDatePickerSetup(fpItem)"
-                                                                on-change="vm.expiryDatePickerChange(dateStr, instance)">
+                                                                on-change="vm.expiryDatePickerChange(dateStr, instance)"
+                                                                class="flex-1" style="width: auto;">
                                                             </umb-date-time-picker>
                                                             <button ng-show="vm.content.expiryDate" ng-click="vm.clearExpiryDate()" 
                                                                     class="btn umb-button--xs dropdown-toggle umb-button-group__toggle vendr-btn--clear">
