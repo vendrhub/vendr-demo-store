@@ -1115,6 +1115,14 @@
                         storeId: storeId
                     })),
                     "Failed to get store stats for today");
+            },
+
+            getStoreActionsForToday: function (storeId) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("storeApiBaseUrl", "GetStoreActionsForToday", {
+                        storeId: storeId
+                    })),
+                    "Failed to get store actions for today");
             }
 
         };

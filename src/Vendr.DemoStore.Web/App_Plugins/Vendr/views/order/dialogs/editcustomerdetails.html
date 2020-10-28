@@ -100,6 +100,13 @@
                                     </select>
                                 </umb-control-group>
 
+                                <!-- Region -->
+                                <umb-control-group label="Region" ng-if="vm.content.paymentRegion">
+                                    <select class="umb-property-editor umb-dropdown" disabled>
+                                        <option value="" disabled selected>{{vm.content.paymentRegion.name}}</option>
+                                    </select>
+                                </umb-control-group>
+
                                 <umb-control-group label="{{ vm.editorConfig.billing.zipCode.label }}"
                                                    description="{{ vm.editorConfig.billing.zipCode.description }}"
                                                    ng-if="vm.editorConfig.billing.zipCode">
@@ -202,6 +209,12 @@
                                     <umb-control-group label="Country">
                                         <select class="umb-property-editor umb-dropdown" disabled>
                                             <option value="" disabled selected>{{vm.content.shippingCountry.name}}</option>
+                                        </select>
+                                    </umb-control-group>
+
+                                    <umb-control-group label="Region" ng-if="vm.content.shippingRegion">
+                                        <select class="umb-property-editor umb-dropdown" disabled>
+                                            <option value="" disabled selected>{{vm.content.shippingRegion.name}}</option>
                                         </select>
                                     </umb-control-group>
 

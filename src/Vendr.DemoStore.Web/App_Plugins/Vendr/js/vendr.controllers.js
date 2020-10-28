@@ -3467,7 +3467,6 @@
             expandedBundles: []
         };
         vm.content = {};
-        vm.orderMember = undefined;
 
         vm.close = function () {
             if ($scope.model.close) {
@@ -3584,15 +3583,7 @@
                         order.properties[vm.editorConfig.notes.internalNotes.alias] = { value: "" };
                     }
 
-                    // Check to see if we have a customer ref, and if so, try and fetch a member
-                    if (order.customerReference) {
-                        memberResource.getByKey(order.customerReference).then(function (member) {
-                            vm.orderMember = member;
-                            vm.ready(order);
-                        });
-                    } else {
-                        vm.ready(order);
-                    }
+                    vm.ready(order);
 
                     // Sync payment status
                     vendrOrderResource.syncPaymentStatus(id).then(function (order) {
@@ -4580,7 +4571,7 @@
 
         function doToggleProperties(config) {
 
-            var $inputEl = $("div[data-element='property-" + $scope.model.alias + "']");
+            var $inputEl = $("[data-element='property-" + $scope.model.alias + "']");
             var form = $inputEl.closest("form");
 
             var hiddenContainer = $(form).find("> .cih");
@@ -4590,7 +4581,7 @@
             }
 
             config.show.forEach(function (toShow) {
-                var $s = $("div[data-element='property-" + toShow + "']");
+                var $s = $("[data-element='property-" + toShow + "']");
                 if ($s.closest(".cih").length > 0) {
                     $(form).find(".property-" + toShow + "-placeholder").after($s);
                     $(form).find(".property-" + toShow + "-placeholder").remove();
@@ -4598,7 +4589,7 @@
             });
 
             config.hide.forEach(function (toHide) {
-                var $s = $("div[data-element='property-" + toHide + "']");
+                var $s = $("[data-element='property-" + toHide + "']");
                 if ($s.closest(".cih").length === 0) {
                     $s.after("<span class='property-" + toHide + "-placeholder'></span>");
                     hiddenContainer.append($s);
@@ -6081,6 +6072,7 @@
 
         vm.loading = true;
         vm.stats = undefined;
+        vm.actions = [];
 
         vm.activityLogLoading = true;
         vm.activityLogs = {
@@ -6095,41 +6087,6 @@
                 vm.activityLogs = activityLogs;
                 vm.activityLogLoading = false;
             });
-        }
-
-        // TODO: Make this extendable in some way
-        vm.getEventTypeName = function (eventType) {
-            switch (eventType) {
-                case "vendr/order/new":
-                    return "Order";
-                case "vendr/order/payment/capture":
-                    return "Capture";
-                case "vendr/order/payment/refund":
-                    return "Refund";
-                case "vendr/order/payment/authorize":
-                    return "Authorize";
-                case "vendr/order/status/change":
-                    return "Status";
-                default:
-                    return "Unknown";
-            }
-        }
-
-        vm.getEventTypeColor = function (eventType) {
-            switch (eventType) {
-                case "vendr/order/new":
-                    return "vendr-bg--indigo";
-                case "vendr/order/payment/capture":
-                    return "vendr-bg--green";
-                case "vendr/order/payment/refund":
-                    return "vendr-bg--orange";
-                case "vendr/order/payment/authorize":
-                    return "vendr-bg--light-blue";
-                case "vendr/order/status/change":
-                    return "vendr-bg--dark-grey";
-                default:
-                    return "vendr-bg--grey";
-            }
         }
 
         vm.refresh = function () {
@@ -6147,7 +6104,10 @@
                 vm.store = store;
                 vendrStoreResource.getStoreStatsForToday(id).then(function (stats) {
                     vm.stats = stats;
-                    vm.loading = false;
+                    vendrStoreResource.getStoreActionsForToday(id).then(function (actions) {
+                        vm.actions = actions;
+                        vm.loading = false;
+                    })
                 })
             });
 

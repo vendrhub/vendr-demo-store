@@ -156,7 +156,7 @@ div [ng-controller*=MemberGroupPickerController] .umb-box-content > .umb-tree {
     margin-bottom: 0 !important;
 }
 
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 1350px) {
     .vendr-layout {
         flex-direction: row;
     }
@@ -380,7 +380,8 @@ div [ng-controller*=MemberGroupPickerController] .umb-box-content > .umb-tree {
 
 .vendr-action-list a,
 .vendr-action-list > li > span {
-    display: block;
+    display: flex;
+    align-items: center;
     position: relative;
     text-decoration: none;
     padding: 12px 15px;
@@ -388,15 +389,21 @@ div [ng-controller*=MemberGroupPickerController] .umb-box-content > .umb-tree {
     margin-right: -15px;
 }
 
+.vendr-action-list a span,
+.vendr-action-list > li > span span {
+    padding-right: 20px;
+}
+
 .vendr-action-list a:after {
     content: "\203A";
-    display: block;
+    display: flex;
     position: absolute;
+    align-items: center;
     top: 15px;
     right: 15px;
     bottom: 15px;
     font-size: 30px;
-    line-height: 20px;
+    line-height: 1;
     color: #ddd;
 }
 
@@ -420,7 +427,7 @@ div [ng-controller*=MemberGroupPickerController] .umb-box-content > .umb-tree {
     width: 20px;
     height: 20px;
     font-size: 20px;
-    margin-right: 10px;
+    margin-right: 15px;
     vertical-align: middle;
 }
 
