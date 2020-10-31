@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Umbraco.Core;
 using Umbraco.Core.Models;
 using Umbraco.Core.Models.PublishedContent;
+using Umbraco.Web;
 using Umbraco.Web.Mvc;
 
 namespace Vendr.DemoStore.Web.Controllers
@@ -14,10 +15,12 @@ namespace Vendr.DemoStore.Web.Controllers
     public class SearchSurfaceController : SurfaceController
     {
         private readonly IExamineManager _examineManager;
+        private readonly IUmbracoContextAccessor _umbracoContextAccessor;
 
-        public SearchSurfaceController(IExamineManager examineManager)
+        public SearchSurfaceController(IExamineManager examineManager, IUmbracoContextAccessor umbracoContextAccessor)
         {
             _examineManager = examineManager;
+            _umbracoContextAccessor = umbracoContextAccessor;
         }
 
         [ChildActionOnly]
@@ -69,9 +72,12 @@ namespace Vendr.DemoStore.Web.Controllers
                 var totalResults = results.TotalItemCount;
                 var pagedResults = results.Skip(ps * (p - 1));
 
+                var items = pagedResults.ToPublishedSearchResults(_umbracoContextAccessor.UmbracoContext.Content)
+                                        .Select(x => x.Content);
+
                 result = new PagedResult<IPublishedContent>(totalResults, p, ps)
                 {
-                    Items = pagedResults.Select(x => UmbracoContext.Content.GetById(int.Parse(x.Id)))
+                    Items = items
                 };
             }
 
