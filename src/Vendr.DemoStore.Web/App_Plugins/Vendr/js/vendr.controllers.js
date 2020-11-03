@@ -3826,7 +3826,7 @@
                 { alias: 'finalizedDate', header: 'Date', template: "{{ finalizedDate  | date : 'MMMM d, yyyy h:mm a' }}" },
                 { alias: 'orderStatusId', header: 'Order Status', align: 'right', template: '<span class="umb-badge umb-badge--xs vendr-bg--{{ orderStatus.color }}" title="Order Status: {{ orderStatus.name }}">{{ orderStatus.name }}</span>' },
                 { alias: 'paymentStatus', header: 'Payment Status', align: 'right', template: '<span class="umb-badge umb-badge--xs vendr-badge--{{ paymentStatus.toLowerCase() }}">{{paymentStatusName}}</span>' },
-                { alias: 'payment', header: 'Payment', align: 'right', template: '<span class="vendr-table-cell-value--multiline"><strong>{{totalPrice}}</strong><span>{{paymentMethod.name}}</span></span>' }
+                { alias: 'payment', header: 'Payment', align: 'right', template: '<span class="vendr-table-cell-value--multiline"><strong>{{transactionAmount}}</strong><span>{{paymentMethod.name}}</span></span>' }
             ],
             itemClick: function (itm) {
                 $location.path(itm.routePath);
@@ -5378,9 +5378,14 @@
 
     'use strict';
 
-    function SettingsViewController($scope, $rootScope, $routeParams, navigationService, vendrUtils)
+    function SettingsViewController($scope, $rootScope, $routeParams, navigationService, vendrUtils, vendrLicensingResource, vendrRouteCache)
     {
         $scope.vendrInfo = vendrUtils.getSettings("vendrInfo");
+
+        vendrRouteCache.getOrFetch("vendrLicensingInfo",
+            () => vendrLicensingResource.getLicensingInfo()).then(function (data) {
+            $scope.licensingInfo = data;
+        });
 
         navigationService.syncTree({ tree: "vendrsettings", path: ["-1"], forceReload: false, activate: true });
 
@@ -5859,7 +5864,8 @@
     function StoreEditController($scope, $routeParams, $location, formHelper,
         appState, editorState, localizationService, notificationsService, navigationService, userGroupsResource, usersResource,
         vendrStoreResource, vendrCurrencyResource, vendrCountryResource, vendrTaxResource,
-        vendrOrderStatusResource, vendrEmailTemplateResource) {
+        vendrOrderStatusResource, vendrEmailTemplateResource,
+        vendrLicensingResource, vendrRouteCache) {
 
         var id = $routeParams.id;
         var create = id === '-1';
@@ -5908,7 +5914,12 @@
         vm.content = {};
 
         vm.init = function () {
-                       
+
+            vendrRouteCache.getOrFetch("vendrLicensingInfo",
+                () => vendrLicensingResource.getLicensingInfo()).then(function (data) {
+                    vm.licensingInfo = data;
+                });
+
             userGroupsResource.getUserGroups().then(function (userGroups) {
                 vm.options.userRoles = userGroups.map(function (itm) {
 
@@ -6064,7 +6075,8 @@
     'use strict';
 
     function StoreViewController($scope, $routeParams, $location,
-        vendrStoreResource, navigationService, vendrActivityLogResource) {
+        vendrStoreResource, navigationService, vendrActivityLogResource,
+        vendrLicensingResource, vendrRouteCache) {
 
         var id = $routeParams.id;
 
@@ -6095,6 +6107,11 @@
         }
 
         vm.init = function (noSync) {
+
+            vendrRouteCache.getOrFetch("vendrLicensingInfo",
+                () => vendrLicensingResource.getLicensingInfo()).then(function (data) {
+                    vm.licensingInfo = data;
+                });
 
             if (!noSync) {
                 navigationService.syncTree({ tree: "vendr", path: "-1," + id, forceReload: true });

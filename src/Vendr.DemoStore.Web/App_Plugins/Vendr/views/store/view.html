@@ -7,7 +7,7 @@
         <div class="p-40" ng-if="!vm.loading">
             <button type="button" class="btn-reset btn-refresh" ng-click="vm.refresh()"><i class="fa fa-refresh"></i></button>
             <h2 class="mt-0 font-heading font-bold color-darkgrey text-xl">{{vm.store.name}} Dashboard</h2>
-            <p class="text-lg color-midgrey" style="max-width: 75%;">Search for orders, review and act on recent store activity and see how your store is performing today. If you'd like to see a more in-depth view, you can find this in the <a href="#/commerce/vendr/analytics-view/{{vm.store.id}}">Analytics</a> section.</p>
+            <p class="text-lg color-midgrey" style="max-width: 75%;">Search for orders, review and act on recent store activity and see how your store is performing today. <span ng-if="vm.licensingInfo.limitations.canAccessAnalytics">If you'd like to see a more in-depth view, you can find this in the <a href="#/commerce/vendr/analytics-view/{{vm.store.id}}">Analytics</a> section.</span></p>
 
             <div class="mt-40 flex">
                 <div class="mr-40" ng-if="vm.stats.totalRevenue">

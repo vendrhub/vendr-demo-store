@@ -15,14 +15,16 @@
                                    title="Expand / Collapse Bundle"
                                    ng-class="{ 'fa-plus-square-o': !vm.bundleIsExpanded(ol.bundleId), 'fa-minus-square-o': vm.bundleIsExpanded(ol.bundleId) }"
                                    ng-click="vm.toggleBundle(ol.bundleId)"
-                                   ng-if="ol.bundleId && ol.orderLines.length > 0" 
+                                   ng-if="ol.bundleId && ol.orderLines.length > 0"
                                    aria-hidden="true"></i>
                                 <div class="flex flex-column w-full">
                                     <div class="flex items-baseline w-full">
                                         <strong title="{{ ol.name }}" class="truncate">{{ ol.name }}</strong>
                                         <button type="button" class="btn-link hover:text-light-blue" title="Edit Order Line Properties"
-                                           ng-if="vm.hasEditableOrderLineProperties(ol)"
-                                           ng-click="vm.editOrderLineProperties(ol)"><i class="fa fa-pencil-square-o" style="font-weight:normal; vertical-align: middle;" aria-hidden="true"></i></button>
+                                                ng-if="vm.hasEditableOrderLineProperties(ol)"
+                                                ng-click="vm.editOrderLineProperties(ol)">
+                                            <i class="fa fa-pencil-square-o" style="font-weight:normal; vertical-align: middle;" aria-hidden="true"></i>
+                                        </button>
                                     </div>
                                     <div class="color-grey text-12 block">
                                         <span title="Sku: {{ ol.sku }}">{{ ol.sku }}</span>
@@ -32,12 +34,12 @@
                                 </div>
                             </div>
                             <div>
-                                <span class="color-grey text-12 strikethrough block" ng-if="ol.unitPriceWithoutDiscount != ol.unitPrice">{{ol.unitPriceWithoutDiscount}}</span>
+                                <span class="color-grey text-12 strikethrough block" ng-if="ol.unitPriceWithoutAdjustments != ol.unitPrice">{{ol.unitPriceWithoutAdjustments}}</span>
                                 {{ ol.quantity }} x {{ ol.unitPrice }}
 
                             </div>
                             <div>
-                                <span class="color-grey text-12 strikethrough block" ng-if="ol.totalPriceWithoutDiscount != ol.totalPrice">{{ol.totalPriceWithoutDiscount}}</span>
+                                <span class="color-grey text-12 strikethrough block" ng-if="ol.totalPriceWithoutAdjustments != ol.totalPrice">{{ol.totalPriceWithoutAdjustments}}</span>
                                 {{ ol.totalPrice }}
                             </div>
                         </div>
@@ -61,8 +63,10 @@
                                         <div class="flex items-baseline w-full">
                                             <strong>{{ sol.name }}</strong>
                                             <button type="button" class="btn-link hover:text-light-blue" title="Edit Order Line Properties"
-                                                ng-if="vm.hadEditableOrderLineProperties(sol)"
-                                                ng-click="vm.editOrderLineProperties(ol)"><i class="fa fa-pencil-square-o" style="font-weight:normal; margin-left: 5px; vertical-align: middle;" aria-hidden="true"></i></button>
+                                                    ng-if="vm.hadEditableOrderLineProperties(sol)"
+                                                    ng-click="vm.editOrderLineProperties(ol)">
+                                                <i class="fa fa-pencil-square-o" style="font-weight:normal; margin-left: 5px; vertical-align: middle;" aria-hidden="true"></i>
+                                            </button>
                                         </div>
                                         <div class="color-grey text-12 block">
                                             <span title="Sku: {{ sol.sku }}">{{ sol.sku }}</span>
@@ -71,12 +75,12 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <span class="color-grey text-12 strikethrough block" ng-if="sol.unitPriceWithoutDiscount != sol.unitPrice">{{sol.unitPriceWithoutDiscount}}</span>
+                                        <span class="color-grey text-12 strikethrough block" ng-if="sol.unitPriceWithoutAdjustments != sol.unitPrice">{{sol.unitPriceWithoutAdjustments}}</span>
                                         {{ sol.quantity }} x {{ sol.unitPrice }}
 
                                     </div>
                                     <div class="bold">
-                                        <span class="color-grey text-12 strikethrough block" ng-if="sol.totalPriceWithoutDiscount != sol.totalPrice">{{sol.totalPriceWithoutDiscount}}</span>
+                                        <span class="color-grey text-12 strikethrough block" ng-if="sol.totalPriceWithoutAdjustments != sol.totalPrice">{{sol.totalPriceWithoutAdjustments}}</span>
                                         {{ sol.totalPrice }}
                                     </div>
                                     <div></div>
@@ -89,25 +93,29 @@
                     <div class="vendr-order-table__total">
                         <div>Subtotal</div>
                         <div>
-                            {{ vm.content.subtotalPriceWithPreviousDiscount }}
+                            {{ vm.content.subtotalPriceWithPreviousAdjustments }}
                         </div>
                     </div>
-                    <div class="vendr-order-table__subtotal" ng-if="vm.content.subtotalPriceDiscount != vm.content.zeroAmount">
+                    <div class="vendr-order-table__subtotal" ng-if="vm.content.subtotalPriceFeesAdjustment != vm.content.zeroAmount">
+                        <div>Subtotal Fees</div>
+                        <div>{{ vm.content.subtotalPriceFeesAdjustment }}</div>
+                    </div>
+                    <div class="vendr-order-table__subtotal" ng-if="vm.content.subtotalPriceDiscountAdjustment != vm.content.zeroAmount">
                         <div>Subtotal Discount</div>
-                        <div>-{{ vm.content.subtotalPriceDiscount }}</div>
+                        <div>{{ vm.content.subtotalPriceDiscountAdjustment }}</div>
                     </div>
 
                     <div class="vendr-order-table__subtotal">
                         <div>Shipping<span ng-if="vm.content.shippingMethod"> via {{ vm.content.shippingMethod.name }}</span></div>
                         <div>
-                            <span class="color-grey text-12 strikethrough mr-5" ng-if="vm.content.shippingMethodPriceWithoutDiscount != vm.content.shippingMethodPrice">{{ vm.content.shippingMethodPriceWithoutDiscount }}</span>
+                            <span class="color-grey text-12 strikethrough mr-5" ng-if="vm.content.shippingMethodPriceWithoutAdjustments != vm.content.shippingMethodPrice">{{ vm.content.shippingMethodPriceWithoutAdjustments }}</span>
                             {{ vm.content.shippingMethodPrice }}
                         </div>
                     </div>
                     <div class="vendr-order-table__subtotal">
                         <div>Payment<span ng-if="vm.content.paymentMethod"> via {{ vm.content.paymentMethod.name }}</span></div>
                         <div>
-                            <span class="color-grey text-12 strikethrough mr-5" ng-if="vm.content.paymentMethodPriceWithoutDiscount != vm.content.paymentMethodPrice">{{ vm.content.paymentMethodPriceWithoutDiscount }}</span>
+                            <span class="color-grey text-12 strikethrough mr-5" ng-if="vm.content.paymentMethodPriceWithoutAdjustments != vm.content.paymentMethodPrice">{{ vm.content.paymentMethodPriceWithoutAdjustments }}</span>
                             {{ vm.content.paymentMethodPrice }}
                         </div>
                     </div>
@@ -116,11 +124,15 @@
 
                     <div class="vendr-order-table__total">
                         <div>Net Total</div>
-                        <div>{{ vm.content.totalPriceWithPreviousDiscount }}</div>
+                        <div>{{ vm.content.totalPriceWithPreviousAdjustments }}</div>
                     </div>
-                    <div class="vendr-order-table__subtotal" ng-if="vm.content.totalPriceDiscount != vm.content.zeroAmount">
+                    <div class="vendr-order-table__subtotal" ng-if="vm.content.totalPriceFeesAdjustment != vm.content.zeroAmount">
+                        <div>Net Total Fees</div>
+                        <div>{{ vm.content.totalPriceFeesAdjustment }}</div>
+                    </div>
+                    <div class="vendr-order-table__subtotal" ng-if="vm.content.totalPriceDiscountAdjustment != vm.content.zeroAmount">
                         <div>Net Total Discount</div>
-                        <div>-{{ vm.content.totalPriceDiscount }}</div>
+                        <div>{{ vm.content.totalPriceDiscountAdjustment }}</div>
                     </div>
 
                     <div class="vendr-order-table__subtotal">
@@ -128,16 +140,16 @@
                         <div>{{ vm.content.totalPriceTax }}</div>
                     </div>
 
-                    <div class="vendr-order-table__subtotal" ng-if="vm.content.totalGiftCardAmount != vm.content.zeroAmount">
+                    <div class="vendr-order-table__subtotal" ng-if="vm.content.totalGiftCardAdjustment != vm.content.zeroAmount">
                         <div>Gift Card <span class="color-grey text-12 block">{{ vm.content.appliedGiftCards.join(', ') }}</span></div>
-                        <div>-{{ vm.content.totalGiftCardAmount }}</div>
+                        <div>{{ vm.content.totalGiftCardAdjustment }}</div>
                     </div>
 
                     <hr class="w-2/5 self-end" />
 
                     <div class="vendr-order-table__total mb-0">
                         <div>Order Total</div>
-                        <div>{{ vm.content.totalPrice }}</div>
+                        <div>{{ vm.content.transactionAmount }}</div>
                     </div>
 
                 </div>
@@ -153,7 +165,7 @@
 
                 <div class="vendr-order-table__subtotal">
                     <div>Transaction Amount</div>
-                    <div>{{ vm.content.transactionAmount }}</div>
+                    <div>{{ vm.content.transactionAmountAuthorized }}</div>
                 </div>
 
                 <div class="vendr-order-table__subtotal" ng-if="vm.content.transactionFee != vm.content.zeroAmount">
