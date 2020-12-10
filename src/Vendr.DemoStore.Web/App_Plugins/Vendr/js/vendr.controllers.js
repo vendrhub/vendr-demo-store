@@ -684,7 +684,7 @@
 
     function CountryListController($scope, $location, $routeParams, $q,
         appState, localizationService, treeService, navigationService,
-        vendrUtils, vendrCountryResource) {
+        vendrUtils, vendrCountryResource, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
@@ -706,18 +706,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: [
-                {
-                    name: 'Delete',
-                    icon: 'icon-trash',
-                    doAction: function (bulkItem) {
-                        return vendrCountryResource.deleteCountry(bulkItem.id);
-                    },
-                    getConfirmMessage: function (total) {
-                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") +"?");
-                    }
-                }
-            ],
+            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'Country'}),
             items: [],
             itemProperties: [
                 { alias: 'code', header: 'ISO Code' }
@@ -957,7 +946,7 @@
 
     function CurrencyListController($scope, $location, $routeParams, $q,
         appState, localizationService, treeService, navigationService,
-        vendrUtils, vendrCurrencyResource) {
+        vendrUtils, vendrCurrencyResource, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
@@ -979,18 +968,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: [
-                {
-                    name: 'Delete',
-                    icon: 'icon-trash',
-                    doAction: function (bulkItem) {
-                        return vendrCurrencyResource.deleteCurrency(bulkItem.id);
-                    },
-                    getConfirmMessage: function (total) {
-                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") +"?");
-                    }
-                }
-            ],
+            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'Currency' }),
             items: [],
             itemProperties: [
                 { alias: 'code', header: 'ISO Code' }
@@ -1927,7 +1905,7 @@
 
     function DiscountListController($scope, $location, $routeParams, $q,
         appState, localizationService, treeService, navigationService,
-        vendrUtils, vendrDiscountResource) {
+        vendrUtils, vendrDiscountResource, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
@@ -1949,18 +1927,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: [
-                {
-                    name: 'Delete',
-                    icon: 'icon-trash',
-                    doAction: function (bulkItem) {
-                        return vendrDiscountResource.deleteDiscount(bulkItem.id);
-                    },
-                    getConfirmMessage: function (total) {
-                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") +"?");
-                    }
-                }
-            ],
+            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'Discount' }),
             items: [],
             itemProperties: [
                 { alias: 'name', template: '<span class="vendr-table-cell-value--multiline"><span>{{name}}</span>{{ blockFurtherDiscounts ? \'<span class="vendr-table-cell-label" style="font-size: 12px;"><i class="fa fa-minus-circle color-red" aria-hidden="true"></i> Blocks all further discounts if applied</span>\' : \'\' }}{{ blockIfPreviousDiscounts ? \'<span class="vendr-table-cell-label" style="font-size: 12px;"><i class="fa fa-chevron-circle-up color-orange"></i> Is not applied if previous discounts already apply</span></span>\' : \'\' }}' },
@@ -2180,7 +2147,7 @@
 
     function EmailTemplateListController($scope, $location, $routeParams, $q,
         appState, localizationService, treeService, navigationService,
-        vendrUtils, vendrEmailTemplateResource) {
+        vendrUtils, vendrEmailTemplateResource, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
@@ -2202,18 +2169,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: [
-                {
-                    name: 'Delete',
-                    icon: 'icon-trash',
-                    doAction: function (bulkItem) {
-                        return vendrEmailTemplateResource.deleteEmailTemplate(bulkItem.id);
-                    },
-                    getConfirmMessage: function (total) {
-                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") +"?");
-                    }
-                }
-            ],
+            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'EmailTemplate' }),
             items: [],
             itemProperties: [
                 { alias: 'category', header: 'Category' }
@@ -2716,7 +2672,7 @@
 
     function GiftCardListController($scope, $location, $routeParams, $q,
         appState, localizationService, treeService, navigationService,
-        vendrUtils, vendrGiftCardResource) {
+        vendrUtils, vendrGiftCardResource, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
@@ -2738,18 +2694,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: [
-                {
-                    name: 'Delete',
-                    icon: 'icon-trash',
-                    doAction: function (bulkItem) {
-                        return vendrGiftCardResource.deleteGiftCard(bulkItem.id);
-                    },
-                    getConfirmMessage: function (total) {
-                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") + "?");
-                    }
-                }
-            ],
+            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'GiftCard' }),
             items: [],
             itemProperties: [
                 { alias: 'name', template: '<span class="vendr-table-cell-value--multiline"><span><strong>{{code}}<strong></span>{{ orderNumber ? \'<span class="vendr-table-cell-label">#\'+ orderNumber +\'</span>\' : \'\' }}</span>' },
@@ -2956,7 +2901,7 @@
 
     function OrderStatusListController($scope, $location, $routeParams, $q,
         appState, localizationService, treeService, navigationService,
-        vendrUtils, vendrOrderStatusResource) {
+        vendrUtils, vendrOrderStatusResource, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
@@ -2978,18 +2923,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: [
-                {
-                    name: 'Delete',
-                    icon: 'icon-trash',
-                    doAction: function (bulkItem) {
-                        return vendrOrderStatusResource.deleteOrderStatus(bulkItem.id);
-                    },
-                    getConfirmMessage: function (total) {
-                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") +"?");
-                    }
-                }
-            ],
+            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'OrderStatus' }),
             items: [],
             itemProperties: [
                 { alias: 'color', header: 'Color', template: '<span class="vendr-color-swatch vendr-bg--{{color}}" title="Color: {{color}}"></span>' }
@@ -3750,7 +3684,8 @@
 
     function OrderListController($scope, $location, $routeParams, $q,
         appState, localizationService, treeService, navigationService,
-        vendrUtils, vendrOrderResource, vendrOrderStatusResource, vendrRouteCache, vendrLocalStorage) {
+        vendrUtils, vendrOrderResource, vendrOrderStatusResource, vendrRouteCache, vendrLocalStorage,
+        vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
@@ -3808,25 +3743,14 @@
                     }
                 }
             ],
-            bulkActions: [
-                {
-                    name: 'Delete',
-                    icon: 'icon-trash',
-                    doAction: function (bulkItem) {
-                        return vendrOrderResource.deleteOrder(bulkItem.id);
-                    },
-                    getConfirmMessage: function (total) {
-                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") +"?");
-                    }
-                }
-            ],
+            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'Order' }),
             items: [],
             itemProperties: [
                 { alias: 'name', template: '<span class="vendr-table-cell-value--multiline"><span>{{customerFullName}}</span><span class="vendr-table-cell-label">#{{orderNumber}}</span></span>' },
                 { alias: 'finalizedDate', header: 'Date', template: "{{ finalizedDate  | date : 'MMMM d, yyyy h:mm a' }}" },
                 { alias: 'orderStatusId', header: 'Order Status', align: 'right', template: '<span class="umb-badge umb-badge--xs vendr-bg--{{ orderStatus.color }}" title="Order Status: {{ orderStatus.name }}">{{ orderStatus.name }}</span>' },
                 { alias: 'paymentStatus', header: 'Payment Status', align: 'right', template: '<span class="umb-badge umb-badge--xs vendr-badge--{{ paymentStatus.toLowerCase() }}">{{paymentStatusName}}</span>' },
-                { alias: 'payment', header: 'Payment', align: 'right', template: '<span class="vendr-table-cell-value--multiline"><strong>{{totalPrice}}</strong><span>{{paymentMethod.name}}</span></span>' }
+                { alias: 'payment', header: 'Payment', align: 'right', template: '<span class="vendr-table-cell-value--multiline"><strong>{{transactionAmount}}</strong><span>{{paymentMethod.name}}</span></span>' }
             ],
             itemClick: function (itm) {
                 $location.path(itm.routePath);
@@ -4402,7 +4326,7 @@
 
     function PaymentMethodListController($scope, $location, $routeParams, $q,
         appState, localizationService, treeService, navigationService,
-        vendrUtils, vendrPaymentMethodResource) {
+        vendrUtils, vendrPaymentMethodResource, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
@@ -4424,18 +4348,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: [
-                {
-                    name: 'Delete',
-                    icon: 'icon-trash',
-                    doAction: function (bulkItem) {
-                        return vendrPaymentMethodResource.deletePaymentMethod(bulkItem.id);
-                    },
-                    getConfirmMessage: function (total) {
-                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") +"?");
-                    }
-                }
-            ],
+            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'PaymentMethod' }),
             items: [],
             itemProperties: [
                 { alias: 'sku', header: 'SKU' }
@@ -5267,7 +5180,7 @@
 
     function RegionListController($scope, $location, $routeParams, $q,
         appState, localizationService, treeService, navigationService,
-        vendrUtils, vendrCountryResource) {
+        vendrUtils, vendrCountryResource, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
@@ -5280,18 +5193,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: [
-                {
-                    name: 'Delete',
-                    icon: 'icon-trash',
-                    doAction: function (bulkItem) {
-                        return vendrCountryResource.deleteRegion(bulkItem.id);
-                    },
-                    getConfirmMessage: function (total) {
-                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") +"?");
-                    }
-                }
-            ],
+            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'Region' }),
             items: [],
             itemProperties: [
                 { alias: 'code', header: 'Code' }
@@ -5378,9 +5280,14 @@
 
     'use strict';
 
-    function SettingsViewController($scope, $rootScope, $routeParams, navigationService, vendrUtils)
+    function SettingsViewController($scope, $rootScope, $routeParams, navigationService, vendrUtils, vendrLicensingResource, vendrRouteCache)
     {
         $scope.vendrInfo = vendrUtils.getSettings("vendrInfo");
+
+        vendrRouteCache.getOrFetch("vendrLicensingInfo",
+            () => vendrLicensingResource.getLicensingInfo()).then(function (data) {
+            $scope.licensingInfo = data;
+        });
 
         navigationService.syncTree({ tree: "vendrsettings", path: ["-1"], forceReload: false, activate: true });
 
@@ -5748,7 +5655,7 @@
 
     function ShippingMethodListController($scope, $location, $routeParams, $q,
         appState, localizationService, treeService, navigationService,
-        vendrUtils, vendrShippingMethodResource) {
+        vendrUtils, vendrShippingMethodResource, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
@@ -5770,18 +5677,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: [
-                {
-                    name: 'Delete',
-                    icon: 'icon-trash',
-                    doAction: function (bulkItem) {
-                        return vendrShippingMethodResource.deleteShippingMethod(bulkItem.id);
-                    },
-                    getConfirmMessage: function (total) {
-                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") +"?");
-                    }
-                }
-            ],
+            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'ShippingMethod' }),
             items: [],
             itemProperties: [
                 { alias: 'sku', header: 'SKU' }
@@ -5859,7 +5755,8 @@
     function StoreEditController($scope, $routeParams, $location, formHelper,
         appState, editorState, localizationService, notificationsService, navigationService, userGroupsResource, usersResource,
         vendrStoreResource, vendrCurrencyResource, vendrCountryResource, vendrTaxResource,
-        vendrOrderStatusResource, vendrEmailTemplateResource) {
+        vendrOrderStatusResource, vendrEmailTemplateResource,
+        vendrLicensingResource, vendrRouteCache) {
 
         var id = $routeParams.id;
         var create = id === '-1';
@@ -5908,7 +5805,12 @@
         vm.content = {};
 
         vm.init = function () {
-                       
+
+            vendrRouteCache.getOrFetch("vendrLicensingInfo",
+                () => vendrLicensingResource.getLicensingInfo()).then(function (data) {
+                    vm.licensingInfo = data;
+                });
+
             userGroupsResource.getUserGroups().then(function (userGroups) {
                 vm.options.userRoles = userGroups.map(function (itm) {
 
@@ -6064,7 +5966,8 @@
     'use strict';
 
     function StoreViewController($scope, $routeParams, $location,
-        vendrStoreResource, navigationService, vendrActivityLogResource) {
+        vendrStoreResource, navigationService, vendrActivityLogResource,
+        vendrLicensingResource, vendrRouteCache) {
 
         var id = $routeParams.id;
 
@@ -6095,6 +5998,11 @@
         }
 
         vm.init = function (noSync) {
+
+            vendrRouteCache.getOrFetch("vendrLicensingInfo",
+                () => vendrLicensingResource.getLicensingInfo()).then(function (data) {
+                    vm.licensingInfo = data;
+                });
 
             if (!noSync) {
                 navigationService.syncTree({ tree: "vendr", path: "-1," + id, forceReload: true });
@@ -6327,7 +6235,7 @@
 
     function TaxClassListController($scope, $location, $routeParams, $q,
         appState, localizationService, treeService, navigationService,
-        vendrUtils, vendrTaxResource) {
+        vendrUtils, vendrTaxResource, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
@@ -6349,18 +6257,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: [
-                {
-                    name: 'Delete',
-                    icon: 'icon-trash',
-                    doAction: function (bulkItem) {
-                        return vendrTaxResource.deleteTaxClass(bulkItem.id);
-                    },
-                    getConfirmMessage: function (total) {
-                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") +"?");
-                    }
-                }
-            ],
+            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'TaxClass' }),
             items: [],
             itemProperties: [
                 { alias: 'defaultTaxRate', header: 'Default Tax Rate' }

@@ -3,7 +3,8 @@
     <umb-box>
         <umb-box-content class="block-form">
 
-            <umb-control-group label="User Groups" description="The User Groups allowed to access this store">
+            <umb-control-group label="User Groups" description="The User Groups allowed to access this store"
+                               ng-if="model.licensingInfo.limitations.supportsUserGroupPermissions">
                 <vendr-toggle-list ng-model="model.options.userRoles" 
                                    toggle-all="true"></vendr-toggle-list>
             </umb-control-group>

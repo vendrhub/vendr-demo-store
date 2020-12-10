@@ -1,14 +1,13 @@
 ﻿using Umbraco.Web;
 using Vendr.Core.Models;
-using Vendr.Core.Services;
 using Vendr.Web.Adapters;
 
 namespace Vendr.DemoStore.Web.Adapters
 {
     public class CompositeNameUmbracoProductAdapter : UmbracoProductAdapter
     {
-        public CompositeNameUmbracoProductAdapter(IUmbracoContextAccessor umbracoContextAccessor, VendrServiceContext vendrServices) 
-            : base(umbracoContextAccessor, vendrServices)
+        public CompositeNameUmbracoProductAdapter(IUmbracoContextAccessor umbracoContextAccessor) 
+            : base(umbracoContextAccessor)
         { }
 
         public override IProductSnapshot GetProductSnapshot(string productReference, string languageIsoCode)
