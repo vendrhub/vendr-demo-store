@@ -1,4 +1,5 @@
 ﻿@using Vendr.Core;
+@using Vendr.Core.Models;
 @using Vendr.DemoStore.Models;
 @using Umbraco.Web.Models;
 @inherits Umbraco.Web.Mvc.UmbracoViewPage<CheckoutStepPage>
@@ -55,7 +56,7 @@
                                 <div>@(orderLine.Name) x @((int)orderLine.Quantity)<br /><span class="text-xs text-gray-500">@(orderLine.Sku)</span></div>
                             </div>
 
-                            <div class="pl-4 font-medium">@(orderLine.TotalPrice.Value.Formatted().WithoutTax)</div>
+                            <div class="pl-4 font-medium">@(orderLine.TotalPrice.WithoutAdjustments.Formatted().WithoutTax)</div>
 
                         </div>
                     </li>
@@ -66,7 +67,7 @@
 
             <div class="flex w-full justify-between items-center">
                 <div class="">Subtotal</div>
-                <div class="font-medium">@(Model.Order.SubtotalPrice.WithoutDiscounts.Formatted().WithoutTax)</div>
+                <div class="font-medium">@(Model.Order.SubtotalPrice.WithoutAdjustments.Formatted().WithoutTax)</div>
             </div>
 
             @if (Model.ShippingMethod != null)
@@ -75,7 +76,7 @@
                     <div class="">
                         Shipping via @(Model.ShippingMethod.Name)
                     </div>
-                    <div class="font-medium">@(Model.Order.ShippingInfo.TotalPrice.WithoutDiscounts.Formatted().WithoutTax)</div>
+                    <div class="font-medium">@(Model.Order.ShippingInfo.TotalPrice.WithoutAdjustments.Formatted().WithoutTax)</div>
                 </div>
             }
 
@@ -85,39 +86,39 @@
                     <div class="">
                         Payment via @(Model.PaymentMethod.Name)
                     </div>
-                    <div class="font-medium">@(Model.Order.PaymentInfo.TotalPrice.WithoutDiscounts.Formatted().WithoutTax)</div>
+                    <div class="font-medium">@(Model.Order.PaymentInfo.TotalPrice.WithoutAdjustments.Formatted().WithoutTax)</div>
                 </div>
             }
 
-            @if (Model.Order.TotalPrice.TotalDiscount > 0)
+            @{
+                var totalDiscount = Model.Order.GetTotalPriceAdjustmentByType<DiscountAdjustment>();
+                if (totalDiscount != 0)
                 {
                     <div class="flex w-full justify-between items-center mt-2 ">
                         <div class="">Discounts</div>
-                        <div class="font-medium">-@Model.Order.TotalPrice.TotalDiscount.Formatted().WithoutTax</div>
+                        <div class="font-medium">@(totalDiscount.Formatted().WithoutTax)</div>
                     </div>
                 }
+            }
 
                 <div class="flex w-full justify-between items-center mt-2">
                     <div class="">TAX</div>
                     <div class="font-medium">@(Model.Order.TotalPrice.Value.Formatted().Tax)</div>
                 </div>
 
-            @if (Model.Order.TotalPrice.GiftCardsAmount.Value > 0)
+            @foreach (var giftCardAdjustment in Model.Order.TransactionAmount.Adjustments.OfType<GiftCardAdjustment>())
             {
-                foreach (var giftCard in Model.Order.GiftCards)
-                {
                     <div class="flex w-full justify-between items-center mt-2">
-                        <div class="">Gift Card (@(giftCard.Code))</div>
-                        <div class="font-medium">-@(giftCard.Amount.Formatted())</div>
+                    <div class="">Gift Card (@(giftCardAdjustment.GiftCardCode))</div>
+                    <div class="font-medium">@(giftCardAdjustment.Amount.Formatted())</div>
                     </div>
                 }
-            }
 
                 <hr class="border-t border-gray-300 my-4" />
 
                 <div class="flex w-full justify-between items-center">
                     <div class="font-medium text-base">Total</div>
-                    <div class="font-medium text-2xl">@Model.Order.TotalPrice.Value.Formatted()</div>
+                <div class="font-medium text-2xl">@Model.Order.TransactionAmount.Value.Formatted()</div>
                 </div>
 
         </div>
@@ -126,12 +127,16 @@
 
             <div class="hidden lg:block">
 
-                @if (Model.CheckoutPage.Logo != null)
+                <div class="bg-white p-8 text-center">
+                    @if (Model.CheckoutPage.HasValue("logo"))
                 {
-                    <div class="text-center mb-4">
-                        <a href="/"><img src="@(Url.GetCropUrl(Model.CheckoutPage.Logo, 200, 200, imageCropMode: ImageCropMode.Max))" class="inline-block" /></a>
+                        <a href="/"><img src="@(Url.GetCropUrl(Model.CheckoutPage.Value<IPublishedContent>("logo"), 200, 200, imageCropMode: ImageCropMode.Max))" class="inline-block" /></a>
+                    }
+                    else
+                    {
+                        <h1 class="text-3xl font-bold"><a href="/">Blendid.</a></h1>
+                    }
                     </div>
-                }
 
                 <div class="mb-8">
                     <ul class="flex justify-center">

@@ -715,6 +715,27 @@
 
     'use strict';
 
+    function vendrLicensingResource($http, umbRequestHelper, vendrRequestHelper) {
+
+        return {
+
+            getLicensingInfo: function () {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("licensingApiBaseUrl", "GetLicensingInfo")),
+                    "Failed to get licensing info");
+            }
+
+        };
+
+    }
+
+    angular.module('vendr.resources').factory('vendrLicensingResource', vendrLicensingResource);
+
+}());
+(function () {
+
+    'use strict';
+
     function vendrOrderResource($http, umbRequestHelper, vendrRequestHelper) {
 
         return {

@@ -604,17 +604,19 @@
 
     'use strict';
 
-    function vendrLicenseCheck(vendrUtils) {
+    function vendrLicenseCheck(vendrUtils, vendrLicensingResource, vendrRouteCache) {
 
         function link(scope, el, attr, ctrl) {
-            scope.vendrInfo = vendrUtils.getSettings("vendrInfo");
-            // console.log(scope.licenseInfo);
+            vendrRouteCache.getOrFetch("vendrLicensingInfo",
+                () => vendrLicensingResource.getLicensingInfo()).then(function (data) {
+                scope.licensingInfo = data;
+            });
         }
 
         var directive = {
             restrict: 'E',
             replace: true,
-            template:'<div><vendr-message ng-if="!vendrInfo.isLicensed" type="\'warn\'" heading="\'Trial Mode\'" icon="\'exclamation-triangle\'"><p>Vendr is currently running in unlicensed mode and will be limited to a maximum of {{vendrInfo.trialMaxOrders}} finalized orders. You can purchase a license from <a href="https://vendr.net?ref=lic-check" target="_blank">the Vendr website</a>.</p></vendr-message><vendr-message ng-if="vendrInfo.isLicensed && vendrInfo.isExpiring" type="\'warn\'" heading="\'License Expiring\'" icon="\'exclamation-triangle\'"><p>You are currently using Vendr with a license that is due to expire. If you have a trial license, please purchase a full license from <a href="https://vendr.net?ref=lic-check" target="_blank">the Vendr website</a>. If you are using a subscription license, this should have renewed by now so please review your error log for any issues with the renewal process.</p></vendr-message></div>',
+            template:'<div><div ng-if="licensingInfo"><vendr-message ng-if="!licensingInfo.isLicensed" type="\'warn\'" heading="\'Trial Mode\'" icon="\'exclamation-triangle\'"><p>Vendr is currently running in unlicensed mode and will be limited to a maximum of {{licensingInfo.limitations.maxFinalizedOrders}} finalized orders. You can purchase a license from <a href="https://vendr.net?ref=lic-check" target="_blank">the Vendr website</a>.</p></vendr-message><vendr-message ng-if="licensingInfo.isLicensed && licensingInfo.isExpiring" type="\'warn\'" heading="\'License Expiring\'" icon="\'exclamation-triangle\'"><p>You are currently using Vendr with a license that is due to expire. If you have a trial license, please purchase a full license from <a href="https://vendr.net?ref=lic-check" target="_blank">the Vendr website</a>. If you are using a subscription license, this should have renewed by now so please review your error log for any issues with the renewal process.</p></vendr-message></div></div>',
             link: link
         };
         
@@ -1576,7 +1578,13 @@
                 if (selected.length === 0)
                     return;
 
-                getConfirmMsg(selected.length).then(function (msg) {
+                var selectedItems = scope.selection.map(function (itm) {
+                    return scope.options.filteredItems.find(function (itm2) {
+                        return itm.id === itm2.id;
+                    });
+                });
+
+                getConfirmMsg(selectedItems.length).then(function (msg) {
 
                     if (msg) {
 
@@ -1588,7 +1596,7 @@
                             closeButtonLabelKey: "general_cancel",
                             submitButtonStyle: "danger",
                             submit: function () {
-                                performBulkActionInner(selected, fn, getStatusMsg, getSuccessMsg);
+                                performBulkActionInner(selectedItems, fn, getStatusMsg, getSuccessMsg);
                                 overlayService.close();
                             },
                             close: function () {
@@ -1599,7 +1607,7 @@
                         overlayService.open(confirm);
 
                     } else {
-                        performBulkActionInner(selected, fn, getStatusMsg, getSuccessMsg);
+                        performBulkActionInner(selectedItems, fn, getStatusMsg, getSuccessMsg);
                     }
                 });
             }
@@ -1689,11 +1697,13 @@
             };
 
             scope.clearSelection = function () {
-                listViewHelper.clearSelection(scope.options.filteredItems, null, scope.selection);
+                if (scope.options.bulkActionsAllowed)
+                    listViewHelper.clearSelection(scope.options.filteredItems, null, scope.selection);
             };
 
             scope.selectAll = function ($event) {
-                listViewHelper.selectAllItemsToggle(scope.options.filteredItems, scope.selection);
+                if (scope.options.bulkActionsAllowed)
+                    listViewHelper.selectAllItemsToggle(scope.options.filteredItems, scope.selection);
             };
 
             scope.selectItem = function (selectedItem, $index, $event) {
