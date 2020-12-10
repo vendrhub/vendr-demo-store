@@ -1,11 +1,11 @@
 ﻿using Umbraco.Core;
 using Umbraco.Core.Composing;
-using Vendr.Core.Adapters;
 using Vendr.Core.Composing;
 using Vendr.Core.Events.Notification;
 using Vendr.DemoStore.Events;
-using Vendr.DemoStore.Web.Adapters;
+using Vendr.DemoStore.Web.Extractors;
 using Vendr.Web.Composing;
+using Vendr.Web.Extractors;
 
 namespace Vendr.DemoStore.Composing
 {
@@ -14,8 +14,8 @@ namespace Vendr.DemoStore.Composing
     {
         public void Compose(Composition composition)
         {
-            // Replace the product information extractor with one that supports child variants
-            composition.RegisterUnique<IProductAdapter, CompositeNameUmbracoProductAdapter>();
+            // Replace the umbraco product name extractor with one that supports child variants
+            composition.RegisterUnique<IUmbracoProductNameExtractor, CompositeProductNameExtractor>();
 
             // Register event handlers
             composition.WithNotificationEvent<OrderProductAddingNotification>()

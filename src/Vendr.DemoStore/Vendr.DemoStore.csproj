@@ -417,8 +417,6 @@
     <Compile Include="Web\Dtos\UpdateOrderPaymentMethodDto.cs" />
     <Compile Include="Web\Dtos\UpdateOrderShippingMethodDto.cs" />
     <Compile Include="Web\Extensions\UriExtensions.cs" />
-    <Compile Include="Web\Adapters\CompositeNameUmbracoProductSnapshotDecorator.cs" />
-    <Compile Include="Web\Adapters\CompositeNameUmbracoProductAdapter.cs" />
     <Compile Include="Models\CartPage.cs" />
     <Compile Include="Models\CartPage.generated.cs">
       <DependentUpon>Generated.cs</DependentUpon>
@@ -505,6 +503,7 @@
     <Compile Include="Web\Dtos\AddToCartDto.cs" />
     <Compile Include="Web\Dtos\UpdateCartDto.cs" />
     <Compile Include="Web\Dtos\UpdateOrderInformationDto.cs" />
+    <Compile Include="Web\Extractors\CompositeProductNameExtractor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.Analyzers.2.6.1\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
