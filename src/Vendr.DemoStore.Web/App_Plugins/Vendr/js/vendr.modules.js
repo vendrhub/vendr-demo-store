@@ -42,6 +42,7 @@
     angular.module('vendr.interceptors', [])
         .config(['$httpProvider', function ($httpProvider) {
             $httpProvider.interceptors.push('routeRewritesInterceptor');
+            $httpProvider.interceptors.push('menuActionsInterceptor');
         }]);
 
 }());

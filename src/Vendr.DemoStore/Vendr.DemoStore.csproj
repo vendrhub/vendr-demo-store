@@ -385,13 +385,13 @@
       <HintPath>..\..\packages\UmbracoCms.Web.8.9.0\lib\net472\Umbraco.Web.UI.dll</HintPath>
     </Reference>
     <Reference Include="Vendr.Core, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Vendr.Core.1.4.0-rc0062\lib\net472\Vendr.Core.dll</HintPath>
+      <HintPath>..\..\packages\Vendr.Core.1.4.0\lib\net472\Vendr.Core.dll</HintPath>
     </Reference>
     <Reference Include="Vendr.Core.Web, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Vendr.Core.Web.1.4.0-rc0062\lib\net472\Vendr.Core.Web.dll</HintPath>
+      <HintPath>..\..\packages\Vendr.Core.Web.1.4.0\lib\net472\Vendr.Core.Web.dll</HintPath>
     </Reference>
     <Reference Include="Vendr.Web, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Vendr.Web.1.4.0-rc0062\lib\net472\Vendr.Web.dll</HintPath>
+      <HintPath>..\..\packages\Vendr.Web.1.4.0\lib\net472\Vendr.Web.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

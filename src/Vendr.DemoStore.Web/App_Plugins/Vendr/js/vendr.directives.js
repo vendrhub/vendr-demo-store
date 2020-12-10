@@ -1578,7 +1578,13 @@
                 if (selected.length === 0)
                     return;
 
-                getConfirmMsg(selected.length).then(function (msg) {
+                var selectedItems = scope.selection.map(function (itm) {
+                    return scope.options.filteredItems.find(function (itm2) {
+                        return itm.id === itm2.id;
+                    });
+                });
+
+                getConfirmMsg(selectedItems.length).then(function (msg) {
 
                     if (msg) {
 
@@ -1590,7 +1596,7 @@
                             closeButtonLabelKey: "general_cancel",
                             submitButtonStyle: "danger",
                             submit: function () {
-                                performBulkActionInner(selected, fn, getStatusMsg, getSuccessMsg);
+                                performBulkActionInner(selectedItems, fn, getStatusMsg, getSuccessMsg);
                                 overlayService.close();
                             },
                             close: function () {
@@ -1601,7 +1607,7 @@
                         overlayService.open(confirm);
 
                     } else {
-                        performBulkActionInner(selected, fn, getStatusMsg, getSuccessMsg);
+                        performBulkActionInner(selectedItems, fn, getStatusMsg, getSuccessMsg);
                     }
                 });
             }
@@ -1691,11 +1697,13 @@
             };
 
             scope.clearSelection = function () {
-                listViewHelper.clearSelection(scope.options.filteredItems, null, scope.selection);
+                if (scope.options.bulkActionsAllowed)
+                    listViewHelper.clearSelection(scope.options.filteredItems, null, scope.selection);
             };
 
             scope.selectAll = function ($event) {
-                listViewHelper.selectAllItemsToggle(scope.options.filteredItems, scope.selection);
+                if (scope.options.bulkActionsAllowed)
+                    listViewHelper.selectAllItemsToggle(scope.options.filteredItems, scope.selection);
             };
 
             scope.selectItem = function (selectedItem, $index, $event) {
