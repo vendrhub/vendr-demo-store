@@ -140,6 +140,11 @@ div [ng-controller*=MemberGroupPickerController] .umb-box-content > .umb-tree {
     box-sizing: border-box;
 }
 
+.vendr .block-form .controls {
+    margin-left: 0;
+    padding-top: 0;
+}
+
 /* Layouts */
 .vendr-layout,
 .vendr-layout {
