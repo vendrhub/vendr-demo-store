@@ -1,0 +1,131 @@
+﻿<div ng-controller="Vendr.Controllers.ProductAttribtuePickerDialogController as vm" class="vendr">
+    
+    <umb-editor-view ng-if="!vm.loading">
+
+        <umb-editor-header 
+            name="vm.getView() == 'presets' ? 'Select a Product Attribute Preset' : 'Select Product Attributes'"
+            name-locked="true"
+            hide-alias="true"
+            hide-icon="true"
+            hide-description="true">
+        </umb-editor-header>
+
+        <umb-editor-container>
+
+            <umb-box ng-if="!loading && vm.options.productAttributes.length > 0">
+                <umb-box-content>
+
+                    <!-- Preset -->
+                    <ul class="umb-actions umb-actions-child" ng-if="vm.getView() == 'presets'">
+                        <li class="umb-action" ng-repeat="preset in vm.options.productAttributePresets">
+                            <a class="umb-action-link" ng-click="vm.selectPreset(preset)">
+                                <i class="large icon {{preset.icon}}" aria-hidden="true"></i>
+                                <span class="menu-label">
+                                    <span ng-bind="preset.name"></span>
+                                    <small ng-bind="preset.description"></small>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="umb-action">
+                            <a class="umb-action-link" ng-click="vm.skipPreset()">
+                                <i class="large icon icon-checkbox-dotted" aria-hidden="true"></i>
+                                <span class="menu-label">
+                                    <span>Custom</span>
+                                    <small>Choose from all product attributes</small>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- Product Attributes -->
+                    <ul class="umb-actions umb-actions-child vendr-checkbox-tree" ng-if="vm.getView() == 'attributes'">
+                        <li class="umb-action vendr-checkbox-tree__item vendr-checkbox-tree__item--level-1" 
+                            ng-repeat-start="pa in vm.options.productAttributes | filter: { hidden: false }"
+                            ng-class="{ 'vendr-checkbox-tree__item--disabled': vm.config.disablePreselected && pa.allPreselected}">
+                            <span class="umb-action-link vendr-checkbox-tree__link"   ng-click="vm.toggleSelectAll(pa, $event)">
+                                <i class="icon vendr-checkbox-tree__toggle" ng-class="{ 'icon-navigation-right' : !pa.expanded, 'icon-navigation-down': pa.expanded }" aria-hidden="true" ng-click="vm.toggleExpand(pa, $event)"></i>
+                                <span class="vendr-checkbox" ng-class="{ 'vendr-checkbox--checked' : pa.allSelected, 'vendr-checkbox--mixed' : pa.someSelected }" aria-hidden="true">
+                                    <span class="vendr-checkbox__state"></span>
+                                </span>
+                                <span class="menu-label vendr-checkbox-tree__label">
+                                    <span>{{pa.name}}</span>
+                                    <small>{{ vm.getSelectedValueCount(pa) }} of {{ pa.values.length }} values selected</small>
+                                </span>
+                            </span>
+                        </li>
+                        <li class="umb-action vendr-checkbox-tree__item vendr-checkbox-tree__item--level-2" 
+                            ng-repeat="val in pa.values | filter: { hidden: false }" ng-if="pa.expanded" 
+                            ng-class="{ 'vendr-checkbox-tree__item--disabled': vm.config.disablePreselected && val.preselected}">
+                            <span class="umb-action-link vendr-checkbox-tree__link" ng-click="vm.toggleSelect(pa, val, $event)">
+                                <span class="vendr-checkbox" ng-class="{ 'vendr-checkbox--checked' : val.selected }" aria-hidden="true">
+                                    <span class="vendr-checkbox__state"></span>
+                                </span>
+                                <span class="menu-label vendr-checkbox-tree__label">
+                                    <span>{{val.name}}</span>
+                                </span>
+                            </span>
+                        </li>
+                        <li class="umb-action vendr-checkbox-tree__item vendr-checkbox-tree__item--level-2 umb-action vendr-checkbox-tree__item--more"
+                            ng-if="pa.expanded && vm.getHiddenAttributeValueCount(pa) > 0" 
+                            ng-repeat-end>
+                            <span class="umb-action-link vendr-checkbox-tree__link" ng-click="vm.showHiddenAttributeValues(pa)">
+                                <i class="icon icon-eye" aria-hidden="true"></i>
+                                <span class="menu-label vendr-checkbox-tree__label">
+                                    <span>Show {{ vm.getHiddenAttributeValueCount(pa) }} additional {{ pa.name.toLowerCase() }} {{ vm.getHiddenAttributeValueCount(pa)  == 1 ? 'value' : 'values' }}</span>
+                                </span>
+                            </span>
+                        </li>
+                        <li class="umb-action vendr-checkbox-tree__item vendr-checkbox-tree__item--level-1 vendr-checkbox-tree__item--more"
+                            ng-if="vm.getHiddenAttributeCount() > 0">
+                            <span class="umb-action-link vendr-checkbox-tree__link" ng-click="vm.showHiddenAttributes()">
+                                <i class="icon icon-eye" aria-hidden="true"></i>
+                                <span class="menu-label vendr-checkbox-tree__label">
+                                    <span>Show {{ vm.getHiddenAttributeCount() }} additional {{ vm.getHiddenAttributeCount() == 1 ? 'attribute' : 'attributes' }}</span>
+                                </span>
+                            </span>
+                        </li>
+                    </ul>
+
+                </umb-box-content>
+            </umb-box>
+
+            <umb-empty-state ng-if="!loading && vm.options.productAttributes.length == 0" position="center">
+                <p>There are no items available to choose from.</p>
+            </umb-empty-state>
+
+        </umb-editor-container>
+
+        <umb-editor-footer>
+            <umb-editor-footer-content-right>
+
+                <umb-button type="button"
+                            button-style="link"
+                            label-key="general_cancel"
+                            shortcut="esc"
+                            action="vm.cancel()"
+                            ng-if="vm.getView() == 'attributes' && vm.config.enablePresets && vm.options.productAttributePresets.length > 0">
+                </umb-button>
+
+                <umb-button type="button"
+                            button-style="link"
+                            label-key="general_close"
+                            shortcut="esc"
+                            action="vm.close()"
+                            ng-if="vm.getView() == 'presets' || !vm.config.enablePresets || vm.options.productAttributePresets.length == 0">
+                </umb-button>
+
+                <umb-button type="button"
+                            button-style="success"
+                            shortcut="ctrl+s"
+                            label="Select"
+                            label-key="buttons_select"
+                            action="vm.select()"
+                            disabled="vm.getView() == 'presets'">
+                </umb-button>
+
+            </umb-editor-footer-content-right>
+        </umb-editor-footer>
+
+    </umb-editor-view>
+
+</div>

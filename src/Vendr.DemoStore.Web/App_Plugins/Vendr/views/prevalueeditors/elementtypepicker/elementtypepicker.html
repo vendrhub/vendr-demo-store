@@ -1,0 +1,28 @@
+﻿<div ng-controller="Vendr.Controllers.ElementTypePickerController as vm" class="vendr">
+
+    <ng-form name="pickerForm">
+
+        <umb-node-preview ng-if="vm.pickedItem"
+            icon="vm.pickedItem.icon"
+            name="vm.pickedItem.name"
+            published="true"
+            description="vm.pickedItem.id"
+            sortable="false"
+            allow-remove="true"
+            allow-open="false"
+            on-remove="vm.removeItem()"
+            on-open="vm.openItem()">
+        </umb-node-preview>
+
+        <button type="button" ng-show="!vm.pickedItem"
+                class="umb-node-preview-add"
+                ng-click="vm.openPicker()"
+                id="{{vm.pickedItem.alias}}"
+                aria-label="Add item">
+            <localize key="general_add">Add</localize>
+            <span class="sr-only">...</span>
+        </button>
+
+    </ng-form>
+
+</div>

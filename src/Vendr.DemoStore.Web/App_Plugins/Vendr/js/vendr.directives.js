@@ -255,6 +255,33 @@
 
     'use strict';
 
+    function vendrCompile($compile) {
+
+        function link(scope, el, attr, ctrl) {
+            el.html(scope.template).show();
+            $compile(el.contents())(scope);
+        }
+
+        var directive = {
+            restrict: 'A',
+            scope: {
+                template: '<',
+                model: '<',
+                refScope: '<'
+            },
+            link: link
+        };
+        
+        return directive;
+    };
+
+    angular.module('vendr.directives').directive('vendrCompile', vendrCompile);
+
+}());
+(function () {
+
+    'use strict';
+
     function vendrDictionaryInput($routeParams, listViewHelper, angularHelper,
         vendrDictionaryResource, editorService, overlayService) {
 
@@ -415,15 +442,20 @@
 
             vm.showFilterOptions = false;
             vm.filterOptions = [];
+            vm.groupedFilterOptions = {};
 
             vm.getFilterNames = function () {
                 var names = vm.filterOptions.filter(function (itm) {
                     return itm.selected;
                 }).map(function (itm) {
-                    return itm.name;
+                    return (itm.group ? itm.group + " - " : "") + itm.name;
                 });
                 return names.length > 0 ? names.join(", ") : "All";
             };
+
+            vm.someVisibleValues = function (values) {
+                return values.some((val) => !val.hidden);
+            }
 
             vm.setFilter = function (filterOption) {
 
@@ -453,10 +485,22 @@
             };
 
             vm.filter.getFilterOptions().then(function (filterOptions) {
+
+                var gfo = [];
+                var currentGroup = null;
+
                 filterOptions.forEach(itm => {
                     itm.selected = vm.filter.value.findIndex(itm2 => itm2.toString() === itm.id.toString()) > -1;
+                    if (!currentGroup || currentGroup.group !== itm.group) {
+                        currentGroup = { group: itm.group, items: [itm] }
+                        gfo.push(currentGroup)
+                    } else {
+                        currentGroup.items.push(itm);
+                    }
                 });
                 vm.filterOptions = filterOptions;
+
+                vm.groupedFilterOptions = gfo;
                 vm.loading = false;
             });
         }
@@ -464,7 +508,7 @@
         var directive = {
             restrict: 'E',
             replace: true,
-            template: `<div class="vendr flex" style="position: relative;">
+            template: `<div class="vendr vendr-filter flex" style="position: relative;">
                 <div class="flex" style="position: relative;" ng-show="!vm.loading">
                     <button type="button" class="btn btn-link dropdown-toggle flex" ng-click="vm.showFilterOptions = !vm.showFilterOptions" title="{{ vm.getFilterNames() }}" aria-haspopup="true" aria-expanded="{{vm.showFilterOptions === undefined ? false : vm.showFilterOptions}}">
                         <span>{{vm.filter.name}}:</span>
@@ -472,11 +516,14 @@
                         <span class="caret"></span>
                     </button>
                     <umb-dropdown class="pull-left" ng-if="vm.showFilterOptions" on-close="vm.showFilterOptions = false;" style="padding-top: 8px">
-                        <umb-dropdown-item ng-repeat="filterOption in vm.filterOptions" style="padding: 8px 20px 8px 16px;">
+                        <umb-dropdown-item ng-repeat-start="g in vm.groupedFilterOptions" ng-if="g.group !== 'undefined' && vm.someVisibleValues(g.items)" style="padding: 8px 20px 0 16px;">
+                            <strong>{{ g.group }}</strong>
+                        </umb-dropdown-item>
+                        <umb-dropdown-item ng-repeat="filterOption in g.items" ng-if="!filterOption.hidden" ng-repeat-end style="padding: 8px 20px 8px 16px;">
                             <div class="flex items-center">
                                 <umb-checkbox input-id="filter-{{vm.filter.alias}}-{{$index}}" name="filter-{{vm.filter.alias}}" model="filterOption.selected" on-change="vm.setFilter(filterOption)"></umb-checkbox>
                                 <label for="filter-{{vm.filter.alias}}-{{$index}}" class="m-0">
-                                    <umb-badge class="{{ 'm-0 umb-badge--s vendr-bg--' + filterOption.color }}">{{filterOption.name}}</umb-badge>
+                                    <umb-badge class="{{ 'm-0 nowrap umb-badge--s vendr-bg--' + filterOption.color }}">{{filterOption.name}}</umb-badge>
                                 </label>
                             </div>
                         </umb-dropdown-item>
@@ -624,6 +671,54 @@
     };
 
     angular.module('vendr.directives').directive('vendrLicenseCheck', vendrLicenseCheck);
+
+}());
+(function () {
+
+    'use strict';
+
+    function vendrLowercase() {
+
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            link: function (scope, element, attrs, ctrl) {
+
+                element.on('keypress', function (e) {
+                    var char = e.char || String.fromCharCode(e.charCode);
+                    if (!/^[a-z0-9]$/i.test(char)) {
+                        e.preventDefault();
+                        return false;
+                    }
+                });
+
+                function parser(value) {
+                    if (ctrl.$isEmpty(value)) {
+                        return value;
+                    }
+                    var formatedValue = value.toLowerCase();
+                    if (ctrl.$viewValue !== formatedValue) {
+                        ctrl.$setViewValue(formatedValue);
+                        ctrl.$render();
+                    }
+                    return formatedValue;
+                }
+
+                function formatter(value) {
+                    if (ctrl.$isEmpty(value)) {
+                        return value;
+                    }
+                    return value.toLowerCase();
+                }
+
+                ctrl.$formatters.push(formatter);
+                ctrl.$parsers.push(parser);
+            }
+        };
+
+    }
+
+    angular.module('vendr.directives').directive('vendrLowercase', vendrLowercase);
 
 }());
 (function () {
@@ -1448,10 +1543,9 @@
 
         var vm = this;
 
-
-        vm.clickItem = function (item, $event) {
+        vm.clickItem = function (item, $index, $event) {
             if (vm.onClick && !($event.metaKey || $event.ctrlKey)) {
-                vm.onClick({ item: item });
+                vm.onClick({ item: item, $index: $index, $event: $event });
                 $event.preventDefault();
             }
             $event.stopPropagation();
@@ -1499,13 +1593,14 @@
     }
 
     var component = {
-        template:'<div><div class="vendr-table umb-table" ng-if="vm.items"><div class="umb-table-head"><div class="umb-table-row"><div class="umb-table-cell vendr-table-cell"><a style="text-decoration: none;" ng-show="vm.allowSelectAll" ng-click="vm.selectAll()"><umb-checkmark checked="vm.isSelectedAll()" size="xs"></umb-checkmark></a></div><div class="umb-table-cell vendr-table-cell umb-table__name"><button type="button" class="btn-reset umb-table-head__link sortable" ng-click="vm.sort(\'Name\', true, true)"><localize key="general_name">Name</localize><i class="umb-table-head__icon icon" aria-hidden="true" ng-class="{\'icon-navigation-up\': vm.isSortDirection(\'Name\', \'asc\'), \'icon-navigation-down\': vm.isSortDirection(\'Name\', \'desc\')}"></i></button></div><div class="umb-table-cell vendr-table-cell vendr-table-cell--{{column.align}}" ng-repeat="column in vm.itemProperties track by column.alias" ng-if="column.alias != \'name\'"><button type="button" class="btn-reset umb-table-head__link" title="Sort by {{ column.header }}" ng-click="vm.sort(column.alias, column.allowSorting, column.isSystem)" ng-class="{\'sortable\':column.allowSorting}"><span ng-bind="column.header"></span> <i class="umb-table-head__icon icon" aria-hidden="true" ng-class="{\'icon-navigation-up\': vm.isSortDirection(column.alias, \'asc\'), \'icon-navigation-down\': vm.isSortDirection(column.alias, \'desc\')}"></i></button></div></div></div><div class="umb-table-body"><div class="umb-table-row -selectable" ng-repeat="item in vm.items track by $index" ng-class="{ \'-selected\' : item.selected }" ng-click="vm.selectItem(item, $index, $event)"><div class="umb-table-cell vendr-table-cell"><i class="umb-table-body__icon umb-table-body__fileicon {{item.icon}}" aria-hidden="true" ng-class="vm.getIcon(item)"></i> <i class="umb-table-body__icon umb-table-body__checkicon icon-check" aria-hidden="true"></i></div><div class="umb-table-cell vendr-table-cell umb-table__name"><a title="{{ item.name }}" class="umb-table-body__link" ng-href="{{\'#\' + item.editPath}}" ng-click="vm.clickItem(item, $event)"><span ng-if="vm.itemProperties.length > 0 && vm.itemProperties[0].alias == \'name\'"><span ng-if="vm.itemProperties[0].template" ng-bind-html="vm.renderTemplate(vm.itemProperties[0].template, item)"></span> <span ng-if="!vm.itemProperties[0].template" ng-bind="item.name"></span></span> <span ng-if="vm.itemProperties.length == 0 || vm.itemProperties[0].alias != \'name\'">{{item.name}}</span></a></div><div class="umb-table-cell vendr-table-cell vendr-table-cell--{{column.align}}" ng-repeat="column in vm.itemProperties track by column.alias" ng-if="column.alias != \'name\'"><span title="{{column.header}}: {{item[column.alias]}}"><span ng-if="column.template" ng-bind-html="vm.renderTemplate(column.template, item)"></span> <span ng-if="!column.template" ng-bind="item[column.alias]"></span></span></div></div></div></div><umb-empty-state ng-hide="vm.items" position="center"><localize key="content_listViewNoItems">There are no items show in the list.</localize></umb-empty-state></div>',
+        template:'<div><div class="vendr-table umb-table" ng-if="vm.items"><div class="umb-table-head"><div class="umb-table-row"><div class="umb-table-cell vendr-table-cell"><a style="text-decoration: none;" ng-show="vm.allowSelectAll" ng-click="vm.selectAll()"><umb-checkmark checked="vm.isSelectedAll()" size="xs"></umb-checkmark></a></div><div class="umb-table-cell vendr-table-cell umb-table__name"><button type="button" class="btn-reset umb-table-head__link" ng-click="vm.sort(\'Name\', vm.allowSorting, true)" ng-class="{ \'sortable\': vm.allowSorting }" ng-attr-title="{{ vm.allowSorting ? \'Sort by Name\' : \'\' }}"><span>{{ vm.itemProperties.length > 0 && vm.itemProperties[0].alias == \'name\' && vm.itemProperties[0].header ? vm.itemProperties[0].header : \'Name\' }}</span> <i class="umb-table-head__icon icon" aria-hidden="true" ng-class="{\'icon-navigation-up\': vm.isSortDirection(\'Name\', \'asc\'), \'icon-navigation-down\': vm.isSortDirection(\'Name\', \'desc\')}" ng-if="vm.allowSorting"></i></button></div><div class="umb-table-cell vendr-table-cell vendr-table-cell--{{column.align}}" ng-repeat="column in vm.itemProperties track by column.alias" ng-if="column.alias != \'name\'"><button type="button" class="btn-reset umb-table-head__link" ng-click="vm.sort(column.alias, vm.allowSorting && column.allowSorting, column.isSystem)" ng-class="{\'sortable\': column.allowSorting}" ng-attr-title="{{ vm.allowSorting && column.allowSorting ? \'Sort by \' + column.header : \'\' }}"><span ng-bind="column.header"></span> <i class="umb-table-head__icon icon" aria-hidden="true" ng-class="{\'icon-navigation-up\': vm.isSortDirection(column.alias, \'asc\'), \'icon-navigation-down\': vm.isSortDirection(column.alias, \'desc\')}" ng-if="vm.allowSorting"></i></button></div></div></div><div class="umb-table-body"><div class="umb-table-row -selectable" ng-repeat="item in vm.items track by $index" ng-class="{ \'-selected\' : item.selected }" ng-click="vm.selectItem(item, $index, $event)"><div class="umb-table-cell vendr-table-cell"><i class="umb-table-body__icon umb-table-body__fileicon {{item.icon}}" aria-hidden="true" ng-class="vm.getIcon(item)"></i> <i class="umb-table-body__icon umb-table-body__checkicon icon-check" aria-hidden="true"></i></div><div class="umb-table-cell vendr-table-cell umb-table__name"><a title="{{ item.name }}" class="umb-table-body__link" ng-href="{{\'#\' + item.editPath}}" ng-click="vm.clickItem(item, $index, $event)"><span ng-if="vm.itemProperties.length > 0 && vm.itemProperties[0].alias == \'name\'"><span ng-attr-data-placeholder="{{vm.itemProperties[0].placeholder}}" ng-if="vm.itemProperties[0].template && !vm.itemProperties[0].refScope" ng-bind-html="vm.renderTemplate(vm.itemProperties[0].template, item)"></span> <span ng-attr-data-placeholder="{{vm.itemProperties[0].placeholder}}" ng-if="vm.itemProperties[0].template && vm.itemProperties[0].refScope" vendr-compile template="vm.itemProperties[0].template" model="item" ref-scope="vm.itemProperties[0].refScope"></span> <span ng-attr-data-placeholder="{{vm.itemProperties[0].placeholder}}" ng-if="!vm.itemProperties[0].template && vm.itemProperties[0].getter" ng-bind="vm.itemProperties[0].getter(item)"></span> <span ng-attr-data-placeholder="{{vm.itemProperties[0].placeholder}}" ng-if="!vm.itemProperties[0].template && !vm.itemProperties[0].getter" ng-bind="item.name"></span></span> <span ng-if="vm.itemProperties.length == 0 || vm.itemProperties[0].alias != \'name\'">{{item.name}}</span></a></div><div class="umb-table-cell vendr-table-cell vendr-table-cell--{{column.align}}" ng-repeat="column in vm.itemProperties track by column.alias" ng-if="column.alias != \'name\'"><span title="{{column.header}}: {{item[column.alias]}}" ng-attr-data-placeholder="vm.itemProperties[0].placeholder"><span ng-attr-data-placeholder="{{column.placeholder}}" ng-if="column.template && !column.refScope" ng-bind-html="vm.renderTemplate(column.template, item)"></span> <span ng-attr-data-placeholder="{{column.placeholder}}" ng-if="column.template && column.refScope" vendr-compile template="column.template" model="item" ref-scope="column.refScope"></span> <span ng-attr-data-placeholder="{{column.placeholder}}" ng-if="!column.template && column.getter" ng-bind="column.getter(item)"></span> <span ng-attr-data-placeholder="{{column.placeholder}}" ng-if="!column.template && !column.getter" ng-bind="item[column.alias]"></span></span></div></div></div></div><umb-empty-state ng-hide="vm.items" position="center"><localize key="content_listViewNoItems">There are no items show in the list.</localize></umb-empty-state></div>',
         controller: vendrTableController,
         controllerAs: 'vm',
         bindings: {
             items: '<',
             itemProperties: '<',
             allowSelectAll: '<',
+            allowSorting: '<',
             onSelect: '&',
             onClick: '&',
             onSelectAll: '&',
@@ -1630,7 +1725,10 @@
             scope.options = {
                 filterTerm: '',
                 filteredItems: scope.items || [],
-                bulkActionsAllowed: scope.bulkActions && scope.bulkActions.length > 0
+                orderBy: "name",
+                orderDirection: "asc",
+                bulkActionsAllowed: scope.bulkActions && scope.bulkActions.length > 0,
+                allowSorting: scope.allowSorting
             };
 
             scope.pagination = { pageNumber: 1, totalPages: 1 };
@@ -1655,25 +1753,74 @@
 
             scope.doNonPaginatedFilter = function () {
                 var items = scope.items || [];
-                scope.options.filteredItems = items.filter(function (itm) {
-                    if (!scope.options.filterTerm)
-                        return true;
+                var filteredItems = items.filter(function (itm) {
 
-                    var term = scope.options.filterTerm.toLowerCase();
+                    var result = false;
+                    var term = (scope.options.filterTerm || "").toLowerCase();
 
-                    if (itm.name.toLowerCase().startsWith(term))
-                        return true;
+                    // See if there is a term match
+                    if (term.length > 0) {
 
-                    if (scope.itemProperties && scope.itemProperties.length > 0) {
-                        var found = scope.itemProperties.find(function (prop) {
-                            return itm[prop.alias].toLowerCase().startsWith(term);
+                        if ((itm.name || "").toLowerCase().startsWith(term))
+                            result = true;
+
+                        if (!result && scope.itemProperties && scope.itemProperties.length > 0) {
+
+                            var found = scope.itemProperties.find(function (prop) {
+
+                                var propValue = prop.getter
+                                    ? prop.getter(itm)
+                                    : itm[prop.alias];
+
+                                return propValue
+                                    ? propValue.toLowerCase().startsWith(term)
+                                    : false;
+                            });
+
+                            if (found)
+                                result = true;
+                        }
+
+                    }
+                    else
+                    {
+                        result = true;
+                    }
+
+                    // See if there is a filter match
+                    if (scope.filters && scope.filters.some((f) => f.value.length > 0) && scope.onFilterItem) {
+                        result &= scope.onFilterItem(itm, scope.filters);
+                    }
+
+                    return result;
+                });
+
+                filteredItems = _.sortBy(filteredItems, function (itm) {
+
+                    var val = "";
+
+                    if (scope.itemProperties && scope.itemProperties.length > 0)
+                    {
+                        var prop = scope.itemProperties.find(function (p) {
+                            return p.alias.toLowerCase() === scope.options.orderBy.toLowerCase();
                         });
 
-                        if (found)
-                            return true;
+                        if (prop) {
+                            val = prop.getter
+                                ? prop.getter(itm)
+                                : itm[prop.alias];
+                        }
                     }
-                    return false;
+
+                    return val ? val : "zzzzzzzzzz";
+
                 });
+
+                if (scope.options.orderDirection.toLowerCase() === "desc") {
+                    filteredItems = filteredItems.reverse();
+                }
+
+                scope.options.filteredItems = filteredItems;
             };
 
             scope.doBulkAction = function (bulkAction) {
@@ -1715,6 +1862,17 @@
                 return listViewHelper.isSelectedAll(scope.options.filteredItems, scope.selection);
             };
 
+            scope.setSortDirection = function(col, direction) {
+                return listViewHelper.setSortingDirection(col, direction, scope.options);
+            }
+
+            scope.sortItems = function (field, allow, isSystem) {
+                if (allow) {
+                    listViewHelper.setSorting(field.toLowerCase(), allow, scope.options);
+                    scope.doFilter();
+                }
+            }
+
             scope.goToPage = function (pageNumber) {
                 scope.pagination.pageNumber = pageNumber;
                 scope.loadItems();
@@ -1725,7 +1883,9 @@
                 scope.clearSelection();
                 scope.onLoadItems({
                     searchTerm: scope.options.filterTerm,
-                    pageNumber: scope.pagination.pageNumber
+                    pageNumber: scope.pagination.pageNumber,
+                    orderBy: scope.options.orderBy,
+                    orderDirection: scope.options.orderDirection
                 });
             };
 
@@ -1745,12 +1905,20 @@
                 }
             });
 
+            // If the items array length changes outside of the table
+            // then re-calculate the filter
+            if (scope.isEditable) {
+                scope.$watch('items.length', function () {
+                    scope.doFilter();
+                });
+            }
+
         }
 
         var directive = {
             restrict: 'E',
             replace: true,
-            template:'<div class="vendr"><div class="umb-property-editor umb-listview"><umb-editor-sub-header ng-class="{\'--state-selection\':(selection.length > 0)}"><umb-editor-sub-header-content-left><umb-editor-sub-header-section ng-if="(createActions && createActions.length > 0 && (selection.length == 0))"><div class="btn-group" ng-show="createActions.length == 1"><button type="button" class="btn btn-outline umb-outline" ng-click="createActions[0].doAction()"><i class="{{createActions[0].icon}}" aria-hidden="true"></i> {{createActions[0].name}}</button></div><div class="btn-group" ng-show="createActions.length > 1"><button type="button" class="btn btn-outline umb-outline dropdown-toggle" data-toggle="dropdown"><span ng-click="createActions[0].doAction()"><i class="{{createActions[0].icon}}" aria-hidden="true"></i> {{createActions[0].name}}</span> <span class="caret" ng-click="page.createDropdownOpen = !page.createDropdownOpen"></span></button><umb-dropdown ng-if="page.createDropdownOpen" on-close="page.createDropdownOpen = false"><umb-dropdown-item ng-repeat="createAction in createActions" ng-if="$index > 0"><a ng-click="createAction.doAction()"><i class="{{createAction.icon}}" aria-hidden="true"></i> {{createAction.name}}</a></umb-dropdown-item></umb-dropdown></div></umb-editor-sub-header-section><vendr-filter ng-repeat="fltr in filters" ng-show="!selection || selection.length == 0" filter="fltr" on-change="doFilter()"></vendr-filter><umb-editor-sub-header-section ng-show="(selection.length > 0)"><umb-button type="button" label="Clear selection" label-key="buttons_clearSelection" button-style="white" action="clearSelection()" disabled="bulkActionInProgress"></umb-button></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length > 0)"><strong ng-show="!bulkActionInProgress">{{ selection.length }}&nbsp;<localize key="general_of">of</localize>&nbsp;{{ options.filteredItems.length }}&nbsp;<localize key="general_selected">items selected</localize></strong> <strong ng-show="bulkActionInProgress" ng-bind="bulkActionStatus"></strong><umb-loader position="bottom" ng-show="bulkActionInProgress"></umb-loader></umb-editor-sub-header-section></umb-editor-sub-header-content-left><umb-editor-sub-header-content-right><umb-editor-sub-header-section ng-show="(selection.length == 0)"><div class="form-search -no-margin-bottom pull-right" novalidate><div class="inner-addon left-addon"><i class="icon icon-search" ng-click="doFilter()" aria-hidden="true"></i> <input class="form-control search-input" type="text" localize="placeholder" placeholder="@general_typeToSearch" ng-model="options.filterTerm" ng-change="doFilter()" ng-keydown="doFilter()" prevent-enter-submit no-dirty-check></div></div></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length > 0) && (options.bulkActionsAllowed)"><umb-button ng-repeat="bulkAction in bulkActions" type="button" button-style="white" label="{{ bulkAction.name }}" icon="{{ bulkAction.icon }}" action="doBulkAction(bulkAction)" disabled="bulkActionInProgress" size="xs" add-ellipsis="true"></umb-button></umb-editor-sub-header-section></umb-editor-sub-header-content-right></umb-editor-sub-header><div ng-if="!loading"><vendr-table ng-if="options.filteredItems && options.filteredItems.length > 0" items="options.filteredItems" allow-select-all="options.bulkActionsAllowed" item-properties="itemProperties" on-select="selectItem(item, $index, $event)" on-click="itemClick(item)" on-select-all="selectAll($event)" on-selected-all="areAllSelected()"></vendr-table><umb-empty-state ng-if="!options.filteredItems || options.filteredItems.length === 0" position="center"><div>No items found</div></umb-empty-state></div><umb-load-indicator ng-show="loading"></umb-load-indicator><div class="flex justify-center"><umb-pagination ng-show="!loading && paginated && pagination.totalPages" page-number="pagination.pageNumber" total-pages="pagination.totalPages" on-next="goToPage" on-prev="goToPage" on-go-to-page="goToPage"></umb-pagination></div></div></div>',
+            template:'<div class="vendr"><div class="umb-property-editor umb-listview"><umb-editor-sub-header ng-class="{\'--state-selection\':(selection.length > 0)}"><umb-editor-sub-header-content-left><umb-editor-sub-header-section ng-if="(createActions && createActions.length > 0 && (selection.length == 0))"><div class="btn-group" ng-show="createActions.length == 1"><button type="button" class="btn btn-outline umb-outline" ng-click="createActions[0].doAction()"><i class="{{createActions[0].icon}}" aria-hidden="true"></i> {{createActions[0].name}}</button></div><div class="btn-group" ng-show="createActions.length > 1"><button type="button" class="btn btn-outline umb-outline dropdown-toggle" data-toggle="dropdown"><span ng-click="createActions[0].doAction()"><i class="{{createActions[0].icon}}" aria-hidden="true"></i> {{createActions[0].name}}</span> <span class="caret" ng-click="page.createDropdownOpen = !page.createDropdownOpen"></span></button><umb-dropdown ng-if="page.createDropdownOpen" on-close="page.createDropdownOpen = false"><umb-dropdown-item ng-repeat="createAction in createActions" ng-if="$index > 0"><a ng-click="createAction.doAction()"><i class="{{createAction.icon}}" aria-hidden="true"></i> {{createAction.name}}</a></umb-dropdown-item></umb-dropdown></div></umb-editor-sub-header-section><vendr-filter ng-repeat="fltr in filters track by fltr.alias" ng-show="!selection || selection.length == 0" filter="fltr" on-change="doFilter()"></vendr-filter><umb-editor-sub-header-section ng-show="(selection.length > 0)"><umb-button type="button" label="Clear selection" label-key="buttons_clearSelection" button-style="white" action="clearSelection()" disabled="bulkActionInProgress"></umb-button></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length > 0)"><strong ng-show="!bulkActionInProgress">{{ selection.length }}&nbsp;<localize key="general_of">of</localize>&nbsp;{{ options.filteredItems.length }}&nbsp;<localize key="general_selected">items selected</localize></strong> <strong ng-show="bulkActionInProgress" ng-bind="bulkActionStatus"></strong><umb-loader position="bottom" ng-show="bulkActionInProgress"></umb-loader></umb-editor-sub-header-section></umb-editor-sub-header-content-left><umb-editor-sub-header-content-right><umb-editor-sub-header-section ng-show="(selection.length == 0)"><div class="form-search -no-margin-bottom pull-right" novalidate><div class="inner-addon left-addon"><i class="icon icon-search" ng-click="doFilter()" aria-hidden="true"></i> <input class="form-control search-input" type="text" localize="placeholder" placeholder="@general_typeToSearch" ng-model="options.filterTerm" ng-change="doFilter()" ng-keydown="doFilter()" prevent-enter-submit no-dirty-check></div></div></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length > 0) && (options.bulkActionsAllowed)"><umb-button ng-repeat="bulkAction in bulkActions" type="button" button-style="white" label="{{ bulkAction.name }}" icon="{{ bulkAction.icon }}" action="doBulkAction(bulkAction)" disabled="bulkActionInProgress" size="xs" add-ellipsis="true"></umb-button></umb-editor-sub-header-section></umb-editor-sub-header-content-right></umb-editor-sub-header><div ng-if="!loading"><vendr-table ng-if="options.filteredItems && options.filteredItems.length > 0" items="options.filteredItems" allow-select-all="options.bulkActionsAllowed" allow-sorting="options.allowSorting" item-properties="itemProperties" on-select="selectItem(item, $index, $event)" on-click="itemClick(item, $index, $event)" on-select-all="selectAll($event)" on-selected-all="areAllSelected()" on-sorting-direction="setSortDirection(col, direction)" on-sort="sortItems(field, allow, isSystem)"></vendr-table><umb-empty-state ng-if="!options.filteredItems || options.filteredItems.length === 0" position="center"><div>No items found</div></umb-empty-state></div><umb-load-indicator ng-show="loading"></umb-load-indicator><div class="flex justify-center"><umb-pagination ng-show="!loading && paginated && pagination.totalPages" page-number="pagination.pageNumber" total-pages="pagination.totalPages" on-next="goToPage" on-prev="goToPage" on-go-to-page="goToPage"></umb-pagination></div></div></div>',
             scope: {
                 loading: "<",
                 createActions: "<",
@@ -1759,8 +1927,11 @@
                 items: "<",
                 itemProperties: "<",
                 paginated: "<",
+                allowSorting: '<',
                 itemClick: "<",
-                onLoadItems: "="
+                onFilterItem: "=",
+                onLoadItems: "=",
+                isEditable: "<"
             },
             link: link
         };

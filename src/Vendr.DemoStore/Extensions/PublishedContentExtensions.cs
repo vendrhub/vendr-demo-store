@@ -1,4 +1,5 @@
-﻿using Umbraco.Core.Models.PublishedContent;
+﻿using System.Threading;
+using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using Vendr.Core;
 using Vendr.Core.Api;
@@ -36,7 +37,7 @@ namespace Vendr.DemoStore
 
         public static IProductSnapshot AsVendrProduct(this IProductComp content)
         {
-            return VendrApi.Instance.GetProduct(content.GetProductReference());
+            return VendrApi.Instance.GetProduct(content.GetProductReference(), Thread.CurrentThread.CurrentCulture.Name);
         }
 
         public static Price CalculatePrice(this IProductComp content)
