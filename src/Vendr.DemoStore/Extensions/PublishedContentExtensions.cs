@@ -40,9 +40,19 @@ namespace Vendr.DemoStore
             return VendrApi.Instance.GetProduct(content.GetProductReference(), Thread.CurrentThread.CurrentCulture.Name);
         }
 
+        public static IProductSnapshot AsVendrProduct(this IProductComp variant, IProductComp parent)
+        {
+            return VendrApi.Instance.GetProduct(parent.GetProductReference(), variant.GetProductReference(), Thread.CurrentThread.CurrentCulture.Name);
+        }
+
         public static Price CalculatePrice(this IProductComp content)
         {
             return content.AsVendrProduct()?.CalculatePrice();
+        }
+
+        public static Price CalculatePrice(this IProductComp variant, IProductComp parent)
+        {
+            return variant.AsVendrProduct(parent)?.CalculatePrice();
         }
 
         public static CheckoutPage GetCheckoutPage(this CheckoutStepPage content)

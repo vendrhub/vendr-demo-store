@@ -14,11 +14,11 @@ namespace Vendr.DemoStore.Web.Extractors
 
         public override string ExtractProductName(IPublishedContent content, IPublishedElement variant, string languageIsoCode)
         {
-            var parentProductName = content.ContentType.Alias == ProductVariant.ModelTypeAlias
-                ? content.Parent.Parent.Name
+            var productNamePrefix = content.ContentType.Alias == ProductVariant.ModelTypeAlias
+                ? $"{content.Parent.Parent.Name} - {content.Parent.Name}"
                 : content.Parent.Name;
 
-            return $"{parentProductName} - {base.ExtractProductName(content, variant, languageIsoCode)}";
+            return $"{productNamePrefix} - {base.ExtractProductName(content, variant, languageIsoCode)}";
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using Umbraco.Web.Mvc;
 using Vendr.Core;
 using Vendr.Core.Exceptions;
@@ -42,7 +43,7 @@ namespace Vendr.DemoStore.Web.Controllers
                     var store = CurrentPage.GetStore();
                     var order = _sessionManager.GetOrCreateCurrentOrder(store.Id)
                         .AsWritable(uow)
-                        .AddProduct(postModel.ProductReference, 1);
+                        .AddProduct(postModel.ProductReference, postModel.ProductVariantReference, 1);
 
                     _orderService.SaveOrder(order);
 

@@ -10,6 +10,6 @@ namespace Vendr.DemoStore.Models
 
         public IPublishedContent PrimaryImage => this.Images.FirstOrDefault();
 
-        public IEnumerable<ProductVariant> Variants => this.Children.OfType<ProductVariant>();
+        public IEnumerable<ProductVariant> ChildVariants => this.Children.OfType<ProductVariant>();
     }
 }
