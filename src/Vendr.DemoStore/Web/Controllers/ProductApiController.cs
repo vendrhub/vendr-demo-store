@@ -40,15 +40,15 @@ namespace Vendr.DemoStore.Web.Controllers
                 var snapshot = _productService.GetProduct(productNode.Key.ToString("D"), variant.Content.Key.ToString("D"), Thread.CurrentThread.CurrentCulture.Name);
                 if (snapshot != null)
                 {
-                    var multiVarientContent = variant.Content as ProductMultiVariant;
+                    var multiVariantContent = variant.Content as ProductMultiVariant;
 
                     return new ProductVariantDto
                     {
                         ProductVariantReference = variant.Content.Key.ToString("D"),
                         Sku = snapshot.Sku,
                         PriceFormatted = snapshot.CalculatePrice()?.Formatted(),
-                        ImageUrl = multiVarientContent?.Image.GetCropUrl(500, 500),
-                        ThumbnailImageUrl = multiVarientContent?.Image.GetCropUrl(150, 150)
+                        ImageUrl = multiVariantContent?.Image.GetCropUrl(500, 500),
+                        ThumbnailImageUrl = multiVariantContent?.Image.GetCropUrl(150, 150)
                     };
                 }
             }
