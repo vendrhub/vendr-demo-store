@@ -57,7 +57,7 @@
                                                                    ng-model="vm.content.name"
                                                                    auto-complete="autoCompleteOptions"
                                                                    prevent-enter-submit />
-                                                            <a href="" ng-click="vm.openTranslationsEditor('Name', vm.content.nameTranslations)" class="vendr-input--action"><i class="icon icon-globe" aria-hidden="true"></i></a>
+                                                            <button type="button" ng-click="vm.openTranslationsEditor('Name', vm.content.nameTranslations)" class="btn-reset vendr-input--action"><i class="icon icon-globe" aria-hidden="true"></i></button>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -81,7 +81,7 @@
                                             <tr ng-repeat="value in vm.content.values" style="position: relative;">
                                                 <td class="vendr-multi-field-table__divide-right">
                                                     <div class="flex items-center">
-                                                        <a href="#" class="px-10 -ml-5 handle" title="Move Value" aria-hidden="true"><i class="fa fa-ellipsis-v"></i></a>
+                                                        <span class="px-10 -ml-5 handle" title="Move Value" aria-hidden="true"><i class="fa fa-ellipsis-v"></i></span>
                                                         <input type="text" class="umb-property-editor umb-textstring textstring"
                                                                ng-model="value.alias"
                                                                pattern="[a-z0-9_\-]+"
@@ -95,7 +95,7 @@
                                                                ng-model="value.name"
                                                                auto-complete="autoCompleteOptions"
                                                                prevent-enter-submit />
-                                                        <a href="" ng-click="vm.openTranslationsEditor('Name', value.nameTranslations)" class="vendr-input--action"><i class="icon icon-globe" aria-hidden="true"></i></a>
+                                                        <button type="button" ng-click="vm.openTranslationsEditor('Name', value.nameTranslations)" class="btn-reset vendr-input--action"><i class="icon icon-globe" aria-hidden="true"></i></button>
                                                     </div>
                                                 </td>
                                                 <td>
