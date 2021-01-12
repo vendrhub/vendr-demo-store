@@ -26,12 +26,12 @@ namespace Vendr.DemoStore.Web.Controllers
         public object GetProductVariant(GetProductVariantDto model)
         {
             // Get the variants for the given node
-            var productNode = Umbraco.Content(model.ProductNodeId);
-            var variantsProp = productNode.ContentType.PropertyTypes.FirstOrDefault(x => x.EditorAlias == VendrCoreConstants.PropertyEditors.Aliases.VariantsEditor);
-            var variants = productNode.Value<ProductVariantCollection>(variantsProp.Alias);
+            var productNode = Umbraco.Content(model.ProductNodeId) as MultiVariantProductPage;
+            if (productNode == null)
+                return null;
 
             // Find the variant with the matching attributes
-            var variant = variants.FirstOrDefault(v => v.Config.Attributes.Count == model.Attributes.Count
+            var variant = productNode.Variants.FirstOrDefault(v => v.Config.Attributes.Count == model.Attributes.Count
                 && v.Config.Attributes.All(a => model.Attributes.ContainsKey(a.Key) && model.Attributes[a.Key] == a.Value));
 
             // If we have a variant, map it's data to our DTO
