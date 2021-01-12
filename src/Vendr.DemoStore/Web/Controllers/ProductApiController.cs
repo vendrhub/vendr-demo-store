@@ -31,8 +31,7 @@ namespace Vendr.DemoStore.Web.Controllers
                 return null;
 
             // Find the variant with the matching attributes
-            var variant = productNode.Variants.FirstOrDefault(v => v.Config.Attributes.Count == model.Attributes.Count
-                && v.Config.Attributes.All(a => model.Attributes.ContainsKey(a.Key) && model.Attributes[a.Key] == a.Value));
+            var variant = productNode.Variants.FindByAttributes(model.Attributes);
 
             // If we have a variant, map it's data to our DTO
             if (variant != null)
