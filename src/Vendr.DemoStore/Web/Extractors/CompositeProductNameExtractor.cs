@@ -8,10 +8,6 @@ namespace Vendr.DemoStore.Web.Extractors
 {
     public class CompositeProductNameExtractor : UmbracoProductNameExtractor
     {
-        public CompositeProductNameExtractor(Lazy<IProductAttributeService> productAttributeService)
-            : base(productAttributeService)
-        { }
-
         public override string ExtractProductName(IPublishedContent content, IPublishedElement variant, string languageIsoCode)
         {
             var productNamePrefix = content.ContentType.Alias == ProductVariant.ModelTypeAlias

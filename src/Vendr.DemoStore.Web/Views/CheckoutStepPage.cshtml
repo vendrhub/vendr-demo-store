@@ -53,7 +53,20 @@
                                 <span class="bg-gray-300 h-12 w-12 flex items-center justify-center rounded mr-4">
                                     <i class="fa fa-coffee fa-lg"></i>
                                 </span>
-                                <div>@(orderLine.Name) x @((int)orderLine.Quantity)<br /><span class="text-xs text-gray-500">@(orderLine.Sku)</span></div>
+                                <div>
+                                    @(orderLine.Name) x @((int)orderLine.Quantity)
+                                    <br />
+                                    <span class="text-xs text-gray-500">
+                                        @(orderLine.Sku)
+                                        @if (orderLine.Attributes.Count > 0)
+                                        {
+                                            foreach (var attr in orderLine.Attributes)
+                                            {
+                                                <text> / @(attr.Value)</text>
+                                            }
+                                        }
+                                    </span>
+                                </div>
                             </div>
 
                             <div class="pl-4 font-medium">@(orderLine.TotalPrice.WithoutAdjustments.Formatted().WithoutTax)</div>
