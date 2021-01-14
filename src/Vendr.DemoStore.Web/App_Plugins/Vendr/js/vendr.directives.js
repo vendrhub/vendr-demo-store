@@ -516,14 +516,15 @@
                         <span class="caret"></span>
                     </button>
                     <umb-dropdown class="pull-left" ng-if="vm.showFilterOptions" on-close="vm.showFilterOptions = false;" style="padding-top: 8px">
-                        <umb-dropdown-item ng-repeat-start="g in vm.groupedFilterOptions" ng-if="g.group !== 'undefined' && vm.someVisibleValues(g.items)" style="padding: 8px 20px 0 16px;">
+                        <umb-dropdown-item ng-repeat-start="g in vm.groupedFilterOptions" ng-if="g.group && g.group !== 'undefined' && vm.someVisibleValues(g.items)" style="padding: 8px 20px 0 16px;">
                             <strong>{{ g.group }}</strong>
                         </umb-dropdown-item>
                         <umb-dropdown-item ng-repeat="filterOption in g.items" ng-if="!filterOption.hidden" ng-repeat-end style="padding: 8px 20px 8px 16px;">
                             <div class="flex items-center">
                                 <umb-checkbox input-id="filter-{{vm.filter.alias}}-{{$index}}" name="filter-{{vm.filter.alias}}" model="filterOption.selected" on-change="vm.setFilter(filterOption)"></umb-checkbox>
                                 <label for="filter-{{vm.filter.alias}}-{{$index}}" class="m-0">
-                                    <umb-badge class="{{ 'm-0 nowrap umb-badge--s vendr-bg--' + filterOption.color }}">{{filterOption.name}}</umb-badge>
+                                    <span ng-if="!filterOption.color" class="m-0 nowrap">{{filterOption.name}}</span>
+                                    <umb-badge ng-if="filterOption.color" class="{{ 'm-0 nowrap umb-badge--s vendr-bg--' + filterOption.color }}">{{filterOption.name}}</umb-badge>
                                 </label>
                             </div>
                         </umb-dropdown-item>

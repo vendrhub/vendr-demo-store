@@ -640,8 +640,7 @@
 
                             var opt = {
                                 id: val.alias,
-                                name: val.name,
-                                color: 'blue'
+                                name: val.name
                             };
 
                             Object.defineProperty(opt, "hidden", {
@@ -6029,6 +6028,16 @@
         };
 
         vm.valueSortableOptions = {
+            helper: function (e, ui) {
+                ui.children().each(function () {
+                    $(this).width($(this).width());
+                });
+                var clone = ui.clone();
+                ui.children().each(function () {
+                    $(this).css('width', '');
+                });
+                return clone;
+            },
             axis: "y",
             cursor: "move",
             handle: ".handle",
