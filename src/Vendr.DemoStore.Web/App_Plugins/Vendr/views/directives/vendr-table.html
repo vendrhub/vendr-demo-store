@@ -46,8 +46,8 @@
                        ng-click="vm.clickItem(item, $event)">
 
                         <span ng-if="vm.itemProperties.length > 0 && vm.itemProperties[0].alias == 'name'">
-                            <span ng-if="vm.itemProperties[0].template" ng-bind-html="vm.renderTemplate(vm.itemProperties[0].template, item)"></span>
-                            <span ng-if="!vm.itemProperties[0].template" ng-bind="item.name"></span>
+                            <span ng-if="vm.itemProperties[0].template" ng-bind-html="vm.renderTemplate(vm.itemProperties[0].template, item)"  class="vendr-table-cell__value"></span>
+                            <span ng-if="!vm.itemProperties[0].template" ng-bind="item.name"  class="vendr-table-cell__value"></span>
                         </span>
                         <span ng-if="vm.itemProperties.length == 0 || vm.itemProperties[0].alias != 'name'">
                             {{item.name}}
@@ -58,8 +58,8 @@
 
                 <div class="umb-table-cell vendr-table-cell vendr-table-cell--{{column.align}}" ng-repeat="column in vm.itemProperties track by column.alias" ng-if="column.alias != 'name'">
                     <span title="{{column.header}}: {{item[column.alias]}}">
-                        <span ng-if="column.template" ng-bind-html="vm.renderTemplate(column.template, item)"></span>
-                        <span ng-if="!column.template" ng-bind="item[column.alias]"></span>
+                        <span ng-if="column.template" ng-bind-html="vm.renderTemplate(column.template, item)" class="vendr-table-cell__value"></span>
+                        <span ng-if="!column.template" ng-bind="item[column.alias]" class="vendr-table-cell__value"></span>
                     </span>
                 </div>
 

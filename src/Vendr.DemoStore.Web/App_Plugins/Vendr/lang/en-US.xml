@@ -13,6 +13,9 @@
     <area alias="actions">
         <key alias="manageStoreSettings">Manage Store Settings</key>
         <key alias="manageStorePermissions">Manage Store Permissions</key>
+        <key alias="cancelPayment">Cancel Payment</key>
+        <key alias="capturePayment">Capture Payment</key>
+        <key alias="refundPayment">Refund Payment</key>
     </area>
     <area alias="actionCategories">
         <key alias="commerce">Commerce</key>

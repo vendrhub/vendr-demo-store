@@ -28,23 +28,36 @@
             $rootScope.$broadcast("vendrMasonryGridChanged", null);
         });
 
-        var today = vendrDateHelper.getToday();
         var filterTimeframeKey = "vendr_analytics_timeframe";
+        var namedDateRanges = vendrDateHelper.getNamedDateRanges();
 
         vm.filterTimeframe = vendrLocalStorage.get(filterTimeframeKey) || {
             dateRange: {
-                name: "This Month",
-                alias: "thisMonth",
-                from: vendrDateHelper.getISODateString(new Date(today.getFullYear(), today.getMonth(), 1)),
-                to: vendrDateHelper.getISODateString(new Date(today.getFullYear(), today.getMonth() + 1, 1).addDays(-1))
+                alias: "thisMonth"
             },
             compareTo: {
-                name: vendrDateHelper.formatDateRange([new Date(today.getFullYear(), today.getMonth(), 1).addMonths(-1), new Date(today.getFullYear(), today.getMonth(), 1).addDays(-1)]),
-                type: "prevPeriod",
-                from: vendrDateHelper.getISODateString(new Date(today.getFullYear(), today.getMonth(), 1).addMonths(-1)),
-                to: vendrDateHelper.getISODateString(new Date(today.getFullYear(), today.getMonth(), 1).addDays(-1))
+                type: "prevPeriod"
             }
         };
+
+        // If the cached timeframe is a named range, then update all it's values so they are based
+        // on todays date, not the date the timeframe was cached.
+        // If the cached date range is unnamed however, then we will just use that timeframe
+        // This should only happen if the timeframe was "Custom"
+        var namedDateRange = namedDateRanges.find(dr => dr.alias === vm.filterTimeframe.dateRange.alias);
+        if (namedDateRange) {
+            vm.filterTimeframe.dateRange.name = namedDateRange.name;
+            vm.filterTimeframe.dateRange.from = vendrDateHelper.getISODateString(namedDateRange.range[0]);
+            vm.filterTimeframe.dateRange.to = vendrDateHelper.getISODateString(namedDateRange.range[1]);
+            if (vm.filterTimeframe.compareTo && vm.filterTimeframe.compareTo.type) {
+                var compareRange = namedDateRange[vm.filterTimeframe.compareTo.type];
+                if (compareRange) {
+                    vm.filterTimeframe.compareTo.name = vendrDateHelper.formatDateRange(compareRange);
+                    vm.filterTimeframe.compareTo.from = vendrDateHelper.getISODateString(compareRange[0]);
+                    vm.filterTimeframe.compareTo.to = vendrDateHelper.getISODateString(compareRange[1]);
+                }
+            }
+        }
 
         var timeframeDialogOptions = {
             view: '/app_plugins/vendr/views/analytics/dialogs/timeframe.html',
@@ -110,36 +123,7 @@
         vm.title = "Timeframe";
 
         vm.namedDateRange = currentTimeframe && currentTimeframe.dateRange.alias ? currentTimeframe.dateRange.alias : "thisMonth";
-        vm.namedDateRanges = [
-            {
-                name: "Last 7 days",
-                alias: "last7",
-                range: [today.addDays(-6), today],
-                prevPeriod: [today.addDays(-13), today.addDays(-7)],
-                prevYear: [today.addDays(-6).addYears(-1), today.addYears(-1)]
-            },
-            {
-                name: "Last 30 days",
-                alias: "last30",
-                range: [today.addDays(-29), today],
-                prevPeriod: [today.addDays(-59), today.addDays(-30)],
-                prevYear: [today.addDays(-29).addYears(-1), today.addYears(-1)]
-            },
-            {
-                name: "This Month",
-                alias: "thisMonth",
-                range: [new Date(today.getFullYear(), today.getMonth(), 1), new Date(today.getFullYear(), today.getMonth() + 1, 1).addDays(-1)],
-                prevPeriod: [new Date(today.getFullYear(), today.getMonth(), 1).addMonths(-1), new Date(today.getFullYear(), today.getMonth(), 1).addDays(-1)],
-                prevYear: [new Date(today.getFullYear(), today.getMonth(), 1).addYears(-1), new Date(today.getFullYear(), today.getMonth() + 1, 1).addDays(-1).addYears(-1)]
-            },
-            {
-                name: "Last Month",
-                alias: "lastMonth",
-                range: [new Date(today.getFullYear(), today.getMonth() - 1, 1), new Date(today.getFullYear(), today.getMonth(), 1).addDays(-1)],
-                prevPeriod: [new Date(today.getFullYear(), today.getMonth() - 2, 1), new Date(today.getFullYear(), today.getMonth() - 1, 1).addDays(-1)],
-                prevYear: [new Date(today.getFullYear(), today.getMonth() - 1, 1).addYears(-1), new Date(today.getFullYear(), today.getMonth(), 1).addDays(-1).addYears(-1)]
-            }
-        ];
+        vm.namedDateRanges = vendrDateHelper.getNamedDateRanges();
 
         vm.initCustomDateRange = vm.customDateRange = currentTimeframe && (!currentTimeframe.dateRange.alias || currentTimeframe.dateRange.alias == "custom")
             ? [new Date(currentTimeframe.dateRange.from), new Date(currentTimeframe.dateRange.to)]
@@ -1931,8 +1915,8 @@
             items: [],
             itemProperties: [
                 { alias: 'name', template: '<span class="vendr-table-cell-value--multiline"><span>{{name}}</span>{{ blockFurtherDiscounts ? \'<span class="vendr-table-cell-label" style="font-size: 12px;"><i class="fa fa-minus-circle color-red" aria-hidden="true"></i> Blocks all further discounts if applied</span>\' : \'\' }}{{ blockIfPreviousDiscounts ? \'<span class="vendr-table-cell-label" style="font-size: 12px;"><i class="fa fa-chevron-circle-up color-orange"></i> Is not applied if previous discounts already apply</span></span>\' : \'\' }}' },
-                { alias: 'type', header: 'Type', template: '<span class="umb-badge umb-badge--xs vendr-bg--{{ typeColor }}">{{ type }}</span>' },
-                { alias: 'status', header: 'Status', template: '<span class="umb-badge umb-badge--xs vendr-bg--{{ statusColor }}">{{ status }}</span>' }
+                { alias: 'type', header: 'Type', template: '<span class="vendr-badge umb-badge umb-badge--xs vendr-bg--{{ typeColor }} truncate">{{ type }}</span>' },
+                { alias: 'status', header: 'Status', template: '<span class="vendr-badge umb-badge umb-badge--xs vendr-bg--{{ statusColor }} truncate">{{ status }}</span>' }
             ],
             itemClick: function (itm) {
                 $location.path(itm.routePath);
@@ -2699,7 +2683,7 @@
             itemProperties: [
                 { alias: 'name', template: '<span class="vendr-table-cell-value--multiline"><span><strong>{{code}}<strong></span>{{ orderNumber ? \'<span class="vendr-table-cell-label">#\'+ orderNumber +\'</span>\' : \'\' }}</span>' },
                 { alias: 'remainingAmountFormatted', header: 'Remaining', template: '<span class="vendr-table-cell-value--multiline"><span><strong>{{remainingAmountFormatted}}</strong> of {{ originalAmountFormatted }}</span><span class="vendr-progress-bar mt-5" style="width: 100%;max-width: 200px;"><span  class="vendr-progress-bar__bar" style="width: {{ (100 / originalAmount) * remainingAmount }}%;"></span></span></span>' },
-                { alias: 'status', header: 'Status', template: '<span class="umb-badge umb-badge--xs vendr-bg--{{ statusColor }}">{{ status }}</span>' },
+                { alias: 'status', header: 'Status', template: '<span class="vendr-badge umb-badge umb-badge--xs vendr-bg--{{ statusColor }} truncate">{{ status }}</span>' },
                 { alias: 'createDate', header: 'Create Date', template: "{{ createDate  | date : 'MMMM d, yyyy h: mm a' }}" }
             ],
             itemClick: function (itm) {
@@ -3233,7 +3217,7 @@
     'use strict';
 
     function OrderEditController($scope, $routeParams, $location, formHelper,
-        appState, editorState, editorService, localizationService, notificationsService, navigationService, memberResource,
+        appState, editorState, editorService, localizationService, notificationsService, navigationService, overlayService,
         vendrUtils, vendrOrderResource, vendrStoreResource, vendrEmailResource) {
 
         var infiniteMode = editorService.getNumberOfEditors() > 0 ? true : false;
@@ -3549,6 +3533,26 @@
             editorService.open(customerInfoDialogOptions);
         };
 
+        vm.doConfirm = function (title, message, submitButtonLabelKey, action) {
+            overlayService.confirm({
+                title: title,
+                content: message,
+                submitButtonLabelKey: submitButtonLabelKey,
+                submitButtonStyle: "warning",
+                close: function () {
+                    overlayService.close();
+                },
+                submit: function () {
+                    action();
+                    overlayService.close();
+                }
+            });
+        }
+
+        vm.confirmCancelPayment = function () {
+            vm.doConfirm("Confirm Payment Cancel", "Are you sure you want to cancel this payment?", "actions_cancelPayment", () => vm.cancelPayment());
+        }
+
         vm.cancelPayment = function () {
             vm.cancelPaymentButtonState = 'busy';
             vendrOrderResource.cancelPayment(id).then(function(order) {
@@ -3561,6 +3565,10 @@
             });
         };
 
+        vm.confirmCapturePayment = function () {
+            vm.doConfirm("Confirm Payment Capture", "Are you sure you want to capture this payment?", "actions_capturePayment", () => vm.capturePayment());
+        }
+
         vm.capturePayment = function () {
             vm.capturePaymentButtonState = 'busy';
             vendrOrderResource.capturePayment(id).then(function(order) {
@@ -3572,6 +3580,10 @@
                     vm.capturePaymentButtonState = 'error';
             });
         };
+
+        vm.confirmRefundPayment = function () {
+            vm.doConfirm("Confirm Payment Refund", "Are you sure you want to refund this payment?", "actions_refundPayment", () => vm.refundPayment());
+        }
 
         vm.refundPayment = function () {
             vm.refundPaymentButtonState = 'busy';
@@ -3748,8 +3760,8 @@
             itemProperties: [
                 { alias: 'name', template: '<span class="vendr-table-cell-value--multiline"><span>{{customerFullName}}</span><span class="vendr-table-cell-label">#{{orderNumber}}</span></span>' },
                 { alias: 'finalizedDate', header: 'Date', template: "{{ finalizedDate  | date : 'MMMM d, yyyy h:mm a' }}" },
-                { alias: 'orderStatusId', header: 'Order Status', align: 'right', template: '<span class="umb-badge umb-badge--xs vendr-bg--{{ orderStatus.color }}" title="Order Status: {{ orderStatus.name }}">{{ orderStatus.name }}</span>' },
-                { alias: 'paymentStatus', header: 'Payment Status', align: 'right', template: '<span class="umb-badge umb-badge--xs vendr-badge--{{ paymentStatus.toLowerCase() }}">{{paymentStatusName}}</span>' },
+                { alias: 'orderStatusId', header: 'Order Status', align: 'right', template: '<span class="vendr-badge umb-badge umb-badge--xs vendr-bg--{{ orderStatus.color }} truncate" title="Order Status: {{ orderStatus.name }}">{{ orderStatus.name }}</span>' },
+                { alias: 'paymentStatus', header: 'Payment Status', align: 'right', template: '<span class="vendr-badge umb-badge umb-badge--xs vendr-badge--{{ paymentStatus.toLowerCase() }} truncate">{{paymentStatusName}}</span>' },
                 { alias: 'payment', header: 'Payment', align: 'right', template: '<span class="vendr-table-cell-value--multiline"><strong>{{transactionAmount}}</strong><span>{{paymentMethod.name}}</span></span>' }
             ],
             itemClick: function (itm) {

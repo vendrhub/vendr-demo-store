@@ -19,7 +19,8 @@
 
                     // Parse querystring
                     var qs = resp.config.url.substr(resp.config.url.indexOf('?') + 1);
-                    var params = JSON.parse('{"' + decodeURI(qs).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
+                    var json = '{"' + decodeURI(qs).replace(/&*$/g, '').replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}';
+                    var params = JSON.parse(json);
 
                     // Fetch the vendrActions service
                     // We have to do it at runtime to avoid a circular dependency

@@ -104,7 +104,7 @@
                                                     Model.Properties["shippingAddressLine2"],
                                                     Model.Properties["shippingCity"],
                                                     Model.Properties["shippingZipCode"],
-                                                    paymentCountry.Name
+                                                    shippingCountry.Name
                                                 };
                                                 @Html.Raw(string.Join("<br />", shippingParts.Where(x => !string.IsNullOrWhiteSpace(x))))
                                             }
