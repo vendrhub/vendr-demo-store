@@ -1,0 +1,38 @@
+﻿<div ng-controller="Vendr.Controllers.ProductAttributePresetListController as vm" class="vendr">
+
+    <umb-load-indicator ng-if="vm.page.loading"></umb-load-indicator>
+
+    <umb-editor-view ng-if="!vm.page.loading">
+
+        <umb-editor-header name="vm.page.menu.currentNode.name"
+            name-locked="true"
+            hide-icon="true"
+            hide-description="true"
+            hide-alias="true"
+            show-back-button="false"
+            menu="vm.page.menu">
+        </umb-editor-header>
+
+        <umb-editor-container class="form-horizontal">
+            <vendr-table-view create-actions="vm.options.createActions"
+                bulk-actions="vm.options.bulkActions"
+                items="vm.options.items"
+                item-properties="vm.options.itemProperties"
+                item-click="vm.options.itemClick"
+                on-load-items="vm.loadItems">
+            </vendr-table-view>
+        </umb-editor-container>
+
+        <umb-editor-footer>
+            <umb-editor-footer-content-left>
+                <umb-breadcrumbs
+                    ng-if="vm.page.breadcrumb && vm.page.breadcrumb.items && vm.page.breadcrumb.items.length > 0"
+                    ancestors="vm.page.breadcrumb.items"
+                    on-open="vm.page.breadcrumb.itemClick(ancestor)">
+                </umb-breadcrumbs>
+            </umb-editor-footer-content-left>
+        </umb-editor-footer>
+
+    </umb-editor-view>
+
+</div>

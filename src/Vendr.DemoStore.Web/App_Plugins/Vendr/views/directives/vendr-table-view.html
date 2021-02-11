@@ -36,19 +36,19 @@
 
                 </umb-editor-sub-header-section>
 
-                <vendr-filter ng-repeat="fltr in filters"
-                    ng-show="!selection || selection.length == 0"
-                    filter="fltr"
-                    on-change="doFilter()">
+                <vendr-filter ng-repeat="fltr in filters track by fltr.alias"
+                              ng-show="!selection || selection.length == 0"
+                              filter="fltr"
+                              on-change="doFilter()">
                 </vendr-filter>
 
                 <umb-editor-sub-header-section ng-show="(selection.length > 0)">
                     <umb-button type="button"
-                        label="Clear selection"
-                        label-key="buttons_clearSelection"
-                        button-style="white"
-                        action="clearSelection()"
-                        disabled="bulkActionInProgress">
+                                label="Clear selection"
+                                label-key="buttons_clearSelection"
+                                button-style="white"
+                                action="clearSelection()"
+                                disabled="bulkActionInProgress">
                     </umb-button>
                 </umb-editor-sub-header-section>
 
@@ -103,11 +103,14 @@
             <vendr-table ng-if="options.filteredItems && options.filteredItems.length > 0"
                 items="options.filteredItems"
                 allow-select-all="options.bulkActionsAllowed"
+                allow-sorting="options.allowSorting"
                 item-properties="itemProperties"
                 on-select="selectItem(item, $index, $event)"
-                on-click="itemClick(item)"
+                on-click="itemClick(item, $index, $event)"
                 on-select-all="selectAll($event)"
-                on-selected-all="areAllSelected()">
+                on-selected-all="areAllSelected()"
+                on-sorting-direction="setSortDirection(col, direction)"
+                on-sort="sortItems(field, allow, isSystem)">
             </vendr-table>
 
             <umb-empty-state ng-if="!options.filteredItems || options.filteredItems.length === 0" position="center">

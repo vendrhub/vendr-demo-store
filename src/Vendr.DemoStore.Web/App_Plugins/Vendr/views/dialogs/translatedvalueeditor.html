@@ -1,0 +1,55 @@
+﻿<div ng-controller="Vendr.Controllers.TranslatedValueEditorDialogController as vm" class="vendr vendr--narrow-view">
+
+    <umb-load-indicator ng-if="vm.page.loading"></umb-load-indicator>
+
+    <form name="contentForm"
+          ng-submit="vm.save()"
+          novalidate
+          val-form-manager>
+
+        <umb-editor-view ng-if="!vm.page.loading">
+
+            <umb-editor-header name="vm.page.name"
+                name-locked="true"
+                hide-alias="true"
+                hide-icon="true" 
+                hide-description="true">
+            </umb-editor-header>
+
+            <umb-editor-container class="form-vertical">
+                <umb-box>
+                    <umb-box-content>
+                        <umb-control-group label="{{ language.name + ' ('+ language.culture +')' }}" ng-repeat="language in vm.options.languages">
+                            <input type="text" ng-model="vm.content[language.culture]" style="width: 100%; margin: 0;" rows="4"></input>
+                        </umb-control-group>
+                    </umb-box-content>
+                </umb-box>
+            </umb-editor-container>
+
+            <umb-editor-footer>
+
+                <umb-editor-footer-content-right>
+
+                    <umb-button type="button"
+                                button-style="link"
+                                label="Close"
+                                shortcut="esc"
+                                label-key="general_close"
+                                action="vm.close()">
+                    </umb-button>
+
+                    <umb-button type="submit"
+                                button-style="success"
+                                state="vm.page.saveButtonState"
+                                shortcut="ctrl+s"
+                                label="Save and Close"
+                                label-key="buttons_saveAndClose">
+                    </umb-button>
+
+                </umb-editor-footer-content-right>
+
+            </umb-editor-footer>
+        </umb-editor-view>
+    </form>
+
+</div>

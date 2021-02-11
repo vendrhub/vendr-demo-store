@@ -1,0 +1,91 @@
+﻿<div ng-controller="Vendr.Controllers.VariantsAppController as vm" class="vendr">
+
+    <vendr-table-view create-actions="vm.options.createActions"
+            bulk-actions="vm.options.bulkActions"
+            filters="vm.options.filters"
+            allow-sorting="true"
+            items="vm.layout"
+            item-properties="vm.options.itemProperties"
+            item-click="vm.options.itemClick"
+            on-filter-item="vm.filterVariantRow"
+            is-editable="true"
+            ng-if="!vm.loading">
+    </vendr-table-view>
+
+    <!--<div class="row-fluid ">
+
+        <div class="umb-editor-sub-header umb-editor-sub-header--" umb-sticky-bar="">
+
+            <div class="umb-editor-sub-header__content-left ">
+
+                <div class="umb-editor-sub-header__section ">
+
+                    <div class="btn-group " aria-hidden="false">
+                        <button type="button" class="btn btn-outline umb-outline" ng-click="vm.addVariantRow({ attributes: { size:'xl', color:'red' } }, 0);">
+                            <localize key="actions_create" class="">Create</localize> Variant
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="umb-editor-sub-header__content-right ">
+
+                <div class="umb-editor-sub-header__section " aria-hidden="false">
+
+                    <umb-mini-search model="options.filter" on-search="makeSearch()" on-start-typing="onSearchStartTyping()" class=" "><  novalidate=""> <i class="icon icon-search"></i> <input class="form-control search-input localize="placeholder,label" label="Type to search..." placeholder="Type to search..." prevent-enter-submit="" no-dirty-check="" aria-invalid="false"> </ng-form> </umb-mini-search>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <table class="vendr-listview" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th><button type="button" class="umb-table__action" aria-hidden="false"> <i class="icon-check umb-checkmark umb-checkmark--xs umb-outline" checked="checked" size="xs"></i> </button></th>
+                    <th>SKU</th>
+                    <th>Options</th>
+                    <th>Stock</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="entry in vm.layout track by entry.$block.key">
+                    <td><i class="umb-table-body__icon umb-table-body__fileicon icon-barcode color-blue" aria-hidden="true"></i> <i class="umb-table-body__icon umb-table-body__checkicon icon-check" aria-hidden="true"></i></td>
+                    <td>{{vm.getPropertyValue(entry.$block.content, "sku")}}</td>
+                    <td>
+                        <div ng-click="vm.editVariantRow(entry, $index)">
+                            <div ng-repeat="(key, value) in entry.config.attributes" class="flex">
+                                <div style="margin-right: 10px; font-weight: bold;">{{vm.getProductAttributeName(key)}}:</div>
+                                <div>{{vm.getProductAttributeValueName(key, value)}}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td><input type="text" /></td>
+                    <td>
+                        <div>
+                            <div class="flex">
+                                <div style="margin-right: 10px">GBP</div>
+                                <div><input type="text" /></div>
+                            </div>
+                            <div class="flex">
+                                <div style="margin-right: 10px">USD</div>
+                                <div><input type="text" /></div>
+                            </div>
+                            <div class="flex">
+                                <div style="margin-right: 10px">EUR</div>
+                                <div><input type="text" /></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>-->
+
+</div>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<language alias="en" intName="English (UK)" localName="English (UK)" lcid="" culture="en-GB">
+	<creator>
+		<name>Vendr</name>
+		<link>https://vendr.net</link>
+	</creator>
+    <area alias="sections">
+        <key alias="commerce">Commerce</key>
+    </area>
+	<area alias="treeHeaders">
+		<key alias="commerceSettingsGroup">Commerce</key>
+	</area>
+    <area alias="actions">
+        <key alias="manageStoreSettings">Manage Store Settings</key>
+        <key alias="manageStorePermissions">Manage Store Permissions</key>
+    </area>
+    <area alias="actionCategories">
+        <key alias="commerce">Commerce</key>
+    </area>
+    <area alias="actionDescriptions">
+        <key alias="manageStoreSettings">Allow access to manage store settings</key>
+        <key alias="manageStorePermissions">Allow access to manage store permissions</key>
+    </area>
+    <area alias="dashboardTabs">
+        <key alias="CommerceDashboard">Welcome</key>
+    </area>
+    <area alias="vendr">
+        <!-- Variants -->
+        <key alias="configureVariant">Configure</key>
+        <key alias="deleteVariant">Delete</key>
+        <key alias="setDefaultVariant">Set as Default</key>
+        <key alias="unsetDefaultVariant">Remove as Default</key>
+    </area>
+</language>
