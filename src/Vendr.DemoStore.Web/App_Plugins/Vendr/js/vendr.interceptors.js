@@ -18,8 +18,8 @@
                     var coreMenuItemsCount = resp.data.menuItems.length;
 
                     // Parse querystring
-                    var qs = resp.config.url.substr(resp.config.url.indexOf('?') + 1).replace(/&*$/gi, "");
-                    var json = '{"' + decodeURI(qs).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}';
+                    var qs = resp.config.url.substr(resp.config.url.indexOf('?') + 1);
+                    var json = '{"' + decodeURI(qs).replace(/&*$/g, '').replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}';
                     var params = JSON.parse(json);
 
                     // Fetch the vendrActions service

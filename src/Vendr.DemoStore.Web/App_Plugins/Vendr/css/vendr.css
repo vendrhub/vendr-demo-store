@@ -50,6 +50,12 @@
     color: #333;
 }
 
+.vendr-badge {
+    display: inline-block;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
 /* Overrides */
 /*.umb-property[data-element="property-variants"] {
     display: none !important;
@@ -58,6 +64,11 @@
 .vendr .umb-table-cell > span {
     display: block;
     width: 100%;
+}
+
+.vendr .umb-table-cell > span > .umb-table-cell__value {
+    display: inline-block;
+    max-width: 100%;
 }
 
 .umb-tree-item.unselectable > .umb-tree-item__inner {

@@ -211,25 +211,25 @@
                         <umb-button type="button" 
                                     label="Cancel Payment" 
                                     class="mr-5" 
-                                    action="vm.cancelPayment()" 
+                                    action="vm.confirmCancelPayment()" 
                                     state="vm.cancelPaymentButtonState"
                                     disabled="vm.cancelPaymentButtonState === 'busy'"
                                     ng-if="vm.content.paymentMethod.canCancelPayments"></umb-button>
                         <umb-button type="button" 
                                     button-style="success" 
                                     label="Capture Payment" 
-                                    action="vm.capturePayment()" 
+                                    action="vm.confirmCapturePayment()" 
                                     state="vm.capturePaymentButtonState"
                                     disabled="vm.capturePaymentButtonState === 'busy'"
                                     ng-if="vm.content.paymentMethod.canCapturePayments"></umb-button>
                     </div>
                 </div>
                 <div ng-if="vm.content.paymentStatus == 'Captured' && vm.content.paymentMethod.canRefundPayments" class="flex flex-column">
-                    <hr />
+                    <hr /> 
                     <umb-button type="button" 
                                 label="Refund Payment" 
                                 class="self-end" 
-                                action="vm.refundPayment()"
+                                action="vm.confirmRefundPayment()"
                                 state="vm.refundPaymentButtonState"
                                 disabled="vm.refundPaymentButtonState === 'busy'"></umb-button>
                 </div>

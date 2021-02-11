@@ -56,10 +56,10 @@
                        ng-click="vm.clickItem(item, $index, $event)">
 
                         <span ng-if="vm.itemProperties.length > 0 && vm.itemProperties[0].alias == 'name'">
-                            <span ng-attr-data-placeholder="{{vm.itemProperties[0].placeholder}}" ng-if="vm.itemProperties[0].template && !vm.itemProperties[0].refScope" ng-bind-html="vm.renderTemplate(vm.itemProperties[0].template, item)"></span>
-                            <span ng-attr-data-placeholder="{{vm.itemProperties[0].placeholder}}" ng-if="vm.itemProperties[0].template && vm.itemProperties[0].refScope" vendr-compile template="vm.itemProperties[0].template" model="item" ref-scope="vm.itemProperties[0].refScope"></span>
-                            <span ng-attr-data-placeholder="{{vm.itemProperties[0].placeholder}}" ng-if="!vm.itemProperties[0].template && vm.itemProperties[0].getter" ng-bind="vm.itemProperties[0].getter(item)"></span>
-                            <span ng-attr-data-placeholder="{{vm.itemProperties[0].placeholder}}" ng-if="!vm.itemProperties[0].template && !vm.itemProperties[0].getter" ng-bind="item.name"></span>
+                            <span ng-attr-data-placeholder="{{vm.itemProperties[0].placeholder}}" ng-if="vm.itemProperties[0].template && !vm.itemProperties[0].refScope" ng-bind-html="vm.renderTemplate(vm.itemProperties[0].template, item)" class="vendr-table-cell__value"></span>
+                            <span ng-attr-data-placeholder="{{vm.itemProperties[0].placeholder}}" ng-if="vm.itemProperties[0].template && vm.itemProperties[0].refScope" vendr-compile template="vm.itemProperties[0].template" model="item" ref-scope="vm.itemProperties[0].refScope" class="vendr-table-cell__value"></span>
+                            <span ng-attr-data-placeholder="{{vm.itemProperties[0].placeholder}}" ng-if="!vm.itemProperties[0].template && vm.itemProperties[0].getter" ng-bind="vm.itemProperties[0].getter(item)" class="vendr-table-cell__value"></span>
+                            <span ng-attr-data-placeholder="{{vm.itemProperties[0].placeholder}}" ng-if="!vm.itemProperties[0].template && !vm.itemProperties[0].getter" ng-bind="item.name" class="vendr-table-cell__value"></span>
                         </span>
                         <span ng-if="vm.itemProperties.length == 0 || vm.itemProperties[0].alias != 'name'">
                             {{item.name}}
@@ -69,10 +69,10 @@
 
                 <div class="umb-table-cell vendr-table-cell vendr-table-cell--{{column.align}} vendr-table-cell--{{column.alias}}" ng-repeat="column in vm.itemProperties track by column.alias" ng-if="column.alias != 'name'">
                     <span title="{{column.header}}: {{item[column.alias]}}"  ng-attr-data-placeholder="vm.itemProperties[0].placeholder">
-                        <span ng-attr-data-placeholder="{{column.placeholder}}" ng-if="column.template && !column.refScope" ng-bind-html="vm.renderTemplate(column.template, item)"></span>
-                        <span ng-attr-data-placeholder="{{column.placeholder}}" ng-if="column.template && column.refScope" vendr-compile template="column.template" model="item" ref-scope="column.refScope"></span>
-                        <span ng-attr-data-placeholder="{{column.placeholder}}" ng-if="!column.template && column.getter" ng-bind="column.getter(item)"></span>
-                        <span ng-attr-data-placeholder="{{column.placeholder}}" ng-if="!column.template && !column.getter" ng-bind="item[column.alias]"></span>
+                        <span ng-attr-data-placeholder="{{column.placeholder}}" ng-if="column.template && !column.refScope" ng-bind-html="vm.renderTemplate(column.template, item)" class="vendr-table-cell__value"></span>
+                        <span ng-attr-data-placeholder="{{column.placeholder}}" ng-if="column.template && column.refScope" vendr-compile template="column.template" model="item" ref-scope="column.refScope" class="vendr-table-cell__value"></span>
+                        <span ng-attr-data-placeholder="{{column.placeholder}}" ng-if="!column.template && column.getter" ng-bind="column.getter(item)" class="vendr-table-cell__value"></span>
+                        <span ng-attr-data-placeholder="{{column.placeholder}}" ng-if="!column.template && !column.getter" ng-bind="item[column.alias]" class="vendr-table-cell__value"></span>
                     </span>
                 </div>
 
