@@ -149,6 +149,25 @@ div [ng-controller*=MemberGroupPickerController] .umb-box-content > .umb-tree {
     padding-top: 0;
 }
 
+.umb-property-actions__right {
+    position: relative;
+    display: inline-block;
+}
+
+.umb-property-actions__right .umb-property-actions__menu,
+.umb-property-actions__right .umb-property-actions__menu-open-toggle {
+    right: 0;
+}
+
+.umb-table-body .vendr-table-cell--actions,
+.umb-table-body .vendr-table-cell--actions > span {
+    overflow: visible;
+}
+
+.vendr-table-cell--actions {
+    flex: 0 0 25px;
+}
+
 /* Layouts */
 .vendr-layout,
 .vendr-layout {

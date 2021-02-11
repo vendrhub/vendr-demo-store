@@ -464,12 +464,10 @@
                             });
                         });
 
-                        if (filtered[0].length === 0 && filtered[1].length > 0)
-                        {
+                        if (filtered[0].length === 0 && filtered[1].length > 0) {
                             // TODO: Show error that all combinations already exist
                         }
-                        else
-                        {
+                        else {
                             filtered[0].forEach((c) => {
                                 addBlock({
                                     attributes: c
@@ -543,16 +541,48 @@
                     alias: 'actions',
                     header: '',
                     align: 'right',
-                    template: `<div style="display: flex; justify-content: flex-end;">
-<button type="button" class="btn vendr-btn--table-action" ng-click="refScope.vm.configureVariantRow(model, $event)"><i class="icon icon-settings" aria-hidden="true"></i></button>
-<button type="button" class="btn vendr-btn--table-action" ng-click="refScope.vm.removeVariantRow(model, $event)"><i class="icon icon-trash" aria-hidden="true"></i></button>
-</div>`,
+                    template: `<umb-property-actions actions="refScope.vm.rowActionsFactory(model)" class="umb-property-actions__right" ng-click="$event.stopPropagation();"></umb-property-actions>`,
                     refScope: $scope
                 }
             ],
             itemClick: function (item, index) {
                 vm.editVariantRow(item, index)
             }
+        };
+
+        vm.rowActions = {};
+        vm.rowActionsFactory = function (itm) {
+            if (!vm.rowActions[itm.key]) {
+                vm.rowActions[itm.key] = [
+                    {
+                        //labelKey: "vendr_toggleDefaultVariant", // Use defined property below to allow toggling label
+                        icon: "rate",
+                        method: function () {
+                            vm.toggleDefaultVariantRow(itm);
+                        }
+                    },
+                    {
+                        labelKey: "vendr_configureVariant",
+                        icon: "settings",
+                        method: function () {
+                            vm.configureVariantRow(itm);
+                        }
+                    },
+                    {
+                        labelKey: "vendr_deleteVariant",
+                        icon: "trash",
+                        method: function () {
+                            vm.removeVariantRow(itm);
+                        }
+                    }
+                ];
+                Object.defineProperty(vm.rowActions[itm.key][0], "labelKey", {
+                    get: function () {
+                        return itm.config.isDefault ? "vendr_unsetDefaultVariant" : "vendr_setDefaultVariant"
+                    }
+                })
+            }
+            return vm.rowActions[itm.key];
         };
 
         var pickVariantAttributes = function (callback) {
@@ -850,7 +880,7 @@
             Object.defineProperty(layout, "icon", {
                 get: function () {
                     return layout.config && layout.config.isValid
-                        ? 'icon-barcode color-blue'
+                        ? layout.config.isDefault ? 'icon-rate color-green' : 'icon-barcode color-blue'
                         : 'icon-block color-red';
                 }
             });
@@ -961,6 +991,20 @@
                 syncUI();
             };
             editorService.open(productAtrtibutePickerDialogOptions);
+        }
+
+        vm.toggleDefaultVariantRow = function (model, $event) {
+            if ($event) {
+                $event.stopPropagation();
+                $event.preventDefault();
+            }
+            vm.layout.forEach(layout => {
+                if (layout.key === model.key) {
+                    layout.config.isDefault = !layout.config.isDefault;
+                } else {
+                    layout.config.isDefault = false;
+                }
+            });
         }
 
         vm.filterVariantRow = function (item, filters) {
@@ -1117,6 +1161,7 @@
                     delete layout.id;
                     delete layout.key;
                     delete layout.icon;
+                    delete layout.selected;
 
                     if (layout.config)
                         delete layout.config.isValid;
@@ -6517,13 +6562,22 @@
         var isDocTypeEditorPreview = $routeParams.section == "settings" && $routeParams.tree == "documentTypes";
 
         var vm = this;
+        vm.model = $scope.model;
 
         var vendrVariantEditor = editorService.getEditors().find(e => e.vendrVariantEditor);
         if (vendrVariantEditor) {
             productVariantReference = vendrVariantEditor.content.key;
         }
 
-        vm.model = $scope.model;
+        // As multi variants can be loaded / unloaded within
+        // the same editing session, we have to check whether
+        // a stock level has been set previously that hasn't
+        // yet been persisted by saving the parent node. If this
+        // is the case then use this unpersisted value.
+        var hasUnpersistedValue = productVariantReference
+            && vm.model.value
+            && vm.model.value != -1
+            && vm.model.value != "-1";
 
         // We don't use any stored stock value as we fetch it from
         // the product service every time. 
@@ -6532,8 +6586,8 @@
         // We also set the stored model value to -1 initially 
         // to ensure it's only handled in the backend
         // if it's value is different.
-        vm.model.value = -1;
-        vm.stockLevel = 0;
+        vm.model.value = hasUnpersistedValue ? vm.model.value : -1;
+        vm.stockLevel = hasUnpersistedValue ? vm.model.value : 0;
         vm.syncStockLevel = function () {
             if (!vm.loading) {
                 vm.model.value = vm.stockLevel;
@@ -6543,7 +6597,7 @@
         vm.loading = true;
         
         var init = function () {
-            if (productReference && !isDocTypeEditorPreview) {
+            if (productReference && !isDocTypeEditorPreview && !hasUnpersistedValue) {
                 vendrProductResource.getStock(productReference, productVariantReference).then(function (stock) {
                     vm.stockLevel = stock || 0;
                     vm.loading = false;

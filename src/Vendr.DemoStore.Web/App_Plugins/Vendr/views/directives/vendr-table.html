@@ -24,7 +24,7 @@
                     </button>
                 </div>
 
-                <div class="umb-table-cell vendr-table-cell vendr-table-cell--{{column.align}}" ng-repeat="column in vm.itemProperties track by column.alias"  ng-if="column.alias != 'name'">
+                <div class="umb-table-cell vendr-table-cell vendr-table-cell--{{column.align}} vendr-table-cell--{{column.alias}}" ng-repeat="column in vm.itemProperties track by column.alias"  ng-if="column.alias != 'name'">
                     <button type="button" class="btn-reset umb-table-head__link"
                        ng-click="vm.sort(column.alias, vm.allowSorting && column.allowSorting, column.isSystem)"
                        ng-class="{'sortable': column.allowSorting}"
@@ -67,7 +67,7 @@
                     </a>
                 </div>
 
-                <div class="umb-table-cell vendr-table-cell vendr-table-cell--{{column.align}}" ng-repeat="column in vm.itemProperties track by column.alias" ng-if="column.alias != 'name'">
+                <div class="umb-table-cell vendr-table-cell vendr-table-cell--{{column.align}} vendr-table-cell--{{column.alias}}" ng-repeat="column in vm.itemProperties track by column.alias" ng-if="column.alias != 'name'">
                     <span title="{{column.header}}: {{item[column.alias]}}"  ng-attr-data-placeholder="vm.itemProperties[0].placeholder">
                         <span ng-attr-data-placeholder="{{column.placeholder}}" ng-if="column.template && !column.refScope" ng-bind-html="vm.renderTemplate(column.template, item)"></span>
                         <span ng-attr-data-placeholder="{{column.placeholder}}" ng-if="column.template && column.refScope" vendr-compile template="column.template" model="item" ref-scope="column.refScope"></span>
