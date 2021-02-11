@@ -22,7 +22,7 @@ namespace Vendr.DemoStore.Models
 {
 	// Mixin Content Type with alias "productComp"
 	/// <summary>Product</summary>
-	public partial interface IProductComp : IPublishedContent
+	public partial interface IProductComp : IPublishedElement
 	{
 		/// <summary>Price</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
@@ -35,7 +35,7 @@ namespace Vendr.DemoStore.Models
 
 	/// <summary>Product</summary>
 	[PublishedModel("productComp")]
-	public partial class ProductComp : PublishedContentModel, IProductComp
+	public partial class ProductComp : PublishedElementModel, IProductComp
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -52,7 +52,7 @@ namespace Vendr.DemoStore.Models
 #pragma warning restore 0109
 
 		// ctor
-		public ProductComp(IPublishedContent content)
+		public ProductComp(IPublishedElement content)
 			: base(content)
 		{ }
 

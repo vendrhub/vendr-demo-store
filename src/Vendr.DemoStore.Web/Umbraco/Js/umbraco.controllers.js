@@ -2597,11 +2597,11 @@
         if ($scope.onlyImages) {
             vm.acceptedFileTypes = mediaHelper.formatFileTypes(umbracoSettings.imageFileTypes);
         } else {
-            // Use whitelist of allowed file types if provided
+            // Use list of allowed file types if provided
             if (allowedUploadFiles !== '') {
                 vm.acceptedFileTypes = allowedUploadFiles;
             } else {
-                // If no whitelist, we pass in a blacklist by adding ! to the file extensions, allowing everything EXCEPT for disallowedUploadFiles
+                // If no allowed list, we pass in a disallowed list by adding ! to the file extensions, allowing everything EXCEPT for disallowedUploadFiles
                 vm.acceptedFileTypes = !mediaHelper.formatFileTypes(umbracoSettings.disallowedUploadFiles);
             }
         }
@@ -3365,11 +3365,12 @@
             vm.toggleShowOnMemberProfile = toggleShowOnMemberProfile;
             vm.toggleMemberCanEdit = toggleMemberCanEdit;
             vm.toggleIsSensitiveData = toggleIsSensitiveData;
+            vm.toggleLabelOnTop = toggleLabelOnTop;
             function onInit() {
                 userService.getCurrentUser().then(function (user) {
                     vm.showSensitiveData = user.userGroups.indexOf('sensitiveData') != -1;
                 });
-                //make the default the same as the content type            
+                //make the default the same as the content type
                 if (!$scope.model.property.dataTypeId) {
                     $scope.model.property.allowCultureVariant = $scope.model.contentTypeAllowCultureVariant;
                 }
@@ -3381,7 +3382,8 @@
                     'validation_validateAsNumber',
                     'validation_validateAsUrl',
                     'validation_enterCustomValidation',
-                    'validation_fieldIsMandatory'
+                    'validation_fieldIsMandatory',
+                    'contentTypeEditor_displaySettingsLabelOnTop'
                 ];
                 localizationService.localizeMany(labels).then(function (data) {
                     vm.labels.validateAsEmail = data[0];
@@ -3389,6 +3391,7 @@
                     vm.labels.validateAsUrl = data[2];
                     vm.labels.customValidation = data[3];
                     vm.labels.fieldIsMandatory = data[4];
+                    vm.labels.displaySettingsLabelOnTop = data[5];
                     vm.validationTypes = [
                         {
                             'name': vm.labels.validateAsEmail,
@@ -3544,6 +3547,9 @@
             }
             function toggleIsSensitiveData() {
                 $scope.model.property.isSensitiveData = toggleValue($scope.model.property.isSensitiveData);
+            }
+            function toggleLabelOnTop() {
+                $scope.model.property.labelOnTop = toggleValue($scope.model.property.labelOnTop);
             }
             onInit();
         }
@@ -3850,7 +3856,7 @@
                         var diffProperty = {
                             'alias': property.alias,
                             'label': property.label,
-                            'diff': JsDiff.diffWords(property.value, oldProperty.value),
+                            'diff': property.isObject ? JsDiff.diffJson(property.value, oldProperty.value) : JsDiff.diffWords(property.value, oldProperty.value),
                             'isObject': property.isObject || oldProperty.isObject ? true : false
                         };
                         vm.diff.properties.push(diffProperty);
@@ -4867,14 +4873,6 @@
         onInit();
     }
     angular.module('umbraco').controller('Umbraco.Overlays.ItemPickerOverlay', ItemPickerOverlay);
-    'use strict';
-    angular.module('umbraco').controller('Umbraco.Overlays.MediaTypePickerController', function ($scope) {
-        $scope.select = function (mediatype) {
-            $scope.model.selectedType = mediatype;
-            $scope.model.submit($scope.model);
-            $scope.model.show = false;
-        };
-    });
     'use strict';
     angular.module('umbraco').controller('Umbraco.Overlays.UserController', function ($scope, $location, $timeout, dashboardResource, userService, historyService, eventsService, externalLoginInfo, externalLoginInfoService, authResource, currentUserResource, formHelper, localizationService) {
         $scope.history = historyService.getCurrent();
@@ -9013,6 +9011,7 @@
         var vm = this;
         vm.itemKey = '';
         vm.createItem = createItem;
+        $scope.$emit('$changeTitle', '');
         function createItem() {
             if (formHelper.submitForm({
                     scope: $scope,
@@ -9657,7 +9656,6 @@
                         hotKeyWhenHidden: true,
                         labelKey: vm.submitButtonKey,
                         letter: 'S',
-                        type: 'submit',
                         handler: function handler() {
                             vm.save();
                         }
@@ -10290,35 +10288,15 @@
     }());
     'use strict';
     function _slicedToArray(arr, i) {
-        return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+        return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
     }
     function _nonIterableRest() {
-        throw new TypeError('Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.');
-    }
-    function _unsupportedIterableToArray(o, minLen) {
-        if (!o)
-            return;
-        if (typeof o === 'string')
-            return _arrayLikeToArray(o, minLen);
-        var n = Object.prototype.toString.call(o).slice(8, -1);
-        if (n === 'Object' && o.constructor)
-            n = o.constructor.name;
-        if (n === 'Map' || n === 'Set')
-            return Array.from(o);
-        if (n === 'Arguments' || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
-            return _arrayLikeToArray(o, minLen);
-    }
-    function _arrayLikeToArray(arr, len) {
-        if (len == null || len > arr.length)
-            len = arr.length;
-        for (var i = 0, arr2 = new Array(len); i < len; i++) {
-            arr2[i] = arr[i];
-        }
-        return arr2;
+        throw new TypeError('Invalid attempt to destructure non-iterable instance');
     }
     function _iterableToArrayLimit(arr, i) {
-        if (typeof Symbol === 'undefined' || !(Symbol.iterator in Object(arr)))
+        if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === '[object Arguments]')) {
             return;
+        }
         var _arr = [];
         var _n = true;
         var _d = false;
@@ -10377,7 +10355,8 @@
                     'languages_noFallbackLanguageOption',
                     'languages_fallbackLanguageDescription',
                     'languages_fallbackLanguage',
-                    'defaultdialogs_confirmSure'
+                    'defaultdialogs_confirmSure',
+                    'defaultdialogs_editlanguage'
                 ];
                 localizationService.localizeMany(labelKeys).then(function (values) {
                     vm.labels.languages = values[0];
@@ -10388,6 +10367,7 @@
                     vm.labels.addLanguage = values[5];
                     vm.labels.noFallbackLanguageOption = values[6];
                     vm.labels.areYouSure = values[9];
+                    vm.labels.editLanguage = values[10];
                     $scope.properties = {
                         fallbackLanguage: {
                             alias: 'fallbackLanguage',
@@ -10397,6 +10377,7 @@
                     };
                     if ($routeParams.create) {
                         vm.page.name = vm.labels.addLanguage;
+                        $scope.$emit('$changeTitle', vm.labels.addLanguage);
                     }
                 });
                 vm.loading = true;
@@ -10424,6 +10405,7 @@
                     promises.push(languageResource.getById($routeParams.id).then(function (lang) {
                         vm.language = lang;
                         vm.page.name = vm.language.name;
+                        $scope.$emit('$changeTitle', vm.labels.editLanguage + ': ' + vm.page.name);
                         /* we need to store the initial default state so we can disable the toggle if it is the default.
           we need to prevent from not having a default language. */
                         vm.initIsDefault = Utilities.copy(vm.language.isDefault);
@@ -10527,7 +10509,7 @@
     'use strict';
     (function () {
         'use strict';
-        function LanguagesOverviewController($location, $timeout, navigationService, localizationService, languageResource, eventsService, overlayService) {
+        function LanguagesOverviewController($location, $timeout, navigationService, localizationService, languageResource, eventsService, overlayService, $scope) {
             var vm = this;
             vm.page = {};
             vm.languages = [];
@@ -10559,6 +10541,7 @@
                     vm.labels.fallsbackTo = values[3];
                     // set page name
                     vm.page.name = vm.labels.languages;
+                    $scope.$emit('$changeTitle', vm.labels.languages);
                 });
                 languageResource.getAll().then(function (languages) {
                     vm.languages = languages;
@@ -10619,35 +10602,15 @@
     }());
     'use strict';
     function _slicedToArray(arr, i) {
-        return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+        return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
     }
     function _nonIterableRest() {
-        throw new TypeError('Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.');
-    }
-    function _unsupportedIterableToArray(o, minLen) {
-        if (!o)
-            return;
-        if (typeof o === 'string')
-            return _arrayLikeToArray(o, minLen);
-        var n = Object.prototype.toString.call(o).slice(8, -1);
-        if (n === 'Object' && o.constructor)
-            n = o.constructor.name;
-        if (n === 'Map' || n === 'Set')
-            return Array.from(o);
-        if (n === 'Arguments' || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
-            return _arrayLikeToArray(o, minLen);
-    }
-    function _arrayLikeToArray(arr, len) {
-        if (len == null || len > arr.length)
-            len = arr.length;
-        for (var i = 0, arr2 = new Array(len); i < len; i++) {
-            arr2[i] = arr[i];
-        }
-        return arr2;
+        throw new TypeError('Invalid attempt to destructure non-iterable instance');
     }
     function _iterableToArrayLimit(arr, i) {
-        if (typeof Symbol === 'undefined' || !(Symbol.iterator in Object(arr)))
+        if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === '[object Arguments]')) {
             return;
+        }
         var _arr = [];
         var _n = true;
         var _d = false;
@@ -10890,7 +10853,7 @@
     'use strict';
     (function () {
         'use strict';
-        function LogViewerSearchController($location, logViewerResource, overlayService, localizationService) {
+        function LogViewerSearchController($location, $timeout, logViewerResource, overlayService, localizationService) {
             var vm = this;
             vm.loading = false;
             vm.logsLoading = false;
@@ -10924,6 +10887,74 @@
                     logTypeColor: 'dark'
                 }
             ];
+            vm.polling = {
+                enabled: false,
+                interval: 0,
+                promise: null,
+                defaultButton: {
+                    labelKey: 'logViewer_polling',
+                    handler: function handler() {
+                        if (vm.polling.enabled) {
+                            vm.polling.enabled = false;
+                            vm.polling.interval = 0;
+                            vm.polling.defaultButton.icon = null;
+                            vm.polling.defaultButton.labelKey = 'logViewer_polling';
+                        } else {
+                            vm.polling.subButtons[0].handler();
+                        }
+                    }
+                },
+                subButtons: [
+                    {
+                        labelKey: 'logViewer_every2',
+                        handler: function handler() {
+                            enablePolling(2);
+                        }
+                    },
+                    {
+                        labelKey: 'logViewer_every5',
+                        handler: function handler() {
+                            enablePolling(5);
+                        }
+                    },
+                    {
+                        labelKey: 'logViewer_every10',
+                        handler: function handler() {
+                            enablePolling(10);
+                        }
+                    },
+                    {
+                        labelKey: 'logViewer_every20',
+                        handler: function handler() {
+                            enablePolling(20);
+                        }
+                    },
+                    {
+                        labelKey: 'logViewer_every30',
+                        handler: function handler() {
+                            enablePolling(30);
+                        }
+                    }
+                ]
+            };
+            function enablePolling(interval) {
+                vm.polling.enabled = true;
+                vm.polling.interval = interval;
+                vm.polling.defaultButton.icon = 'icon-axis-rotation fa-spin';
+                vm.polling.defaultButton.labelKey = 'logViewer_pollingEvery' + interval;
+                if (vm.polling.promise) {
+                    $timeout.cancel(vm.polling.promise);
+                }
+                vm.polling.promise = poll(interval);
+            }
+            function poll(interval) {
+                vm.polling.promise = $timeout(function () {
+                    getLogs(true, true);
+                    if (vm.polling.enabled && vm.polling.interval > 0) {
+                        poll(vm.polling.interval);
+                    }
+                }, interval * 1000);
+            }
             vm.searches = [];
             vm.logItems = {};
             vm.logOptions = {};
@@ -11027,9 +11058,20 @@
                 vm.logOptions.pageNumber = pageNumber;
                 getLogs();
             }
-            function getLogs() {
-                vm.logsLoading = true;
+            function getLogs(hideLoadingIndicator, keepOpenItems) {
+                vm.logsLoading = !hideLoadingIndicator;
                 logViewerResource.getLogs(vm.logOptions).then(function (data) {
+                    if (keepOpenItems) {
+                        var openItemTimestamps = vm.logItems.items.filter(function (item) {
+                            return item.open;
+                        }).map(function (item) {
+                            return item.Timestamp;
+                        });
+                        data.items = data.items.map(function (item) {
+                            item.open = openItemTimestamps.indexOf(item.Timestamp) > -1;
+                            return item;
+                        });
+                    }
                     vm.logItems = data;
                     vm.logsLoading = false;
                     setLogTypeColor(vm.logItems.items);
@@ -12717,7 +12759,6 @@
                         hotKeyWhenHidden: true,
                         labelKey: vm.saveButtonKey,
                         letter: 'S',
-                        type: 'submit',
                         handler: function handler() {
                             vm.save();
                         }
@@ -13748,7 +13789,6 @@
                         hotKeyWhenHidden: true,
                         labelKey: vm.saveButtonKey,
                         letter: 'S',
-                        type: 'submit',
                         handler: function handler() {
                             vm.save();
                         }
@@ -15858,6 +15898,65 @@
         };
     });
     'use strict';
+    angular.module('umbraco').controller('Umbraco.PrevalueEditors.CheckboxListController', function ($scope) {
+        var vm = this;
+        vm.configItems = [];
+        vm.viewItems = [];
+        vm.change = change;
+        function init() {
+            var prevalues = ($scope.model.config ? $scope.model.config.prevalues : $scope.model.prevalues) || [];
+            var items = [];
+            for (var i = 0; i < prevalues.length; i++) {
+                var item = {};
+                if (Utilities.isObject(prevalues[i])) {
+                    item.value = prevalues[i].value;
+                    item.label = prevalues[i].label;
+                } else {
+                    item.value = prevalues[i];
+                    item.label = prevalues[i];
+                }
+                items.push({
+                    value: item.value,
+                    label: item.label
+                });
+            }
+            vm.configItems = items;
+            if ($scope.model.value === null || $scope.model.value === undefined) {
+                $scope.model.value = [];
+            }
+            // update view model.
+            generateViewModel($scope.model.value);
+        }
+        function generateViewModel(newVal) {
+            vm.viewItems = [];
+            var iConfigItem;
+            for (var i = 0; i < vm.configItems.length; i++) {
+                iConfigItem = vm.configItems[i];
+                var isChecked = _.contains(newVal, iConfigItem.value);
+                vm.viewItems.push({
+                    checked: isChecked,
+                    value: iConfigItem.value,
+                    label: iConfigItem.label
+                });
+            }
+        }
+        function change(model, value) {
+            var index = $scope.model.value.indexOf(value);
+            if (model === true) {
+                //if it doesn't exist in the model, then add it
+                if (index < 0) {
+                    $scope.model.value.push(value);
+                }
+            } else {
+                //if it exists in the model, then remove it
+                if (index >= 0) {
+                    $scope.model.value.splice(index, 1);
+                }
+            }
+        }
+        init();
+    });
+    'use strict';
     angular.module('umbraco').controller('Umbraco.PrevalueEditors.ColorPickerController', function ($scope) {
         //setup the default config
         var config = { useLabel: false };
@@ -16444,6 +16543,19 @@
         angular.module('umbraco').controller('Umbraco.PropertyEditors.BlockEditor.InlineBlockEditor', InlineBlockEditor);
     }());
     'use strict';
+    function _defineProperty(obj, key, value) {
+        if (key in obj) {
+            Object.defineProperty(obj, key, {
+                value: value,
+                enumerable: true,
+                configurable: true,
+                writable: true
+            });
+        } else {
+            obj[key] = value;
+        }
+        return obj;
+    }
     /**
  * @ngdoc controller
  * @name Umbraco.Editors.BlockList.BlockConfigurationController
@@ -16459,7 +16571,7 @@
                 toObject[p] = fromObject[p];
             }
         }
-        function BlockConfigurationController($scope, elementTypeResource, overlayService, localizationService, editorService, eventsService) {
+        function BlockConfigurationController($scope, elementTypeResource, overlayService, localizationService, editorService, eventsService, udiService) {
             var unsubscribe = [];
             var vm = this;
             vm.openBlock = null;
@@ -16527,66 +16639,66 @@
                     }) || null;
                 }
             };
-            vm.openAddDialog = function ($event, entry) {
-                //we have to add the 'alias' property to the objects, to meet the data requirements of itempicker.
-                var selectedItems = Utilities.copy($scope.model.value).forEach(function (obj) {
-                    var elementType = vm.getElementTypeByKey(obj.contentElementTypeKey);
-                    if (elementType) {
-                        obj.alias = elementType.alias;
-                        return obj;
-                    }
-                });
-                var availableItems = vm.getAvailableElementTypes();
-                localizationService.localizeMany([
-                    'blockEditor_headlineCreateBlock',
-                    'blockEditor_labelcreateNewElementType'
-                ]).then(function (localized) {
-                    var elemTypeSelectorOverlay = {
-                        view: 'itempicker',
-                        title: localized[0],
-                        availableItems: availableItems,
-                        selectedItems: selectedItems,
-                        createNewItem: {
-                            action: function action() {
-                                overlayService.close();
-                                vm.createElementTypeAndCallback(vm.addBlockFromElementTypeKey);
-                            },
-                            icon: 'icon-add',
-                            name: localized[1]
+            vm.openAddDialog = function () {
+                localizationService.localize('blockEditor_headlineCreateBlock').then(function (localizedTitle) {
+                    var contentTypePicker = {
+                        title: localizedTitle,
+                        section: 'settings',
+                        treeAlias: 'documentTypes',
+                        entityType: 'documentType',
+                        isDialog: true,
+                        filter: function filter(node) {
+                            if (node.metaData.isElement === true) {
+                                var key = udiService.getKey(node.udi);
+                                // If a Block with this ElementType as content already exists, we will emit it as a posible option.
+                                return $scope.model.value.find(function (entry) {
+                                    return key === entry.contentElementTypeKey;
+                                });
+                            }
+                            return true;
                         },
-                        position: 'target',
-                        event: $event,
-                        size: availableItems.length < 7 ? 'small' : 'medium',
-                        submit: function submit(overlay) {
-                            vm.addBlockFromElementTypeKey(overlay.selectedItem.key);
-                            overlayService.close();
+                        filterCssClass: 'not-allowed',
+                        select: function select(node) {
+                            vm.addBlockFromElementTypeKey(udiService.getKey(node.udi));
+                            editorService.close();
                         },
                         close: function close() {
-                            overlayService.close();
-                        }
+                            editorService.close();
+                        },
+                        extraActions: [{
+                                style: 'primary',
+                                labelKey: 'blockEditor_labelcreateNewElementType',
+                                action: function action() {
+                                    vm.createElementTypeAndCallback(function (documentTypeKey) {
+                                        vm.addBlockFromElementTypeKey(documentTypeKey);
+                                        // At this point we will close the contentTypePicker.
+                                        editorService.close();
+                                    });
+                                }
+                            }]
                     };
-                    overlayService.open(elemTypeSelectorOverlay);
+                    editorService.treePicker(contentTypePicker);
                 });
             };
             vm.createElementTypeAndCallback = function (callback) {
-                var editor = {
+                var _editor;
+                var editor = (_editor = {
                     create: true,
                     infiniteMode: true,
-                    isElement: true,
-                    submit: function submit(model) {
-                        loadElementTypes().then(function () {
-                            callback(model.documentTypeKey);
-                        });
-                        editorService.close();
-                    },
-                    close: function close() {
-                        editorService.close();
-                    }
-                };
+                    noTemplate: true,
+                    isElement: true
+                }, _defineProperty(_editor, 'noTemplate', true), _defineProperty(_editor, 'submit', function submit(model) {
+                    loadElementTypes().then(function () {
+                        callback(model.documentTypeKey);
+                    });
+                    editorService.close();
+                }), _defineProperty(_editor, 'close', function close() {
+                    editorService.close();
+                }), _editor);
                 editorService.documentTypeEditor(editor);
             };
             vm.addBlockFromElementTypeKey = function (key) {
-                var entry = {
+                var blockType = {
                     'contentElementTypeKey': key,
                     'settingsElementTypeKey': null,
                     'labelTemplate': '',
@@ -16597,7 +16709,8 @@
                     'backgroundColor': null,
                     'thumbnail': null
                 };
-                $scope.model.value.push(entry);
+                $scope.model.value.push(blockType);
+                vm.openBlockOverlay(blockType);
             };
             vm.openBlockOverlay = function (block) {
                 var elementType = vm.getElementTypeByKey(block.contentElementTypeKey);
@@ -16649,7 +16762,7 @@
  */
     (function () {
         'use strict';
-        function BlockConfigurationOverlayController($scope, overlayService, localizationService, editorService, elementTypeResource, eventsService) {
+        function BlockConfigurationOverlayController($scope, overlayService, localizationService, editorService, elementTypeResource, eventsService, udiService) {
             var unsubscribe = [];
             var vm = this;
             vm.block = $scope.model.block;
@@ -16687,6 +16800,7 @@
                     create: true,
                     infiniteMode: true,
                     isElement: true,
+                    noTemplate: true,
                     submit: function submit(model) {
                         callback(model.documentTypeKey);
                         editorService.close();
@@ -16698,36 +16812,40 @@
                 editorService.documentTypeEditor(editor);
             };
             vm.addSettingsForBlock = function ($event, block) {
-                localizationService.localizeMany([
-                    'blockEditor_headlineAddSettingsElementType',
-                    'blockEditor_labelcreateNewElementType'
-                ]).then(function (localized) {
-                    var elemTypeSelectorOverlay = {
-                        view: 'itempicker',
-                        title: localized[0],
-                        availableItems: vm.elementTypes,
-                        position: 'target',
-                        event: $event,
-                        size: vm.elementTypes.length < 7 ? 'small' : 'medium',
-                        createNewItem: {
-                            action: function action() {
-                                overlayService.close();
-                                vm.createElementTypeAndCallback(function (key) {
-                                    vm.applySettingsToBlock(block, key);
-                                });
-                            },
-                            icon: 'icon-add',
-                            name: localized[1]
+                localizationService.localize('blockEditor_headlineAddSettingsElementType').then(function (localizedTitle) {
+                    var settingsTypePicker = {
+                        title: localizedTitle,
+                        section: 'settings',
+                        treeAlias: 'documentTypes',
+                        entityType: 'documentType',
+                        isDialog: true,
+                        filter: function filter(node) {
+                            if (node.metaData.isElement === true) {
+                                return false;
+                            }
+                            return true;
                         },
-                        submit: function submit(overlay) {
-                            vm.applySettingsToBlock(block, overlay.selectedItem.key);
-                            overlayService.close();
+                        filterCssClass: 'not-allowed',
+                        select: function select(node) {
+                            vm.applySettingsToBlock(block, udiService.getKey(node.udi));
+                            editorService.close();
                         },
                         close: function close() {
-                            overlayService.close();
-                        }
+                            editorService.close();
+                        },
+                        extraActions: [{
+                                style: 'primary',
+                                labelKey: 'blockEditor_labelcreateNewElementType',
+                                action: function action() {
+                                    vm.createElementTypeAndCallback(function (key) {
+                                        vm.applySettingsToBlock(block, key);
+                                        // At this point we will close the contentTypePicker.
+                                        editorService.close();
+                                    });
+                                }
+                            }]
                     };
-                    overlayService.open(elemTypeSelectorOverlay);
+                    editorService.treePicker(settingsTypePicker);
                 });
             };
             vm.applySettingsToBlock = function (block, key) {
@@ -16784,6 +16902,7 @@
                         filter: function filter(i) {
                             return !(i.name.indexOf('.html') !== -1);
                         },
+                        filterCssClass: 'not-allowed',
                         select: function select(node) {
                             var filepath = decodeURIComponent(node.id.replace(/\+/g, ' '));
                             block.view = '~/' + filepath;
@@ -16828,6 +16947,7 @@
                         filter: function filter(i) {
                             return !(i.name.indexOf('.css') !== -1);
                         },
+                        filterCssClass: 'not-allowed',
                         select: function select(node) {
                             var filepath = decodeURIComponent(node.id.replace(/\+/g, ' '));
                             block.stylesheet = '~/' + filepath;
@@ -17033,7 +17153,7 @@
         vm.change = change;
         function init() {
             vm.uniqueId = String.CreateGuid();
-            // currently the property editor will onyl work if our input is an object.
+            // currently the property editor will only work if our input is an object.
             if (Utilities.isObject($scope.model.config.items)) {
                 // formatting the items in the dictionary into an array
                 var sortedItems = [];
@@ -17108,6 +17228,7 @@
     });
     'use strict';
     function ColorPickerController($scope, $timeout) {
+        var vm = this;
         //setup the default config
         var config = {
             items: [],
@@ -17126,7 +17247,7 @@
                         label: $scope.model.config.items[key]
                     };
             }
-            $scope.model.useLabel = isTrue($scope.model.config.useLabel);
+            $scope.model.useLabel = Object.toBoolean($scope.model.config.useLabel);
             initActiveColor();
         }
         if (!Utilities.isArray($scope.model.config.items)) {
@@ -17157,7 +17278,7 @@
             //now make the editor model the array
             $scope.model.config.items = items;
         }
-        $scope.selectColor = function (color) {
+        vm.selectColor = function (color) {
             // this is required to re-validate
             $timeout(function () {
                 var newColor = color ? color.value : null;
@@ -17173,7 +17294,6 @@
                 errorKey: 'required'
             };
         };
-        $scope.isConfigured = $scope.model.config && $scope.model.config.items && _.keys($scope.model.config.items).length > 0;
         // Finds the color best matching the model's color,
         // and sets the model color to that one. This is useful when
         // either the value or label was changed on the data type.
@@ -17229,14 +17349,20 @@
                 $scope.model.value.label = foundItem.label;
             }
         }
-        // figures out if a value is trueish enough
-        function isTrue(bool) {
-            return !!bool && bool !== '0' && bool.toString().toLowerCase() !== 'false';
-        }
     }
     angular.module('umbraco').controller('Umbraco.PropertyEditors.ColorPickerController', ColorPickerController);
     'use strict';
-    angular.module('umbraco').controller('Umbraco.PrevalueEditors.MultiColorPickerController', function ($scope, $timeout, assetsService, angularHelper, $element, localizationService, eventsService) {
+    angular.module('umbraco').controller('Umbraco.PrevalueEditors.MultiColorPickerController', function ($scope, angularHelper, $element, eventsService) {
+        var vm = this;
+        vm.add = add;
+        vm.remove = remove;
+        vm.edit = edit;
+        vm.cancel = cancel;
+        vm.show = show;
+        vm.hide = hide;
+        vm.change = change;
+        vm.labelEnabled = false;
+        vm.editItem = null;
         //NOTE: We need to make each color an object, not just a string because you cannot 2-way bind to a primitive.
         var defaultColor = '000000';
         var defaultLabel = null;
@@ -17244,46 +17370,29 @@
         $scope.newLabel = defaultLabel;
         $scope.hasError = false;
         $scope.focusOnNew = false;
-        $scope.labels = {};
-        var labelKeys = [
-            'general_cancel',
-            'general_choose'
-        ];
-        $scope.labelEnabled = false;
-        eventsService.on('toggleValue', function (e, args) {
-            $scope.labelEnabled = args.value;
-        });
-        localizationService.localizeMany(labelKeys).then(function (values) {
-            $scope.labels.cancel = values[0];
-            $scope.labels.choose = values[1];
-        });
-        assetsService.load([//"lib/spectrum/tinycolor.js",
-            'lib/spectrum/spectrum.js'], $scope).then(function () {
-            var elem = $element.find('input[name=\'newColor\']');
-            elem.spectrum({
-                type: 'color',
-                color: defaultColor,
-                showAlpha: false,
-                showInitial: false,
-                showInput: true,
-                chooseText: $scope.labels.choose,
-                cancelText: $scope.labels.cancel,
-                preferredFormat: 'hex',
-                clickoutFiresChange: true,
-                hide: function hide(color) {
-                    //show the add butotn
-                    $element.find('.btn.add').show();
-                },
-                change: function change(color) {
-                    angularHelper.safeApply($scope, function () {
-                        $scope.newColor = color.toHexString().trimStart('#');    // #ff0000
-                    });
-                },
-                show: function show() {
-                    //hide the add butotn
-                    $element.find('.btn.add').hide();
+        $scope.options = {
+            type: 'color',
+            color: defaultColor,
+            allowEmpty: false,
+            showAlpha: false
+        };
+        function hide(color) {
+            // show the add button
+            $element.find('.btn.add').show();
+        }
+        function show(color) {
+            // hide the add button
+            $element.find('.btn.add').hide();
+        }
+        function change(color) {
+            angularHelper.safeApply($scope, function () {
+                if (color) {
+                    $scope.newColor = color.toHexString().trimStart('#');
                 }
             });
+        }
+        eventsService.on('toggleValue', function (e, args) {
+            vm.labelEnabled = args.value;
         });
         if (!Utilities.isArray($scope.model.value)) {
             //make an array from the dictionary
@@ -17321,35 +17430,53 @@
         function validLabel(label) {
             return label !== null && typeof label !== 'undefined' && label !== '' && label.length && label.length > 0;
         }
-        $scope.remove = function (item, evt) {
+        function remove(item, evt) {
             evt.preventDefault();
             $scope.model.value = _.reject($scope.model.value, function (x) {
                 return x.value === item.value && x.label === item.label;
             });
             angularHelper.getCurrentForm($scope).$setDirty();
-        };
-        $scope.add = function (evt) {
+        }
+        function add(evt) {
             evt.preventDefault();
             if ($scope.newColor) {
                 var newLabel = validLabel($scope.newLabel) ? $scope.newLabel : $scope.newColor;
                 var exists = _.find($scope.model.value, function (item) {
-                    return item.value.toUpperCase() === $scope.newColor.toUpperCase() || item.label.toUpperCase() === newLabel.toUpperCase();
+                    return item != vm.editItem && (item.value.toUpperCase() === $scope.newColor.toUpperCase() || item.label.toUpperCase() === newLabel.toUpperCase());
                 });
                 if (!exists) {
-                    $scope.model.value.push({
-                        value: $scope.newColor,
-                        label: newLabel
-                    });
+                    if (vm.editItem == null) {
+                        $scope.model.value.push({
+                            value: $scope.newColor,
+                            label: newLabel
+                        });
+                    } else {
+                        vm.editItem.value = $scope.newColor;
+                        vm.editItem.label = newLabel;
+                        vm.editItem = null;
+                    }
                     $scope.newLabel = '';
                     $scope.hasError = false;
                     $scope.focusOnNew = true;
                     angularHelper.getCurrentForm($scope).$setDirty();
                     return;
                 }
-                //there was an error, do the highlight (will be set back by the directive)
+                // there was an error, do the highlight (will be set back by the directive)
                 $scope.hasError = true;
             }
-        };
+        }
+        function edit(item, evt) {
+            evt.preventDefault();
+            vm.editItem = item;
+            $scope.newColor = item.value;
+            $scope.newLabel = item.label;
+        }
+        function cancel(evt) {
+            evt.preventDefault();
+            vm.editItem = null;
+            $scope.newColor = defaultColor;
+            $scope.newLabel = defaultLabel;
+        }
         $scope.sortableOptions = {
             axis: 'y',
             containment: 'parent',
@@ -17361,8 +17488,6 @@
                 angularHelper.getCurrentForm($scope).$setDirty();
             }
         };
-        //load the separate css for the editor to avoid it blocking our js loading
-        assetsService.loadCss('lib/spectrum/spectrum.css', $scope);
     });
     'use strict';
     /**
@@ -20082,17 +20207,22 @@
         if (!$scope.model.value) {
             $scope.model.value = 'icon-list';
         }
+        var valueArray = $scope.model.value.split(' ');
+        $scope.icon = valueArray[0];
+        $scope.color = valueArray[1];
         $scope.openIconPicker = function () {
             var iconPicker = {
-                icon: $scope.model.value.split(' ')[0],
-                color: $scope.model.value.split(' ')[1],
+                icon: $scope.icon,
+                color: $scope.color,
                 submit: function submit(model) {
                     if (model.icon) {
                         if (model.color) {
                             $scope.model.value = model.icon + ' ' + model.color;
+                            $scope.color = model.color;
                         } else {
                             $scope.model.value = model.icon;
                         }
+                        $scope.icon = model.icon;
                         $scope.iconForm.$setDirty();
                     }
                     editorService.close();
@@ -20342,10 +20472,10 @@
             var vm = this;
             var umbracoSettings = Umbraco.Sys.ServerVariables.umbracoSettings;
             vm.nodeId = $scope.contentId;
-            // Use whitelist of allowed file types if provided
+            // Use list of allowed file types if provided
             vm.acceptedFileTypes = mediaHelper.formatFileTypes(umbracoSettings.allowedUploadFiles);
             if (vm.acceptedFileTypes === '') {
-                // If not provided, we pass in a blacklist by adding ! to the file extensions, allowing everything EXCEPT for disallowedUploadFiles
+                // If not provided, we pass in a disallowed list by adding ! to the file extensions, allowing everything EXCEPT for disallowedUploadFiles
                 vm.acceptedFileTypes = !mediaHelper.formatFileTypes(umbracoSettings.disallowedUploadFiles);
             }
             vm.maxFileSize = umbracoSettings.maxFileSize + 'KB';
@@ -20429,10 +20559,10 @@
             var vm = this;
             var umbracoSettings = Umbraco.Sys.ServerVariables.umbracoSettings;
             vm.nodeId = $scope.contentId;
-            // Use whitelist of allowed file types if provided
+            // Use list of allowed file types if provided
             vm.acceptedFileTypes = mediaHelper.formatFileTypes(umbracoSettings.allowedUploadFiles);
             if (vm.acceptedFileTypes === '') {
-                // If not provided, we pass in a blacklist by adding ! to the file extensions, allowing everything EXCEPT for disallowedUploadFiles
+                // If not provided, we pass in a disallowed list by adding ! to the file extensions, allowing everything EXCEPT for disallowedUploadFiles
                 vm.acceptedFileTypes = !mediaHelper.formatFileTypes(umbracoSettings.disallowedUploadFiles);
             }
             vm.maxFileSize = umbracoSettings.maxFileSize + 'KB';
@@ -21553,7 +21683,7 @@
     'use strict';
     //this controller simply tells the dialogs service to open a mediaPicker window
     //with a specified callback, this callback will receive an object with a selection on it
-    angular.module('umbraco').controller('Umbraco.PropertyEditors.MediaPickerController', function ($scope, entityResource, mediaHelper, $timeout, userService, localizationService, editorService, angularHelper) {
+    angular.module('umbraco').controller('Umbraco.PropertyEditors.MediaPickerController', function ($scope, entityResource, mediaHelper, $timeout, userService, localizationService, editorService, angularHelper, overlayService) {
         var vm = this;
         vm.labels = {};
         vm.labels.deletedItem = '';
@@ -21749,12 +21879,27 @@
             return true;
         }
         function removeAllEntries() {
-            $scope.mediaItems.length = 0;
-            // AngularJS way to empty the array.
-            $scope.ids.length = 0;
-            // AngularJS way to empty the array.
-            sync();
-            setDirty();
+            localizationService.localizeMany([
+                'content_nestedContentDeleteAllItems',
+                'general_delete'
+            ]).then(function (data) {
+                overlayService.confirmDelete({
+                    title: data[1],
+                    content: data[0],
+                    close: function close() {
+                        overlayService.close();
+                    },
+                    submit: function submit() {
+                        $scope.mediaItems.length = 0;
+                        // AngularJS way to empty the array.
+                        $scope.ids.length = 0;
+                        // AngularJS way to empty the array.
+                        sync();
+                        setDirty();
+                        overlayService.close();
+                    }
+                });
+            });
         }
         var removeAllEntriesAction = {
             labelKey: 'clipboard_labelForRemoveAllEntries',
@@ -21826,7 +21971,6 @@
                         // no new groups selected
                         editorService.close();
                     }
-                    editorService.close();
                 },
                 close: function close() {
                     editorService.close();
@@ -22274,7 +22418,6 @@
         return obj;
     }
     function _typeof(obj) {
-        '@babel/helpers - typeof';
         if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') {
             _typeof = function _typeof(obj) {
                 return typeof obj;
@@ -22328,7 +22471,7 @@
             }
         ]);
         angular.module('umbraco').component('nestedContentPropertyEditor', {
-            template: ' <div id="umb-nested-content--{{model.id}}" class="umb-nested-content" ng-class="{\'umb-nested-content--narrow\':!vm.wideMode, \'umb-nested-content--wide\':vm.wideMode}"> <umb-load-indicator class="mt2" ng-if="!vm.inited"></umb-load-indicator> <ng-form name="nestedContentForm" ng-show="vm.inited"> <div class="umb-nested-content__items" ng-hide="vm.nodes.length === 0" ui-sortable="vm.sortableOptions" ng-model="vm.nodes"> <div ng-repeat="node in vm.nodes"> <ng-form name="ncRowForm" val-server-match="{ \'contains\' : node.key }"> <div class="umb-nested-content__item" ng-class="{ \'umb-nested-content__item--active\' : vm.currentNode.key === node.key, \'umb-nested-content__item--single\' : vm.singleMode, \'--error\': ncRowForm.$invalid }"> <div class="umb-nested-content__header-bar" ng-click="vm.editNode($index)" ng-hide="vm.singleMode" umb-auto-focus="{{vm.currentNode.key === node.key ? \'true\' : \'false\'}}"> <div class="umb-nested-content__heading"><i ng-if="vm.showIcons" class="icon" ng-class="vm.getIcon($index)"></i><span class="umb-nested-content__item-name" ng-class="{\'--has-icon\': vm.showIcons}" ng-bind="vm.getName($index)"></span></div> <div class="umb-nested-content__icons"> <button type="button" class="umb-nested-content__icon umb-nested-content__icon--copy" title="{{vm.labels.copy_icon_title}}" ng-click="vm.clickCopy($event, node);" ng-if="vm.showCopy"> <i class="icon icon-documents" aria-hidden="true"></i> <span class="sr-only">{{vm.labels.copy_icon_title}}</span> </button> <button type="button" class="umb-nested-content__icon umb-nested-content__icon--delete" localize="title" title="general_delete" ng-class="{ \'umb-nested-content__icon--disabled\': !vm.canDeleteNode($index) }" ng-click="vm.requestDeleteNode($index); $event.stopPropagation();"> <i class="icon icon-trash" aria-hidden="true"></i> <span class="sr-only"> <localize key="general_delete">Delete</localize> </span> </button> </div> </div> <div class="umb-nested-content__content" ng-if="vm.currentNode.key === node.key && !vm.sorting"> <umb-nested-content-editor ng-model="node" tab-alias="ncTabAlias"> </umb-nested-content-editor></div> </div> </ng-form> </div> </div> <div ng-hide="vm.hasContentTypes"> <div class="umb-nested-content__help-text"> <localize key="content_nestedContentNoContentTypes">No content types are configured for this property.</localize> </div> </div> <div class="umb-nested-content__footer-bar" ng-hide="!vm.inited || vm.hasContentTypes === false || vm.singleMode === true"> <button type="button" class="btn-reset umb-nested-content__add-content umb-focus" ng-class="{ \'--disabled\': (!vm.scaffolds.length || vm.nodes.length >= vm.maxItems) }" ng-click="vm.openNodeTypePicker($event)" aria-disabled="{{!vm.scaffolds.length || vm.nodes.length >= vm.maxItems}}"> <localize key="grid_addElement">Add element</localize> </button> </div>  <input type="hidden" name="minCount" ng-model="vm.nodes"> <input type="hidden" name="maxCount" ng-model="vm.nodes"> <div ng-messages="nestedContentForm.minCount.$error" show-validation-on-submit> <div class="help text-error" ng-message="minCount"> <localize key="validation_entriesShort" tokens="[vm.minItems, vm.minItems - vm.nodes.length]" watch-tokens="true">Minimum %0% entries, needs <strong>%1%</strong> more.</localize> </div> </div> <div ng-if="nestedContentForm.minCount.$error === true || vm.nodes.length > vm.maxItems"> <div class="help text-error"> <localize key="validation_entriesExceed" tokens="[vm.maxItems, vm.nodes.length - vm.maxItems]" watch-tokens="true">Maximum %0% entries, <strong>%1%</strong> too many.</localize> </div> </div> </ng-form> </div> ',
+            template: ' <div id="umb-nested-content--{{model.id}}" class="umb-nested-content" ng-class="{\'umb-nested-content--narrow\':!vm.wideMode, \'umb-nested-content--wide\':vm.wideMode}"> <umb-load-indicator class="mt2" ng-if="!vm.inited"></umb-load-indicator> <ng-form name="nestedContentForm" ng-show="vm.inited"> <div class="umb-nested-content__items" ng-hide="vm.nodes.length === 0" ui-sortable="vm.sortableOptions" ng-model="vm.nodes"> <div ng-repeat="node in vm.nodes"> <ng-form name="ncRowForm" val-server-match="{ \'contains\' : node.key }"> <div class="umb-nested-content__item" ng-class="{ \'umb-nested-content__item--active\' : vm.currentNode.key === node.key, \'umb-nested-content__item--single\' : vm.singleMode, \'--error\': ncRowForm.$invalid }"> <div class="umb-nested-content__header-bar" ng-click="vm.editNode($index)" ng-hide="vm.singleMode" umb-auto-focus="{{vm.currentNode.key === node.key ? \'true\' : \'false\'}}"> <div class="umb-nested-content__heading"><i ng-if="vm.showIcons" class="icon umb-nested-content__item-icon" ng-class="vm.getIcon($index)"></i><span class="umb-nested-content__item-name" ng-class="{\'--has-icon\': vm.showIcons}" ng-bind="vm.getName($index)"></span></div> <div class="umb-nested-content__icons"> <button type="button" class="umb-nested-content__icon umb-nested-content__icon--copy" title="{{vm.labels.copy_icon_title}}" ng-click="vm.clickCopy($event, node);" ng-if="vm.showCopy"> <i class="icon icon-documents" aria-hidden="true"></i> <span class="sr-only">{{vm.labels.copy_icon_title}}</span> </button> <button type="button" class="umb-nested-content__icon umb-nested-content__icon--delete" localize="title" title="general_delete" ng-class="{ \'umb-nested-content__icon--disabled\': !vm.canDeleteNode($index) }" ng-click="vm.requestDeleteNode($index); $event.stopPropagation();"> <i class="icon icon-trash" aria-hidden="true"></i> <span class="sr-only"> <localize key="general_delete">Delete</localize> </span> </button> </div> </div> <div class="umb-nested-content__content" ng-if="vm.currentNode.key === node.key && !vm.sorting"> <umb-nested-content-editor ng-model="node" tab-alias="ncTabAlias"> </umb-nested-content-editor></div> </div> </ng-form> </div> </div> <div ng-hide="vm.hasContentTypes"> <div class="umb-nested-content__help-text"> <localize key="content_nestedContentNoContentTypes">No content types are configured for this property.</localize> </div> </div> <div class="umb-nested-content__footer-bar" ng-hide="!vm.inited || vm.hasContentTypes === false || vm.singleMode === true"> <button type="button" class="btn-reset umb-nested-content__add-content umb-focus" ng-class="{ \'--disabled\': (!vm.scaffolds.length || vm.nodes.length >= vm.maxItems) }" ng-click="vm.openNodeTypePicker($event)" aria-disabled="{{!vm.scaffolds.length || vm.nodes.length >= vm.maxItems}}"> <localize key="grid_addElement">Add element</localize> </button> </div>  <input type="hidden" name="minCount" ng-model="vm.nodes"> <input type="hidden" name="maxCount" ng-model="vm.nodes"> <div ng-messages="nestedContentForm.minCount.$error" show-validation-on-submit> <div class="help text-error" ng-message="minCount"> <localize key="validation_entriesShort" tokens="[vm.minItems, vm.minItems - vm.nodes.length]" watch-tokens="true">Minimum %0% entries, needs <strong>%1%</strong> more.</localize> </div> </div> <div ng-if="nestedContentForm.minCount.$error === true || vm.nodes.length > vm.maxItems"> <div class="help text-error"> <localize key="validation_entriesExceed" tokens="[vm.maxItems, vm.nodes.length - vm.maxItems]" watch-tokens="true">Maximum %0% entries, <strong>%1%</strong> too many.</localize> </div> </div> </ng-form> </div> ',
             controller: NestedContentController,
             controllerAs: 'vm',
             require: {
@@ -25459,7 +25602,9 @@
             vm.openContentPicker = openContentPicker;
             vm.openMediaPicker = openMediaPicker;
             vm.openUserPicker = openUserPicker;
-            vm.removeSelectedItem = removeSelectedItem;
+            vm.removeSection = removeSection;
+            vm.removeAssignedPermissions = removeAssignedPermissions;
+            vm.removeUser = removeUser;
             vm.clearStartNode = clearStartNode;
             vm.save = save;
             vm.openGranularPermissionsPicker = openGranularPermissionsPicker;
@@ -25688,24 +25833,28 @@
                 };
                 editorService.nodePermissions(vm.nodePermissions);
             }
-            function removeSelectedItem(index, selection) {
-                if (selection && selection.length > 0) {
-                    var dialog = {
-                        view: 'views/users/views/overlays/remove.html',
-                        username: selection[index].username,
-                        userGroupName: vm.userGroup.name.toLowerCase(),
-                        submitButtonLabelKey: 'defaultdialogs_yesRemove',
-                        submitButtonStyle: 'danger',
-                        submit: function submit() {
-                            selection.splice(index, 1);
-                            overlayService.close();
-                        },
-                        close: function close() {
-                            overlayService.close();
-                        }
-                    };
-                    overlayService.open(dialog);
-                }
+            function removeSection(index) {
+                vm.userGroup.sections.splice(index, 1);
+            }
+            function removeAssignedPermissions(index) {
+                vm.userGroup.assignedPermissions.splice(index, 1);
+            }
+            function removeUser(index) {
+                var dialog = {
+                    view: 'views/users/views/overlays/remove.html',
+                    username: vm.userGroup.users[index].username,
+                    userGroupName: vm.userGroup.name.toLowerCase(),
+                    submitButtonLabelKey: 'defaultdialogs_yesRemove',
+                    submitButtonStyle: 'danger',
+                    submit: function submit() {
+                        vm.userGroup.users.splice(index, 1);
+                        overlayService.close();
+                    },
+                    close: function close() {
+                        overlayService.close();
+                    }
+                };
+                overlayService.open(dialog);
             }
             function clearStartNode(type) {
                 if (type === 'content') {
@@ -26189,7 +26338,6 @@
             }
             function performDelete() {
                 usersResource.deleteNonLoggedInUser(vm.user.id).then(function (data) {
-                    formHelper.showNotifications(data);
                     goToPage(vm.breadcrumbs[0]);
                 }, function (error) {
                     vm.deleteNotLoggedInUserButtonState = 'error';

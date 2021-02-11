@@ -48,7 +48,10 @@ namespace Vendr.DemoStore.Web.Controllers
             {
                 var searcher = index.GetSearcher();
                 var query = searcher.CreateQuery()
-                    .Field("__NodeTypeAlias", ProductPage.ModelTypeAlias);
+                    .GroupedOr(new[] { "__NodeTypeAlias" }, new[] { 
+                        ProductPage.ModelTypeAlias, 
+                        MultiVariantProductPage.ModelTypeAlias 
+                    });
 
                 if (collectionId.HasValue)
                 {
@@ -65,8 +68,9 @@ namespace Vendr.DemoStore.Web.Controllers
                 var pagedResults = results.Skip(pageSize * (page - 1));
 
                 var items = pagedResults.ToPublishedSearchResults(_umbracoContextAccessor.UmbracoContext.Content)
-                                        .Select(x => x.Content)
-                                        .OfType<ProductPage>();
+                    .Select(x => x.Content)
+                    .OfType<ProductPage>()
+                    .OrderBy(x => x.SortOrder);
 
                 return new PagedResult<ProductPage>(totalResults, page, pageSize)
                 {

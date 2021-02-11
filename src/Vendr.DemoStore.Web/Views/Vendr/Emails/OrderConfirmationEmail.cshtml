@@ -139,7 +139,18 @@
                                 {
                                     <tr>
                                         <td style="vertical-align: top;padding-top:20px;">
-                                            @orderLine.Name<br /><span style="color:#a0aec0; font-size: 12px;">@orderLine.Sku</span>
+                                            @orderLine.Name
+                                            <br />
+                                            <span style="color:#a0aec0; font-size: 12px;">
+                                                @orderLine.Sku
+                                                @if (orderLine.Attributes.Count > 0)
+                                                {
+                                                    foreach (var attr in orderLine.Attributes)
+                                                    {
+                                                        <text> / @(attr.Value)</text>
+                                                    }
+                                                }
+                                            </span>
                                         </td>
                                         <td style="vertical-align: top;padding-top:20px; text-align: right;">
                                             @orderLine.UnitPrice.Value.Formatted().WithoutTax

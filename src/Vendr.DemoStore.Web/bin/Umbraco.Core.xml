@@ -1013,7 +1013,7 @@
         </member>
         <member name="F:Umbraco.Core.Constants.PropertyEditors.Aliases.MultiUrlPicker">
             <summary>
-            Alias for the multi url picker editor.
+            Alias for the multi URL picker editor.
             </summary>
         </member>
         <member name="T:Umbraco.Core.Constants.PropertyEditors.ConfigurationKeys">
@@ -1183,7 +1183,7 @@
         </member>
         <member name="F:Umbraco.Core.Constants.AppSettings.ReservedUrls">
             <summary>
-            The reserved urls from web.config.
+            The reserved URLs from web.config.
             </summary>
         </member>
         <member name="F:Umbraco.Core.Constants.AppSettings.ReservedPaths">
@@ -1220,7 +1220,7 @@
         </member>
         <member name="F:Umbraco.Core.Constants.AppSettings.HideTopLevelNodeFromPath">
             <summary>
-            A true/false value indicating whether umbraco should hide top level nodes from generated urls.
+            A true/false value indicating whether umbraco should hide top level nodes from generated URLs.
             </summary>
         </member>
         <member name="F:Umbraco.Core.Constants.AppSettings.UseHttps">
@@ -1268,6 +1268,7 @@
             The preview cookie name
             </summary>
         </member>
+        <!-- Badly formed XML comment ignored for member "F:Umbraco.Core.Constants.Web.AcceptPreviewCookieName" -->
         <member name="T:Umbraco.Core.Constants.Locks">
             <summary>
             Defines lock objects.
@@ -4035,27 +4036,27 @@
         </member>
         <member name="T:Umbraco.Core.Models.PublishedContent.UrlMode">
             <summary>
-            Specifies the type of urls that the url provider should produce, Auto is the default.
+            Specifies the type of URLs that the URL provider should produce, Auto is the default.
             </summary>
         </member>
         <member name="F:Umbraco.Core.Models.PublishedContent.UrlMode.Default">
             <summary>
-            Indicates that the url provider should do what it has been configured to do.
+            Indicates that the URL provider should do what it has been configured to do.
             </summary>
         </member>
         <member name="F:Umbraco.Core.Models.PublishedContent.UrlMode.Relative">
             <summary>
-            Indicates that the url provider should produce relative urls exclusively.
+            Indicates that the URL provider should produce relative URLs exclusively.
             </summary>
         </member>
         <member name="F:Umbraco.Core.Models.PublishedContent.UrlMode.Absolute">
             <summary>
-            Indicates that the url provider should produce absolute urls exclusively.
+            Indicates that the URL provider should produce absolute URLs exclusively.
             </summary>
         </member>
         <member name="F:Umbraco.Core.Models.PublishedContent.UrlMode.Auto">
             <summary>
-            Indicates that the url provider should determine automatically whether to return relative or absolute urls.
+            Indicates that the URL provider should determine automatically whether to return relative or absolute URLs.
             </summary>
         </member>
         <member name="T:Umbraco.Core.Models.PublishedContent.Fallback">
@@ -4163,7 +4164,7 @@
         </member>
         <member name="P:Umbraco.Core.Models.PublishedContent.PublishedCultureInfo.UrlSegment">
             <summary>
-            Gets the url segment of the item.
+            Gets the URL segment of the item.
             </summary>
         </member>
         <member name="P:Umbraco.Core.Models.PublishedContent.PublishedCultureInfo.Date">
@@ -4690,7 +4691,7 @@
         </member>
         <member name="P:Umbraco.Core.Models.PublishedContent.IPublishedContent.UrlSegment">
             <summary>
-            Gets the url segment of the content item for the current culture.
+            Gets the URL segment of the content item for the current culture.
             </summary>
         </member>
         <member name="P:Umbraco.Core.Models.PublishedContent.IPublishedContent.SortOrder">
@@ -4750,7 +4751,7 @@
         </member>
         <member name="P:Umbraco.Core.Models.PublishedContent.IPublishedContent.Url">
             <summary>
-            Gets the url of the content item for the current culture.
+            Gets the URL of the content item for the current culture.
             </summary>
             <remarks>
             <para>The value of this property is contextual. It depends on the 'current' request uri,
@@ -5897,7 +5898,7 @@
         </member>
         <member name="P:Umbraco.Core.Models.Entities.IMediaEntitySlim.MediaPath">
             <summary>
-            The media file's path/url
+            The media file's path/URL
             </summary>
         </member>
         <member name="T:Umbraco.Core.Models.Entities.MediaEntitySlim">
@@ -9624,7 +9625,7 @@
         </member>
         <member name="T:Umbraco.Core.Models.IRedirectUrl">
             <summary>
-            Represents a redirect url.
+            Represents a redirect URL.
             </summary>
         </member>
         <member name="P:Umbraco.Core.Models.IRedirectUrl.ContentId">
@@ -9639,7 +9640,7 @@
         </member>
         <member name="P:Umbraco.Core.Models.IRedirectUrl.CreateDateUtc">
             <summary>
-            Gets or sets the redirect url creation date.
+            Gets or sets the redirect URL creation date.
             </summary>
         </member>
         <member name="P:Umbraco.Core.Models.IRedirectUrl.Culture">
@@ -9649,7 +9650,7 @@
         </member>
         <member name="P:Umbraco.Core.Models.IRedirectUrl.Url">
             <summary>
-            Gets or sets the redirect url route.
+            Gets or sets the redirect URL route.
             </summary>
             <remarks>Is a proper Umbraco route eg /path/to/foo or 123/path/tofoo.</remarks>
         </member>
@@ -10047,12 +10048,12 @@
         </member>
         <member name="M:Umbraco.Core.Models.MediaExtensions.GetUrl(Umbraco.Core.Models.IMedia,System.String,Umbraco.Core.Logging.ILogger)">
             <summary>
-            Gets the url of a media item.
+            Gets the URL of a media item.
             </summary>
         </member>
         <member name="M:Umbraco.Core.Models.MediaExtensions.GetUrls(Umbraco.Core.Models.IMedia,Umbraco.Core.Configuration.UmbracoSettings.IContentSection,Umbraco.Core.Logging.ILogger)">
             <summary>
-            Gets the urls of a media item.
+            Gets the URLs of a media item.
             </summary>
         </member>
         <member name="T:Umbraco.Core.Models.MediaType">
@@ -10671,6 +10672,11 @@
             Gets or sets the custom validation message used when a value for this PropertyType is required
             </summary>
         </member>
+        <member name="P:Umbraco.Core.Models.PropertyType.LabelOnTop">
+            <summary>
+            Gets or sets a value indicating whether the label of this property type should be displayed on top.
+            </summary>
+        </member>
         <member name="P:Umbraco.Core.Models.PropertyType.SortOrder">
             <summary>
             Gets of sets the sort order of the property type.
@@ -10971,7 +10977,7 @@
             Initializes a new instance of the <see cref="T:Umbraco.Core.Models.ServerRegistration"/> class.
             </summary>
             <param name="id">The unique id of the server registration.</param>
-            <param name="serverAddress">The server url.</param>
+            <param name="serverAddress">The server URL.</param>
             <param name="serverIdentity">The unique server identity.</param>
             <param name="registered">The date and time the registration was created.</param>
             <param name="accessed">The date and time the registration was last accessed.</param>
@@ -10982,13 +10988,13 @@
             <summary>
             Initializes a new instance of the <see cref="T:Umbraco.Core.Models.ServerRegistration"/> class.
             </summary>
-            <param name="serverAddress">The server url.</param>
+            <param name="serverAddress">The server URL.</param>
             <param name="serverIdentity">The unique server identity.</param>
             <param name="registered">The date and time the registration was created.</param>
         </member>
         <member name="P:Umbraco.Core.Models.ServerRegistration.ServerAddress">
             <summary>
-            Gets or sets the server url.
+            Gets or sets the server URL.
             </summary>
         </member>
         <member name="P:Umbraco.Core.Models.ServerRegistration.ServerIdentity">
@@ -12514,6 +12520,28 @@
             <param name="queryType"></param>
             <returns></returns>
         </member>
+        <member name="M:Umbraco.Core.Persistence.Repositories.Implement.ContentRepositoryBase`3.InsertPropertyValues(`1,System.Int32,System.Boolean@,System.Collections.Generic.HashSet{System.String}@)">
+            <summary>
+            Inserts property values for the content entity
+            </summary>
+            <param name="entity"></param>
+            <param name="publishedVersionId"></param>
+            <param name="edited"></param>
+            <param name="editedCultures"></param>
+            <remarks>
+            Used when creating a new entity
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Core.Persistence.Repositories.Implement.ContentRepositoryBase`3.ReplacePropertyValues(`1,System.Int32,System.Int32,System.Boolean@,System.Collections.Generic.HashSet{System.String}@)">
+            <summary>
+            Used to atomically replace the property values for the entity version specified
+            </summary>
+            <param name="entity"></param>
+            <param name="versionId"></param>
+            <param name="publishedVersionId"></param>
+            <param name="edited"></param>
+            <param name="editedCultures"></param>
+        </member>
         <member name="T:Umbraco.Core.Persistence.Repositories.IContentTypeCommonRepository">
             <summary>
             Represents the content types common repository, dealing with document, media and member types.
@@ -12848,72 +12876,80 @@
         </member>
         <member name="M:Umbraco.Core.Persistence.Repositories.IRedirectUrlRepository.Get(System.String,System.Guid,System.String)">
             <summary>
-            Gets a redirect url.
+            Gets a redirect URL.
             </summary>
-            <param name="url">The Umbraco redirect url route.</param>
+            <param name="url">The Umbraco redirect URL route.</param>
             <param name="contentKey">The content unique key.</param>
             <param name="culture">The culture.</param>
             <returns></returns>
         </member>
         <member name="M:Umbraco.Core.Persistence.Repositories.IRedirectUrlRepository.Delete(System.Guid)">
             <summary>
-            Deletes a redirect url.
+            Deletes a redirect URL.
             </summary>
-            <param name="id">The redirect url identifier.</param>
+            <param name="id">The redirect URL identifier.</param>
         </member>
         <member name="M:Umbraco.Core.Persistence.Repositories.IRedirectUrlRepository.DeleteAll">
             <summary>
-            Deletes all redirect urls.
+            Deletes all redirect URLs.
             </summary>
         </member>
         <member name="M:Umbraco.Core.Persistence.Repositories.IRedirectUrlRepository.DeleteContentUrls(System.Guid)">
             <summary>
-            Deletes all redirect urls for a given content.
+            Deletes all redirect URLs for a given content.
             </summary>
             <param name="contentKey">The content unique key.</param>
         </member>
         <member name="M:Umbraco.Core.Persistence.Repositories.IRedirectUrlRepository.GetMostRecentUrl(System.String)">
             <summary>
-            Gets the most recent redirect url corresponding to an Umbraco redirect url route.
+            Gets the most recent redirect URL corresponding to an Umbraco redirect URL route.
             </summary>
-            <param name="url">The Umbraco redirect url route.</param>
-            <returns>The most recent redirect url corresponding to the route.</returns>
+            <param name="url">The Umbraco redirect URL route.</param>
+            <returns>The most recent redirect URL corresponding to the route.</returns>
+        </member>
+        <member name="M:Umbraco.Core.Persistence.Repositories.IRedirectUrlRepository.GetMostRecentUrl(System.String,System.String)">
+            <summary>
+            Gets the most recent redirect URL corresponding to an Umbraco redirect URL route.
+            </summary>
+            <param name="url">The Umbraco redirect URL route.</param>
+            <param name="culture">The culture the domain is associated with</param>
+            <returns>The most recent redirect URL corresponding to the route.</returns>
         </member>
         <member name="M:Umbraco.Core.Persistence.Repositories.IRedirectUrlRepository.GetContentUrls(System.Guid)">
             <summary>
-            Gets all redirect urls for a content item.
+            Gets all redirect URLs for a content item.
             </summary>
             <param name="contentKey">The content unique key.</param>
-            <returns>All redirect urls for the content item.</returns>
+            <returns>All redirect URLs for the content item.</returns>
         </member>
         <member name="M:Umbraco.Core.Persistence.Repositories.IRedirectUrlRepository.GetAllUrls(System.Int64,System.Int32,System.Int64@)">
             <summary>
-            Gets all redirect urls.
+            Gets all redirect URLs.
             </summary>
             <param name="pageIndex">The page index.</param>
             <param name="pageSize">The page size.</param>
-            <param name="total">The total count of redirect urls.</param>
-            <returns>The redirect urls.</returns>
+            <param name="total">The total count of redirect URLs.</param>
+            <returns>The redirect URLs.</returns>
         </member>
         <member name="M:Umbraco.Core.Persistence.Repositories.IRedirectUrlRepository.GetAllUrls(System.Int32,System.Int64,System.Int32,System.Int64@)">
             <summary>
-            Gets all redirect urls below a given content item.
+            Gets all redirect URLs below a given content item.
             </summary>
             <param name="rootContentId">The content unique identifier.</param>
             <param name="pageIndex">The page index.</param>
             <param name="pageSize">The page size.</param>
-            <param name="total">The total count of redirect urls.</param>
-            <returns>The redirect urls.</returns>
+            <param name="total">The total count of redirect URLs.</param>
+            <returns>The redirect URLs.</returns>
         </member>
         <member name="M:Umbraco.Core.Persistence.Repositories.IRedirectUrlRepository.SearchUrls(System.String,System.Int64,System.Int32,System.Int64@)">
             <summary>
-            Searches for all redirect urls that contain a given search term in their URL property.
+            Searches for all redirect URLs that contain a given search term in their URL property.
             </summary>
             <param name="searchTerm">The term to search for.</param>
             <param name="pageIndex">The page index.</param>
             <param name="pageSize">The page size.</param>
-            <param name="total">The total count of redirect urls.</param>
-            <returns>The redirect urls.</returns>
+            <param name="total">The total count of redirect URLs.</param>
+            <returns>The redirect URLs.</returns>
         </member>
         <member name="M:Umbraco.Core.Persistence.Repositories.IRelationRepository.Save(System.Collections.Generic.IEnumerable{Umbraco.Core.Models.IRelation})">
             <summary>
@@ -17744,22 +17780,22 @@
         </member>
         <member name="M:Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue.GetCropUrl(System.String,System.Boolean,System.Boolean,System.String)">
             <summary>
-            Gets the value image url for a specified crop.
+            Gets the value image URL for a specified crop.
             </summary>
         </member>
         <member name="M:Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue.GetCropUrl(System.String,Umbraco.Core.Models.IImageUrlGenerator,System.Boolean,System.Boolean,System.String)">
             <summary>
-            Gets the value image url for a specified crop.
+            Gets the value image URL for a specified crop.
             </summary>
         </member>
         <member name="M:Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue.GetCropUrl(System.Int32,System.Int32,System.Boolean,System.String)">
             <summary>
-            Gets the value image url for a specific width and height.
+            Gets the value image URL for a specific width and height.
             </summary>
         </member>
         <member name="M:Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue.GetCropUrl(System.Int32,System.Int32,Umbraco.Core.Models.IImageUrlGenerator,System.Boolean,System.String)">
             <summary>
-            Gets the value image url for a specific width and height.
+            Gets the value image URL for a specific width and height.
             </summary>
         </member>
         <member name="M:Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue.HasFocalPoint">
@@ -18726,24 +18762,24 @@
             <returns></returns>
         </member>
         <member name="M:Umbraco.Core.PropertyEditors.DataValueEditor.FromEditor(Umbraco.Core.Models.Editors.ContentPropertyData,System.Object)">
-             <summary>
-             A method to deserialize the string value that has been saved in the content editor
-             to an object to be stored in the database.
-             </summary>
-             <param name="editorValue"></param>
-             <param name="currentValue">
-             The current value that has been persisted to the database for this editor. This value may be useful for
-             how the value then get's deserialized again to be re-persisted. In most cases it will probably not be used.
-             </param>
-            <param name="languageId"></param>
-            <param name="segment"></param>
-            <returns></returns>
-             <remarks>
-             By default this will attempt to automatically convert the string value to the value type supplied by ValueType.
+              <summary>
+              A method to deserialize the string value that has been saved in the content editor
+              to an object to be stored in the database.
+              </summary>
+              <param name="editorValue"></param>
+              <param name="currentValue">
+              The current value that has been persisted to the database for this editor. This value may be useful for
+              how the value then get's deserialized again to be re-persisted. In most cases it will probably not be used.
+              </param>
+             <param name="languageId"></param>
+             <param name="segment"></param>
+             <returns></returns>
+              <remarks>
+              By default this will attempt to automatically convert the string value to the value type supplied by ValueType.
             
-             If overridden then the object returned must match the type supplied in the ValueType, otherwise persisting the
-             value to the DB will fail when it tries to validate the value type.
-             </remarks>
+              If overridden then the object returned must match the type supplied in the ValueType, otherwise persisting the
+              value to the DB will fail when it tries to validate the value type.
+              </remarks>
         </member>
         <member name="M:Umbraco.Core.PropertyEditors.DataValueEditor.ToEditor(Umbraco.Core.Models.Property,Umbraco.Core.Services.IDataTypeService,System.String,System.String)">
             <summary>
@@ -21639,7 +21675,7 @@
             <summary>
             Touches a server to mark it as active; deactivate stale servers.
             </summary>
-            <param name="serverAddress">The server url.</param>
+            <param name="serverAddress">The server URL.</param>
             <param name="serverIdentity">The server unique identity.</param>
             <param name="staleTimeout">The time after which a server is considered stale.</param>
         </member>
@@ -24871,78 +24907,86 @@
         </member>
         <member name="M:Umbraco.Core.Services.IRedirectUrlService.Register(System.String,System.Guid,System.String)">
             <summary>
-            Registers a redirect url.
+            Registers a redirect URL.
             </summary>
-            <param name="url">The Umbraco url route.</param>
+            <param name="url">The Umbraco URL route.</param>
             <param name="contentKey">The content unique key.</param>
             <param name="culture">The culture.</param>
             <remarks>Is a proper Umbraco route eg /path/to/foo or 123/path/tofoo.</remarks>
         </member>
         <member name="M:Umbraco.Core.Services.IRedirectUrlService.DeleteContentRedirectUrls(System.Guid)">
             <summary>
-            Deletes all redirect urls for a given content.
+            Deletes all redirect URLs for a given content.
             </summary>
             <param name="contentKey">The content unique key.</param>
         </member>
         <member name="M:Umbraco.Core.Services.IRedirectUrlService.Delete(Umbraco.Core.Models.IRedirectUrl)">
             <summary>
-            Deletes a redirect url.
+            Deletes a redirect URL.
             </summary>
-            <param name="redirectUrl">The redirect url to delete.</param>
+            <param name="redirectUrl">The redirect URL to delete.</param>
         </member>
         <member name="M:Umbraco.Core.Services.IRedirectUrlService.Delete(System.Guid)">
             <summary>
-            Deletes a redirect url.
+            Deletes a redirect URL.
             </summary>
-            <param name="id">The redirect url identifier.</param>
+            <param name="id">The redirect URL identifier.</param>
         </member>
         <member name="M:Umbraco.Core.Services.IRedirectUrlService.DeleteAll">
             <summary>
-            Deletes all redirect urls.
+            Deletes all redirect URLs.
             </summary>
         </member>
         <member name="M:Umbraco.Core.Services.IRedirectUrlService.GetMostRecentRedirectUrl(System.String)">
             <summary>
-            Gets the most recent redirect urls corresponding to an Umbraco redirect url route.
+            Gets the most recent redirect URLs corresponding to an Umbraco redirect URL route.
             </summary>
-            <param name="url">The Umbraco redirect url route.</param>
-            <returns>The most recent redirect urls corresponding to the route.</returns>
+            <param name="url">The Umbraco redirect URL route.</param>
+            <returns>The most recent redirect URLs corresponding to the route.</returns>
+        </member>
+        <member name="M:Umbraco.Core.Services.IRedirectUrlService.GetMostRecentRedirectUrl(System.String,System.String)">
+            <summary>
+            Gets the most recent redirect URLs corresponding to an Umbraco redirect URL route.
+            </summary>
+            <param name="url">The Umbraco redirect URL route.</param>
+            <param name="culture">The culture of the request.</param>
+            <returns>The most recent redirect URLs corresponding to the route.</returns>
         </member>
         <member name="M:Umbraco.Core.Services.IRedirectUrlService.GetContentRedirectUrls(System.Guid)">
             <summary>
-            Gets all redirect urls for a content item.
+            Gets all redirect URLs for a content item.
             </summary>
             <param name="contentKey">The content unique key.</param>
-            <returns>All redirect urls for the content item.</returns>
+            <returns>All redirect URLs for the content item.</returns>
         </member>
         <member name="M:Umbraco.Core.Services.IRedirectUrlService.GetAllRedirectUrls(System.Int64,System.Int32,System.Int64@)">
             <summary>
-            Gets all redirect urls.
+            Gets all redirect URLs.
             </summary>
             <param name="pageIndex">The page index.</param>
             <param name="pageSize">The page size.</param>
-            <param name="total">The total count of redirect urls.</param>
-            <returns>The redirect urls.</returns>
+            <param name="total">The total count of redirect URLs.</param>
+            <returns>The redirect URLs.</returns>
         </member>
         <member name="M:Umbraco.Core.Services.IRedirectUrlService.GetAllRedirectUrls(System.Int32,System.Int64,System.Int32,System.Int64@)">
             <summary>
-            Gets all redirect urls below a given content item.
+            Gets all redirect URLs below a given content item.
             </summary>
             <param name="rootContentId">The content unique identifier.</param>
             <param name="pageIndex">The page index.</param>
             <param name="pageSize">The page size.</param>
-            <param name="total">The total count of redirect urls.</param>
-            <returns>The redirect urls.</returns>
+            <param name="total">The total count of redirect URLs.</param>
+            <returns>The redirect URLs.</returns>
         </member>
         <member name="M:Umbraco.Core.Services.IRedirectUrlService.SearchRedirectUrls(System.String,System.Int64,System.Int32,System.Int64@)">
             <summary>
-            Searches for all redirect urls that contain a given search term in their URL property.
+            Searches for all redirect URLs that contain a given search term in their URL property.
             </summary>
             <param name="searchTerm">The term to search for.</param>
             <param name="pageIndex">The page index.</param>
             <param name="pageSize">The page size.</param>
-            <param name="total">The total count of redirect urls.</param>
-            <returns>The redirect urls.</returns>
+            <param name="total">The total count of redirect URLs.</param>
+            <returns>The redirect URLs.</returns>
         </member>
         <member name="M:Umbraco.Core.Services.IRelationService.GetById(System.Int32)">
             <summary>
@@ -25279,7 +25323,7 @@
             <summary>
             Touches a server to mark it as active; deactivate stale servers.
             </summary>
-            <param name="serverAddress">The server url.</param>
+            <param name="serverAddress">The server URL.</param>
             <param name="serverIdentity">The server unique identity.</param>
             <param name="staleTimeout">The time after which a server is considered stale.</param>
         </member>
@@ -29984,7 +30028,7 @@
         </member>
         <member name="M:Umbraco.Core.CompositionExtensions.UrlSegmentProviders(Umbraco.Core.Composing.Composition)">
             <summary>
-            Gets the url segment providers collection builder.
+            Gets the URL segment providers collection builder.
             </summary>
             <param name="composition">The composition.</param>
         </member>
@@ -30947,7 +30991,7 @@
             <summary>
             Returns the application relative path to the file.
             </summary>
-            <param name="fullPathOrUrl">The full path or url.</param>
+            <param name="fullPathOrUrl">The full path or URL.</param>
             <returns>
             The <see cref="T:System.String"/> representing the relative path.
             </returns>
@@ -30963,11 +31007,11 @@
         </member>
         <member name="M:Umbraco.Core.IO.IFileSystem.GetUrl(System.String)">
             <summary>
-            Returns the application relative url to the file.
+            Returns the application relative URL to the file.
             </summary>
-            <param name="path">The path to return the url for.</param>
+            <param name="path">The path to return the URL for.</param>
             <returns>
-            <see cref="T:System.String"/> representing the relative url.
+            <see cref="T:System.String"/> representing the relative URL.
             </returns>
         </member>
         <member name="M:Umbraco.Core.IO.IFileSystem.GetLastModified(System.String)">
@@ -31200,9 +31244,9 @@
         </member>
         <member name="M:Umbraco.Core.IO.PhysicalFileSystem.GetRelativePath(System.String)">
             <summary>
-            Gets the filesystem-relative path of a full path or of an url.
+            Gets the filesystem-relative path of a full path or of an URL.
             </summary>
-            <param name="fullPathOrUrl">The full path or url.</param>
+            <param name="fullPathOrUrl">The full path or URL.</param>
             <returns>The path, relative to this filesystem's root.</returns>
             <remarks>
             <para>The relative path is relative to this filesystem's root, not starting with any
@@ -31222,10 +31266,10 @@
         </member>
         <member name="M:Umbraco.Core.IO.PhysicalFileSystem.GetUrl(System.String)">
             <summary>
-            Gets the url.
+            Gets the URL.
             </summary>
             <param name="path">The filesystem-relative path.</param>
-            <returns>The url.</returns>
+            <returns>The URL.</returns>
             <remarks>All separators are forward-slashes.</remarks>
         </member>
         <member name="M:Umbraco.Core.IO.PhysicalFileSystem.GetLastModified(System.String)">
@@ -32581,10 +32625,10 @@
         </member>
         <member name="M:Umbraco.Core.PublishedContentExtensions.UrlSegment(Umbraco.Core.Models.PublishedContent.IPublishedContent,System.String)">
             <summary>
-            Gets the url segment of the content item.
+            Gets the URL segment of the content item.
             </summary>
             <param name="content">The content item.</param>
-            <param name="culture">The specific culture to get the url segment for. If null is used the current culture is used (Default is null).</param>
+            <param name="culture">The specific culture to get the URL segment for. If null is used the current culture is used (Default is null).</param>
         </member>
         <member name="M:Umbraco.Core.PublishedContentExtensions.CultureDate(Umbraco.Core.Models.PublishedContent.IPublishedContent,System.String)">
             <summary>
@@ -32599,7 +32643,7 @@
             </summary>
             <param name="content">The content item.</param>
             <param name="culture">
-            The specific culture to get the url children for. Default is null which will use the current culture in <see cref="T:Umbraco.Core.Models.PublishedContent.VariationContext"/>        
+            The specific culture to get the URL children for. Default is null which will use the current culture in <see cref="T:Umbraco.Core.Models.PublishedContent.VariationContext"/>        
             </param>
             <remarks>
             <para>Gets children that are available for the specified culture.</para>
@@ -32734,9 +32778,9 @@
         </member>
         <member name="P:Umbraco.Core.Configuration.GlobalSettings.ReservedUrls">
             <summary>
-            Gets the reserved urls from web.config.
+            Gets the reserved URLs from web.config.
             </summary>
-            <value>The reserved urls.</value>
+            <value>The reserved URLs.</value>
         </member>
         <member name="P:Umbraco.Core.Configuration.GlobalSettings.ReservedPaths">
             <summary>
@@ -32816,10 +32860,10 @@
         </member>
         <member name="P:Umbraco.Core.Configuration.GlobalSettings.HideTopLevelNodeFromPath">
             <summary>
-            Gets a value indicating whether umbraco should hide top level nodes from generated urls.
+            Gets a value indicating whether umbraco should hide top level nodes from generated URLs.
             </summary>
             <value>
-                <c>true</c> if umbraco hides top level nodes from urls; otherwise, <c>false</c>.
+                <c>true</c> if umbraco hides top level nodes from URLs; otherwise, <c>false</c>.
             </value>
         </member>
         <member name="P:Umbraco.Core.Configuration.GlobalSettings.UseHttps">
@@ -32847,9 +32891,9 @@
         </member>
         <member name="P:Umbraco.Core.Configuration.IGlobalSettings.ReservedUrls">
             <summary>
-            Gets the reserved urls from web.config.
+            Gets the reserved URLs from web.config.
             </summary>
-            <value>The reserved urls.</value>
+            <value>The reserved URLs.</value>
         </member>
         <member name="P:Umbraco.Core.Configuration.IGlobalSettings.ReservedPaths">
             <summary>
@@ -32885,10 +32929,10 @@
         </member>
         <member name="P:Umbraco.Core.Configuration.IGlobalSettings.HideTopLevelNodeFromPath">
             <summary>
-            Gets a value indicating whether umbraco should hide top level nodes from generated urls.
+            Gets a value indicating whether umbraco should hide top level nodes from generated URLs.
             </summary>
             <value>
-            	<c>true</c> if umbraco hides top level nodes from urls; otherwise, <c>false</c>.
+            	<c>true</c> if umbraco hides top level nodes from URLs; otherwise, <c>false</c>.
             </value>
         </member>
         <member name="P:Umbraco.Core.Configuration.IGlobalSettings.UseHttps">
@@ -36642,7 +36686,7 @@
         </member>
         <member name="P:Umbraco.Core.IRuntimeState.ApplicationUrl">
             <summary>
-            Gets the Umbraco application url.
+            Gets the Umbraco application URL.
             </summary>
             <remarks>This is eg "http://www.example.com".</remarks>
         </member>
@@ -38857,18 +38901,18 @@
         </member>
         <member name="M:Umbraco.Core.StringExtensions.ToUrlSegment(System.String)">
             <summary>
-            Cleans a string to produce a string that can safely be used in an url segment.
+            Cleans a string to produce a string that can safely be used in an URL segment.
             </summary>
             <param name="text">The text to filter.</param>
-            <returns>The safe url segment.</returns>
+            <returns>The safe URL segment.</returns>
         </member>
         <member name="M:Umbraco.Core.StringExtensions.ToUrlSegment(System.String,System.String)">
             <summary>
-            Cleans a string, in the context of a specified culture, to produce a string that can safely be used in an url segment.
+            Cleans a string, in the context of a specified culture, to produce a string that can safely be used in an URL segment.
             </summary>
             <param name="text">The text to filter.</param>
             <param name="culture">The culture.</param>
-            <returns>The safe url segment.</returns>
+            <returns>The safe URL segment.</returns>
         </member>
         <member name="M:Umbraco.Core.StringExtensions.ToCleanString(System.String,Umbraco.Core.Strings.CleanStringType)">
             <summary>
@@ -38922,7 +38966,7 @@
         <member name="M:Umbraco.Core.StringExtensions.ToSafeFileName(System.String)">
             <summary>
             Cleans a string, in the context of the invariant culture, to produce a string that can safely be used as a filename,
-            both internally (on disk) and externally (as a url).
+            both internally (on disk) and externally (as a URL).
             </summary>
             <param name="text">The text to filter.</param>
             <returns>The safe filename.</returns>
@@ -38930,7 +38974,7 @@
         <member name="M:Umbraco.Core.StringExtensions.ToSafeFileName(System.String,System.String)">
             <summary>
             Cleans a string, in the context of the invariant culture, to produce a string that can safely be used as a filename,
-            both internally (on disk) and externally (as a url).
+            both internally (on disk) and externally (as a URL).
             </summary>
             <param name="text">The text to filter.</param>
             <param name="culture">The culture.</param>
@@ -39120,21 +39164,21 @@
         </member>
         <member name="T:Umbraco.Core.Strings.ContentBaseExtensions">
             <summary>
-            Provides extension methods to IContentBase to get url segments.
+            Provides extension methods to IContentBase to get URL segments.
             </summary>
         </member>
         <member name="M:Umbraco.Core.Strings.ContentBaseExtensions.GetUrlSegment(Umbraco.Core.Models.IContentBase,System.Collections.Generic.IEnumerable{Umbraco.Core.Strings.IUrlSegmentProvider},System.String)">
             <summary>
-            Gets the url segment for a specified content and culture.
+            Gets the URL segment for a specified content and culture.
             </summary>
             <param name="content">The content.</param>
             <param name="culture">The culture.</param>
             <param name="urlSegmentProviders"></param>
-            <returns>The url segment.</returns>
+            <returns>The URL segment.</returns>
         </member>
         <member name="T:Umbraco.Core.Strings.DefaultShortStringHelper">
             <summary>
-            New default implementation of string functions for short strings such as aliases or url segments.
+            New default implementation of string functions for short strings such as aliases or URL segments.
             </summary>
             <remarks>
             <para>Not optimized to work on large bodies of text.</para>
@@ -39166,10 +39210,10 @@
         </member>
         <member name="M:Umbraco.Core.Strings.DefaultShortStringHelper.CleanStringForUrlSegment(System.String)">
             <summary>
-            Cleans a string to produce a string that can safely be used in an url segment.
+            Cleans a string to produce a string that can safely be used in an URL segment.
             </summary>
             <param name="text">The text to filter.</param>
-            <returns>The safe url segment.</returns>
+            <returns>The safe URL segment.</returns>
             <remarks>
             <para>The string will be cleaned in the context of the default culture.</para>
             <para>Url segments are Ascii only (no accents...).</para>
@@ -39177,11 +39221,11 @@
         </member>
         <member name="M:Umbraco.Core.Strings.DefaultShortStringHelper.CleanStringForUrlSegment(System.String,System.String)">
             <summary>
-            Cleans a string, in the context of a specified culture, to produce a string that can safely be used in an url segment.
+            Cleans a string, in the context of a specified culture, to produce a string that can safely be used in an URL segment.
             </summary>
             <param name="text">The text to filter.</param>
             <param name="culture">The culture.</param>
-            <returns>The safe url segment.</returns>
+            <returns>The safe URL segment.</returns>
             <remarks>
             <para>Url segments are Ascii only (no accents...).</para>
             </remarks>
@@ -39189,7 +39233,7 @@
         <member name="M:Umbraco.Core.Strings.DefaultShortStringHelper.CleanStringForSafeFileName(System.String)">
             <summary>
             Cleans a string, in the context of the default culture, to produce a string that can safely be used as a filename,
-            both internally (on disk) and externally (as a url).
+            both internally (on disk) and externally (as a URL).
             </summary>
             <param name="text">The text to filter.</param>
             <returns>The safe filename.</returns>
@@ -39198,7 +39242,7 @@
         <member name="M:Umbraco.Core.Strings.DefaultShortStringHelper.CleanStringForSafeFileName(System.String,System.String)">
             <summary>
             Cleans a string to produce a string that can safely be used as a filename,
-            both internally (on disk) and externally (as a url).
+            both internally (on disk) and externally (as a URL).
             </summary>
             <param name="text">The text to filter.</param>
             <param name="culture">The culture.</param>
@@ -39275,11 +39319,11 @@
         </member>
         <member name="M:Umbraco.Core.Strings.DefaultUrlSegmentProvider.GetUrlSegment(Umbraco.Core.Models.IContentBase,System.String)">
             <summary>
-            Gets the url segment for a specified content and culture.
+            Gets the URL segment for a specified content and culture.
             </summary>
             <param name="content">The content.</param>
             <param name="culture">The culture.</param>
-            <returns>The url segment.</returns>
+            <returns>The URL segment.</returns>
         </member>
         <member name="T:Umbraco.Core.Strings.Diff">
              <summary>
@@ -39446,7 +39490,7 @@
         </member>
         <member name="T:Umbraco.Core.Strings.IShortStringHelper">
             <summary>
-            Provides string functions for short strings such as aliases or url segments.
+            Provides string functions for short strings such as aliases or URL segments.
             </summary>
             <remarks>Not necessarily optimized to work on large bodies of text.</remarks>
         </member>
@@ -39471,24 +39515,24 @@
         </member>
         <member name="M:Umbraco.Core.Strings.IShortStringHelper.CleanStringForUrlSegment(System.String)">
             <summary>
-            Cleans a string to produce a string that can safely be used in an url segment.
+            Cleans a string to produce a string that can safely be used in an URL segment.
             </summary>
             <param name="text">The text to filter.</param>
-            <returns>The safe url segment.</returns>
+            <returns>The safe URL segment.</returns>
             <remarks>The string will be cleaned in the context of the IShortStringHelper default culture.</remarks>
         </member>
         <member name="M:Umbraco.Core.Strings.IShortStringHelper.CleanStringForUrlSegment(System.String,System.String)">
             <summary>
-            Cleans a string, in the context of a specified culture, to produce a string that can safely be used in an url segment.
+            Cleans a string, in the context of a specified culture, to produce a string that can safely be used in an URL segment.
             </summary>
             <param name="text">The text to filter.</param>
             <param name="culture">The culture.</param>
-            <returns>The safe url segment.</returns>
+            <returns>The safe URL segment.</returns>
         </member>
         <member name="M:Umbraco.Core.Strings.IShortStringHelper.CleanStringForSafeFileName(System.String)">
             <summary>
             Cleans a string, in the context of the invariant culture, to produce a string that can safely be used as a filename,
-            both internally (on disk) and externally (as a url).
+            both internally (on disk) and externally (as a URL).
             </summary>
             <param name="text">The text to filter.</param>
             <returns>The safe filename.</returns>
@@ -39497,7 +39541,7 @@
         <member name="M:Umbraco.Core.Strings.IShortStringHelper.CleanStringForSafeFileName(System.String,System.String)">
             <summary>
             Cleans a string, in the context of a specified culture, to produce a string that can safely be used as a filename,
-            both internally (on disk) and externally (as a url).
+            both internally (on disk) and externally (as a URL).
             </summary>
             <param name="text">The text to filter.</param>
             <param name="culture">The culture.</param>
@@ -39557,20 +39601,20 @@
         </member>
         <member name="T:Umbraco.Core.Strings.IUrlSegmentProvider">
             <summary>
-            Provides url segments for content.
+            Provides URL segments for content.
             </summary>
             <remarks>Url segments should comply with IETF RFCs regarding content, encoding, etc.</remarks>
         </member>
         <member name="M:Umbraco.Core.Strings.IUrlSegmentProvider.GetUrlSegment(Umbraco.Core.Models.IContentBase,System.String)">
             <summary>
-            Gets the url segment for a specified content and culture.
+            Gets the URL segment for a specified content and culture.
             </summary>
             <param name="content">The content.</param>
             <param name="culture">The culture.</param>
-            <returns>The url segment.</returns>
-            <remarks>This is for when Umbraco is capable of managing more than one url
+            <returns>The URL segment.</returns>
+            <remarks>This is for when Umbraco is capable of managing more than one URL
             per content, in 1-to-1 multilingual configurations. Then there would be one
-            url per culture.</remarks>
+            URL per culture.</remarks>
         </member>
         <member name="T:Umbraco.Core.Strings.Utf8ToAsciiConverter">
             <summary>
@@ -39662,17 +39706,17 @@
         </member>
         <member name="T:Umbraco.Core.Sync.ApplicationUrlHelper">
             <summary>
-            A helper used to determine the current server umbraco application url.
+            A helper used to determine the current server umbraco application URL.
             </summary>
         </member>
         <member name="P:Umbraco.Core.Sync.ApplicationUrlHelper.ApplicationUrlProvider">
             <summary>
-            Gets or sets a custom provider for the umbraco application url.
+            Gets or sets a custom provider for the umbraco application URL.
             </summary>
             <remarks>
             <para>Receives the current request as a parameter, and it may be null. Must return a properly
-            formatted url with scheme and umbraco dir and no trailing slash eg "http://www.mysite.com/umbraco",
-            or <c>null</c>. To be used in auto-load-balancing scenarios where the application url is not
+            formatted URL with scheme and umbraco dir and no trailing slash eg "http://www.mysite.com/umbraco",
+            or <c>null</c>. To be used in auto-load-balancing scenarios where the application URL is not
             in config files but is determined programmatically.</para>
             <para>Must be assigned before resolution is frozen.</para>
             </remarks>
@@ -39871,7 +39915,7 @@
         </member>
         <member name="M:Umbraco.Core.Sync.DatabaseServerRegistrar.GetCurrentServerUmbracoApplicationUrl">
             <summary>
-            Gets the current umbraco application url.
+            Gets the current umbraco application URL.
             </summary>
         </member>
         <member name="T:Umbraco.Core.Sync.DatabaseServerRegistrarOptions">
@@ -39995,11 +40039,11 @@
         </member>
         <member name="M:Umbraco.Core.Sync.IServerRegistrar.GetCurrentServerUmbracoApplicationUrl">
             <summary>
-            Gets the current umbraco application url.
+            Gets the current umbraco application URL.
             </summary>
             <remarks>
-            <para>If the registrar does not provide the umbraco application url, should return null.</para>
-            <para>Must return null, or a url that ends with SystemDirectories.Umbraco, and contains a scheme, eg "http://www.mysite.com/umbraco".</para>
+            <para>If the registrar does not provide the umbraco application URL, should return null.</para>
+            <para>Must return null, or a URL that ends with SystemDirectories.Umbraco, and contains a scheme, eg "http://www.mysite.com/umbraco".</para>
             </remarks>
         </member>
         <member name="T:Umbraco.Core.Sync.MessageType">

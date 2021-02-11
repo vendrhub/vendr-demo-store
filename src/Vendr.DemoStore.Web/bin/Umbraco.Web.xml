@@ -922,7 +922,7 @@
             Used to get a specific file from disk via the FileService
             </summary>
             <param name="type">This is a string but will be 'scripts' 'partialViews', 'partialViewMacros' or 'stylesheets'</param>
-            <param name="virtualPath">The filename or urlencoded path of the file to open</param>
+            <param name="virtualPath">The filename or URL encoded path of the file to open</param>
             <returns>The file and its contents from the virtualPath</returns>
         </member>
         <member name="M:Umbraco.Web.Editors.CodeFileController.GetSnippets(System.String)">
@@ -946,7 +946,7 @@
             Used to delete a specific file from disk via the FileService
             </summary>
             <param name="type">This is a string but will be 'scripts' 'partialViews', 'partialViewMacros' or 'stylesheets'</param>
-            <param name="virtualPath">The filename or urlencoded path of the file to delete</param>
+            <param name="virtualPath">The filename or URL encoded path of the file to delete</param>
             <returns>Will return a simple 200 if file deletion succeeds</returns>
         </member>
         <member name="M:Umbraco.Web.Editors.CodeFileController.PostSave(Umbraco.Web.Models.ContentEditing.CodeFileDisplay)">
@@ -1293,7 +1293,7 @@
         </member>
         <member name="M:Umbraco.Web.Editors.UsersController.GetCurrentUserAvatarUrls">
             <summary>
-            Returns a list of the sizes of gravatar urls for the user or null if the gravatar server cannot be reached
+            Returns a list of the sizes of gravatar URLs for the user or null if the gravatar server cannot be reached
             </summary>
             <returns></returns>
         </member>
@@ -2444,7 +2444,7 @@
         </member>
         <member name="M:Umbraco.Web.Editors.EntityController.GetUrl(Umbraco.Core.Udi,System.String)">
             <summary>
-            Gets the url of an entity
+            Gets the URL of an entity
             </summary>
             <param name="udi">UDI of the entity to fetch URL for</param>
             <param name="culture">The culture to fetch the URL for</param>
@@ -2452,7 +2452,7 @@
         </member>
         <member name="M:Umbraco.Web.Editors.EntityController.GetUrl(System.Int32,Umbraco.Web.Models.ContentEditing.UmbracoEntityTypes,System.String)">
             <summary>
-            Gets the url of an entity
+            Gets the URL of an entity
             </summary>
             <param name="id">Int id of the entity to fetch URL for</param>
             <param name="type">The type of entity such as Document, Media, Member</param>
@@ -3528,7 +3528,7 @@
         </member>
         <member name="M:Umbraco.Web.ImageCropperTemplateCoreExtensions.GetCropUrl(Umbraco.Core.Models.PublishedContent.IPublishedContent,System.String,Umbraco.Core.Models.IImageUrlGenerator)">
             <summary>
-            Gets the ImageProcessor Url by the crop alias (from the "umbracoFile" property alias) on the IPublishedContent item
+            Gets the ImageProcessor URL by the crop alias (from the "umbracoFile" property alias) on the IPublishedContent item
             </summary>
             <param name="mediaItem">
             The IPublishedContent item.
@@ -3537,12 +3537,12 @@
             The crop alias e.g. thumbnail
             </param>
             <returns>
-            The ImageProcessor.Web Url.
+            The ImageProcessor.Web URL.
             </returns>
         </member>
         <member name="M:Umbraco.Web.ImageCropperTemplateCoreExtensions.GetCropUrl(Umbraco.Core.Models.PublishedContent.IPublishedContent,System.String,System.String,Umbraco.Core.Models.IImageUrlGenerator)">
             <summary>
-            Gets the ImageProcessor Url by the crop alias using the specified property containing the image cropper Json data on the IPublishedContent item.
+            Gets the ImageProcessor URL by the crop alias using the specified property containing the image cropper Json data on the IPublishedContent item.
             </summary>
             <param name="mediaItem">
             The IPublishedContent item.
@@ -3554,12 +3554,12 @@
             The crop alias e.g. thumbnail
             </param>
             <returns>
-            The ImageProcessor.Web Url.
+            The ImageProcessor.Web URL.
             </returns>
         </member>
         <member name="M:Umbraco.Web.ImageCropperTemplateCoreExtensions.GetCropUrl(Umbraco.Core.Models.PublishedContent.IPublishedContent,Umbraco.Core.Models.IImageUrlGenerator,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Int32},System.Nullable{Umbraco.Web.Models.ImageCropMode},System.Nullable{Umbraco.Web.Models.ImageCropAnchor},System.Boolean,System.Boolean,System.Boolean,System.String,System.Nullable{Umbraco.Web.Models.ImageCropRatioMode},System.Boolean)">
             <summary>
-            Gets the ImageProcessor Url from the IPublishedContent item.
+            Gets the ImageProcessor URL from the IPublishedContent item.
             </summary>
             <param name="mediaItem">
             The IPublishedContent item.
@@ -3614,10 +3614,10 @@
         </member>
         <member name="M:Umbraco.Web.ImageCropperTemplateCoreExtensions.GetCropUrl(System.String,Umbraco.Core.Models.IImageUrlGenerator,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Int32},System.Nullable{Umbraco.Web.Models.ImageCropMode},System.Nullable{Umbraco.Web.Models.ImageCropAnchor},System.Boolean,System.Boolean,System.String,System.String,System.Nullable{Umbraco.Web.Models.ImageCropRatioMode},System.Boolean)">
             <summary>
-            Gets the ImageProcessor Url from the image path.
+            Gets the ImageProcessor URL from the image path.
             </summary>
             <param name="imageUrl">
-            The image url.
+            The image URL.
             </param>
             <param name="width">
             The width of the output image.
@@ -3669,13 +3669,13 @@
         </member>
         <member name="M:Umbraco.Web.ImageCropperTemplateCoreExtensions.GetCropUrl(System.String,Umbraco.Core.Models.IImageUrlGenerator,Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int32},System.Nullable{Umbraco.Web.Models.ImageCropMode},System.Nullable{Umbraco.Web.Models.ImageCropAnchor},System.Boolean,System.Boolean,System.String,System.String,System.Nullable{Umbraco.Web.Models.ImageCropRatioMode},System.Boolean,System.String)">
             <summary>
-            Gets the ImageProcessor Url from the image path.
+            Gets the ImageProcessor URL from the image path.
             </summary>
             <param name="imageUrl">
-            The image url.
+            The image URL.
             </param>
             <param name="imageUrlGenerator">
-            The generator that will process all the options and the image URL to return a full image urls with all processing options appended
+            The generator that will process all the options and the image URL to return a full image URLs with all processing options appended
             </param>
             <param name="cropDataSet"></param>
             <param name="width">
@@ -3723,61 +3723,6 @@
             The <see cref="T:System.String"/>.
             </returns>
         </member>
-        <member name="T:Umbraco.Web.IUmbracoContextFactory">
-            <summary>
-            Creates and manages <see cref="T:Umbraco.Web.UmbracoContext"/> instances.
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.IUmbracoContextFactory.EnsureUmbracoContext(System.Web.HttpContextBase)">
-            <summary>
-            Ensures that a current <see cref="T:Umbraco.Web.UmbracoContext"/> exists.
-            </summary>
-            <remarks>
-            <para>If an <see cref="T:Umbraco.Web.UmbracoContext"/> is already registered in the
-            <see cref="T:Umbraco.Web.IUmbracoContextAccessor"/>, returns a non-root reference to it.
-            Otherwise, create a new instance, registers it, and return a root reference
-            to it.</para>
-            <para>If <paramref name="httpContext"/> is null, the factory tries to use
-            <see cref="P:System.Web.HttpContext.Current"/> if it exists. Otherwise, it uses a dummy
-            <see cref="T:System.Web.HttpContextBase"/>.</para>
-            </remarks>
-            <example>
-            using (var contextReference = contextFactory.EnsureUmbracoContext())
-            {
-              var umbracoContext = contextReference.UmbracoContext;
-              // use umbracoContext...
-            }
-            </example>
-            <param name="httpContext">An optional http context.</param>
-        </member>
-        <member name="M:Umbraco.Web.Install.ChangesMonitor.Suspended">
-            <summary>
-            Gets a disposable object representing suspended change monitoring.
-            </summary>
-            <remarks>
-            <para>Dispose the object to re-enable change monitoring.</para>
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Web.Install.ChangesMonitor.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Umbraco.Web.Install.ChangesMonitor"/> class.
-            </summary>
-        </member>
-        <member name="M:Umbraco.Web.Install.InstallStepCollection.GetAllSteps">
-            <summary>
-            Get the installer steps
-            </summary>
-            <returns></returns>
-            <remarks>
-            The step order returned here is how they will appear on the front-end if they have views assigned
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Web.Install.InstallStepCollection.GetStepsForCurrentInstallType">
-            <summary>
-            Returns the steps that are used only for the current installation type
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:Umbraco.Web.Install.InstallSteps.ConfigureMachineKey.HasMachineKey">
             <summary>
             Don't display the view or execute if a machine key already exists
@@ -3815,6 +3760,34 @@
             <summary>
             Return a custom view model for this step
             </summary>
+        </member>
+        <member name="M:Umbraco.Web.Install.ChangesMonitor.Suspended">
+            <summary>
+            Gets a disposable object representing suspended change monitoring.
+            </summary>
+            <remarks>
+            <para>Dispose the object to re-enable change monitoring.</para>
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.Install.ChangesMonitor.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umbraco.Web.Install.ChangesMonitor"/> class.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Install.InstallStepCollection.GetAllSteps">
+            <summary>
+            Get the installer steps
+            </summary>
+            <returns></returns>
+            <remarks>
+            The step order returned here is how they will appear on the front-end if they have views assigned
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.Install.InstallStepCollection.GetStepsForCurrentInstallType">
+            <summary>
+            Returns the steps that are used only for the current installation type
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Umbraco.Web.Install.InstallException">
             <summary>
@@ -4080,6 +4053,33 @@
             </summary>
             <param name="umbracoContextAccessor"></param>
             <param name="runtimeState"></param>
+        </member>
+        <member name="T:Umbraco.Web.IUmbracoContextFactory">
+            <summary>
+            Creates and manages <see cref="T:Umbraco.Web.UmbracoContext"/> instances.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.IUmbracoContextFactory.EnsureUmbracoContext(System.Web.HttpContextBase)">
+            <summary>
+            Ensures that a current <see cref="T:Umbraco.Web.UmbracoContext"/> exists.
+            </summary>
+            <remarks>
+            <para>If an <see cref="T:Umbraco.Web.UmbracoContext"/> is already registered in the
+            <see cref="T:Umbraco.Web.IUmbracoContextAccessor"/>, returns a non-root reference to it.
+            Otherwise, create a new instance, registers it, and return a root reference
+            to it.</para>
+            <para>If <paramref name="httpContext"/> is null, the factory tries to use
+            <see cref="P:System.Web.HttpContext.Current"/> if it exists. Otherwise, it uses a dummy
+            <see cref="T:System.Web.HttpContextBase"/>.</para>
+            </remarks>
+            <example>
+            using (var contextReference = contextFactory.EnsureUmbracoContext())
+            {
+              var umbracoContext = contextReference.UmbracoContext;
+              // use umbracoContext...
+            }
+            </example>
+            <param name="httpContext">An optional http context.</param>
         </member>
         <member name="T:Umbraco.Web.Logging.WebProfiler">
             <summary>
@@ -6710,7 +6710,7 @@
         <member name="P:Umbraco.Web.Models.ContentEditing.CodeFileDisplay.Path">
              <summary>
              Path represents the path used by the backoffice tree
-             For files stored on disk, this is a urlencoded, comma separated
+             For files stored on disk, this is a URL encoded, comma separated
              path to the file, always starting with -1.
             
              -1,Partials,Parials%2FFolder,Partials%2FFolder%2FFile.cshtml
@@ -8472,12 +8472,12 @@
         </member>
         <member name="P:Umbraco.Web.Models.Trees.TreeNode.ChildNodesUrl">
             <summary>
-            The JSON url to load the nodes children
+            The JSON URL to load the nodes children
             </summary>
         </member>
         <member name="P:Umbraco.Web.Models.Trees.TreeNode.MenuUrl">
             <summary>
-            The JSON url to load the menu from
+            The JSON URL to load the menu from
             </summary>
         </member>
         <member name="P:Umbraco.Web.Models.Trees.TreeNode.IconIsClass">
@@ -8635,7 +8635,7 @@
         </member>
         <member name="M:Umbraco.Web.Models.Trees.MenuItem.LaunchDialogUrl(System.String,System.String)">
             <summary>
-            Sets the menu item to display a dialog based on a url path in an iframe
+            Sets the menu item to display a dialog based on a URL path in an iframe
             </summary>
             <param name="url"></param>
             <param name="dialogTitle"></param>
@@ -9138,7 +9138,7 @@
             <summary>
             Provide an abstract base class for <c>IPublishedContent</c> implementations.
             </summary>
-            <remarks>This base class does which (a) consistently resolves and caches the Url, (b) provides an implementation
+            <remarks>This base class does which (a) consistently resolves and caches the URL, (b) provides an implementation
             for this[alias], and (c) provides basic content set management.</remarks>
         </member>
         <member name="P:Umbraco.Web.Models.PublishedContentBase.Key">
@@ -10676,7 +10676,7 @@
         </member>
         <member name="M:Umbraco.Web.Mvc.RenderRouteHandler.HandlePostedValues(System.Web.Routing.RequestContext,Umbraco.Web.Mvc.PostedDataProxyInfo)">
             <summary>
-            Handles a posted form to an Umbraco Url and ensures the correct controller is routed to and that
+            Handles a posted form to an Umbraco URL and ensures the correct controller is routed to and that
             the right DataTokens are set.
             </summary>
             <param name="requestContext"></param>
@@ -13120,7 +13120,7 @@
         </member>
         <member name="T:Umbraco.Web.Routing.DefaultMediaUrlProvider">
             <summary>
-            Default media url provider.
+            Default media URL provider.
             </summary>
         </member>
         <member name="M:Umbraco.Web.Routing.DefaultMediaUrlProvider.GetMediaUrl(Umbraco.Web.UmbracoContext,Umbraco.Core.Models.PublishedContent.IPublishedContent,System.String,Umbraco.Core.Models.PublishedContent.UrlMode,System.String,System.Uri)">
@@ -13128,27 +13128,27 @@
         </member>
         <member name="T:Umbraco.Web.Routing.IMediaUrlProvider">
             <summary>
-            Provides media urls.
+            Provides media URL.
             </summary>
         </member>
         <member name="M:Umbraco.Web.Routing.IMediaUrlProvider.GetMediaUrl(Umbraco.Web.UmbracoContext,Umbraco.Core.Models.PublishedContent.IPublishedContent,System.String,Umbraco.Core.Models.PublishedContent.UrlMode,System.String,System.Uri)">
             <summary>
-            Gets the url of a media item.
+            Gets the URL of a media item.
             </summary>
             <param name="umbracoContext">The Umbraco context.</param>
             <param name="content">The published content.</param>
-            <param name="propertyAlias">The property alias to resolve the url from.</param>
-            <param name="mode">The url mode.</param>
+            <param name="propertyAlias">The property alias to resolve the URL from.</param>
+            <param name="mode">The URL mode.</param>
             <param name="culture">The variation language.</param>
-            <param name="current">The current absolute url.</param>
-            <returns>The url for the media.</returns>
+            <param name="current">The current absolute URL.</param>
+            <returns>The URL for the media.</returns>
             <remarks>
-            <para>The url is absolute or relative depending on <c>mode</c> and on <c>current</c>.</para>
-            <para>If the media is multi-lingual, gets the url for the specified culture or,
+            <para>The URL is absolute or relative depending on <c>mode</c> and on <c>current</c>.</para>
+            <para>If the media is multi-lingual, gets the URL for the specified culture or,
             when no culture is specified, the current culture.</para>
-            <para>The url provider can ignore the mode and always return an absolute url,
-            e.g. a cdn url provider will most likely always return an absolute url.</para>
-            <para>If the provider is unable to provide a url, it returns <c>null</c>.</para>
+            <para>The URL provider can ignore the mode and always return an absolute URL,
+            e.g. a cdn URL provider will most likely always return an absolute URL.</para>
+            <para>If the provider is unable to provide a URL, it returns <c>null</c>.</para>
             </remarks>
         </member>
         <member name="T:Umbraco.Web.Routing.IPublishedRouter">
@@ -13198,20 +13198,20 @@
         </member>
         <member name="T:Umbraco.Web.Routing.RedirectTrackingComposer">
             <summary>
-            Implements an Application Event Handler for managing redirect urls tracking.
+            Implements an Application Event Handler for managing redirect URLs tracking.
             </summary>
             <remarks>
-            <para>when content is renamed or moved, we want to create a permanent 301 redirect from it's old url</para>
+            <para>when content is renamed or moved, we want to create a permanent 301 redirect from it's old URL</para>
             <para>not managing domains because we don't know how to do it - changing domains => must create a higher level strategy using rewriting rules probably</para>
             <para>recycle bin = moving to and from does nothing: to = the node is gone, where would we redirect? from = same</para>
             </remarks>
         </member>
         <member name="T:Umbraco.Web.Routing.ContentFinderByUrl">
             <summary>
-            Provides an implementation of <see cref="T:Umbraco.Web.Routing.IContentFinder"/> that handles page nice urls.
+            Provides an implementation of <see cref="T:Umbraco.Web.Routing.IContentFinder"/> that handles page nice URLs.
             </summary>
             <remarks>
-            <para>Handles <c>/foo/bar</c> where <c>/foo/bar</c> is the nice url of a document.</para>
+            <para>Handles <c>/foo/bar</c> where <c>/foo/bar</c> is the nice URL of a document.</para>
             </remarks>
         </member>
         <member name="M:Umbraco.Web.Routing.ContentFinderByUrl.TryFindContent(Umbraco.Web.Routing.PublishedRequest)">
@@ -13231,11 +13231,11 @@
         </member>
         <member name="T:Umbraco.Web.Routing.ContentFinderByUrlAndTemplate">
             <summary>
-            Provides an implementation of <see cref="T:Umbraco.Web.Routing.IContentFinder"/> that handles page nice urls and a template.
+            Provides an implementation of <see cref="T:Umbraco.Web.Routing.IContentFinder"/> that handles page nice URLs and a template.
             </summary>
             <remarks>
             <para>This finder allows for an odd routing pattern similar to altTemplate, probably only use case is if there is an alternative mime type template and it should be routable by something like "/hello/world/json" where the JSON template is to be used for the "world" page</para>
-            <para>Handles <c>/foo/bar/template</c> where <c>/foo/bar</c> is the nice url of a document, and <c>template</c> a template alias.</para>
+            <para>Handles <c>/foo/bar/template</c> where <c>/foo/bar</c> is the nice URL of a document, and <c>template</c> a template alias.</para>
             <para>If successful, then the template of the document request is also assigned.</para>
             </remarks>
         </member>
@@ -13302,12 +13302,12 @@
         </member>
         <member name="T:Umbraco.Web.Routing.UrlInfo">
             <summary>
-            Represents infos for a url.
+            Represents infos for a URL.
             </summary>
         </member>
         <member name="M:Umbraco.Web.Routing.UrlInfo.Url(System.String,System.String)">
             <summary>
-            Creates a <see cref="T:Umbraco.Web.Routing.UrlInfo"/> instance representing a true url.
+            Creates a <see cref="T:Umbraco.Web.Routing.UrlInfo"/> instance representing a true URL.
             </summary>
         </member>
         <member name="M:Umbraco.Web.Routing.UrlInfo.Message(System.String,System.String)">
@@ -13327,13 +13327,13 @@
         </member>
         <member name="P:Umbraco.Web.Routing.UrlInfo.IsUrl">
             <summary>
-            Gets a value indicating whether the url is a true url.
+            Gets a value indicating whether the URL is a true URL.
             </summary>
             <remarks>Otherwise, it is a message.</remarks>
         </member>
         <member name="P:Umbraco.Web.Routing.UrlInfo.Text">
             <summary>
-            Gets the text, which is either the url, or a message.
+            Gets the text, which is either the URL, or a message.
             </summary>
         </member>
         <member name="M:Umbraco.Web.Routing.UrlInfo.Equals(Umbraco.Web.Routing.UrlInfo)">
@@ -13374,8 +13374,8 @@
             <returns></returns>
         </member>
         <member name="T:Umbraco.Web.Routing.RedirectTrackingComponent">
-            Implements an Application Event Handler for managing redirect urls tracking.
-            <para>when content is renamed or moved, we want to create a permanent 301 redirect from it's old url</para>
+            Implements an Application Event Handler for managing redirect URLs tracking.
+            <para>when content is renamed or moved, we want to create a permanent 301 redirect from it's old URL</para>
             <para>
                 not managing domains because we don't know how to do it - changing domains => must create a higher level
                 strategy using rewriting rules probably
@@ -13384,7 +13384,7 @@
         </member>
         <member name="T:Umbraco.Web.Routing.ContentFinderByRedirectUrl">
             <summary>
-            Provides an implementation of <see cref="T:Umbraco.Web.Routing.IContentFinder"/> that handles page url rewrites
+            Provides an implementation of <see cref="T:Umbraco.Web.Routing.IContentFinder"/> that handles page URL rewrites
             that are stored when moving, saving, or deleting a node.
             </summary>
             <remarks>
@@ -13401,11 +13401,11 @@
         </member>
         <member name="M:Umbraco.Web.Routing.UrlProviderExtensions.GetContentUrls(Umbraco.Core.Models.IContent,Umbraco.Web.Routing.IPublishedRouter,Umbraco.Web.UmbracoContext,Umbraco.Core.Services.ILocalizationService,Umbraco.Core.Services.ILocalizedTextService,Umbraco.Core.Services.IContentService,Umbraco.Core.Logging.ILogger)">
             <summary>
-            Gets the Urls of the content item.
+            Gets the URLs of the content item.
             </summary>
             <remarks>
-            <para>Use when displaying Urls. If errors occur when generating the Urls, they will show in the list.</para>
-            <para>Contains all the Urls that we can figure out (based upon domains, etc).</para>
+            <para>Use when displaying URLs. If errors occur when generating the URLs, they will show in the list.</para>
+            <para>Contains all the URLs that we can figure out (based upon domains, etc).</para>
             </remarks>
         </member>
         <member name="M:Umbraco.Web.Routing.UrlProviderExtensions.GetContentUrlsByCulture(Umbraco.Core.Models.IContent,System.Collections.Generic.IEnumerable{System.String},Umbraco.Web.Routing.IPublishedRouter,Umbraco.Web.UmbracoContext,Umbraco.Core.Services.IContentService,Umbraco.Core.Services.ILocalizedTextService,Umbraco.Core.Logging.ILogger)">
@@ -13423,7 +13423,7 @@
         </member>
         <member name="T:Umbraco.Web.Routing.AliasUrlProvider">
             <summary>
-            Provides urls using the <c>umbracoUrlAlias</c> property.
+            Provides URLs using the <c>umbracoUrlAlias</c> property.
             </summary>
         </member>
         <member name="M:Umbraco.Web.Routing.AliasUrlProvider.GetUrl(Umbraco.Web.UmbracoContext,Umbraco.Core.Models.PublishedContent.IPublishedContent,Umbraco.Core.Models.PublishedContent.UrlMode,System.String,System.Uri)">
@@ -13431,15 +13431,15 @@
         </member>
         <member name="M:Umbraco.Web.Routing.AliasUrlProvider.GetOtherUrls(Umbraco.Web.UmbracoContext,System.Int32,System.Uri)">
             <summary>
-            Gets the other urls of a published content.
+            Gets the other URLs of a published content.
             </summary>
             <param name="umbracoContext">The Umbraco context.</param>
             <param name="id">The published content id.</param>
-            <param name="current">The current absolute url.</param>
-            <returns>The other urls for the published content.</returns>
+            <param name="current">The current absolute URL.</param>
+            <returns>The other URLs for the published content.</returns>
             <remarks>
-            <para>Other urls are those that <c>GetUrl</c> would not return in the current context, but would be valid
-            urls for the node in other contexts (different domain for current request, umbracoUrlAlias...).</para>
+            <para>Other URLs are those that <c>GetUrl</c> would not return in the current context, but would be valid
+            URLs for the node in other contexts (different domain for current request, umbracoUrlAlias...).</para>
             </remarks>
         </member>
         <member name="T:Umbraco.Web.Routing.ContentFinderByConfigured404">
@@ -13517,15 +13517,15 @@
         </member>
         <member name="M:Umbraco.Web.Routing.DefaultUrlProvider.GetOtherUrls(Umbraco.Web.UmbracoContext,System.Int32,System.Uri)">
             <summary>
-            Gets the other urls of a published content.
+            Gets the other URLs of a published content.
             </summary>
             <param name="umbracoContext">The Umbraco context.</param>
             <param name="id">The published content id.</param>
-            <param name="current">The current absolute url.</param>
-            <returns>The other urls for the published content.</returns>
+            <param name="current">The current absolute URL.</param>
+            <returns>The other URLs for the published content.</returns>
             <remarks>
-            <para>Other urls are those that <c>GetUrl</c> would not return in the current context, but would be valid
-            urls for the node in other contexts (different domain for current request, umbracoUrlAlias...).</para>
+            <para>Other URLs are those that <c>GetUrl</c> would not return in the current context, but would be valid
+            URLs for the node in other contexts (different domain for current request, umbracoUrlAlias...).</para>
             </remarks>
         </member>
         <member name="T:Umbraco.Web.Routing.DomainAndUri">
@@ -13551,37 +13551,37 @@
         </member>
         <member name="T:Umbraco.Web.Routing.IUrlProvider">
             <summary>
-            Provides urls.
+            Provides URLs.
             </summary>
         </member>
         <member name="M:Umbraco.Web.Routing.IUrlProvider.GetUrl(Umbraco.Web.UmbracoContext,Umbraco.Core.Models.PublishedContent.IPublishedContent,Umbraco.Core.Models.PublishedContent.UrlMode,System.String,System.Uri)">
             <summary>
-            Gets the url of a published content.
+            Gets the URL of a published content.
             </summary>
             <param name="umbracoContext">The Umbraco context.</param>
             <param name="content">The published content.</param>
-            <param name="mode">The url mode.</param>
+            <param name="mode">The URL mode.</param>
             <param name="culture">A culture.</param>
-            <param name="current">The current absolute url.</param>
-            <returns>The url for the published content.</returns>
+            <param name="current">The current absolute URL.</param>
+            <returns>The URL for the published content.</returns>
             <remarks>
-            <para>The url is absolute or relative depending on <c>mode</c> and on <c>current</c>.</para>
-            <para>If the published content is multi-lingual, gets the url for the specified culture or,
+            <para>The URL is absolute or relative depending on <c>mode</c> and on <c>current</c>.</para>
+            <para>If the published content is multi-lingual, gets the URL for the specified culture or,
             when no culture is specified, the current culture.</para>
-            <para>If the provider is unable to provide a url, it should return <c>null</c>.</para>
+            <para>If the provider is unable to provide a URL, it should return <c>null</c>.</para>
             </remarks>
         </member>
         <member name="M:Umbraco.Web.Routing.IUrlProvider.GetOtherUrls(Umbraco.Web.UmbracoContext,System.Int32,System.Uri)">
             <summary>
-            Gets the other urls of a published content.
+            Gets the other URLs of a published content.
             </summary>
             <param name="umbracoContext">The Umbraco context.</param>
             <param name="id">The published content id.</param>
-            <param name="current">The current absolute url.</param>
-            <returns>The other urls for the published content.</returns>
+            <param name="current">The current absolute URL.</param>
+            <returns>The other URLs for the published content.</returns>
             <remarks>
-            <para>Other urls are those that <c>GetUrl</c> would not return in the current context, but would be valid
-            urls for the node in other contexts (different domain for current request, umbracoUrlAlias...).</para>
+            <para>Other URLs are those that <c>GetUrl</c> would not return in the current context, but would be valid
+            URLs for the node in other contexts (different domain for current request, umbracoUrlAlias...).</para>
             </remarks>
         </member>
         <member name="T:Umbraco.Web.Routing.SiteDomainHelper">
@@ -13779,97 +13779,97 @@
         </member>
         <member name="T:Umbraco.Web.Routing.UrlProvider">
             <summary>
-            Provides urls.
+            Provides URLs.
             </summary>
         </member>
         <member name="M:Umbraco.Web.Routing.UrlProvider.#ctor(Umbraco.Web.UmbracoContext,Umbraco.Core.Configuration.UmbracoSettings.IWebRoutingSection,System.Collections.Generic.IEnumerable{Umbraco.Web.Routing.IUrlProvider},System.Collections.Generic.IEnumerable{Umbraco.Web.Routing.IMediaUrlProvider},Umbraco.Core.Models.PublishedContent.IVariationContextAccessor)">
             <summary>
-            Initializes a new instance of the <see cref="T:Umbraco.Web.Routing.UrlProvider"/> class with an Umbraco context and a list of url providers.
+            Initializes a new instance of the <see cref="T:Umbraco.Web.Routing.UrlProvider"/> class with an Umbraco context and a list of URL providers.
             </summary>
             <param name="umbracoContext">The Umbraco context.</param>
             <param name="routingSettings">Routing settings.</param>
-            <param name="urlProviders">The list of url providers.</param>
-            <param name="mediaUrlProviders">The list of media url providers.</param>
+            <param name="urlProviders">The list of URL providers.</param>
+            <param name="mediaUrlProviders">The list of media URL providers.</param>
             <param name="variationContextAccessor">The current variation accessor.</param>
         </member>
         <member name="M:Umbraco.Web.Routing.UrlProvider.#ctor(Umbraco.Web.UmbracoContext,System.Collections.Generic.IEnumerable{Umbraco.Web.Routing.IUrlProvider},System.Collections.Generic.IEnumerable{Umbraco.Web.Routing.IMediaUrlProvider},Umbraco.Core.Models.PublishedContent.IVariationContextAccessor,Umbraco.Core.Models.PublishedContent.UrlMode)">
             <summary>
-            Initializes a new instance of the <see cref="T:Umbraco.Web.Routing.UrlProvider"/> class with an Umbraco context and a list of url providers.
+            Initializes a new instance of the <see cref="T:Umbraco.Web.Routing.UrlProvider"/> class with an Umbraco context and a list of URL providers.
             </summary>
             <param name="umbracoContext">The Umbraco context.</param>
-            <param name="urlProviders">The list of url providers.</param>
-            <param name="mediaUrlProviders">The list of media url providers</param>
+            <param name="urlProviders">The list of URL providers.</param>
+            <param name="mediaUrlProviders">The list of media URL providers</param>
             <param name="variationContextAccessor">The current variation accessor.</param>
             <param name="mode">An optional provider mode.</param>
         </member>
         <member name="P:Umbraco.Web.Routing.UrlProvider.Mode">
             <summary>
-            Gets or sets the provider url mode.
+            Gets or sets the provider URL mode.
             </summary>
         </member>
         <member name="M:Umbraco.Web.Routing.UrlProvider.GetUrl(System.Guid,Umbraco.Core.Models.PublishedContent.UrlMode,System.String,System.Uri)">
             <summary>
-            Gets the url of a published content.
+            Gets the URL of a published content.
             </summary>
             <param name="id">The published content identifier.</param>
-            <param name="mode">The url mode.</param>
+            <param name="mode">The URL mode.</param>
             <param name="culture">A culture.</param>
-            <param name="current">The current absolute url.</param>
-            <returns>The url for the published content.</returns>
+            <param name="current">The current absolute URL.</param>
+            <returns>The URL for the published content.</returns>
         </member>
         <member name="M:Umbraco.Web.Routing.UrlProvider.GetUrl(System.Int32,Umbraco.Core.Models.PublishedContent.UrlMode,System.String,System.Uri)">
             <summary>
-            Gets the url of a published content.
+            Gets the URL of a published content.
             </summary>
             <param name="id">The published content identifier.</param>
-            <param name="mode">The url mode.</param>
+            <param name="mode">The URL mode.</param>
             <param name="culture">A culture.</param>
-            <param name="current">The current absolute url.</param>
-            <returns>The url for the published content.</returns>
+            <param name="current">The current absolute URL.</param>
+            <returns>The URL for the published content.</returns>
         </member>
         <member name="M:Umbraco.Web.Routing.UrlProvider.GetUrl(Umbraco.Core.Models.PublishedContent.IPublishedContent,Umbraco.Core.Models.PublishedContent.UrlMode,System.String,System.Uri)">
             <summary>
-            Gets the url of a published content.
+            Gets the URL of a published content.
             </summary>
             <param name="content">The published content.</param>
-            <param name="mode">The url mode.</param>
+            <param name="mode">The URL mode.</param>
             <param name="culture">A culture.</param>
-            <param name="current">The current absolute url.</param>
-            <returns>The url for the published content.</returns>
+            <param name="current">The current absolute URL.</param>
+            <returns>The URL for the published content.</returns>
             <remarks>
-            <para>The url is absolute or relative depending on <c>mode</c> and on <c>current</c>.</para>
-            <para>If the published content is multi-lingual, gets the url for the specified culture or,
+            <para>The URL is absolute or relative depending on <c>mode</c> and on <c>current</c>.</para>
+            <para>If the published content is multi-lingual, gets the URL for the specified culture or,
             when no culture is specified, the current culture.</para>
-            <para>If the provider is unable to provide a url, it returns "#".</para>
+            <para>If the provider is unable to provide a URL, it returns "#".</para>
             </remarks>
         </member>
         <member name="M:Umbraco.Web.Routing.UrlProvider.GetOtherUrls(System.Int32)">
             <summary>
-            Gets the other urls of a published content.
+            Gets the other URLs of a published content.
             </summary>
             <param name="id">The published content id.</param>
-            <returns>The other urls for the published content.</returns>
+            <returns>The other URLs for the published content.</returns>
             <remarks>
-            <para>Other urls are those that <c>GetUrl</c> would not return in the current context, but would be valid
-            urls for the node in other contexts (different domain for current request, umbracoUrlAlias...).</para>
-            <para>The results depend on the current url.</para>
+            <para>Other URLs are those that <c>GetUrl</c> would not return in the current context, but would be valid
+            URLs for the node in other contexts (different domain for current request, umbracoUrlAlias...).</para>
+            <para>The results depend on the current URL.</para>
             </remarks>
         </member>
         <member name="M:Umbraco.Web.Routing.UrlProvider.GetOtherUrls(System.Int32,System.Uri)">
             <summary>
-            Gets the other urls of a published content.
+            Gets the other URLs of a published content.
             </summary>
             <param name="id">The published content id.</param>
-            <param name="current">The current absolute url.</param>
-            <returns>The other urls for the published content.</returns>
+            <param name="current">The current absolute URL.</param>
+            <returns>The other URLs for the published content.</returns>
             <remarks>
-            <para>Other urls are those that <c>GetUrl</c> would not return in the current context, but would be valid
-            urls for the node in other contexts (different domain for current request, umbracoUrlAlias...).</para>
+            <para>Other URLs are those that <c>GetUrl</c> would not return in the current context, but would be valid
+            URLs for the node in other contexts (different domain for current request, umbracoUrlAlias...).</para>
             </remarks>
         </member>
         <member name="M:Umbraco.Web.Routing.UrlProvider.GetMediaUrl(System.Guid,Umbraco.Core.Models.PublishedContent.UrlMode,System.String,System.String,System.Uri)">
             <summary>
-            Gets the url of a media item.
+            Gets the URL of a media item.
             </summary>
             <param name="id"></param>
             <param name="mode"></param>
@@ -13880,19 +13880,19 @@
         </member>
         <member name="M:Umbraco.Web.Routing.UrlProvider.GetMediaUrl(Umbraco.Core.Models.PublishedContent.IPublishedContent,Umbraco.Core.Models.PublishedContent.UrlMode,System.String,System.String,System.Uri)">
             <summary>
-            Gets the url of a media item.
+            Gets the URL of a media item.
             </summary>
             <param name="content">The published content.</param>
-            <param name="propertyAlias">The property alias to resolve the url from.</param>
-            <param name="mode">The url mode.</param>
+            <param name="propertyAlias">The property alias to resolve the URL from.</param>
+            <param name="mode">The URL mode.</param>
             <param name="culture">The variation language.</param>
-            <param name="current">The current absolute url.</param>
-            <returns>The url for the media.</returns>
+            <param name="current">The current absolute URL.</param>
+            <returns>The URL for the media.</returns>
             <remarks>
-            <para>The url is absolute or relative depending on <c>mode</c> and on <c>current</c>.</para>
-            <para>If the media is multi-lingual, gets the url for the specified culture or,
+            <para>The URL is absolute or relative depending on <c>mode</c> and on <c>current</c>.</para>
+            <para>If the media is multi-lingual, gets the URL for the specified culture or,
             when no culture is specified, the current culture.</para>
-            <para>If the provider is unable to provide a url, it returns <see cref="F:System.String.Empty"/>.</para>
+            <para>If the provider is unable to provide a URL, it returns <see cref="F:System.String.Empty"/>.</para>
             </remarks>
         </member>
         <member name="T:Umbraco.Web.Routing.PublishedContentNotFoundHandler">
@@ -14242,14 +14242,14 @@
         </member>
         <member name="P:Umbraco.Web.Routing.PublishedRequest.RedirectUrl">
             <summary>
-            Gets or sets the url to redirect to, when the content request triggers a redirect.
+            Gets or sets the URL to redirect to, when the content request triggers a redirect.
             </summary>
         </member>
         <member name="M:Umbraco.Web.Routing.PublishedRequest.SetRedirect(System.String)">
             <summary>
             Indicates that the content request should trigger a redirect (302).
             </summary>
-            <param name="url">The url to redirect to.</param>
+            <param name="url">The URL to redirect to.</param>
             <remarks>Does not actually perform a redirect, only registers that the response should
             redirect. Redirect will or will not take place in due time.</remarks>
         </member>
@@ -14257,7 +14257,7 @@
             <summary>
             Indicates that the content request should trigger a permanent redirect (301).
             </summary>
-            <param name="url">The url to redirect to.</param>
+            <param name="url">The URL to redirect to.</param>
             <remarks>Does not actually perform a redirect, only registers that the response should
             redirect. Redirect will or will not take place in due time.</remarks>
         </member>
@@ -14265,7 +14265,7 @@
             <summary>
             Indicates that the content request should trigger a redirect, with a specified status code.
             </summary>
-            <param name="url">The url to redirect to.</param>
+            <param name="url">The URL to redirect to.</param>
             <param name="status">The status code (300-308).</param>
             <remarks>Does not actually perform a redirect, only registers that the response should
             redirect. Redirect will or will not take place in due time.</remarks>
@@ -16600,6 +16600,13 @@
         <member name="M:Umbraco.Web.Services.TreeService.GetBySectionGrouped(System.String,Umbraco.Web.Trees.TreeUse)">
             <inheritdoc />
         </member>
+        <member name="M:Umbraco.Web.Telemetry.ReportSiteTask.PerformRunAsync(System.Threading.CancellationToken)">
+            <summary>
+            Runs the background task to send the anonymous ID
+            to telemetry service
+            </summary>
+            <returns>A value indicating whether to repeat the task.</returns>
+        </member>
         <member name="T:Umbraco.Web.Templates.HtmlLocalLinkParser">
             <summary>
             Utility class used to parse internal links
@@ -16638,7 +16645,7 @@
         </member>
         <member name="M:Umbraco.Web.Templates.HtmlImageSourceParser.RemoveImageSources(System.String)">
             <summary>
-            Removes media urls from &lt;img&gt; tags where a data-udi attribute is present
+            Removes media URLs from &lt;img&gt; tags where a data-udi attribute is present
             </summary>
             <param name="text"></param>
             <returns></returns>
@@ -17391,7 +17398,7 @@
         </member>
         <member name="P:Umbraco.Web.WebApi.UmbracoApiControllerBase.ApplicationUrl">
             <summary>
-            Gets the application url.
+            Gets the application URL.
             </summary>
         </member>
         <member name="P:Umbraco.Web.WebApi.UmbracoApiControllerBase.Members">
@@ -17928,7 +17935,7 @@
         </member>
         <member name="M:Umbraco.Web.Trees.TreeControllerBase.CreateTreeNode(Umbraco.Core.Models.Entities.IEntitySlim,System.Guid,System.String,System.Net.Http.Formatting.FormDataCollection,System.Boolean)">
             <summary>
-            Helper method to create tree nodes and automatically generate the json url + UDI
+            Helper method to create tree nodes and automatically generate the json URL + UDI
             </summary>
             <param name="entity"></param>
             <param name="entityObjectType"></param>
@@ -17939,7 +17946,7 @@
         </member>
         <member name="M:Umbraco.Web.Trees.TreeControllerBase.CreateTreeNode(Umbraco.Core.Models.Entities.IUmbracoEntity,System.Guid,System.String,System.Net.Http.Formatting.FormDataCollection,System.String,System.Boolean)">
             <summary>
-            Helper method to create tree nodes and automatically generate the json url + UDI
+            Helper method to create tree nodes and automatically generate the json URL + UDI
             </summary>
             <param name="entity"></param>
             <param name="entityObjectType"></param>
@@ -17951,7 +17958,7 @@
         </member>
         <member name="M:Umbraco.Web.Trees.TreeControllerBase.CreateTreeNode(System.String,System.String,System.Net.Http.Formatting.FormDataCollection,System.String,System.String,System.Boolean)">
             <summary>
-            Helper method to create tree nodes and automatically generate the json url
+            Helper method to create tree nodes and automatically generate the json URL
             </summary>
             <param name="id"></param>
             <param name="parentId"></param>
@@ -17963,7 +17970,7 @@
         </member>
         <member name="M:Umbraco.Web.Trees.TreeControllerBase.CreateTreeNode(System.String,System.String,System.Net.Http.Formatting.FormDataCollection,System.String,System.String,System.Boolean,System.String)">
             <summary>
-            Helper method to create tree nodes and automatically generate the json url
+            Helper method to create tree nodes and automatically generate the json URL
             </summary>
             <param name="id"></param>
             <param name="parentId"></param>
@@ -17976,7 +17983,7 @@
         </member>
         <member name="M:Umbraco.Web.Trees.TreeControllerBase.CreateTreeNode(System.String,System.String,System.Net.Http.Formatting.FormDataCollection,System.String,System.String,System.Boolean,System.String,Umbraco.Core.Udi)">
             <summary>
-            Helper method to create tree nodes and automatically generate the json url + UDI
+            Helper method to create tree nodes and automatically generate the json URL + UDI
             </summary>
             <param name="id"></param>
             <param name="parentId"></param>
@@ -18399,13 +18406,13 @@
         </member>
         <member name="M:Umbraco.Web.WebCompositionExtensions.UrlProviders(Umbraco.Core.Composing.Composition)">
             <summary>
-            Gets the url providers collection builder.
+            Gets the URL providers collection builder.
             </summary>
             <param name="composition">The composition.</param>
         </member>
         <member name="M:Umbraco.Web.WebCompositionExtensions.MediaUrlProviders(Umbraco.Core.Composing.Composition)">
             <summary>
-            Gets the media url providers collection builder.
+            Gets the media URL providers collection builder.
             </summary>
             <param name="composition">The composition.</param>
         </member>
@@ -18976,7 +18983,7 @@
             <param name="html"></param>
             <param name="uri"></param>
             <param name="externalLoginsUrl">
-            The post url used to sign in with external logins - this can change depending on for what service the external login is service.
+            The post URL used to sign in with external logins - this can change depending on for what service the external login is service.
             Example: normal back office login or authenticating upgrade login
             </param>
             <param name="features"></param>
@@ -19079,17 +19086,17 @@
         </member>
         <member name="M:Umbraco.Web.PublishedElementExtensions.MediaUrl(Umbraco.Core.Models.PublishedContent.IPublishedContent,System.String,Umbraco.Core.Models.PublishedContent.UrlMode,System.String)">
             <summary>
-            Gets the url for a media.
+            Gets the URL for a media.
             </summary>
             <param name="content">The content item.</param>
             <param name="culture">The culture (use current culture by default).</param>
-            <param name="mode">The url mode (use site configuration by default).</param>
+            <param name="mode">The URL mode (use site configuration by default).</param>
             <param name="propertyAlias">The alias of the property (use 'umbracoFile' by default).</param>
-            <returns>The url for the media.</returns>
+            <returns>The URL for the media.</returns>
             <remarks>
             <para>The value of this property is contextual. It depends on the 'current' request uri,
-            if any. In addition, when the content type is multi-lingual, this is the url for the
-            specified culture. Otherwise, it is the invariant url.</para>
+            if any. In addition, when the content type is multi-lingual, this is the URL for the
+            specified culture. Otherwise, it is the invariant URL.</para>
             </remarks>
         </member>
         <member name="T:Umbraco.Web.Tour.BackOfficeTourFilter">
@@ -19586,12 +19593,12 @@
         </member>
         <member name="T:Umbraco.Web.ImageCropperTemplateExtensions">
             <summary>
-            Provides extension methods for getting ImageProcessor Url from the core Image Cropper property editor
+            Provides extension methods for getting ImageProcessor URL from the core Image Cropper property editor
             </summary>
         </member>
         <member name="M:Umbraco.Web.ImageCropperTemplateExtensions.GetCropUrl(Umbraco.Core.Models.PublishedContent.IPublishedContent,System.String)">
             <summary>
-            Gets the ImageProcessor Url by the crop alias (from the "umbracoFile" property alias) on the IPublishedContent item
+            Gets the ImageProcessor URL by the crop alias (from the "umbracoFile" property alias) on the IPublishedContent item
             </summary>
             <param name="mediaItem">
             The IPublishedContent item.
@@ -19600,12 +19607,12 @@
             The crop alias e.g. thumbnail
             </param>
             <returns>
-            The ImageProcessor.Web Url.
+            The ImageProcessor.Web URL.
             </returns>
         </member>
         <member name="M:Umbraco.Web.ImageCropperTemplateExtensions.GetCropUrl(Umbraco.Core.Models.PublishedContent.IPublishedContent,System.String,System.String)">
             <summary>
-            Gets the ImageProcessor Url by the crop alias using the specified property containing the image cropper Json data on the IPublishedContent item.
+            Gets the ImageProcessor URL by the crop alias using the specified property containing the image cropper Json data on the IPublishedContent item.
             </summary>
             <param name="mediaItem">
             The IPublishedContent item.
@@ -19617,12 +19624,12 @@
             The crop alias e.g. thumbnail
             </param>
             <returns>
-            The ImageProcessor.Web Url.
+            The ImageProcessor.Web URL.
             </returns>
         </member>
         <member name="M:Umbraco.Web.ImageCropperTemplateExtensions.GetCropUrl(Umbraco.Core.Models.PublishedContent.IPublishedContent,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Int32},System.Nullable{Umbraco.Web.Models.ImageCropMode},System.Nullable{Umbraco.Web.Models.ImageCropAnchor},System.Boolean,System.Boolean,System.Boolean,System.String,System.Nullable{Umbraco.Web.Models.ImageCropRatioMode},System.Boolean)">
             <summary>
-            Gets the ImageProcessor Url from the IPublishedContent item.
+            Gets the ImageProcessor URL from the IPublishedContent item.
             </summary>
             <param name="mediaItem">
             The IPublishedContent item.
@@ -19677,10 +19684,10 @@
         </member>
         <member name="M:Umbraco.Web.ImageCropperTemplateExtensions.GetCropUrl(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Int32},System.Nullable{Umbraco.Web.Models.ImageCropMode},System.Nullable{Umbraco.Web.Models.ImageCropAnchor},System.Boolean,System.Boolean,System.String,System.String,System.Nullable{Umbraco.Web.Models.ImageCropRatioMode},System.Boolean)">
             <summary>
-            Gets the ImageProcessor Url from the image path.
+            Gets the ImageProcessor URL from the image path.
             </summary>
             <param name="imageUrl">
-            The image url.
+            The image URL.
             </param>
             <param name="width">
             The width of the output image.
@@ -19732,10 +19739,10 @@
         </member>
         <member name="M:Umbraco.Web.ImageCropperTemplateExtensions.GetCropUrl(System.String,Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int32},System.Nullable{Umbraco.Web.Models.ImageCropMode},System.Nullable{Umbraco.Web.Models.ImageCropAnchor},System.Boolean,System.Boolean,System.String,System.String,System.Nullable{Umbraco.Web.Models.ImageCropRatioMode},System.Boolean)">
             <summary>
-            Gets the ImageProcessor Url from the image path.
+            Gets the ImageProcessor URL from the image path.
             </summary>
             <param name="imageUrl">
-            The image url.
+            The image URL.
             </param>
             <param name="cropDataSet"></param>
             <param name="width">
@@ -20178,7 +20185,7 @@
         </member>
         <member name="M:Umbraco.Web.UrlHelperExtensions.GetUmbracoApiService``1(System.Web.Mvc.UrlHelper,System.String,System.Web.Routing.RouteValueDictionary)">
             <summary>
-            Return the Url for a Web Api service
+            Return the URL for a Web Api service
             </summary>
             <typeparam name="T"></typeparam>
             <param name="url"></param>
@@ -20188,7 +20195,7 @@
         </member>
         <member name="M:Umbraco.Web.UrlHelperExtensions.GetUmbracoApiService(System.Web.Mvc.UrlHelper,System.String,System.Type,System.Web.Routing.RouteValueDictionary)">
             <summary>
-            Return the Url for a Web Api service
+            Return the URL for a Web Api service
             </summary>
             <param name="url"></param>
             <param name="actionName"></param>
@@ -20198,7 +20205,7 @@
         </member>
         <member name="M:Umbraco.Web.UrlHelperExtensions.GetUmbracoApiService(System.Web.Mvc.UrlHelper,System.String,System.String,System.String,System.Web.Routing.RouteValueDictionary)">
             <summary>
-            Return the Url for a Web Api service
+            Return the URL for a Web Api service
             </summary>
             <param name="url"></param>
             <param name="actionName"></param>
@@ -20209,7 +20216,7 @@
         </member>
         <member name="M:Umbraco.Web.UrlHelperExtensions.GetUrlWithCacheBust(System.Web.Mvc.UrlHelper,System.String,System.String,System.Web.Routing.RouteValueDictionary)">
             <summary>
-            Return the Url for an action with a cache-busting hash appended
+            Return the URL for an action with a cache-busting hash appended
             </summary>
             <param name="url"></param>
             <param name="actionName"></param>
@@ -20230,7 +20237,7 @@
         </member>
         <member name="M:Umbraco.Web.UrlHelperRenderExtensions.GetCropUrl(System.Web.Mvc.UrlHelper,Umbraco.Core.Models.PublishedContent.IPublishedContent,System.String,System.Boolean)">
             <summary>
-            Gets the ImageProcessor Url of a media item by the crop alias (using default media item property alias of "umbracoFile")
+            Gets the ImageProcessor URL of a media item by the crop alias (using default media item property alias of "umbracoFile")
             </summary>
             <param name="urlHelper"></param>
             <param name="mediaItem">
@@ -20247,7 +20254,7 @@
         </member>
         <member name="M:Umbraco.Web.UrlHelperRenderExtensions.GetCropUrl(System.Web.Mvc.UrlHelper,Umbraco.Core.Models.PublishedContent.IPublishedContent,System.String,System.String,System.Boolean)">
             <summary>
-            Gets the ImageProcessor Url by the crop alias using the specified property containing the image cropper Json data on the IPublishedContent item.
+            Gets the ImageProcessor URL by the crop alias using the specified property containing the image cropper Json data on the IPublishedContent item.
             </summary>
             <param name="urlHelper"></param>
             <param name="mediaItem">
@@ -20264,12 +20271,12 @@
             set to false if using the result of this method for CSS.
             </param>
             <returns>
-            The ImageProcessor.Web Url.
+            The ImageProcessor.Web URL.
             </returns>
         </member>
         <member name="M:Umbraco.Web.UrlHelperRenderExtensions.GetCropUrl(System.Web.Mvc.UrlHelper,Umbraco.Core.Models.PublishedContent.IPublishedContent,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Int32},System.Nullable{Umbraco.Web.Models.ImageCropMode},System.Nullable{Umbraco.Web.Models.ImageCropAnchor},System.Boolean,System.Boolean,System.Boolean,System.String,System.Nullable{Umbraco.Web.Models.ImageCropRatioMode},System.Boolean,System.Boolean)">
             <summary>
-            Gets the ImageProcessor Url from the image path.
+            Gets the ImageProcessor URL from the image path.
             </summary>
             <param name="mediaItem">
             The IPublishedContent item.
@@ -20329,10 +20336,10 @@
         </member>
         <member name="M:Umbraco.Web.UrlHelperRenderExtensions.GetCropUrl(System.Web.Mvc.UrlHelper,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Int32},System.Nullable{Umbraco.Web.Models.ImageCropMode},System.Nullable{Umbraco.Web.Models.ImageCropAnchor},System.Boolean,System.Boolean,System.String,System.String,System.Nullable{Umbraco.Web.Models.ImageCropRatioMode},System.Boolean,System.Boolean)">
             <summary>
-            Gets the ImageProcessor Url from the image path.
+            Gets the ImageProcessor URL from the image path.
             </summary>
             <param name="imageUrl">
-            The image url.
+            The image URL.
             </param>
             <param name="width">
             The width of the output image.
@@ -21059,16 +21066,16 @@
         </member>
         <member name="M:Umbraco.Web.PublishedContentExtensions.Url(Umbraco.Core.Models.PublishedContent.IPublishedContent,System.String,Umbraco.Core.Models.PublishedContent.UrlMode)">
             <summary>
-            Gets the url of the content item.
+            Gets the URL of the content item.
             </summary>
             <remarks>
-            <para>If the content item is a document, then this method returns the url of the
-            document. If it is a media, then this methods return the media url for the
-            'umbracoFile' property. Use the MediaUrl() method to get the media url for other
+            <para>If the content item is a document, then this method returns the URL of the
+            document. If it is a media, then this methods return the media URL for the
+            'umbracoFile' property. Use the MediaUrl() method to get the media URL for other
             properties.</para>
             <para>The value of this property is contextual. It depends on the 'current' request uri,
-            if any. In addition, when the content type is multi-lingual, this is the url for the
-            specified culture. Otherwise, it is the invariant url.</para>
+            if any. In addition, when the content type is multi-lingual, this is the URL for the
+            specified culture. Otherwise, it is the invariant URL.</para>
             </remarks>
         </member>
         <member name="T:Umbraco.Web.ExamineExtensions">
@@ -22167,7 +22174,7 @@
         </member>
         <member name="P:Umbraco.Web.UmbracoContext.CleanedUmbracoUrl">
             <summary>
-            Gets the cleaned up url that is handled by Umbraco.
+            Gets the cleaned up URL that is handled by Umbraco.
             </summary>
             <remarks>That is, lowercase, no trailing slash after path, no .aspx...</remarks>
         </member>
@@ -22208,7 +22215,7 @@
         </member>
         <member name="P:Umbraco.Web.UmbracoContext.UrlProvider">
             <summary>
-            Gets the url provider.
+            Gets the URL provider.
             </summary>
         </member>
         <member name="P:Umbraco.Web.UmbracoContext.PublishedRequest">
@@ -22239,53 +22246,53 @@
         </member>
         <member name="M:Umbraco.Web.UmbracoContext.Url(System.Int32,System.String)">
             <summary>
-            Gets the url of a content identified by its identifier.
+            Gets the URL of a content identified by its identifier.
             </summary>
             <param name="contentId">The content identifier.</param>
             <param name="culture"></param>
-            <returns>The url for the content.</returns>
+            <returns>The URL for the content.</returns>
         </member>
         <member name="M:Umbraco.Web.UmbracoContext.Url(System.Guid,System.String)">
             <summary>
-            Gets the url of a content identified by its identifier.
+            Gets the URL of a content identified by its identifier.
             </summary>
             <param name="contentId">The content identifier.</param>
             <param name="culture"></param>
-            <returns>The url for the content.</returns>
+            <returns>The URL for the content.</returns>
         </member>
         <member name="M:Umbraco.Web.UmbracoContext.Url(System.Int32,Umbraco.Core.Models.PublishedContent.UrlMode,System.String)">
             <summary>
-            Gets the url of a content identified by its identifier, in a specified mode.
+            Gets the URL of a content identified by its identifier, in a specified mode.
             </summary>
             <param name="contentId">The content identifier.</param>
             <param name="mode">The mode.</param>
             <param name="culture"></param>
-            <returns>The url for the content.</returns>
+            <returns>The URL for the content.</returns>
         </member>
         <member name="M:Umbraco.Web.UmbracoContext.Url(System.Guid,Umbraco.Core.Models.PublishedContent.UrlMode,System.String)">
             <summary>
-            Gets the url of a content identified by its identifier, in a specified mode.
+            Gets the URL of a content identified by its identifier, in a specified mode.
             </summary>
             <param name="contentId">The content identifier.</param>
             <param name="mode">The mode.</param>
             <param name="culture"></param>
-            <returns>The url for the content.</returns>
+            <returns>The URL for the content.</returns>
         </member>
         <member name="M:Umbraco.Web.UmbracoContext.UrlAbsolute(System.Int32,System.String)">
             <summary>
-            Gets the absolute url of a content identified by its identifier.
+            Gets the absolute URL of a content identified by its identifier.
             </summary>
             <param name="contentId">The content identifier.</param>
             <param name="culture"></param>
-            <returns>The absolute url for the content.</returns>
+            <returns>The absolute URL for the content.</returns>
         </member>
         <member name="M:Umbraco.Web.UmbracoContext.UrlAbsolute(System.Guid,System.String)">
             <summary>
-            Gets the absolute url of a content identified by its identifier.
+            Gets the absolute URL of a content identified by its identifier.
             </summary>
             <param name="contentId">The content identifier.</param>
             <param name="culture"></param>
-            <returns>The absolute url for the content.</returns>
+            <returns>The absolute URL for the content.</returns>
         </member>
         <member name="T:Umbraco.Web.UmbracoInjectedModule">
             <summary>
@@ -22353,7 +22360,7 @@
         </member>
         <member name="M:Umbraco.Web.UriUtility.ToFullUrl(System.String,System.Web.HttpContextBase)">
             <summary>
-            Returns an full url with the host, port, etc...
+            Returns an full URL with the host, port, etc...
             </summary>
             <param name="absolutePath">An absolute path (i.e. starts with a '/' )</param>
             <param name="httpContext"> </param>
@@ -22440,7 +22447,7 @@
         </member>
         <member name="P:Umbraco.Web.UmbracoHttpHandler.Url">
             <summary>
-            Gets the Url helper.
+            Gets the URL helper.
             </summary>
             <remarks>This URL helper is created without any route data and an empty request context.</remarks>
         </member>
@@ -22491,7 +22498,7 @@
         </member>
         <member name="P:Umbraco.Web.UmbracoWebService.Url">
             <summary>
-            Gets the Url helper.
+            Gets the URL helper.
             </summary>
             <remarks>This URL helper is created without any route data and an empty request context.</remarks>
         </member>

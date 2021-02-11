@@ -367,31 +367,31 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Umbraco.Core, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\UmbracoCms.Core.8.9.0\lib\net472\Umbraco.Core.dll</HintPath>
+      <HintPath>..\..\packages\UmbracoCms.Core.8.10.1\lib\net472\Umbraco.Core.dll</HintPath>
     </Reference>
     <Reference Include="Umbraco.Examine, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\UmbracoCms.Web.8.9.0\lib\net472\Umbraco.Examine.dll</HintPath>
+      <HintPath>..\..\packages\UmbracoCms.Web.8.10.1\lib\net472\Umbraco.Examine.dll</HintPath>
     </Reference>
     <Reference Include="Umbraco.ModelsBuilder, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Umbraco.ModelsBuilder.8.1.0\lib\net472\Umbraco.ModelsBuilder.dll</HintPath>
     </Reference>
     <Reference Include="Umbraco.ModelsBuilder.Embedded, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\UmbracoCms.Web.8.9.0\lib\net472\Umbraco.ModelsBuilder.Embedded.dll</HintPath>
+      <HintPath>..\..\packages\UmbracoCms.Web.8.10.1\lib\net472\Umbraco.ModelsBuilder.Embedded.dll</HintPath>
     </Reference>
     <Reference Include="Umbraco.Web, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\UmbracoCms.Web.8.9.0\lib\net472\Umbraco.Web.dll</HintPath>
+      <HintPath>..\..\packages\UmbracoCms.Web.8.10.1\lib\net472\Umbraco.Web.dll</HintPath>
     </Reference>
     <Reference Include="Umbraco.Web.UI, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\UmbracoCms.Web.8.9.0\lib\net472\Umbraco.Web.UI.dll</HintPath>
+      <HintPath>..\..\packages\UmbracoCms.Web.8.10.1\lib\net472\Umbraco.Web.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Vendr.Core, Version=1.4.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Vendr.Core.1.4.2\lib\net472\Vendr.Core.dll</HintPath>
+    <Reference Include="Vendr.Core, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Vendr.Core.1.5.0\lib\net472\Vendr.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Vendr.Core.Web, Version=1.4.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Vendr.Core.Web.1.4.2\lib\net472\Vendr.Core.Web.dll</HintPath>
+    <Reference Include="Vendr.Core.Web, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Vendr.Core.Web.1.5.0\lib\net472\Vendr.Core.Web.dll</HintPath>
     </Reference>
-    <Reference Include="Vendr.Web, Version=1.4.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Vendr.Web.1.4.2\lib\net472\Vendr.Web.dll</HintPath>
+    <Reference Include="Vendr.Web, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Vendr.Web.1.5.0\lib\net472\Vendr.Web.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -409,11 +409,20 @@
     <Compile Include="Models\CheckoutShippingMethodPage.generated.cs">
       <DependentUpon>Generated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\MultiVariantProductPage.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ProductGroupComp.generated.cs">
       <DependentUpon>Generated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductMultiVariant.generated.cs">
+      <DependentUpon>Generated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Web\Controllers\ProductApiController.cs" />
     <Compile Include="Web\Controllers\SearchSurfaceController.cs" />
+    <Compile Include="Web\Dtos\GetProductVariantDto.cs" />
     <Compile Include="Web\Dtos\OrderAddressDto.cs" />
+    <Compile Include="Web\Dtos\ProductVariantDto.cs" />
     <Compile Include="Web\Dtos\UpdateOrderPaymentMethodDto.cs" />
     <Compile Include="Web\Dtos\UpdateOrderShippingMethodDto.cs" />
     <Compile Include="Web\Extensions\UriExtensions.cs" />

@@ -42,7 +42,8 @@ namespace Vendr.DemoStore.Composing
                     // ================================================================
 
                     // Make sure node is a product page node
-                    if (e.ValueSet.ItemType.InvariantEquals(ProductPage.ModelTypeAlias))
+                    if (e.ValueSet.ItemType.InvariantEquals(ProductPage.ModelTypeAlias)
+                        || e.ValueSet.ItemType.InvariantEquals(MultiVariantProductPage.ModelTypeAlias))
                     {
                         // Make sure some categories are defined
                         if (e.ValueSet.Values.ContainsKey("categories"))
