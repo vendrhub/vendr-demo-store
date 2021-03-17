@@ -28,3 +28,6 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- publish: $(build.artifactStagingDirectory)
+  displayName: 'Publish Artifacts'
+  artifact: BuildArtifacts
