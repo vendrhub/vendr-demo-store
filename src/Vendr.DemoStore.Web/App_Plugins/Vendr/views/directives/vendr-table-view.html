@@ -37,18 +37,18 @@
                 </umb-editor-sub-header-section>
 
                 <vendr-filter ng-repeat="fltr in filters track by fltr.alias"
-                              ng-show="!selection || selection.length == 0"
-                              filter="fltr"
-                              on-change="doFilter()">
+                    ng-show="!selection || selection.length == 0"
+                    filter="fltr"
+                    on-change="doFilter()">
                 </vendr-filter>
 
                 <umb-editor-sub-header-section ng-show="(selection.length > 0)">
                     <umb-button type="button"
-                                label="Clear selection"
-                                label-key="buttons_clearSelection"
-                                button-style="white"
-                                action="clearSelection()"
-                                disabled="bulkActionInProgress">
+                        label="Clear selection"
+                        label-key="buttons_clearSelection"
+                        button-style="white"
+                        action="clearSelection()"
+                        disabled="bulkActionInProgress">
                     </umb-button>
                 </umb-editor-sub-header-section>
 
@@ -59,7 +59,7 @@
                 </umb-editor-sub-header-section>
 
             </umb-editor-sub-header-content-left>
-            
+
             <umb-editor-sub-header-content-right>
 
                 <umb-editor-sub-header-section ng-show="(selection.length == 0)">
@@ -121,16 +121,18 @@
 
         <umb-load-indicator ng-show="loading"></umb-load-indicator>
 
-        <div class="flex justify-center">
-          <umb-pagination
-             ng-show="!loading && paginated && pagination.totalPages"
-             page-number="pagination.pageNumber"
-             total-pages="pagination.totalPages"
-             on-next="goToPage"
-             on-prev="goToPage"
-             on-go-to-page="goToPage">
-          </umb-pagination>
-      </div>
+        <div class="flex justify-center" ng-show="!loading && paginated && pagination.totalPages">
+            <umb-pagination page-number="pagination.pageNumber"
+                total-pages="pagination.totalPages"
+                on-next="goToPage"
+                on-prev="goToPage"
+                on-go-to-page="goToPage">
+            </umb-pagination>
+            <vendr-page-size page-sizes="[30,75,150,300,600]"
+                page-size="pagination.pageSize"
+                on-change="setPageSize(pageSize)">
+            </vendr-page-size>
+        </div>
 
     </div>
 

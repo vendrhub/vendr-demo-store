@@ -1,0 +1,102 @@
+﻿<div ng-controller="Vendr.Controllers.PrintTemplateEditController as vm" class="vendr">
+
+    <umb-load-indicator ng-if="vm.page.loading"></umb-load-indicator>
+
+    <form name="contentForm"
+          ng-submit="vm.save()"
+          novalidate
+          val-form-manager
+          autocomplete="off">
+
+        <umb-editor-view ng-if="!vm.page.loading">
+
+            <umb-editor-header name="vm.content.name"
+                alias="vm.content.alias"
+                hide-icon="true"
+                hide-description="true"
+                hide-alias="false"
+                show-back-button="true"
+                on-back="vm.back()"
+                menu="vm.page.menu">
+            </umb-editor-header>
+
+            <umb-editor-container class="form-horizontal">
+
+                <div class="vendr-layout vendr-layout--layout1">
+
+                    <div class="vendr-layout__left">
+
+                        <umb-box>
+                            <!--<umb-box-header title="Settings"></umb-box-header>-->
+                            <umb-box-content>
+
+                                <umb-control-group label="Category" description="Select a category for this print">
+                                    <select class="umb-property-editor umb-dropdown"
+                                            ng-model="vm.content.category"
+                                            ng-options="itm.key as itm.value for itm in vm.options.templateCategories"
+                                            required>
+                                        <option value="" disabled selected ng-hide="vm.content.category">-- Select a Category --</option>
+                                    </select>
+                                </umb-control-group>
+
+                                <umb-control-group label="Template View" description="The template view file to use as the body of the print">
+                                    <vendr-dictionary-input name="templateView"
+                                                            ng-model="vm.content.templateView"
+                                                            container-key="vm.options.dictionaryInputOptions.containerKey"
+                                                            on-generate-key="vm.options.dictionaryInputOptions.generateKey"></vendr-dictionary-input>
+                                </umb-control-group>
+
+                            </umb-box-content>
+                        </umb-box>
+                    </div>
+
+                    <div class="vendr-layout__right">
+
+                        <vendr-editor-actions editor-actions="vm.options.editorActions"
+                            model="vm.content"
+                            ng-if="!vm.create && vm.options.editorActions && vm.options.editorActions.length > 0">
+                        </vendr-editor-actions>
+
+                        <umb-box>
+                            <umb-box-header title-key="general_info"></umb-box-header>
+                            <umb-box-content class="block-form">
+                                <umb-control-group label="Id">
+                                    <vendr-id-label value="vm.content.id"></vendr-id-label>
+                                </umb-control-group>
+                                <umb-control-group label="Store Id">
+                                    <vendr-id-label value="vm.content.storeId"></vendr-id-label>
+                                </umb-control-group>
+                            </umb-box-content>
+                        </umb-box>
+                    </div>
+
+                </div>
+
+            </umb-editor-container>
+
+            <umb-editor-footer>
+
+                <umb-editor-footer-content-left>
+                    <umb-breadcrumbs
+                        ng-if="vm.page.breadcrumb && vm.page.breadcrumb.items && vm.page.breadcrumb.items.length > 0"
+                        ancestors="vm.page.breadcrumb.items"
+                        on-open="vm.page.breadcrumb.itemClick(ancestor)">
+                    </umb-breadcrumbs>
+                </umb-editor-footer-content-left>
+
+                <umb-editor-footer-content-right>
+
+                    <umb-button type="submit"
+                        button-style="success"
+                        state="vm.page.saveButtonState"
+                        shortcut="ctrl+s"
+                        label="Save"
+                        label-key="buttons_save">
+                    </umb-button>
+
+                </umb-editor-footer-content-right>
+
+            </umb-editor-footer>
+        </umb-editor-view>
+    </form>
+</div>

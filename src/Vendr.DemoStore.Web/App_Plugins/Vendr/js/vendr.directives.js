@@ -184,6 +184,36 @@
 
     'use strict';
 
+    function vendrAutoSizeIframe() {
+
+        function link(scope, element, attrs) {
+
+            element.on('load', function () {
+
+                var iFrameHeight = element[0].contentWindow.document.body.scrollHeight + 'px';
+                var iFrameWidth = '100%';
+
+                element.css('width', iFrameWidth);
+                element.css('height', iFrameHeight);
+
+            });
+        }
+
+        var directive = {
+            restrict: 'A',
+            link: link
+        };
+        
+        return directive;
+    };
+
+    angular.module('vendr.directives').directive('vendrAutoSizeIframe', vendrAutoSizeIframe);
+
+}());
+(function () {
+
+    'use strict';
+
     function vendrColorPicker() {
 
         function link(scope, el, attr, ctrl) {
@@ -424,6 +454,61 @@
     };
 
     angular.module('vendr.directives').directive('vendrDictionaryInput', vendrDictionaryInput);
+
+}());
+(function () {
+
+    'use strict';
+
+    function vendrEditorActions(notificationsService) {
+
+        function link(scope, el, attr, ctrl) {
+
+            scope.getActionName = function (editorAction) {
+                return typeof editorAction.name === 'function'
+                    ? editorAction.name(scope.model)
+                    : editorAction.name;
+            }
+
+            scope.performEditorAction = function (editorAction) {
+                editorAction.action(scope.model).then(function (resp) {
+                    if (resp && !resp.canceled) {
+                        notificationsService.success(scope.getActionName(editorAction) + " Successful",
+                            resp.message || scope.getActionName(editorAction) + " successfully executed.");
+                    }
+                }, function (err) {
+                    notificationsService.error(scope.getActionName(editorAction) + " Error",
+                        err.message || "Unable to perform action '" + scope.getActionName(editorAction) + "'. Please check the error log for details.");
+                });
+            }
+
+        }
+
+        var directive = {
+            restrict: 'E',
+            replace: true,
+            template: `<div>
+                <umb-box ng-if="editorActions && editorActions.length > 0">
+                    <umb-box-header title="Actions"></umb-box-header>
+                    <umb-box-content class="block-form">
+                        <button type="button" class="btn btn-block"
+                            ng-repeat="editorAction in editorActions"
+                            ng-class="{ 'btn-action' : $index === 0 }"
+                            ng-click="performEditorAction(editorAction)">{{ getActionName(editorAction) }}</button>
+                    </umb-box-content>
+                </umb-box>
+            </div>`,
+            scope: {
+                editorActions: '<',
+                model: '='
+            },
+            link: link
+        };
+        
+        return directive;
+    };
+
+    angular.module('vendr.directives').directive('vendrEditorActions', vendrEditorActions);
 
 }());
 (function () {
@@ -918,6 +1003,42 @@
     };
 
     angular.module('vendr.directives').directive('vendrOrderSearch', vendrOrderSearch);
+
+}());
+(function () {
+
+    'use strict';
+
+    function vendrPageSize() {
+
+        function link(scope, el, attr, ctrl) {
+            scope.handleChange = function () {
+                if (scope.onChange) {
+                    scope.onChange({ pageSize: scope.pageSize })
+                }
+            }
+        }
+
+        var directive = {
+            restrict: 'E',
+            replace: true,
+            template: `<select class="vendr-page-size" 
+                ng-model="pageSize" 
+                ng-options="size for size in pageSizes"
+                ng-change="handleChange()">
+            </select>`,
+            scope: {
+                pageSizes: '=',
+                pageSize: '=',
+                onChange: '&'
+            },
+            link: link
+        };
+        
+        return directive;
+    };
+
+    angular.module('vendr.directives').directive('vendrPageSize', vendrPageSize);
 
 }());
 (function () {
@@ -1633,13 +1754,14 @@
                     scope.bulkActionStatus = "";
                     scope.bulkActionInProgress = false;
                     scope.clearSelection();
-                }, 500);
+                }, 200);
 
                 if (reload && scope.onLoadItems) {
                     scope.loading = true;
                     scope.onLoadItems({
                         searchTerm: scope.options.filterTerm,
-                        pageNumber: scope.pagination.pageNumber
+                        pageNumber: scope.pagination.pageNumber,
+                        pageSize: scope.pagination.pageSize
                     });
                 }
 
@@ -1654,13 +1776,13 @@
 
             }
 
-            function serial(selected, fn, getStatusMsg, index) {
-                return fn(selected[index]).then(function (content) {
+            function doItemActions(selected, config, fn, getStatusMsg, index) {
+                return fn(selected[index], config).then(function (content) {
                     index++;
                     getStatusMsg(index, selected.length).then(function (value) {
                         scope.bulkActionStatus = value;
                     });
-                    return index < selected.length ? serial(selected, fn, getStatusMsg, index) : content;
+                    return index < selected.length ? doItemActions(selected, config, fn, getStatusMsg, index) : content;
                 }, function (err) {
                     var reload = index > 0;
                     notifyAndReload(err, reload);
@@ -1668,7 +1790,16 @@
                 });
             }
 
-            function performBulkAction(name, fn, getStatusMsg, getSuccessMsg, getConfirmMsg) {
+            function doBulkAction(selected, config, fn) {
+                return fn(selected, config).then(function (content) {
+                    return content;
+                }, function (err) {
+                    notifyAndReload(err, true);
+                    return err;
+                });
+            }
+
+            function performBulkAction(name, configure, fn, getStatusMsg, getSuccessMsg, getConfirmMsg, isBulkAction) {
                 var selected = scope.selection;
 
                 if (selected.length === 0)
@@ -1681,9 +1812,7 @@
                 });
 
                 getConfirmMsg(selectedItems.length).then(function (msg) {
-
                     if (msg) {
-
                         const confirm = {
                             title: name,
                             view: "default",
@@ -1692,34 +1821,47 @@
                             closeButtonLabelKey: "general_cancel",
                             submitButtonStyle: "danger",
                             submit: function () {
-                                performBulkActionInner(selectedItems, fn, getStatusMsg, getSuccessMsg);
                                 overlayService.close();
+                                // Ensure we wait till the next tick as we don't know what a 
+                                // configure action will do so we need to ensure that our UI
+                                // is fully finished before it runs
+                                $timeout(function () {
+                                    configure(selectedItems).then(function (config) {
+                                        performBulkActionInner(selectedItems, config, fn, getStatusMsg, getSuccessMsg, isBulkAction);
+                                    });
+                                }, 1);
                             },
                             close: function () {
                                 overlayService.close();
                             }
                         };
-
                         overlayService.open(confirm);
-
                     } else {
-                        performBulkActionInner(selectedItems, fn, getStatusMsg, getSuccessMsg);
+                        configure(selectedItems).then(function (config) {
+                            performBulkActionInner(selectedItems, config, fn, getStatusMsg, getSuccessMsg, isBulkAction);
+                        });
                     }
                 });
             }
 
-            function performBulkActionInner(selected, fn, getStatusMsg, getSuccessMsg) {
+            function performBulkActionInner(selected, config, fn, getStatusMsg, getSuccessMsg, isBulkAction) {
                 scope.bulkActionInProgress = true;
 
                 getStatusMsg(0, selected.length).then(function (value) {
                     scope.bulkActionStatus = value;
                 });
 
-                return serial(selected, fn, getStatusMsg, 0).then(function (result) {
+                var r = isBulkAction
+                    ? doBulkAction(selected, console, fn)
+                    : doItemActions(selected, config, fn, getStatusMsg, 0);
+
+                return r.then(function (result) {
                     // executes once the whole selection has been processed
                     // in case of an error (caught by serial), result will be the error
                     if (!(result.data && angular.isArray(result.data.notifications)))
-                        notifyAndReload(result, true, getSuccessMsg(selected.length));
+                        notifyAndReload(result,
+                            !result.canceled,
+                            result.canceled ? null : getSuccessMsg(selected.length));
                 });
             }
 
@@ -1732,7 +1874,7 @@
                 allowSorting: scope.allowSorting
             };
 
-            scope.pagination = { pageNumber: 1, totalPages: 1 };
+            scope.pagination = { pageNumber: 1, totalPages: 1, pageSize: 30 };
             scope.selection = [];
             scope.bulkActionStatus = '';
             scope.bulkActionInProgress = false;
@@ -1822,11 +1964,12 @@
                 }
 
                 scope.options.filteredItems = filteredItems;
-            };
+            }; 
 
             scope.doBulkAction = function (bulkAction) {
                 performBulkAction(bulkAction.name, 
-                    bulkAction.doAction,
+                    bulkAction.configure || function () { return $q.resolve(null) },
+                    bulkAction.bulkAction || bulkAction.itemAction || bulkAction.doAction,
                     function (count, total) {
                         return bulkAction.getStatusMessage
                             ? bulkAction.getStatusMessage(count, total)
@@ -1841,7 +1984,8 @@
                         return bulkAction.getConfirmMessage
                             ? bulkAction.getConfirmMessage(total)
                             : $q.resolve(false);
-                    });
+                    },
+                    !!bulkAction.bulkAction);
             };
 
             scope.clearSelection = function () {
@@ -1874,6 +2018,12 @@
                 }
             }
 
+            scope.setPageSize = function (pageSize) {
+                scope.pagination.pageNumber = 1;
+                scope.pagination.pageSize = pageSize;
+                scope.loadItems();
+            }
+
             scope.goToPage = function (pageNumber) {
                 scope.pagination.pageNumber = pageNumber;
                 scope.loadItems();
@@ -1885,6 +2035,7 @@
                 scope.onLoadItems({
                     searchTerm: scope.options.filterTerm,
                     pageNumber: scope.pagination.pageNumber,
+                    pageSize: scope.pagination.pageSize,
                     orderBy: scope.options.orderBy,
                     orderDirection: scope.options.orderDirection
                 });
@@ -1900,7 +2051,8 @@
                     // If the list view IS paginated, assume the items are a paged result
                     scope.pagination = {
                         pageNumber: scope.items.pageNumber,
-                        totalPages: scope.items.totalPages
+                        totalPages: scope.items.totalPages,
+                        pageSize: scope.items.pageSize
                     };
                     scope.options.filteredItems = scope.items.items;
                 }
@@ -1919,7 +2071,7 @@
         var directive = {
             restrict: 'E',
             replace: true,
-            template:'<div class="vendr"><div class="umb-property-editor umb-listview"><umb-editor-sub-header ng-class="{\'--state-selection\':(selection.length > 0)}"><umb-editor-sub-header-content-left><umb-editor-sub-header-section ng-if="(createActions && createActions.length > 0 && (selection.length == 0))"><div class="btn-group" ng-show="createActions.length == 1"><button type="button" class="btn btn-outline umb-outline" ng-click="createActions[0].doAction()"><i class="{{createActions[0].icon}}" aria-hidden="true"></i> {{createActions[0].name}}</button></div><div class="btn-group" ng-show="createActions.length > 1"><button type="button" class="btn btn-outline umb-outline dropdown-toggle" data-toggle="dropdown"><span ng-click="createActions[0].doAction()"><i class="{{createActions[0].icon}}" aria-hidden="true"></i> {{createActions[0].name}}</span> <span class="caret" ng-click="page.createDropdownOpen = !page.createDropdownOpen"></span></button><umb-dropdown ng-if="page.createDropdownOpen" on-close="page.createDropdownOpen = false"><umb-dropdown-item ng-repeat="createAction in createActions" ng-if="$index > 0"><a ng-click="createAction.doAction()"><i class="{{createAction.icon}}" aria-hidden="true"></i> {{createAction.name}}</a></umb-dropdown-item></umb-dropdown></div></umb-editor-sub-header-section><vendr-filter ng-repeat="fltr in filters track by fltr.alias" ng-show="!selection || selection.length == 0" filter="fltr" on-change="doFilter()"></vendr-filter><umb-editor-sub-header-section ng-show="(selection.length > 0)"><umb-button type="button" label="Clear selection" label-key="buttons_clearSelection" button-style="white" action="clearSelection()" disabled="bulkActionInProgress"></umb-button></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length > 0)"><strong ng-show="!bulkActionInProgress">{{ selection.length }}&nbsp;<localize key="general_of">of</localize>&nbsp;{{ options.filteredItems.length }}&nbsp;<localize key="general_selected">items selected</localize></strong> <strong ng-show="bulkActionInProgress" ng-bind="bulkActionStatus"></strong><umb-loader position="bottom" ng-show="bulkActionInProgress"></umb-loader></umb-editor-sub-header-section></umb-editor-sub-header-content-left><umb-editor-sub-header-content-right><umb-editor-sub-header-section ng-show="(selection.length == 0)"><div class="form-search -no-margin-bottom pull-right" novalidate><div class="inner-addon left-addon"><i class="icon icon-search" ng-click="doFilter()" aria-hidden="true"></i> <input class="form-control search-input" type="text" localize="placeholder" placeholder="@general_typeToSearch" ng-model="options.filterTerm" ng-change="doFilter()" ng-keydown="doFilter()" prevent-enter-submit no-dirty-check></div></div></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length > 0) && (options.bulkActionsAllowed)"><umb-button ng-repeat="bulkAction in bulkActions" type="button" button-style="white" label="{{ bulkAction.name }}" icon="{{ bulkAction.icon }}" action="doBulkAction(bulkAction)" disabled="bulkActionInProgress" size="xs" add-ellipsis="true"></umb-button></umb-editor-sub-header-section></umb-editor-sub-header-content-right></umb-editor-sub-header><div ng-if="!loading"><vendr-table ng-if="options.filteredItems && options.filteredItems.length > 0" items="options.filteredItems" allow-select-all="options.bulkActionsAllowed" allow-sorting="options.allowSorting" item-properties="itemProperties" on-select="selectItem(item, $index, $event)" on-click="itemClick(item, $index, $event)" on-select-all="selectAll($event)" on-selected-all="areAllSelected()" on-sorting-direction="setSortDirection(col, direction)" on-sort="sortItems(field, allow, isSystem)"></vendr-table><umb-empty-state ng-if="!options.filteredItems || options.filteredItems.length === 0" position="center"><div>No items found</div></umb-empty-state></div><umb-load-indicator ng-show="loading"></umb-load-indicator><div class="flex justify-center"><umb-pagination ng-show="!loading && paginated && pagination.totalPages" page-number="pagination.pageNumber" total-pages="pagination.totalPages" on-next="goToPage" on-prev="goToPage" on-go-to-page="goToPage"></umb-pagination></div></div></div>',
+            template:'<div class="vendr"><div class="umb-property-editor umb-listview"><umb-editor-sub-header ng-class="{\'--state-selection\':(selection.length > 0)}"><umb-editor-sub-header-content-left><umb-editor-sub-header-section ng-if="(createActions && createActions.length > 0 && (selection.length == 0))"><div class="btn-group" ng-show="createActions.length == 1"><button type="button" class="btn btn-outline umb-outline" ng-click="createActions[0].doAction()"><i class="{{createActions[0].icon}}" aria-hidden="true"></i> {{createActions[0].name}}</button></div><div class="btn-group" ng-show="createActions.length > 1"><button type="button" class="btn btn-outline umb-outline dropdown-toggle" data-toggle="dropdown"><span ng-click="createActions[0].doAction()"><i class="{{createActions[0].icon}}" aria-hidden="true"></i> {{createActions[0].name}}</span> <span class="caret" ng-click="page.createDropdownOpen = !page.createDropdownOpen"></span></button><umb-dropdown ng-if="page.createDropdownOpen" on-close="page.createDropdownOpen = false"><umb-dropdown-item ng-repeat="createAction in createActions" ng-if="$index > 0"><a ng-click="createAction.doAction()"><i class="{{createAction.icon}}" aria-hidden="true"></i> {{createAction.name}}</a></umb-dropdown-item></umb-dropdown></div></umb-editor-sub-header-section><vendr-filter ng-repeat="fltr in filters track by fltr.alias" ng-show="!selection || selection.length == 0" filter="fltr" on-change="doFilter()"></vendr-filter><umb-editor-sub-header-section ng-show="(selection.length > 0)"><umb-button type="button" label="Clear selection" label-key="buttons_clearSelection" button-style="white" action="clearSelection()" disabled="bulkActionInProgress"></umb-button></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length > 0)"><strong ng-show="!bulkActionInProgress">{{ selection.length }}&nbsp;<localize key="general_of">of</localize>&nbsp;{{ options.filteredItems.length }}&nbsp;<localize key="general_selected">items selected</localize></strong> <strong ng-show="bulkActionInProgress" ng-bind="bulkActionStatus"></strong><umb-loader position="bottom" ng-show="bulkActionInProgress"></umb-loader></umb-editor-sub-header-section></umb-editor-sub-header-content-left><umb-editor-sub-header-content-right><umb-editor-sub-header-section ng-show="(selection.length == 0)"><div class="form-search -no-margin-bottom pull-right" novalidate><div class="inner-addon left-addon"><i class="icon icon-search" ng-click="doFilter()" aria-hidden="true"></i> <input class="form-control search-input" type="text" localize="placeholder" placeholder="@general_typeToSearch" ng-model="options.filterTerm" ng-change="doFilter()" ng-keydown="doFilter()" prevent-enter-submit no-dirty-check></div></div></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length > 0) && (options.bulkActionsAllowed)"><umb-button ng-repeat="bulkAction in bulkActions" type="button" button-style="white" label="{{ bulkAction.name }}" icon="{{ bulkAction.icon }}" action="doBulkAction(bulkAction)" disabled="bulkActionInProgress" size="xs" add-ellipsis="true"></umb-button></umb-editor-sub-header-section></umb-editor-sub-header-content-right></umb-editor-sub-header><div ng-if="!loading"><vendr-table ng-if="options.filteredItems && options.filteredItems.length > 0" items="options.filteredItems" allow-select-all="options.bulkActionsAllowed" allow-sorting="options.allowSorting" item-properties="itemProperties" on-select="selectItem(item, $index, $event)" on-click="itemClick(item, $index, $event)" on-select-all="selectAll($event)" on-selected-all="areAllSelected()" on-sorting-direction="setSortDirection(col, direction)" on-sort="sortItems(field, allow, isSystem)"></vendr-table><umb-empty-state ng-if="!options.filteredItems || options.filteredItems.length === 0" position="center"><div>No items found</div></umb-empty-state></div><umb-load-indicator ng-show="loading"></umb-load-indicator><div class="flex justify-center" ng-show="!loading && paginated && pagination.totalPages"><umb-pagination page-number="pagination.pageNumber" total-pages="pagination.totalPages" on-next="goToPage" on-prev="goToPage" on-go-to-page="goToPage"></umb-pagination><vendr-page-size page-sizes="[30,75,150,300,600]" page-size="pagination.pageSize" on-change="setPageSize(pageSize)"></vendr-page-size></div></div></div>',
             scope: {
                 loading: "<",
                 createActions: "<",

@@ -300,13 +300,10 @@
     </div>
     <div class="vendr-layout__right">
 
-        <umb-box>
-            <umb-box-header title="Actions"></umb-box-header>
-            <umb-box-content class="block-form">
-                <button type="button" class="btn btn-block btn-action" ng-click="vm.changeStatus()">Change Status</button>
-                <button type="button" class="btn btn-block" ng-click="vm.sendEmail()">Send Email</button>
-            </umb-box-content>
-        </umb-box>
+        <vendr-editor-actions editor-actions="vm.options.editorActions"
+            model="vm.content"
+            ng-if="vm.options.editorActions && vm.options.editorActions.length > 0">
+        </vendr-editor-actions>
 
         <umb-box>
             <umb-box-header title="Customer Details">

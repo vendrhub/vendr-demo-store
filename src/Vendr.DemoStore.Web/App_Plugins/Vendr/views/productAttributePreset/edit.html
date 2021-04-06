@@ -55,6 +55,12 @@
                         </umb-box>
                     </div>
                     <div class="vendr-layout__right">
+
+                        <vendr-editor-actions editor-actions="vm.options.editorActions"
+                            model="vm.content"
+                            ng-if="!vm.create && vm.options.editorActions && vm.options.editorActions.length > 0">
+                        </vendr-editor-actions>
+
                         <umb-box>
                             <umb-box-header title-key="general_info"></umb-box-header>
                             <umb-box-content class="block-form">
@@ -66,6 +72,7 @@
                                 </umb-control-group>
                             </umb-box-content>
                         </umb-box>
+
                     </div>
                 </div>
             </umb-editor-container>

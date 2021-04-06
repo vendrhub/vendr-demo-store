@@ -72,27 +72,6 @@
         "hideLabel": false,
         "valueType": "JSON"
       }
-    },
-    {
-      "alias": "Vendr.VariantsEditor",
-      "name": "Vendr: Variants Editor",
-      "editor": {
-        "view": "~/app_plugins/vendr/views/propertyeditors/variantseditor/variantseditor.html",
-        "hideLabel": true,
-        "valueType": "JSON"
-      },
-      "prevalues": {
-        "fields": [
-          {
-            "label": "Variant Element Type",
-            "description": "The element type to use as the blueprint for product variant data",
-            "key": "variantElementType",
-            "view": "~/app_plugins/vendr/views/prevalueeditors/elementtypepicker/elementtypepicker.html",
-            "hideLabel": false,
-            "valueType": "STRING"
-          }
-        ]
-      }
     }
   ],
   "dashboards": [

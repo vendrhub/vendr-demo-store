@@ -179,6 +179,12 @@
     </div>
 
     <div class="vendr-layout__right">
+
+        <vendr-editor-actions editor-actions="model.options.editorActions"
+            model="model.content"
+            ng-if="!model.create && model.options.editorActions && model.options.editorActions.length > 0">
+        </vendr-editor-actions>
+
         <umb-box>
             <umb-box-header title-key="general_info"></umb-box-header>
             <umb-box-content class="block-form">
