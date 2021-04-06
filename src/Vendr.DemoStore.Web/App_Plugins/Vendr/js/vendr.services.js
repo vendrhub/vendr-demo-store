@@ -295,9 +295,7 @@
 
         };
 
-        $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-            api.reset();
-        });
+        $rootScope.$on('$routeChangeSuccess', () => api.reset());
 
         return api;
     };

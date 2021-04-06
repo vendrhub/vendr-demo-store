@@ -94,12 +94,10 @@
 
                     <div class="vendr-layout__right">
 
-                        <umb-box ng-if="!vm.create">
-                            <umb-box-header title="Actions"></umb-box-header>
-                            <umb-box-content class="block-form">
-                                <button type="button" class="btn btn-block btn-action" ng-click="vm.sendEmail()">Send Email</button>
-                            </umb-box-content>
-                        </umb-box>
+                        <vendr-editor-actions editor-actions="vm.options.editorActions"
+                            model="vm.content"
+                            ng-if="!vm.create && vm.options.editorActions && vm.options.editorActions.length > 0">
+                        </vendr-editor-actions>
 
                         <umb-box>
                             <umb-box-header title-key="general_info"></umb-box-header>

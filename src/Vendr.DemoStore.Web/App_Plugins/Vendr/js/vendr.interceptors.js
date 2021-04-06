@@ -6,6 +6,7 @@
         return {
             'response': function (resp) {
                 if (resp.config.url.indexOf('/GetMenu?') >= 0) {
+
                     resp.data.menuItems = resp.data.menuItems || [];
 
                     // Give core defined menu items a sort order in increments of 10 to allow positioning
@@ -26,23 +27,25 @@
                     // We have to do it at runtime to avoid a circular dependency
                     // (This is mostly because bulkActions have a $http dependency)
                     var vendrActions = $injector.get('vendrActions');
-                    var additionalMenuItems = vendrActions.getMenuActions(params);
+                    vendrActions.getMenuActions(params).then(additionalMenuItems => {
 
-                    // Append any menu items
-                    additionalMenuItems.forEach(function (mi, idx) {
+                        // Append any menu items
+                        additionalMenuItems.forEach(function (mi, idx) {
 
-                        // If there is no sort order, place the items at the end
-                        if (!mi.sortOrder) {
-                            mi.sortOrder = ((coreMenuItemsCount + 1) * 100) + idx;
-                        }
+                            // If there is no sort order, place the items at the end
+                            if (!mi.sortOrder) {
+                                mi.sortOrder = ((coreMenuItemsCount + 1) * 100) + idx;
+                            }
 
-                        // Add the menu item
-                        resp.data.menuItems.push(mi);
-                    });
+                            // Add the menu item
+                            resp.data.menuItems.push(mi);
+                        });
 
-                    // Sort the menu items
-                    resp.data.menuItems.sort(function (a, b) {
-                        return a.sortOrder < b.sortOrder ? -1 : (a.sortOrder > b.sortOrder ? 1 : 0);
+                        // Sort the menu items
+                        resp.data.menuItems.sort(function (a, b) {
+                            return a.sortOrder < b.sortOrder ? -1 : (a.sortOrder > b.sortOrder ? 1 : 0);
+                        });
+
                     });
                 }
                 return resp;

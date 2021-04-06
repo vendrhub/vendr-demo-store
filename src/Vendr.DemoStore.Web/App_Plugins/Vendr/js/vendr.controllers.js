@@ -404,7 +404,7 @@
 
         var currentOrParentNodeId = $routeParams.id;
 
-        var productAtrtibutePickerDialogOptions = {
+        var productAttributePickerDialogOptions = {
             view: '/app_plugins/vendr/views/dialogs/productattributepicker.html',
             size: 'small',
             config: {
@@ -412,7 +412,7 @@
                 disablePreselected: true
             },
             submit: function (model) {
-                productAtrtibutePickerDialogOptions.onSubmit(model);
+                productAttributePickerDialogOptions.onSubmit(model);
                 editorService.close();
             },
             close: function () {
@@ -570,12 +570,12 @@
         };
 
         var pickVariantAttributes = function (callback) {
-            productAtrtibutePickerDialogOptions.config.storeId = vm.store.id;
-            productAtrtibutePickerDialogOptions.config.multiValuePicker = true;
-            productAtrtibutePickerDialogOptions.config.disablePreselected = true;
-            productAtrtibutePickerDialogOptions.value = null;
-            productAtrtibutePickerDialogOptions.onSubmit = callback;
-            editorService.open(productAtrtibutePickerDialogOptions);
+            productAttributePickerDialogOptions.config.storeId = vm.store.id;
+            productAttributePickerDialogOptions.config.multiValuePicker = true;
+            productAttributePickerDialogOptions.config.disablePreselected = true;
+            productAttributePickerDialogOptions.value = null;
+            productAttributePickerDialogOptions.onSubmit = callback;
+            editorService.open(productAttributePickerDialogOptions);
         }
 
         var getUniqueAttributeCombinations = function (model) {
@@ -871,6 +871,18 @@
 
         }
 
+        vm.canEditCulture = function () {
+            var content = $scope.variantContent || $scope.content;
+            var contentLanguage = content.language;
+            var canEditCulture = !contentLanguage || !vm.editorState ||
+                // If the property culture equals the content culture it can be edited
+                vm.editorState.culture === contentLanguage.culture ||
+                // A culture-invariant property can only be edited by the default language variant
+                (vm.editorState.culture == null && contentLanguage.isDefault);
+
+            return canEditCulture;
+        }
+
         vm.getProductAttribute = function (attributeAlias) {
             return vm.options.productAttributesLookup.hasOwnProperty(attributeAlias)
                 ? vm.options.productAttributesLookup[attributeAlias]
@@ -894,9 +906,9 @@
         }
 
         vm.getProperty = function (blockContent, alias) {
-            return blockContent.variants[0].tabs[0].properties.find(function (itm) {
-                return itm.alias === alias;
-            });
+            return blockContent.variants[0].tabs.reduce((prev, curr) => {
+                return prev || curr.properties.find(prop => prop.alias === alias);
+            }, undefined);
         };
 
         vm.getPropertyValue = function (blockContent, alias) {
@@ -922,21 +934,21 @@
                 $event.stopPropagation();
                 $event.preventDefault();
             }
-            productAtrtibutePickerDialogOptions.config.storeId = vm.store.id;
-            productAtrtibutePickerDialogOptions.config.multiValuePicker = false;
-            productAtrtibutePickerDialogOptions.config.disablePreselected = false;
+            productAttributePickerDialogOptions.config.storeId = vm.store.id;
+            productAttributePickerDialogOptions.config.multiValuePicker = false;
+            productAttributePickerDialogOptions.config.disablePreselected = false;
             if (layout.config && layout.config.attributes) {
-                productAtrtibutePickerDialogOptions.value = Object.entries(layout.config.attributes).map(function (itm) {
+                productAttributePickerDialogOptions.value = Object.entries(layout.config.attributes).map(function (itm) {
                     return {
                         alias: itm[0],
                         values: [{ alias: itm[1] }]
                     }
                 });
             } else {
-                productAtrtibutePickerDialogOptions.value = null;
+                productAttributePickerDialogOptions.value = null;
             }
             
-            productAtrtibutePickerDialogOptions.onSubmit = function (model) {
+            productAttributePickerDialogOptions.onSubmit = function (model) {
 
                 // Calculate target attributes config object
                 var targetAttrObj = model.reduce((obj, attr) => {
@@ -974,7 +986,7 @@
 
                 syncUI();
             };
-            editorService.open(productAtrtibutePickerDialogOptions);
+            editorService.open(productAttributePickerDialogOptions);
         }
 
         vm.toggleDefaultVariantRow = function (model, $event) {
@@ -1004,6 +1016,32 @@
             }
 
             return result;
+        }
+
+        vm.syncModelToPropEditor = function () {
+            if (!vm.loading) {
+
+                // Copy the local model to the editor model
+                vm.editorState.model.value = angular.copy(vm.model.value);
+
+                // Remove any properties we don't want persisting
+                vm.editorState.model.value.layout['Vendr.VariantsEditor'].forEach(layout => {
+
+                    delete layout.$block;
+                    delete layout.id;
+                    delete layout.key;
+                    delete layout.icon;
+                    delete layout.selected;
+
+                    if (layout.config)
+                        delete layout.config.isValid;
+
+                });
+
+                // We don't have settings data, so no point persisting an empty array
+                delete vm.editorState.model.value.settingsData;
+
+            }
         }
 
         vm.ready = function () {
@@ -1115,47 +1153,31 @@
                 vm.doInit();
             }
 
-            var evt = eventsService.on("variantsEditorState.changed", function (e, args) {
+            var evt1 = eventsService.on("variantsEditorState.changed", function (e, args) {
                 vm.editorState = args.state;
                 vm.doInit();
             });
 
-            var evt = eventsService.on("variantsEditor.modelValueChanged", function (e, args) {
+            var evt2 = eventsService.on("variantsEditor.modelValueChanged", function (e, args) {
                 vm.model = angular.copy(vm.editorState.model);
                 vm.modelObject.update(vm.model.value, $scope);
                 vm.ready();
             });
 
             subs.push(function () {
-                eventsService.unsubscribe(evt);
+                eventsService.unsubscribe(evt1);
+                eventsService.unsubscribe(evt2);
             });
 
         }
 
+        var cultureChanged = eventsService.on('editors.content.cultureChanged', (name, args) => vm.syncModelToPropEditor());
+        subs.push(function () {
+            eventsService.unsubscribe(cultureChanged);
+        });
+
         subs.push($scope.$on("formSubmitting", function (ev, args) {
-            if (!vm.loading) {
-
-                // Copy the local model to the editor model
-                vm.editorState.model.value = angular.copy(vm.model.value);
-
-                // Remove any properties we don't want persisting
-                vm.editorState.model.value.layout['Vendr.VariantsEditor'].forEach(layout => {
-
-                    delete layout.$block;
-                    delete layout.id;
-                    delete layout.key;
-                    delete layout.icon;
-                    delete layout.selected;
-
-                    if (layout.config)
-                        delete layout.config.isValid;
-
-                });
-
-                // We don't have settings data, so no point persisting an empty array
-                delete vm.editorState.model.value.settingsData;
-
-            }
+            vm.syncModelToPropEditor();
         }));
 
         // TODO: Listen for variantsEditor.modelValueChanged for changes to the model on the server
@@ -1305,7 +1327,7 @@
 
     function CountryEditController($scope, $routeParams, $location, formHelper,
         appState, editorState, localizationService, notificationsService, navigationService, treeService,
-        vendrUtils, vendrCountryResource, vendrCurrencyResource, vendrShippingMethodResource, vendrPaymentMethodResource) {
+        vendrUtils, vendrCountryResource, vendrCurrencyResource, vendrShippingMethodResource, vendrPaymentMethodResource, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
@@ -1351,7 +1373,8 @@
         vm.options = {
             currencies: [],
             shippingMethods: [],
-            paymentMethods: []
+            paymentMethods: [],
+            editorActions: [],
         };
         vm.content = {};
 
@@ -1360,6 +1383,10 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getEditorActions({ storeId: storeId, entityType: 'Country' }).then(result => {
+                vm.options.editorActions = result;
+            });
 
             vendrCurrencyResource.getCurrencies(storeId).then(function (currencies) {
                 vm.options.currencies = currencies;
@@ -1492,7 +1519,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'Country'}),
+            bulkActions: [],
             items: [],
             itemProperties: [
                 { alias: 'code', header: 'ISO Code' }
@@ -1513,6 +1540,10 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getBulkActions({ storeId: storeId, entityType: 'Country' }).then(result => {
+                vm.options.bulkActions = result;
+            });
 
             navigationService.syncTree({ tree: "vendrsettings", path: "-1,1," + storeId + ",5", forceReload: true }).then(function (syncArgs) {
                 vm.page.menu.currentNode = syncArgs.node;
@@ -1570,7 +1601,7 @@
 
     function CurrencyEditController($scope, $routeParams, $location, formHelper,
         appState, editorState, localizationService, notificationsService, navigationService, treeService,
-        vendrUtils, vendrCurrencyResource, vendrCultureResource, vendrCountryResource) {
+        vendrUtils, vendrCurrencyResource, vendrCultureResource, vendrCountryResource, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
 
@@ -1596,7 +1627,8 @@
 
         vm.options = {
             cultures: [],
-            countries: []
+            countries: [],
+            editorActions: [],
         };
         vm.content = {};
 
@@ -1605,6 +1637,10 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getEditorActions({ storeId: storeId, entityType: 'Currency' }).then(result => {
+                vm.options.editorActions = result;
+            });
 
             vendrCultureResource.getCultures().then(function (cultures) {
                 vm.options.cultures = cultures;
@@ -1754,7 +1790,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'Currency' }),
+            bulkActions: [],
             items: [],
             itemProperties: [
                 { alias: 'code', header: 'ISO Code' }
@@ -1775,6 +1811,10 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getBulkActions({ storeId: storeId, entityType: 'Currency' }).then(result => {
+                vm.options.bulkActions = result;
+            });
 
             navigationService.syncTree({ tree: "vendrsettings", path: "-1,1," + storeId + ",6", forceReload: true }).then(function (syncArgs) {
                 vm.page.menu.currentNode = syncArgs.node;
@@ -2249,6 +2289,151 @@
     }
 
     angular.module('vendr').controller('Vendr.Controllers.OrderStatusPickerDialogController', OrderStatusPickerDialogController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function PrintOptionsDialogController($scope, languageResource, vendrPrintTemplateResource)
+    {
+        var cfg = $scope.model.config;
+
+        var vm = this;
+
+        vm.loading = true;
+
+        vm.page = {};
+        vm.page.name = "Print " + cfg.entityType.replace(/([a-z0-9])([A-Z])/g, '$1 $2');
+        vm.page.printButtonState = 'init';
+
+        vm.printUrl = false;
+        vm.languageIsoCode = null;
+        vm.options = {
+            templates: [],
+            languages: [],
+            entityType: cfg.entityType,
+            entities: cfg.entities,
+            entityHasLanguageIsoCode: cfg.entityHasLanguageIsoCode,
+            currentEntityIndex: 0,
+            showAllEntities: false
+        };
+
+        vm.toggleTemplate = function (template, $event) {
+            template.selected = true;
+        }
+
+        vm.getPreviewUrl = function (template, entity) {
+            var url = `${Umbraco.Sys.ServerVariables.umbracoSettings.umbracoPath}/backoffice/vendr/vendrprint/preview?templateId=${template.id}&entityType=${vm.options.entityType}&entityId=${entity.id}`;
+
+            if (!vm.options.entityHasLanguageIsoCode && vm.languageIsoCode) {
+                url += `&languageIsoCode=${vm.languageIsoCode}`
+            }
+
+            return url;
+        }
+
+        vm.anyTemplatesSelected = function () {
+            return vm.options.templates.some(t => t.checked);
+        }
+
+        vm.init = function () {
+
+            vendrPrintTemplateResource.getPrintTemplates(cfg.storeId, cfg.category).then(function (templates) {
+                vm.options.templates = templates.map((itm, idx) => {
+                    itm.checked = idx === 0;
+                    return itm;
+                });
+
+                if (vm.options.entityHasLanguageIsoCode) {
+                    vm.loading = false;
+                } else {
+                    languageResource.getAll().then(function (languages) {
+                        vm.options.languages = languages;
+                        vm.loading = false;
+                    });
+                }
+            });
+
+        };
+
+        vm.print = function () {
+
+            // Remove previous
+            var wrapper = document.getElementById("vendr-print-wrapper");
+            if (wrapper) {
+                wrapper.parentElement.removeChild(wrapper);
+            }
+
+            // Generate form + iframe
+            var wrapper = document.createElement('div')
+            wrapper.id = "vendr-print-wrapper";
+            wrapper.style = "display: none;";
+
+            var frame = document.createElement('iframe');
+            frame.src = "about:blank";
+            frame.id = "vendr-print-iframe"
+            frame.name = "vendr-print-iframe"
+
+            wrapper.appendChild(frame);
+
+            var form = document.createElement('form')
+            form.id = "vendr-print-form";
+            form.action = `${Umbraco.Sys.ServerVariables.umbracoSettings.umbracoPath}/backoffice/vendr/vendrprint/print`;
+            form.method = "POST";
+            form.target = "vendr-print-iframe";
+
+            var entityTypeInput = document.createElement('input');
+            entityTypeInput.type = "hidden";
+            entityTypeInput.name = "entityType";
+            entityTypeInput.value = vm.options.entityType;
+            form.appendChild(entityTypeInput);
+
+            if (!vm.options.entityHasLanguageIsoCode && vm.languageIsoCode) {
+                var languageIsoCodeInput = document.createElement('input');
+                languageIsoCodeInput.type = "hidden";
+                languageIsoCodeInput.name = "languageIsoCode";
+                languageIsoCodeInput.value = vm.languageIsoCode;
+                form.appendChild(languageIsoCodeInput);
+            }
+
+            vm.options.templates.forEach((t, i) => {
+                if (t.checked) {
+                    var templateInput = document.createElement('input');
+                    templateInput.type = "hidden";
+                    templateInput.name = "templateIds["+ i +"]";
+                    templateInput.value = t.id;
+                    form.appendChild(templateInput);
+                }
+            });
+
+            vm.options.entities.forEach((e, i) => {
+                var entityInput = document.createElement('input');
+                entityInput.type = "hidden";
+                entityInput.name = "entityIds[" + i +"]";
+                entityInput.value = e.id;
+                form.appendChild(entityInput);
+            });
+
+            wrapper.appendChild(form);
+
+            document.body.appendChild(wrapper);
+
+            // Submit the form
+            setTimeout(function () {
+                form.submit();
+            }, 1);
+
+        };
+
+        vm.close = function () {
+            $scope.model.close();
+        };
+
+        vm.init();
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.PrintOptionsDialogController', PrintOptionsDialogController);
 
 }());
 (function () {
@@ -2852,7 +3037,7 @@
 
     function DiscountEditController($scope, $routeParams, $location, formHelper,
         appState, editorState, localizationService, notificationsService, navigationService, treeService, dateHelper, userService,
-        vendrUtils, vendrDiscountResource, vendrStoreResource, vendrRouteCache) {
+        vendrUtils, vendrDiscountResource, vendrStoreResource, vendrRouteCache, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
@@ -2882,7 +3067,8 @@
         vm.localStartDate = null;
         vm.localExpiryDate = null;
         vm.options = {
-            discountTypes: ['Automatic', 'Code']
+            discountTypes: ['Automatic', 'Code'],
+            editorActions: [],
         };
 
         vm.back = function () {
@@ -2946,6 +3132,10 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getEditorActions({ storeId: storeId, entityType: 'Discount' }).then(result => {
+                vm.options.editorActions = result;
+            });
 
             vendrRouteCache.getOrFetch("currentStore", function () {
                 return vendrStoreResource.getBasicStore(storeId);
@@ -3085,7 +3275,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'Discount' }),
+            bulkActions: [],
             items: [],
             itemProperties: [
                 { alias: 'name', template: '<span class="vendr-table-cell-value--multiline"><span>{{name}}</span>{{ blockFurtherDiscounts ? \'<span class="vendr-table-cell-label" style="font-size: 12px;"><i class="fa fa-minus-circle color-red" aria-hidden="true"></i> Blocks all further discounts if applied</span>\' : \'\' }}{{ blockIfPreviousDiscounts ? \'<span class="vendr-table-cell-label" style="font-size: 12px;"><i class="fa fa-chevron-circle-up color-orange"></i> Is not applied if previous discounts already apply</span></span>\' : \'\' }}' },
@@ -3108,6 +3298,10 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getBulkActions({ storeId: storeId, entityType: 'Discount' }).then(result => {
+                vm.options.bulkActions = result;
+            });
 
             navigationService.syncTree({ tree: "vendr", path: "-1," + storeId + ",2", forceReload: true }).then(function (syncArgs) {
                 vm.page.menu.currentNode = syncArgs.node;
@@ -3164,7 +3358,7 @@
 
     function EmailTemplateEditController($scope, $routeParams, $location, formHelper,
         appState, editorState, localizationService, notificationsService, navigationService, treeService,
-        vendrUtils, vendrUtilsResource, vendrEmailTemplateResource, vendrStoreResource) {
+        vendrUtils, vendrUtilsResource, vendrEmailTemplateResource, vendrStoreResource, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
@@ -3189,13 +3383,14 @@
         };
 
         vm.options = {
-            emailTemplateCategories: [],
+            templateCategories: [],
             dictionaryInputOptions: {
                 containerKey: "Vendr",
                 generateKey: function (fldName) {
                     return "vendr_" + storeAlias.toLowerCase() + "_emailtemplate_" + (vm.content.alias || scope.$id).toLowerCase() + "_" + fldName.toLowerCase();
                 }
-            }
+            },
+            editorActions: []
         };
 
         vm.content = {};
@@ -3206,12 +3401,16 @@
 
         vm.init = function () {
 
+            vendrActions.getEditorActions({ storeId: storeId, entityType: 'EmailTemplate' }).then(result => {
+                vm.options.editorActions = result;
+            });
+
             vendrStoreResource.getStoreAlias(storeId).then(function (alias) {
                 storeAlias = alias;
             });
 
-            vendrUtilsResource.getEnumOptions("EmailTemplateCategory").then(function (opts) {
-                vm.options.emailTemplateCategories = opts;
+            vendrUtilsResource.getEnumOptions("TemplateCategory").then(function (opts) {
+                vm.options.templateCategories = opts;
             });
 
             if (create) {
@@ -3327,7 +3526,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'EmailTemplate' }),
+            bulkActions: [],
             items: [],
             itemProperties: [
                 { alias: 'category', header: 'Category' }
@@ -3349,7 +3548,11 @@
 
         vm.init = function () {
 
-            navigationService.syncTree({ tree: "vendrsettings", path: "-1,1," + storeId + ",8", forceReload: true }).then(function (syncArgs) {
+            vendrActions.getBulkActions({ storeId: storeId, entityType: 'EmailTemplate' }).then(result => {
+                vm.options.bulkActions = result;
+            });
+
+            navigationService.syncTree({ tree: "vendrsettings", path: "-1,1," + storeId + ",10,11", forceReload: true }).then(function (syncArgs) {
                 vm.page.menu.currentNode = syncArgs.node;
                 vm.page.breadcrumb.items = vendrUtils.createSettingsBreadcrumbFromTreeNode(syncArgs.node);
                 treeService.getMenu({ treeNode: vm.page.menu.currentNode }).then(function (menu) {
@@ -3588,58 +3791,13 @@
 
     function GiftCardEditController($scope, $routeParams, $location, formHelper,
         appState, editorState, localizationService, editorService, notificationsService, navigationService, treeService, dateHelper, userService,
-        vendrUtils, vendrGiftCardResource, vendrStoreResource, vendrEmailResource, vendrCurrencyResource, vendrRouteCache) {
+        vendrUtils, vendrGiftCardResource, vendrStoreResource, vendrEmailResource, vendrCurrencyResource, vendrRouteCache, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
         var storeAlias = storeId; // Set store alias to id for now as a fallback
         var id = compositeId[1];
         var create = id === '-1';
-
-        var pickEmailTemplateDialogOptions = {
-            view: '/app_plugins/vendr/views/dialogs/emailtemplatepicker.html',
-            size: 'small',
-            config: {
-                storeId: storeId,
-                category: 'GiftCard'
-            },
-            submit: function (model) {
-                sendEmailDialogOptions.config.emailTemplateId = model.id;
-                sendEmailDialogOptions.config.emailTemplateName = model.name;
-                sendEmailDialogOptions.config.orderId = vm.content.orderId;
-                editorService.open(sendEmailDialogOptions);
-            },
-            close: function () {
-                editorService.close();
-            }
-        };
-
-        var sendEmailDialogOptions = {
-            view: '/app_plugins/vendr/views/dialogs/sendemail.html',
-            size: 'small',
-            config: {
-                storeId: storeId,
-                emailTemplateId: undefined,
-                emailTemplateName: undefined,
-                orderId: undefined
-            },
-            submit: function (model) {
-                vendrEmailResource.sendGiftCardEmail(model.emailTemplateId, id, model.to, model.languageIsoCode).then(function () {
-                    notificationsService.success("Email Sent", model.emailTemplateName + " email successfully sent.");
-                    editorService.closeAll();
-                }).catch(function (e) {
-                    model.onError();
-                    var msg = "Unabled to send " + model.name + " email. Please check the error log for details.";
-                    if (e.data.Message) {
-                        msg = e.data.Message;
-                    }
-                    notificationsService.error("Error Sending Email", msg);
-                });
-            },
-            close: function () {
-                editorService.close();
-            }
-        };
 
         var vm = this;
 
@@ -3668,7 +3826,8 @@
         vm.localExpiryDate = null;
         vm.options = {
             currencies: [],
-            currencyCodes: { }
+            currencyCodes: {},
+            editorActions: [],
         };
 
         vm.back = function () {
@@ -3711,6 +3870,10 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getEditorActions({ storeId: storeId, entityType: 'GiftCard' }).then(result => {
+                vm.options.editorActions = result;
+            });
 
             vendrRouteCache.getOrFetch("currentStore", function () {
                 return vendrStoreResource.getBasicStore(storeId);
@@ -3852,7 +4015,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'GiftCard' }),
+            bulkActions: [],
             items: [],
             itemProperties: [
                 { alias: 'name', template: '<span class="vendr-table-cell-value--multiline"><span><strong>{{code}}<strong></span>{{ orderNumber ? \'<span class="vendr-table-cell-label">#\'+ orderNumber +\'</span>\' : \'\' }}</span>' },
@@ -3866,6 +4029,7 @@
         };
 
         vm.loadItems = function (opts, callback) {
+            opts.itemsPerPage = opts.pageSize;
             vendrGiftCardResource.searchGiftCards(storeId, opts).then(function (entities) {
                 entities.items.forEach(function (itm) {
                     itm.routePath = '/commerce/vendr/giftcard-edit/' + vendrUtils.createCompositeId([storeId, itm.id]);
@@ -3876,6 +4040,10 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getBulkActions({ storeId: storeId, entityType: 'GiftCard' }).then(result => {
+                vm.options.bulkActions = result;
+            });
 
             navigationService.syncTree({ tree: "vendr", path: "-1," + storeId + ",3", forceReload: true }).then(function (syncArgs) {
                 vm.page.menu.currentNode = syncArgs.node;
@@ -3935,7 +4103,7 @@
 
     function OrderStatusEditController($scope, $routeParams, $location, formHelper,
         appState, editorState, localizationService, notificationsService, navigationService, treeService,
-        vendrUtils, vendrOrderStatusResource) {
+        vendrUtils, vendrOrderStatusResource, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
 
@@ -3959,7 +4127,10 @@
             $location.path(ancestor.routePath);
         };
 
-        vm.options = {};
+        vm.options = {
+            editorActions: []
+        };
+
         vm.content = {};
 
         vm.back = function () {
@@ -3967,6 +4138,10 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getEditorActions({ storeId: storeId, entityType: 'OrderStatus' }).then(result => {
+                vm.options.editorActions = result;
+            });
 
             if (create) {
 
@@ -4081,7 +4256,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'OrderStatus' }),
+            bulkActions: [],
             items: [],
             itemProperties: [
                 { alias: 'color', header: 'Color', template: '<span class="vendr-color-swatch vendr-bg--{{color}}" title="Color: {{color}}"></span>' }
@@ -4102,6 +4277,10 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getBulkActions({ storeId: storeId, entityType: 'OrderStatus' }).then(result => {
+                vm.options.bulkActions = result;
+            });
 
             navigationService.syncTree({ tree: "vendrsettings", path: "-1,1," + storeId + ",2", forceReload: true }).then(function (syncArgs) {
                 vm.page.menu.currentNode = syncArgs.node;
@@ -4392,7 +4571,7 @@
 
     function OrderEditController($scope, $routeParams, $location, formHelper,
         appState, editorState, editorService, localizationService, notificationsService, navigationService, overlayService,
-        vendrUtils, vendrOrderResource, vendrStoreResource, vendrEmailResource) {
+        vendrUtils, vendrOrderResource, vendrStoreResource, vendrEmailResource, vendrActions) {
 
         var infiniteMode = editorService.getNumberOfEditors() > 0 ? true : false;
         var compositeId = infiniteMode
@@ -4401,72 +4580,6 @@
 
         var storeId = compositeId[0];
         var id = compositeId[1];
-
-        var changeStatusDialogOptions = {
-            view: '/app_plugins/vendr/views/dialogs/orderstatuspicker.html',
-            size: 'small',
-            config: {
-                storeId: storeId
-            },
-            submit: function(model) {
-                vendrOrderResource.changeOrderStatus(id, model.id).then(function(order) {
-                    vm.content.orderStatusId = order.orderStatusId;
-                    vm.content.orderStatus = order.orderStatus;
-                    notificationsService.success("Status Changed", "Order status successfully changed to " + model.name + ".");
-                    editorService.close();
-                }).catch(function(e) {
-                    notificationsService.error("Error Changing Status", "Unabled to change status to " + model.name + ". Please check the error log for details.");
-                });
-            },
-            close: function() {
-                editorService.close();
-            }
-        };
-
-        var pickEmailTemplateDialogOptions = {
-            view: '/app_plugins/vendr/views/dialogs/emailtemplatepicker.html',
-            size: 'small',
-            config: {
-                storeId: storeId,
-                category: 'Order'
-            },
-            submit: function (model) {
-                sendEmailDialogOptions.config.emailTemplateId = model.id;
-                sendEmailDialogOptions.config.emailTemplateName = model.name;
-                sendEmailDialogOptions.config.orderId = id;
-                editorService.open(sendEmailDialogOptions);
-            },
-            close: function () {
-                editorService.close();
-            }
-        };
-
-        var sendEmailDialogOptions = {
-            view: '/app_plugins/vendr/views/dialogs/sendemail.html',
-            size: 'small',
-            config: {
-                storeId: storeId,
-                emailTemplateId: undefined,
-                emailTemplateName: undefined,
-                orderId: undefined
-            },
-            submit: function (model) {
-                vendrEmailResource.sendOrderEmail(model.emailTemplateId, id, model.to, model.languageIsoCode).then(function () {
-                    notificationsService.success("Email Sent", model.emailTemplateName + " email successfully sent.");
-                    editorService.closeAll();
-                }).catch(function (e) {
-                    model.onError();
-                    var msg = "Unabled to send " + model.name + " email. Please check the error log for details.";
-                    if (e.data.Message) {
-                        msg = e.data.Message;
-                    }
-                    notificationsService.error("Error Sending Email", msg);
-                });
-            },
-            close: function () {
-                editorService.close();
-            }
-        };
 
         var transactionInfoDialogOptions = {
             view: '/app_plugins/vendr/views/order/dialogs/transactioninfo.html',
@@ -4556,7 +4669,8 @@
         vm.refundPaymentButtonState = 'init';
 
         vm.options = {
-            expandedBundles: []
+            expandedBundles: [],
+            editorActions: [],
         };
         vm.content = {};
 
@@ -4662,6 +4776,11 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getEditorActions({ storeId: storeId, entityType: 'Order' }).then(result => {
+                vm.options.editorActions = result;
+            });
+
             vendrStoreResource.getStoreOrderEditorConfig(storeId).then(function (config) {
                 vm.editorConfig = config;
                 vm.editorConfig.view = vm.editorConfig.view || '/app_plugins/vendr/views/order/subviews/edit.html';
@@ -4808,7 +4927,7 @@
                     id: id,
                     name: orderOrCartNumber,
                     nodeType: "Order",
-                    menuUrl: "/umbraco/backoffice/Vendr/StoresTree/GetMenu?application=" + application + "&tree=" + tree + "&nodeType=Order&storeId=" + storeId + "&id=" + id,
+                    menuUrl: `${Umbraco.Sys.ServerVariables.umbracoSettings.umbracoPath}/backoffice/Vendr/StoresTree/GetMenu?application=${application}&tree=${tree}&nodeType=Order&storeId=${storeId}&id=${id}`,
                     metaData: {
                         tree: tree,
                         storeId: storeId
@@ -4929,7 +5048,7 @@
                     }
                 }
             ],
-            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'Order' }),
+            bulkActions: [],
             items: [],
             itemProperties: [
                 { alias: 'name', template: '<span class="vendr-table-cell-value--multiline"><span>{{customerFullName}}</span><span class="vendr-table-cell-label">#{{orderNumber}}</span></span>' },
@@ -4990,6 +5109,9 @@
                 };
             }
 
+            // Rename pageSize to itemsPerPage
+            opts.itemsPerPage = opts.pageSize;
+
             // Apply filters
             vm.options.filters.forEach(fltr => {
                 if (fltr.value && fltr.value.length > 0) {
@@ -5012,6 +5134,10 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getBulkActions({ storeId: storeId, entityType: 'Order' }).then(result => {
+                vm.options.bulkActions = result;
+            });
 
             navigationService.syncTree({ tree: "vendr", path: "-1," + storeId + ",1", forceReload: true }).then(function (syncArgs) {
                 vm.page.menu.currentNode = syncArgs.node;
@@ -5097,7 +5223,7 @@
 
     function PaymentMethodEditController($scope, $routeParams, $location, formHelper,
         appState, editorState, localizationService, notificationsService, treeService, navigationService, editorService,
-        vendrUtils, vendrPaymentMethodResource, vendrCountryResource, vendrCurrencyResource, vendrTaxResource, vendrStoreResource) {
+        vendrUtils, vendrPaymentMethodResource, vendrCountryResource, vendrCurrencyResource, vendrTaxResource, vendrStoreResource, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
@@ -5128,7 +5254,8 @@
             paymentProviderScaffold: [],
             paymentProviderProperties: [],
             advancedPaymentProviderProperties: [],
-            advancedPaymentProviderPropertiesShown: false
+            advancedPaymentProviderPropertiesShown: false,
+            editorActions: []
         };
         vm.content = {
             defaultPrices: []
@@ -5291,6 +5418,10 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getEditorActions({ storeId: storeId, entityType: 'PaymentMethod' }).then(result => {
+                vm.options.editorActions = result;
+            });
 
             vendrStoreResource.getStoreAlias(storeId).then(function (alias) {
                 storeAlias = alias;
@@ -5534,7 +5665,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'PaymentMethod' }),
+            bulkActions: [],
             items: [],
             itemProperties: [
                 { alias: 'sku', header: 'SKU' }
@@ -5555,6 +5686,10 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getBulkActions({ storeId: storeId, entityType: 'PaymentMethod' }).then(result => {
+                vm.options.bulkActions = result;
+            });
 
             navigationService.syncTree({ tree: "vendrsettings", path: "-1,1," + storeId + ",4", forceReload: true }).then(function (syncArgs) {
                 vm.page.menu.currentNode = syncArgs.node;
@@ -5698,9 +5833,9 @@
 
     'use strict';
 
-    function ProductAttributePresetEditController($scope, $routeParams, $location, formHelper,
-        appState, editorState, editorService, localizationService, notificationsService, navigationService, treeService,
-        vendrUtils, vendrProductAttributeResource, vendrStoreResource, vendrRouteCache) {
+    function PrintTemplateEditController($scope, $routeParams, $location, formHelper,
+        appState, editorState, localizationService, notificationsService, navigationService, treeService,
+        vendrUtils, vendrUtilsResource, vendrPrintTemplateResource, vendrStoreResource, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
@@ -5708,7 +5843,256 @@
         var id = compositeId[1];
         var create = id === '-1';
 
-        var productAtrtibutePickerDialogOptions = {
+        var vm = this;
+
+        vm.page = {};
+        vm.page.loading = true;
+        vm.page.saveButtonState = 'init';
+
+        vm.page.menu = {};
+        vm.page.menu.currentSection = appState.getSectionState("currentSection");
+        vm.page.menu.currentNode = null;
+
+        vm.page.breadcrumb = {};
+        vm.page.breadcrumb.items = [];
+        vm.page.breadcrumb.itemClick = function (ancestor) {
+            $location.path(ancestor.routePath);
+        };
+
+        vm.options = {
+            templateCategories: [],
+            dictionaryInputOptions: {
+                containerKey: "Vendr",
+                generateKey: function (fldName) {
+                    return "vendr_" + storeAlias.toLowerCase() + "_printtemplate_" + (vm.content.alias || scope.$id).toLowerCase() + "_" + fldName.toLowerCase();
+                }
+            },
+            editorActions: []
+        };
+
+        vm.content = {};
+
+        vm.back = function () {
+            $location.path("/settings/vendrsettings/printtemplate-list/" + vendrUtils.createCompositeId([storeId]));
+        };
+
+        vm.init = function () {
+
+            vendrActions.getEditorActions({ storeId: storeId, entityType: 'PrintTemplate' }).then(result => {
+                vm.options.editorActions = result;
+            });
+
+            vendrStoreResource.getStoreAlias(storeId).then(function (alias) {
+                storeAlias = alias;
+            });
+
+            vendrUtilsResource.getEnumOptions("TemplateCategory").then(function (opts) {
+                vm.options.templateCategories = opts;
+            });
+
+            if (create) {
+
+                vendrPrintTemplateResource.createPrintTemplate(storeId).then(function (printTemplate) {
+                    vm.ready(printTemplate);
+                });
+
+            } else {
+
+                vendrPrintTemplateResource.getPrintTemplate(id).then(function (printTemplate) {
+                    vm.ready(printTemplate);
+                });
+
+            }
+        };
+
+        vm.ready = function (model) {
+            vm.page.loading = false;
+            vm.content = model;
+
+            // sync state
+            editorState.set(vm.content);
+
+            var pathToSync = create ? vm.content.path : vm.content.path.slice(0, -1);
+            navigationService.syncTree({ tree: "vendrsettings", path: pathToSync, forceReload: true }).then(function (syncArgs) {
+                if (!create) {
+                    treeService.getChildren({ node: syncArgs.node }).then(function (children) {
+                        var node = children.find(function (itm) {
+                            return itm.id === id;
+                        });
+                        vm.page.menu.currentNode = node;
+                        vm.page.breadcrumb.items = vendrUtils.createSettingsBreadcrumbFromTreeNode(node);
+                    });
+                } else {
+                    vm.page.breadcrumb.items = vendrUtils.createSettingsBreadcrumbFromTreeNode(syncArgs.node);
+                    vm.page.breadcrumb.items.push({ name: 'Untitled' });
+                }
+            });
+        };
+
+        vm.save = function (suppressNotification) {
+
+            if (formHelper.submitForm({ scope: $scope, statusMessage: "Saving..." })) {
+
+                vm.page.saveButtonState = "busy";
+
+                vendrPrintTemplateResource.savePrintTemplate(vm.content).then(function (saved) {
+
+                    formHelper.resetForm({ scope: $scope, notifications: saved.notifications });
+
+                    vm.page.saveButtonState = "success";
+
+                    if (create) {
+                        $location.path("/settings/vendrsettings/printtemplate-edit/" + vendrUtils.createCompositeId([storeId, saved.id]));
+                    }
+                    else {
+                        vm.ready(saved);
+                    }
+
+                }, function (err) {
+
+                    if (!suppressNotification) {
+                        vm.page.saveButtonState = "error";
+                        notificationsService.error("Failed to save print template " + vm.content.name,
+                            err.data.message || err.data.Message || err.errorMsg);
+                    }
+
+                    vm.page.saveButtonState = "error";
+                });
+            }
+
+        };
+
+        vm.init();
+
+        $scope.$on("vendrEntityDeleted", function (evt, args) {
+            if (args.entityType === 'PrintTemplate' && args.storeId === storeId && args.entityId === id) {
+                vm.back();
+            }
+        });
+
+    };
+
+    angular.module('vendr').controller('Vendr.Controllers.PrintTemplateEditController', PrintTemplateEditController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function PrintTemplateListController($scope, $location, $routeParams, $q,
+        appState, localizationService, treeService, navigationService,
+        vendrUtils, vendrPrintTemplateResource, vendrActions) {
+
+        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
+        var storeId = compositeId[0];
+
+        var vm = this;
+
+        vm.page = {};
+        vm.page.loading = true;
+
+        vm.page.menu = {};
+        vm.page.menu.currentSection = appState.getSectionState("currentSection");
+        vm.page.menu.currentNode = null;
+
+        vm.page.breadcrumb = {};
+        vm.page.breadcrumb.items = [];
+        vm.page.breadcrumb.itemClick = function (ancestor) {
+            $location.path(ancestor.routePath);
+        };
+
+        vm.options = {
+            createActions: [],
+            bulkActions: [],
+            items: [],
+            itemProperties: [
+                { alias: 'category', header: 'Category' }
+            ],
+            itemClick: function (itm) {
+                $location.path(itm.routePath);
+            }
+        };
+
+        vm.loadItems = function (callback) {
+            vendrPrintTemplateResource.getPrintTemplates(storeId).then(function (entities) {
+                entities.forEach(function (itm) {
+                    itm.routePath = '/settings/vendrsettings/printtemplate-edit/' + vendrUtils.createCompositeId([storeId, itm.id]);
+                });
+                vm.options.items = entities;
+                if (callback) callback();
+            });
+        };
+
+        vm.init = function () {
+
+            vendrActions.getBulkActions({ storeId: storeId, entityType: 'PrintTemplate' }).then(result => {
+                vm.options.bulkActions = result;
+            });
+
+            navigationService.syncTree({ tree: "vendrsettings", path: "-1,1," + storeId + ",10,12", forceReload: true }).then(function (syncArgs) {
+                vm.page.menu.currentNode = syncArgs.node;
+                vm.page.breadcrumb.items = vendrUtils.createSettingsBreadcrumbFromTreeNode(syncArgs.node);
+                treeService.getMenu({ treeNode: vm.page.menu.currentNode }).then(function (menu) {
+
+                    var createMenuAction = menu.menuItems.find(function (itm) {
+                        return itm.alias === 'create';
+                    });
+
+                    if (createMenuAction) {
+                        vm.options.createActions.push({
+                            name: 'Create Print Template',
+                            doAction: function () {
+                                appState.setMenuState("currentNode", vm.page.menu.currentNode);
+                                navigationService.executeMenuAction(createMenuAction,
+                                    vm.page.menu.currentNode,
+                                    vm.page.menu.currentSection);
+                            }
+                        });
+                    }
+
+                    vm.loadItems(function () {
+                        vm.page.loading = false;
+                    });
+
+                });
+            });
+           
+        };
+
+        vm.init();
+
+        var onVendrEvent = function (evt, args) {
+            if (args.entityType === 'PrintTemplate' && args.storeId === storeId) {
+                vm.page.loading = true;
+                vm.loadItems(function () {
+                    vm.page.loading = false;
+                });
+            }
+        };
+
+        $scope.$on("vendrEntitiesSorted", onVendrEvent);
+        $scope.$on("vendrEntityDelete", onVendrEvent);
+
+    };
+
+    angular.module('vendr').controller('Vendr.Controllers.PrintTemplateListController', PrintTemplateListController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function ProductAttributePresetEditController($scope, $routeParams, $location, formHelper,
+        appState, editorState, editorService, localizationService, notificationsService, navigationService, treeService,
+        vendrUtils, vendrProductAttributeResource, vendrStoreResource, vendrRouteCache, vendrActions) {
+
+        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
+        var storeId = compositeId[0];
+        var storeAlias = storeId; // Set store alias to id for now as a fallback
+        var id = compositeId[1];
+        var create = id === '-1';
+
+        var productAttributePickerDialogOptions = {
             view: '/app_plugins/vendr/views/dialogs/productattributepicker.html',
             size: 'small',
             config: {
@@ -5724,7 +6108,6 @@
                         })
                     }
                 });
-                console.log(vm.content.allowedAttributes);
                 editorService.close();
             },
             close: function () {
@@ -5749,14 +6132,16 @@
         };
 
         vm.content = {};
-        vm.options = { };
+        vm.options = {
+            editorActions: [],
+        };
 
         vm.back = function () {
             $location.path("/commerce/vendr/productattributepreset-list/" + vendrUtils.createCompositeId([storeId]));
         };
 
         vm.openProductAttributePicker = function () {
-            productAtrtibutePickerDialogOptions.value = vm.content.allowedAttributes.map(function (itm) {
+            productAttributePickerDialogOptions.value = vm.content.allowedAttributes.map(function (itm) {
                 return {
                     alias: itm.productAttributeAlias,
                     values: itm.allowedValueAliases.map(function (val) {
@@ -5764,7 +6149,7 @@
                     })
                 }
             });
-            editorService.open(productAtrtibutePickerDialogOptions);
+            editorService.open(productAttributePickerDialogOptions);
         }
 
         vm.getProductAttribute = function (alias) {
@@ -5809,6 +6194,10 @@
         }
 
         vm.init = function () {
+
+            vendrActions.getEditorActions({ storeId: storeId, entityType: 'ProductAttributePreset' }).then(result => {
+                vm.options.editorActions = result;
+            });
 
             vendrRouteCache.getOrFetch("currentStore", function () {
                 return vendrStoreResource.getBasicStore(storeId);
@@ -5964,7 +6353,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'ProductAttributePreset' }),
+            bulkActions: [],
             items: [],
             itemProperties: [
                 { alias: 'description', header: 'Description' }
@@ -5985,6 +6374,10 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getBulkActions({ storeId: storeId, entityType: 'ProductAttributePreset' }).then(result => {
+                vm.options.bulkActions = result;
+            });
 
             navigationService.syncTree({ tree: "vendr", path: "-1," + storeId + ",10,12", forceReload: true }).then(function (syncArgs) {
                 vm.page.menu.currentNode = syncArgs.node;
@@ -6041,7 +6434,7 @@
 
     function ProductAttributeEditController($scope, $routeParams, $location, formHelper,
         appState, editorState, editorService, localizationService, notificationsService, navigationService, treeService,
-        vendrUtils, vendrProductAttributeResource, vendrStoreResource, vendrRouteCache) {
+        vendrUtils, vendrProductAttributeResource, vendrStoreResource, vendrRouteCache, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
@@ -6078,7 +6471,9 @@
         };
 
         vm.content = {};
-        vm.options = { };
+        vm.options = {
+            editorActions: [],
+        };
 
         vm.back = function () {
             $location.path("/commerce/vendr/productattribute-list/" + vendrUtils.createCompositeId([storeId]));
@@ -6126,12 +6521,16 @@
 
         vm.init = function () {
 
+            vendrActions.getEditorActions({ storeId: storeId, entityType: 'ProductAttribute' }).then(result => {
+                vm.options.editorActions = result;
+            });
+
             vendrRouteCache.getOrFetch("currentStore", function () {
                 return vendrStoreResource.getBasicStore(storeId);
             })
-                .then(function (store) {
-                    storeAlias = store.alias;
-                });
+            .then(function (store) {
+                storeAlias = store.alias;
+            });
 
 
             if (create) {
@@ -6251,7 +6650,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'ProductAttribute' }),
+            bulkActions: [],
             items: [],
             itemProperties: [
                 { alias: 'alias', header: 'Alias' }
@@ -6272,6 +6671,10 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getBulkActions({ storeId: storeId, entityType: 'ProductAttribute' }).then(result => {
+                vm.options.bulkActions = result;
+            });
 
             navigationService.syncTree({ tree: "vendr", path: "-1," + storeId + ",10,11", forceReload: true }).then(function (syncArgs) {
                 vm.page.menu.currentNode = syncArgs.node;
@@ -6935,15 +7338,6 @@
 
         var init = function () {
 
-            // Hide the property editor row
-            // We do this in the prop editor as we need to ensure we only hide
-            // rows for this particular editor and so we can't just hide on the
-            // property alias via css in case someone uses the same alias for
-            // something none vendr related.
-            // NB: This does result in the flash of an empty row, but the editor
-            // moves around a bit anyway as it is loading in the various prop editors.
-            $element.closest('.umb-property')[0].style.display = "none";
-
             // Ensure model has a baseline value
             if (typeof vm.model.value !== 'object' || vm.model.value === null) {
                 vm.model.value = {};
@@ -7005,7 +7399,10 @@
                 init();
             }
         }
-        
+
+        $scope.$on("$destroy", function () {
+            vendrVariantsEditorState.reset();
+        });
     }
 
     angular
@@ -7035,7 +7432,7 @@
 
     function RegionEditController($scope, $routeParams, $location, formHelper,
         appState, editorState, localizationService, notificationsService, navigationService, treeService,
-        vendrUtils, vendrCountryResource, vendrShippingMethodResource, vendrPaymentMethodResource) {
+        vendrUtils, vendrCountryResource, vendrShippingMethodResource, vendrPaymentMethodResource, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
@@ -7062,7 +7459,8 @@
         vm.options = {
             isCreate: create,
             shippingMethods: [],
-            paymentMethods: []
+            paymentMethods: [],
+            editorActions: []
         };
         vm.content = {};
 
@@ -7072,6 +7470,10 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getEditorActions({ storeId: storeId, entityType: 'Region' }).then(result => {
+                vm.options.editorActions = result;
+            });
             
             vendrShippingMethodResource.getShippingMethods(storeId).then(function (shippingMethods) {
                 if (create)
@@ -7202,7 +7604,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'Region' }),
+            bulkActions: [],
             items: [],
             itemProperties: [
                 { alias: 'code', header: 'Code' }
@@ -7213,6 +7615,11 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getBulkActions({ storeId: storeId, entityType: 'Region' }).then(result => {
+                vm.options.bulkActions = result;
+            });
+
             if ($scope.model.page.menu.currentNode) {
                 vm.initFromNode($scope.model.page.menu.currentNode);
             } else {
@@ -7223,6 +7630,7 @@
                     }
                 });
             }
+
         };
 
         vm.loadItems = function (callback) {
@@ -7311,7 +7719,7 @@
 
     function ShippingMethodEditController($scope, $routeParams, $location, formHelper,
         appState, editorState, localizationService, notificationsService, treeService, navigationService, editorService,
-        vendrUtils, vendrShippingMethodResource, vendrCountryResource, vendrCurrencyResource, vendrTaxResource) {
+        vendrUtils, vendrShippingMethodResource, vendrCountryResource, vendrCurrencyResource, vendrTaxResource, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
@@ -7337,7 +7745,8 @@
         vm.options = {
             taxClasses: [],
             currencies: [],
-            countryRegions: []
+            countryRegions: [],
+            editorActions: []
         };
         vm.content = {
             defaultPrices: []
@@ -7449,6 +7858,10 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getEditorActions({ storeId: storeId, entityType: 'ShippingMethod' }).then(result => {
+                vm.options.editorActions = result;
+            });
 
             vendrTaxResource.getTaxClasses(storeId).then(function (taxClasses) {
                 vm.options.taxClasses = taxClasses;
@@ -7686,7 +8099,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'ShippingMethod' }),
+            bulkActions: [],
             items: [],
             itemProperties: [
                 { alias: 'sku', header: 'SKU' }
@@ -7707,6 +8120,10 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getBulkActions({ storeId: storeId, entityType: 'ShippingMethod' }).then(result => {
+                vm.options.bulkActions = result;
+            });
 
             navigationService.syncTree({ tree: "vendrsettings", path: "-1,1," + storeId + ",3", forceReload: true }).then(function (syncArgs) {
                 vm.page.menu.currentNode = syncArgs.node;
@@ -7765,7 +8182,7 @@
         appState, editorState, localizationService, notificationsService, navigationService, userGroupsResource, usersResource,
         vendrStoreResource, vendrCurrencyResource, vendrCountryResource, vendrTaxResource,
         vendrOrderStatusResource, vendrEmailTemplateResource,
-        vendrLicensingResource, vendrRouteCache) {
+        vendrLicensingResource, vendrRouteCache, vendrActions) {
 
         var id = $routeParams.id;
         var create = id === '-1';
@@ -7808,12 +8225,17 @@
                 { key: 'OrderStatus', value: 'Order Status' }
             ],
             userRoles: [],
-            users: []
+            users: [],
+            editorActions: []
         };
 
         vm.content = {};
 
         vm.init = function () {
+
+            vendrActions.getEditorActions({ storeId: id, entityType: 'Store' }).then(result => {
+                vm.options.editorActions = result;
+            });
 
             vendrRouteCache.getOrFetch("vendrLicensingInfo",
                 () => vendrLicensingResource.getLicensingInfo()).then(function (data) {
@@ -8045,7 +8467,7 @@
 
     function TaxClassEditController($scope, $routeParams, $location, formHelper,
         appState, editorState, localizationService, notificationsService, treeService, navigationService,
-        vendrUtils, vendrTaxResource, vendrCountryResource) {
+        vendrUtils, vendrTaxResource, vendrCountryResource, vendrActions) {
 
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId[0];
@@ -8069,7 +8491,8 @@
         };
 
         vm.options = {
-            countryRegions: []
+            countryRegions: [],
+            editorActions: []
         };
         vm.content = {};
 
@@ -8078,6 +8501,10 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getEditorActions({ storeId: storeId, entityType: 'TaxClass' }).then(result => {
+                vm.options.editorActions = result;
+            });
 
             vendrCountryResource.getCountriesWithRegions(storeId).then(function (countries) {
                 countries.forEach(function (country) {
@@ -8266,7 +8693,7 @@
 
         vm.options = {
             createActions: [],
-            bulkActions: vendrActions.getBulkActions({ storeId: storeId, entityType: 'TaxClass' }),
+            bulkActions: [],
             items: [],
             itemProperties: [
                 { alias: 'defaultTaxRate', header: 'Default Tax Rate' }
@@ -8288,6 +8715,10 @@
         };
 
         vm.init = function () {
+
+            vendrActions.getBulkActions({ storeId: storeId, entityType: 'TaxClass' }).then(result => {
+                vm.options.bulkActions = result;
+            });
 
             navigationService.syncTree({ tree: "vendrsettings", path: "-1,1," + storeId + ",7", forceReload: true }).then(function (syncArgs) {
                 vm.page.menu.currentNode = syncArgs.node;
