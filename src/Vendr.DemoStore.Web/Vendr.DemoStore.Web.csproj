@@ -411,17 +411,17 @@
     <Reference Include="Umbraco.Web.UI, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\UmbracoCms.Web.8.10.1\lib\net472\Umbraco.Web.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Vendr.Core, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Vendr.Core.1.6.0\lib\net472\Vendr.Core.dll</HintPath>
+    <Reference Include="Vendr.Core, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Vendr.Core.1.7.0\lib\net472\Vendr.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Vendr.Core.Web, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Vendr.Core.Web.1.6.0\lib\net472\Vendr.Core.Web.dll</HintPath>
+    <Reference Include="Vendr.Core.Web, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Vendr.Core.Web.1.7.0\lib\net472\Vendr.Core.Web.dll</HintPath>
     </Reference>
     <Reference Include="Vendr.PaymentProviders.Invoicing, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Vendr.PaymentProviders.Invoicing.1.1.0\lib\net472\Vendr.PaymentProviders.Invoicing.dll</HintPath>
     </Reference>
-    <Reference Include="Vendr.Web, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Vendr.Web.1.6.0\lib\net472\Vendr.Web.dll</HintPath>
+    <Reference Include="Vendr.Web, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Vendr.Web.1.7.0\lib\net472\Vendr.Web.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

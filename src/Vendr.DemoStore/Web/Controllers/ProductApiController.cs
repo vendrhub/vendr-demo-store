@@ -4,7 +4,6 @@ using System.Web.Http;
 using Umbraco.Web;
 using Umbraco.Web.WebApi;
 using Vendr.Core;
-using Vendr.Core.Models;
 using Vendr.Core.Services;
 using Vendr.DemoStore.Models;
 using Vendr.DemoStore.Web.Dtos;

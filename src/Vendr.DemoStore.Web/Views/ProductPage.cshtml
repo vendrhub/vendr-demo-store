@@ -2,6 +2,7 @@
 @using Vendr.Core.Models;
 @using Vendr.DemoStore;
 @using Vendr.DemoStore.Models;
+@using ProductVariantCollectionExtensions = Vendr.Core.ProductVariantCollectionExtensions;
 @inherits Umbraco.Web.Mvc.UmbracoViewPage<ProductPage>
 @{
     Layout = "Page.cshtml";
@@ -80,7 +81,7 @@
 <div class="pt-6">
     <div class="md:flex mb-4">
         <div class="w-full md:w-1/2 md:mr-6">
-            <img src="@(Model.PrimaryImage != null ? Url.GetCropUrl(Model.PrimaryImage, 500, 500).ToString() : "https://placehold.it/400x500")" 
+            <img src="@(Model.PrimaryImage != null ? Url.GetCropUrl(Model.PrimaryImage, 500, 500).ToString() : "https://placehold.it/400x500")"
                  data-default-url="@(Model.PrimaryImage != null ? Url.GetCropUrl(Model.PrimaryImage, 500, 500).ToString() : "https://placehold.it/400x500")"
                  class="border w-full product-image" />
             @if (Model.Images.Count() > 1)
@@ -133,7 +134,7 @@
         @Html.Hidden("productReference", Model.GetProductReference())
         @Html.Hidden("productVariantReference", "")
 
-        var attrs = multiVariantProductPage.Variants.GetInUseProductAttributes(store.Id);
+        var attrs = ProductVariantCollectionExtensions.GetInUseProductAttributes(multiVariantProductPage.Variants);
 
         foreach (var attr in attrs)
         {
