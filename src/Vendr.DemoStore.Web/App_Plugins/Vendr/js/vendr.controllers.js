@@ -2257,6 +2257,175 @@
 
     'use strict';
 
+    function ExportDialogController($scope, $http, vendrOrderResource, vendrExportTemplateResource, languageResource) {
+
+        var cfg = $scope.model.config;
+
+        var vm = this;
+
+        vm.page = {};
+        vm.page.name = "Export " + cfg.entityType.replace(/([a-z0-9])([A-Z])/g, '$1 $2');
+        vm.page.exportButtonState = 'init';
+
+        vm.loading = true;
+
+        vm.model = {};
+        vm.templateId = null;
+        vm.languageIsoCode = null;
+        vm.options = {
+            languages: []
+        };
+
+        vm.init = function () {
+
+            vendrExportTemplateResource.getExportTemplates(cfg.storeId, cfg.category).then(function (templates) {
+
+                vm.options.templates = templates.map((itm, idx) => {
+                    itm.checked = false;
+                    return itm;
+                });
+
+                languageResource.getAll().then(function (languages) {
+                    vm.options.languages = languages;
+
+                    var defaultLanguage = languages.find(function (itm) {
+                        return itm.isDefault;
+                    });
+
+                    if (defaultLanguage) {
+                        vm.languageIsoCode = defaultLanguage.culture;
+                    }
+                    else if (languages.length == 1) {
+                        vm.languageIsoCode = languages[0].culture;
+                    }
+
+                    vm.loading = false;
+                });
+
+            });
+
+        };
+
+        vm.anyTemplatesSelected = function () {
+            return vm.options.templates.some(t => t.checked);
+        }
+
+        vm.export = function () {
+
+            // Remove previous
+            var wrapper = document.getElementById("vendr-export-wrapper");
+            if (wrapper) {
+                wrapper.parentElement.removeChild(wrapper);
+            }
+
+            // Generate form + iframe
+            var wrapper = document.createElement('div')
+            wrapper.id = "vendr-export-wrapper";
+            wrapper.style = "display: none;";
+
+            var frame = document.createElement('iframe');
+            frame.src = "about:blank";
+            frame.id = "vendr-export-iframe";
+            frame.name = "vendr-export-iframe";
+            wrapper.appendChild(frame);
+
+            // Generate form
+            var form = document.createElement("form");
+            form.setAttribute("id", "vendr-export-form");
+            form.setAttribute("action", `${Umbraco.Sys.ServerVariables.umbracoSettings.umbracoPath}/backoffice/vendr/vendrexport/export`);
+            form.setAttribute("method", "post");
+            form.target = "vendr-export-iframe";
+
+            var entityTypeEl = document.createElement("input");
+            entityTypeEl.setAttribute("type", "hidden");
+            entityTypeEl.setAttribute("name", "entityType");
+            entityTypeEl.setAttribute("value", cfg.entityType);
+            form.append(entityTypeEl);
+
+            var languageIsoCodeEl = document.createElement("input");
+            languageIsoCodeEl.setAttribute("type", "hidden");
+            languageIsoCodeEl.setAttribute("name", "languageIsoCode");
+            languageIsoCodeEl.setAttribute("value", vm.languageIsoCode);
+            form.append(languageIsoCodeEl);
+
+            vm.options.templates.filter(t => t.checked).forEach((t, i) => {
+                var templateIdEl = document.createElement('input');
+                templateIdEl.type = "hidden";
+                templateIdEl.name = "templateIds[" + i + "]";
+                templateIdEl.value = t.id;
+                form.appendChild(templateIdEl);
+            });
+
+            cfg.entities.forEach((e, i) => {
+                var entityIdEl = document.createElement('input');
+                entityIdEl.setAttribute("type", "hidden");
+                entityIdEl.setAttribute("name", "entityIds[" + i + "]");
+                entityIdEl.setAttribute("value", e.id);
+                form.appendChild(entityIdEl);
+            });
+
+            wrapper.appendChild(form);
+
+            document.body.appendChild(wrapper);
+
+            // Submit the form
+            setTimeout(function () {
+                form.submit();
+            }, 1);
+        };
+
+        vm.close = function () {
+            $scope.model.close();
+        };
+
+        vm.init();
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.ExportDialogController', ExportDialogController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function ExportTemplatePickerDialogController($scope,
+        vendrExportTemplateResource)
+    {
+        var defaultConfig = {
+            title: "Select an Export Template",
+            enableFilter: true,
+            orderBy: "name"
+        };
+
+        var vm = this;
+
+        vm.config = angular.extend({}, defaultConfig, $scope.model.config);
+
+        vm.loadItems = function() {
+            return vendrExportTemplateResource.getExportTemplates(vm.config.storeId, vm.config.category);
+        };
+
+        vm.select = function(item) {
+            $scope.model.value = item;
+            if ($scope.model.submit) {
+                $scope.model.submit($scope.model.value);
+            }
+        };
+
+        vm.close = function () {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.ExportTemplatePickerDialogController', ExportTemplatePickerDialogController);
+
+}());
+(function () {
+
+    'use strict';
+
     function OrderStatusPickerDialogController($scope,
         vendrOrderStatusResource)
     {
@@ -2397,14 +2566,12 @@
                 form.appendChild(languageIsoCodeInput);
             }
 
-            vm.options.templates.forEach((t, i) => {
-                if (t.checked) {
-                    var templateInput = document.createElement('input');
-                    templateInput.type = "hidden";
-                    templateInput.name = "templateIds["+ i +"]";
-                    templateInput.value = t.id;
-                    form.appendChild(templateInput);
-                }
+            vm.options.templates.filter(t => t.checked).forEach((t, i) => {
+                var templateInput = document.createElement('input');
+                templateInput.type = "hidden";
+                templateInput.name = "templateIds["+ i +"]";
+                templateInput.value = t.id;
+                form.appendChild(templateInput);
             });
 
             vm.options.entities.forEach((e, i) => {
@@ -3783,6 +3950,259 @@
     };
 
     angular.module('vendr').controller('Vendr.Controllers.EntitySortController', EntitySortController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function ExportTemplateEditController($scope, $routeParams, $location, formHelper,
+        appState, editorState, localizationService, notificationsService, navigationService, treeService,
+        vendrUtils, vendrUtilsResource, vendrExportTemplateResource, vendrStoreResource, vendrActions) {
+
+        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
+        var storeId = compositeId[0];
+        var storeAlias = storeId; // Set store alias to id for now as a fallback
+        var id = compositeId[1];
+        var create = id === '-1';
+
+        var vm = this;
+
+        vm.page = {};
+        vm.page.loading = true;
+        vm.page.saveButtonState = 'init';
+
+        vm.page.menu = {};
+        vm.page.menu.currentSection = appState.getSectionState("currentSection");
+        vm.page.menu.currentNode = null;
+
+        vm.page.breadcrumb = {};
+        vm.page.breadcrumb.items = [];
+        vm.page.breadcrumb.itemClick = function (ancestor) {
+            $location.path(ancestor.routePath);
+        };
+
+        vm.options = {
+            templateCategories: [],
+            dictionaryInputOptions: {
+                containerKey: "Vendr",
+                generateKey: function (fldName) {
+                    return "vendr_" + storeAlias.toLowerCase() + "_exporttemplate_" + (vm.content.alias || scope.$id).toLowerCase() + "_" + fldName.toLowerCase();
+                }
+            },
+            editorActions: []
+        };
+
+        vm.content = {};
+
+        vm.back = function () {
+            $location.path("/settings/vendrsettings/exporttemplate-list/" + vendrUtils.createCompositeId([storeId]));
+        };
+
+        vm.init = function () {
+
+            vendrActions.getEditorActions({ storeId: storeId, entityType: 'ExportTemplate' }).then(result => {
+                vm.options.editorActions = result;
+            });
+
+            vendrStoreResource.getStoreAlias(storeId).then(function (alias) {
+                storeAlias = alias;
+            });
+
+            vendrUtilsResource.getEnumOptions("TemplateCategory").then(function (opts) {
+                vm.options.templateCategories = opts;
+            });
+
+            vendrUtilsResource.getEnumOptions("ExportStrategy").then(function (opts) {
+                vm.options.exportStrategies = opts;
+            });
+
+            if (create) {
+
+                vendrExportTemplateResource.createExportTemplate(storeId).then(function (exportTemplate) {
+                    vm.ready(exportTemplate);
+                });
+
+            } else {
+
+                vendrExportTemplateResource.getExportTemplate(id).then(function (exportTemplate) {
+                    vm.ready(exportTemplate);
+                });
+
+            }
+        };
+
+        vm.ready = function (model) {
+            vm.page.loading = false;
+            vm.content = model;
+
+            // sync state
+            editorState.set(vm.content);
+
+            var pathToSync = create ? vm.content.path : vm.content.path.slice(0, -1);
+            navigationService.syncTree({ tree: "vendrsettings", path: pathToSync, forceReload: true }).then(function (syncArgs) {
+                if (!create) {
+                    treeService.getChildren({ node: syncArgs.node }).then(function (children) {
+                        var node = children.find(function (itm) {
+                            return itm.id === id;
+                        });
+                        vm.page.menu.currentNode = node;
+                        vm.page.breadcrumb.items = vendrUtils.createSettingsBreadcrumbFromTreeNode(node);
+                    });
+                } else {
+                    vm.page.breadcrumb.items = vendrUtils.createSettingsBreadcrumbFromTreeNode(syncArgs.node);
+                    vm.page.breadcrumb.items.push({ name: 'Untitled' });
+                }
+            });
+        };
+
+        vm.save = function (suppressNotification) {
+
+            if (formHelper.submitForm({ scope: $scope, statusMessage: "Saving..." })) {
+
+                vm.page.saveButtonState = "busy";
+
+                vendrExportTemplateResource.saveExportTemplate(vm.content).then(function (saved) {
+
+                    formHelper.resetForm({ scope: $scope, notifications: saved.notifications });
+
+                    vm.page.saveButtonState = "success";
+
+                    if (create) {
+                        $location.path("/settings/vendrsettings/exporttemplate-edit/" + vendrUtils.createCompositeId([storeId, saved.id]));
+                    }
+                    else {
+                        vm.ready(saved);
+                    }
+
+                }, function (err) {
+
+                    if (!suppressNotification) {
+                        vm.page.saveButtonState = "error";
+                        notificationsService.error("Failed to save export template " + vm.content.name,
+                            err.data.message || err.data.Message || err.errorMsg);
+                    }
+
+                    vm.page.saveButtonState = "error";
+                });
+            }
+
+        };
+
+        vm.init();
+
+        $scope.$on("vendrEntityDeleted", function (evt, args) {
+            if (args.entityType === 'ExportTemplate' && args.storeId === storeId && args.entityId === id) {
+                vm.back();
+            }
+        });
+
+    };
+
+    angular.module('vendr').controller('Vendr.Controllers.ExportTemplateEditController', ExportTemplateEditController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function ExportTemplateListController($scope, $location, $routeParams, $q,
+        appState, localizationService, treeService, navigationService,
+        vendrUtils, vendrExportTemplateResource, vendrActions) {
+
+        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
+        var storeId = compositeId[0];
+
+        var vm = this;
+
+        vm.page = {};
+        vm.page.loading = true;
+
+        vm.page.menu = {};
+        vm.page.menu.currentSection = appState.getSectionState("currentSection");
+        vm.page.menu.currentNode = null;
+
+        vm.page.breadcrumb = {};
+        vm.page.breadcrumb.items = [];
+        vm.page.breadcrumb.itemClick = function (ancestor) {
+            $location.path(ancestor.routePath);
+        };
+
+        vm.options = {
+            createActions: [],
+            bulkActions: [],
+            items: [],
+            itemProperties: [
+                { alias: 'category', header: 'Category' }
+            ],
+            itemClick: function (itm) {
+                $location.path(itm.routePath);
+            }
+        };
+
+        vm.loadItems = function (callback) {
+            vendrExportTemplateResource.getExportTemplates(storeId).then(function (entities) {
+                entities.forEach(function (itm) {
+                    itm.routePath = '/settings/vendrsettings/exporttemplate-edit/' + vendrUtils.createCompositeId([storeId, itm.id]);
+                });
+                vm.options.items = entities;
+                if (callback) callback();
+            });
+        };
+
+        vm.init = function () {
+
+            vendrActions.getBulkActions({ storeId: storeId, entityType: 'ExportTemplate' }).then(result => {
+                vm.options.bulkActions = result;
+            });
+
+            navigationService.syncTree({ tree: "vendrsettings", path: "-1,1," + storeId + ",10,13", forceReload: true }).then(function (syncArgs) {
+                vm.page.menu.currentNode = syncArgs.node;
+                vm.page.breadcrumb.items = vendrUtils.createSettingsBreadcrumbFromTreeNode(syncArgs.node);
+                treeService.getMenu({ treeNode: vm.page.menu.currentNode }).then(function (menu) {
+
+                    var createMenuAction = menu.menuItems.find(function (itm) {
+                        return itm.alias === 'create';
+                    });
+
+                    if (createMenuAction) {
+                        vm.options.createActions.push({
+                            name: 'Create Export Template',
+                            doAction: function () {
+                                appState.setMenuState("currentNode", vm.page.menu.currentNode);
+                                navigationService.executeMenuAction(createMenuAction,
+                                    vm.page.menu.currentNode,
+                                    vm.page.menu.currentSection);
+                            }
+                        });
+                    }
+
+                    vm.loadItems(function () {
+                        vm.page.loading = false;
+                    });
+
+                });
+            });
+           
+        };
+
+        vm.init();
+
+        var onVendrEvent = function (evt, args) {
+            if (args.entityType === 'ExportTemplate' && args.storeId === storeId) {
+                vm.page.loading = true;
+                vm.loadItems(function () {
+                    vm.page.loading = false;
+                });
+            }
+        };
+
+        $scope.$on("vendrEntitiesSorted", onVendrEvent);
+        $scope.$on("vendrEntityDelete", onVendrEvent);
+
+    };
+
+    angular.module('vendr').controller('Vendr.Controllers.ExportTemplateListController', ExportTemplateListController);
 
 }());
 (function () {

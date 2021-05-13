@@ -17,21 +17,22 @@
                 <div class="vendr-layout__right">
 
                     <umb-box>
-                        <umb-box-header title="Templates"></umb-box-header>
+                        <umb-box-header title="Options"></umb-box-header>
                         <umb-box-content class="block-form">
-                            <vendr-toggle-list ng-model="vm.options.templates" toggle-all="false"></vendr-toggle-list>
-                        </umb-box-content>
-                    </umb-box>
 
-                    <umb-box ng-if="!vm.options.entityHasLanguageIsoCode">
-                        <umb-box-header title="Language"></umb-box-header>
-                        <umb-box-content class="block-form">
-                            <select class="umb-property-editor umb-dropdown"
-                                    ng-model="vm.languageIsoCode"
-                                    ng-options="itm.culture as itm.name for itm in vm.options.languages"
-                                    required>
-                                <option value="" selected>-- Select a Language --</option>
-                            </select>
+                            <umb-control-group label="Templates" description="Select one or more templates to print">
+                                <vendr-toggle-list ng-model="vm.options.templates" toggle-all="false"></vendr-toggle-list>
+                            </umb-control-group>
+
+                            <umb-control-group label="Language" description="Select the language to print in" ng-if="!vm.options.entityHasLanguageIsoCode">
+                                <select class="umb-property-editor umb-dropdown"
+                                        ng-model="vm.languageIsoCode"
+                                        ng-options="itm.culture as itm.name for itm in vm.options.languages"
+                                        required>
+                                    <option value="" selected>-- Select a Language --</option>
+                                </select>
+                            </umb-control-group>
+
                         </umb-box-content>
                     </umb-box>
 
@@ -91,7 +92,8 @@
                     button-style="success"
                     shortcut="ctrl+p"
                     label="Print"
-                    action="vm.print()">
+                    action="vm.print()"
+                    disabled="!vm.anyTemplatesSelected()">
                 </umb-button>
 
             </umb-editor-footer-content-right>

@@ -2,7 +2,6 @@
 @using Vendr.Core.Models;
 @using Vendr.DemoStore;
 @using Vendr.DemoStore.Models;
-@using ProductVariantCollectionExtensions = Vendr.Core.ProductVariantCollectionExtensions;
 @inherits Umbraco.Web.Mvc.UmbracoViewPage<ProductPage>
 @{
     Layout = "Page.cshtml";
@@ -134,7 +133,7 @@
         @Html.Hidden("productReference", Model.GetProductReference())
         @Html.Hidden("productVariantReference", "")
 
-        var attrs = ProductVariantCollectionExtensions.GetInUseProductAttributes(multiVariantProductPage.Variants);
+        var attrs = multiVariantProductPage.Variants.GetInUseProductAttributes();
 
         foreach (var attr in attrs)
         {

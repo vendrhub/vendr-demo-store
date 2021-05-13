@@ -41,9 +41,53 @@
                         });
                     },
                     condition: function (ctx) {
-                        if (ctx.entityType !== 'Order' && ctx.entityType !== 'GiftCard')
+                        if (ctx.entityType !== 'Order' && ctx.entityType !== 'GiftCard' && ctx.entityType !== 'Discount')
                             return false
                         return vendrPrintTemplateResource.getPrintTemplateCount(ctx.storeId, ctx.entityType).then(count => {
+                            return count > 0;
+                        });
+                    }
+                }
+            }],
+            ['$q', 'editorService', 'vendrExportTemplateResource', function ($q, editorService, vendrExportTemplateResource) {
+                return {
+                    name: 'Export',
+                    icon: 'icon-sharing-iphone',
+                    bulkAction: function (items, config) {
+                        return $q(function (resolve, reject) {
+
+                            editorService.open({
+                                view: '/app_plugins/vendr/views/dialogs/export.html',
+                                size: 'small',
+                                config: {
+                                    storeId: items[0].storeId,
+                                    entityType: items[0].entityType,
+                                    entityHasLanguageIsoCode: items[0].entityType === 'Order',
+                                    entities: items.map(itm => {
+                                        return {
+                                            id: itm.id,
+                                            name: itm.entityType === 'Order' ? '#' + itm.orderNumber : itm.name
+                                        }
+                                    }),
+                                    category: items[0].entityType
+                                },
+                                close: function () {
+                                    editorService.close();
+                                    resolve({ canceled: true });
+                                }
+                            });
+
+                            // We don't need to sit around for this one
+                            // as it's not a bulk action that performs 
+                            // an ongoing task
+                            // resolve({ canceled: true });
+
+                        });
+                    },
+                    condition: function (ctx) {
+                        if (ctx.entityType !== 'Order' && ctx.entityType !== 'GiftCard' && ctx.entityType !== 'Discount')
+                            return false
+                        return vendrExportTemplateResource.getExportTemplateCount(ctx.storeId, ctx.entityType).then(count => {
                             return count > 0;
                         });
                     }
@@ -170,7 +214,7 @@
                         });
                     },
                     condition: function (ctx) {
-                        if (ctx.entityType !== 'Order' && ctx.entityType !== 'GiftCard')
+                        if (ctx.entityType !== 'Order' && ctx.entityType !== 'GiftCard' && ctx.entityType !== 'Discount')
                             return false
                         return vendrEmailTemplateResource.getEmailTemplateCount(ctx.storeId, ctx.entityType).then(count => {
                             return count > 0;
@@ -209,7 +253,7 @@
                         });
                     },
                     condition: function (ctx) {
-                        if (ctx.entityType !== 'Order' && ctx.entityType !== 'GiftCard')
+                        if (ctx.entityType !== 'Order' && ctx.entityType !== 'GiftCard' && ctx.entityType !== 'Discount')
                             return false
                         return vendrPrintTemplateResource.getPrintTemplateCount(ctx.storeId, ctx.entityType).then(count => {
                             return count > 0;
