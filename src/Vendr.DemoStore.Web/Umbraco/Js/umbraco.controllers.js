@@ -1062,7 +1062,7 @@
             var vm = this;
             var oldModel = null;
             vm.showConfirmSubmit = false;
-            vm.loading = false;
+            vm.loadingAlias = null;
             vm.isSelected = isSelected;
             vm.openContentType = openContentType;
             vm.selectCompositeContentType = selectCompositeContentType;
@@ -1099,23 +1099,10 @@
                 $location.path(url);
             }
             function selectCompositeContentType(compositeContentType) {
-                vm.loading = true;
+                vm.loadingAlias = compositeContentType.contentType.alias;
                 var contentType = compositeContentType.contentType;
                 $scope.model.selectCompositeContentType(contentType).then(function (response) {
-                    Utilities.forEach(vm.availableGroups, function (group) {
-                        Utilities.forEach(group.compositeContentTypes, function (obj) {
-                            if (obj.allowed === false) {
-                                obj.selected = false;
-                            }
-                        });
-                    });
-                    $timeout(function () {
-                        vm.loading = false;
-                    }, 500);
-                }, function () {
-                    $timeout(function () {
-                        vm.loading = false;
-                    }, 500);
+                    vm.loadingAlias = null;
                 });
                 // Check if the template is already selected.
                 var index = $scope.model.contentType.compositeContentTypes.indexOf(contentType.alias);
@@ -4834,6 +4821,7 @@
     });
     'use strict';
     function ItemPickerOverlay($scope, localizationService) {
+        $scope.filter = { searchTerm: '' };
         function onInit() {
             $scope.model.hideSubmitButton = true;
             if (!$scope.model.title) {
@@ -18350,6 +18338,16 @@
             if ($scope.model.close) {
                 $scope.model.close();
             }
+        }
+        vm.showEmptyState = false;
+        vm.showConfig = false;
+        vm.showStyles = false;
+        $scope.$watchCollection('model.config', onWatch);
+        $scope.$watchCollection('model.styles', onWatch);
+        function onWatch() {
+            vm.showConfig = $scope.model.config && ($scope.model.config.length > 0 || Object.keys($scope.model.config).length > 0);
+            vm.showStyles = $scope.model.styles && ($scope.model.styles.length > 0 || Object.keys($scope.model.styles).length > 0);
+            vm.showEmptyState = vm.showConfig === false && vm.showStyles === false;
         }
     }
     angular.module('umbraco').controller('Umbraco.PropertyEditors.GridPrevalueEditor.ConfigController', ConfigController);

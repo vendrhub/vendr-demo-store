@@ -587,6 +587,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Umbraco.Web.Editors.IconController.GetIcons">
+            <summary>
+            Gets a list of all svg icons found at at the global icons path.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Umbraco.Web.Editors.ImageUrlGeneratorController">
             <summary>
             The API controller used for getting URLs for images with parameters
@@ -16482,6 +16488,9 @@
             <inheritdoc />
         </member>
         <member name="M:Umbraco.Web.Services.DashboardService.GetDashboards(Umbraco.Core.Models.Membership.IUser)">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Web.Services.IconService.GetIcons">
             <inheritdoc />
         </member>
         <member name="M:Umbraco.Web.Services.IconService.GetAllIcons">

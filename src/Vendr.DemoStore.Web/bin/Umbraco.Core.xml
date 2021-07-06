@@ -1336,6 +1336,345 @@
             <remarks>Well-known entity types are those that Deploy already knows about,
             but entity types are strings and so can be extended beyond what is defined here.</remarks>
         </member>
+        <member name="T:Umbraco.Core.Collections.EventClearingObservableCollection`1">
+            <summary>
+            Allows clearing all event handlers
+            </summary>
+            <typeparam name="TValue"></typeparam>
+        </member>
+        <member name="M:Umbraco.Core.Collections.EventClearingObservableCollection`1.ClearCollectionChangedEvents">
+            <summary>
+            Clears all event handlers for the <see cref="!:CollectionChanged"/> event
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Collections.CompositeNStringNStringKey">
+            <summary>
+            Represents a composite key of (string, string) for fast dictionaries.
+            </summary>
+            <remarks>
+            <para>The string parts of the key are case-insensitive.</para>
+            <para>Null is a valid value for both parts.</para>
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Core.Collections.CompositeNStringNStringKey.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umbraco.Core.Collections.CompositeNStringNStringKey"/> struct.
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Collections.CompositeStringStringKey">
+            <summary>
+            Represents a composite key of (string, string) for fast dictionaries.
+            </summary>
+            <remarks>
+            <para>The string parts of the key are case-insensitive.</para>
+            <para>Null is NOT a valid value for neither parts.</para>
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Core.Collections.CompositeStringStringKey.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umbraco.Core.Collections.CompositeStringStringKey"/> struct.
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Collections.CompositeIntStringKey">
+            <summary>
+            Represents a composite key of (int, string) for fast dictionaries.
+            </summary>
+            <remarks>
+            <para>The integer part of the key must be greater than, or equal to, zero.</para>
+            <para>The string part of the key is case-insensitive.</para>
+            <para>Null is a valid value for both parts.</para>
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Core.Collections.CompositeIntStringKey.#ctor(System.Nullable{System.Int32},System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umbraco.Core.Collections.CompositeIntStringKey"/> struct.
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Collections.CompositeTypeTypeKey">
+            <summary>
+            Represents a composite key of (Type, Type) for fast dictionaries.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Collections.CompositeTypeTypeKey.#ctor(System.Type,System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umbraco.Core.Collections.CompositeTypeTypeKey"/> struct.
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Collections.CompositeTypeTypeKey.Type1">
+            <summary>
+            Gets the first type.
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Collections.CompositeTypeTypeKey.Type2">
+            <summary>
+            Gets the second type.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Collections.CompositeTypeTypeKey.Equals(Umbraco.Core.Collections.CompositeTypeTypeKey)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Umbraco.Core.Collections.CompositeTypeTypeKey.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Umbraco.Core.Collections.CompositeTypeTypeKey.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="T:Umbraco.Core.Collections.ConcurrentHashSet`1">
+            <summary>
+            A thread-safe representation of a <see cref="T:System.Collections.Generic.HashSet`1"/>.
+            Enumerating this collection is thread-safe and will only operate on a clone that is generated before returning the enumerator.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Umbraco.Core.Collections.ConcurrentHashSet`1.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
+            </returns>
+            <filterpriority>1</filterpriority>
+        </member>
+        <member name="M:Umbraco.Core.Collections.ConcurrentHashSet`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
+            </returns>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="M:Umbraco.Core.Collections.ConcurrentHashSet`1.Remove(`0)">
+            <summary>
+            Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <returns>
+            true if <paramref name="item"/> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </returns>
+            <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param><exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.</exception>
+        </member>
+        <member name="P:Umbraco.Core.Collections.ConcurrentHashSet`1.Count">
+            <summary>
+            Gets the number of elements contained in the <see cref="T:System.Collections.ICollection"/>.
+            </summary>
+            <returns>
+            The number of elements contained in the <see cref="T:System.Collections.ICollection"/>.
+            </returns>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="P:Umbraco.Core.Collections.ConcurrentHashSet`1.IsReadOnly">
+            <summary>
+            Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+            </summary>
+            <returns>
+            true if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Core.Collections.ConcurrentHashSet`1.Add(`0)">
+            <summary>
+            Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param><exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.</exception>
+        </member>
+        <member name="M:Umbraco.Core.Collections.ConcurrentHashSet`1.TryAdd(`0)">
+            <summary>
+            Attempts to add an item to the collection
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Collections.ConcurrentHashSet`1.Clear">
+            <summary>
+            Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only. </exception>
+        </member>
+        <member name="M:Umbraco.Core.Collections.ConcurrentHashSet`1.Contains(`0)">
+            <summary>
+            Determines whether the <see cref="T:System.Collections.Generic.ICollection`1"/> contains a specific value.
+            </summary>
+            <returns>
+            true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
+            </returns>
+            <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+        </member>
+        <member name="M:Umbraco.Core.Collections.ConcurrentHashSet`1.CopyTo(`0[],System.Int32)">
+            <summary>
+            Copies the elements of the <see cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1"/> to an <see cref="T:System.Array"/>, starting at a specified index.
+            </summary>
+            <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from the <see cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1"/>. The array must have zero-based indexing.</param><param name="index">The zero-based index in <paramref name="array"/> at which copying begins.</param><exception cref="T:System.ArgumentNullException"><paramref name="array"/> is a null reference (Nothing in Visual Basic).</exception><exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than zero.</exception><exception cref="T:System.ArgumentException"><paramref name="index"/> is equal to or greater than the length of the <paramref name="array"/> -or- The number of elements in the source <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/> is greater than the available space from <paramref name="index"/> to the end of the destination <paramref name="array"/>.</exception>
+        </member>
+        <member name="M:Umbraco.Core.Collections.ConcurrentHashSet`1.CopyTo(System.Array,System.Int32)">
+            <summary>
+            Copies the elements of the <see cref="T:System.Collections.ICollection"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
+            </summary>
+            <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from <see cref="T:System.Collections.ICollection"/>. The <see cref="T:System.Array"/> must have zero-based indexing. </param><param name="index">The zero-based index in <paramref name="array"/> at which copying begins. </param><exception cref="T:System.ArgumentNullException"><paramref name="array"/> is null. </exception><exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than zero. </exception><exception cref="T:System.ArgumentException"><paramref name="array"/> is multidimensional.-or- The number of elements in the source <see cref="T:System.Collections.ICollection"/> is greater than the available space from <paramref name="index"/> to the end of the destination <paramref name="array"/>. </exception><exception cref="T:System.ArgumentException">The type of the source <see cref="T:System.Collections.ICollection"/> cannot be cast automatically to the type of the destination <paramref name="array"/>. </exception><filterpriority>2</filterpriority>
+        </member>
+        <member name="T:Umbraco.Core.Collections.DeepCloneableList`1">
+            <summary>
+            A List that can be deep cloned with deep cloned elements and can reset the collection's items dirty flags
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Umbraco.Core.Collections.DeepCloneableList`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Default behavior is CloneOnce
+            </summary>
+            <param name="collection"></param>
+        </member>
+        <member name="M:Umbraco.Core.Collections.DeepCloneableList`1.DeepClone">
+            <summary>
+            Creates a new list and adds each element as a deep cloned element if it is of type IDeepCloneable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Collections.DeepCloneableList`1.IsPropertyDirty(System.String)">
+            <inheritdoc />
+            <remarks>Always return false, the list has no properties that can be dirty.</remarks>
+        </member>
+        <member name="M:Umbraco.Core.Collections.DeepCloneableList`1.WasPropertyDirty(System.String)">
+            <inheritdoc />
+            <remarks>Always return false, the list has no properties that can be dirty.</remarks>
+        </member>
+        <member name="M:Umbraco.Core.Collections.DeepCloneableList`1.GetDirtyProperties">
+            <inheritdoc />
+            <remarks>Always return an empty enumerable, the list has no properties that can be dirty.</remarks>
+        </member>
+        <member name="M:Umbraco.Core.Collections.DeepCloneableList`1.GetWereDirtyProperties">
+            <remarks>Always return an empty enumerable, the list has no properties that can be dirty.</remarks>
+        </member>
+        <member name="F:Umbraco.Core.Collections.ListCloneBehavior.CloneOnce">
+            <summary>
+            When set, DeepClone will clone the items one time and the result list behavior will be None
+            </summary>
+        </member>
+        <member name="F:Umbraco.Core.Collections.ListCloneBehavior.None">
+            <summary>
+            When set, DeepClone will not clone any items
+            </summary>
+        </member>
+        <member name="F:Umbraco.Core.Collections.ListCloneBehavior.Always">
+            <summary>
+            When set, DeepClone will always clone all items
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Collections.ObservableDictionary`2">
+            <summary>
+            An ObservableDictionary
+            </summary>
+            <remarks>
+            Assumes that the key will not change and is unique for each element in the collection.
+            Collection is not thread-safe, so calls should be made single-threaded.
+            </remarks>
+            <typeparam name="TValue">The type of elements contained in the BindableCollection</typeparam>
+            <typeparam name="TKey">The type of the indexing key</typeparam>
+        </member>
+        <member name="M:Umbraco.Core.Collections.ObservableDictionary`2.#ctor(System.Func{`1,`0},System.Collections.Generic.IEqualityComparer{`0})">
+            <summary>
+            Create new ObservableDictionary
+            </summary>
+            <param name="keySelector">Selector function to create key from value</param>
+            <param name="equalityComparer">The equality comparer to use when comparing keys, or null to use the default comparer.</param>
+        </member>
+        <member name="M:Umbraco.Core.Collections.ObservableDictionary`2.ClearCollectionChangedEvents">
+            <summary>
+            Clears all <see cref="!:CollectionChanged"/> event handlers
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Collections.ObservableDictionary`2.Item(`0)">
+            <summary>
+            Gets or sets the element with the specified key.  If setting a new value, new value must have same key.
+            </summary>
+            <param name="key">Key of element to replace</param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Collections.ObservableDictionary`2.Replace(`0,`1)">
+             <summary>
+             Replaces element at given key with new value.  New value must have same key.
+             </summary>
+             <param name="key">Key of element to replace</param>
+             <param name="value">New value</param>
+            
+             <exception cref="T:System.InvalidOperationException"></exception>
+             <returns>False if key not found</returns>
+        </member>
+        <member name="M:Umbraco.Core.Collections.ObservableDictionary`2.ChangeKey(`0,`0)">
+            <summary>
+            Allows us to change the key of an item
+            </summary>
+            <param name="currentKey"></param>
+            <param name="newKey"></param>
+        </member>
+        <member name="P:Umbraco.Core.Collections.ObservableDictionary`2.Keys">
+            <summary>
+            Returns all keys
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Collections.ObservableDictionary`2.Values">
+            <summary>
+            Returns all values
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Collections.TypeList`1">
+            <summary>
+            Represents a list of types.
+            </summary>
+            <remarks>Types in the list are, or derive from, or implement, the base type.</remarks>
+            <typeparam name="TBase">The base type.</typeparam>
+        </member>
+        <member name="M:Umbraco.Core.Collections.TypeList`1.Add``1">
+            <summary>
+            Adds a type to the list.
+            </summary>
+            <typeparam name="T">The type to add.</typeparam>
+        </member>
+        <member name="M:Umbraco.Core.Collections.TypeList`1.Contains(System.Type)">
+            <summary>
+            Determines whether a type is in the list.
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Collections.OrderedHashSet`1">
+            <summary>
+            A custom collection similar to HashSet{T} which only contains unique items, however this collection keeps items in order
+            and is customizable to keep the newest or oldest equatable item
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Umbraco.Core.Collections.TopoGraph`2">
+            <summary>
+            Represents a generic DAG that can be topologically sorted.
+            </summary>
+            <typeparam name="TKey">The type of the keys.</typeparam>
+            <typeparam name="TItem">The type of the items.</typeparam>
+        </member>
+        <member name="M:Umbraco.Core.Collections.TopoGraph`2.#ctor(System.Func{`1,`0},System.Func{`1,System.Collections.Generic.IEnumerable{`0}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umbraco.Core.Collections.TopoGraph`2"/> class.
+            </summary>
+            <param name="getKey">A method that returns the key of an item.</param>
+            <param name="getDependencies">A method that returns the dependency keys of an item.</param>
+        </member>
+        <member name="M:Umbraco.Core.Collections.TopoGraph`2.AddItem(`1)">
+            <summary>
+            Adds an item to the graph.
+            </summary>
+            <param name="item">The item.</param>
+        </member>
+        <member name="M:Umbraco.Core.Collections.TopoGraph`2.AddItems(System.Collections.Generic.IEnumerable{`1})">
+            <summary>
+            Adds items to the graph.
+            </summary>
+            <param name="items">The items.</param>
+        </member>
+        <member name="M:Umbraco.Core.Collections.TopoGraph`2.GetSortedItems(System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Gets the sorted items.
+            </summary>
+            <param name="throwOnCycle">A value indicating whether to throw on cycles, or just ignore the branch.</param>
+            <param name="throwOnMissing">A value indicating whether to throw on missing dependency, or just ignore the dependency.</param>
+            <param name="reverse">A value indicating whether to reverse the order.</param>
+            <returns>The (topologically) sorted items.</returns>
+        </member>
         <member name="T:Umbraco.Core.Migrations.Upgrade.V_8_0_0.Models.ContentTypeDto80">
             <summary>
             Snapshot of the <see cref="T:Umbraco.Core.Persistence.Dtos.ContentTypeDto"/> as it was at version 8.0
@@ -6799,6 +7138,11 @@
             Expire the document.
             </summary>
         </member>
+        <member name="M:Umbraco.Core.Models.ContentScheduleCollection.ClearCollectionChangedEvents">
+            <summary>
+            Clears all <see cref="E:Umbraco.Core.Models.ContentScheduleCollection.CollectionChanged"/> event handlers
+            </summary>
+        </member>
         <member name="M:Umbraco.Core.Models.ContentScheduleCollection.Add(Umbraco.Core.Models.ContentSchedule)">
             <summary>
             Add an existing schedule
@@ -10576,6 +10920,11 @@
             <returns><c>true</c> if the collection contains the specified name; otherwise, <c>false</c>.</returns>
             <remarks></remarks>
         </member>
+        <member name="M:Umbraco.Core.Models.PropertyGroupCollection.ClearCollectionChangedEvents">
+            <summary>
+            Clears all <see cref="E:Umbraco.Core.Models.PropertyGroupCollection.CollectionChanged"/> event handlers
+            </summary>
+        </member>
         <member name="T:Umbraco.Core.Models.PropertyType">
             <summary>
             Represents a property type.
@@ -10782,6 +11131,11 @@
             <param name="propertyAlias">Alias of the PropertyType.</param>
             <returns><c>true</c> if the collection contains the specified alias; otherwise, <c>false</c>.</returns>
             <remarks></remarks>
+        </member>
+        <member name="M:Umbraco.Core.Models.PropertyTypeCollection.ClearCollectionChangedEvents">
+            <summary>
+            Clears all <see cref="E:Umbraco.Core.Models.PropertyTypeCollection.CollectionChanged"/> event handlers
+            </summary>
         </member>
         <member name="T:Umbraco.Core.Models.PublishedState">
             <summary>
@@ -18860,12 +19214,18 @@
         </member>
         <member name="M:Umbraco.Core.Services.IIconService.GetIcon(System.String)">
             <summary>
-            Gets an IconModel containing the icon name and SvgString according to an icon name found at the global icons path
+            Gets the svg string for the icon name found at the global icons path
             </summary>
             <param name="iconName"></param>
             <returns></returns>
         </member>
         <member name="M:Umbraco.Core.Services.IIconService.GetAllIcons">
+            <summary>
+            Gets a list of all svg icons found at at the global icons path.
+            </summary>
+            <returns>A list of <see cref="T:Umbraco.Core.Models.IconModel"/></returns>
+        </member>
+        <member name="M:Umbraco.Core.Services.IIconService.GetIcons">
             <summary>
             Gets a list of all svg icons found at at the global icons path.
             </summary>
@@ -27826,329 +28186,6 @@
             <summary>
             Attribute to associate a GUID string and Type with an UmbracoObjectType Enum value
             </summary>
-        </member>
-        <member name="T:Umbraco.Core.Collections.CompositeNStringNStringKey">
-            <summary>
-            Represents a composite key of (string, string) for fast dictionaries.
-            </summary>
-            <remarks>
-            <para>The string parts of the key are case-insensitive.</para>
-            <para>Null is a valid value for both parts.</para>
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Core.Collections.CompositeNStringNStringKey.#ctor(System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Umbraco.Core.Collections.CompositeNStringNStringKey"/> struct.
-            </summary>
-        </member>
-        <member name="T:Umbraco.Core.Collections.CompositeStringStringKey">
-            <summary>
-            Represents a composite key of (string, string) for fast dictionaries.
-            </summary>
-            <remarks>
-            <para>The string parts of the key are case-insensitive.</para>
-            <para>Null is NOT a valid value for neither parts.</para>
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Core.Collections.CompositeStringStringKey.#ctor(System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Umbraco.Core.Collections.CompositeStringStringKey"/> struct.
-            </summary>
-        </member>
-        <member name="T:Umbraco.Core.Collections.CompositeIntStringKey">
-            <summary>
-            Represents a composite key of (int, string) for fast dictionaries.
-            </summary>
-            <remarks>
-            <para>The integer part of the key must be greater than, or equal to, zero.</para>
-            <para>The string part of the key is case-insensitive.</para>
-            <para>Null is a valid value for both parts.</para>
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Core.Collections.CompositeIntStringKey.#ctor(System.Nullable{System.Int32},System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Umbraco.Core.Collections.CompositeIntStringKey"/> struct.
-            </summary>
-        </member>
-        <member name="T:Umbraco.Core.Collections.CompositeTypeTypeKey">
-            <summary>
-            Represents a composite key of (Type, Type) for fast dictionaries.
-            </summary>
-        </member>
-        <member name="M:Umbraco.Core.Collections.CompositeTypeTypeKey.#ctor(System.Type,System.Type)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Umbraco.Core.Collections.CompositeTypeTypeKey"/> struct.
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Collections.CompositeTypeTypeKey.Type1">
-            <summary>
-            Gets the first type.
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Collections.CompositeTypeTypeKey.Type2">
-            <summary>
-            Gets the second type.
-            </summary>
-        </member>
-        <member name="M:Umbraco.Core.Collections.CompositeTypeTypeKey.Equals(Umbraco.Core.Collections.CompositeTypeTypeKey)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Umbraco.Core.Collections.CompositeTypeTypeKey.Equals(System.Object)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Umbraco.Core.Collections.CompositeTypeTypeKey.GetHashCode">
-            <inheritdoc/>
-        </member>
-        <member name="T:Umbraco.Core.Collections.ConcurrentHashSet`1">
-            <summary>
-            A thread-safe representation of a <see cref="T:System.Collections.Generic.HashSet`1"/>.
-            Enumerating this collection is thread-safe and will only operate on a clone that is generated before returning the enumerator.
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:Umbraco.Core.Collections.ConcurrentHashSet`1.GetEnumerator">
-            <summary>
-            Returns an enumerator that iterates through the collection.
-            </summary>
-            <returns>
-            A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
-            </returns>
-            <filterpriority>1</filterpriority>
-        </member>
-        <member name="M:Umbraco.Core.Collections.ConcurrentHashSet`1.System#Collections#IEnumerable#GetEnumerator">
-            <summary>
-            Returns an enumerator that iterates through a collection.
-            </summary>
-            <returns>
-            An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
-            </returns>
-            <filterpriority>2</filterpriority>
-        </member>
-        <member name="M:Umbraco.Core.Collections.ConcurrentHashSet`1.Remove(`0)">
-            <summary>
-            Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
-            </summary>
-            <returns>
-            true if <paramref name="item"/> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1"/>.
-            </returns>
-            <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param><exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.</exception>
-        </member>
-        <member name="P:Umbraco.Core.Collections.ConcurrentHashSet`1.Count">
-            <summary>
-            Gets the number of elements contained in the <see cref="T:System.Collections.ICollection"/>.
-            </summary>
-            <returns>
-            The number of elements contained in the <see cref="T:System.Collections.ICollection"/>.
-            </returns>
-            <filterpriority>2</filterpriority>
-        </member>
-        <member name="P:Umbraco.Core.Collections.ConcurrentHashSet`1.IsReadOnly">
-            <summary>
-            Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
-            </summary>
-            <returns>
-            true if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, false.
-            </returns>
-        </member>
-        <member name="M:Umbraco.Core.Collections.ConcurrentHashSet`1.Add(`0)">
-            <summary>
-            Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1"/>.
-            </summary>
-            <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param><exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.</exception>
-        </member>
-        <member name="M:Umbraco.Core.Collections.ConcurrentHashSet`1.TryAdd(`0)">
-            <summary>
-            Attempts to add an item to the collection
-            </summary>
-            <param name="item"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Core.Collections.ConcurrentHashSet`1.Clear">
-            <summary>
-            Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
-            </summary>
-            <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only. </exception>
-        </member>
-        <member name="M:Umbraco.Core.Collections.ConcurrentHashSet`1.Contains(`0)">
-            <summary>
-            Determines whether the <see cref="T:System.Collections.Generic.ICollection`1"/> contains a specific value.
-            </summary>
-            <returns>
-            true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
-            </returns>
-            <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
-        </member>
-        <member name="M:Umbraco.Core.Collections.ConcurrentHashSet`1.CopyTo(`0[],System.Int32)">
-            <summary>
-            Copies the elements of the <see cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1"/> to an <see cref="T:System.Array"/>, starting at a specified index.
-            </summary>
-            <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from the <see cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1"/>. The array must have zero-based indexing.</param><param name="index">The zero-based index in <paramref name="array"/> at which copying begins.</param><exception cref="T:System.ArgumentNullException"><paramref name="array"/> is a null reference (Nothing in Visual Basic).</exception><exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than zero.</exception><exception cref="T:System.ArgumentException"><paramref name="index"/> is equal to or greater than the length of the <paramref name="array"/> -or- The number of elements in the source <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/> is greater than the available space from <paramref name="index"/> to the end of the destination <paramref name="array"/>.</exception>
-        </member>
-        <member name="M:Umbraco.Core.Collections.ConcurrentHashSet`1.CopyTo(System.Array,System.Int32)">
-            <summary>
-            Copies the elements of the <see cref="T:System.Collections.ICollection"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
-            </summary>
-            <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from <see cref="T:System.Collections.ICollection"/>. The <see cref="T:System.Array"/> must have zero-based indexing. </param><param name="index">The zero-based index in <paramref name="array"/> at which copying begins. </param><exception cref="T:System.ArgumentNullException"><paramref name="array"/> is null. </exception><exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than zero. </exception><exception cref="T:System.ArgumentException"><paramref name="array"/> is multidimensional.-or- The number of elements in the source <see cref="T:System.Collections.ICollection"/> is greater than the available space from <paramref name="index"/> to the end of the destination <paramref name="array"/>. </exception><exception cref="T:System.ArgumentException">The type of the source <see cref="T:System.Collections.ICollection"/> cannot be cast automatically to the type of the destination <paramref name="array"/>. </exception><filterpriority>2</filterpriority>
-        </member>
-        <member name="T:Umbraco.Core.Collections.DeepCloneableList`1">
-            <summary>
-            A List that can be deep cloned with deep cloned elements and can reset the collection's items dirty flags
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:Umbraco.Core.Collections.DeepCloneableList`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
-            <summary>
-            Default behavior is CloneOnce
-            </summary>
-            <param name="collection"></param>
-        </member>
-        <member name="M:Umbraco.Core.Collections.DeepCloneableList`1.DeepClone">
-            <summary>
-            Creates a new list and adds each element as a deep cloned element if it is of type IDeepCloneable
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Core.Collections.DeepCloneableList`1.IsPropertyDirty(System.String)">
-            <inheritdoc />
-            <remarks>Always return false, the list has no properties that can be dirty.</remarks>
-        </member>
-        <member name="M:Umbraco.Core.Collections.DeepCloneableList`1.WasPropertyDirty(System.String)">
-            <inheritdoc />
-            <remarks>Always return false, the list has no properties that can be dirty.</remarks>
-        </member>
-        <member name="M:Umbraco.Core.Collections.DeepCloneableList`1.GetDirtyProperties">
-            <inheritdoc />
-            <remarks>Always return an empty enumerable, the list has no properties that can be dirty.</remarks>
-        </member>
-        <member name="M:Umbraco.Core.Collections.DeepCloneableList`1.GetWereDirtyProperties">
-            <remarks>Always return an empty enumerable, the list has no properties that can be dirty.</remarks>
-        </member>
-        <member name="F:Umbraco.Core.Collections.ListCloneBehavior.CloneOnce">
-            <summary>
-            When set, DeepClone will clone the items one time and the result list behavior will be None
-            </summary>
-        </member>
-        <member name="F:Umbraco.Core.Collections.ListCloneBehavior.None">
-            <summary>
-            When set, DeepClone will not clone any items
-            </summary>
-        </member>
-        <member name="F:Umbraco.Core.Collections.ListCloneBehavior.Always">
-            <summary>
-            When set, DeepClone will always clone all items
-            </summary>
-        </member>
-        <member name="T:Umbraco.Core.Collections.ObservableDictionary`2">
-            <summary>
-            An ObservableDictionary
-            </summary>
-            <remarks>
-            Assumes that the key will not change and is unique for each element in the collection.
-            Collection is not thread-safe, so calls should be made single-threaded.
-            </remarks>
-            <typeparam name="TValue">The type of elements contained in the BindableCollection</typeparam>
-            <typeparam name="TKey">The type of the indexing key</typeparam>
-        </member>
-        <member name="M:Umbraco.Core.Collections.ObservableDictionary`2.#ctor(System.Func{`1,`0},System.Collections.Generic.IEqualityComparer{`0})">
-            <summary>
-            Create new ObservableDictionary
-            </summary>
-            <param name="keySelector">Selector function to create key from value</param>
-            <param name="equalityComparer">The equality comparer to use when comparing keys, or null to use the default comparer.</param>
-        </member>
-        <member name="P:Umbraco.Core.Collections.ObservableDictionary`2.Item(`0)">
-            <summary>
-            Gets or sets the element with the specified key.  If setting a new value, new value must have same key.
-            </summary>
-            <param name="key">Key of element to replace</param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Core.Collections.ObservableDictionary`2.Replace(`0,`1)">
-             <summary>
-             Replaces element at given key with new value.  New value must have same key.
-             </summary>
-             <param name="key">Key of element to replace</param>
-             <param name="value">New value</param>
-            
-             <exception cref="T:System.InvalidOperationException"></exception>
-             <returns>False if key not found</returns>
-        </member>
-        <member name="M:Umbraco.Core.Collections.ObservableDictionary`2.ChangeKey(`0,`0)">
-            <summary>
-            Allows us to change the key of an item
-            </summary>
-            <param name="currentKey"></param>
-            <param name="newKey"></param>
-        </member>
-        <member name="P:Umbraco.Core.Collections.ObservableDictionary`2.Keys">
-            <summary>
-            Returns all keys
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Collections.ObservableDictionary`2.Values">
-            <summary>
-            Returns all values
-            </summary>
-        </member>
-        <member name="T:Umbraco.Core.Collections.TypeList`1">
-            <summary>
-            Represents a list of types.
-            </summary>
-            <remarks>Types in the list are, or derive from, or implement, the base type.</remarks>
-            <typeparam name="TBase">The base type.</typeparam>
-        </member>
-        <member name="M:Umbraco.Core.Collections.TypeList`1.Add``1">
-            <summary>
-            Adds a type to the list.
-            </summary>
-            <typeparam name="T">The type to add.</typeparam>
-        </member>
-        <member name="M:Umbraco.Core.Collections.TypeList`1.Contains(System.Type)">
-            <summary>
-            Determines whether a type is in the list.
-            </summary>
-        </member>
-        <member name="T:Umbraco.Core.Collections.OrderedHashSet`1">
-            <summary>
-            A custom collection similar to HashSet{T} which only contains unique items, however this collection keeps items in order
-            and is customizable to keep the newest or oldest equatable item
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="T:Umbraco.Core.Collections.TopoGraph`2">
-            <summary>
-            Represents a generic DAG that can be topologically sorted.
-            </summary>
-            <typeparam name="TKey">The type of the keys.</typeparam>
-            <typeparam name="TItem">The type of the items.</typeparam>
-        </member>
-        <member name="M:Umbraco.Core.Collections.TopoGraph`2.#ctor(System.Func{`1,`0},System.Func{`1,System.Collections.Generic.IEnumerable{`0}})">
-            <summary>
-            Initializes a new instance of the <see cref="T:Umbraco.Core.Collections.TopoGraph`2"/> class.
-            </summary>
-            <param name="getKey">A method that returns the key of an item.</param>
-            <param name="getDependencies">A method that returns the dependency keys of an item.</param>
-        </member>
-        <member name="M:Umbraco.Core.Collections.TopoGraph`2.AddItem(`1)">
-            <summary>
-            Adds an item to the graph.
-            </summary>
-            <param name="item">The item.</param>
-        </member>
-        <member name="M:Umbraco.Core.Collections.TopoGraph`2.AddItems(System.Collections.Generic.IEnumerable{`1})">
-            <summary>
-            Adds items to the graph.
-            </summary>
-            <param name="items">The items.</param>
-        </member>
-        <member name="M:Umbraco.Core.Collections.TopoGraph`2.GetSortedItems(System.Boolean,System.Boolean,System.Boolean)">
-            <summary>
-            Gets the sorted items.
-            </summary>
-            <param name="throwOnCycle">A value indicating whether to throw on cycles, or just ignore the branch.</param>
-            <param name="throwOnMissing">A value indicating whether to throw on missing dependency, or just ignore the dependency.</param>
-            <param name="reverse">A value indicating whether to reverse the order.</param>
-            <returns>The (topologically) sorted items.</returns>
         </member>
         <member name="T:Umbraco.Core.Composing.ComponentComposer`1">
             <summary>

@@ -267,7 +267,7 @@
             </code>
             </example>
         </member>
-        <member name="M:Ganss.XSS.HtmlSanitizer.#ctor(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:Ganss.XSS.HtmlSanitizer.#ctor(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
             <summary>
             Initializes a new instance of the <see cref="T:Ganss.XSS.HtmlSanitizer"/> class.
             </summary>
@@ -276,7 +276,6 @@
             <param name="allowedAttributes">The allowed HTML attributes such as "href" and "alt". When <c>null</c>, uses <see cref="P:Ganss.XSS.HtmlSanitizer.DefaultAllowedAttributes"/></param>
             <param name="uriAttributes">The HTML attributes that can contain a URI such as "href". When <c>null</c>, uses <see cref="P:Ganss.XSS.HtmlSanitizer.DefaultUriAttributes"/></param>
             <param name="allowedCssProperties">The allowed CSS properties such as "font" and "margin". When <c>null</c>, uses <see cref="P:Ganss.XSS.HtmlSanitizer.DefaultAllowedCssProperties"/></param>
-            <param name="allowedCssClasses">CSS class names which are allowed in the value of a class attribute. When <c>null</c>, any class names are allowed.</param>
         </member>
         <member name="P:Ganss.XSS.HtmlSanitizer.DefaultKeepChildNodes">
             <summary>
@@ -399,12 +398,17 @@
             The regex.
             </value>
         </member>
-        <member name="P:Ganss.XSS.HtmlSanitizer.AllowedCssClasses">
+        <member name="P:Ganss.XSS.HtmlSanitizer.DefaultAllowedClasses">
             <summary>
-            Gets or sets the allowed CSS classes.
+            The default allowed CSS classes.
+            </summary>
+        </member>
+        <member name="P:Ganss.XSS.HtmlSanitizer.AllowedClasses">
+            <summary>
+            Gets or sets the allowed CSS classes. If the set is empty, all classes will be allowed.
             </summary>
             <value>
-            The allowed CSS classes.
+            The allowed CSS classes. An empty set means all classes are allowed.
             </value>
         </member>
         <member name="E:Ganss.XSS.HtmlSanitizer.PostProcessDom">
@@ -533,7 +537,17 @@
             </summary>
             <param name="html">The HTML body fragment to sanitize.</param>
             <param name="baseUrl">The base URL relative URLs are resolved against. No resolution if empty.</param>
-            <returns>The sanitized HTML Document.</returns>
+            <returns>The sanitized HTML document.</returns>
+        </member>
+        <member name="M:Ganss.XSS.HtmlSanitizer.SanitizeDom(AngleSharp.Html.Dom.IHtmlDocument,AngleSharp.Html.Dom.IHtmlElement,System.String)">
+            <summary>
+            Sanitizes the specified parsed HTML body fragment.
+            If the document has not been parsed with CSS support then all styles will be removed.
+            </summary>
+            <param name="document">The parsed HTML document.</param>
+            <param name="context">The node within which to sanitize.</param>
+            <param name="baseUrl">The base URL relative URLs are resolved against. No resolution if empty.</param>
+            <returns>The sanitized HTML document.</returns>
         </member>
         <member name="M:Ganss.XSS.HtmlSanitizer.SanitizeDocument(System.String,System.String,AngleSharp.IMarkupFormatter)">
             <summary>
@@ -555,23 +569,23 @@
         </member>
         <member name="M:Ganss.XSS.HtmlSanitizer.CreateParser">
             <summary>
-            Creeates an instance of <see cref="T:AngleSharp.Parser.Html.HtmlParser"/>.
+            Creeates an instance of <see cref="T:AngleSharp.Html.Parser.HtmlParser"/>.
             </summary>
-            <returns>An instance of <see cref="T:AngleSharp.Parser.Html.HtmlParser"/>.</returns>
+            <returns>An instance of <see cref="T:AngleSharp.Html.Parser.HtmlParser"/>.</returns>
         </member>
-        <member name="M:Ganss.XSS.HtmlSanitizer.RemoveComments(AngleSharp.Dom.IElement)">
+        <member name="M:Ganss.XSS.HtmlSanitizer.RemoveComments(AngleSharp.Dom.INode)">
             <summary>
             Removes all comment nodes from a list of nodes.
             </summary>
-            <param name="context">The element within which to remove comments.</param>
+            <param name="context">The node within which to remove comments.</param>
             <returns><c>true</c> if any comments were removed; otherwise, <c>false</c>.</returns>
         </member>
-        <member name="M:Ganss.XSS.HtmlSanitizer.DoPostProcess(AngleSharp.Dom.Html.IHtmlDocument,AngleSharp.Dom.IElement)">
+        <member name="M:Ganss.XSS.HtmlSanitizer.DoPostProcess(AngleSharp.Html.Dom.IHtmlDocument,AngleSharp.Dom.INode)">
             <summary>
             Performs post processing on all nodes in the document.
             </summary>
             <param name="dom">The HTML document.</param>
-            <param name="context">The element within which to post process all nodes.</param>
+            <param name="context">The node within which to post process all nodes.</param>
         </member>
         <member name="M:Ganss.XSS.HtmlSanitizer.IsUriAttribute(AngleSharp.Dom.IAttr)">
             <summary>
@@ -638,7 +652,7 @@
             <param name="attribute">Attribute to be removed</param>
             <param name="reason">Reason for removal</param>
         </member>
-        <member name="M:Ganss.XSS.HtmlSanitizer.RemoveStyle(AngleSharp.Dom.IElement,AngleSharp.Dom.Css.ICssStyleDeclaration,AngleSharp.Dom.Css.ICssProperty,Ganss.XSS.RemoveReason)">
+        <member name="M:Ganss.XSS.HtmlSanitizer.RemoveStyle(AngleSharp.Dom.IElement,AngleSharp.Css.Dom.ICssStyleDeclaration,AngleSharp.Css.Dom.ICssProperty,Ganss.XSS.RemoveReason)">
             <summary>
             Removes a style from the document.
             </summary>
@@ -647,7 +661,7 @@
             <param name="style">Style to be removed</param>
             <param name="reason">Reason for removal</param>
         </member>
-        <member name="M:Ganss.XSS.HtmlSanitizer.RemoveAtRule(AngleSharp.Dom.IElement,AngleSharp.Dom.Css.ICssRule)">
+        <member name="M:Ganss.XSS.HtmlSanitizer.RemoveAtRule(AngleSharp.Dom.IElement,AngleSharp.Css.Dom.ICssRule)">
             <summary>
             Removes an at-rule from the document.
             </summary>
@@ -745,12 +759,12 @@
             The regex.
             </value>
         </member>
-        <member name="P:Ganss.XSS.IHtmlSanitizer.AllowedCssClasses">
+        <member name="P:Ganss.XSS.IHtmlSanitizer.AllowedClasses">
             <summary>
-            Gets or sets the allowed CSS classes.
+            Gets or sets the allowed CSS classes. If the set is empty, all classes will be allowed.
             </summary>
             <value>
-            The allowed CSS classes.
+            The allowed CSS classes. An empty set means all classes are allowed.
             </value>
         </member>
         <member name="E:Ganss.XSS.IHtmlSanitizer.PostProcessDom">
@@ -808,7 +822,17 @@
             </summary>
             <param name="html">The HTML body fragment to sanitize.</param>
             <param name="baseUrl">The base URL relative URLs are resolved against. No resolution if empty.</param>
-            <returns>The sanitized HTML Document.</returns>
+            <returns>The sanitized HTML document.</returns>
+        </member>
+        <member name="M:Ganss.XSS.IHtmlSanitizer.SanitizeDom(AngleSharp.Html.Dom.IHtmlDocument,AngleSharp.Html.Dom.IHtmlElement,System.String)">
+            <summary>
+            Sanitizes the specified parsed HTML body fragment.
+            If the document has not been parsed with CSS support then all styles will be removed.
+            </summary>
+            <param name="document">The parsed HTML document.</param>
+            <param name="context">The node within which to sanitize.</param>
+            <param name="baseUrl">The base URL relative URLs are resolved against. No resolution if empty.</param>
+            <returns>The sanitized HTML document.</returns>
         </member>
         <member name="M:Ganss.XSS.IHtmlSanitizer.SanitizeDocument(System.String,System.String,AngleSharp.IMarkupFormatter)">
             <summary>
