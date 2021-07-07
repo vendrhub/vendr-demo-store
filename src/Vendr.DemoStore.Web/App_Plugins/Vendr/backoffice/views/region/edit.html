@@ -1,0 +1,105 @@
+﻿<div ng-controller="Vendr.Controllers.RegionEditController as vm" class="vendr">
+
+    <umb-load-indicator ng-if="vm.page.loading"></umb-load-indicator>
+
+    <form name="contentForm"
+          ng-submit="vm.save()"
+          novalidate
+          val-form-manager>
+
+        <umb-editor-view ng-if="!vm.page.loading">
+
+            <umb-editor-header name="vm.content.name"
+                hide-icon="true"
+                hide-description="true"
+                hide-alias="true"
+                show-back-button="true"
+                on-back="vm.back()"
+                menu="vm.page.menu">
+            </umb-editor-header>
+
+            <umb-editor-container class="form-horizontal">
+
+                <div class="vendr-layout vendr-layout--layout1">
+
+                    <div class="vendr-layout__left">
+
+                        <umb-box>
+                            <!--<umb-box-header title="Settings"></umb-box-header>-->
+                            <umb-box-content>
+
+                                <umb-control-group label="Code" description="A short code to reference this region. Should be uppercase alphanumeric, ie 'ALB01'">
+                                    <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--short"
+                                           ng-model="vm.content.code"
+                                           pattern="[A-Z0-9]+" required
+                                           vendr-uppercase />
+                                </umb-control-group>
+                                <umb-control-group label="Default Shipping Method">
+                                    <select class="umb-property-editor umb-dropdown"
+                                            ng-model="vm.content.defaultShippingMethodId"
+                                            ng-options="itm.id as itm.name for itm in vm.options.shippingMethods">
+                                        <option value="" selected>-- Inherit --</option>
+                                    </select>
+                                </umb-control-group>
+                                <umb-control-group label="Default Payment Method">
+                                    <select class="umb-property-editor umb-dropdown"
+                                            ng-model="vm.content.defaultPaymentMethodId"
+                                            ng-options="itm.id as itm.name for itm in vm.options.paymentMethods">
+                                        <option value="" selected>-- Inherit --</option>
+                                    </select>
+                                </umb-control-group>
+
+                            </umb-box-content>
+                        </umb-box>
+                    </div>
+
+                    <div class="vendr-layout__right">
+
+                        <vendr-editor-actions editor-actions="vm.options.editorActions"
+                            model="vm.content"
+                            ng-if="!vm.create && vm.options.editorActions && vm.options.editorActions.length > 0">
+                        </vendr-editor-actions>
+
+                        <umb-box>
+                            <umb-box-header title-key="general_info"></umb-box-header>
+                            <umb-box-content class="block-form">
+                                <umb-control-group label="Id">
+                                    <vendr-id-label value="vm.content.id"></vendr-id-label>
+                                </umb-control-group>
+                                <umb-control-group label="Store Id">
+                                    <vendr-id-label value="vm.content.storeId"></vendr-id-label>
+                                </umb-control-group>
+                            </umb-box-content>
+                        </umb-box>
+                    </div>
+
+                </div>
+
+            </umb-editor-container>
+
+            <umb-editor-footer>
+
+                <umb-editor-footer-content-left>
+                    <umb-breadcrumbs
+                        ng-if="vm.page.breadcrumb && vm.page.breadcrumb.items && vm.page.breadcrumb.items.length > 0"
+                        ancestors="vm.page.breadcrumb.items"
+                        on-open="vm.page.breadcrumb.itemClick(ancestor)">
+                    </umb-breadcrumbs>
+                </umb-editor-footer-content-left>
+
+                <umb-editor-footer-content-right>
+
+                    <umb-button type="submit"
+                                button-style="success"
+                                state="vm.page.saveButtonState"
+                                shortcut="ctrl+s"
+                                label="Save"
+                                label-key="buttons_save">
+                    </umb-button>
+
+                </umb-editor-footer-content-right>
+
+            </umb-editor-footer>
+        </umb-editor-view>
+    </form>
+</div>

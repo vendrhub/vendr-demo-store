@@ -59,12 +59,6 @@ namespace Vendr.DemoStore.Models
 		[ImplementPropertyType("umbracoExtension")]
 		public string UmbracoExtension => this.Value<string>("umbracoExtension");
 
-		///<summary>
-		/// Upload image
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("umbracoFile")]
-		public Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue UmbracoFile => this.Value<Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue>("umbracoFile");
 
 		///<summary>
 		/// Height: in pixels

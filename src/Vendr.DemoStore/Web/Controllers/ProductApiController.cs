@@ -3,13 +3,13 @@ using System.Threading;
 using System.Web.Http;
 using Umbraco.Web;
 using Umbraco.Web.WebApi;
-using Vendr.Core;
 using Vendr.Core.Services;
 using Vendr.DemoStore.Models;
 using Vendr.DemoStore.Web.Dtos;
+using Vendr.Extensions;
 
 using VendrCoreConstants = Vendr.Core.Constants;
-
+ 
 namespace Vendr.DemoStore.Web.Controllers
 {
     public class ProductApiController : UmbracoApiController

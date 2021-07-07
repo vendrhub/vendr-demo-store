@@ -1,0 +1,65 @@
+﻿<div ng-controller="Vendr.Controllers.SendEmailDialogController as vm" class="vendr vendr--narrow-view">
+
+    <umb-load-indicator ng-if="vm.page.loading"></umb-load-indicator>
+
+    <form name="contentForm"
+          ng-submit="vm.save()"
+          novalidate
+          val-form-manager>
+
+        <umb-editor-view ng-if="!vm.page.loading">
+
+            <umb-editor-header name="vm.page.name"
+                name-locked="true"
+                hide-alias="true"
+                hide-icon="true"
+                hide-description="true"
+                show-back-button="false">
+            </umb-editor-header>
+
+            <umb-editor-container class="form-vertical">
+                <umb-box>
+
+                    <umb-box-content>
+                        <umb-control-group label="To" description="Set who to send this email to">
+                            <input type="text" ng-model="vm.model.to" class="umb-property-editor umb-textstring" required />
+                        </umb-control-group>
+                        <umb-control-group label="Language" description="Select the language of the email to send">
+                            <select class="umb-property-editor umb-dropdown"
+                                    ng-model="vm.model.languageIsoCode"
+                                    ng-options="itm.culture as itm.name for itm in vm.options.languages"
+                                    required>
+                                <option value="" disabled selected ng-hide="vm.model.languageIsoCode">-- Select a Language --</option>
+                            </select>
+                        </umb-control-group>
+                    </umb-box-content>
+
+                </umb-box>
+            </umb-editor-container>
+
+            <umb-editor-footer>
+
+                <umb-editor-footer-content-right>
+
+                    <umb-button type="button"
+                                button-style="link"
+                                label="Close"
+                                label-key="general_close"
+                                shortcut="esc"
+                                action="vm.close()">
+                    </umb-button>
+
+                    <umb-button type="submit"
+                                button-style="success"
+                                state="vm.page.saveButtonState"
+                                shortcut="ctrl+s"
+                                label="Send and Close">
+                    </umb-button>
+
+                </umb-editor-footer-content-right>
+
+            </umb-editor-footer>
+        </umb-editor-view>
+    </form>
+
+</div>

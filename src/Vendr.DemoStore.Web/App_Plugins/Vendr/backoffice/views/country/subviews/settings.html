@@ -1,0 +1,61 @@
+﻿<div class="vendr-layout vendr-layout--layout1">
+
+    <div class="vendr-layout__left">
+
+        <umb-box>
+            <!--<umb-box-header title="Settings"></umb-box-header>-->
+            <umb-box-content>
+
+                <umb-control-group label="ISO Code" description="2 letter ISO country code">
+                    <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--short"
+                           ng-model="model.content.code" 
+                           pattern="[A-Z]{2}" required
+                           vendr-uppercase />
+                </umb-control-group>
+                <umb-control-group label="Default Currency">
+                    <select class="umb-property-editor umb-dropdown"
+                            ng-model="model.content.defaultCurrencyId"
+                            ng-options="itm.id as itm.name for itm in model.options.currencies">
+                        <option value="" selected>-- Select a Currency --</option>
+                    </select>
+                </umb-control-group>
+                <umb-control-group label="Default Shipping Method">
+                    <select class="umb-property-editor umb-dropdown"
+                            ng-model="model.content.defaultShippingMethodId"
+                            ng-options="itm.id as itm.name for itm in model.options.shippingMethods">
+                        <option value="" selected>-- Select a Shipping Method --</option>
+                    </select>
+                </umb-control-group>
+                <umb-control-group label="Default Payment Method">
+                    <select class="umb-property-editor umb-dropdown"
+                            ng-model="model.content.defaultPaymentMethodId"
+                            ng-options="itm.id as itm.name for itm in model.options.paymentMethods">
+                        <option value="" selected>-- Select a Payment Method --</option>
+                    </select>
+                </umb-control-group>
+
+            </umb-box-content>
+        </umb-box>
+    </div>
+
+    <div class="vendr-layout__right">
+
+        <vendr-editor-actions editor-actions="model.options.editorActions"
+            model="model.content"
+            ng-if="!model.create && model.options.editorActions && model.options.editorActions.length > 0">
+        </vendr-editor-actions>
+
+        <umb-box>
+            <umb-box-header title-key="general_info"></umb-box-header>
+            <umb-box-content class="block-form">
+                <umb-control-group label="Id">
+                    <vendr-id-label value="model.content.id"></vendr-id-label>
+                </umb-control-group>
+                <umb-control-group label="Store Id">
+                    <vendr-id-label value="model.content.storeId"></vendr-id-label>
+                </umb-control-group>
+            </umb-box-content>
+        </umb-box>
+    </div>
+
+</div>

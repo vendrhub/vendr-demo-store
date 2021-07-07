@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
-using Vendr.Core;
 using Vendr.Core.Api;
 using Vendr.Core.Models;
 using Vendr.DemoStore.Models;
+using Vendr.Extensions;
 
 namespace Vendr.DemoStore
 {

@@ -1,13 +1,16 @@
-﻿using System;
-using Umbraco.Core.Models.PublishedContent;
-using Vendr.Core.Services;
+﻿using Umbraco.Core.Models.PublishedContent;
 using Vendr.DemoStore.Models;
-using Vendr.Web.Extractors;
+using Vendr.Umbraco.Extractors;
+using Vendr.Umbraco.Helpers;
 
 namespace Vendr.DemoStore.Web.Extractors
 {
     public class CompositeProductNameExtractor : UmbracoProductNameExtractor
     {
+        public CompositeProductNameExtractor(PublishedContentHelperAccessor publishedContentHelperAccessor)
+            : base(publishedContentHelperAccessor)
+        { }
+
         public override string ExtractProductName(IPublishedContent content, IPublishedElement variant, string languageIsoCode)
         {
             var productNamePrefix = content.ContentType.Alias == ProductVariant.ModelTypeAlias

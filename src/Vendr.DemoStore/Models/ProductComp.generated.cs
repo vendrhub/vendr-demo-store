@@ -26,7 +26,7 @@ namespace Vendr.DemoStore.Models
 	{
 		/// <summary>Price</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		Vendr.Web.Models.PricePropertyValue Price { get; }
+		Vendr.Umbraco.Models.PricePropertyValue Price { get; }
 
 		/// <summary>SKU</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
@@ -63,11 +63,11 @@ namespace Vendr.DemoStore.Models
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		[ImplementPropertyType("price")]
-		public Vendr.Web.Models.PricePropertyValue Price => GetPrice(this);
+		public Vendr.Umbraco.Models.PricePropertyValue Price => GetPrice(this);
 
 		/// <summary>Static getter for Price</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public static Vendr.Web.Models.PricePropertyValue GetPrice(IProductComp that) => that.Value<Vendr.Web.Models.PricePropertyValue>("price");
+		public static Vendr.Umbraco.Models.PricePropertyValue GetPrice(IProductComp that) => that.Value<Vendr.Umbraco.Models.PricePropertyValue>("price");
 
 		///<summary>
 		/// SKU: The unique SKU of this product.

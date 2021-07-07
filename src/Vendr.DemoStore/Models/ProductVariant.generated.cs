@@ -57,7 +57,7 @@ namespace Vendr.DemoStore.Models
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		[ImplementPropertyType("price")]
-		public Vendr.Web.Models.PricePropertyValue Price => ProductComp.GetPrice(this);
+		public Vendr.Umbraco.Models.PricePropertyValue Price => ProductComp.GetPrice(this);
 
 		///<summary>
 		/// SKU: The unique SKU of this product.

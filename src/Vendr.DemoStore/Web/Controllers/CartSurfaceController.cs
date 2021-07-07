@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using Umbraco.Web.Mvc;
-using Vendr.Core;
-using Vendr.Core.Exceptions;
+using Vendr.Common;
+using Vendr.Common.Validation;
 using Vendr.Core.Services;
 using Vendr.Core.Session;
 using Vendr.DemoStore.Web.Dtos;
+using Vendr.Extensions;
 
 namespace Vendr.DemoStore.Web.Controllers
 {

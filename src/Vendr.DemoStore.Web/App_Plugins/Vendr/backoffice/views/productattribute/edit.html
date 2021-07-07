@@ -1,0 +1,171 @@
+﻿<div ng-controller="Vendr.Controllers.ProductAttributeEditController as vm" class="vendr">
+
+    <umb-load-indicator ng-if="vm.page.loading"></umb-load-indicator>
+
+    <form name="contentForm"
+          ng-submit="vm.save()"
+          novalidate
+          val-form-manager
+          autocomplete="off">
+
+        <umb-editor-view ng-if="!vm.page.loading">
+
+            <umb-editor-header name="vm.content.name || 'Untitled'"
+                name-locked="true"
+                hide-icon="true"
+                hide-description="true"
+                hide-alias="true"
+                show-back-button="true"
+                on-back="vm.back()"
+                menu="vm.page.menu">
+            </umb-editor-header>
+
+            <umb-editor-container class="form-horizontal">
+
+                <vendr-license-check></vendr-license-check>
+
+                <div class="vendr-layout vendr-layout--layout1">
+
+                    <div class="vendr-layout__left">
+
+                        <umb-box>
+                            <!--<umb-box-header title="Settings"></umb-box-header>-->
+                            <umb-box-content>
+
+                                <umb-control-group label="Attribute" description="Provide an alias and name for this attribtue">
+                                    <div class="umb-property-editor umb-contentpicker">
+
+                                        <table class="vendr-multi-field-table w-full">
+                                            <thead>
+                                                <tr>
+                                                    <th>Alias</th>
+                                                    <th>Name</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="vendr-multi-field-table__divide-right">
+                                                        <input type="text" class="umb-property-editor umb-textstring textstring"
+                                                               ng-model="vm.content.alias"
+                                                               pattern="[a-zA-Z0-9_\-]+"
+                                                               vendr-lowercase />
+                                                    </td>
+                                                    <td>
+                                                        <div class="vendr-input vendr-input--wide" style="position: relative;">
+                                                            <input type="text"
+                                                                   ng-attr-autocomplete="{{  'nope-' + $id  }}"
+                                                                   ng-model="vm.content.name"
+                                                                   auto-complete="autoCompleteOptions"
+                                                                   prevent-enter-submit />
+                                                            <button type="button" ng-click="vm.openTranslationsEditor('Name', vm.content.nameTranslations)" class="btn-reset vendr-input--action"><i class="icon icon-globe" aria-hidden="true"></i></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </umb-control-group>
+
+                                <umb-control-group label="Values" description="Add one or more values to this attribute">
+
+                                    <table class="vendr-multi-field-table w-full" ng-if="vm.content.values.length > 0">
+                                        <thead>
+                                            <tr>
+                                                <th style="padding-left: 20px;">Alias</th>
+                                                <th>Name</th>
+                                                <th style="width: 1px;"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody ui-sortable="vm.valueSortableOptions" ng-model="vm.content.values">
+                                            <tr ng-repeat="value in vm.content.values" style="position: relative;">
+                                                <td class="vendr-multi-field-table__divide-right">
+                                                    <div class="flex items-center">
+                                                        <span class="px-10 -ml-5 handle" title="Move Value" aria-hidden="true"><i class="fa fa-ellipsis-v"></i></span>
+                                                        <input type="text" class="umb-property-editor umb-textstring textstring"
+                                                               ng-model="value.alias"
+                                                               pattern="[a-zA-Z0-9_\-]+"
+                                                               vendr-lowercase />
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="vendr-input vendr-input--wide" style="position: relative;">
+                                                        <input type="text"
+                                                               ng-attr-autocomplete="{{  'nope-' + $id  }}"
+                                                               ng-model="value.name"
+                                                               auto-complete="autoCompleteOptions"
+                                                               prevent-enter-submit />
+                                                        <button type="button" ng-click="vm.openTranslationsEditor('Name', value.nameTranslations)" class="btn-reset vendr-input--action"><i class="icon icon-globe" aria-hidden="true"></i></button>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <button type="button" ng-click="vm.removeValue(value, $index)" class="btn umb-button--xs dropdown-toggle umb-button-group__toggle" title="Remove Value" aria-hidden="true">
+                                                        <i class="icon icon-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <button type="button" class="umb-node-preview-add mt-10"
+                                            ng-click="vm.addValue()">
+                                        <span>Add Value</span>
+                                        <span class="sr-only">...</span>
+                                    </button>
+
+                                </umb-control-group>
+
+                            </umb-box-content>
+                        </umb-box>
+                    </div>
+
+                    <div class="vendr-layout__right">
+
+                        <vendr-editor-actions editor-actions="vm.options.editorActions"
+                            model="vm.content"
+                            ng-if="!vm.create && vm.options.editorActions && vm.options.editorActions.length > 0">
+                        </vendr-editor-actions>
+
+                        <umb-box>
+                            <umb-box-header title-key="general_info"></umb-box-header>
+                            <umb-box-content class="block-form">
+                                <umb-control-group label="Id">
+                                    <vendr-id-label value="vm.content.id"></vendr-id-label>
+                                </umb-control-group>
+                                <umb-control-group label="Store Id">
+                                    <vendr-id-label value="vm.content.storeId"></vendr-id-label>
+                                </umb-control-group>
+                            </umb-box-content>
+                        </umb-box>
+
+                    </div>
+
+                </div>
+
+            </umb-editor-container>
+
+            <umb-editor-footer>
+
+                <umb-editor-footer-content-left>
+                    <umb-breadcrumbs ng-if="vm.page.breadcrumb && vm.page.breadcrumb.items && vm.page.breadcrumb.items.length > 0"
+                                     ancestors="vm.page.breadcrumb.items"
+                                     on-open="vm.page.breadcrumb.itemClick(ancestor)">
+                    </umb-breadcrumbs>
+                </umb-editor-footer-content-left>
+
+                <umb-editor-footer-content-right>
+
+                    <umb-button type="submit"
+                                button-style="success"
+                                state="vm.page.saveButtonState"
+                                shortcut="ctrl+s"
+                                label="Save"
+                                label-key="buttons_save">
+                    </umb-button>
+
+                </umb-editor-footer-content-right>
+
+            </umb-editor-footer>
+        </umb-editor-view>
+    </form>
+</div>

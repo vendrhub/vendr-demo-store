@@ -17,6 +17,7 @@ using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using Umbraco.ModelsBuilder;
 using Umbraco.ModelsBuilder.Umbraco;
+using Umbraco.Core.Models.Blocks;
 
 namespace Vendr.DemoStore.Models
 {
@@ -50,7 +51,7 @@ namespace Vendr.DemoStore.Models
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		[ImplementPropertyType("block")]
-		public Umbraco.Core.Models.Blocks.BlockListModel Block => this.Value<Umbraco.Core.Models.Blocks.BlockListModel>("block");
+		public BlockListModel Block => this.Value<BlockListModel>("block");
 
 		///<summary>
 		/// Body: The main body of the page.

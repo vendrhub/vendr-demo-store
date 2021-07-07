@@ -1,15 +1,15 @@
 ﻿using Umbraco.Core;
 using Umbraco.Core.Composing;
-using Vendr.Core.Composing;
+using Vendr.Umbraco;
 using Vendr.Core.Events.Notification;
 using Vendr.DemoStore.Events;
 using Vendr.DemoStore.Web.Extractors;
-using Vendr.Web.Composing;
-using Vendr.Web.Extractors;
+using Vendr.Umbraco.Extractors;
+using Vendr.Extensions;
 
 namespace Vendr.DemoStore.Composing
 {
-    [ComposeAfter(typeof(VendrWebComposer))]
+    [ComposeAfter(typeof(VendrComposer))]
     public class DemoStoreComposer : IUserComposer
     {
         public void Compose(Composition composition)

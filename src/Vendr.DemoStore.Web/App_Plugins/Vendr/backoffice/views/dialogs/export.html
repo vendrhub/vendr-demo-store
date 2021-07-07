@@ -1,0 +1,63 @@
+﻿<div ng-controller="Vendr.Controllers.ExportDialogController as vm" class="vendr vendr--narrow-view">
+
+    <umb-load-indicator ng-if="vm.loading"></umb-load-indicator>
+
+    <umb-editor-view ng-if="!vm.loading">
+
+        <umb-editor-header name="vm.page.name"
+            name-locked="true"
+            hide-alias="true"
+            hide-icon="true"
+            hide-description="true"
+            show-back-button="false">
+        </umb-editor-header>
+
+        <umb-editor-container class="form-vertical">
+            <umb-box>
+
+                <umb-box-content>
+
+                    <umb-control-group label="Templates" description="Select one or more templates to export">
+                        <vendr-toggle-list ng-model="vm.options.templates" toggle-all="false"></vendr-toggle-list>
+                    </umb-control-group>
+
+                    <umb-control-group label="Language" description="Select the language of the export">
+                        <select class="umb-property-editor umb-dropdown"
+                                ng-model="vm.languageIsoCode"
+                                ng-options="itm.culture as itm.name for itm in vm.options.languages"
+                                required>
+                            <option value="" selected>-- Select a Language --</option>
+                        </select>
+                    </umb-control-group>
+
+                </umb-box-content>
+
+            </umb-box>
+        </umb-editor-container>
+
+        <umb-editor-footer>
+
+            <umb-editor-footer-content-right>
+
+                <umb-button type="button"
+                            button-style="link"
+                            label="Close"
+                            label-key="general_close"
+                            shortcut="esc"
+                            action="vm.close()">
+                </umb-button>
+
+                <umb-button type="button"
+                            button-style="success"
+                            state="vm.page.exportButtonState"
+                            label="Export"
+                            action="vm.export()"
+                            disabled="!vm.anyTemplatesSelected()">
+                </umb-button>
+
+            </umb-editor-footer-content-right>
+
+        </umb-editor-footer>
+    </umb-editor-view>
+
+</div>

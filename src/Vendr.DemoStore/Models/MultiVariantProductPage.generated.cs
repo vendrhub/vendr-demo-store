@@ -50,6 +50,6 @@ namespace Vendr.DemoStore.Models
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		[ImplementPropertyType("variants")]
-		public Vendr.Core.Models.ProductVariantCollection Variants => this.Value<Vendr.Core.Models.ProductVariantCollection>("variants");
+		public Vendr.Umbraco.Models.ProductVariantCollection Variants => this.Value<Vendr.Umbraco.Models.ProductVariantCollection>("variants");
 	}
 }

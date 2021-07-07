@@ -1,10 +1,10 @@
-{
+﻿{
   "propertyEditors": [
     {
       "alias": "Vendr.StorePicker",
       "name": "Vendr: Store Picker",
       "editor": {
-        "view": "~/app_plugins/vendr/views/propertyeditors/storepicker/storepicker.html",
+        "view": "~/App_Plugins/Vendr/backoffice/views/propertyeditors/storepicker/storepicker.html",
         "hideLabel": false,
         "valueType": "STRING"
       }
@@ -13,7 +13,7 @@
       "alias": "Vendr.TaxClassPicker",
       "name": "Vendr: Tax Class Picker [Obsolete, use Store Entity Picker instead]",
       "editor": {
-        "view": "~/app_plugins/vendr/views/propertyeditors/taxclasspicker/taxclasspicker.html",
+        "view": "~/App_Plugins/Vendr/backoffice/views/propertyeditors/taxclasspicker/taxclasspicker.html",
         "hideLabel": false,
         "valueType": "STRING"
       }
@@ -22,7 +22,7 @@
       "alias": "Vendr.StoreEntityPicker",
       "name": "Vendr: Store Entity Picker",
       "editor": {
-        "view": "~/app_plugins/vendr/views/propertyeditors/storeentitypicker/storeentitypicker.html",
+        "view": "~/App_Plugins/Vendr/backoffice/views/propertyeditors/storeentitypicker/storeentitypicker.html",
         "hideLabel": false,
         "valueType": "STRING"
       },
@@ -31,14 +31,14 @@
           {
             "label": "Store Config",
             "key": "storeConfig",
-            "view": "~/app_plugins/vendr/views/prevalueeditors/storeconfig/storeconfig.html",
+            "view": "~/App_Plugins/Vendr/backoffice/views/prevalueeditors/storeconfig/storeconfig.html",
             "hideLabel": true
           },
           {
             "label": "Store Entity Type",
             "description": "The type of store entity to pick from",
             "key": "entityType",
-            "view": "~/app_plugins/vendr/views/propertyeditors/dropdown/dropdown.html",
+            "view": "~/App_Plugins/Vendr/backoffice/views/propertyeditors/dropdown/dropdown.html",
             "config": {
               "items": {
                 "OrderStatus": "Order Status",
@@ -59,7 +59,7 @@
       "alias": "Vendr.Stock",
       "name": "Vendr: Stock",
       "editor": {
-        "view": "~/app_plugins/vendr/views/propertyeditors/stock/stock.html",
+        "view": "~/App_Plugins/Vendr/backoffice/views/propertyeditors/stock/stock.html",
         "hideLabel": false,
         "valueType": "DECIMAL"
       }
@@ -68,7 +68,7 @@
       "alias": "Vendr.Price",
       "name": "Vendr: Price",
       "editor": {
-        "view": "~/app_plugins/vendr/views/propertyeditors/price/price.html",
+        "view": "~/App_Plugins/Vendr/backoffice/views/propertyeditors/price/price.html",
         "hideLabel": false,
         "valueType": "JSON"
       }
@@ -77,7 +77,7 @@
   "dashboards": [
     {
       "alias": "CommerceDashboard",
-      "view": "~/app_plugins/vendr/views/dashboards/commerce.dashboard.html",
+      "view": "~/App_Plugins/Vendr/backoffice/views/dashboards/commerce.dashboard.html",
       "sections": [
         "commerce"
       ],
@@ -85,19 +85,19 @@
     }
   ],
   "javascript": [
-    "~/App_Plugins/vendr/js/vendr.vendor.js",
-    "~/App_Plugins/vendr/js/vendr.extensions.js",
-    "~/App_Plugins/vendr/js/vendr.modules.js",
-    "~/App_Plugins/vendr/js/vendr.providers.js",
-    "~/App_Plugins/vendr/js/vendr.interceptors.js",
-    "~/App_Plugins/vendr/js/vendr.decorators.js",
-    "~/App_Plugins/vendr/js/vendr.filters.js",
-    "~/App_Plugins/vendr/js/vendr.directives.js",
-    "~/App_Plugins/vendr/js/vendr.resources.js",
-    "~/App_Plugins/vendr/js/vendr.services.js",
-    "~/App_Plugins/vendr/js/vendr.controllers.js"
+    "~/App_Plugins/Vendr/backoffice/js/vendr.modules.js",
+    "~/App_Plugins/Vendr/backoffice/js/vendr.vendor.js",
+    "~/App_Plugins/Vendr/backoffice/js/vendr.extensions.js",
+    "~/App_Plugins/Vendr/backoffice/js/vendr.providers.js",
+    "~/App_Plugins/Vendr/backoffice/js/vendr.interceptors.js",
+    "~/App_Plugins/Vendr/backoffice/js/vendr.decorators.js",
+    "~/App_Plugins/Vendr/backoffice/js/vendr.filters.js",
+    "~/App_Plugins/Vendr/backoffice/js/vendr.directives.js",
+    "~/App_Plugins/Vendr/backoffice/js/vendr.resources.js",
+    "~/App_Plugins/Vendr/backoffice/js/vendr.services.js",
+    "~/App_Plugins/Vendr/backoffice/js/vendr.controllers.js"
   ],
   "css": [
-    "~/app_plugins/vendr/css/vendr.css"
+    "~/App_Plugins/Vendr/backoffice/css/vendr.css"
   ]
 }

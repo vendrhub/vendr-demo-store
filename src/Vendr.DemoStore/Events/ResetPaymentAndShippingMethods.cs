@@ -1,4 +1,5 @@
-﻿using Vendr.Core.Events.Notification;
+﻿using Vendr.Common.Events;
+using Vendr.Core.Events.Notification;
 
 namespace Vendr.DemoStore.Events
 {

@@ -1,0 +1,9 @@
+﻿<div ng-controller="Vendr.Controllers.StockController as vm" class="vendr umb-property-editor">
+
+    <ng-include ng-if="!vm.loading && !vm.store" src="'/App_Plugins/Vendr/backoffice/views/common/nostorefound.html'"></ng-include>
+
+    <div class="vendr-input vendr-input--short" ng-if="!vm.loading && vm.store">
+        <input id="{{vm.model.alias}}" type="number" ng-model="vm.stockLevel" fix-number ng-change="vm.syncStockLevel()" />
+    </div>
+
+</div>

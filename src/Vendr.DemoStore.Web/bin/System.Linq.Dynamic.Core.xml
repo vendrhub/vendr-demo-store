@@ -62,16 +62,19 @@
             <summary>
             Initializes a new instance of the <see cref="T:System.Linq.Dynamic.Core.CustomTypeProviders.DefaultDynamicLinqCustomTypeProvider"/> class.
             </summary>
-            <param name="cacheCustomTypes">Defines whether to cache the CustomTypes which are found in the Application Domain. Default set to 'true'.</param>
+            <param name="cacheCustomTypes">Defines whether to cache the CustomTypes (including extension methods) which are found in the Application Domain. Default set to 'true'.</param>
         </member>
         <member name="M:System.Linq.Dynamic.Core.CustomTypeProviders.DefaultDynamicLinqCustomTypeProvider.GetCustomTypes">
-            <inheritdoc cref="M:System.Linq.Dynamic.Core.CustomTypeProviders.IDynamicLinkCustomTypeProvider.GetCustomTypes"/>
+            <inheritdoc cref="M:System.Linq.Dynamic.Core.CustomTypeProviders.IDynamicLinqCustomTypeProvider.GetCustomTypes"/>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.CustomTypeProviders.DefaultDynamicLinqCustomTypeProvider.GetExtensionMethods">
+            <inheritdoc cref="M:System.Linq.Dynamic.Core.CustomTypeProviders.IDynamicLinqCustomTypeProvider.GetExtensionMethods"/>
         </member>
         <member name="M:System.Linq.Dynamic.Core.CustomTypeProviders.DefaultDynamicLinqCustomTypeProvider.ResolveType(System.String)">
-            <inheritdoc cref="M:System.Linq.Dynamic.Core.CustomTypeProviders.IDynamicLinkCustomTypeProvider.ResolveType(System.String)"/>
+            <inheritdoc cref="M:System.Linq.Dynamic.Core.CustomTypeProviders.IDynamicLinqCustomTypeProvider.ResolveType(System.String)"/>
         </member>
         <member name="M:System.Linq.Dynamic.Core.CustomTypeProviders.DefaultDynamicLinqCustomTypeProvider.ResolveTypeBySimpleName(System.String)">
-            <inheritdoc cref="M:System.Linq.Dynamic.Core.CustomTypeProviders.IDynamicLinkCustomTypeProvider.ResolveTypeBySimpleName(System.String)"/>
+            <inheritdoc cref="M:System.Linq.Dynamic.Core.CustomTypeProviders.IDynamicLinqCustomTypeProvider.ResolveTypeBySimpleName(System.String)"/>
         </member>
         <member name="T:System.Linq.Dynamic.Core.CustomTypeProviders.DynamicLinqTypeAttribute">
             <summary>
@@ -81,22 +84,34 @@
         <member name="T:System.Linq.Dynamic.Core.CustomTypeProviders.IDynamicLinkCustomTypeProvider">
             <summary>
             Interface for providing functionality to find custom types for or resolve any type.
+            Note that this interface will be marked obsolete in the next version. Use <see cref="T:System.Linq.Dynamic.Core.CustomTypeProviders.IDynamicLinqCustomTypeProvider"/> instead.
             </summary>
         </member>
-        <member name="M:System.Linq.Dynamic.Core.CustomTypeProviders.IDynamicLinkCustomTypeProvider.GetCustomTypes">
+        <member name="T:System.Linq.Dynamic.Core.CustomTypeProviders.IDynamicLinqCustomTypeProvider">
+            <summary>
+            Interface for providing functionality to find custom types for or resolve any type.
+            </summary>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.CustomTypeProviders.IDynamicLinqCustomTypeProvider.GetCustomTypes">
             <summary>
             Returns a list of custom types that System.Linq.Dynamic.Core will understand.
             </summary>
             <returns>A <see cref="T:System.Collections.Generic.HashSet`1" /> list of custom types.</returns>
         </member>
-        <member name="M:System.Linq.Dynamic.Core.CustomTypeProviders.IDynamicLinkCustomTypeProvider.ResolveType(System.String)">
+        <member name="M:System.Linq.Dynamic.Core.CustomTypeProviders.IDynamicLinqCustomTypeProvider.GetExtensionMethods">
+            <summary>
+            Returns a list of custom extension methods that System.Linq.Dynamic.Core will understand.
+            </summary>
+            <returns>A list of custom extension methods that System.Linq.Dynamic.Core will understand.</returns>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.CustomTypeProviders.IDynamicLinqCustomTypeProvider.ResolveType(System.String)">
             <summary>
             Resolve any type by fullname which is registered in the current application domain.
             </summary>
             <param name="typeName">The typename to resolve.</param>
             <returns>A resolved <see cref="T:System.Type"/> or null when not found.</returns>
         </member>
-        <member name="M:System.Linq.Dynamic.Core.CustomTypeProviders.IDynamicLinkCustomTypeProvider.ResolveTypeBySimpleName(System.String)">
+        <member name="M:System.Linq.Dynamic.Core.CustomTypeProviders.IDynamicLinqCustomTypeProvider.ResolveTypeBySimpleName(System.String)">
             <summary>
             Resolve any type by the simple name which is registered in the current application domain.
             </summary>
@@ -351,11 +366,35 @@
             <param name="values">An object array that contains zero or more objects which are used as replacement values.</param>
             <returns>The generated <see cref="T:System.Linq.Expressions.LambdaExpression"/></returns>
         </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicExpressionParser.ParseLambda(System.Type,System.Linq.Dynamic.Core.ParsingConfig,System.Boolean,System.Type,System.String,System.Object[])">
+            <summary>
+            Parses an expression into a LambdaExpression.
+            </summary>
+            <param name="delegateType">The delegate type.</param>
+            <param name="parsingConfig">The Configuration for the parsing.</param>
+            <param name="createParameterCtor">if set to <c>true</c> then also create a constructor for all the parameters. Note that this doesn't work for Linq-to-Database entities.</param>
+            <param name="resultType">Type of the result. If not specified, it will be generated dynamically.</param>
+            <param name="expression">The expression.</param>
+            <param name="values">An object array that contains zero or more objects which are used as replacement values.</param>
+            <returns>The generated <see cref="T:System.Linq.Expressions.LambdaExpression"/></returns>
+        </member>
         <member name="M:System.Linq.Dynamic.Core.DynamicExpressionParser.ParseLambda``1(System.Linq.Dynamic.Core.ParsingConfig,System.Boolean,System.String,System.Object[])">
             <summary>
             Parses an expression into a Typed Expression.
             </summary>
             <typeparam name="TResult">The type of the result.</typeparam>
+            <param name="parsingConfig">The Configuration for the parsing.</param>
+            <param name="createParameterCtor">if set to <c>true</c> then also create a constructor for all the parameters. Note that this doesn't work for Linq-to-Database entities.</param>
+            <param name="expression">The expression.</param>
+            <param name="values">An object array that contains zero or more objects which are used as replacement values.</param>
+            <returns>The generated <see cref="T:System.Linq.Expressions.Expression"/></returns>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicExpressionParser.ParseLambda``1(System.Type,System.Linq.Dynamic.Core.ParsingConfig,System.Boolean,System.String,System.Object[])">
+            <summary>
+            Parses an expression into a Typed Expression.
+            </summary>
+            <typeparam name="TResult">The type of the result.</typeparam>
+            <param name="delegateType">The delegate type.</param>
             <param name="parsingConfig">The Configuration for the parsing.</param>
             <param name="createParameterCtor">if set to <c>true</c> then also create a constructor for all the parameters. Note that this doesn't work for Linq-to-Database entities.</param>
             <param name="expression">The expression.</param>
@@ -374,11 +413,37 @@
             <param name="values">An object array that contains zero or more objects which are used as replacement values.</param>
             <returns>The generated <see cref="T:System.Linq.Expressions.LambdaExpression"/></returns>
         </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicExpressionParser.ParseLambda(System.Type,System.Linq.Dynamic.Core.ParsingConfig,System.Boolean,System.Linq.Expressions.ParameterExpression[],System.Type,System.String,System.Object[])">
+            <summary>
+            Parses an expression into a LambdaExpression.
+            </summary>
+            <param name="delegateType">The delegate type.</param>
+            <param name="parsingConfig">The Configuration for the parsing.</param>
+            <param name="createParameterCtor">if set to <c>true</c> then also create a constructor for all the parameters. Note that this doesn't work for Linq-to-Database entities.</param>
+            <param name="parameters">A array from ParameterExpressions.</param>
+            <param name="resultType">Type of the result. If not specified, it will be generated dynamically.</param>
+            <param name="expression">The expression.</param>
+            <param name="values">An object array that contains zero or more objects which are used as replacement values.</param>
+            <returns>The generated <see cref="T:System.Linq.Expressions.LambdaExpression"/></returns>
+        </member>
         <member name="M:System.Linq.Dynamic.Core.DynamicExpressionParser.ParseLambda``1(System.Linq.Dynamic.Core.ParsingConfig,System.Boolean,System.Linq.Expressions.ParameterExpression[],System.String,System.Object[])">
             <summary>
             Parses an expression into a Typed Expression.
             </summary>
             <typeparam name="TResult">The type of the result.</typeparam>
+            <param name="parsingConfig">The Configuration for the parsing.</param>
+            <param name="createParameterCtor">if set to <c>true</c> then also create a constructor for all the parameters. Note that this doesn't work for Linq-to-Database entities.</param>
+            <param name="parameters">A array from ParameterExpressions.</param>
+            <param name="expression">The expression.</param>
+            <param name="values">An object array that contains zero or more objects which are used as replacement values.</param>
+            <returns>The generated <see cref="T:System.Linq.Expressions.Expression"/></returns>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicExpressionParser.ParseLambda``1(System.Type,System.Linq.Dynamic.Core.ParsingConfig,System.Boolean,System.Linq.Expressions.ParameterExpression[],System.String,System.Object[])">
+            <summary>
+            Parses an expression into a Typed Expression.
+            </summary>
+            <typeparam name="TResult">The type of the result.</typeparam>
+            <param name="delegateType">The delegate type.</param>
             <param name="parsingConfig">The Configuration for the parsing.</param>
             <param name="createParameterCtor">if set to <c>true</c> then also create a constructor for all the parameters. Note that this doesn't work for Linq-to-Database entities.</param>
             <param name="parameters">A array from ParameterExpressions.</param>
@@ -409,10 +474,34 @@
             <param name="values">An object array that contains zero or more objects which are used as replacement values.</param>
             <returns>The generated <see cref="T:System.Linq.Expressions.Expression"/></returns>
         </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicExpressionParser.ParseLambda``2(System.Type,System.Linq.Dynamic.Core.ParsingConfig,System.Boolean,System.String,System.Object[])">
+            <summary>
+            Parses an expression into a Typed Expression.
+            </summary>
+            <typeparam name="T">The `it`-Type.</typeparam>
+            <typeparam name="TResult">The type of the result.</typeparam>
+            <param name="delegateType">The delegate type.</param>
+            <param name="parsingConfig">The Configuration for the parsing.</param>
+            <param name="createParameterCtor">if set to <c>true</c> then also create a constructor for all the parameters. Note that this doesn't work for Linq-to-Database entities.</param>
+            <param name="expression">The expression.</param>
+            <param name="values">An object array that contains zero or more objects which are used as replacement values.</param>
+            <returns>The generated <see cref="T:System.Linq.Expressions.Expression"/></returns>
+        </member>
         <member name="M:System.Linq.Dynamic.Core.DynamicExpressionParser.ParseLambda(System.Linq.Dynamic.Core.ParsingConfig,System.Type,System.String,System.Object[])">
             <summary>
             Parses an expression into a LambdaExpression. (Also create a constructor for all the parameters. Note that this doesn't work for Linq-to-Database entities.)
             </summary>
+            <param name="parsingConfig">The Configuration for the parsing.</param>
+            <param name="resultType">Type of the result. If not specified, it will be generated dynamically.</param>
+            <param name="expression">The expression.</param>
+            <param name="values">An object array that contains zero or more objects which are used as replacement values.</param>
+            <returns>The generated <see cref="T:System.Linq.Expressions.LambdaExpression"/></returns>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicExpressionParser.ParseLambda(System.Type,System.Linq.Dynamic.Core.ParsingConfig,System.Type,System.String,System.Object[])">
+            <summary>
+            Parses an expression into a LambdaExpression. (Also create a constructor for all the parameters. Note that this doesn't work for Linq-to-Database entities.)
+            </summary>
+            <param name="delegateType">The delegate type.</param>
             <param name="parsingConfig">The Configuration for the parsing.</param>
             <param name="resultType">Type of the result. If not specified, it will be generated dynamically.</param>
             <param name="expression">The expression.</param>
@@ -449,10 +538,35 @@
             <param name="values">An object array that contains zero or more objects which are used as replacement values.</param>
             <returns>The generated <see cref="T:System.Linq.Expressions.LambdaExpression"/></returns>
         </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicExpressionParser.ParseLambda(System.Type,System.Linq.Dynamic.Core.ParsingConfig,System.Type,System.Type,System.String,System.Object[])">
+            <summary>
+            Parses an expression into a LambdaExpression. (Also create a constructor for all the parameters. Note that this doesn't work for Linq-to-Database entities.)
+            </summary>
+            <param name="delegateType">The delegate type.</param>
+            <param name="parsingConfig">The Configuration for the parsing.</param>
+            <param name="itType">The main type from the dynamic class expression.</param>
+            <param name="resultType">Type of the result. If not specified, it will be generated dynamically.</param>
+            <param name="expression">The expression.</param>
+            <param name="values">An object array that contains zero or more objects which are used as replacement values.</param>
+            <returns>The generated <see cref="T:System.Linq.Expressions.LambdaExpression"/></returns>
+        </member>
         <member name="M:System.Linq.Dynamic.Core.DynamicExpressionParser.ParseLambda(System.Linq.Dynamic.Core.ParsingConfig,System.Boolean,System.Type,System.Type,System.String,System.Object[])">
             <summary>
             Parses an expression into a LambdaExpression.
             </summary>
+            <param name="parsingConfig">The Configuration for the parsing.</param>
+            <param name="createParameterCtor">if set to <c>true</c> then also create a constructor for all the parameters. Note that this doesn't work for Linq-to-Database entities.</param>
+            <param name="itType">The main type from the dynamic class expression.</param>
+            <param name="resultType">Type of the result. If not specified, it will be generated dynamically.</param>
+            <param name="expression">The expression.</param>
+            <param name="values">An object array that contains zero or more objects which are used as replacement values.</param>
+            <returns>The generated <see cref="T:System.Linq.Expressions.LambdaExpression"/></returns>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicExpressionParser.ParseLambda(System.Type,System.Linq.Dynamic.Core.ParsingConfig,System.Boolean,System.Type,System.Type,System.String,System.Object[])">
+            <summary>
+            Parses an expression into a LambdaExpression.
+            </summary>
+            <param name="delegateType">The delegate type.</param>
             <param name="parsingConfig">The Configuration for the parsing.</param>
             <param name="createParameterCtor">if set to <c>true</c> then also create a constructor for all the parameters. Note that this doesn't work for Linq-to-Database entities.</param>
             <param name="itType">The main type from the dynamic class expression.</param>
@@ -471,10 +585,33 @@
             <param name="values">An object array that contains zero or more objects which are used as replacement values.</param>
             <returns>The generated <see cref="T:System.Linq.Expressions.LambdaExpression"/></returns>
         </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicExpressionParser.ParseLambda(System.Type,System.Linq.Expressions.ParameterExpression[],System.Type,System.String,System.Object[])">
+            <summary>
+            Parses an expression into a LambdaExpression. (Also create a constructor for all the parameters. Note that this doesn't work for Linq-to-Database entities.)
+            </summary>
+            <param name="delegateType">The delegate type.</param>
+            <param name="parameters">A array from ParameterExpressions.</param>
+            <param name="resultType">Type of the result. If not specified, it will be generated dynamically.</param>
+            <param name="expression">The expression.</param>
+            <param name="values">An object array that contains zero or more objects which are used as replacement values.</param>
+            <returns>The generated <see cref="T:System.Linq.Expressions.LambdaExpression"/></returns>
+        </member>
         <member name="M:System.Linq.Dynamic.Core.DynamicExpressionParser.ParseLambda(System.Linq.Dynamic.Core.ParsingConfig,System.Linq.Expressions.ParameterExpression[],System.Type,System.String,System.Object[])">
             <summary>
             Parses an expression into a LambdaExpression. (Also create a constructor for all the parameters. Note that this doesn't work for Linq-to-Database entities.)
             </summary>
+            <param name="parsingConfig">The Configuration for the parsing.</param>
+            <param name="parameters">A array from ParameterExpressions.</param>
+            <param name="resultType">Type of the result. If not specified, it will be generated dynamically.</param>
+            <param name="expression">The expression.</param>
+            <param name="values">An object array that contains zero or more objects which are used as replacement values.</param>
+            <returns>The generated <see cref="T:System.Linq.Expressions.LambdaExpression"/></returns>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicExpressionParser.ParseLambda(System.Type,System.Linq.Dynamic.Core.ParsingConfig,System.Linq.Expressions.ParameterExpression[],System.Type,System.String,System.Object[])">
+            <summary>
+            Parses an expression into a LambdaExpression. (Also create a constructor for all the parameters. Note that this doesn't work for Linq-to-Database entities.)
+            </summary>
+            <param name="delegateType">The delegate type.</param>
             <param name="parsingConfig">The Configuration for the parsing.</param>
             <param name="parameters">A array from ParameterExpressions.</param>
             <param name="resultType">Type of the result. If not specified, it will be generated dynamically.</param>
@@ -495,7 +632,7 @@
         </member>
         <member name="T:System.Linq.Dynamic.Core.DynamicGetMemberBinder">
             <summary>
-            Based on From SqlLinq by dkackman. https://github.com/dkackman/SqlLinq/blob/210b594e37f14061424397368ed750ce547c21e7/License.md
+            Code is based on SqlLinq by dkackman (https://github.com/dkackman/SqlLinq/blob/210b594e37f14061424397368ed750ce547c21e7/License.md) however it's modified to solve several issues.
             </summary>
             <seealso cref="T:System.Dynamic.GetMemberBinder" />
         </member>
@@ -848,8 +985,24 @@
             </code>
             </example>
         </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.GroupBy(System.Linq.IQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.String,System.Collections.IEqualityComparer,System.Object[])">
+            <summary>
+            Groups the elements of a sequence according to a specified key string function 
+            and creates a result value from each group and its key.
+            </summary>
+            <param name="source">A <see cref="T:System.Linq.IQueryable"/> whose elements to group.</param>
+            <param name="config">The <see cref="T:System.Linq.Dynamic.Core.ParsingConfig"/>.</param>
+            <param name="keySelector">A string expression to specify the key for each element.</param>
+            <param name="resultSelector">A string expression to specify a result value from each group.</param>
+            <param name="equalityComparer">The comparer to use.</param>
+            <param name="args">An object array that contains zero or more objects to insert into the predicate as parameters.  Similar to the way String.Format formats strings.</param>
+            <returns>A <see cref="T:System.Linq.IQueryable"/> where each element represents a projection over a group and its key.</returns>
+        </member>
         <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.GroupBy(System.Linq.IQueryable,System.String,System.String,System.Object[])">
             <inheritdoc cref="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.GroupBy(System.Linq.IQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.String,System.Object[])"/>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.GroupBy(System.Linq.IQueryable,System.String,System.String,System.Collections.IEqualityComparer,System.Object[])">
+            <inheritdoc cref="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.GroupBy(System.Linq.IQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.String,System.Collections.IEqualityComparer,System.Object[])"/>
         </member>
         <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.GroupBy(System.Linq.IQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.String)">
             <summary>
@@ -871,6 +1024,21 @@
         <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.GroupBy(System.Linq.IQueryable,System.String,System.String)">
             <inheritdoc cref="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.GroupBy(System.Linq.IQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.String)"/>
         </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.GroupBy(System.Linq.IQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.String,System.Collections.IEqualityComparer)">
+            <summary>
+            Groups the elements of a sequence according to a specified key string function 
+            and creates a result value from each group and its key.
+            </summary>
+            <param name="source">A <see cref="T:System.Linq.IQueryable"/> whose elements to group.</param>
+            <param name="config">The <see cref="T:System.Linq.Dynamic.Core.ParsingConfig"/>.</param>
+            <param name="keySelector">A string expression to specify the key for each element.</param>
+            <param name="resultSelector">A string expression to specify a result value from each group.</param>
+            <param name="equalityComparer">The comparer to use.</param>
+            <returns>A <see cref="T:System.Linq.IQueryable"/> where each element represents a projection over a group and its key.</returns>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.GroupBy(System.Linq.IQueryable,System.String,System.String,System.Collections.IEqualityComparer)">
+            <inheritdoc cref="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.GroupBy(System.Linq.IQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.String,System.Collections.IEqualityComparer)"/>
+        </member>
         <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.GroupBy(System.Linq.IQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.Object[])">
             <summary>
             Groups the elements of a sequence according to a specified key string function 
@@ -888,8 +1056,23 @@
             </code>
             </example>
         </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.GroupBy(System.Linq.IQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.Collections.IEqualityComparer,System.Object[])">
+            <summary>
+            Groups the elements of a sequence according to a specified key string function 
+            and creates a result value from each group and its key.
+            </summary>
+            <param name="source">A <see cref="T:System.Linq.IQueryable"/> whose elements to group.</param>
+            <param name="config">The <see cref="T:System.Linq.Dynamic.Core.ParsingConfig"/>.</param>
+            <param name="keySelector">A string expression to specify the key for each element.</param>
+            <param name="args">An object array that contains zero or more objects to insert into the predicate as parameters. Similar to the way String.Format formats strings.</param>
+            <param name="equalityComparer">The comparer to use.</param>
+            <returns>A <see cref="T:System.Linq.IQueryable"/> where each element represents a projection over a group and its key.</returns>
+        </member>
         <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.GroupBy(System.Linq.IQueryable,System.String,System.Object[])">
             <inheritdoc cref="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.GroupBy(System.Linq.IQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.Object[])"/>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.GroupBy(System.Linq.IQueryable,System.String,System.Collections.IEqualityComparer,System.Object[])">
+            <inheritdoc cref="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.GroupBy(System.Linq.IQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.Collections.IEqualityComparer,System.Object[])"/>
         </member>
         <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.GroupByMany``1(System.Collections.Generic.IEnumerable{``0},System.Linq.Dynamic.Core.ParsingConfig,System.String[])">
             <summary>
@@ -1063,6 +1246,88 @@
             <param name="lambda">A cached Lambda Expression.</param>
             <returns>The number of elements in the specified sequence that satisfies a condition.</returns>
         </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.Max(System.Linq.IQueryable)">
+            <summary>
+            Computes the max element of a sequence.
+            </summary>
+            <param name="source">A sequence of values to calculate find the max for.</param>
+            <example>
+            <code language="cs">
+            IQueryable queryable = employees.AsQueryable();
+            var result1 = queryable.Max();
+            var result2 = queryable.Select("Roles.Max()");
+            </code>
+            </example>
+            <returns>The max element in the sequence.</returns>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.Max(System.Linq.IQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.Object[])">
+            <summary>
+            Computes the max element of a sequence.
+            </summary>
+            <param name="source">A sequence of values to calculate find the max for.</param>
+            <param name="config">The <see cref="T:System.Linq.Dynamic.Core.ParsingConfig"/>.</param>
+            <param name="predicate">A function to test each element for a condition.</param>
+            <param name="args">An object array that contains zero or more objects to insert into the predicate as parameters. Similar to the way String.Format formats strings.</param>
+            <example>
+            <code language="cs">
+            IQueryable queryable = employees.AsQueryable();
+            var result = queryable.Max("Income");
+            </code>
+            </example>
+            <returns>The max element in the sequence.</returns>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.Max(System.Linq.IQueryable,System.String,System.Object[])">
+            <inheritdoc cref="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.Max(System.Linq.IQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.Object[])"/>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.Max(System.Linq.IQueryable,System.Linq.Expressions.LambdaExpression)">
+            <summary>
+            Computes the max element of a sequence.
+            </summary>
+            <param name="source">A sequence of values to calculate find the max for.</param>
+            <param name="lambda">A Lambda Expression.</param>
+            <returns>The max element in the sequence.</returns>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.Min(System.Linq.IQueryable)">
+            <summary>
+            Computes the min element of a sequence.
+            </summary>
+            <param name="source">A sequence of values to calculate find the min for.</param>
+            <example>
+            <code language="cs">
+            IQueryable queryable = employees.AsQueryable();
+            var result1 = queryable.Min();
+            var result2 = queryable.Select("Roles.Min()");
+            </code>
+            </example>
+            <returns>The min element in the sequence.</returns>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.Min(System.Linq.IQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.Object[])">
+            <summary>
+            Computes the min element of a sequence.
+            </summary>
+            <param name="source">A sequence of values to calculate find the min for.</param>
+            <param name="config">The <see cref="T:System.Linq.Dynamic.Core.ParsingConfig"/>.</param>
+            <param name="predicate">A function to test each element for a condition.</param>
+            <param name="args">An object array that contains zero or more objects to insert into the predicate as parameters. Similar to the way String.Format formats strings.</param>
+            <example>
+            <code language="cs">
+            IQueryable queryable = employees.AsQueryable();
+            var result = queryable.Min("Income");
+            </code>
+            </example>
+            <returns>The min element in the sequence.</returns>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.Min(System.Linq.IQueryable,System.String,System.Object[])">
+            <inheritdoc cref="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.Min(System.Linq.IQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.Object[])"/>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.Min(System.Linq.IQueryable,System.Linq.Expressions.LambdaExpression)">
+            <summary>
+            Computes the min element of a sequence.
+            </summary>
+            <param name="source">A sequence of values to calculate find the min for.</param>
+            <param name="lambda">A Lambda Expression.</param>
+            <returns>The min element in the sequence.</returns>
+        </member>
         <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.OfType(System.Linq.IQueryable,System.Type)">
             <summary>
             Filters the elements of an <see cref="T:System.Linq.IQueryable"/> based on a specified type.
@@ -1111,6 +1376,29 @@
         <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy``1(System.Linq.IQueryable{``0},System.String,System.Object[])">
             <inheritdoc cref="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy``1(System.Linq.IQueryable{``0},System.Linq.Dynamic.Core.ParsingConfig,System.String,System.Object[])"/>
         </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy``1(System.Linq.IQueryable{``0},System.Linq.Dynamic.Core.ParsingConfig,System.String,System.Collections.IComparer,System.Object[])">
+            <summary>
+            Sorts the elements of a sequence in ascending or descending order according to a key.
+            </summary>
+            <typeparam name="TSource">The type of the elements of source.</typeparam>
+            <param name="source">A sequence of values to order.</param>
+            <param name="config">The <see cref="T:System.Linq.Dynamic.Core.ParsingConfig"/>.</param>
+            <param name="ordering">An expression string to indicate values to order by.</param>
+            <param name="comparer">The comparer to use.</param>
+            <param name="args">An object array that contains zero or more objects to insert into the predicate as parameters. Similar to the way String.Format formats strings.</param>
+            <returns>A <see cref="T:System.Linq.IQueryable`1"/> whose elements are sorted according to the specified <paramref name="ordering"/>.</returns>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy``1(System.Linq.IQueryable{``0},System.String,System.Collections.IComparer,System.Object[])">
+            <summary>
+            Sorts the elements of a sequence in ascending or descending order according to a key.
+            </summary>
+            <typeparam name="TSource">The type of the elements of source.</typeparam>
+            <param name="source">A sequence of values to order.</param>
+            <param name="ordering">An expression string to indicate values to order by.</param>
+            <param name="comparer">The comparer to use.</param>
+            <param name="args">An object array that contains zero or more objects to insert into the predicate as parameters. Similar to the way String.Format formats strings.</param>
+            <returns>A <see cref="T:System.Linq.IQueryable`1"/> whose elements are sorted according to the specified <paramref name="ordering"/>.</returns>
+        </member>
         <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy(System.Linq.IQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.Object[])">
             <summary>
             Sorts the elements of a sequence in ascending or descending order according to a key.
@@ -1128,8 +1416,22 @@
             </code>
             </example>
         </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy(System.Linq.IQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.Collections.IComparer,System.Object[])">
+            <summary>
+            Sorts the elements of a sequence in ascending or descending order according to a key.
+            </summary>
+            <param name="source">A sequence of values to order.</param>
+            <param name="config">The <see cref="T:System.Linq.Dynamic.Core.ParsingConfig"/>.</param>
+            <param name="ordering">An expression string to indicate values to order by.</param>
+            <param name="comparer">The comparer to use.</param>
+            <param name="args">An object array that contains zero or more objects to insert into the predicate as parameters.  Similar to the way String.Format formats strings.</param>
+            <returns>A <see cref="T:System.Linq.IQueryable"/> whose elements are sorted according to the specified <paramref name="ordering"/>.</returns>
+        </member>
         <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy(System.Linq.IQueryable,System.String,System.Object[])">
             <inheritdoc cref="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy(System.Linq.IQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.Object[])"/>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy(System.Linq.IQueryable,System.String,System.Collections.IComparer,System.Object[])">
+            <inheritdoc cref="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy(System.Linq.IQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.Collections.IComparer,System.Object[])"/>
         </member>
         <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.Page(System.Linq.IQueryable,System.Int32,System.Int32)">
             <summary>
@@ -1541,6 +1843,29 @@
         <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.ThenBy``1(System.Linq.IOrderedQueryable{``0},System.String,System.Object[])">
             <inheritdoc cref="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.ThenBy``1(System.Linq.IOrderedQueryable{``0},System.Linq.Dynamic.Core.ParsingConfig,System.String,System.Object[])"/>
         </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.ThenBy``1(System.Linq.IOrderedQueryable{``0},System.Linq.Dynamic.Core.ParsingConfig,System.String,System.Collections.IComparer,System.Object[])">
+            <summary>
+            Performs a subsequent ordering of the elements in a sequence in ascending order according to a key.
+            </summary>
+            <typeparam name="TSource">The type of the elements of source.</typeparam>
+            <param name="source">A sequence of values to order.</param>
+            <param name="config">The <see cref="T:System.Linq.Dynamic.Core.ParsingConfig"/>.</param>
+            <param name="ordering">An expression string to indicate values to order by.</param>
+            <param name="comparer">The comparer to use.</param>
+            <param name="args">An object array that contains zero or more objects to insert into the predicate as parameters. Similar to the way String.Format formats strings.</param>
+            <returns>A <see cref="T:System.Linq.IOrderedQueryable`1"/> whose elements are sorted according to the specified <paramref name="ordering"/>.</returns>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.ThenBy``1(System.Linq.IOrderedQueryable{``0},System.String,System.Collections.IComparer,System.Object[])">
+            <summary>
+            Performs a subsequent ordering of the elements in a sequence in ascending order according to a key.
+            </summary>
+            <typeparam name="TSource">The type of the elements of source.</typeparam>
+            <param name="source">A sequence of values to order.</param>
+            <param name="ordering">An expression string to indicate values to order by.</param>
+            <param name="comparer">The comparer to use.</param>
+            <param name="args">An object array that contains zero or more objects to insert into the predicate as parameters. Similar to the way String.Format formats strings.</param>
+            <returns>A <see cref="T:System.Linq.IOrderedQueryable`1"/> whose elements are sorted according to the specified <paramref name="ordering"/>.</returns>
+        </member>
         <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.ThenBy(System.Linq.IOrderedQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.Object[])">
             <summary>
             Performs a subsequent ordering of the elements in a sequence in ascending order according to a key.
@@ -1559,8 +1884,22 @@
             </code>
             </example>
         </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.ThenBy(System.Linq.IOrderedQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.Collections.IComparer,System.Object[])">
+            <summary>
+            Performs a subsequent ordering of the elements in a sequence in ascending order according to a key.
+            </summary>
+            <param name="source">A sequence of values to order.</param>
+            <param name="config">The <see cref="T:System.Linq.Dynamic.Core.ParsingConfig"/>.</param>
+            <param name="ordering">An expression string to indicate values to order by.</param>
+            <param name="comparer">The comparer to use.</param>
+            <param name="args">An object array that contains zero or more objects to insert into the predicate as parameters.  Similar to the way String.Format formats strings.</param>
+            <returns>A <see cref="T:System.Linq.IQueryable"/> whose elements are sorted according to the specified <paramref name="ordering"/>.</returns>
+        </member>
         <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.ThenBy(System.Linq.IOrderedQueryable,System.String,System.Object[])">
             <inheritdoc cref="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.ThenBy(System.Linq.IOrderedQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.Object[])"/>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.ThenBy(System.Linq.IOrderedQueryable,System.String,System.Collections.IComparer,System.Object[])">
+            <inheritdoc cref="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.ThenBy(System.Linq.IOrderedQueryable,System.Linq.Dynamic.Core.ParsingConfig,System.String,System.Collections.IComparer,System.Object[])"/>
         </member>
         <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.Where``1(System.Linq.IQueryable{``0},System.Linq.Dynamic.Core.ParsingConfig,System.String,System.Object[])">
             <summary>
@@ -1614,6 +1953,9 @@
             <param name="source">A <see cref="T:System.Linq.IQueryable"/> to filter.</param>
             <param name="lambda">A cached Lambda Expression.</param>
             <returns>A <see cref="T:System.Linq.IQueryable"/> that contains elements from the input sequence that satisfy the condition specified by LambdaExpression.</returns>
+        </member>
+        <member name="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.Where``1(System.Linq.IQueryable{``0},System.Linq.Expressions.LambdaExpression)">
+            <inheritdoc cref="M:System.Linq.Dynamic.Core.DynamicQueryableExtensions.Where(System.Linq.IQueryable,System.Linq.Expressions.LambdaExpression)"/>
         </member>
         <member name="T:System.Linq.Dynamic.Core.Exceptions.ParseException">
             <summary>
@@ -1808,7 +2150,7 @@
         </member>
         <member name="F:System.Linq.Dynamic.Core.Parser.EnumerationsFromMscorlib.PredefinedEnumerationTypes">
             <summary>
-            Some enumeration types from mscorlib/netstandard.
+            All Enum types from mscorlib/netstandard.
             </summary>
         </member>
         <member name="T:System.Linq.Dynamic.Core.Parser.ExpressionParser">
@@ -1923,6 +2265,9 @@
             Default ParsingConfig for EntityFramework Core 2.1 and higher
             </summary>
         </member>
+        <member name="P:System.Linq.Dynamic.Core.ParsingConfig.IsCaseSensitive">
+            <summary>Gets or sets if parameter, method, and properties resolution should be case sensitive or not (false by default).</summary>
+        </member>
         <member name="P:System.Linq.Dynamic.Core.ParsingConfig.DefaultCosmosDb">
             <summary>
             Default ParsingConfig for CosmosDb
@@ -2029,6 +2374,11 @@
             
              Default value is CultureInfo.InvariantCulture
              </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Core.ParsingConfig.TypeConverters">
+            <summary>
+            Additional TypeConverters
+            </summary>
         </member>
         <member name="M:System.Linq.Dynamic.Core.TypeConverters.CustomDateTimeConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)">
             <summary>
