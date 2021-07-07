@@ -432,9 +432,6 @@
     <Reference Include="Vendr.Infrastructure, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Vendr.Infrastructure.2.0.0-net-core0888\lib\net472\Vendr.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Vendr.PaymentProviders.Invoicing, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Vendr.PaymentProviders.Invoicing.1.1.0\lib\net472\Vendr.PaymentProviders.Invoicing.dll</HintPath>
-    </Reference>
     <Reference Include="Vendr.Umbraco, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Vendr.Umbraco.2.0.0-net-core0888\lib\net472\Vendr.Umbraco.dll</HintPath>
     </Reference>
