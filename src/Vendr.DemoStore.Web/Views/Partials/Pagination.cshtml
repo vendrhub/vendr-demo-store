@@ -1,13 +1,22 @@
 ﻿@using Vendr.DemoStore.Web;
-@inherits Umbraco.Web.Mvc.UmbracoViewPage<PagedResult<object>>
-
+@using Vendr.Common.Models;
+@using Microsoft.AspNetCore.Http;
+@using Microsoft.AspNetCore.Http.Extensions; 
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<PagedResult<object>>
+@{
+    // Helper method to get the raw URL as a Uri object
+    Uri GetRawUrl(HttpRequest request)
+    {
+        return new Uri(request.GetDisplayUrl());
+    }
+}
 @if (Model.TotalPages > 1)
 {
     <div class="flex justify-center mt-12">
         @* Prev *@
         @if (Model.PageNumber > 1)
         {
-            <a href="@Request.Url.AddOrUpdateQueryStringParam("p", Model.PageNumber - 1)" class="flex-1 bg-gray-300 py-3 px-6 mx-1 hover:bg-teal-400 hover:text-white lg:flex-none"><i class="fa fa-angle-left"></i> Previous</a>
+            <a href="@GetRawUrl(Context.Request).AddOrUpdateQueryStringParam(" p", Model.PageNumber - 1)" class="flex-1 bg-gray-300 py-3 px-6 mx-1 hover:bg-teal-400 hover:text-white lg:flex-none"><i class="fa fa-angle-left"></i> Previous</a>
         }
         else
         {
@@ -23,11 +32,11 @@
                 {
                     if (i == 1)
                     {
-                        <a href="@Request.Url.RemoveQueryStringParam("p")" class="py-3 px-6 mx-1 hover:bg-teal-400 hover:text-white @(i == Model.PageNumber ? "bg-teal-400 text-white" : "bg-gray-300")">@(i)</a>
+                        <a href="@GetRawUrl(Context.Request).RemoveQueryStringParam("p")" class="py-3 px-6 mx-1 hover:bg-teal-400 hover:text-white @(i == Model.PageNumber ? "bg-teal-400 text-white" : "bg-gray-300")">@(i)</a>
                     }
                     else
                     {
-                        <a href="@Request.Url.AddOrUpdateQueryStringParam("p", i)" class="py-3 px-6 mx-1 hover:bg-teal-400 hover:text-white @(i == Model.PageNumber ? "bg-teal-400 text-white" : "bg-gray-300")">@(i)</a>
+                        <a href="@GetRawUrl(Context.Request).AddOrUpdateQueryStringParam("p", i)" class="py-3 px-6 mx-1 hover:bg-teal-400 hover:text-white @(i == Model.PageNumber ? "bg-teal-400 text-white" : "bg-gray-300")">@(i)</a>
                     }
                 }
             }
@@ -40,17 +49,17 @@
                     {
                         if (i == 1)
                         {
-                            <a href="@Request.Url.RemoveQueryStringParam("p")" class="bg-gray-300 py-3 px-6 mx-1 hover:bg-teal-400 hover:text-white @(i == Model.PageNumber ? "bg-teal-400 text-white" : "bg-gray-300")">@(i)</a>
+                            <a href="@GetRawUrl(Context.Request).RemoveQueryStringParam("p")" class="bg-gray-300 py-3 px-6 mx-1 hover:bg-teal-400 hover:text-white @(i == Model.PageNumber ? "bg-teal-400 text-white" : "bg-gray-300")">@(i)</a>
                         }
                         else
                         {
-                            <a href="@Request.Url.AddOrUpdateQueryStringParam("p", i)" class="bg-gray-300 py-3 px-6 mx-1 hover:bg-teal-400 hover:text-white @(i == Model.PageNumber ? "bg-teal-400 text-white" : "bg-gray-300")">@(i)</a>
+                            <a href="@GetRawUrl(Context.Request).AddOrUpdateQueryStringParam("p", i)" class="bg-gray-300 py-3 px-6 mx-1 hover:bg-teal-400 hover:text-white @(i == Model.PageNumber ? "bg-teal-400 text-white" : "bg-gray-300")">@(i)</a>
                         }
                     }
                 }
                 else
                 {
-                    <a href="@Request.Url.RemoveQueryStringParam("p")" class="bg-gray-300 py-3 px-6 mx-1 hover:bg-teal-400 hover:text-white">1</a>
+                    <a href="@GetRawUrl(Context.Request).RemoveQueryStringParam("p")" class="bg-gray-300 py-3 px-6 mx-1 hover:bg-teal-400 hover:text-white">1</a>
                     <span class="bg-gray-300 py-3 px-6 mx-1">...</span>
                 }
 
@@ -59,7 +68,7 @@
                 {
                     for (var i = Model.PageNumber - 1; i <= Model.PageNumber + 1; i++)
                     {
-                        <a href="@Request.Url.AddOrUpdateQueryStringParam("p", i)" class="bg-gray-300 py-3 px-6 mx-1 hover:bg-teal-400 hover:text-white @(i == Model.PageNumber ? "bg-teal-400 text-white" : "bg-gray-300")">@(i)</a>
+                        <a href="@GetRawUrl(Context.Request).AddOrUpdateQueryStringParam("p", i)" class="bg-gray-300 py-3 px-6 mx-1 hover:bg-teal-400 hover:text-white @(i == Model.PageNumber ? "bg-teal-400 text-white" : "bg-gray-300")">@(i)</a>
                     }
                 }
 
@@ -68,13 +77,13 @@
                 {
                     for (var i = (Model.TotalPages - 4); i <= Model.TotalPages; i++)
                     {
-                        <a href="@Request.Url.AddOrUpdateQueryStringParam("p", i)" class="bg-gray-300 py-3 px-6 mx-1 hover:bg-teal-400 hover:text-white @(i == Model.PageNumber ? "bg-teal-400 text-white" : "bg-gray-300")">@(i)</a>
+                        <a href="@GetRawUrl(Context.Request).AddOrUpdateQueryStringParam("p", i)" class="bg-gray-300 py-3 px-6 mx-1 hover:bg-teal-400 hover:text-white @(i == Model.PageNumber ? "bg-teal-400 text-white" : "bg-gray-300")">@(i)</a>
                     }
                 }
                 else
                 {
                     <span class="bg-gray-300 py-3 px-6 mx-1">...</span>
-                    <a href="@Request.Url.AddOrUpdateQueryStringParam("p", Model.TotalPages)" class="bg-gray-300 py-3 px-6 mx-1 hover:bg-teal-400 hover:text-white">@(Model.TotalPages)</a>
+                    <a href="@GetRawUrl(Context.Request).AddOrUpdateQueryStringParam("p", Model.TotalPages)" class="bg-gray-300 py-3 px-6 mx-1 hover:bg-teal-400 hover:text-white">@(Model.TotalPages)</a>
                 }
             }
         </span>
@@ -82,7 +91,7 @@
         @* Next *@
         @if (Model.PageNumber < Model.TotalPages)
         {
-            <a href="@Request.Url.AddOrUpdateQueryStringParam("p", Model.PageNumber + 1)" class="flex-1 text-right bg-gray-300 py-3 px-6 mx-1 hover:bg-teal-400 hover:text-white lg:flex-none">Next <i class="fa fa-angle-right"></i></a>
+            <a href="@GetRawUrl(Context.Request).AddOrUpdateQueryStringParam("p", Model.PageNumber + 1)" class="flex-1 text-right bg-gray-300 py-3 px-6 mx-1 hover:bg-teal-400 hover:text-white lg:flex-none">Next <i class="fa fa-angle-right"></i></a>
         }
         else
         {

@@ -2,7 +2,8 @@
 @using Vendr.DemoStore;
 @using Vendr.DemoStore.Models;
 @using Vendr.Extensions;
-@inherits Umbraco.Web.Mvc.UmbracoViewPage<ProductPage>
+@using Umbraco.Cms.Core.Models.PublishedContent;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ProductPage>
 @{
     Layout = "Page.cshtml";
 
@@ -80,16 +81,16 @@
 <div class="pt-6">
     <div class="md:flex mb-4">
         <div class="w-full md:w-1/2 md:mr-6">
-            <img src="@(Model.PrimaryImage != null ? Url.GetCropUrl(Model.PrimaryImage, 500, 500).ToString() : "https://placehold.it/400x500")"
-                 data-default-url="@(Model.PrimaryImage != null ? Url.GetCropUrl(Model.PrimaryImage, 500, 500).ToString() : "https://placehold.it/400x500")"
+            <img src="@(Model.PrimaryImage != null ? Model.PrimaryImage.GetCropUrl(500, 500).ToString() : "https://placehold.it/400x500")"
+                 data-default-url="@(Model.PrimaryImage != null ? Model.PrimaryImage.GetCropUrl(500, 500).ToString() : "https://placehold.it/400x500")"
                  class="border w-full product-image" />
             @if (Model.Images.Count() > 1)
             {
                 <div class="flex flex-wrap -mx-2">
                     @foreach (var img in Model.Images)
                     {
-                        <a href="@(Url.GetCropUrl(img, 500, 500).ToString())" class="product-image__thumb w-1/3 px-2 pt-4">
-                            <img src="@Url.GetCropUrl(img, 150, 150).ToString()" class="border w-full" />
+                        <a href="@(img.GetCropUrl(500, 500).ToString())" class="product-image__thumb w-1/3 px-2 pt-4">
+                            <img src="@img.GetCropUrl(150, 150).ToString()" class="border w-full" />
                         </a>
                     }
                 </div>
@@ -103,7 +104,9 @@
             {
                 <div class="py-10">
                     <h1 class="text-2xl font-bold">@Model.Parent.Name - @Model.Name</h1>
-                    @RenderVariants(store, Model, addedProductReference)
+                    @{
+                        RenderVariants(store, Model, addedProductReference);
+                    }
                 </div>
 
                 <button id="add-to-cart" class="font-bold border-4 border-gray-900 px-6 py-3 mb-4 lg:w-1/2 hover:bg-teal-400 hover:border-teal-400 hover:text-white" type="submit">Add to Cart</button>
@@ -115,7 +118,7 @@
             </div>
         </div>
     </div>
-    <hr class="my-6" />
+    <hr class="my-6" /> 
     <div>
         <h2 class="text-2xl font-bold">Description</h2>
         <div class="rte">
@@ -124,65 +127,67 @@
     </div>
 </div>
 
-@helper RenderVariants(StoreReadOnly store, ProductPage product, string addedProductReference)
-{
-    var multiVariantProductPage = Model as MultiVariantProductPage;
-
-    if (multiVariantProductPage != null && multiVariantProductPage.Variants != null && multiVariantProductPage.Variants.Count > 0)
+@{
+    void RenderVariants(StoreReadOnly store, ProductPage product, string addedProductReference)
     {
-        @Html.Hidden("productReference", Model.GetProductReference())
-        @Html.Hidden("productVariantReference", "")
+        var multiVariantProductPage = Model as MultiVariantProductPage;
 
-        var attrs = multiVariantProductPage.Variants.GetInUseProductAttributes();
-
-        foreach (var attr in attrs)
+        if (multiVariantProductPage != null && multiVariantProductPage.Variants != null && multiVariantProductPage.Variants.Count > 0)
         {
-            <p class="mt-4">@(attr.Name)</p>
-            <select class="w-full border border-gray-300 p-2 mt-1" data-attribute="@(attr.Alias)" data-attribute-name="@(attr.Name)" onchange="updateProductVariantInfo()">
-                @foreach (var val in attr.Values)
-                {
-                    <option value="@val.Alias">@(val.Name)</option>
-                }
-            </select>
+            @Html.Hidden("productReference", Model.GetProductReference())
+            @Html.Hidden("productVariantReference", "")
+
+            var attrs = multiVariantProductPage.Variants.GetInUseProductAttributes();
+
+            foreach (var attr in attrs)
+            {
+                <p class="mt-4">@(attr.Name)</p>
+                <select class="w-full border border-gray-300 p-2 mt-1" data-attribute="@(attr.Alias)" data-attribute-name="@(attr.Name)" onchange="updateProductVariantInfo()">
+                    @foreach (var val in attr.Values)
+                    {
+                        <!option value="@val.Alias">@(val.Name)</!option>
+                    }
+                </select>
+            }
+
+            <p class="mt-4" data-variant-price></p>
         }
-
-        <p class="mt-4" data-variant-price></p>
-    }
-    else if (product.ChildVariants.Any())
-    {
-        if (product.IsGiftCard)
+        else if (product.ChildVariants.Any())
         {
-            var selectedReference = addedProductReference ?? product.ChildVariants.FirstOrDefault()?.GetProductReference();
+            if (product.IsGiftCard)
+            {
+                var selectedReference = addedProductReference ?? product.ChildVariants.FirstOrDefault()?.GetProductReference();
 
-            <div class="gift-cards flex justify-start space-x-2 mt-4">
-                @foreach (var variant in product.ChildVariants)
-                {
-                    var productReference = variant.GetProductReference();
+                <div class="gift-cards flex justify-start space-x-2 mt-4">
+                    @foreach (var variant in product.ChildVariants)
+                    {
+                        var productReference = variant.GetProductReference();
 
-                    <span class="relative">
-                        <input type="radio" class="form-radio absolute w-0 h-0" name="productReference" id="giftcard-@productReference" value="@productReference" @Html.Raw(selectedReference == productReference ? "checked=\"checked\"" : "") />
-                        <label class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 cursor-pointer" for="giftcard-@productReference">@(variant.CalculatePrice()?.Formatted())</label>
-                    </span>
-                }
-            </div>
-        }
-        else
-        {
+                        <span class="relative">
+                            <input type="radio" class="form-radio absolute w-0 h-0" name="productReference" id="giftcard-@productReference" value="@productReference" @Html.Raw(selectedReference == productReference ? "checked=\"checked\"" : "") />
+                            <label class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 cursor-pointer" for="giftcard-@productReference">@(variant.CalculatePrice()?.Formatted())</label>
+                        </span>
+                    }
+                </div>
+            }
+            else
+            {
             <select name="productReference" class="w-full border border-gray-300 p-2 mt-1">
                 @foreach (var variant in product.ChildVariants)
                 {
                     var productReference = variant.GetProductReference();
 
-                    <option value="@productReference" @Html.Raw(addedProductReference == productReference ? "selected=\"selected\"" : "")>@(variant.Name) - @(variant.CalculatePrice()?.Formatted())</option>
+                    <!option value="@productReference" @Html.Raw(addedProductReference == productReference ? "selected=\" selected\"" : "" )>@(variant.Name) - @(variant.CalculatePrice()?.Formatted())</!option>
                 }
             </select>
+            }
         }
-    }
-    else
-    {
-        @Html.Hidden("productReference", product.GetProductReference())
+        else
+        {
+            @Html.Hidden("productReference", product.GetProductReference())
 
-        <p>@(product.CalculatePrice()?.Formatted())</p>
-    }
+            <p>@(product.CalculatePrice()?.Formatted())</p>
+        }
 
+    }
 }

@@ -6,6 +6,6 @@ namespace Vendr.DemoStore.Web.Dtos
     {
         public Guid ShippingMethod { get; set; }
 
-        public int? NextStep { get; set; }
+        public Guid? NextStep { get; set; }
     }
 }

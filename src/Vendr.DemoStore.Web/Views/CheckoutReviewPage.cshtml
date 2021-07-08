@@ -1,10 +1,10 @@
 ﻿@using Vendr.Extensions;
-@inherits Umbraco.Web.Mvc.UmbracoViewPage<Vendr.DemoStore.Models.CheckoutReviewPage>
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Vendr.DemoStore.Models.CheckoutReviewPage>
 @{
     Layout = "CheckoutStepPage.cshtml";
 }
 
-@Html.Partial("OrderInformationSummary")
+@await Html.PartialAsync("OrderInformationSummary")
 
 @using (Html.BeginPaymentForm(Model.Order))
 {
@@ -18,11 +18,11 @@
     <div class="flex flex-col-reverse items-center justify-between mt-8 md:flex-row">
         @if (Model.PreviousStep != null)
         {
-            <div><a href="@(Model.PreviousStep.Url)" class="text-@(Model.CheckoutPage.PrimaryColor) hover:text-gray-900 hover:underline"><i class="fa fa-angle-left"></i> Return to @(Model.PreviousStep.Name)</a></div>
+            <div><a href="@(Model.PreviousStep.Url())" class="text-@(Model.CheckoutPage.PrimaryColor) hover:text-gray-900 hover:underline"><i class="fa fa-angle-left"></i> Return to @(Model.PreviousStep.Name)</a></div>
         }
         else
         {
-            <div><a href="@(Model.HomePage.CartPage.Url)" class="text-@(Model.CheckoutPage.PrimaryColor) hover:text-gray-900 hover:underline"><i class="fa fa-angle-left"></i> Return to Cart</a></div>
+            <div><a href="@(Model.HomePage.CartPage.Url())" class="text-@(Model.CheckoutPage.PrimaryColor) hover:text-gray-900 hover:underline"><i class="fa fa-angle-left"></i> Return to Cart</a></div>
         }
         <div class="mb-4 w-full md:mb-0 md:w-auto text-center">
             <div id="continue-disabled" class="bg-gray-200 text-white px-4 py-4 w-full rounded cursor-not-allowed">Continue to @(Model.NextStep.Name)</div>

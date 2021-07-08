@@ -1,0 +1,71 @@
+﻿/* Utilities */
+.font-heading {
+    font-family: "Gilroy", sans-serif;
+}
+
+.text-grey {
+    color: #1a1a1a;
+}
+
+/* Product Page */
+.gift-cards input[type="radio"]:checked + label {
+    background-color: #81e6d9;
+}
+
+/* Cart Table Styles */
+.data-label-visible:before {
+    content: attr(data-label);
+    padding-right: 1rem;
+}
+
+.table-row-group {
+    display: table-row-group;
+}
+
+@media (min-width: 768px) {
+    .md\:table-row-group {
+        display: table-row-group;
+    }
+
+    .md\:data-label-hidden:before {
+        display: none;
+    }
+}
+
+.trim > *:last-child,
+.trim > *:last-child > *:last-child {
+    margin-bottom: 0;
+}
+
+/* RTE */
+.rte p {
+    margin-bottom: 1rem;
+}
+
+.rte a {
+    color: #4fd1c5;
+}
+
+.rte a:hover,
+.rte a:focus {
+    color: #000;
+    text-decoration: underline;
+}
+
+.rte ul {
+    list-style-type: disc;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.rte h2,
+.rte h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: .5rem;
+}
+
+/* Validation */
+.field-validation-valid {
+    display: none !important;
+}

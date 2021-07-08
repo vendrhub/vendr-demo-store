@@ -1,4 +1,4 @@
-﻿using Umbraco.Core.Models.PublishedContent;
+﻿using Umbraco.Cms.Core.Models.PublishedContent;
 using Vendr.DemoStore.Models;
 using Vendr.Umbraco.Extractors;
 using Vendr.Umbraco.Helpers;

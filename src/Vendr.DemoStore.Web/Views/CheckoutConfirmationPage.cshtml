@@ -1,4 +1,4 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<Vendr.DemoStore.Models.CheckoutConfirmationPage>
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Vendr.DemoStore.Models.CheckoutConfirmationPage>
 @{
     Layout = "CheckoutStepPage.cshtml";
 }
@@ -10,4 +10,4 @@
         <p><a href="/" class="inline-block bg-@(Model.CheckoutPage.PrimaryColor) text-white px-4 py-4 rounded hover:bg-gray-900">Return to Store</a></p>
     </div>
 
-@Html.Partial("OrderInformationSummary")
+@await Html.PartialAsync("OrderInformationSummary")

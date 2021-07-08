@@ -1,0 +1,23 @@
+﻿@using Vendr.DemoStore;
+@using Vendr.Common.Models;
+@using Umbraco.Cms.Core.Models.PublishedContent;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<PagedResult<IPublishedContent>>
+
+@if (Model.TotalItems > 0)
+{
+    <div class="mt-6">
+        @foreach (var item in Model.Items.Select((x, i) => new { Result = x, Index = i }))
+        {
+            <div class="mt-4 @(item.Index > 0 ? "border-t border-gray-300 pt-4" : "")">
+                <h3 class="text-lg font-bold"><a href="@item.Result.Url()" class="text-teal-400 hover:text-gray-800 hover:underline">@(item.Index + 1 + ((Model.PageNumber - 1) * Model.PageSize)).  @(item.Result.Name)</a></h3>
+                <p class="text-sm "><a href="@item.Result.Url()" class="text-gray-500 hover:text-gray-800 hover:underline">@item.Result.Url()</a></p>
+            </div>
+        }
+    </div>
+
+    @await Html.PartialAsync("Pagination", Model.Cast<IPublishedContent, object>())
+}
+else
+{
+    <h2 class="text-5xl font-bold text-center py-24 text-gray-300">No results found</h2>
+}

@@ -1,4 +1,4 @@
-﻿using Umbraco.Core;
+﻿using Umbraco.Extensions;
 
 namespace Vendr.DemoStore
 {

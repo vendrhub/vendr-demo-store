@@ -1,9 +1,10 @@
 ﻿@using Vendr.DemoStore;
 @using Vendr.DemoStore.Models;
-@inherits Umbraco.Web.Mvc.UmbracoViewPage<PagedResult<ProductPage>>
+@using Vendr.Common.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<PagedResult<ProductPage>>
 
 @if (Model.TotalItems > 0)
 {
-    @Html.Partial("ProductList", Model.Items)
-    @Html.Partial("Pagination", Model.Cast<ProductPage, object>())
+    @await Html.PartialAsync("ProductList", Model.Items)
+    @await Html.PartialAsync("Pagination", Model.Cast<ProductPage, object>())
 }

@@ -1,5 +1,5 @@
 ﻿@using Vendr.DemoStore.Models;
-@inherits Umbraco.Web.Mvc.UmbracoViewPage<CheckoutInformationPage>
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<CheckoutInformationPage>
 @{
     Layout = "CheckoutStepPage.cshtml";
 }
@@ -19,11 +19,11 @@
             <ul class="mt-4 block">
                 @foreach (var discountCode in Model.Order.DiscountCodes)
                 {
-                    <li class="inline-block mr-2"><a href="@Url.SurfaceAction("RemoveDiscountOrGiftCardCode",  "CheckoutSurface", new { Code = discountCode.Code })" class="inline-block bg-gray-300 px-2 rounded hover:bg-gray-900 hover:text-white"><i class="fa fa-times mr-1"></i> @discountCode.Code</a></li>
+                    <li class="inline-block mr-2"><a href="@Url.Action("RemoveDiscountOrGiftCardCode",  "CheckoutSurface", new { Code = discountCode.Code, CurrentPageId = Model.Id })" class="inline-block bg-gray-300 px-2 rounded hover:bg-gray-900 hover:text-white"><i class="fa fa-times mr-1"></i> @discountCode.Code</a></li>
                 }
                 @foreach (var giftCard in Model.Order.GiftCards)
                 {
-                    <li class="inline-block mr-2"><a href="@Url.SurfaceAction("RemoveDiscountOrGiftCardCode",  "CheckoutSurface", new { Code = giftCard.Code })" class="inline-block bg-gray-300 px-2 rounded hover:bg-gray-900 hover:text-white"><i class="fa fa-times mr-1"></i> @giftCard.Code</a></li>
+                    <li class="inline-block mr-2"><a href="@Url.Action("RemoveDiscountOrGiftCardCode",  "CheckoutSurface", new { Code = giftCard.Code, CurrentPageId = Model.Id })" class="inline-block bg-gray-300 px-2 rounded hover:bg-gray-900 hover:text-white"><i class="fa fa-times mr-1"></i> @giftCard.Code</a></li>
                 }
             </ul>
         }
@@ -32,7 +32,7 @@
 
 @using (Html.BeginUmbracoForm("UpdateOrderInformation", "CheckoutSurface"))
 {
-    <input type="hidden" name="nextStep" value="@(Model.NextStep?.Id)" />
+    <input type="hidden" name="nextStep" value="@(Model.NextStep?.Key)" />
 
     <h3 class="text-xl font-medium mb-4">Contact Information</h3>
     <input name="email" type="email" placeholder="Email" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 w-full"
@@ -61,7 +61,7 @@
         <select name="billingAddress.Country" placeholder="Country" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full">
             @foreach (var country in Model.Countries)
             {
-                <option value="@(country.Id)" @Html.Raw(Model.Order.PaymentInfo.CountryId == country.Id ? "selected=\"selected\"" : "")>@(country.Name)</option>
+                <!option value="@(country.Id)" @Html.Raw(Model.Order.PaymentInfo.CountryId == country.Id ? "selected=\"selected\"" : "")>@(country.Name)</!option>
             }
         </select>
         <input name="billingAddress.ZipCode" type="text" placeholder="Postcode" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full"
@@ -96,7 +96,7 @@
             <select name="shippingAddress.Country" placeholder="Country" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full">
                 @foreach (var country in Model.Countries)
                 {
-                    <option value="@(country.Id)" @Html.Raw(Model.Order.PaymentInfo.CountryId == country.Id ? "selected=\"selected\"" : "")>@(country.Name)</option>
+                    <!option value="@(country.Id)" @Html.Raw(Model.Order.PaymentInfo.CountryId == country.Id ? "selected=\"selected\"" : "")>@(country.Name)</!option>
                 }
             </select>
             <input name="shippingAddress.ZipCode" type="text" placeholder="Postcode" class="block placeholder-gray-700 border border-gray-300 rounded py-2 px-4 mb-2 mx-1 w-full"

@@ -1,8 +1,9 @@
 ﻿@using Vendr.Core.Models;
 @using Vendr.DemoStore.Models;
-@using Umbraco.Web.Models;
+@using Umbraco.Cms.Core.Models;
+@using Umbraco.Cms.Core.Models.PublishedContent;
 @using Vendr.Extensions;
-@inherits Umbraco.Web.Mvc.UmbracoViewPage<CheckoutStepPage>
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<CheckoutStepPage>
 @{
     Layout = "Master.cshtml";
 }
@@ -28,7 +29,7 @@
         @if (Model.CheckoutPage.Logo != null)
         {
             <div class="bg-white p-8 text-center lg:hidden">
-                <a href="/"><img src="@(Url.GetCropUrl(Model.CheckoutPage.Logo, 200, 200, imageCropMode: ImageCropMode.Max))" class="inline-block" /></a>
+                <a href="/"><img src="@(Model.CheckoutPage.Logo.GetCropUrl(200))" class="inline-block" /></a>
             </div>
         }
 
@@ -143,7 +144,7 @@
                 <div class="bg-white p-8 text-center">
                     @if (Model.CheckoutPage.HasValue("logo"))
                     {
-                        <a href="/"><img src="@(Url.GetCropUrl(Model.CheckoutPage.Value<IPublishedContent>("logo"), 200, 200, imageCropMode: ImageCropMode.Max))" class="inline-block" /></a>
+                        <a href="/"><img src="@(Model.CheckoutPage.Value<IPublishedContent>("logo").GetCropUrl(200))" class="inline-block" /></a>
                     }
                     else
                     {
@@ -164,7 +165,7 @@
                                     }
                                     @if (!passedStep && item.Step.Id != Model.Id && Model.CanGoBack)
                                     {
-                                        <a href="@item.Step.Url" class="hover:text-@(Model.CheckoutPage.PrimaryColor)">@(item.Step.ShortStepName ?? item.Step.Name)</a>
+                                        <a href="@item.Step.Url()" class="hover:text-@(Model.CheckoutPage.PrimaryColor)">@(item.Step.ShortStepName ?? item.Step.Name)</a>
                                     }
                                     else
                                     {

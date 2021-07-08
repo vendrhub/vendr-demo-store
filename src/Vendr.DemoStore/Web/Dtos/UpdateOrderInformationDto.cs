@@ -16,6 +16,6 @@ namespace Vendr.DemoStore.Web.Dtos
 
         public string Comments { get; set; }
 
-        public int? NextStep { get; set; }
+        public Guid? NextStep { get; set; }
     }
 }

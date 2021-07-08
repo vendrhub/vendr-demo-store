@@ -1,7 +1,14 @@
-@using Umbraco.Core.Models.PublishedContent
-@using Umbraco.Web
-@using Umbraco.Core
-@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@using Umbraco.Cms.Core
+@using Umbraco.Cms.Core.Media
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Macros.PartialViewMacroPage
+@inject IPublishedValueFallback PublishedValueFallback
+@inject IPublishedContentQuery PublishedContentQuery
+@inject IVariationContextAccessor VariationContextAccessor
+@inject IPublishedUrlProvider PublishedUrlProvider
+@inject IImageUrlGenerator ImageUrlGenerator
 
 @*
     Macro to display a gallery of images from the Media section.
@@ -24,28 +31,27 @@
     <div class="row">
         @foreach (var mediaId in mediaIds.Split(','))
         {
-            var media = Umbraco.Media(mediaId);
+            var media = PublishedContentQuery.Media(mediaId);
 
             @* a single image *@
             if (media.IsDocumentType("Image"))
             {
-                @Render(media)
+                <div class="col-xs-6 col-md-3">
+                    <a href="@media.Url(PublishedUrlProvider)" class="thumbnail">
+                        <img src="@media.GetCropUrl(ImageUrlGenerator, PublishedValueFallback, PublishedUrlProvider, width: 200, height: 200)" alt="@media.Name"/>
+                    </a>
+                </div>
             }
 
             @* a folder with images under it *@
-            foreach (var image in media.Children())
+            foreach (var image in media.Children(VariationContextAccessor))
             {
-                @Render(image)
+                <div class="col-xs-6 col-md-3">
+                    <a href="@image.Url(PublishedUrlProvider)" class="thumbnail">
+                        <img src="@image.GetCropUrl(ImageUrlGenerator, PublishedValueFallback, PublishedUrlProvider, width: 200, height: 200)" alt="@image.Name"/>
+                    </a>
+                </div>
             }
         }
-    </div>
-}
-
-@helper Render(IPublishedContent item)
-{
-    <div class="col-xs-6 col-md-3">
-        <a href="@item.Url" class="thumbnail">
-            <img src="@item.GetCropUrl(width:200, height:200)" alt="@item.Name" />
-        </a>
     </div>
 }

@@ -1,7 +1,7 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<Vendr.DemoStore.Models.CollectionPage>
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Vendr.DemoStore.Models.CollectionPage>
 @{
     Layout = "Page.cshtml";
 }
 
-@Html.Partial("Intro")
-@Html.Action("ProductListByCollection", "ProductSurface", new { collectionId = Model.Id })
+@await Html.PartialAsync("Intro")
+@await Component.InvokeAsync("ProductListByCollection", new { collectionId = Model.Id })

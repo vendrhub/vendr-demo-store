@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Umbraco.Core.Models;
+using Vendr.Common.Models;
 
 namespace Vendr.DemoStore
 {

@@ -171,16 +171,6 @@ UpgradeLog*.htm
 
 ## Miscellaneous Ignores
 
-sql/
-*.Cache
-ClientBin/
-[Ss]tyle[Cc]op.*
-~$*
-*~
-*.dbmdl
-*.[Pp]ublish.xml
-*.pfx
-*.publishsettings
 
 ## Windows Ignores
 
@@ -190,6 +180,7 @@ ehthumbs.db
 Desktop.ini
 
 # Umbraco
-**/App_Data/Logs/
-**/App_Data/TEMP/
-**/App_Data/cache/
+**/Data/TEMP/
+**/Data/Logs/
+**/Data/cache/
+/Vendr.DemoStore.local.sln

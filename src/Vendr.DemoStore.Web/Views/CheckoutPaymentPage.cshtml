@@ -1,5 +1,5 @@
 ﻿@using Vendr.Extensions;
-@inherits Umbraco.Web.Mvc.UmbracoViewPage<Vendr.DemoStore.Models.CheckoutPaymentMethodPage>
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Vendr.DemoStore.Models.CheckoutPaymentMethodPage>
 @{
     Layout = "CheckoutStepPage.cshtml";
 
@@ -8,7 +8,7 @@
 
 @using (Html.BeginUmbracoForm("UpdateOrderPaymentMethod", "CheckoutSurface"))
 {
-    <input type="hidden" name="nextStep" value="@(Model.NextStep?.Id)" />
+    <input type="hidden" name="nextStep" value="@(Model.NextStep?.Key)" />
 
     <h3 class="text-xl font-medium mb-4 mt-8">Payment Method</h3>
 
@@ -16,7 +16,7 @@
     {
         <ul class="border border-gray-300 rounded">
             @foreach (var item in Model.PaymentMethods.Where(x => x.Alias != "zeroValue")
-                .Select((pm, i) => new { PaymentMethod = pm, Index = i }))
+               .Select((pm, i) => new { PaymentMethod = pm, Index = i }))
             {
                 <li class="border-gray-300 @(item.Index > 0 ? "border-t " : "")">
                     <label class="flex items-center py-4 px-4 cursor-pointer hover:bg-gray-100">
@@ -34,5 +34,5 @@
         <div class="border border-gray-300 rounded py-4 px-4 text-center">It looks like today is your lucky day, there is nothing for you to pay 🎉</div>
     }
 
-    @Html.Partial("CheckoutPrevNext")
+    @await Html.PartialAsync("CheckoutPrevNext")
 }

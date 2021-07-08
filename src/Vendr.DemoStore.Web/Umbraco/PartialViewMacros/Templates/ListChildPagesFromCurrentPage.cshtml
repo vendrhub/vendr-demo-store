@@ -1,6 +1,10 @@
-@using Umbraco.Web
-@inherits Umbraco.Web.Macros.PartialViewMacroPage
-
+@using Umbraco.Cms.Core
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Macros.PartialViewMacroPage
+@inject IPublishedValueFallback PublishedValueFallback
+@inject IPublishedUrlProvider PublishedUrlProvider
 @*
     This snippet makes a list of links to the of children of the current page using an unordered HTML list.
 
@@ -9,7 +13,7 @@
     - It then generates links so the visitor can go to each page
 *@
 
-@{ var selection = Model.Content.Children.Where(x => x.IsVisible()).ToArray(); }
+@{ var selection = Model.Content.Children.Where(x => x.IsVisible(PublishedValueFallback)).ToArray(); }
 
 @if (selection.Length > 0)
 {
@@ -17,7 +21,7 @@
         @foreach (var item in selection)
         {
             <li>
-                <a href="@item.Url">@item.Name</a>
+                <a href="@item.Url(PublishedUrlProvider)">@item.Name</a>
             </li>
         }
     </ul>

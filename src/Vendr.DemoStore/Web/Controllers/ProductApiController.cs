@@ -1,31 +1,32 @@
-﻿using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading;
-using System.Web.Http;
-using Umbraco.Web;
-using Umbraco.Web.WebApi;
+using Umbraco.Cms.Core;
+using Umbraco.Cms.Web.Common.Controllers;
+using Umbraco.Extensions;
 using Vendr.Core.Services;
 using Vendr.DemoStore.Models;
 using Vendr.DemoStore.Web.Dtos;
 using Vendr.Extensions;
-
-using VendrCoreConstants = Vendr.Core.Constants;
  
 namespace Vendr.DemoStore.Web.Controllers
 {
     public class ProductApiController : UmbracoApiController
     {
         private readonly IProductService _productService;
+        private readonly IPublishedContentQuery _publishedContentQuery;
 
-        public ProductApiController(IProductService productService)
+        public ProductApiController(IProductService productService,
+            IPublishedContentQuery publishedContentQuery)
         {
             _productService = productService;
+            _publishedContentQuery = publishedContentQuery;
         }
 
         [HttpPost]
         public object GetProductVariant(GetProductVariantDto model)
         {
             // Get the variants for the given node
-            var productNode = Umbraco.Content(model.ProductNodeId) as MultiVariantProductPage;
+            var productNode = _publishedContentQuery.Content(model.ProductNodeId) as MultiVariantProductPage;
             if (productNode == null)
                 return null;
 

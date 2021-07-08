@@ -1,12 +1,12 @@
 ﻿@using Vendr.Extensions;
-@inherits Umbraco.Web.Mvc.UmbracoViewPage<Vendr.DemoStore.Models.CheckoutShippingMethodPage>
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Vendr.DemoStore.Models.CheckoutShippingMethodPage>
 @{
     Layout = "CheckoutStepPage.cshtml";
 }
 
 @using (Html.BeginUmbracoForm("UpdateOrderShippingMethod", "CheckoutSurface"))
 {
-    <input type="hidden" name="nextStep" value="@(Model.NextStep?.Id)" />
+    <input type="hidden" name="nextStep" value="@(Model.NextStep?.Key)" />
 
     <h3 class="text-xl font-medium mb-4">Shipping Method</h3>
     <ul class="border border-gray-300 rounded">
@@ -22,5 +22,5 @@
         }
     </ul>
 
-    @Html.Partial("CheckoutPrevNext")
+    @await Html.PartialAsync("CheckoutPrevNext")
 }

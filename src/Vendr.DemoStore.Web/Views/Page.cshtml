@@ -1,5 +1,5 @@
 ﻿@using Vendr.DemoStore.Models;
-@inherits Umbraco.Web.Mvc.UmbracoViewPage<Vendr.DemoStore.Models.Page>
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Vendr.DemoStore.Models.Page>
 @{
     Layout = "Master.cshtml";
 }
@@ -21,12 +21,12 @@
             <!-- Top Bar -->
             <div class="border-b-4 border-gray-300 pb-2 -mt-2 md:mt-0">
                 <div class="flex justify-between w-full text-2xl md:hidden">
-                    <a href="@Model.HomePage.SearchPage.Url"><i class="fa fa-search"></i></a>
-                    <a href="@Model.HomePage.CartPage.Url"><i class="fa fa-shopping-cart"></i></a>
+                    <a href="@Model.HomePage.SearchPage.Url()"><i class="fa fa-search"></i></a>
+                    <a href="@Model.HomePage.CartPage.Url()"><i class="fa fa-shopping-cart"></i></a>
                 </div>
                 <div class="hidden w-full md:flex">
-                    <form action="@Model.HomePage.SearchPage.Url" method="get" class="flex flex-1 m-0"><button type="submit" class="mr-2 hover:text-teal-400"><i class="fa fa-search"></i></button><input type="text" name="q" class="flex-1 p-1" placeholder="Search..." /></form>
-                    <div class="pl-6"><a href="@Model.HomePage.CartPage.Url" class="hover:text-teal-400"><i class="fa fa-shopping-cart"></i> Cart @Html.Action("CartCount", "CartSurface")</a></div>
+                    <form action="@Model.HomePage.SearchPage.Url()" method="get" class="flex flex-1 m-0"><button type="submit" class="mr-2 hover:text-teal-400"><i class="fa fa-search"></i></button><input type="text" name="q" class="flex-1 p-1" placeholder="Search..." /></form>
+                    <div class="pl-6"><a href="@Model.HomePage.CartPage.Url()" class="hover:text-teal-400"><i class="fa fa-shopping-cart"></i> Cart @(await Component.InvokeAsync("CartCount", new { currentPage = Model }))</a></div>
                 </div>
             </div>
 
@@ -61,7 +61,7 @@
                         {
                             foreach (var category in Model.HomePage.CategoryPages)
                             {
-                                <li class="border-b border-gray-300 text-center md:text-left"><a href="@category.Url" class="block py-2 hover:text-teal-400 @(category.Id == Model.Id ? "font-bold" : "")">@category.Name</a></li>
+                                <li class="border-b border-gray-300 text-center md:text-left"><a href="@category.Url()" class="block py-2 hover:text-teal-400 @(category.Id == Model.Id ? "font-bold" : "")">@category.Name</a></li>
                             }
                         }
                     </ul>
@@ -81,7 +81,7 @@
             <div class="flex-1 border-t-4 border-gray-300">
 
                 <!-- Breadcrumb -->
-                @Html.Partial("Breadcrumb")
+                @(await Html.PartialAsync("Breadcrumb"))
 
                 <!-- Body -->
                 <div class="">
@@ -100,7 +100,7 @@
                         <li><a href="/" class="hover:text-teal-400">Home</a></li>
                         @foreach (var lnk in Model.HomePage.SiteFooterLinks)
                         {
-                            <li><a href="@lnk.Url" class="hover:text-teal-400">@lnk.Name</a></li>
+                            <li><a href="@lnk.Url()" class="hover:text-teal-400">@lnk.Name</a></li>
                         }
                     </ul>
                 </div>

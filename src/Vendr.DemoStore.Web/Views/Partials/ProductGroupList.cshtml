@@ -1,4 +1,4 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<IEnumerable<Vendr.DemoStore.Models.IProductGroupComp>>
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IEnumerable<Vendr.DemoStore.Models.IProductGroupComp>>
 
 @if (Model != null)
 {
@@ -6,7 +6,7 @@
         @foreach (var group in Model)
         {
             <div class="w-1/2 md:w-1/3 px-3 mt-6">
-                @Html.Partial("ProductGroupListItem", group)
+                @await Html.PartialAsync("ProductGroupListItem", group)
             </div>
         }
     </div>

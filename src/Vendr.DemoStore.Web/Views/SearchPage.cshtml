@@ -1,8 +1,8 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<Vendr.DemoStore.Models.SearchPage>
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Vendr.DemoStore.Models.SearchPage>
 @{
-	Layout = "Page.cshtml";
+    Layout = "Page.cshtml";
 }
 
-<h1 class="text-4xl font-heading leading-tight tracking-tight mt-6">Search results for "@(Request.QueryString["q"])"</h1>
+<h1 class="text-4xl font-heading leading-tight tracking-tight mt-6">Search results for "@(Context.Request.Query["q"])"</h1>
 
-@Html.Action("Search", "SearchSurface")
+@await Component.InvokeAsync("Search", new { currentPage = Model })

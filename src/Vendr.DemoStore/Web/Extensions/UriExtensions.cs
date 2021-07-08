@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Web;
-using Umbraco.Core;
+using Umbraco.Extensions;
 
 namespace Vendr.DemoStore.Web
 {

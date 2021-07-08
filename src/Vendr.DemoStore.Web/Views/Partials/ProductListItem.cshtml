@@ -2,13 +2,13 @@
 @using Vendr.DemoStore;
 @using Vendr.DemoStore.Models;
 @using Vendr.Extensions;
-@inherits Umbraco.Web.Mvc.UmbracoViewPage<ProductPage>
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ProductPage>
 @{ 
     var multiVariantProductPage = Model as MultiVariantProductPage;
 }
 <div class="px-3 mt-6 w-1/2 md:w-1/3">
-    <a href="@Model.Url" class="text-center hover:text-teal-400">
-        <img src="@(Model.PrimaryImage != null ? Url.GetCropUrl(Model.PrimaryImage, 300, 300).ToString() : "https://placehold.it/300x300")" class="border" />
+    <a href="@Model.Url()" class="text-center hover:text-teal-400">
+        <img src="@(Model.PrimaryImage != null ? Model.PrimaryImage.GetCropUrl(300, 300).ToString() : "https://placehold.it/300x300")" class="border" />
         <span class="block font-bold mt-4">@Model.Parent.Name - @Model.Name</span>
         <span class="block ">
             @if (multiVariantProductPage != null && multiVariantProductPage.Variants.Count > 0)

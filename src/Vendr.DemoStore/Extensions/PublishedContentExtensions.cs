@@ -1,6 +1,6 @@
 ﻿using System.Threading;
-using Umbraco.Core.Models.PublishedContent;
-using Umbraco.Web;
+using Umbraco.Cms.Core.Models.PublishedContent;
+using Umbraco.Extensions;
 using Vendr.Core.Api;
 using Vendr.Core.Models;
 using Vendr.DemoStore.Models;

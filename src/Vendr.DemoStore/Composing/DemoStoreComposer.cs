@@ -1,44 +1,44 @@
-﻿using Umbraco.Core;
-using Umbraco.Core.Composing;
-using Vendr.Umbraco;
+﻿using Vendr.Umbraco;
 using Vendr.Core.Events.Notification;
 using Vendr.DemoStore.Events;
 using Vendr.DemoStore.Web.Extractors;
 using Vendr.Umbraco.Extractors;
 using Vendr.Extensions;
+using Umbraco.Cms.Core.Composing;
+using Umbraco.Cms.Core.DependencyInjection;
+using Umbraco.Extensions;
+using Umbraco.Cms.Core.Notifications;
 
 namespace Vendr.DemoStore.Composing
 {
     [ComposeAfter(typeof(VendrComposer))]
     public class DemoStoreComposer : IUserComposer
     {
-        public void Compose(Composition composition)
+        public void Compose(IUmbracoBuilder builder)
         {
             // Replace the umbraco product name extractor with one that supports child variants
-            composition.RegisterUnique<IUmbracoProductNameExtractor, CompositeProductNameExtractor>();
+            builder.Services.AddUnique<IUmbracoProductNameExtractor, CompositeProductNameExtractor>();
 
             // Register event handlers
-            composition.WithNotificationEvent<OrderProductAddingNotification>()
+            builder.WithNotificationEvent<OrderProductAddingNotification>()
                 .RegisterHandler<OrderProductAddingHandler>();
 
-            composition.WithNotificationEvent<OrderLineChangingNotification>()
+            builder.WithNotificationEvent<OrderLineChangingNotification>()
                 .RegisterHandler<OrderLineChangingHandler>();
 
-            composition.WithNotificationEvent<OrderLineRemovingNotification>()
+            builder.WithNotificationEvent<OrderLineRemovingNotification>()
                 .RegisterHandler<OrderLineRemovingHandler>();
 
-            composition.WithNotificationEvent<OrderPaymentCountryRegionChangingNotification>()
+            builder.WithNotificationEvent<OrderPaymentCountryRegionChangingNotification>()
                 .RegisterHandler<OrderPaymentCountryRegionChangingHandler>();
 
-            composition.WithNotificationEvent<OrderShippingCountryRegionChangingNotification>()
+            builder.WithNotificationEvent<OrderShippingCountryRegionChangingNotification>()
                 .RegisterHandler<OrderShippingCountryRegionChangingHandler>();
 
-            composition.WithNotificationEvent<OrderShippingMethodChangingNotification>()
+            builder.WithNotificationEvent<OrderShippingMethodChangingNotification>()
                 .RegisterHandler<OrderShippingMethodChangingHandler>();
 
-            // Register component
-            composition.Components()
-                .Append<DemoStoreComponent>();
+            builder.AddNotificationHandler<UmbracoApplicationStartingNotification, TransformExamineValues>();
         }
     }
 }

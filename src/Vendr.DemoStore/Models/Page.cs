@@ -1,5 +1,4 @@
-﻿using Umbraco.Core;
-using Umbraco.Web;
+﻿using Umbraco.Extensions;
 
 namespace Vendr.DemoStore.Models
 {
