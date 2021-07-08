@@ -65,7 +65,7 @@
                                         }
                                     </span>
                                     <br />
-                                    <a href="@Url.Action("RemoveFromCart",  "CartSurface", new { OrderLineId = item.OrderLine.Id, CurrentPageId = Model.Id })" class="mt-3 inline-block text-sm hover:text-teal-400">Remove</a>
+                                    <a href="@Url.SurfaceAction("RemoveFromCart",  "CartSurface", new { OrderLineId = item.OrderLine.Id })" class="mt-3 inline-block text-sm hover:text-teal-400">Remove</a>
                                 </div>
                             </div>
                         </td>

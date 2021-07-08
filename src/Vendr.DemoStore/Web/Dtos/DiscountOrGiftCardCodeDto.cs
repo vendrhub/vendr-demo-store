@@ -3,6 +3,5 @@
     public class DiscountOrGiftCardCodeDto
     {
         public string Code { get; set; }
-        public int CurrentPageId { get; set; }
     }
 }

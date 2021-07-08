@@ -19,11 +19,11 @@
             <ul class="mt-4 block">
                 @foreach (var discountCode in Model.Order.DiscountCodes)
                 {
-                    <li class="inline-block mr-2"><a href="@Url.Action("RemoveDiscountOrGiftCardCode",  "CheckoutSurface", new { Code = discountCode.Code, CurrentPageId = Model.Id })" class="inline-block bg-gray-300 px-2 rounded hover:bg-gray-900 hover:text-white"><i class="fa fa-times mr-1"></i> @discountCode.Code</a></li>
+                    <li class="inline-block mr-2"><a href="@Url.SurfaceAction("RemoveDiscountOrGiftCardCode",  "CheckoutSurface", new { Code = discountCode.Code })" class="inline-block bg-gray-300 px-2 rounded hover:bg-gray-900 hover:text-white"><i class="fa fa-times mr-1"></i> @discountCode.Code</a></li>
                 }
                 @foreach (var giftCard in Model.Order.GiftCards)
                 {
-                    <li class="inline-block mr-2"><a href="@Url.Action("RemoveDiscountOrGiftCardCode",  "CheckoutSurface", new { Code = giftCard.Code, CurrentPageId = Model.Id })" class="inline-block bg-gray-300 px-2 rounded hover:bg-gray-900 hover:text-white"><i class="fa fa-times mr-1"></i> @giftCard.Code</a></li>
+                    <li class="inline-block mr-2"><a href="@Url.SurfaceAction("RemoveDiscountOrGiftCardCode",  "CheckoutSurface", new { Code = giftCard.Code })" class="inline-block bg-gray-300 px-2 rounded hover:bg-gray-900 hover:text-white"><i class="fa fa-times mr-1"></i> @giftCard.Code</a></li>
                 }
             </ul>
         }
