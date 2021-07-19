@@ -6080,6 +6080,7 @@ Use this directive to construct a header inside the main editor window.
                     addEditor(args.editor);
                 }));
                 evts.push(eventsService.on('appState.editors.close', function (name, args) {
+                    
                     // remove the closed editor
                     if (args && args.editor) {
                         editorCount = editorCount - 1;
@@ -6089,6 +6090,7 @@ Use this directive to construct a header inside the main editor window.
                     if (args && !args.editor && args.editors.length === 0) {
                         editorCount = 0;
                         scope.editors = [];
+                        focusLockService.removeInertAttribute();
                     }
                 }));
                 //ensure to unregister from all events!
