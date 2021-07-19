@@ -203,7 +203,7 @@
  */
     angular.module('umbraco.filters').filter('umbCmsJoinArray', function () {
         return function join(array, separator, prop) {
-            return (!angular.isUndefined(prop) ? array.map(function (item) {
+            return (!Utilities.isUndefined(prop) ? array.map(function (item) {
                 return item[prop];
             }) : array).join(separator || '');
         };
@@ -243,7 +243,7 @@
                 if (!Utilities.isString(collection)) {
                     return collection;
                 }
-                if (angular.isUndefined(property)) {
+                if (Utilities.isUndefined(property)) {
                     return collection;
                 }
                 var newString = '';

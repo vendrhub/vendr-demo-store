@@ -267,6 +267,7 @@
             A composer for Block editors to run a component
             </summary>
         </member>
+        <!-- Badly formed XML comment ignored for member "T:Umbraco.Web.Compose.DatabaseServerRegistrarAndMessengerComposer" -->
         <member name="T:Umbraco.Web.Compose.NestedContentPropertyComponent">
             <summary>
             A component for NestedContent used to bind to events
@@ -299,7 +300,6 @@
             <param name="contentConfig"></param>
             <param name="logger"></param>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:Umbraco.Web.Compose.DatabaseServerRegistrarAndMessengerComposer" -->
         <member name="M:Umbraco.Web.Compose.DatabaseServerRegistrarAndMessengerComponent.RegisterBackgroundTasksOnce(System.Object,Umbraco.Web.Routing.RoutableAttemptEventArgs)">
             <summary>
             Handle when a request is made
@@ -369,14 +369,6 @@
         </member>
         <member name="M:Umbraco.Web.Composing.ModuleInjector`1.Dispose">
             <inheritdoc />
-        </member>
-        <member name="M:Umbraco.Web.Dashboards.DashboardCollectionBuilder.SetWeight``1(System.Int32)">
-            <summary>
-            Changes the default weight of a dashboard
-            </summary>
-            <typeparam name="T">The type of dashboard</typeparam>
-            <param name="weight">The new dashboard weight</param>
-            <returns></returns>
         </member>
         <member name="T:Umbraco.Web.Editors.Filters.ContentSaveModelValidator">
             <summary>
@@ -451,10 +443,6 @@
             <summary>
             Authorize that the user is not adding a section to the group that they don't have access to
             </summary>
-            <param name="currentUser"></param>
-            <param name="currentAllowedSections"></param>
-            <param name="proposedAllowedSections"></param>
-            <returns></returns>
         </member>
         <member name="M:Umbraco.Web.Editors.Filters.UserGroupEditorAuthorizationHelper.AuthorizeStartNodeChanges(Umbraco.Core.Models.Membership.IUser,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
@@ -582,6 +570,12 @@
             <returns></returns>
         </member>
         <member name="M:Umbraco.Web.Editors.IconController.GetAllIcons">
+            <summary>
+            Gets a list of all svg icons found at at the global icons path.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Editors.IconController.GetIcons">
             <summary>
             Gets a list of all svg icons found at at the global icons path.
             </summary>
@@ -1654,6 +1648,22 @@
             <param name="contentTypeKey"></param>
             <param name="parentId"></param>
         </member>
+        <member name="M:Umbraco.Web.Editors.ContentController.GetEmpties(System.Collections.Generic.IEnumerable{Umbraco.Core.Models.IContentType},System.Int32)">
+            <summary>
+            Gets an empty <see cref="T:Umbraco.Web.Models.ContentEditing.ContentItemDisplay"/> for each content type in the IEnumerable, all with the same parent ID
+            </summary>
+            <remarks>Will attempt to re-use the same permissions for every content as long as the path and user are the same</remarks>
+            <param name="contentTypes"></param>
+            <param name="parentId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.Editors.ContentController.GetEmptyByKeys(System.Guid[],System.Int32)">
+            <summary>
+            Gets a collection of empty content items for all document types.
+            </summary>
+            <param name="contentTypeKeys"></param>
+            <param name="parentId"></param>
+        </member>
         <member name="M:Umbraco.Web.Editors.ContentController.GetNiceUrl(System.Int32)">
             <summary>
             Gets the Url for a given node ID
@@ -1735,7 +1745,7 @@
             <param name="notifications"></param>
             <param name="globalNotifications"></param>
             <param name="invariantSavedLocalizationKey"></param>
-            <param name="variantSavedLocalizationKey"></param>
+            <param name="variantSavedLocalizationAlias"></param>
             <param name="wasCancelled"></param>
             <remarks>
             Method is used for normal Saving and Scheduled Publishing
@@ -1803,7 +1813,7 @@
             This would generally never fail unless someone is tampering with the request
             </remarks>
         </member>
-        <member name="M:Umbraco.Web.Editors.ContentController.AddVariantValidationError(System.String,System.String,System.String,System.String)">
+        <member name="M:Umbraco.Web.Editors.ContentController.AddVariantValidationError(System.String,System.String,System.String,System.String,System.String)">
             <summary>
             Adds a generic culture error for use in displaying the culture validation error in the save/publish/etc... dialogs
             </summary>
@@ -1922,6 +1932,15 @@
             <param name="content"></param>
             <returns></returns>
         </member>
+        <member name="M:Umbraco.Web.Editors.ContentController.MapToDisplay(Umbraco.Core.Models.IContent,System.Action{Umbraco.Core.Mapping.MapperContext})">
+            <summary>
+            Used to map an <see cref="T:Umbraco.Core.Models.IContent"/> instance to a <see cref="T:Umbraco.Web.Models.ContentEditing.ContentItemDisplay"/> and ensuring AllowPreview is set correctly.
+            Also allows you to pass in an action for the mapper context where you can pass additional information on to the mapper.
+            </summary>
+            <param name="content"></param>
+            <param name="contextOptions"></param>
+            <returns></returns>
+        </member>
         <member name="T:Umbraco.Web.Editors.ContentTypeControllerBase`1">
             <summary>
             Am abstract API controller providing functionality used for dealing with content and media types
@@ -1942,7 +1961,7 @@
             be looked up via the db, they need to be passed in.
             </param>
             <param name="contentTypeId"></param>
-            <param name="isElement">Wether the composite content types should be applicable for an element type</param>
+            <param name="isElement">Whether the composite content types should be applicable for an element type</param>
             <returns></returns>
         </member>
         <member name="M:Umbraco.Web.Editors.ContentTypeControllerBase`1.PerformGetWhereCompositionIsUsedInContentTypes(System.Int32,Umbraco.Core.Models.UmbracoObjectTypes)">
@@ -2010,7 +2029,7 @@
             <param name="contentTypeSave"></param>
             <param name="ct"></param>
         </member>
-        <member name="M:Umbraco.Web.Editors.DashboardController.#ctor(Umbraco.Core.Configuration.IGlobalSettings,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Core.Persistence.ISqlContext,Umbraco.Core.Services.ServiceContext,Umbraco.Core.Cache.AppCaches,Umbraco.Core.Logging.IProfilingLogger,Umbraco.Core.IRuntimeState,Umbraco.Web.Services.IDashboardService,Umbraco.Web.UmbracoHelper)">
+        <member name="M:Umbraco.Web.Editors.DashboardController.#ctor(Umbraco.Core.Configuration.IGlobalSettings,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Core.Persistence.ISqlContext,Umbraco.Core.Services.ServiceContext,Umbraco.Core.Cache.AppCaches,Umbraco.Core.Logging.IProfilingLogger,Umbraco.Core.IRuntimeState,Umbraco.Web.Services.IDashboardService,Umbraco.Web.UmbracoHelper,Umbraco.Core.Dashboards.IContentDashboardSettings)">
             <summary>
             Initializes a new instance of the <see cref="T:Umbraco.Web.Editors.DashboardController"/> with all its dependencies.
             </summary>
@@ -2351,6 +2370,13 @@
             <summary>
             Returns all member types
             </summary>
+        </member>
+        <member name="M:Umbraco.Web.Editors.MemberTypeController.PostCopy(Umbraco.Web.Models.ContentEditing.MoveOrCopy)">
+            <summary>
+            Copy the member type
+            </summary>
+            <param name="copy"></param>
+            <returns></returns>
         </member>
         <member name="T:Umbraco.Web.Editors.UpdateCheckController.UpdateCheckResponseFilter">
             <summary>
@@ -3219,7 +3245,7 @@
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Umbraco.Web.Editors.MediaController.CheckPermissions(System.Collections.Generic.IDictionary{System.String,System.Object},Umbraco.Core.Models.Membership.IUser,Umbraco.Core.Services.IMediaService,Umbraco.Core.Services.IEntityService,System.Int32,Umbraco.Core.Models.IMedia)">
+        <member name="M:Umbraco.Web.Editors.MediaController.CheckPermissions(System.Collections.Generic.IDictionary{System.String,System.Object},Umbraco.Core.Models.Membership.IUser,Umbraco.Core.Services.IMediaService,Umbraco.Core.Services.IEntityService,Umbraco.Core.Cache.AppCaches,System.Int32,Umbraco.Core.Models.IMedia)">
             <summary>
             Performs a permissions check for the user to check if it has access to the node based on
             start node and/or permissions for the node
@@ -3230,51 +3256,6 @@
             <param name="entityService"></param>
             <param name="nodeId">The content to lookup, if the contentItem is not specified</param>
             <param name="media">Specifies the already resolved content item to check against, setting this ignores the nodeId</param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.HealthCheck.Checks.Data.DatabaseIntegrityCheck.GetStatus">
-            <summary>
-            Get the status for this health check
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.HealthCheck.Checks.Security.BaseHttpHeaderCheck.GetStatus">
-            <summary>
-            Get the status for this health check
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.HealthCheck.Checks.Security.BaseHttpHeaderCheck.ExecuteAction(Umbraco.Web.HealthCheck.HealthCheckAction)">
-            <summary>
-            Executes the action and returns it's status
-            </summary>
-            <param name="action"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.HealthCheck.Checks.Security.ExcessiveHeadersCheck.GetStatus">
-            <summary>
-            Get the status for this health check
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.HealthCheck.Checks.Security.ExcessiveHeadersCheck.ExecuteAction(Umbraco.Web.HealthCheck.HealthCheckAction)">
-            <summary>
-            Executes the action and returns it's status
-            </summary>
-            <param name="action"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.HealthCheck.Checks.Security.HttpsCheck.GetStatus">
-            <summary>
-            Get the status for this health check
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Web.HealthCheck.Checks.Security.HttpsCheck.ExecuteAction(Umbraco.Web.HealthCheck.HealthCheckAction)">
-            <summary>
-            Executes the action and returns it's status
-            </summary>
-            <param name="action"></param>
             <returns></returns>
         </member>
         <member name="P:Umbraco.Web.HealthCheck.Checks.Config.AbstractConfigCheck.FilePath">
@@ -3305,6 +3286,16 @@
         <member name="P:Umbraco.Web.HealthCheck.Checks.Config.AbstractConfigCheck.ValueComparisonType">
             <summary>
             Gets the comparison type for checking the value.
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.HealthCheck.Checks.Config.AbstractConfigCheck.ProvidedValueValidation">
+            <summary>
+            Indicates validation method for provided value
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.HealthCheck.Checks.Config.AbstractConfigCheck.ProvidedValueValidationRegex">
+            <summary>
+            If provided value validation requires a regex, it's provided here
             </summary>
         </member>
         <member name="P:Umbraco.Web.HealthCheck.Checks.Config.AbstractConfigCheck.ValidIfConfigMissing">
@@ -3375,6 +3366,51 @@
             Updates a value in a given configuration file with the given XPath
             </summary>
             <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.HealthCheck.Checks.Data.DatabaseIntegrityCheck.GetStatus">
+            <summary>
+            Get the status for this health check
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.HealthCheck.Checks.Security.BaseHttpHeaderCheck.GetStatus">
+            <summary>
+            Get the status for this health check
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.HealthCheck.Checks.Security.BaseHttpHeaderCheck.ExecuteAction(Umbraco.Web.HealthCheck.HealthCheckAction)">
+            <summary>
+            Executes the action and returns it's status
+            </summary>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.HealthCheck.Checks.Security.ExcessiveHeadersCheck.GetStatus">
+            <summary>
+            Get the status for this health check
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.HealthCheck.Checks.Security.ExcessiveHeadersCheck.ExecuteAction(Umbraco.Web.HealthCheck.HealthCheckAction)">
+            <summary>
+            Executes the action and returns it's status
+            </summary>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.HealthCheck.Checks.Security.HttpsCheck.GetStatus">
+            <summary>
+            Get the status for this health check
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.HealthCheck.Checks.Security.HttpsCheck.ExecuteAction(Umbraco.Web.HealthCheck.HealthCheckAction)">
+            <summary>
+            Executes the action and returns it's status
+            </summary>
+            <param name="action"></param>
             <returns></returns>
         </member>
         <member name="M:Umbraco.Web.HealthCheck.Checks.Services.SmtpCheck.GetStatus">
@@ -3452,6 +3488,16 @@
         <member name="P:Umbraco.Web.HealthCheck.HealthCheckAction.ValueRequired">
             <summary>
             Indicates if a value is required to rectify the issue
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.HealthCheck.HealthCheckAction.ProvidedValueValidation">
+            <summary>
+            Indicates if a value required, how it is validated
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.HealthCheck.HealthCheckAction.ProvidedValueValidationRegex">
+            <summary>
+            Indicates if a value required, and is validated by a regex, what the regex to use is
             </summary>
         </member>
         <member name="P:Umbraco.Web.HealthCheck.HealthCheckAction.ProvidedValue">
@@ -3538,6 +3584,18 @@
             </param>
             <returns>
             The ImageProcessor.Web URL.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Web.ImageCropperTemplateCoreExtensions.GetCropUrl(Umbraco.Core.Models.PublishedContent.IPublishedContent,Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue,System.String,Umbraco.Core.Models.IImageUrlGenerator)">
+            <summary>
+            Gets the crop URL by using only the specified <paramref name="imageCropperValue" />.
+            </summary>
+            <param name="mediaItem">The media item.</param>
+            <param name="imageCropperValue">The image cropper value.</param>
+            <param name="cropAlias">The crop alias.</param>
+            <param name="imageUrlGenerator">The image URL generator.</param>
+            <returns>
+            The image crop URL.
             </returns>
         </member>
         <member name="M:Umbraco.Web.ImageCropperTemplateCoreExtensions.GetCropUrl(Umbraco.Core.Models.PublishedContent.IPublishedContent,System.String,System.String,Umbraco.Core.Models.IImageUrlGenerator)">
@@ -8294,11 +8352,12 @@
             Declares how model mappings for content
             </summary>
         </member>
-        <member name="M:Umbraco.Web.Models.Mapping.ContentMapDefinition.DetermineIsChildOfListView(Umbraco.Core.Models.IContent,Umbraco.Core.Mapping.MapperContext)">
+        <member name="M:Umbraco.Web.Models.Mapping.ContentMapDefinition.DetermineIsChildOfListView(Umbraco.Core.Models.IContent,Umbraco.Core.Models.IContent,Umbraco.Core.Mapping.MapperContext)">
             <summary>
             Checks if the content item is a descendant of a list view
             </summary>
             <param name="source"></param>
+            <param name="parent"></param>
             <param name="context"></param>
             <returns>
             Returns true if the content item is a descendant of a list view and where the content is
@@ -9491,6 +9550,11 @@
         <member name="T:Umbraco.Web.Mvc.JsonNetResult">
             <summary>
             Custom json result using newtonsoft json.net
+            </summary>
+        </member>
+        <member name="F:Umbraco.Web.Mvc.JsonNetResult.DefaultJsonSerializerSettings">
+            <summary>
+            Default, unchanged JsonSerializerSettings
             </summary>
         </member>
         <member name="T:Umbraco.Web.Mvc.MinifyJavaScriptResultAttribute">
@@ -10877,6 +10941,15 @@
             Represents a block list property editor.
             </summary>
         </member>
+        <member name="M:Umbraco.Web.PropertyEditors.EyeDropperColorPickerConfigurationEditor.ToConfigurationEditor(Umbraco.Core.PropertyEditors.EyeDropperColorPickerConfiguration)">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Web.PropertyEditors.EyeDropperColorPickerConfigurationEditor.FromConfigurationEditor(System.Collections.Generic.IDictionary{System.String,System.Object},Umbraco.Core.PropertyEditors.EyeDropperColorPickerConfiguration)">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Web.PropertyEditors.EyeDropperColorPickerPropertyEditor.CreateConfigurationEditor">
+            <inheritdoc />
+        </member>
         <member name="T:Umbraco.Web.PropertyEditors.ComplexEditorValidator">
             <summary>
             Used to validate complex editors that contain nested editors
@@ -10897,6 +10970,59 @@
             </summary>
             <param name="rawValue"></param>
             <returns></returns>
+        </member>
+        <member name="T:Umbraco.Web.PropertyEditors.FileUploadConfiguration">
+            <summary>
+            Represents the configuration for the file upload address value editor.
+            </summary>
+        </member>
+        <member name="T:Umbraco.Web.PropertyEditors.FileUploadConfigurationEditor">
+            <summary>
+            Represents the configuration editor for the file upload value editor.
+            </summary>
+        </member>
+        <member name="T:Umbraco.Web.PropertyEditors.MediaPicker3Configuration">
+            <summary>
+            Represents the configuration for the media picker value editor.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.PropertyEditors.MediaPicker3ConfigurationExtensions.ApplyConfiguration(Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue,Umbraco.Web.PropertyEditors.MediaPicker3Configuration)">
+            <summary>
+            Applies the configuration to ensure only valid crops are kept and have the correct width/height.
+            </summary>
+            <param name="configuration">The configuration.</param>
+        </member>
+        <member name="T:Umbraco.Web.PropertyEditors.MediaPicker3ConfigurationEditor">
+            <summary>
+            Represents the configuration editor for the media picker value editor.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.PropertyEditors.MediaPicker3ConfigurationEditor.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umbraco.Web.PropertyEditors.MediaPicker3ConfigurationEditor"/> class.
+            </summary>
+        </member>
+        <member name="T:Umbraco.Web.PropertyEditors.MediaPicker3PropertyEditor">
+            <summary>
+            Represents a media picker property editor.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.PropertyEditors.MediaPicker3PropertyEditor.#ctor(Umbraco.Core.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umbraco.Web.PropertyEditors.MediaPicker3PropertyEditor" /> class.
+            </summary>
+            <param name="logger">The logger.</param>
+        </member>
+        <member name="M:Umbraco.Web.PropertyEditors.MediaPicker3PropertyEditor.CreateConfigurationEditor">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Web.PropertyEditors.MediaPicker3PropertyEditor.CreateValueEditor">
+            <inheritdoc />
+        </member>
+        <member name="T:Umbraco.Web.PropertyEditors.MediaPicker3PropertyEditor.MediaPicker3PropertyValueEditor.MediaWithCropsDto">
+            <summary>
+            Model/DTO that represents the JSON that the MediaPicker3 stores.
+            </summary>
         </member>
         <member name="T:Umbraco.Web.PropertyEditors.ParameterEditors.MultipleMediaPickerParameterEditor">
             <summary>
@@ -11202,6 +11328,7 @@
         <member name="T:Umbraco.Web.PropertyEditors.MediaPickerPropertyEditor">
             <summary>
             Represents a media picker property editor.
+            Named "(legacy)" as it's best to use the NEW Media Picker aka MediaPicker3
             </summary>
         </member>
         <member name="M:Umbraco.Web.PropertyEditors.MediaPickerPropertyEditor.#ctor(Umbraco.Core.Logging.ILogger)">
@@ -11863,6 +11990,9 @@
         <member name="M:Umbraco.Web.PropertyEditors.ValueListConfigurationEditor.FromConfigurationEditor(System.Collections.Generic.IDictionary{System.String,System.Object},Umbraco.Core.PropertyEditors.ValueListConfiguration)">
             <inheritdoc />
         </member>
+        <member name="M:Umbraco.Web.PropertyEditors.FileUploadPropertyEditor.CreateConfigurationEditor">
+            <inheritdoc />
+        </member>
         <member name="M:Umbraco.Web.PropertyEditors.FileUploadPropertyEditor.CreateValueEditor">
             <summary>
             Creates the corresponding property value editor.
@@ -12045,31 +12175,109 @@
         <member name="M:Umbraco.Web.PropertyEditors.TrueFalsePropertyEditor.CreateConfigurationEditor">
             <inheritdoc />
         </member>
-        <member name="T:Umbraco.Web.PublishedCache.NuCache.PublishedSnapshotServiceOptions">
+        <member name="T:Umbraco.Web.PublishedCache.NuCache.DataSource.ContentCacheDataSerializationResult">
             <summary>
-            Options class for configuring the <see cref="T:Umbraco.Web.PublishedCache.IPublishedSnapshotService"/>
+            The serialization result from <see cref="T:Umbraco.Web.PublishedCache.NuCache.DataSource.IContentCacheDataSerializer"/> for which the serialized value
+            will be either a string or a byte[]
             </summary>
         </member>
-        <member name="P:Umbraco.Web.PublishedCache.NuCache.PublishedSnapshotServiceOptions.IgnoreLocalDb">
+        <member name="T:Umbraco.Web.PublishedCache.NuCache.DataSource.IContentCacheDataSerializer">
             <summary>
-            If true this disables the persisted local cache files for content and media
+            Serializes/Deserializes <see cref="T:Umbraco.Web.PublishedCache.NuCache.DataSource.ContentCacheDataModel"/> document to the SQL Database as a string
             </summary>
             <remarks>
-            By default this is false which means umbraco will use locally persisted cache files for reading in all published content and media on application startup.
-            The reason for this is to improve startup times because the alternative to populating the published content and media on application startup is to read
-            these values from the database. In scenarios where sites are relatively small (below a few thousand nodes) reading the content/media from the database to populate
-            the in memory cache isn't that slow and is only marginally slower than reading from the locally persisted cache files.
+            Resolved from the <see cref="T:Umbraco.Web.PublishedCache.NuCache.DataSource.IContentCacheDataSerializerFactory"/>. This cannot be resolved from DI.
             </remarks>
         </member>
-        <member name="T:Umbraco.Web.PublishedCache.NuCache.Snap.LinkedNode`1">
+        <member name="M:Umbraco.Web.PublishedCache.NuCache.DataSource.IContentCacheDataSerializer.Deserialize(Umbraco.Core.Models.IReadOnlyContentBase,System.String,System.Byte[],System.Boolean)">
             <summary>
-            Used to represent an item in a linked list
+            Deserialize the data into a <see cref="T:Umbraco.Web.PublishedCache.NuCache.DataSource.ContentCacheDataModel"/>
             </summary>
-            <typeparam name="TValue"></typeparam>
         </member>
-        <member name="T:Umbraco.Web.PublishedCache.NuCache.DataSource.ContentNestedData">
+        <member name="M:Umbraco.Web.PublishedCache.NuCache.DataSource.IContentCacheDataSerializer.Serialize(Umbraco.Core.Models.IReadOnlyContentBase,Umbraco.Web.PublishedCache.NuCache.DataSource.ContentCacheDataModel,System.Boolean)">
             <summary>
-            The content item 1:M data that is serialized to JSON
+            Serializes the <see cref="T:Umbraco.Web.PublishedCache.NuCache.DataSource.ContentCacheDataModel"/>
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.PublishedCache.NuCache.DataSource.IContentCacheDataSerializerFactory.Create(Umbraco.Web.PublishedCache.NuCache.DataSource.ContentCacheDataSerializerEntityType)">
+            <summary>
+            Gets or creates a new instance of <see cref="T:Umbraco.Web.PublishedCache.NuCache.DataSource.IContentCacheDataSerializer"/>
+            </summary>
+            <returns></returns>
+            <remarks>
+            This method may return the same instance, however this depends on the state of the application and if any underlying data has changed.
+            This method may also be used to initialize anything before a serialization/deserialization session occurs.
+            </remarks>
+        </member>
+        <member name="T:Umbraco.Web.PublishedCache.NuCache.DataSource.LazyCompressedString">
+            <summary>
+            Lazily decompresses a LZ4 Pickler compressed UTF8 string
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.PublishedCache.NuCache.DataSource.LazyCompressedString.#ctor(System.Byte[])">
+            <summary>
+            Constructor
+            </summary>
+            <param name="bytes">LZ4 Pickle compressed UTF8 String</param>
+        </member>
+        <member name="M:Umbraco.Web.PublishedCache.NuCache.DataSource.LazyCompressedString.DecompressString">
+            <summary>
+            Returns the decompressed string from the bytes. This methods can only be called once.
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException">Throws if this is called more than once</exception>
+        </member>
+        <member name="P:Umbraco.Web.PublishedCache.NuCache.DataSource.LazyCompressedString.Display">
+            <summary>
+            Used to display debugging output since ToString() can only be called once
+            </summary>
+        </member>
+        <member name="T:Umbraco.Web.PublishedCache.NuCache.DataSource.MsgPackContentNestedDataSerializer">
+            <summary>
+            Serializes/Deserializes <see cref="T:Umbraco.Web.PublishedCache.NuCache.DataSource.ContentCacheDataModel"/> document to the SQL Database as bytes using MessagePack
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.PublishedCache.NuCache.DataSource.MsgPackContentNestedDataSerializer.Compress(Umbraco.Core.Models.IReadOnlyContentBase,Umbraco.Web.PublishedCache.NuCache.DataSource.ContentCacheDataModel,System.Boolean)">
+            <summary>
+            Used during serialization to compress properties
+            </summary>
+            <param name="content"></param>
+            <param name="model"></param>
+            <param name="published"></param>
+            <remarks>
+            This will essentially 'double compress' property data. The MsgPack data as a whole will already be compressed
+            but this will go a step further and double compress property data so that it is stored in the nucache file
+            as compressed bytes and therefore will exist in memory as compressed bytes. That is, until the bytes are
+            read/decompressed as a string to be displayed on the front-end. This allows for potentially a significant
+            memory savings but could also affect performance of first rendering pages while decompression occurs.
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.PublishedCache.NuCache.DataSource.MsgPackContentNestedDataSerializer.Expand(Umbraco.Core.Models.IReadOnlyContentBase,Umbraco.Web.PublishedCache.NuCache.DataSource.ContentCacheDataModel,System.Boolean)">
+            <summary>
+            Used during deserialization to map the property data as lazy or expand the value
+            </summary>
+            <param name="content"></param>
+            <param name="nestedData"></param>
+            <param name="published"></param>
+        </member>
+        <member name="T:Umbraco.Web.PublishedCache.NuCache.DataSource.ContentDataSerializer">
+            <summary>
+            Serializes/Deserializes data to BTree data source for <see cref="T:Umbraco.Web.PublishedCache.NuCache.DataSource.ContentData"/>
+            </summary>
+        </member>
+        <member name="T:Umbraco.Web.PublishedCache.NuCache.DataSource.DictionaryOfCultureVariationSerializer">
+            <summary>
+            Serializes/Deserializes culture variant data as a dictionary for BTree
+            </summary>
+        </member>
+        <member name="T:Umbraco.Web.PublishedCache.NuCache.DataSource.DictionaryOfPropertyDataSerializer">
+            <summary>
+            Serializes/Deserializes property data as a dictionary for BTree
+            </summary>
+        </member>
+        <member name="T:Umbraco.Web.PublishedCache.NuCache.DataSource.ContentCacheDataModel">
+            <summary>
+            The content model stored in the content cache database table serialized as JSON
             </summary>
         </member>
         <member name="T:Umbraco.Web.PublishedCache.NuCache.DataSource.CultureVariation">
@@ -12142,10 +12350,72 @@
             MUST be ordered by level + parentId + sortOrder!
             </remarks>
         </member>
+        <member name="M:Umbraco.Web.PublishedCache.NuCache.DataSource.SerializerBase.ReadObject(System.Char,System.IO.Stream)">
+            <summary>
+            Reads in a value based on its char type
+            </summary>
+            <param name="type"></param>
+            <param name="stream"></param>
+            <returns></returns>
+            <remarks>
+            This will incur boxing because the result is an object but in most cases the value will be a struct.
+            When the type is known use the specific methods like <see cref="M:Umbraco.Web.PublishedCache.NuCache.DataSource.SerializerBase.ReadInt(System.IO.Stream)"/> instead
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.PublishedCache.NuCache.DataSource.SerializerBase.WriteObject(System.Object,System.IO.Stream)">
+            <summary>
+            Writes a value to the stream ensuring it's char type is prefixed to the value for reading later
+            </summary>
+            <param name="value"></param>
+            <param name="stream"></param>
+            <remarks>
+            This method will incur boxing if the value is a struct. When the type is known use the <see cref="T:CSharpTest.Net.Serialization.PrimitiveSerializer"/>
+            to write the value directly.
+            </remarks>
+        </member>
+        <member name="T:Umbraco.Web.PublishedCache.NuCache.DataSource.ContentData">
+            <summary>
+            Represents everything that is specific to an edited or published content version
+            </summary>
+        </member>
         <member name="P:Umbraco.Web.PublishedCache.NuCache.DataSource.ContentData.CultureInfos">
             <summary>
             The collection of language Id to name for the content item
             </summary>
+        </member>
+        <member name="M:Umbraco.Web.PublishedCache.NuCache.DataSource.DatabaseDataSource.SqlContentSourcesCount(Umbraco.Core.Scoping.IScope,System.Func{Umbraco.Core.Persistence.ISqlContext,NPoco.Sql{Umbraco.Core.Persistence.ISqlContext}})">
+            <summary>
+            Returns a slightly more optimized query to use for the document counting when paging over the content sources
+            </summary>
+            <param name="scope"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Umbraco.Web.PublishedCache.NuCache.NuCacheSerializerComponent">
+            <summary>
+            Rebuilds the database cache if required when the serializer changes
+            </summary>
+        </member>
+        <member name="T:Umbraco.Web.PublishedCache.NuCache.PublishedSnapshotServiceOptions">
+            <summary>
+            Options class for configuring the <see cref="T:Umbraco.Web.PublishedCache.IPublishedSnapshotService"/>
+            </summary>
+        </member>
+        <member name="P:Umbraco.Web.PublishedCache.NuCache.PublishedSnapshotServiceOptions.IgnoreLocalDb">
+            <summary>
+            If true this disables the persisted local cache files for content and media
+            </summary>
+            <remarks>
+            By default this is false which means umbraco will use locally persisted cache files for reading in all published content and media on application startup.
+            The reason for this is to improve startup times because the alternative to populating the published content and media on application startup is to read
+            these values from the database. In scenarios where sites are relatively small (below a few thousand nodes) reading the content/media from the database to populate
+            the in memory cache isn't that slow and is only marginally slower than reading from the locally persisted cache files.
+            </remarks>
+        </member>
+        <member name="T:Umbraco.Web.PublishedCache.NuCache.Snap.LinkedNode`1">
+            <summary>
+            Used to represent an item in a linked list
+            </summary>
+            <typeparam name="TValue"></typeparam>
         </member>
         <member name="T:Umbraco.Web.PublishedCache.NuCache.ContentStore">
             <summary>
@@ -12429,11 +12699,10 @@
             This will execute on a threadpool thread
             </remarks>
         </member>
-        <member name="M:Umbraco.Web.PublishedCache.NuCache.PublishedSnapshotService.LoadCachesOnStartup">
+        <member name="M:Umbraco.Web.PublishedCache.NuCache.PublishedSnapshotService.EnsureCaches">
             <summary>
-            Populates the stores
+            Lazily populates the stores only when they are first requested
             </summary>
-            <remarks>This is called inside of a lock for _storesLock</remarks>
         </member>
         <member name="M:Umbraco.Web.PublishedCache.NuCache.PublishedSnapshotService.Notify(Umbraco.Web.Cache.MediaCacheRefresher.JsonPayload[],System.Boolean@)">
             <inheritdoc />
@@ -13066,16 +13335,26 @@
             </summary>
             <param name="preview">A value indicating whether to consider unpublished content.</param>
             <param name="contentId">The content unique identifier.</param>
-            <returns>The route.</returns>
-            <remarks>The value of <paramref name="preview"/> overrides defaults.</remarks>
+            <returns>A special string formatted route path.</returns>
+            <remarks>
+            <para>
+            The resulting string is a special encoded route string that may contain the domain ID
+            for the current route. If a domain is present the string will be prefixed with the domain ID integer, example: {domainId}/route-path-of-item
+            </para>
+            <para>The value of <paramref name="preview"/> overrides defaults.</para>
+            </remarks>
         </member>
         <member name="M:Umbraco.Web.PublishedCache.IPublishedContentCache.GetRouteById(System.Int32,System.String)">
             <summary>
             Gets the route for a content identified by its unique identifier.
             </summary>
             <param name="contentId">The content unique identifier.</param>
-            <returns>The route.</returns>
+            <returns>A special string formatted route path.</returns>
             <remarks>Considers published or unpublished content depending on defaults.</remarks>
+            <para>
+            The resulting string is a special encoded route string that may contain the domain ID
+            for the current route. If a domain is present the string will be prefixed with the domain ID integer, example: {domainId}/route-path-of-item
+            </para>
         </member>
         <member name="T:Umbraco.Web.RoutableDocumentFilter">
             <summary>
@@ -14666,6 +14945,15 @@
             RunsOnShutdown, in order to indicate whether the latched task should run immediately on
             shutdown, or just be abandoned (default).</remarks>
         </member>
+        <member name="M:Umbraco.Web.Scheduling.RecurringTaskBase.#ctor(Umbraco.Web.Scheduling.IBackgroundTaskRunner{Umbraco.Web.Scheduling.RecurringTaskBase},System.Int64,System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umbraco.Web.Scheduling.RecurringTaskBase"/> class.
+            </summary>
+            <param name="runner">The task runner.</param>
+            <param name="delayMilliseconds">The delay.</param>
+            <param name="periodMilliseconds">The period.</param>
+            <remarks>The task will repeat itself periodically. Use this constructor to create a new task.</remarks>
+        </member>
         <member name="M:Umbraco.Web.Scheduling.RecurringTaskBase.#ctor(Umbraco.Web.Scheduling.IBackgroundTaskRunner{Umbraco.Web.Scheduling.RecurringTaskBase},System.Int32,System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:Umbraco.Web.Scheduling.RecurringTaskBase"/> class.
@@ -14804,23 +15092,67 @@
         </member>
         <member name="M:Umbraco.Web.Search.IUmbracoTreeSearcherFields.GetBackOfficeFields">
             <summary>
-            Propagate list of searchable fields for all node types
+            The default index fields that are searched on in the back office search for umbraco content entities.
             </summary>
         </member>
         <member name="M:Umbraco.Web.Search.IUmbracoTreeSearcherFields.GetBackOfficeMembersFields">
             <summary>
-            Propagate list of searchable fields for Members
+            The additional index fields that are searched on in the back office for member entities.
             </summary>
         </member>
         <member name="M:Umbraco.Web.Search.IUmbracoTreeSearcherFields.GetBackOfficeMediaFields">
             <summary>
-            Propagate list of searchable fields for Media
+            The additional index fields that are searched on in the back office for media entities.
             </summary>
         </member>
         <member name="M:Umbraco.Web.Search.IUmbracoTreeSearcherFields.GetBackOfficeDocumentFields">
             <summary>
-            Propagate list of searchable fields for Documents
+            The additional index fields that are searched on in the back office for document entities.
             </summary>
+        </member>
+        <member name="M:Umbraco.Web.Search.IUmbracoTreeSearcherFields2.GetBackOfficeFieldsToLoad">
+            <summary>
+            Set of fields for all node types to be loaded
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Search.IUmbracoTreeSearcherFields2.GetBackOfficeMembersFieldsToLoad">
+            <summary>
+            Additional set list of fields for Members to be loaded
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Search.IUmbracoTreeSearcherFields2.GetBackOfficeMediaFieldsToLoad">
+            <summary>
+            Additional set of fields for Media to be loaded
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Search.IUmbracoTreeSearcherFields2.GetBackOfficeDocumentFieldsToLoad">
+            <summary>
+            Additional set of fields for Documents to be loaded
+            </summary>
+        </member>
+        <member name="M:Umbraco.Web.Search.UmbracoTreeSearcherFields.GetBackOfficeFields">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Web.Search.UmbracoTreeSearcherFields.GetBackOfficeMembersFields">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Web.Search.UmbracoTreeSearcherFields.GetBackOfficeMediaFields">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Web.Search.UmbracoTreeSearcherFields.GetBackOfficeDocumentFields">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Web.Search.UmbracoTreeSearcherFields.GetBackOfficeFieldsToLoad">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Web.Search.UmbracoTreeSearcherFields.GetBackOfficeMembersFieldsToLoad">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Web.Search.UmbracoTreeSearcherFields.GetBackOfficeMediaFieldsToLoad">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Web.Search.UmbracoTreeSearcherFields.GetBackOfficeDocumentFieldsToLoad">
+            <inheritdoc />
         </member>
         <member name="T:Umbraco.Web.Search.ExamineComposer">
             <summary>
@@ -16482,6 +16814,9 @@
             <inheritdoc />
         </member>
         <member name="M:Umbraco.Web.Services.DashboardService.GetDashboards(Umbraco.Core.Models.Membership.IUser)">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Web.Services.IconService.GetIcons">
             <inheritdoc />
         </member>
         <member name="M:Umbraco.Web.Services.IconService.GetAllIcons">
@@ -18904,6 +19239,29 @@
             Gets or sets the <see cref="P:Umbraco.Web.HybridUmbracoContextAccessor.UmbracoContext"/> object.
             </summary>
         </member>
+        <member name="M:Umbraco.Web.IPublishedContentQuery2.Search(System.String,System.Int32,System.Int32,System.Int64@,System.String,System.String,System.Collections.Generic.ISet{System.String})">
+            <summary>
+            Searches content.
+            </summary>
+            <param name="term">The term to search.</param>
+            <param name="skip">The amount of results to skip.</param>
+            <param name="take">The amount of results to take/return.</param>
+            <param name="totalRecords">The total amount of records.</param>
+            <param name="culture">The culture (defaults to a culture insensitive search).</param>
+            <param name="indexName">The name of the index to search (defaults to <see cref="F:Umbraco.Core.Constants.UmbracoIndexes.ExternalIndexName" />).</param>
+            <param name="loadedFields">The fields to load in the results of the search (defaults to all fields loaded).</param>
+            <returns>
+            The search results.
+            </returns>
+            <remarks>
+            <para>
+            When the <paramref name="culture" /> is not specified or is *, all cultures are searched.
+            To search for only invariant documents and fields use null.
+            When searching on a specific culture, all culture specific fields are searched for the provided culture and all invariant fields for all documents.
+            </para>
+            <para>While enumerating results, the ambient culture is changed to be the searched culture.</para>
+            </remarks>
+        </member>
         <member name="T:Umbraco.Web.IPublishedContentQuery">
             <summary>
             Query methods used for accessing strongly typed content in templates
@@ -19575,6 +19933,9 @@
         <member name="M:Umbraco.Web.PublishedContentQuery.Search(System.String,System.Int32,System.Int32,System.Int64@,System.String,System.String)">
             <inheritdoc />
         </member>
+        <member name="M:Umbraco.Web.PublishedContentQuery.Search(System.String,System.Int32,System.Int32,System.Int64@,System.String,System.String,System.Collections.Generic.ISet{System.String})">
+            <inheritdoc />
+        </member>
         <member name="M:Umbraco.Web.PublishedContentQuery.Search(Examine.Search.IQueryExecutor)">
             <inheritdoc />
         </member>
@@ -19608,6 +19969,17 @@
             </param>
             <returns>
             The ImageProcessor.Web URL.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Web.ImageCropperTemplateExtensions.GetCropUrl(Umbraco.Core.Models.PublishedContent.IPublishedContent,Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue,System.String)">
+            <summary>
+            Gets the crop URL by using only the specified <paramref name="imageCropperValue" />.
+            </summary>
+            <param name="mediaItem">The media item.</param>
+            <param name="imageCropperValue">The image cropper value.</param>
+            <param name="cropAlias">The crop alias.</param>
+            <returns>
+            The image crop URL.
             </returns>
         </member>
         <member name="M:Umbraco.Web.ImageCropperTemplateExtensions.GetCropUrl(Umbraco.Core.Models.PublishedContent.IPublishedContent,System.String,System.String)">
@@ -20902,6 +21274,38 @@
             <param name="orSelf">Indicates whether the content should be included.</param>
             <returns>Enumerates bottom-up ie walking up the tree (parent, grand-parent, etc).</returns>
         </member>
+        <member name="M:Umbraco.Web.PublishedContentExtensions.Breadcrumbs(Umbraco.Core.Models.PublishedContent.IPublishedContent,System.Boolean)">
+            <summary>
+            Gets the breadcrumbs (ancestors and self, top to bottom) for the specified <paramref name="content" />.
+            </summary>
+            <param name="content">The content.</param>
+            <param name="andSelf">Indicates whether the specified content should be included.</param>
+            <returns>
+            The breadcrumbs (ancestors and self, top to bottom) for the specified <paramref name="content" />.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Web.PublishedContentExtensions.Breadcrumbs(Umbraco.Core.Models.PublishedContent.IPublishedContent,System.Int32,System.Boolean)">
+            <summary>
+            Gets the breadcrumbs (ancestors and self, top to bottom) for the specified <paramref name="content" /> at a level higher or equal to <paramref name="minLevel" />.
+            </summary>
+            <param name="content">The content.</param>
+            <param name="minLevel">The minimum level.</param>
+            <param name="andSelf">Indicates whether the specified content should be included.</param>
+            <returns>
+            The breadcrumbs (ancestors and self, top to bottom) for the specified <paramref name="content" /> at a level higher or equal to <paramref name="minLevel" />.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Web.PublishedContentExtensions.Breadcrumbs``1(Umbraco.Core.Models.PublishedContent.IPublishedContent,System.Boolean)">
+            <summary>
+            Gets the breadcrumbs (ancestors and self, top to bottom) for the specified <paramref name="content" /> at a level higher or equal to the specified root content type <typeparamref name="T" />.
+            </summary>
+            <typeparam name="T">The root content type.</typeparam>
+            <param name="content">The content.</param>
+            <param name="andSelf">Indicates whether the specified content should be included.</param>
+            <returns>
+            The breadcrumbs (ancestors and self, top to bottom) for the specified <paramref name="content" /> at a level higher or equal to the specified root content type <typeparamref name="T" />.
+            </returns>
+        </member>
         <member name="M:Umbraco.Web.PublishedContentExtensions.DescendantsOrSelfOfType(System.Collections.Generic.IEnumerable{Umbraco.Core.Models.PublishedContent.IPublishedContent},System.String,System.String)">
             <summary>
             Returns all DescendantsOrSelf of all content referenced
@@ -21054,10 +21458,28 @@
         </member>
         <member name="M:Umbraco.Web.PublishedContentExtensions.Root(Umbraco.Core.Models.PublishedContent.IPublishedContent)">
             <summary>
-            Gets the root content for this content.
+            Gets the root content (ancestor or self at level 1) for the specified <paramref name="content" />.
             </summary>
             <param name="content">The content.</param>
-            <returns>The 'site' content ie AncestorOrSelf(1).</returns>
+            <returns>
+            The root content (ancestor or self at level 1) for the specified <paramref name="content" />.
+            </returns>
+            <remarks>
+            This is the same as calling <see cref="M:Umbraco.Web.PublishedContentExtensions.AncestorOrSelf(Umbraco.Core.Models.PublishedContent.IPublishedContent,System.Int32)" /> with <c>maxLevel</c> set to 1.
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.PublishedContentExtensions.Root``1(Umbraco.Core.Models.PublishedContent.IPublishedContent)">
+            <summary>
+            Gets the root content (ancestor or self at level 1) for the specified <paramref name="content" /> if it's of the specified content type <typeparamref name="T" />.
+            </summary>
+            <typeparam name="T">The content type.</typeparam>
+            <param name="content">The content.</param>
+            <returns>
+            The root content (ancestor or self at level 1) for the specified <paramref name="content" /> of content type <typeparamref name="T" />.
+            </returns>
+            <remarks>
+            This is the same as calling <see cref="M:Umbraco.Web.PublishedContentExtensions.AncestorOrSelf``1(Umbraco.Core.Models.PublishedContent.IPublishedContent,System.Int32)" /> with <c>maxLevel</c> set to 1.
+            </remarks>
         </member>
         <member name="P:Umbraco.Web.PublishedContentExtensions.GetPropertyAliasesAndNames">
             <summary>
@@ -22130,6 +22552,11 @@
             Represents the Umbraco global.asax class.
             </summary>
         </member>
+        <member name="M:Umbraco.Web.UmbracoApplication.GetBootErrorFileName">
+            <summary>
+            Returns the absolute filename to the BootException html file.
+            </summary>
+        </member>
         <member name="M:Umbraco.Web.UmbracoApplication.GetMainDom(Umbraco.Core.Logging.ILogger)">
             <summary>
             Returns a new MainDom
@@ -22501,6 +22928,11 @@
             Gets the URL helper.
             </summary>
             <remarks>This URL helper is created without any route data and an empty request context.</remarks>
+        </member>
+        <member name="T:Umbraco.Core.PropertyEditors.IFileExtensionsConfig">
+            <summary>
+            Marker interface for any editor configuration that supports defining file extensions
+            </summary>
         </member>
     </members>
 </doc>
