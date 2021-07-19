@@ -15,25 +15,22 @@
                 <umb-control-group label="Default Currency">
                     <select class="umb-property-editor umb-dropdown"
                             ng-model="model.content.defaultCurrencyId"
-                            ng-options="itm.id as itm.name for itm in model.options.currencies"
-                            required>
-                        <option value="" disabled selected ng-hide="model.content.defaultCurrencyId">-- Select a Currency --</option>
+                            ng-options="itm.id as itm.name for itm in model.options.currencies">
+                        <option value="" selected>-- Select a Currency --</option>
                     </select>
                 </umb-control-group>
                 <umb-control-group label="Default Shipping Method">
                     <select class="umb-property-editor umb-dropdown"
                             ng-model="model.content.defaultShippingMethodId"
-                            ng-options="itm.id as itm.name for itm in model.options.shippingMethods"
-                            required>
-                        <option value="" disabled selected ng-hide="model.content.defaultShippingMethodId">-- Select a Shipping Method --</option>
+                            ng-options="itm.id as itm.name for itm in model.options.shippingMethods">
+                        <option value="" selected>-- Select a Shipping Method --</option>
                     </select>
                 </umb-control-group>
                 <umb-control-group label="Default Payment Method">
                     <select class="umb-property-editor umb-dropdown"
                             ng-model="model.content.defaultPaymentMethodId"
-                            ng-options="itm.id as itm.name for itm in model.options.paymentMethods"
-                            required>
-                        <option value="" disabled selected ng-hide="model.content.defaultPaymentMethodId">-- Select a Payment Method --</option>
+                            ng-options="itm.id as itm.name for itm in model.options.paymentMethods">
+                        <option value="" selected>-- Select a Payment Method --</option>
                     </select>
                 </umb-control-group>
 

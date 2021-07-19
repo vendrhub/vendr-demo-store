@@ -66,6 +66,14 @@
     display: none !important;
 }
 
+.matryoshka-tab-link[data-element="tab-vendr_variants"] {
+    display: none !important;
+}
+
+.matryoshka-tabs-list-wrapper:has(> .matryoshka-tabs-list > .matryoshka-tab-link:first-child + .matryoshka-tab-link[data-element="tab-vendr_variants"]) {
+    display: none !important;
+}
+
 .vendr .umb-table-cell > span {
     display: block;
     width: 100%;

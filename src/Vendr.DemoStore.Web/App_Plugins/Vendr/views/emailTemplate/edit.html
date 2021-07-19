@@ -50,9 +50,15 @@
                                                             container-key="vm.options.dictionaryInputOptions.containerKey"
                                                             on-generate-key="vm.options.dictionaryInputOptions.generateKey"></vendr-dictionary-input>
                                 </umb-control-group>
-                                <umb-control-group label="Sender Address" description="The email address this email will be sent from. Will also act as the emails reply to address.">
+                                <umb-control-group label="Sender Address" description="The email address this email will be sent from. Will also act as the emails default reply to address.">
                                     <vendr-dictionary-input name="senderAddress"
                                                             ng-model="vm.content.senderAddress"
+                                                            container-key="vm.options.dictionaryInputOptions.containerKey"
+                                                            on-generate-key="vm.options.dictionaryInputOptions.generateKey"></vendr-dictionary-input>
+                                </umb-control-group>
+                                <umb-control-group label="Reply To Addresses" description="Semicolon seperated list of email addresses who will recieve reply emails.">
+                                    <vendr-dictionary-input name="replyToAddresses"
+                                                            ng-model="vm.content.replyToAddresses" 
                                                             container-key="vm.options.dictionaryInputOptions.containerKey"
                                                             on-generate-key="vm.options.dictionaryInputOptions.generateKey"></vendr-dictionary-input>
                                 </umb-control-group>

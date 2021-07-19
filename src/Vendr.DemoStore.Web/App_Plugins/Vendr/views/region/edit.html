@@ -38,14 +38,14 @@
                                     <select class="umb-property-editor umb-dropdown"
                                             ng-model="vm.content.defaultShippingMethodId"
                                             ng-options="itm.id as itm.name for itm in vm.options.shippingMethods">
-                                        <option value="" selected ng-disabled="vm.options.isCreate">{{vm.options.isCreate ? '-- Select a Shipping Method --' : 'Inherit'}}</option>
+                                        <option value="" selected>-- Inherit --</option>
                                     </select>
                                 </umb-control-group>
                                 <umb-control-group label="Default Payment Method">
                                     <select class="umb-property-editor umb-dropdown"
                                             ng-model="vm.content.defaultPaymentMethodId"
                                             ng-options="itm.id as itm.name for itm in vm.options.paymentMethods">
-                                        <option value="" selected ng-disabled="vm.options.isCreate">{{vm.options.isCreate ? '-- Select a Payment Method --' : 'Inherit'}}</option>
+                                        <option value="" selected>-- Inherit --</option>
                                     </select>
                                 </umb-control-group>
 

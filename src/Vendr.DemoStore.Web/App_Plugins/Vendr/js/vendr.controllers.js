@@ -245,7 +245,7 @@
 
     'use strict';
 
-    function AvgOrderValueWidgetController($scope, vendrAnalyticsResource) {
+    function AvgOrderValueWidgetController($scope, vendrAnalyticsResource, vendrDateHelper) {
 
         var vm = this;
 
@@ -253,7 +253,9 @@
             return vendrAnalyticsResource.getAverageOrderValueReport($scope.config.storeId,
                 timeframe.dateRange.from, timeframe.dateRange.to,
                 timeframe.compareTo ? timeframe.compareTo.from : undefined,
-                timeframe.compareTo ? timeframe.compareTo.to : undefined);
+                timeframe.compareTo ? timeframe.compareTo.to : undefined,
+                vendrDateHelper.getLocalTimezoneOffset()
+            );
         }
     };
 
@@ -264,7 +266,7 @@
 
     'use strict';
 
-    function CartConversionRatesWidgetController($scope, $rootScope, $timeout, vendrAnalyticsResource) {
+    function CartConversionRatesWidgetController($scope, $rootScope, $timeout, vendrAnalyticsResource, vendrDateHelper) {
 
         var vm = this;
 
@@ -275,7 +277,9 @@
             return vendrAnalyticsResource.getCartConversionRatesReport($scope.config.storeId,
                 timeframe.dateRange.from, timeframe.dateRange.to,
                 timeframe.compareTo ? timeframe.compareTo.from : undefined,
-                timeframe.compareTo ? timeframe.compareTo.to : undefined).then(function (data) {
+                timeframe.compareTo ? timeframe.compareTo.to : undefined,
+                vendrDateHelper.getLocalTimezoneOffset()
+            ).then(function (data) {
 
                     vm.data = data;
                     vm.comparing = timeframe.compareTo;
@@ -292,7 +296,7 @@
 
     'use strict';
 
-    function RepeatCustomerRatesWidgetController($scope, vendrAnalyticsResource) {
+    function RepeatCustomerRatesWidgetController($scope, vendrAnalyticsResource, vendrDateHelper) {
 
         var vm = this;
 
@@ -300,7 +304,9 @@
             return vendrAnalyticsResource.getRepeatCustomerRatesReport($scope.config.storeId,
                 timeframe.dateRange.from, timeframe.dateRange.to,
                 timeframe.compareTo ? timeframe.compareTo.from : undefined,
-                timeframe.compareTo ? timeframe.compareTo.to : undefined);
+                timeframe.compareTo ? timeframe.compareTo.to : undefined,
+                vendrDateHelper.getLocalTimezoneOffset()
+            );
         }
     };
 
@@ -311,7 +317,7 @@
 
     'use strict';
 
-    function TopSellingProductsWidgetController($scope, $rootScope, $timeout, vendrAnalyticsResource) {
+    function TopSellingProductsWidgetController($scope, $rootScope, $timeout, vendrAnalyticsResource, vendrDateHelper) {
 
         var vm = this;
 
@@ -331,7 +337,9 @@
             vendrAnalyticsResource.getTopSellingProductsReport($scope.config.storeId,
                 vm.timeframe.dateRange.from, vm.timeframe.dateRange.to,
                 vm.timeframe.compareTo ? vm.timeframe.compareTo.from : undefined,
-                vm.timeframe.compareTo ? vm.timeframe.compareTo.to : undefined).then(function (data) {
+                vm.timeframe.compareTo ? vm.timeframe.compareTo.to : undefined,
+                vendrDateHelper.getLocalTimezoneOffset()
+            ).then(function (data) {
 
                     vm.data = data;
 
@@ -360,7 +368,7 @@
 
     'use strict';
 
-    function TotalOrdersWidgetController($scope, vendrAnalyticsResource) {
+    function TotalOrdersWidgetController($scope, vendrAnalyticsResource, vendrDateHelper) {
 
         var vm = this;
 
@@ -368,7 +376,9 @@
             return vendrAnalyticsResource.getTotalOrdersReport($scope.config.storeId,
                 timeframe.dateRange.from, timeframe.dateRange.to,
                 timeframe.compareTo ? timeframe.compareTo.from : undefined,
-                timeframe.compareTo ? timeframe.compareTo.to : undefined);
+                timeframe.compareTo ? timeframe.compareTo.to : undefined,
+                vendrDateHelper.getLocalTimezoneOffset()
+            );
         }
     };
 
@@ -379,7 +389,7 @@
 
     'use strict';
 
-    function TotalRevenueWidgetController($scope, vendrAnalyticsResource) {
+    function TotalRevenueWidgetController($scope, vendrAnalyticsResource, vendrDateHelper) {
 
         var vm = this;
 
@@ -387,7 +397,9 @@
             return vendrAnalyticsResource.getTotalRevenueReport($scope.config.storeId,
                 timeframe.dateRange.from, timeframe.dateRange.to,
                 timeframe.compareTo ? timeframe.compareTo.from : undefined,
-                timeframe.compareTo ? timeframe.compareTo.to : undefined);
+                timeframe.compareTo ? timeframe.compareTo.to : undefined,
+                vendrDateHelper.getLocalTimezoneOffset()
+            );
         }
 
     };
@@ -7388,8 +7400,12 @@
 
     'use strict';
 
-    function StockController($scope, $routeParams, $timeout, editorState, editorService, angularHelper, vendrProductResource)
+    function StockController($scope, $routeParams, $timeout, editorState, editorService, vendrUtils, vendrStoreResource, vendrProductResource, vendrRouteCache)
     {
+        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
+        var storeId = compositeId.length > 1 ? compositeId[0] : null;
+        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[0];
+
         var currentNode = editorState.getCurrent();
         var productReference = currentNode.id > 0 ? currentNode.key : undefined;
         var productVariantReference = undefined;
@@ -7414,6 +7430,8 @@
             && vm.model.value != -1
             && vm.model.value != "-1";
 
+        vm.store = null;
+
         // We don't use any stored stock value as we fetch it from
         // the product service every time. 
         // So we store a stock value in a seperate varaiable and 
@@ -7430,15 +7448,38 @@
         };
 
         vm.loading = true;
-        
-        var init = function () {
-            if (productReference && !isDocTypeEditorPreview && !hasUnpersistedValue) {
-                vendrProductResource.getStock(productReference, productVariantReference).then(function (stock) {
-                    vm.stockLevel = stock || 0;
+
+        var initStore = function (store) {
+            if (store) {
+                vm.store = store;
+                if (productReference && !hasUnpersistedValue) {
+                    vendrProductResource.getStock(productReference, productVariantReference).then(function (stock) {
+                        vm.stockLevel = stock || 0;
+                        vm.loading = false;
+                    });
+                } else {
                     vm.loading = false;
+                }
+            } else {
+                vm.store = null;
+                vm.loading = false;
+            }
+        };
+
+        var init = function () {
+            if (!isDocTypeEditorPreview) {
+                vendrRouteCache.getOrFetch("currentStore", function () {
+                    if (!storeId) {
+                        return vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId);
+                    } else {
+                        return vendrStoreResource.getBasicStore(storeId);
+                    }
+                })
+                .then(function (store) {
+                    initStore(store);
                 });
             } else {
-                vm.loading = false;
+                initStore(null, null);
             }
         };
 
@@ -8818,9 +8859,12 @@
 
     function StoreViewController($scope, $routeParams, $location,
         vendrStoreResource, navigationService, vendrActivityLogResource,
-        vendrLicensingResource, vendrRouteCache) {
+        vendrLicensingResource, vendrRouteCache, vendrDateHelper) {
 
         var id = $routeParams.id;
+
+        var today = vendrDateHelper.getISODateString(new Date());
+        var localTimezoneOffset = vendrDateHelper.getLocalTimezoneOffset();
 
         var vm = this;
 
@@ -8861,9 +8905,9 @@
 
             vendrStoreResource.getStore(id).then(function (store) {
                 vm.store = store;
-                vendrStoreResource.getStoreStatsForToday(id).then(function (stats) {
+                vendrStoreResource.getStoreStatsForDay(id, today, localTimezoneOffset).then(function (stats) {
                     vm.stats = stats;
-                    vendrStoreResource.getStoreActionsForToday(id).then(function (actions) {
+                    vendrStoreResource.getStoreActionsForDay(id, today, localTimezoneOffset).then(function (actions) {
                         vm.actions = actions;
                         vm.loading = false;
                     })

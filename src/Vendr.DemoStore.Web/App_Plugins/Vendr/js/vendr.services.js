@@ -23,6 +23,10 @@
                     .split("T")[0];
             },
 
+            getLocalTimezoneOffset: function () {
+                return -(new Date().getTimezoneOffset()); // Invert the offset for ISO8601
+            },
+
             getToday: function () {
                 var now = new Date();
                 return new Date(now.getFullYear(), now.getMonth(), now.getDate());

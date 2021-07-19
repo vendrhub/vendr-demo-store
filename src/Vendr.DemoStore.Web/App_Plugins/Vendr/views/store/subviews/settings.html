@@ -73,14 +73,14 @@
                     <select class="umb-property-editor umb-dropdown"
                             ng-model="model.content.confirmationEmailTemplateId"
                             ng-options="itm.id as itm.name for itm in model.options.emailTemplates">
-                        <option value="" disabled selected ng-hide="model.content.confirmationEmailTemplateId">-- Select an Email Template --</option>
+                        <option value="" selected>-- Select an Email Template --</option>
                     </select>
                 </umb-control-group>
                 <umb-control-group label="Error Email" description="The email to send if there was an error processing an order">
                     <select class="umb-property-editor umb-dropdown"
                             ng-model="model.content.errorEmailTemplateId"
                             ng-options="itm.id as itm.name for itm in model.options.emailTemplates">
-                        <option value="" disabled selected ng-hide="model.content.errorEmailTemplateId">-- Select an Email Template --</option>
+                        <option value="" selected>-- Select an Email Template --</option>
                     </select>
                 </umb-control-group>
 
@@ -157,7 +157,7 @@
                     <select class="umb-property-editor umb-dropdown"
                             ng-model="model.content.defaultGiftCardEmailTemplateId"
                             ng-options="itm.id as itm.name for itm in model.options.emailTemplates">
-                        <option value="" disabled selected ng-hide="model.content.defaultGiftCardEmailTemplateId">-- Select an Email Template --</option>
+                        <option value="" selected>-- Select an Email Template --</option>
                     </select>
                 </umb-control-group>
 
