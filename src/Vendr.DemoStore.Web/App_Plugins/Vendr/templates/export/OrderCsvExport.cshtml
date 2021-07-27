@@ -1,6 +1,4 @@
-﻿@using System.Linq;
-@using Vendr.Core;
-@model IEnumerable<OrderReadOnly>
+﻿@inherits VendrRazorTemplateView<IEnumerable<OrderReadOnly>>
 @{
     // ========================================================
     //                I M P O R T A N T
@@ -41,8 +39,6 @@
 
     if (Model.Any())
     {
-        var vendrApi = VendrApi.Instance;
-
         var headers = new[]
         {
             EscapeCsvValue("Order Number"),
@@ -64,7 +60,7 @@
             EscapeCsvValue("Shipping Region"),
             EscapeCsvValue("Shipping Country"),
             EscapeCsvValue("Shipping Zip Code"),
-            
+
             EscapeCsvValue("Order Line Sku"),
             EscapeCsvValue("Order Line Name"),
             EscapeCsvValue("Order Line Unit Price"),
@@ -95,18 +91,18 @@
 
         @Html.Raw(string.Join(",", headers))
 
-        foreach(var order in Model)
+        foreach (var order in Model)
         {
-            var billingRegion = order.PaymentInfo.RegionId.HasValue ? vendrApi.GetRegion(order.PaymentInfo.RegionId.Value) : null;
-            var billingCountry = order.PaymentInfo.CountryId.HasValue ? vendrApi.GetCountry(order.PaymentInfo.CountryId.Value) : null;
-            var paymentMethod = order.PaymentInfo.PaymentMethodId.HasValue ? vendrApi.GetPaymentMethod(order.PaymentInfo.PaymentMethodId.Value) : null;
+            var billingRegion = order.PaymentInfo.RegionId.HasValue ? VendrApi.GetRegion(order.PaymentInfo.RegionId.Value) : null;
+            var billingCountry = order.PaymentInfo.CountryId.HasValue ? VendrApi.GetCountry(order.PaymentInfo.CountryId.Value) : null;
+            var paymentMethod = order.PaymentInfo.PaymentMethodId.HasValue ? VendrApi.GetPaymentMethod(order.PaymentInfo.PaymentMethodId.Value) : null;
 
-            var shippingRegion = order.ShippingInfo.RegionId.HasValue ? vendrApi.GetRegion(order.ShippingInfo.RegionId.Value) : null;
-            var shippingCountry = order.ShippingInfo.CountryId.HasValue ? vendrApi.GetCountry(order.ShippingInfo.CountryId.Value) : null;
-            var shippingMethod = order.ShippingInfo.ShippingMethodId.HasValue ? vendrApi.GetShippingMethod(order.ShippingInfo.ShippingMethodId.Value) : null;
+            var shippingRegion = order.ShippingInfo.RegionId.HasValue ? VendrApi.GetRegion(order.ShippingInfo.RegionId.Value) : null;
+            var shippingCountry = order.ShippingInfo.CountryId.HasValue ? VendrApi.GetCountry(order.ShippingInfo.CountryId.Value) : null;
+            var shippingMethod = order.ShippingInfo.ShippingMethodId.HasValue ? VendrApi.GetShippingMethod(order.ShippingInfo.ShippingMethodId.Value) : null;
 
-            var currency = vendrApi.GetCurrency(order.CurrencyId);
-            var orderStatus = vendrApi.GetOrderStatus(order.OrderStatusId);
+            var currency = VendrApi.GetCurrency(order.CurrencyId);
+            var orderStatus = VendrApi.GetOrderStatus(order.OrderStatusId);
 
             foreach (var orderLine in order.OrderLines)
             {
@@ -166,5 +162,4 @@
             }
         }
     }
-
 }

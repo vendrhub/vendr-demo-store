@@ -1,4 +1,4 @@
-﻿@model OrderReadOnly
+﻿@inherits VendrRazorTemplateView<OrderReadOnly>
 @{
     // ========================================================
     //                I M P O R T A N T
@@ -12,10 +12,8 @@
     // ========================================================
 
     // Get order entities
-    var store = VendrApi.Instance.GetStore(Model.StoreId);
+    var store = VendrApi.GetStore(Model.StoreId);
     var themeColor = "249bff";
-
-    var baseUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
 }
 <style type="text/css">
     #vendr, #vendr td, #vendr p {
@@ -38,7 +36,7 @@
                         <td style="padding: 40px;">
                             <div style="text-align: center;">
 
-                                <h1 class="margin: 0 0 20px; font-size: 30px; line-height: 38px; color: #000;"><a href="@(baseUrl)" style="color: #000;" target="_blank">@(store.Name)</a></h1>
+                                <h1 class="margin: 0 0 20px; font-size: 30px; line-height: 38px; color: #000;"><a href="@(BaseUrl)" style="color: #000;" target="_blank">@(store.Name)</a></h1>
 
                                 <hr style="border: 0; height: 1px; background: #ebebe9; margin: 20px 0;" />
                                 <h2 style="margin: 0 0 20px; font-size: 20px; line-height: 28px; color: #@(themeColor);">Order Error - #@(Model.OrderNumber)</h2>
@@ -55,7 +53,7 @@
 
                             <hr style="border: 0; height: 1px; background: #ebebe9; margin: 20px 0;" />
                             <p style="text-align: center;">
-                                <a href="@(baseUrl + "/terms-and-conditions/")" target="_blank" style="color: #@(themeColor);">Terms of Service</a> | <a href="@(baseUrl + "/privacy-policy/")" target="_blank" style="color: #@(themeColor);">Privacy Policy</a>
+                                <a href="@(BaseUrl + "/terms-and-conditions/")" target="_blank" style="color: #@(themeColor);">Terms of Service</a> | <a href="@(BaseUrl + "/privacy-policy/")" target="_blank" style="color: #@(themeColor);">Privacy Policy</a>
                             </p>
                             <p style="text-align: center; margin-bottom: 0;">@(store.Name)</p>
 
