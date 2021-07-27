@@ -1,4 +1,4 @@
-﻿@inherits VendrRazorTemplateView<OrderReadOnly>
+﻿@inherits VendrRazorTemplateView<GiftCardReadOnly>
 @{
     // ========================================================
     //                I M P O R T A N T
@@ -13,7 +13,7 @@
 
     // Get order entities
     var store = VendrApi.GetStore(Model.StoreId);
-    var themeColor = "249bff";
+    var themeColor = "4fd1c5";
 }
 <style type="text/css">
     #vendr, #vendr td, #vendr p {
@@ -22,8 +22,15 @@
         line-height: 18px;
         color: #5f6a70;
     }
+
     #vendr td {
         vertical-align: top;
+    }
+
+    #vendr .rounded {
+        border-radius: 4px;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
     }
 </style>
 <div id="vendr" style="font-family: sans-serif; font-size: 14px; line-height: 18px; color: #5f6a70;">
@@ -36,18 +43,28 @@
                         <td style="padding: 40px;">
                             <div style="text-align: center;">
 
-                                <h1 class="margin: 0 0 20px; font-size: 30px; line-height: 38px; color: #000;"><a href="@(BaseUrl)" style="color: #000;" target="_blank">@(store.Name)</a></h1>
+                                <a href="https://try.vendr.net" target="_blank"><img src="@(BaseUrl)/images/logo.png?height=74" alt="Blendid." border="0" height="74" /></a>
 
                                 <hr style="border: 0; height: 1px; background: #ebebe9; margin: 20px 0;" />
-                                <h2 style="margin: 0 0 20px; font-size: 20px; line-height: 28px; color: #@(themeColor);">Order Error - #@(Model.OrderNumber)</h2>
+                                <h2 style="margin: 0 0 20px; font-size: 20px; line-height: 28px; color: #@(themeColor);">Here is your Gift Card for @(store.Name)</h2>
+
+                                <table style="background-color: #@(themeColor); border-radius: 10px; width: 400px; margin: 0 auto 20px;">
+                                    <tr>
+                                        <td style="padding: 40px 20px;">
+                                            <table style="width: 100%;">
+                                                <tr>
+                                                    <td style="color:white; font-size: 60px; line-height: 60px; padding-bottom: 15px;text-align: center;">@(Model.OriginalAmount.Formatted())</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="background-color:white; font-size: 20px; line-height: 20px; color: #@(themeColor); text-align: center; padding: 5px 10px;">@(Model.Code)</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+
                                 <p>
-                                    There is a problem with your payment for order <strong>@Model.OrderNumber</strong>.
-                                </p>
-                                <p>
-                                    Please contact us by replying to this email at your earliest convenience.
-                                </p>
-                                <p class="margin: 0;">
-                                    Your order will not be shipped until this problem has been resolved.
+                                    Use this card as payment for anything you like at the @(store.Name) store. Enter the redemption code at checkout to redeem your gift card.
                                 </p>
                             </div>
 

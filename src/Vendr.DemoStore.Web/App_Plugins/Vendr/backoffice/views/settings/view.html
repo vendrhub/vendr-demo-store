@@ -71,12 +71,20 @@
                                     <umb-badge color="success" size="s" ng-if="license.isActive">Active</umb-badge>
                                     <umb-badge color="grey" size="s" ng-if="!license.isActive">Inactive</umb-badge>
                                 </umb-control-group>
+                                <umb-control-group label="Plan" ng-if="license.plan">{{license.plan}}</umb-control-group>
                                 <umb-control-group label="Domains">
                                     <ul>
                                         <li ng-repeat="domain in license.domains">{{domain}}</li>
                                     </ul>
                                 </umb-control-group>
                                 <umb-control-group label="Expires" ng-if="license.expiryDate">{{license.expiryDate}}</umb-control-group>
+                                <umb-button ng-if="license.type == 3"
+                                            button-style="[action,block]"
+                                            size="l"
+                                            type="button"
+                                            action="refreshLicense(license.key)"
+                                            label="Refresh License"
+                                            style="display: block; margin-top: 20px;"></umb-button>
                             </div>
 
                             <!--<a href="" class="btn btn-info btn-block">Install a License</a>-->

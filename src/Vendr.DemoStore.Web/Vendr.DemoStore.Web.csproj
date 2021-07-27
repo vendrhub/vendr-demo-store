@@ -7,7 +7,7 @@
         <PackageReference Include="Umbraco.Cms" Version="9.0.0-rc001" />
         <PackageReference Include="Umbraco.Cms.SqlCe" Version="9.0.0-rc001" />
         <PackageReference Include="Umbraco.SqlServerCE" Version="4.0.0.1" />
-        <PackageReference Include="Vendr" Version="2.0.0-net-core0902" />
+        <PackageReference Include="Vendr" Version="2.0.0-alpha0109" />
     </ItemGroup>
 
 

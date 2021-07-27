@@ -913,7 +913,7 @@
             restrict: 'E',
             transclude: true,
             replace: true,
-            template:'<div class="vendr-message vendr-message--{{type}}"><h4 ng-if="heading" class="vendr-message__heading"><i class="fa fa-{{icon}} vendr-message__icon" ng-if="icon" aria-hidden="true"></i>{{heading}}</h4><i class="fa fa-{{icon}} vendr-message__icon-watermark" ng-if="icon" aria-hidden="true"></i><div class="vendr-message__body"><ng-transclude></ng-transclude><div class="vendr-message__body"></div></div></div>',
+            template:'<div class="vendr-message vendr-message--{{type}}"><h4 ng-if="heading" class="vendr-message__heading"><i class="fa fa-{{icon}} vendr-message__icon" ng-if="icon" aria-hidden="true"></i>{{heading}}</h4><i class="fa fa-{{icon}} vendr-message__icon-watermark" ng-if="icon" aria-hidden="true"></i><div class="vendr-message__body"><ng-transclude></ng-transclude></div></div>',
             scope: {
                 heading: '<',
                 type: '<',

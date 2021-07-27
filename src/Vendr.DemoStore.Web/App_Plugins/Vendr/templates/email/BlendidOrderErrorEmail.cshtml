@@ -13,7 +13,7 @@
 
     // Get order entities
     var store = VendrApi.GetStore(Model.StoreId);
-    var themeColor = "249bff";
+    var themeColor = "4fd1c5";
 }
 <style type="text/css">
     #vendr, #vendr td, #vendr p {
@@ -36,7 +36,7 @@
                         <td style="padding: 40px;">
                             <div style="text-align: center;">
 
-                                <h1 class="margin: 0 0 20px; font-size: 30px; line-height: 38px; color: #000;"><a href="@(BaseUrl)" style="color: #000;" target="_blank">@(store.Name)</a></h1>
+                                <a href="https://try.vendr.net" target="_blank"><img src="@(BaseUrl)/images/logo.png?height=74" alt="Blendid." border="0" height="74" /></a>
 
                                 <hr style="border: 0; height: 1px; background: #ebebe9; margin: 20px 0;" />
                                 <h2 style="margin: 0 0 20px; font-size: 20px; line-height: 28px; color: #@(themeColor);">Order Error - #@(Model.OrderNumber)</h2>

@@ -184,4 +184,5 @@ Desktop.ini
 **/Data/Logs/
 **/Data/cache/
 **/Umbraco/Logs/
+**/Umbraco/mediacache/
 /Vendr.DemoStore.local.sln
