@@ -1,0 +1,579 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Vendr.Umbraco</name>
+    </assembly>
+    <members>
+        <member name="T:Vendr.Umbraco.Constants">
+            <summary>
+            Vendr constant variables
+            </summary>
+        </member>
+        <member name="T:Vendr.Umbraco.Constants.DistributedCache">
+            <summary>
+            Defines the alias identifiers for Vendr's distributed cache control.
+            </summary>
+        </member>
+        <member name="T:Vendr.Umbraco.Constants.Properties">
+            <summary>
+            Property constants
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Properties.StorePropertyAlias">
+            <summary>
+            The property alias of the Store property
+            </summary>
+        </member>
+        <member name="T:Vendr.Umbraco.Constants.Properties.Product">
+            <summary>
+            Product property constants
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Properties.Product.MasterRelationPropertyAlias">
+            <summary>
+            The property alias of the product Master Relation property
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Properties.Product.ProductSourcePropertyAlias">
+            <summary>
+            The property alias of the linked product source node property
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Properties.Product.SkuPropertyAlias">
+            <summary>
+            The property alias of the product SKU property
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Properties.Product.PricePropertyAlias">
+            <summary>
+            The property alias of the product Price property
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Properties.Product.StockPropertyAlias">
+            <summary>
+            The property alias of the product Stock property
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Properties.Product.NamePropertyAlias">
+            <summary>
+            The property alias of the product Product Name property
+            </summary>
+            <remarks>If a productName property isn't present, the nodes Name will be used</remarks>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Properties.Product.TaxClassPropertyAlias">
+            <summary>
+            The property alias of the product Tax Class property
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Properties.Product.IsGiftCardPropertyAlias">
+            <summary>
+            The property alias of the product Is Gift Card property
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Properties.Product.IsRecurringPropertyAlias">
+            <summary>
+            The property alias of the product Is Recurring property
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Properties.Product.VariantsPropertyAlias">
+            <summary>
+            The property alias of the product Variants property
+            </summary>
+        </member>
+        <member name="T:Vendr.Umbraco.Constants.Properties.ProductVariant">
+            <summary>
+            Product Variant property constants
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Properties.ProductVariant.PriceAdjustmentPropertyAlias">
+            <summary>
+            The property alias of the product variant Price Adjustment property
+            </summary>
+        </member>
+        <member name="T:Vendr.Umbraco.Constants.PropertyEditors">
+            <summary>
+            Property Editor constants
+            </summary>
+        </member>
+        <member name="T:Vendr.Umbraco.Constants.PropertyEditors.Aliases">
+            <summary>
+            Defines Vendr built-in property editor aliases.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.PropertyEditors.Aliases.StorePicker">
+            <summary>
+            Store Picker.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.PropertyEditors.Aliases.TaxClassPicker">
+            <summary>
+            Tax Class Picker.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.PropertyEditors.Aliases.StoreEntityPicker">
+            <summary>
+            Store Entity Picker.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.PropertyEditors.Aliases.Stock">
+            <summary>
+            Stock.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.PropertyEditors.Aliases.Price">
+            <summary>
+            Price.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.PropertyEditors.Aliases.VariantsEditor">
+            <summary>
+            Variants Editor.
+            </summary>
+        </member>
+        <member name="T:Vendr.Umbraco.Constants.Sections">
+            <summary>
+            Defines the alias identifiers for Vendr's core sections.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Sections.Commerce">
+            <summary>
+            Application alias for the commerce section.
+            </summary>
+        </member>
+        <member name="T:Vendr.Umbraco.Constants.Trees">
+            <summary>
+            Defines the alias identifiers for vendr's core trees.
+            </summary>
+        </member>
+        <member name="T:Vendr.Umbraco.Constants.Trees.Settings">
+            <summary>
+            Defines the alias identifiers for vendr's core settings trees.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.Alias">
+            <summary>
+            Tree alias for the store settings tree.
+            </summary>
+        </member>
+        <member name="T:Vendr.Umbraco.Constants.Trees.Settings.NodeType">
+            <summary>
+            Defines the aliases for vendr's core settings tree node types.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.Settings">
+            <summary>
+            Alias for the settings node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.Stores">
+            <summary>
+            Alias for the stores node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.Store">
+            <summary>
+            Alias for a single store node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.OrderStatuses">
+            <summary>
+            Alias for the order statuses node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.OrderStatus">
+            <summary>
+            Alias for a single order status node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.ShippingMethods">
+            <summary>
+            Alias for the shipping methods node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.ShippingMethod">
+            <summary>
+            Alias for a single shipping method node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.PaymentMethods">
+            <summary>
+            Alias for the payment methods node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.PaymentMethod">
+            <summary>
+            Alias for a single payment method node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.Countries">
+            <summary>
+            Alias for the countries node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.Country">
+            <summary>
+            Alias for a single country node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.Region">
+            <summary>
+            Alias for a single region node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.Currencies">
+            <summary>
+            Alias for the currencies node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.Currency">
+            <summary>
+            Alias for a single currency node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.TaxClasses">
+            <summary>
+            Alias for the tax classes node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.TaxClass">
+            <summary>
+            Alias for a single tax class node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.Templating">
+            <summary>
+            Alias for the templating node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.EmailTemplates">
+            <summary>
+            Alias for the email templates node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.EmailTemplate">
+            <summary>
+            Alias for a single email template node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.PrintTemplates">
+            <summary>
+            Alias for the print templates node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.PrintTemplate">
+            <summary>
+            Alias for a single print template node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.ExportTemplates">
+            <summary>
+            Alias for the export templates node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.NodeType.ExportTemplate">
+            <summary>
+            Alias for a single export template node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.Icons">
+            <summary>
+            Defines the maps of icons for vendr's core settings tree node types.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.Ids">
+            <summary>
+            Defines the maps of fixed IDs for vendr's core settings tree node types.
+            </summary>
+        </member>
+        <member name="T:Vendr.Umbraco.Constants.Trees.Settings.Groups">
+            <summary>
+            Defines the tree group alias identifiers for vendr's core settings trees.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Settings.Groups.Commerce">
+            <summary>
+            Alias for the commerce tree settings group.
+            </summary>
+        </member>
+        <member name="T:Vendr.Umbraco.Constants.Trees.Stores">
+            <summary>
+            Defines the alias identifiers for vendr's stores trees.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Stores.Alias">
+            <summary>
+            Tree alias for the commerce section.
+            </summary>
+        </member>
+        <member name="T:Vendr.Umbraco.Constants.Trees.Stores.NodeType">
+            <summary>
+            Defines the aliases for vendr's core tree node types.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Stores.NodeType.Stores">
+            <summary>
+            Alias for the stores node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Stores.NodeType.Store">
+            <summary>
+            Alias for a single store node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Stores.NodeType.Orders">
+            <summary>
+            Alias for the orders node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Stores.NodeType.Order">
+            <summary>
+            Alias for a single order node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Stores.NodeType.Discounts">
+            <summary>
+            Alias for the discounts node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Stores.NodeType.Discount">
+            <summary>
+            Alias for a single discount node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Stores.NodeType.GiftCards">
+            <summary>
+            Alias for the gift cards node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Stores.NodeType.GiftCard">
+            <summary>
+            Alias for a single gift card node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Stores.NodeType.Analytics">
+            <summary>
+            Alias for a analytics node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Stores.NodeType.Options">
+            <summary>
+            Alias for a options node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Stores.NodeType.ProductAttributes">
+            <summary>
+            Alias for a product attributes node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Stores.NodeType.ProductAttribute">
+            <summary>
+            Alias for a product attribute node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Stores.NodeType.ProductAttributePresets">
+            <summary>
+            Alias for a product attribute presets node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Stores.NodeType.ProductAttributePreset">
+            <summary>
+            Alias for a product attribute preset node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Stores.Icons">
+            <summary>
+            Defines the maps of icons for vendr's core tree node types.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Stores.Ids">
+            <summary>
+            Defines the maps of fixed IDs for vendr's core settings tree node types.
+            </summary>
+        </member>
+        <member name="P:Vendr.Umbraco.Models.ProductVariantCollection.StoreId">
+            <summary>
+            Gets the StoreId the product variants belong to
+            </summary>
+        </member>
+        <member name="M:Vendr.Umbraco.Models.ProductVariantCollection.Empty(System.Guid)">
+            <summary>
+            Gets an empty <see cref="T:Vendr.Umbraco.Models.ProductVariantCollection" />.
+            </summary>
+            <value>
+            The empty <see cref="T:Vendr.Umbraco.Models.ProductVariantCollection" />.
+            </value>
+        </member>
+        <member name="M:Vendr.Umbraco.Models.ProductVariantCollection.#ctor(System.Guid)">
+            <summary>
+            Prevents a default instance of the <see cref="T:Vendr.Umbraco.Models.ProductVariantCollection" /> class from being created.
+            </summary>
+            <param name="storeId">The StoreId the product variants belogn to</param>
+        </member>
+        <member name="M:Vendr.Umbraco.Models.ProductVariantCollection.#ctor(System.Guid,System.Collections.Generic.IList{Vendr.Umbraco.Models.ProductVariantItem})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vendr.Umbraco.Models.ProductVariantCollection" /> class.
+            </summary>
+            <param name="storeId">The StoreId the product variants belogn to</param>
+            <param name="list">The list to wrap.</param>
+        </member>
+        <member name="P:Vendr.Umbraco.Models.ProductVariantCollection.Item(System.Guid)">
+            <summary>
+            Gets the <see cref="T:Vendr.Umbraco.Models.ProductVariantItem" /> with the specified content key.
+            </summary>
+            <value>
+            The <see cref="T:Vendr.Umbraco.Models.ProductVariantItem" />.
+            </value>
+            <param name="contentKey">The content key.</param>
+            <returns>
+            The <see cref="T:Vendr.Umbraco.Models.ProductVariantItem" /> with the specified content key.
+            </returns>
+        </member>
+        <member name="P:Vendr.Umbraco.Models.ProductVariantCollection.Item(Umbraco.Core.Udi)">
+            <summary>
+            Gets the <see cref="T:Vendr.Umbraco.Models.ProductVariantItem" /> with the specified content UDI.
+            </summary>
+            <value>
+            The <see cref="T:Vendr.Umbraco.Models.ProductVariantItem" />.
+            </value>
+            <param name="contentUdi">The content UDI.</param>
+            <returns>
+            The <see cref="T:Vendr.Umbraco.Models.ProductVariantItem" /> with the specified content UDI.
+            </returns>
+        </member>
+        <member name="P:Vendr.Umbraco.Models.ProductVariantConfig.Attributes">
+            <summary>
+            Gets the attributes.
+            </summary>
+            <value>
+            The attributes.
+            </value>
+        </member>
+        <member name="P:Vendr.Umbraco.Models.ProductVariantConfig.IsDefault">
+            <summary>
+            Gets a flag indicating whether the given variant is the default.
+            </summary>
+            <value>
+            True if the variant is the default variant, otherwise false.
+            </value>
+        </member>
+        <member name="M:Vendr.Umbraco.Models.ProductVariantItem.#ctor(Umbraco.Core.Udi,Umbraco.Core.Models.PublishedContent.IPublishedElement,Vendr.Umbraco.Models.ProductVariantConfig)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vendr.Umbraco.Models.ProductVariantItem" /> class.
+            </summary>
+            <param name="contentUdi">The content UDI.</param>
+            <param name="content">The content.</param>
+            <param name="config">The config.</param>
+            <exception cref="T:System.ArgumentNullException">contentUdi
+            or
+            content</exception>
+        </member>
+        <member name="P:Vendr.Umbraco.Models.ProductVariantItem.ContentUdi">
+            <summary>
+            Gets the content UDI.
+            </summary>
+            <value>
+            The content UDI.
+            </value>
+        </member>
+        <member name="P:Vendr.Umbraco.Models.ProductVariantItem.Content">
+            <summary>
+            Gets the content.
+            </summary>
+            <value>
+            The content.
+            </value>
+        </member>
+        <member name="P:Vendr.Umbraco.Models.ProductVariantItem.Config">
+            <summary>
+            Gets the config.
+            </summary>
+            <value>
+            The config.
+            </value>
+        </member>
+        <member name="T:Vendr.Umbraco.PropertyEditors.VariantsEditor.VariantsEditorSynchronizer">
+            <summary>
+            Component to watch for content changes to nodes with a variants editor
+            on them and stash a storeId property in the data structure. This is
+            predominantly for Vendr Deploy which needs to lookup Product Attribute
+            dependencies but needs as storeId to do it however the Umbraco Deploy
+            value connectors don't have any other context other than the property
+            value and it's property type. This may also be true for uSycn too.
+            We could also look to potetially use this in the value converter for 
+            the variants editor as we now have this also being store aware.
+            </summary>
+        </member>
+        <member name="T:Vendr.Umbraco.UmbracoScopeUnitOfWork">
+            <summary>
+            A <see cref="T:Vendr.Infrastructure.IDatabaseUnitOfWork"/> implementation using Umbraco Scopes
+            </summary>
+        </member>
+        <member name="E:Vendr.Umbraco.UmbracoScopeUnitOfWork.NotificationEventHandler">
+            <summary>
+            A utility Notification Event dispatch handler for registering Notification Events on the Umbraco Scope
+            </summary>
+        </member>
+        <member name="P:Vendr.Umbraco.UmbracoScopeUnitOfWork.Database">
+            <summary>
+            A <see cref="T:NPoco.IDatabase"/> reference for use in the Unit of Work
+            </summary>
+        </member>
+        <member name="P:Vendr.Umbraco.UmbracoScopeUnitOfWork.DatabaseType">
+            <summary>
+            Get the type of the <see cref="T:NPoco.IDatabase"/> connection
+            </summary>
+        </member>
+        <member name="P:Vendr.Umbraco.UmbracoScopeUnitOfWork.Transaction">
+            <summary>
+            Gets the curent <see cref="T:Vendr.Umbraco.UmbracoScopeUnitOfWorkTransaction"/>
+            </summary>
+        </member>
+        <member name="M:Vendr.Umbraco.UmbracoScopeUnitOfWork.Complete">
+            <summary>
+            Marks the completion of a successful Unit of Work
+            </summary>
+        </member>
+        <member name="M:Vendr.Umbraco.UmbracoScopeUnitOfWork.Dispose">
+            <summary>
+            Disposes of the Unit of Work
+            </summary>
+        </member>
+        <member name="M:Vendr.Umbraco.UmbracoScopeUnitOfWork.ScheduleNotification(Vendr.Common.Events.INotificationEvent)">
+            <summary>
+            Schedules a Notification Event to be raised once the Unit of Work is complete
+            </summary>
+            <param name="notificationEvent">The Notification Event to raise</param>
+        </member>
+        <member name="M:Vendr.Umbraco.UmbracoScopeUnitOfWork.ScheduleNotifications(Vendr.Common.Events.INotificationEvent[])">
+            <summary>
+            Schedules a series of Notification Events to be raised once the Unit of Work is complete
+            </summary>
+            <param name="notificationEvents">The list of Notification Events to raise</param>
+        </member>
+        <member name="M:Vendr.Umbraco.UmbracoScopeUnitOfWork.ScheduleNotifications(System.Collections.Generic.IEnumerable{Vendr.Common.Events.INotificationEvent})">
+            <summary>
+            Schedules a series of Notification Events to be raised once the Unit of Work is complete
+            </summary>
+            <param name="notificationEvents">The list of Notification Events to raise</param>
+        </member>
+        <member name="T:Vendr.Umbraco.UmbracoScopeUnitOfWorkProvider">
+            <summary>
+            A <see cref="T:Vendr.Common.IUnitOfWorkProvider" /> implementation based on Umbraco Scopes
+            </summary>
+        </member>
+        <member name="M:Vendr.Umbraco.UmbracoScopeUnitOfWorkProvider.#ctor(Umbraco.Core.Scoping.IScopeProvider,Vendr.Core.Cache.ICacheAccessor,Vendr.Common.Logging.ILogger{Vendr.Umbraco.UmbracoScopeUnitOfWorkProvider})">
+            <summary>
+            Instantiates a new UmbracoUnitOfWorkProvider instance
+            </summary>
+            <param name="scopeProvider">An Umbraco IScopeProvider instance</param>
+        </member>
+        <member name="M:Vendr.Extensions.PublishedContentExtensions.GetProductSourceNode(Umbraco.Core.Models.PublishedContent.IPublishedContent,Umbraco.Web.IPublishedContentQuery,System.Boolean)">
+            <summary>
+            Gets a product nodes source if one exists. Only to be used if using Umbraco nodes as product information data source.
+            </summary>
+            <param name="productNode">The product node that is linked to the product source node.</param>
+            <param name="recursive">Whether to search recursively for the source relation.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

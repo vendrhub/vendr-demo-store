@@ -1,0 +1,1090 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Vendr.Common</name>
+    </assembly>
+    <members>
+        <member name="T:Vendr.Common.Collections.ComposedCollection`1">
+            <summary>
+            Represents the base class of a collection composed by the DI container
+            </summary>
+            <typeparam name="T">The type of the items in the collection</typeparam>
+        </member>
+        <member name="M:Vendr.Common.Collections.ComposedCollection`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Constructs an instance of a composed collection
+            </summary>
+            <param name="items">The items to add to the collection</param>
+        </member>
+        <member name="T:Vendr.Common.Helpers.TypeHelper">
+            <summary>
+            A utility class for type checking, this provides internal caching so that calls to these methods will be faster
+            than doing a manual type check in c#
+            </summary>
+        </member>
+        <member name="M:Vendr.Common.Helpers.TypeHelper.IsTypeAssignableFrom(System.Type,System.Type)">
+            <summary>
+            Determines whether the type <paramref name="implementation"/> is assignable from the specified implementation,
+            and caches the result across the application using a <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2"/>.
+            </summary>
+            <param name="contract">The type of the contract.</param>
+            <param name="implementation">The implementation.</param>
+            <returns>
+                <c>true</c> if [is type assignable from] [the specified contract]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Vendr.Common.Helpers.TypeHelper.IsTypeAssignableFrom``1(System.Type)">
+            <summary>
+            Determines whether the type <paramref name="implementation"/> is assignable from the specified implementation <typeparamref name="TContract"/>,
+            and caches the result across the application using a <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2"/>.
+            </summary>
+            <typeparam name="TContract">The type of the contract.</typeparam>
+            <param name="implementation">The implementation.</param>
+        </member>
+        <member name="M:Vendr.Common.Helpers.TypeHelper.IsTypeAssignableFrom``1(System.Object)">
+            <summary>
+            Determines whether the object instance <paramref name="implementation"/> is assignable from the specified implementation <typeparamref name="TContract"/>,
+            and caches the result across the application using a <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2"/>.
+            </summary>
+            <typeparam name="TContract">The type of the contract.</typeparam>
+            <param name="implementation">The implementation.</param>
+        </member>
+        <member name="M:Vendr.Common.Helpers.TypeHelper.IsValueType(System.Type)">
+            <summary>
+            A method to determine whether <paramref name="implementation"/> represents a value type.
+            </summary>
+            <param name="implementation">The implementation.</param>
+        </member>
+        <member name="M:Vendr.Common.Helpers.TypeHelper.CachedDiscoverableProperties(System.Type,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Gets (and caches) <see cref="T:System.Reflection.PropertyInfo"/> discoverable in the current <see cref="T:System.AppDomain"/> for a given <paramref name="type"/>.
+            </summary>
+            <param name="type">The source.</param>
+            <param name="mustRead">true if the properties discovered are readable</param>
+            <param name="mustWrite">true if the properties discovered are writable</param>
+            <param name="includeIndexed">true if the properties discovered are indexable</param>
+            <returns></returns>
+        </member>
+        <member name="M:Vendr.Common.Helpers.TypeHelper.GetInstance(System.Type)">
+            <summary>
+            Returns an instance of the <paramref name="type"/> on which the method is invoked.
+            </summary>
+            <param name="type">The type on which the method was invoked.</param>
+            <returns>An instance of the <paramref name="type"/>.</returns>
+        </member>
+        <member name="M:Vendr.Common.Helpers.TypeHelper.GetInstance``1(System.Type,``0)">
+            <summary>
+            Returns an instance of the <paramref name="type"/> on which the method is invoked.
+            </summary>
+            <typeparam name="TArg">The type of the argument to pass to the constructor.</typeparam>
+            <param name="type">The type on which the method was invoked.</param>
+            <param name="argument">The argument to pass to the constructor.</param>
+            <returns>An instance of the given <paramref name="type"/>.</returns>
+        </member>
+        <member name="M:Vendr.Common.Helpers.TypeHelper.GetInstance``2(System.Type,``0,``1)">
+            <summary>
+            Returns an instance of the <paramref name="type"/> on which the method is invoked.
+            </summary>
+            <typeparam name="TArg1">The type of the first argument to pass to the constructor.</typeparam>
+            <typeparam name="TArg2">The type of the second argument to pass to the constructor.</typeparam>
+            <param name="type">The type on which the method was invoked.</param>
+            <param name="argument1">The first argument to pass to the constructor.</param>
+            <param name="argument2">The second argument to pass to the constructor.</param>
+            <returns>An instance of the given <paramref name="type"/>.</returns>
+        </member>
+        <member name="M:Vendr.Common.Helpers.TypeHelper.GetInstance``3(System.Type,``0,``1,``2)">
+            <summary>
+            Returns an instance of the <paramref name="type"/> on which the method is invoked.
+            </summary>
+            <typeparam name="TArg1">The type of the first argument to pass to the constructor.</typeparam>
+            <typeparam name="TArg2">The type of the second argument to pass to the constructor.</typeparam>
+            <typeparam name="TArg3">The type of the third argument to pass to the constructor.</typeparam>
+            <param name="type">The type on which the method was invoked.</param>
+            <param name="argument1">The first argument to pass to the constructor.</param>
+            <param name="argument2">The second argument to pass to the constructor.</param>
+            <param name="argument3">The third argument to pass to the constructor.</param>
+            <returns>An instance of the given <paramref name="type"/>.</returns>
+        </member>
+        <member name="T:Vendr.Common.IHashids">
+            <summary>
+            Describes a Hashids provider
+            </summary>
+        </member>
+        <member name="M:Vendr.Common.IHashids.Decode(System.String)">
+            <summary>
+            Decodes the provided hashed string.
+            </summary>
+            <param name="hash">the hashed string</param>
+            <exception cref="T:System.OverflowException">if one or many of the numbers in the hash overflowing the integer storage</exception>
+            <returns>the numbers</returns>
+        </member>
+        <member name="M:Vendr.Common.IHashids.DecodeLong(System.String)">
+            <summary>
+            Decodes the provided hashed string into longs
+            </summary>
+            <param name="hash">the hashed string</param>
+            <returns>the numbers</returns>
+        </member>
+        <member name="M:Vendr.Common.IHashids.DecodeHex(System.String)">
+            <summary>
+            Decodes the provided hashed string into a hex string
+            </summary>
+            <param name="hash">the hashed string</param>
+            <returns>the hex string</returns>
+        </member>
+        <member name="M:Vendr.Common.IHashids.Encode(System.Int32[])">
+            <summary>
+            Encodes the provided numbers into a hashed string
+            </summary>
+            <param name="numbers">the numbers</param>
+            <returns>the hashed string</returns>
+        </member>
+        <member name="M:Vendr.Common.IHashids.Encode(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Encodes the provided numbers into a hashed string
+            </summary>
+            <param name="numbers">the numbers</param>
+            <returns>the hashed string</returns>
+        </member>
+        <member name="M:Vendr.Common.IHashids.EncodeLong(System.Int64[])">
+            <summary>
+            Encodes the provided numbers into a hashed string
+            </summary>
+            <param name="numbers">the numbers</param>
+            <returns>the hashed string</returns>
+        </member>
+        <member name="M:Vendr.Common.IHashids.EncodeLong(System.Collections.Generic.IEnumerable{System.Int64})">
+            <summary>
+            Encodes the provided numbers into a hashed string
+            </summary>
+            <param name="numbers">the numbers</param>
+            <returns>the hashed string</returns>
+        </member>
+        <member name="M:Vendr.Common.IHashids.EncodeHex(System.String)">
+            <summary>
+            Encodes the provided hex string
+            </summary>
+            <param name="hex">the hex string</param>
+            <returns>the hashed string</returns>
+        </member>
+        <member name="T:Vendr.Common.Hashids">
+            <summary>
+            Generate YouTube-like hashes from one or many numbers. Use hashids when you do not want to expose your database ids to the user.
+            </summary>
+        </member>
+        <member name="M:Vendr.Common.Hashids.#ctor">
+            <summary>
+            Instantiates a new Hashids with the default setup.
+            </summary>
+        </member>
+        <member name="M:Vendr.Common.Hashids.#ctor(System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Instantiates a new Hashids en/de-coder.
+            </summary>
+            <param name="salt"></param>
+            <param name="minHashLength"></param>
+            <param name="alphabet"></param>
+        </member>
+        <member name="M:Vendr.Common.Hashids.Encode(System.Int32[])">
+            <summary>
+            Encodes the provided numbers into a hashed string
+            </summary>
+            <param name="numbers">the numbers to encode</param>
+            <returns>the hashed string</returns>
+        </member>
+        <member name="M:Vendr.Common.Hashids.Encode(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Encodes the provided numbers into a hashed string
+            </summary>
+            <param name="numbers">the numbers to encode</param>
+            <returns>the hashed string</returns>
+        </member>
+        <member name="M:Vendr.Common.Hashids.Decode(System.String)">
+            <summary>
+            Decodes the provided hash into
+            </summary>
+            <param name="hash">the hash</param>
+            <exception cref="T:System.OverflowException">if the decoded number overflows integer</exception>
+            <returns>the numbers</returns>
+        </member>
+        <member name="M:Vendr.Common.Hashids.EncodeHex(System.String)">
+            <summary>
+            Encodes the provided hex string to a hashids hash.
+            </summary>
+            <param name="hex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vendr.Common.Hashids.DecodeHex(System.String)">
+            <summary>
+            Decodes the provided hash into a hex-string
+            </summary>
+            <param name="hash"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vendr.Common.Hashids.DecodeLong(System.String)">
+            <summary>
+            Decodes the provided hashed string into an array of longs 
+            </summary>
+            <param name="hash">the hashed string</param>
+            <returns>the numbers</returns>
+        </member>
+        <member name="M:Vendr.Common.Hashids.EncodeLong(System.Int64[])">
+            <summary>
+            Encodes the provided longs to a hashed string
+            </summary>
+            <param name="numbers">the numbers</param>
+            <returns>the hashed string</returns>
+        </member>
+        <member name="M:Vendr.Common.Hashids.EncodeLong(System.Collections.Generic.IEnumerable{System.Int64})">
+            <summary>
+            Encodes the provided longs to a hashed string
+            </summary>
+            <param name="numbers">the numbers</param>
+            <returns>the hashed string</returns>
+        </member>
+        <member name="M:Vendr.Common.Hashids.SetupSeps">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Vendr.Common.Hashids.SetupGuards">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Vendr.Common.Hashids.GenerateHashFrom(System.Int64[])">
+            <summary>
+            Internal function that does the work of creating the hash
+            </summary>
+            <param name="numbers"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vendr.Common.Hashids.ConsistentShuffle(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="alphabet"></param>
+            <param name="salt"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Vendr.Common.IDeepCloneable">
+            <summary>
+            Defines an entity that supports deep cloning
+            </summary>
+        </member>
+        <member name="M:Vendr.Common.IDeepCloneable.DeepClone">
+            <summary>
+            Deep clones an entity and all of it's child entities
+            </summary>
+            <returns>The cloned entity as an object</returns>
+        </member>
+        <member name="T:Vendr.Common.Logging.ILogger`1">
+            <summary>
+            Defines the logging service.
+            </summary>
+            <remarks>
+            <para>Message templates in logging methods follow the Message Templates specification
+            available at https://messagetemplates.org/ in order to support structured logging.</para>
+            <para>Implementations must ensure that they support these templates. Note that the
+            specification includes support for traditional C# numeric placeholders.</para>
+            <para>For instance, "Processed {Input} in {Time}ms."</para>
+            </remarks>
+        </member>
+        <member name="M:Vendr.Common.Logging.ILogger`1.IsEnabled(Vendr.Common.Logging.LogLevel)">
+            <summary>
+            Determines if logging is enabled at a specified level, for a reporting type.
+            </summary>
+            <param name="level">The level.</param>
+        </member>
+        <member name="M:Vendr.Common.Logging.ILogger`1.Fatal(System.Exception,System.String)">
+            <summary>
+            Logs a fatal message with an exception.
+            </summary>
+            <param name="exception">An exception.</param>
+            <param name="message">A message.</param>
+        </member>
+        <member name="M:Vendr.Common.Logging.ILogger`1.Fatal(System.Exception)">
+            <summary>
+            Logs a fatal exception.
+            </summary>
+            <param name="exception">An exception.</param>
+            <remarks>The message string is unspecified and is implementation-specific.</remarks>
+        </member>
+        <member name="M:Vendr.Common.Logging.ILogger`1.Fatal(System.String)">
+            <summary>
+            Logs a fatal message.
+            </summary>
+            <param name="message">A message.</param>
+        </member>
+        <member name="M:Vendr.Common.Logging.ILogger`1.Fatal(System.Exception,System.String,System.Object[])">
+            <summary>
+            Logs a fatal message with an exception.
+            </summary>
+            <param name="exception">An exception.</param>
+            <param name="messageTemplate">A message template.</param>
+            <param name="propertyValues">Property values.</param>
+        </member>
+        <member name="M:Vendr.Common.Logging.ILogger`1.Fatal(System.String,System.Object[])">
+            <summary>
+            Logs a fatal message.
+            </summary>
+            <param name="messageTemplate">A message template.</param>
+            <param name="propertyValues">Property values.</param>
+        </member>
+        <member name="M:Vendr.Common.Logging.ILogger`1.Error(System.Exception,System.String)">
+            <summary>
+            Logs an error message with an exception.
+            </summary>
+            <param name="exception">An exception.</param>
+            <param name="message">A message.</param>
+        </member>
+        <member name="M:Vendr.Common.Logging.ILogger`1.Error(System.Exception)">
+            <summary>
+            Logs an error exception.
+            </summary>
+            <param name="exception">An exception.</param>
+            <remarks>The message string is unspecified and is implementation-specific.</remarks>
+        </member>
+        <member name="M:Vendr.Common.Logging.ILogger`1.Error(System.String)">
+            <summary>
+            Logs an error message.
+            </summary>
+            <param name="message">A message.</param>
+        </member>
+        <member name="M:Vendr.Common.Logging.ILogger`1.Error(System.Exception,System.String,System.Object[])">
+            <summary>
+            Logs an error message with an exception.
+            </summary>
+            <param name="exception">An exception.</param>
+            <param name="messageTemplate">A message template.</param>
+            <param name="propertyValues">Property values.</param>
+        </member>
+        <member name="M:Vendr.Common.Logging.ILogger`1.Error(System.String,System.Object[])">
+            <summary>
+            Logs an error message.
+            </summary>
+            <param name="messageTemplate">A message template.</param>
+            <param name="propertyValues">Property values.</param>
+        </member>
+        <member name="M:Vendr.Common.Logging.ILogger`1.Warn(System.String)">
+            <summary>
+            Logs a warning message.
+            </summary>
+            <param name="message">A message.</param>
+        </member>
+        <member name="M:Vendr.Common.Logging.ILogger`1.Warn(System.String,System.Object[])">
+            <summary>
+            Logs a warning message.
+            </summary>
+            <param name="messageTemplate">A message template.</param>
+            <param name="propertyValues">Property values.</param>
+        </member>
+        <member name="M:Vendr.Common.Logging.ILogger`1.Warn(System.Exception,System.String)">
+            <summary>
+            Logs a warning message with an exception.
+            </summary>
+            <param name="exception">An exception.</param>
+            <param name="message">A message.</param>
+        </member>
+        <member name="M:Vendr.Common.Logging.ILogger`1.Warn(System.Exception,System.String,System.Object[])">
+            <summary>
+            Logs a warning message with an exception.
+            </summary>
+            <param name="exception">An exception.</param>
+            <param name="messageTemplate">A message template.</param>
+            <param name="propertyValues">Property values.</param>
+        </member>
+        <member name="M:Vendr.Common.Logging.ILogger`1.Info(System.String)">
+            <summary>
+            Logs an information message.
+            </summary>
+            <param name="message">A message.</param>
+        </member>
+        <member name="M:Vendr.Common.Logging.ILogger`1.Info(System.String,System.Object[])">
+            <summary>
+            Logs a info message.
+            </summary>
+            <param name="messageTemplate">A message template.</param>
+            <param name="propertyValues">Property values.</param>
+        </member>
+        <member name="M:Vendr.Common.Logging.ILogger`1.Debug(System.String)">
+            <summary>
+            Logs a debugging message.
+            </summary>
+            <param name="message">A message.</param>
+        </member>
+        <member name="M:Vendr.Common.Logging.ILogger`1.Debug(System.String,System.Object[])">
+            <summary>
+            Logs a debug message.
+            </summary>
+            <param name="messageTemplate">A message template.</param>
+            <param name="propertyValues">Property values.</param>
+        </member>
+        <member name="M:Vendr.Common.Logging.ILogger`1.Verbose(System.String)">
+            <summary>
+            Logs a verbose message.
+            </summary>
+            <param name="message">A message.</param>
+        </member>
+        <member name="M:Vendr.Common.Logging.ILogger`1.Verbose(System.String,System.Object[])">
+            <summary>
+            Logs a verbose message.
+            </summary>
+            <param name="messageTemplate">A message template.</param>
+            <param name="propertyValues">Property values.</param>
+        </member>
+        <member name="T:Vendr.Common.Logging.LogLevel">
+            <summary>
+            Specifies the level of a log event.
+            </summary>
+        </member>
+        <member name="T:Vendr.Common.Models.PagedResultBase">
+            <summary>
+            Represents a paged result for a model collection
+            </summary>
+        </member>
+        <member name="M:Vendr.Common.Models.PagedResultBase.GetSkipSize">
+            <summary>
+            Calculates the skip size based on the paged parameters specified
+            </summary>
+            <remarks>
+            Returns 0 if the page number or page size is zero
+            </remarks>
+        </member>
+        <member name="T:Vendr.Common.Models.PagedResult`1">
+            <summary>
+            Represents a paged result for a model collection
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Vendr.Common.Models.ValueObjectBase">
+            <summary>
+            Base class for an immutable Vendr value object
+            </summary>
+        </member>
+        <member name="M:Vendr.Common.Models.ValueObjectBase.DeepClone">
+            <summary>
+            Deep clones the entity and all of it's child entities
+            </summary>
+            <returns>A deep clones entity instance</returns>
+        </member>
+        <member name="M:Vendr.Common.Models.ValueObjectBase.Equals(System.Object)">
+            <summary>
+            Compares the entity against another entity for equality
+            </summary>
+            <param name="obj">The entity to compare against</param>
+            <returns>Returns <see langword="true"/> if the two entities are equal, otherwise returns <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.InProcPipelineInvoker.Invoke``1(System.Collections.Generic.IEnumerable{Vendr.Common.Pipelines.IPipelineTask{``0}},Vendr.Common.Pipelines.PipelineArgs{``0})">
+            <summary>
+            Invoked the pipeline, executing the pipeline tasks sequentially.
+            </summary>
+            <param name="pipelineTasks">The list of pipeline tasks to execute.</param>
+            <param name="args">The initial args to pass to the pipeline tasks.</param>
+            <returns>An attempt result.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.InProcPipelineInvoker.Invoke``2(System.Collections.Generic.IEnumerable{Vendr.Common.Pipelines.IPipelineTask{``0,``1}},Vendr.Common.Pipelines.PipelineArgs{``0})">
+            <summary>
+            Invoked the pipeline, executing the pipeline tasks sequentially.
+            </summary>
+            <param name="pipelineTasks">The list of pipeline tasks to execute.</param>
+            <param name="args">The initial args to pass to the pipeline tasks.</param>
+            <returns>An attempt result.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.InProcPipelineInvoker.Vendr#Common#Pipelines#IPipelineInvoker#Invoke(System.Collections.Generic.IEnumerable{Vendr.Common.Pipelines.IPipelineTask},Vendr.Common.Pipelines.PipelineArgs)">
+            <summary>
+            Invoked the pipeline, executing the pipeline tasks sequentially.
+            </summary>
+            <param name="pipelineTasks">The list of pipeline tasks to execute.</param>
+            <param name="args">The initial args to pass to the pipeline tasks.</param>
+            <returns>An attempt result.</returns>
+        </member>
+        <member name="P:Vendr.Common.Pipelines.PipelineArgs.Model">
+            <summary>
+            Gets the model of this <see cref="T:Vendr.Common.Pipelines.PipelineArgs"/>.
+            </summary>
+        </member>
+        <member name="P:Vendr.Common.Pipelines.PipelineArgs.AdditionalData">
+            <summary>
+            Gets the additional data of this <see cref="T:Vendr.Common.Pipelines.PipelineArgs"/>.
+            </summary>
+        </member>
+        <member name="P:Vendr.Common.Pipelines.PipelineArgs.UnitOfWork">
+            <summary>
+            Gets the pipelines <see cref="T:Vendr.Common.IUnitOfWork"/>.
+            </summary>
+        </member>
+        <member name="P:Vendr.Common.Pipelines.PipelineArgs`1.Model">
+            <summary>
+            Gets the model of this <see cref="T:Vendr.Common.Pipelines.PipelineArgs`1"/>.
+            </summary>
+        </member>
+        <member name="P:Vendr.Common.Pipelines.PipelineResult.Success">
+            <summary>
+            Gets a value indicating whether this <see cref="T:Vendr.Common.Pipelines.PipelineResult"/> was successful.
+            </summary>
+        </member>
+        <member name="P:Vendr.Common.Pipelines.PipelineResult.Exception">
+            <summary>
+            Gets the exception associated with an unsuccessful PipelineResult.
+            </summary>
+        </member>
+        <member name="P:Vendr.Common.Pipelines.PipelineResult.Data">
+            <summary>
+            Gets the PipelineResult data.
+            </summary>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.PipelineResult.op_Implicit(Vendr.Common.Pipelines.PipelineResult)~System.Boolean">
+            <summary>
+            Implicitly operator to check if the PipelineResult was successful without having to access the 'success' property
+            </summary>
+            <param name="a"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Vendr.Common.Pipelines.PipelineResult`1.Data">
+            <summary>
+            Gets the PipelineResult result.
+            </summary>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskBase.Execute(Vendr.Common.Pipelines.PipelineArgs)">
+            <summary>
+            Executes the pipeline task.
+            </summary>
+            <param name="args">The pipeline args.</param>
+            <returns>A pipeline result.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskBase.Vendr#Common#Pipelines#IPipelineAction#Execute(Vendr.Common.Pipelines.PipelineArgs)">
+            <summary>
+            Executes the pipeline task as an action.
+            </summary>
+            <param name="args">The pipeline args.</param>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskBase.Ok">
+            <summary>
+            Creates a success pipeline result.
+            </summary>
+            <returns>A success pipeline result.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskBase.Ok(System.Object)">
+            <summary>
+            Creates a success pipeline result.
+            </summary>
+            <param name="result">The result data.</param>
+            <returns>A success pipeline result.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskBase.Fail">
+            <summary>
+            Creates a fail pipeline result.
+            </summary>
+            <returns>A fail pipeline result.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskBase.Fail(System.Object)">
+            <summary>
+            Creates a fail pipeline result.
+            </summary>
+            <param name="result">The result data.</param>
+            <returns>A fail pipeline result.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskBase.Fail(System.Exception)">
+            <summary>
+            Creates a fail pipeline result.
+            </summary>
+            <param name="exception">An exception message.</param>
+            <returns>A fail pipeline result.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskBase.Fail(System.Object,System.Exception)">
+            <summary>
+            Creates a fail pipeline result.
+            </summary>
+            <param name="result">The result data.</param>
+            <param name="exception">An exception message.</param>
+            <returns>A fail pipeline result.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskBase`2.Execute(Vendr.Common.Pipelines.PipelineArgs{`0})">
+            <summary>
+            Executes the pipeline task.
+            </summary>
+            <param name="input">The pipeline args.</param>
+            <returns>A pipeline result.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskBase`2.Vendr#Common#Pipelines#IPipelineAction{T}#Execute(Vendr.Common.Pipelines.PipelineArgs{`0})">
+            <summary>
+            Executes the pipeline task as an action.
+            </summary>
+            <param name="args">The pipeline args.</param>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskBase`2.Execute(Vendr.Common.Pipelines.PipelineArgs)">
+            <summary>
+            Executes the pipeline task.
+            </summary>
+            <param name="input">The pipeline args.</param>
+            <returns>A pipeline result.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskBase`2.Ok">
+            <summary>
+            Creates a success pipeline result.
+            </summary>
+            <returns>A success pipeline result.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskBase`2.Ok(`1)">
+            <summary>
+            Creates a success pipeline result.
+            </summary>
+            <param name="result">The result data.</param>
+            <returns>A success pipeline result.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskBase`2.Ok(System.Object)">
+            <summary>
+            Creates a success pipeline result.
+            </summary>
+            <param name="result">The result data.</param>
+            <returns>A success pipeline result.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskBase`2.Fail">
+            <summary>
+            Creates a fail pipeline result.
+            </summary>
+            <returns>A fail pipeline result.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskBase`2.Fail(`1)">
+            <summary>
+            Creates a fail pipeline result.
+            </summary>
+            <param name="result">The result data.</param>
+            <returns>A fail pipeline result.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskBase`2.Fail(System.Object)">
+            <summary>
+            Creates a fail pipeline result.
+            </summary>
+            <param name="result">The result data.</param>
+            <returns>A fail pipeline result.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskBase`2.Fail(System.Exception)">
+            <summary>
+            Creates a fail pipeline result.
+            </summary>
+            <param name="exception">An exception message.</param>
+            <returns>A fail pipeline result.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskBase`2.Fail(`1,System.Exception)">
+            <summary>
+            Creates a fail pipeline result.
+            </summary>
+            <param name="result">The result data.</param>
+            <param name="exception">An exception message.</param>
+            <returns>A fail pipeline result.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskBase`2.Fail(System.Object,System.Exception)">
+            <summary>
+            Creates a fail pipeline result.
+            </summary>
+            <param name="result">The result data.</param>
+            <param name="exception">An exception message.</param>
+            <returns>A fail pipeline result.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskWithTypedArgsBase`3.Execute(`0)">
+            <summary>
+            Executes the pipeline task.
+            </summary>
+            <param name="input">The pipeline args.</param>
+            <returns>A pipeline result.</returns>
+        </member>
+        <member name="M:Vendr.Common.Pipelines.Tasks.PipelineTaskWithTypedArgsBase`2.Execute(`0)">
+            <summary>
+            Executes the pipeline task.
+            </summary>
+            <param name="input">The pipeline args.</param>
+            <returns>A pipeline result.</returns>
+        </member>
+        <member name="T:Vendr.Common.PredicateBuilder">
+            <summary>
+            Copied from http://www.albahari.com/nutshell/predicatebuilder.aspx
+            </summary>
+        </member>
+        <member name="T:Vendr.Common.IUnitOfWork">
+            <summary>
+            Defines a Unit of Work
+            </summary>
+        </member>
+        <member name="M:Vendr.Common.IUnitOfWork.Complete">
+            <summary>
+            Marks the completion of a successful Unit of Work
+            </summary>
+        </member>
+        <member name="M:Vendr.Common.IUnitOfWork.ScheduleNotification(Vendr.Common.Events.INotificationEvent)">
+            <summary>
+            Schedules a Notification Event to be raised once the Unit of Work is complete
+            </summary>
+            <param name="notificationEvent">The Notification Event to raise</param>
+        </member>
+        <member name="M:Vendr.Common.IUnitOfWork.ScheduleNotifications(Vendr.Common.Events.INotificationEvent[])">
+            <summary>
+            Schedules a series of Notification Events to be raised once the Unit of Work is complete
+            </summary>
+            <param name="notificationEvents">The list of Notification Events to raise</param>
+        </member>
+        <member name="M:Vendr.Common.IUnitOfWork.ScheduleNotifications(System.Collections.Generic.IEnumerable{Vendr.Common.Events.INotificationEvent})">
+            <summary>
+            Schedules a series of Notification Events to be raised once the Unit of Work is complete
+            </summary>
+            <param name="notificationEvents">The list of Notification Events to raise</param>
+        </member>
+        <member name="T:Vendr.Common.IUnitOfWorkProvider">
+            <summary>
+            Defines a Provider that can create a <see cref="T:Vendr.Common.IUnitOfWork"/>
+            </summary>
+        </member>
+        <member name="M:Vendr.Common.IUnitOfWorkProvider.Create">
+            <summary>
+            Creates a new <see cref="T:Vendr.Common.IUnitOfWork"/> instance
+            </summary>
+            <returns>The newly created <see cref="T:Vendr.Common.IUnitOfWork"/> instance</returns>
+        </member>
+        <member name="M:Vendr.Common.IUnitOfWorkProvider.Create(System.Boolean)">
+            <summary>
+            Creates a new <see cref="T:Vendr.Common.IUnitOfWork"/> instance
+            </summary>
+            <param name="autoComplete">Boolean flag defining whether to auto complete the unit of work</param>
+            <returns>The newly created <see cref="T:Vendr.Common.IUnitOfWork"/> instance</returns>
+        </member>
+        <member name="T:Vendr.Extensions.AssertionExtensions">
+            <summary>
+            Extension methods for performing assertions
+            </summary>
+        </member>
+        <member name="M:Vendr.Extensions.AssertionExtensions.MustEqual``1(``0,``0,System.String)">
+            <summary>
+            Asserts that a parameter is equal to another value
+            </summary>
+            <typeparam name="T">The Type of the parameter</typeparam>
+            <param name="param">The parameter to check</param>
+            <param name="compareTo">The parameter to compare to</param>
+            <param name="paramName">A friendly parameter name to display in the assertion exception if the assertion fails</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the given parameter is null</exception>
+        </member>
+        <member name="M:Vendr.Extensions.AssertionExtensions.MustNotBeNull``1(``0,System.String)">
+            <summary>
+            Asserts that a parameter must not be null
+            </summary>
+            <typeparam name="T">The Type of the parameter</typeparam>
+            <param name="param">The parameter to check</param>
+            <param name="paramName">A friendly parameter name to display in the assertion exception if the assertion fails</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the given parameter is null</exception>
+        </member>
+        <member name="M:Vendr.Extensions.AssertionExtensions.MustNotBeNullOrEmpty(System.String,System.String)">
+            <summary>
+            Asserts that a parameter must not be null or empty
+            </summary>
+            <param name="param">The parameter to check</param>
+            <param name="paramName">A friendly parameter name to display in the assertion exception if the assertion fails</param>
+            <exception cref="T:System.ArgumentException">Thrown if the given parameter is null or empty</exception>
+        </member>
+        <member name="M:Vendr.Extensions.AssertionExtensions.MustNotBeNullOrWhiteSpace(System.String,System.String)">
+            <summary>
+            Asserts that a parameter must not be null or white space
+            </summary>
+            <param name="param">The parameter to check</param>
+            <param name="paramName">A friendly parameter name to display in the assertion exception if the assertion fails</param>
+            <exception cref="T:System.ArgumentException">Thrown if the given parameter is null or white space</exception>
+        </member>
+        <member name="M:Vendr.Extensions.AssertionExtensions.MustContainKey(System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)">
+            <summary>
+            Asserts that a key must be present in a dictionary, and that it's value must not be null or empty
+            </summary>
+            <param name="dictionary">The dictionary to check</param>
+            <param name="key">The key to look for</param>
+            <param name="paramName">A friendly parameter name to display in the assertion exception if the assertion fails</param>
+            <exception cref="T:System.ArgumentException">Thrown if the given key is not present in the dictionary, or if it's value is null or empty</exception>
+        </member>
+        <member name="T:Vendr.Extensions.DictionaryExtensions">
+            <summary>
+            Dictionary extension methods
+            </summary>
+        </member>
+        <member name="M:Vendr.Extensions.DictionaryExtensions.ToNullSafeDictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            Converts a dictionary into a null safe dictionary that won't error if attempting to access a key that isn't present
+            </summary>
+            <typeparam name="TKey">The Type of the dictionary key</typeparam>
+            <typeparam name="TValue">The Type of the dictionary value</typeparam>
+            <param name="source">The source dictionary to convert</param>
+            <returns>A null safe version of the input dictionary</returns>
+        </member>
+        <member name="M:Vendr.Extensions.DictionaryExtensions.ToNullSafeDictionary``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+            Converts a dictionary into a null safe dictionary that won't error if attempting to access a key that isn't present
+            </summary>
+            <typeparam name="TKey">The Type of the dictionary key</typeparam>
+            <typeparam name="TValue">The Type of the dictionary value</typeparam>
+            <param name="source">The source dictionary to convert</param>
+            <param name="keyComparer">The <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> implementation to use when comparing keys</param>
+            <returns>A null safe version of the input dictionary</returns>
+        </member>
+        <member name="M:Vendr.Extensions.DictionaryExtensions.ToNullSafeDictionary``3(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Func{``0,``2})">
+            <summary>
+            Converts a list of items into a null safe dictionary that won't error if attempting to access a key that isn't present
+            </summary>
+            <typeparam name="TSource">The Type of the source element</typeparam>
+            <typeparam name="TKey">The Type of the dictionary key</typeparam>
+            <typeparam name="TValue">The Type of the dictionary value</typeparam>
+            <param name="source">The source list of elements to convert</param>
+            <param name="keySelector">A delegate function to access the Key from the source element</param>
+            <param name="elementSelector">A delegate function to access the Value from the source element</param>
+            <returns>A null safe version of the input dictionary</returns>
+        </member>
+        <member name="M:Vendr.Extensions.DictionaryExtensions.ToNullSafeDictionary``3(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Func{``0,``2},System.Collections.Generic.IEqualityComparer{``1})">
+            <summary>
+            Converts a list of items into a null safe dictionary that won't error if attempting to access a key that isn't present
+            </summary>
+            <typeparam name="TSource">The Type of the source element</typeparam>
+            <typeparam name="TKey">The Type of the dictionary key</typeparam>
+            <typeparam name="TValue">The Type of the dictionary value</typeparam>
+            <param name="source">The source list of elements to convert</param>
+            <param name="keySelector">A delegate function to access the Key from the source element</param>
+            <param name="elementSelector">A delegate function to access the Value from the source element</param>
+            <param name="keyComparer">The <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> implementation to use when comparing keys</param>
+            <returns>A null safe version of the input dictionary</returns>
+        </member>
+        <member name="M:Vendr.Extensions.DictionaryExtensions.GetTypedValueAs``1(System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+            <summary>
+            Get the value of dictionary cast to a given Type
+            </summary>
+            <typeparam name="T">The Type to cast the Value to</typeparam>
+            <param name="dict">The dictionary to retrieve the Value from</param>
+            <param name="key">The Key of the Value to retrieve</param>
+            <returns>The cast dictionary Value, or default(T) if the Value is not present or cannot be cast to the given type</returns>
+        </member>
+        <member name="M:Vendr.Extensions.DictionaryExtensions.TryGetTypedValue``1(System.Collections.Generic.IDictionary{System.String,System.Object},System.String,``0@)">
+            <summary>
+            Try to get the value of dictionary cast to a given Type
+            </summary>
+            <typeparam name="T">The Type to cast the Value to</typeparam>
+            <param name="dict">The dictionary to retrieve the Value from</param>
+            <param name="key">The Key of the Value to retrieve</param>
+            <param name="result">The cast dictionary Value, or default(T) if the Value is not present or cannot be cast to the given type</param>
+            <returns>Boolean indicating whether the operation was successful or not</returns>
+        </member>
+        <member name="T:Vendr.Extensions.EnumerableExtensions">
+            <summary>
+             Extensions for enumerable sources
+            </summary>
+        </member>
+        <member name="M:Vendr.Extensions.EnumerableExtensions.OrderBySequence``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1},System.Func{``0,``1})">
+            <summary>
+            Orders a collection of items by a property based on the sequence of a secondary collection.
+            </summary>
+            <typeparam name="T">The type of the items</typeparam>
+            <typeparam name="TId">The type of the property to sort on</typeparam>
+            <param name="source">The source collection to order</param>
+            <param name="order">The order sequence to order the source list by</param>
+            <param name="idSelector">The selector of the property to sort on</param>
+            <returns></returns>
+        </member>
+        <member name="M:Vendr.Extensions.EnumerableExtensions.Flatten``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Collections.Generic.IEnumerable{``0}})">
+            <summary>
+            Flattens a hierarchical structure into a single level collection
+            </summary>
+            <typeparam name="T">The type of the collection</typeparam>
+            <param name="items">The initial collection of hierarchical items</param>
+            <param name="nestedCollectionAccessor">The accessor function to access child items</param>
+            <returns></returns>
+        </member>
+        <member name="M:Vendr.Extensions.EnumerableExtensions.Flatten``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Collections.Generic.IEnumerable{``0}},System.Func{``0,``0,``1},``0)">
+            <summary>
+            Flattens a hierarchical structure into a single level collection converting them at the same time
+            </summary>
+            <typeparam name="T1">The type of the collection</typeparam>
+            <typeparam name="T2">The type of the return collection</typeparam>
+            <param name="items">The initial collection of hierarchical items</param>
+            <param name="nestedCollectionAccessor">The accessor function to access child items</param>
+            <param name="convertor">The converter function to change the item type</param>
+            <returns></returns>
+        </member>
+        <member name="M:Vendr.Extensions.EnumerableExtensions.Traverse``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Collections.Generic.IEnumerable{``0}})">
+            <summary>
+            Traverse over a hierarchical structure
+            </summary>
+            <typeparam name="T">The type of the collection</typeparam>
+            <param name="items">The initial collection of hierarchical items</param>
+            <param name="nestedCollectionAccessor">The accessor function to access child items</param>
+            <returns></returns>
+        </member>
+        <member name="M:Vendr.Extensions.EnumerableExtensions.Recursively``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Collections.Generic.IEnumerable{``0}},System.Action{``0})">
+            <summary>
+            Performs a task recursively
+            </summary>
+            <typeparam name="T">The type of the collection</typeparam>
+            <param name="items">The collection of hierarchical items</param>
+            <param name="nestedCollectionAccessor">The accessor function to access child items</param>
+            <param name="action">The action to perform per item</param>
+            <returns></returns>
+        </member>
+        <member name="M:Vendr.Extensions.EnumerableExtensions.Recursively``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Collections.Generic.IEnumerable{``0}},System.Action{``0,``0},``0)">
+            <summary>
+            Performs a task recursively
+            </summary>
+            <typeparam name="T">The type of the collection</typeparam>
+            <param name="items">The collection of hierarchical items</param>
+            <param name="nestedCollectionAccessor">The accessor function to access child items</param>
+            <param name="action">The action to perform per item</param>
+            <returns></returns>
+        </member>
+        <member name="M:Vendr.Extensions.EnumerableExtensions.UnsortedSequenceEqual``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
+             <summary>
+             Determines if 2 lists have equal elements within them regardless of how they are sorted
+             </summary>
+             <typeparam name="T"></typeparam>
+             <param name="source"></param>
+             <param name="other"></param>
+             <returns></returns>
+             <remarks>
+             The logic for this is taken from:
+             http://stackoverflow.com/questions/4576723/test-whether-two-ienumerablet-have-the-same-values-with-the-same-frequencies
+            
+             There's a few answers, this one seems the best for it's simplicity and based on the comment of Eamon
+             </remarks>
+        </member>
+        <member name="T:Vendr.Extensions.ObjectExtensions">
+            <summary>
+            Object extension methods
+            </summary>
+        </member>
+        <member name="M:Vendr.Extensions.ObjectExtensions.ComparesTo``1(``0,``0,Vendr.Common.Models.ComparisonOperator)">
+            <summary>
+            Compares a source object against a given value using the supplied comparison operator
+            </summary>
+            <typeparam name="T">The Type of the source / value objects</typeparam>
+            <param name="source">The Source object to compare</param>
+            <param name="value">The Value to compare against</param>
+            <param name="comparisonOperator">The comparison operator to use for the comparison</param>
+            <returns>Boolean indicating whether the comparison was successful or not</returns>
+        </member>
+        <member name="M:Vendr.Extensions.ObjectExtensions.ToDictionary(System.Object,System.Boolean)">
+            <summary>
+            Converts a generic object into a dictionary, converting the object properties into key value pairs
+            </summary>
+            <param name="data">The object to convert</param>
+            <param name="honorSerializationAttributes">True to honor DataMember/JsonProperty attributes for property names</param>
+            <returns>The converted dictionary</returns>
+        </member>
+        <member name="M:Vendr.Extensions.ObjectExtensions.ToDictionary``1(System.Object,System.String[])">
+            <summary>
+            Turns object into dictionary
+            </summary>
+            <param name="o"></param>
+            <param name="ignoreProperties">Properties to ignore</param>
+            <returns></returns>
+        </member>
+        <member name="M:Vendr.Extensions.ObjectExtensions.IsObsolete(System.Object)">
+            <summary>
+            Determines if the given object is decorated as being obsolete
+            </summary>
+            <param name="obj">The object to check</param>
+            <returns>True if the type is obsolete, otherwise False</returns>
+        </member>
+        <member name="T:Vendr.Extensions.StringExtensions">
+            <summary>
+            String extension methods
+            </summary>
+        </member>
+        <member name="M:Vendr.Extensions.StringExtensions.IsNullOrWhiteSpace(System.String)">
+            <summary>Indicates whether a specified string is null, empty, or
+            consists only of white-space characters.</summary>
+            <param name="value">The value to check.</param>
+            <returns>Returns <see langword="true"/> if the value is null,
+            empty, or consists only of white-space characters, otherwise
+            returns <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Vendr.Extensions.StringExtensions.InvariantEquals(System.String,System.String)">
+            <summary>
+            Compares 2 strings with invariant culture and case ignored
+            </summary>
+            <param name="compare">The compare.</param>
+            <param name="compareTo">The compare to.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Vendr.Extensions.StringExtensions.IsEmailAddress(System.String)">
+            <summary>
+            Helper method to check whether a string looks like a valid email address or not
+            </summary>
+            <param name="str">The input email address</param>
+            <returns></returns>
+        </member>
+        <member name="M:Vendr.Extensions.StringExtensions.SplitAndTrim(System.String,System.Char[])">
+            <summary>
+            Splits a string into an array ensuring no empty entries and trimming any whitespace from the begining and end of the entries
+            </summary>
+            <param name="str"></param>
+            <param name="seperator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vendr.Extensions.StringExtensions.TryParse``1(System.String)">
+            <summary>
+            Tries to parse a string into a strongly typed value
+            </summary>
+            <typeparam name="T">The output type</typeparam>
+            <param name="input">The input string</param>
+            <returns>A nullable output type</returns>
+        </member>
+        <member name="M:Vendr.Extensions.StringExtensions.IsJson(System.String)">
+            <summary>
+            Tries to figure out if the input string is a serialized JSON value
+            </summary>
+            <param name="input">The input string</param>
+            <returns>A true if string is serialized JSON, otherwise false</returns>
+        </member>
+        <member name="M:Vendr.Extensions.StringExtensions.IsComplexJson(System.String)">
+            <summary>
+            Tries to figure out if the input string is a serialized JSON object/array
+            </summary>
+            <param name="input">The input string</param>
+            <returns>A true if string is serialized JSON, otherwise false</returns>
+        </member>
+        <member name="M:Vendr.Extensions.StringExtensions.ReplaceEnd(System.String,System.String,System.String)">
+            <summary>
+            Replaces an original string from the end of an input string with the given replacement
+            </summary>
+            <param name="input">The input string</param>
+            <param name="original">The original string to look for</param>
+            <param name="replacement">The string to replace the original string with</param>
+            <returns>The updated string</returns>
+        </member>
+        <member name="M:Vendr.Extensions.StringExtensions.ParseDecimal(System.String)">
+            <summary>
+            Parse a string input into a decimal number
+            </summary>
+            <param name="input">The input string</param>
+            <returns>The decimal value</returns>
+        </member>
+        <member name="M:Vendr.Extensions.StringExtensions.EnumTryParse``1(System.String,System.Boolean,``0@)">
+            <summary>enum try parse.</summary>
+            <param name="strType">The str type.</param>
+            <param name="ignoreCase">The ignore case.</param>
+            <param name="result">The result.</param>
+            <typeparam name="T">The type</typeparam>
+            <returns>The enum try parse.</returns>
+        </member>
+        <member name="M:Vendr.Extensions.StringExtensions.EnumParse``1(System.String,System.Boolean)">
+            <summary>
+            Parse string to Enum
+            </summary>
+            <typeparam name="T">The enum type</typeparam>
+            <param name="strType">The string to parse</param>
+            <param name="ignoreCase">The ignore case</param>
+            <returns>The parsed enum</returns>
+        </member>
+        <member name="T:Vendr.Extensions.TypeExtensions">
+            <summary>
+            Type extension methods
+            </summary>
+        </member>
+        <member name="M:Vendr.Extensions.TypeExtensions.IsObsolete(System.Type)">
+            <summary>
+            Determines if the given type is decorated as being obsolete
+            </summary>
+            <param name="type">The Type to check</param>
+            <returns>True if the type is obsolete, otherwise False</returns>
+        </member>
+    </members>
+</doc>

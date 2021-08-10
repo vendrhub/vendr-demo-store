@@ -1,0 +1,251 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Vendr.Web</name>
+    </assembly>
+    <members>
+        <member name="M:Vendr.Extensions.HtmlHelperExtensions.BeginPaymentForm(System.Web.Mvc.HtmlHelper,Vendr.Core.Models.OrderReadOnly)">
+            <summary>
+            Helper method to create a payment form for the given order
+            </summary>
+            <param name="htmlHelper"></param>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vendr.Extensions.HtmlHelperExtensions.BeginPaymentForm(System.Web.Mvc.HtmlHelper,Vendr.Core.Models.OrderReadOnly,System.Object)">
+            <summary>
+            Helper method to create a payment form for the given order
+            </summary>
+            <param name="htmlHelper"></param>
+            <param name="order"></param>
+            <param name="htmlAttributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vendr.Extensions.HtmlHelperExtensions.BeginPaymentForm(System.Web.Mvc.HtmlHelper,Vendr.Core.Models.OrderReadOnly,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Helper method to create a payment form for the given order
+            </summary>
+            <param name="htmlHelper"></param>
+            <param name="order"></param>
+            <param name="htmlAttributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vendr.Extensions.HtmlHelperExtensions.RenderPaymentForm(System.Web.Mvc.HtmlHelper,Vendr.Core.Models.OrderReadOnly,System.Collections.Generic.IDictionary{System.String,System.Object},Vendr.Core.Services.IOrderService,Vendr.Core.Services.IPaymentMethodService,Vendr.Core.Services.IPaymentProviderService,Vendr.Core.PaymentProviders.PaymentProviderContextFactory,Vendr.Core.Generators.IOrderNumberGenerator,Vendr.Common.IUnitOfWorkProvider,Vendr.Core.Security.IMembershipHelper)">
+            <summary>
+            Helper method to create a payment form for the given order
+            </summary>
+            <param name="htmlHelper"></param>
+            <param name="order"></param>
+            <param name="htmlAttributes"></param>
+            <param name="paymentMethodService"></param>
+            <param name="paymentProviderService"></param>
+            <param name="uriResolver"></param>
+            <param name="hashProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Vendr.Web.ViewEngines.ViewRenderer">
+            <summary>
+            Class that renders MVC views to a string using the
+            standard MVC View Engine to render the view. 
+            
+            Requires that ASP.NET HttpContext is present to
+            work, but works outside of the context of MVC
+            </summary>
+            <remarks>
+            https://github.com/RickStrahl/WestwindToolkit/blob/master/Westwind.Web.Mvc/Utils/ViewRenderer.cs
+            </remarks>
+        </member>
+        <member name="P:Vendr.Web.ViewEngines.ViewRenderer.Context">
+            <summary>
+            Required Controller Context
+            </summary>
+        </member>
+        <member name="M:Vendr.Web.ViewEngines.ViewRenderer.#ctor(System.Web.Mvc.ControllerContext)">
+            <summary>
+            Initializes the ViewRenderer with a Context.
+            </summary>
+            <param name="controllerContext">
+            If you are running within the context of an ASP.NET MVC request pass in
+            the controller's context. 
+            Only leave out the context if no context is otherwise available.
+            </param>
+        </member>
+        <member name="M:Vendr.Web.ViewEngines.ViewRenderer.RenderViewToString(System.String,System.Object)">
+            <summary>
+            Renders a full MVC view to a string. Will render with the full MVC
+            View engine including running _ViewStart and merging into _Layout        
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by 
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to render the view with</param>
+            <returns>String of the rendered view or null on error</returns>
+        </member>
+        <member name="M:Vendr.Web.ViewEngines.ViewRenderer.RenderView(System.String,System.Object,System.IO.TextWriter)">
+            <summary>
+            Renders a full MVC view to a writer. Will render with the full MVC
+            View engine including running _ViewStart and merging into _Layout        
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by 
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to render the view with</param>
+            <returns>String of the rendered view or null on error</returns>
+        </member>
+        <member name="M:Vendr.Web.ViewEngines.ViewRenderer.RenderPartialViewToString(System.String,System.Object)">
+            <summary>
+            Renders a partial MVC view to string. Use this method to render
+            a partial view that doesn't merge with _Layout and doesn't fire
+            _ViewStart.
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by 
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to pass to the viewRenderer</param>
+            <returns>String of the rendered view or null on error</returns>
+        </member>
+        <member name="M:Vendr.Web.ViewEngines.ViewRenderer.RenderPartialView(System.String,System.Object,System.IO.TextWriter)">
+            <summary>
+            Renders a partial MVC view to given Writer. Use this method to render
+            a partial view that doesn't merge with _Layout and doesn't fire
+            _ViewStart.
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by 
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to pass to the viewRenderer</param>
+            <param name="writer">Writer to render the view to</param>
+        </member>
+        <member name="M:Vendr.Web.ViewEngines.ViewRenderer.RenderView(System.String,System.Object,System.Web.Mvc.ControllerContext)">
+            <summary>
+            Renders a full MVC view to a writer. Will render with the full MVC
+            View engine including running _ViewStart and merging into _Layout
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by 
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to pass to the viewRenderer</param>
+            <param name="controllerContext">Active Controller context</param>
+            <returns>String of the rendered view or null on error</returns>
+        </member>
+        <member name="M:Vendr.Web.ViewEngines.ViewRenderer.RenderView(System.String,System.IO.TextWriter,System.Object,System.Web.Mvc.ControllerContext)">
+            <summary>
+            Renders a full MVC view to a writer. Will render with the full MVC
+            View engine including running _ViewStart and merging into _Layout
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by 
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to pass to the viewRenderer</param>
+            <param name="writer">Writer to render the view to</param>
+            <param name="controllerContext">Active Controller context</param>
+            <returns>String of the rendered view or null on error</returns>
+        </member>
+        <member name="M:Vendr.Web.ViewEngines.ViewRenderer.RenderView(System.String,System.Object,System.Web.Mvc.ControllerContext,System.String@)">
+            <summary>
+            Renders a full MVC view to a writer. Will render with the full MVC
+            View engine including running _ViewStart and merging into _Layout
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by 
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to pass to the viewRenderer</param>
+            <param name="controllerContext">Active Controller context</param>
+            <param name="errorMessage">optional out parameter that captures an error message instead of throwing</param>
+            <returns>String of the rendered view or null on error</returns>
+        </member>
+        <member name="M:Vendr.Web.ViewEngines.ViewRenderer.RenderView(System.String,System.Object,System.IO.TextWriter,System.Web.Mvc.ControllerContext,System.String@)">
+            <summary>
+            Renders a full MVC view to a writer. Will render with the full MVC
+            View engine including running _ViewStart and merging into _Layout
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by 
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to pass to the viewRenderer</param>
+            <param name="controllerContext">Active Controller context</param>
+            <param name="writer">Writer to render the view to</param>
+            <param name="errorMessage">optional out parameter that captures an error message instead of throwing</param>
+            <returns>String of the rendered view or null on error</returns>
+        </member>
+        <member name="M:Vendr.Web.ViewEngines.ViewRenderer.RenderPartialView(System.String,System.Object,System.Web.Mvc.ControllerContext)">
+            <summary>
+            Renders a partial MVC view to string. Use this method to render
+            a partial view that doesn't merge with _Layout and doesn't fire
+            _ViewStart.
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by 
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to pass to the viewRenderer</param>
+            <param name="controllerContext">Active controller context</param>
+            <returns>String of the rendered view or null on error</returns>
+        </member>
+        <member name="M:Vendr.Web.ViewEngines.ViewRenderer.RenderPartialView(System.String,System.IO.TextWriter,System.Object,System.Web.Mvc.ControllerContext)">
+            <summary>
+            Renders a partial MVC view to string. Use this method to render
+            a partial view that doesn't merge with _Layout and doesn't fire
+            _ViewStart.
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by 
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to pass to the viewRenderer</param>
+            <param name="controllerContext">Active controller context</param>
+            <param name="writer">Text writer to render view to</param>
+            <param name="errorMessage">optional output parameter to receive an error message on failure</param>
+        </member>
+        <member name="M:Vendr.Web.ViewEngines.ViewRenderer.RenderViewToWriterInternal(System.String,System.IO.TextWriter,System.Object,System.Boolean)">
+            <summary>
+            Internal method that handles rendering of either partial or 
+            or full views.
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by 
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">Model to render the view with</param>
+            <param name="partial">Determines whether to render a full or partial view</param>
+            <param name="writer">Text writer to render view to</param>
+        </member>
+        <member name="M:Vendr.Web.ViewEngines.ViewRenderer.RenderViewToStringInternal(System.String,System.Object,System.Boolean)">
+            <summary>
+            Internal method that handles rendering of either partial or 
+            or full views.
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by 
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">Model to render the view with</param>
+            <param name="partial">Determines whether to render a full or partial view</param>
+            <returns>String of the rendered view</returns>
+        </member>
+        <member name="M:Vendr.Web.ViewEngines.ViewRenderer.CreateController``1(System.Web.Routing.RouteData,System.Object[])">
+            <summary>
+            Creates an instance of an MVC controller from scratch 
+            when no existing ControllerContext is present       
+            </summary>
+            <typeparam name="T">Type of the controller to create</typeparam>
+            <returns>Controller for T</returns>
+            <exception cref="T:System.InvalidOperationException">thrown if HttpContext not available</exception>
+        </member>
+        <member name="T:Vendr.Web.ViewEngines.EmptyController">
+            <summary>
+            Empty MVC Controller instance used to 
+            instantiate and provide a new ControllerContext
+            for the ViewRenderer
+            </summary>
+        </member>
+    </members>
+</doc>

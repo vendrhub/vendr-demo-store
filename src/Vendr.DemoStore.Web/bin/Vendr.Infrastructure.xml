@@ -1,0 +1,243 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Vendr.Infrastructure</name>
+    </assembly>
+    <members>
+        <member name="T:Vendr.Infrastructure.Constants.DatabaseSchema">
+            <summary>
+            Database schema constants
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.TableNamePrefix">
+            <summary>
+            The prefix to prepend on to all Vendr database table names
+            </summary>
+        </member>
+        <member name="T:Vendr.Infrastructure.Constants.DatabaseSchema.Tables">
+            <summary>
+            Database table constants
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.Store">
+            <summary>
+            The Store database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.StoreAllowedUserRole">
+            <summary>
+            The Store Allowed User Role database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.StoreAllowedUser">
+            <summary>
+            The Store Allowed User database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.Currency">
+            <summary>
+            The Currency database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.CurrencyAllowedCountry">
+            <summary>
+            The Currency Allowed Country database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.Country">
+            <summary>
+            The Country database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.Region">
+            <summary>
+            The Region database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.TaxClass">
+            <summary>
+            The Tax Class database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.TaxClassCountryRegionTaxRate">
+            <summary>
+            The Tax Class Country Region Tax Rate database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.OrderStatus">
+            <summary>
+            The Order Status database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.ShippingMethod">
+            <summary>
+            The Shipping Method database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.ShippingMethodAllowedCountryRegion">
+            <summary>
+            The Shipping Method Allowed Country Region database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.ShippingMethodCountryRegionPrice">
+            <summary>
+            The Shipping Method Country Region Price database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.PaymentMethod">
+            <summary>
+            The Payment Method database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.PaymentMethodAllowedCountryRegion">
+            <summary>
+            The Payment Method Allowed Country Region database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.PaymentMethodCountryRegionPrice">
+            <summary>
+            The Payment Method Country Region Price database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.PaymentMethodPaymentProviderSetting">
+            <summary>
+            The Payment Method Payment Provider Setting database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.Order">
+            <summary>
+            The Order database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.OrderProperty">
+            <summary>
+            The Order Property database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.OrderLine">
+            <summary>
+            The Order Line database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.OrderLineProperty">
+            <summary>
+            The Order Line Property database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.OrderLineAttribute">
+            <summary>
+            The Order Line Attribute database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.OrderPriceAdjustment">
+            <summary>
+            The Order Price Adjustment database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.OrderAppliedDiscountCode">
+            <summary>
+            The Order Applied Discount Code database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.OrderAppliedGiftCard">
+            <summary>
+            The Order Applied Gift Card database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.OrderAmountAdjustment">
+            <summary>
+            The Order Amount Adjustment database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.EmailTemplate">
+            <summary>
+            The Email Template database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.PrintTemplate">
+            <summary>
+            The Print Template database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.ExportTemplate">
+            <summary>
+            The Export Template database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.Stock">
+            <summary>
+            The Stock database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.Discount">
+            <summary>
+            The Discount database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.DiscountCode">
+            <summary>
+            The Discount Code database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.GiftCard">
+            <summary>
+            The Gift Card database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.GiftCardProperty">
+            <summary>
+            The Gift Card Property database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.ActivityLog">
+            <summary>
+            The Activity Log database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.FrozenPrice">
+            <summary>
+            The Frozen Price database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.ProductAttribute">
+            <summary>
+            The Product Attribute database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.ProductAttributeValue">
+            <summary>
+            The Product Attribute Value database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.ProductAttributePreset">
+            <summary>
+            The Product Attribute Preset database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.ProductAttributePresetAllowedAttribute">
+            <summary>
+            The Product Attribute Preset Allowed Attribute database table name
+            </summary>
+        </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.TranslatedValue">
+            <summary>
+            The Translated Value database table name
+            </summary>
+        </member>
+        <member name="T:Vendr.Infrastructure.IDatabaseUnitOfWork">
+            <summary>
+            Defines a Unit of Work that holds an <see cref="T:NPoco.IDatabase"/> reference
+            </summary>
+        </member>
+        <member name="P:Vendr.Infrastructure.IDatabaseUnitOfWork.Database">
+            <summary>
+            An <see cref="T:NPoco.IDatabase"/> reference to use inside the Unit of Work
+            </summary>
+        </member>
+        <member name="P:Vendr.Infrastructure.IDatabaseUnitOfWork.DatabaseType">
+            <summary>
+            Get the type of the <see cref="T:NPoco.IDatabase"/> connection
+            </summary>
+        </member>
+    </members>
+</doc>
