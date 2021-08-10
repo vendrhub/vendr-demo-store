@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Umbraco.Cms.Web.Website" Version="9.0.0-rc001" />
-    <PackageReference Include="Vendr.Umbraco.Startup" Version="2.0.0-alpha0109" />
+    <PackageReference Include="Vendr.Umbraco.Startup" Version="2.0.0-alpha0156" />
   </ItemGroup>
 
 </Project>
