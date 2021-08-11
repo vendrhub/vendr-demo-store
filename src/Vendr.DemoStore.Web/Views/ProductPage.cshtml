@@ -38,12 +38,10 @@
             var updateProductVariantInfo = function () {
 
                 // Convert selected values into a key value collection
-                var attributeValues = Array.from($("select[data-attribute]")).map(function (el) {
-                    return {
-                        key: el.dataset.attribute,
-                        value: el.value
-                    }
-                });
+                var attributeValues = Array.from($("select[data-attribute]")).reduce(function (accumulator, currentValue) {
+                    accumulator[currentValue.dataset.attribute] = currentValue.value;
+                    return accumulator;
+                }, { });
 
                 // Construct the post data to pass to the API controller
                 var postData = {
@@ -55,16 +53,23 @@
                 $("#add-to-cart").prop('disabled', true).css({ opacity: 0.2 });
 
                 // Fetch the variant data for the given attribute combination and update the UI accordingly
-                $.post("/umbraco/api/productapi/getproductvariant", postData, function (data, status, xhr) {
-                    if (data) {
-                        $("[data-variant-price]").text(data.priceFormatted);
-                        $("[name=productVariantReference]").val(data.productVariantReference);
-                        $(".product-image").attr("src", data.imageUrl);
-                        $("#add-to-cart").prop('disabled', false).css({ opacity: 1 });
-                    } else {
-                        $("[data-variant-price]").text("Unavailable");
-                        $("[name=productVariantReference]").val("");
-                        $(".product-image").attr("src", $(".product-image").data("defaultUrl"));
+                $.ajax({
+                    url: "/umbraco/api/productapi/getproductvariant",
+                    type: "POST",
+                    data: JSON.stringify(postData),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data) {
+                            $("[data-variant-price]").text(data.priceFormatted);
+                            $("[name=productVariantReference]").val(data.productVariantReference);
+                            $(".product-image").attr("src", data.imageUrl);
+                            $("#add-to-cart").prop('disabled', false).css({ opacity: 1 });
+                        } else {
+                            $("[data-variant-price]").text("Unavailable");
+                            $("[name=productVariantReference]").val("");
+                            $(".product-image").attr("src", $(".product-image").data("defaultUrl"));
+                        }
                     }
                 });
 

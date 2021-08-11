@@ -23,7 +23,7 @@ namespace Vendr.DemoStore.Web.Controllers
         }
 
         [HttpPost]
-        public object GetProductVariant(GetProductVariantDto model)
+        public object GetProductVariant([FromBody] GetProductVariantDto model)
         {
             // Get the variants for the given node
             var productNode = _publishedContentQuery.Content(model.ProductNodeId) as MultiVariantProductPage;
