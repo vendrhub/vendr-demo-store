@@ -118,6 +118,7 @@
         var currentTimeframe = $scope.model.config.currentTimeframe;
 
         var today = vendrDateHelper.getToday();
+        var todayEod = vendrDateHelper.getToday().setHours(23, 59, 59, 999);
 
         vm.loading = true;
         vm.title = "Timeframe";
@@ -136,7 +137,7 @@
 
         vm.datePickerConfig = {
             mode: "range",
-            maxDate: "today",
+            maxDate: todayEod,
             dateFormat: "Y-m-d",
             showMonths: 2,
             enableTime: false
@@ -7283,7 +7284,7 @@
                         prices.push({
                             currencyId: currency.id,
                             currencyCode: currency.code,
-                            value: value && value[currency.id] ? value[currency.id] : ''
+                            value: value && value[currency.id] != undefined ? value[currency.id] : ''
                         });
                     });
                     vm.prices = prices;
