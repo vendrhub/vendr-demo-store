@@ -12,12 +12,12 @@ namespace Vendr.DemoStore.Web.ViewComponents
     public abstract class ProductViewComponentBase : ViewComponent
     {
         private readonly IExamineManager _examineManager;
-        private readonly IUmbracoContextAccessor _umbracoContextAccessor;
+        private readonly IUmbracoContextFactory _umbracoContextFactory;
 
-        public ProductViewComponentBase(IExamineManager examineManager, IUmbracoContextAccessor umbracoContextAccessor)
+        public ProductViewComponentBase(IExamineManager examineManager, IUmbracoContextFactory umbracoContextFactory)
         {
             _examineManager = examineManager;
-            _umbracoContextAccessor = umbracoContextAccessor;
+            _umbracoContextFactory = umbracoContextFactory;
         }
 
         protected PagedResult<ProductPage> GetPagedProducts(int? collectionId, string category, int page, int pageSize)
@@ -42,15 +42,18 @@ namespace Vendr.DemoStore.Web.ViewComponents
                     .Execute(QueryOptions.SkipTake(pageSize * (page - 1), pageSize * page));
                 var totalResults = results.TotalItemCount;
 
-                var items = results.ToPublishedSearchResults(_umbracoContextAccessor.UmbracoContext.Content)
-                    .Select(x => x.Content)
-                    .OfType<ProductPage>()
-                    .OrderBy(x => x.SortOrder);
-
-                return new PagedResult<ProductPage>(totalResults, page, pageSize)
+                using (var ctx = _umbracoContextFactory.EnsureUmbracoContext())
                 {
-                    Items = items
-                };
+                    var items = results.ToPublishedSearchResults(ctx.UmbracoContext.Content)
+                        .Select(x => x.Content)
+                        .OfType<ProductPage>()
+                        .OrderBy(x => x.SortOrder);
+
+                    return new PagedResult<ProductPage>(totalResults, page, pageSize)
+                    {
+                        Items = items
+                    };
+                }
             }
 
             return new PagedResult<ProductPage>(0, page, pageSize);

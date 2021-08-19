@@ -10,8 +10,8 @@ namespace Vendr.DemoStore.Web.ViewComponents
     [ViewComponent]
     public class FeaturedProductsViewComponent : ProductViewComponentBase
     {
-        public FeaturedProductsViewComponent(IExamineManager examineManager, IUmbracoContextAccessor umbracoContextAccessor)
-            : base(examineManager, umbracoContextAccessor)
+        public FeaturedProductsViewComponent(IExamineManager examineManager, IUmbracoContextFactory umbracoContextFactory)
+            : base(examineManager, umbracoContextFactory)
         { }
 
         public IViewComponentResult Invoke(IPublishedContent currentPage)

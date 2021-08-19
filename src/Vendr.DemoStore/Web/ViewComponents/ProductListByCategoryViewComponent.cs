@@ -8,8 +8,8 @@ namespace Vendr.DemoStore.Web.ViewComponents
     [ViewComponent]
     public class ProductListByCategoryViewComponent : ProductViewComponentBase
     {
-        public ProductListByCategoryViewComponent(IExamineManager examineManager, IUmbracoContextAccessor umbracoContextAccessor)
-            : base(examineManager, umbracoContextAccessor)
+        public ProductListByCategoryViewComponent(IExamineManager examineManager, IUmbracoContextFactory umbracoContextFactory)
+            : base(examineManager, umbracoContextFactory)
         { }
 
         public IViewComponentResult Invoke(string category)
