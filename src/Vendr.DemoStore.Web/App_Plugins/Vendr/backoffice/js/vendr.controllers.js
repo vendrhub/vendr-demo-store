@@ -8691,6 +8691,11 @@
             taxClasses: [],
             orderStatuses: [],
             emailTemplates: [],
+            orderRoundingMethods: [
+                { key: 'Unit', value: 'Unit' },
+                { key: 'Line', value: 'Line' },
+                { key: 'Total', value: 'Total' }
+            ],
             giftCardActivationMethods: [
                 { key: 'Manual', value: 'Manual' },
                 { key: 'Automatic', value: 'Automatic' },

@@ -4,10 +4,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Umbraco.Cms" Version="9.0.0-rc002" />
-        <PackageReference Include="Umbraco.Cms.SqlCe" Version="9.0.0-rc002" />
+        <PackageReference Include="Umbraco.Cms" Version="9.0.0" />
+        <PackageReference Include="Umbraco.Cms.SqlCe" Version="9.0.0" />
         <PackageReference Include="Umbraco.SqlServerCE" Version="4.0.0.1" />
-        <PackageReference Include="Vendr" Version="2.0.0-rc0010" />
+        <PackageReference Include="Vendr" Version="2.0.0-rc0044" />
     </ItemGroup>
 
 
