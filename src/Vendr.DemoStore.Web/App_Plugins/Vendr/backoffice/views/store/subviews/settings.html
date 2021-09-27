@@ -99,6 +99,13 @@
                     <input type="text" class="umb-property-editor umb-textstring textstring vendr-input--short"
                            ng-model="model.content.orderNumberTemplate" />
                 </umb-control-group>
+                <umb-control-group label="Order Rounding Method" description="At what level in the order calculation process should prices be rounded">
+                    <select class="umb-property-editor umb-dropdown"
+                            ng-model="model.content.orderRoundingMethod"
+                            ng-options="itm.key as itm.value  for itm in model.options.orderRoundingMethods">
+                        <option value="" disabled selected ng-hide="model.content.orderRoundingMethod">-- Select a Rounding Method --</option>
+                    </select>
+                </umb-control-group>
 
             </umb-box-content>
         </umb-box>

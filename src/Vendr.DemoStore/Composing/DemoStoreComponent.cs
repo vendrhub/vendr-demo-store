@@ -8,9 +8,9 @@ using Umbraco.Core.Composing;
 using Umbraco.Web;
 using Vendr.DemoStore.Models;
 
-namespace Vendr.DemoStore.Composing
+namespace Vendr.DemoStore.Composing 
 {
-    public class DemoStoreComponent : IComponent
+    public class DemoStoreComponent : IComponent 
     {
         private readonly IExamineManager _examineManager;
         private readonly IUmbracoContextFactory _umbracoContextFactory;

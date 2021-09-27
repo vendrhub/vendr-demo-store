@@ -76,13 +76,12 @@
             <param name="shared">Allow the log file to be shared by multiple processes. The default is false.</param>
             <param name="flushToDiskInterval">If provided, a full disk flush will be performed periodically at the specified interval.</param>
             <param name="rollingInterval">The interval at which logging will roll over to a new file.</param>
-            <param name="rollOnFileSizeLimit">If <code>true</code>, a new file will be created when the file size limit is reached. Filenames 
+            <param name="rollOnFileSizeLimit">If <code>true</code>, a new file will be created when the file size limit is reached. Filenames
             will have a number appended in the format <code>_NNN</code>, with the first filename given no number.</param>
             <param name="retainedFileCountLimit">The maximum number of log files that will be retained,
             including the current log file. For unlimited retention, pass null. The default is 31.</param>
             <param name="encoding">Character encoding used to write the text file. The default is UTF-8 without BOM.</param>
             <returns>Configuration object allowing method chaining.</returns>
-            <remarks>The file will be written using the UTF-8 character set.</remarks>
         </member>
         <member name="M:Serilog.FileLoggerConfigurationExtensions.File(Serilog.Configuration.LoggerSinkConfiguration,Serilog.Formatting.ITextFormatter,System.String,Serilog.Events.LogEventLevel,System.Nullable{System.Int64},Serilog.Core.LoggingLevelSwitch,System.Boolean,System.Boolean,System.Nullable{System.TimeSpan},Serilog.RollingInterval,System.Boolean,System.Nullable{System.Int32},System.Text.Encoding)">
             <summary>
@@ -91,7 +90,7 @@
             <param name="sinkConfiguration">Logger sink configuration.</param>
             <param name="formatter">A formatter, such as <see cref="T:Serilog.Formatting.Json.JsonFormatter"/>, to convert the log events into
             text for the file. If control of regular text formatting is required, use the other
-            overload of <see cref="M:Serilog.FileLoggerConfigurationExtensions.File(Serilog.Configuration.LoggerSinkConfiguration,System.String,Serilog.Events.LogEventLevel,System.String,System.IFormatProvider,System.Nullable{System.Int64},Serilog.Core.LoggingLevelSwitch,System.Boolean,System.Boolean,System.Nullable{System.TimeSpan},Serilog.RollingInterval,System.Boolean,System.Nullable{System.Int32},System.Text.Encoding)"/>
+            overload of <see cref="M:Serilog.FileLoggerConfigurationExtensions.File(Serilog.Configuration.LoggerSinkConfiguration,System.String,Serilog.Events.LogEventLevel,System.String,System.IFormatProvider,System.Nullable{System.Int64},Serilog.Core.LoggingLevelSwitch,System.Boolean,System.Boolean,System.Nullable{System.TimeSpan},Serilog.RollingInterval,System.Boolean,System.Nullable{System.Int32},System.Text.Encoding,Serilog.Sinks.File.FileLifecycleHooks)"/>
             and specify the outputTemplate parameter instead.
             </param>
             <param name="path">Path to the file.</param>
@@ -107,13 +106,72 @@
             <param name="shared">Allow the log file to be shared by multiple processes. The default is false.</param>
             <param name="flushToDiskInterval">If provided, a full disk flush will be performed periodically at the specified interval.</param>
             <param name="rollingInterval">The interval at which logging will roll over to a new file.</param>
-            <param name="rollOnFileSizeLimit">If <code>true</code>, a new file will be created when the file size limit is reached. Filenames 
+            <param name="rollOnFileSizeLimit">If <code>true</code>, a new file will be created when the file size limit is reached. Filenames
             will have a number appended in the format <code>_NNN</code>, with the first filename given no number.</param>
             <param name="retainedFileCountLimit">The maximum number of log files that will be retained,
             including the current log file. For unlimited retention, pass null. The default is 31.</param>
             <param name="encoding">Character encoding used to write the text file. The default is UTF-8 without BOM.</param>
             <returns>Configuration object allowing method chaining.</returns>
-            <remarks>The file will be written using the UTF-8 character set.</remarks>
+        </member>
+        <member name="M:Serilog.FileLoggerConfigurationExtensions.File(Serilog.Configuration.LoggerSinkConfiguration,System.String,Serilog.Events.LogEventLevel,System.String,System.IFormatProvider,System.Nullable{System.Int64},Serilog.Core.LoggingLevelSwitch,System.Boolean,System.Boolean,System.Nullable{System.TimeSpan},Serilog.RollingInterval,System.Boolean,System.Nullable{System.Int32},System.Text.Encoding,Serilog.Sinks.File.FileLifecycleHooks)">
+            <summary>
+            Write log events to the specified file.
+            </summary>
+            <param name="sinkConfiguration">Logger sink configuration.</param>
+            <param name="path">Path to the file.</param>
+            <param name="restrictedToMinimumLevel">The minimum level for
+            events passed through the sink. Ignored when <paramref name="levelSwitch"/> is specified.</param>
+            <param name="levelSwitch">A switch allowing the pass-through minimum level
+            to be changed at runtime.</param>
+            <param name="formatProvider">Supplies culture-specific formatting information, or null.</param>
+            <param name="outputTemplate">A message template describing the format used to write to the sink.
+            the default is "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}".</param>
+            <param name="fileSizeLimitBytes">The approximate maximum size, in bytes, to which a log file will be allowed to grow.
+            For unrestricted growth, pass null. The default is 1 GB. To avoid writing partial events, the last event within the limit
+            will be written in full even if it exceeds the limit.</param>
+            <param name="buffered">Indicates if flushing to the output file can be buffered or not. The default
+            is false.</param>
+            <param name="shared">Allow the log file to be shared by multiple processes. The default is false.</param>
+            <param name="flushToDiskInterval">If provided, a full disk flush will be performed periodically at the specified interval.</param>
+            <param name="rollingInterval">The interval at which logging will roll over to a new file.</param>
+            <param name="rollOnFileSizeLimit">If <code>true</code>, a new file will be created when the file size limit is reached. Filenames
+            will have a number appended in the format <code>_NNN</code>, with the first filename given no number.</param>
+            <param name="retainedFileCountLimit">The maximum number of log files that will be retained,
+            including the current log file. For unlimited retention, pass null. The default is 31.</param>
+            <param name="encoding">Character encoding used to write the text file. The default is UTF-8 without BOM.</param>
+            <param name="hooks">Optionally enables hooking into log file lifecycle events.</param>
+            <returns>Configuration object allowing method chaining.</returns>
+        </member>
+        <member name="M:Serilog.FileLoggerConfigurationExtensions.File(Serilog.Configuration.LoggerSinkConfiguration,Serilog.Formatting.ITextFormatter,System.String,Serilog.Events.LogEventLevel,System.Nullable{System.Int64},Serilog.Core.LoggingLevelSwitch,System.Boolean,System.Boolean,System.Nullable{System.TimeSpan},Serilog.RollingInterval,System.Boolean,System.Nullable{System.Int32},System.Text.Encoding,Serilog.Sinks.File.FileLifecycleHooks)">
+            <summary>
+            Write log events to the specified file.
+            </summary>
+            <param name="sinkConfiguration">Logger sink configuration.</param>
+            <param name="formatter">A formatter, such as <see cref="T:Serilog.Formatting.Json.JsonFormatter"/>, to convert the log events into
+            text for the file. If control of regular text formatting is required, use the other
+            overload of <see cref="M:Serilog.FileLoggerConfigurationExtensions.File(Serilog.Configuration.LoggerSinkConfiguration,System.String,Serilog.Events.LogEventLevel,System.String,System.IFormatProvider,System.Nullable{System.Int64},Serilog.Core.LoggingLevelSwitch,System.Boolean,System.Boolean,System.Nullable{System.TimeSpan},Serilog.RollingInterval,System.Boolean,System.Nullable{System.Int32},System.Text.Encoding,Serilog.Sinks.File.FileLifecycleHooks)"/>
+            and specify the outputTemplate parameter instead.
+            </param>
+            <param name="path">Path to the file.</param>
+            <param name="restrictedToMinimumLevel">The minimum level for
+            events passed through the sink. Ignored when <paramref name="levelSwitch"/> is specified.</param>
+            <param name="levelSwitch">A switch allowing the pass-through minimum level
+            to be changed at runtime.</param>
+            <param name="fileSizeLimitBytes">The approximate maximum size, in bytes, to which a log file will be allowed to grow.
+            For unrestricted growth, pass null. The default is 1 GB. To avoid writing partial events, the last event within the limit
+            will be written in full even if it exceeds the limit.</param>
+            <param name="buffered">Indicates if flushing to the output file can be buffered or not. The default
+            is false.</param>
+            <param name="shared">Allow the log file to be shared by multiple processes. The default is false.</param>
+            <param name="flushToDiskInterval">If provided, a full disk flush will be performed periodically at the specified interval.</param>
+            <param name="rollingInterval">The interval at which logging will roll over to a new file.</param>
+            <param name="rollOnFileSizeLimit">If <code>true</code>, a new file will be created when the file size limit is reached. Filenames
+            will have a number appended in the format <code>_NNN</code>, with the first filename given no number.</param>
+            <param name="retainedFileCountLimit">The maximum number of log files that will be retained,
+            including the current log file. For unlimited retention, pass null. The default is 31.</param>
+            <param name="encoding">Character encoding used to write the text file. The default is UTF-8 without BOM.</param>
+            <param name="hooks">Optionally enables hooking into log file lifecycle events.</param>
+            <returns>Configuration object allowing method chaining.</returns>
         </member>
         <member name="M:Serilog.FileLoggerConfigurationExtensions.File(Serilog.Configuration.LoggerAuditSinkConfiguration,System.String,Serilog.Events.LogEventLevel,System.String,System.IFormatProvider,Serilog.Core.LoggingLevelSwitch)">
             <summary>
@@ -148,6 +206,42 @@
             to be changed at runtime.</param>
             <returns>Configuration object allowing method chaining.</returns>
             <remarks>The file will be written using the UTF-8 character set.</remarks>
+        </member>
+        <member name="M:Serilog.FileLoggerConfigurationExtensions.File(Serilog.Configuration.LoggerAuditSinkConfiguration,System.String,Serilog.Events.LogEventLevel,System.String,System.IFormatProvider,Serilog.Core.LoggingLevelSwitch,System.Text.Encoding,Serilog.Sinks.File.FileLifecycleHooks)">
+            <summary>
+            Write audit log events to the specified file.
+            </summary>
+            <param name="sinkConfiguration">Logger sink configuration.</param>
+            <param name="path">Path to the file.</param>
+            <param name="restrictedToMinimumLevel">The minimum level for
+            events passed through the sink. Ignored when <paramref name="levelSwitch"/> is specified.</param>
+            <param name="levelSwitch">A switch allowing the pass-through minimum level
+            to be changed at runtime.</param>
+            <param name="formatProvider">Supplies culture-specific formatting information, or null.</param>
+            <param name="outputTemplate">A message template describing the format used to write to the sink.
+            the default is "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}".</param>
+            <param name="encoding">Character encoding used to write the text file. The default is UTF-8 without BOM.</param>
+            <param name="hooks">Optionally enables hooking into log file lifecycle events.</param>
+            <returns>Configuration object allowing method chaining.</returns>
+        </member>
+        <member name="M:Serilog.FileLoggerConfigurationExtensions.File(Serilog.Configuration.LoggerAuditSinkConfiguration,Serilog.Formatting.ITextFormatter,System.String,Serilog.Events.LogEventLevel,Serilog.Core.LoggingLevelSwitch,System.Text.Encoding,Serilog.Sinks.File.FileLifecycleHooks)">
+            <summary>
+            Write audit log events to the specified file.
+            </summary>
+            <param name="sinkConfiguration">Logger sink configuration.</param>
+            <param name="formatter">A formatter, such as <see cref="T:Serilog.Formatting.Json.JsonFormatter"/>, to convert the log events into
+            text for the file. If control of regular text formatting is required, use the other
+            overload of <see cref="M:Serilog.FileLoggerConfigurationExtensions.File(Serilog.Configuration.LoggerAuditSinkConfiguration,System.String,Serilog.Events.LogEventLevel,System.String,System.IFormatProvider,Serilog.Core.LoggingLevelSwitch,System.Text.Encoding,Serilog.Sinks.File.FileLifecycleHooks)"/>
+            and specify the outputTemplate parameter instead.
+            </param>
+            <param name="path">Path to the file.</param>
+            <param name="restrictedToMinimumLevel">The minimum level for
+            events passed through the sink. Ignored when <paramref name="levelSwitch"/> is specified.</param>
+            <param name="levelSwitch">A switch allowing the pass-through minimum level
+            to be changed at runtime.</param>
+            <param name="encoding">Character encoding used to write the text file. The default is UTF-8 without BOM.</param>
+            <param name="hooks">Optionally enables hooking into log file lifecycle events.</param>
+            <returns>Configuration object allowing method chaining.</returns>
         </member>
         <member name="T:Serilog.RollingInterval">
             <summary>
@@ -184,6 +278,33 @@
             Roll every minute. Filenames will have <code>yyyyMMddHHmm</code> appended.
             </summary>
         </member>
+        <member name="T:Serilog.Sinks.File.FileLifecycleHooks">
+            <summary>
+            Enables hooking into log file lifecycle events.
+            Hooks run synchronously and therefore may affect responsiveness of the application if long operations are performed.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.File.FileLifecycleHooks.OnFileOpened(System.IO.Stream,System.Text.Encoding)">
+            <summary>
+            Initialize or wrap the <paramref name="underlyingStream"/> opened on the log file. This can be used to write
+            file headers, or wrap the stream in another that adds buffering, compression, encryption, etc. The underlying
+            file may or may not be empty when this method is called.
+            </summary>
+            <remarks>
+            A value must be returned from overrides of this method. Serilog will flush and/or dispose the returned value, but will not
+            dispose the stream initially passed in unless it is itself returned.
+            </remarks>
+            <param name="underlyingStream">The underlying <see cref="T:System.IO.Stream"/> opened on the log file.</param>
+            <param name="encoding">The encoding to use when reading/writing to the stream.</param>
+            <returns>The <see cref="T:System.IO.Stream"/> Serilog should use when writing events to the log file.</returns>
+        </member>
+        <member name="M:Serilog.Sinks.File.FileLifecycleHooks.OnFileDeleting(System.String)">
+            <summary>
+            Called before an obsolete (rolling) log file is deleted.
+            This can be used to copy old logs to an archive location or send to a backup server.
+            </summary>
+            <param name="path">The full path to the file being deleted.</param>
+        </member>
         <member name="T:Serilog.Sinks.File.FileSink">
             <summary>
             Write log events to a disk file.
@@ -200,7 +321,7 @@
             <param name="buffered">Indicates if flushing to the output file can be buffered or not. The default
             is false.</param>
             <returns>Configuration object allowing method chaining.</returns>
-            <remarks>The file will be written using the UTF-8 character set.</remarks>
+            <remarks>This constructor preserves compatibility with early versions of the public API. New code should not depend on this type.</remarks>
             <exception cref="T:System.IO.IOException"></exception>
         </member>
         <member name="M:Serilog.Sinks.File.FileSink.Emit(Serilog.Events.LogEvent)">
@@ -250,7 +371,7 @@
             </summary>
             <param name="sink">The sink to wrap.</param>
             <param name="flushInterval">The interval at which to flush the underlying sink.</param>
-            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.ArgumentNullException"/>
         </member>
         <member name="M:Serilog.Sinks.File.PeriodicFlushToDiskSink.Emit(Serilog.Events.LogEvent)">
             <inheritdoc />
@@ -272,7 +393,6 @@
             will be written in full even if it exceeds the limit.</param>
             <param name="encoding">Character encoding used to write the text file. The default is UTF-8 without BOM.</param>
             <returns>Configuration object allowing method chaining.</returns>
-            <remarks>The file will be written using the UTF-8 character set.</remarks>
             <exception cref="T:System.IO.IOException"></exception>
         </member>
         <member name="M:Serilog.Sinks.File.SharedFileSink.Emit(Serilog.Events.LogEvent)">

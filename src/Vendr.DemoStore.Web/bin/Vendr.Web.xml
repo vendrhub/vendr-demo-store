@@ -4,45 +4,6 @@
         <name>Vendr.Web</name>
     </assembly>
     <members>
-        <member name="M:Vendr.Extensions.HtmlHelperExtensions.BeginPaymentForm(System.Web.Mvc.HtmlHelper,Vendr.Core.Models.OrderReadOnly)">
-            <summary>
-            Helper method to create a payment form for the given order
-            </summary>
-            <param name="htmlHelper"></param>
-            <param name="order"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Vendr.Extensions.HtmlHelperExtensions.BeginPaymentForm(System.Web.Mvc.HtmlHelper,Vendr.Core.Models.OrderReadOnly,System.Object)">
-            <summary>
-            Helper method to create a payment form for the given order
-            </summary>
-            <param name="htmlHelper"></param>
-            <param name="order"></param>
-            <param name="htmlAttributes"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Vendr.Extensions.HtmlHelperExtensions.BeginPaymentForm(System.Web.Mvc.HtmlHelper,Vendr.Core.Models.OrderReadOnly,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            Helper method to create a payment form for the given order
-            </summary>
-            <param name="htmlHelper"></param>
-            <param name="order"></param>
-            <param name="htmlAttributes"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Vendr.Extensions.HtmlHelperExtensions.RenderPaymentForm(System.Web.Mvc.HtmlHelper,Vendr.Core.Models.OrderReadOnly,System.Collections.Generic.IDictionary{System.String,System.Object},Vendr.Core.Services.IOrderService,Vendr.Core.Services.IPaymentMethodService,Vendr.Core.Services.IPaymentProviderService,Vendr.Core.PaymentProviders.PaymentProviderContextFactory,Vendr.Core.Generators.IOrderNumberGenerator,Vendr.Common.IUnitOfWorkProvider,Vendr.Core.Security.IMembershipHelper)">
-            <summary>
-            Helper method to create a payment form for the given order
-            </summary>
-            <param name="htmlHelper"></param>
-            <param name="order"></param>
-            <param name="htmlAttributes"></param>
-            <param name="paymentMethodService"></param>
-            <param name="paymentProviderService"></param>
-            <param name="uriResolver"></param>
-            <param name="hashProvider"></param>
-            <returns></returns>
-        </member>
         <member name="T:Vendr.Web.ViewEngines.ViewRenderer">
             <summary>
             Class that renders MVC views to a string using the
@@ -246,6 +207,45 @@
             instantiate and provide a new ControllerContext
             for the ViewRenderer
             </summary>
+        </member>
+        <member name="M:Vendr.Extensions.HtmlHelperExtensions.BeginPaymentForm(System.Web.Mvc.HtmlHelper,Vendr.Core.Models.OrderReadOnly)">
+            <summary>
+            Helper method to create a payment form for the given order
+            </summary>
+            <param name="htmlHelper"></param>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vendr.Extensions.HtmlHelperExtensions.BeginPaymentForm(System.Web.Mvc.HtmlHelper,Vendr.Core.Models.OrderReadOnly,System.Object)">
+            <summary>
+            Helper method to create a payment form for the given order
+            </summary>
+            <param name="htmlHelper"></param>
+            <param name="order"></param>
+            <param name="htmlAttributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vendr.Extensions.HtmlHelperExtensions.BeginPaymentForm(System.Web.Mvc.HtmlHelper,Vendr.Core.Models.OrderReadOnly,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Helper method to create a payment form for the given order
+            </summary>
+            <param name="htmlHelper"></param>
+            <param name="order"></param>
+            <param name="htmlAttributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vendr.Extensions.HtmlHelperExtensions.RenderPaymentForm(System.Web.Mvc.HtmlHelper,Vendr.Core.Models.OrderReadOnly,System.Collections.Generic.IDictionary{System.String,System.Object},Vendr.Core.Services.IOrderService,Vendr.Core.Services.IPaymentMethodService,Vendr.Core.Services.IPaymentProviderService,Vendr.Core.PaymentProviders.PaymentProviderContextFactory,Vendr.Core.Generators.IOrderNumberGenerator,Vendr.Common.IUnitOfWorkProvider,Vendr.Core.Security.IMembershipHelper)">
+            <summary>
+            Helper method to create a payment form for the given order
+            </summary>
+            <param name="htmlHelper"></param>
+            <param name="order"></param>
+            <param name="htmlAttributes"></param>
+            <param name="paymentMethodService"></param>
+            <param name="paymentProviderService"></param>
+            <param name="uriResolver"></param>
+            <param name="hashProvider"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

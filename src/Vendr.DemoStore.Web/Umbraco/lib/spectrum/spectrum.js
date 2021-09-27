@@ -1,8 +1,3 @@
-// Spectrum Colorpicker v2.0.0
-// https://github.com/seballot/spectrum
-// Author: Brian Grinstead and spectrum contributors
-// License: MIT
-
 (function (factory) {
     "use strict";
 
@@ -292,7 +287,7 @@
 
                 // if showPaletteOnly and didn't set initialcolor
                 // set initialcolor to first palette
-                if (opts.showPaletteOnly && !opts.color) {
+                if (opts.showPaletteOnly && !initialColor) {
                     initialColor = (palette[0][0] === '') ? palette[0][0] : Object.keys(paletteLookup)[0];
                 }
             }
@@ -367,7 +362,7 @@
 
             offsetElement.on("click.spectrum touchstart.spectrum", function (e) {
                 if (!disabled) {
-                    toggle();
+                    show();
                 }
 
                 e.stopPropagation();
@@ -2473,13 +2468,14 @@
     var localization = $.spectrum.localization["cs"] = {
         cancelText: "zrušit",
         chooseText: "vybrat",
-        clearText: "Resetovat výměr barev",
+        clearText: "Resetovat výběr barev",
         noColorSelectedText: "Žádná barva nebyla vybrána",
         togglePaletteMoreText: "více",
         togglePaletteLessText: "méně"
     };
 
 })( jQuery );
+
 // Spectrum Colorpicker
 // German (de) localization
 // https://github.com/seballot/spectrum

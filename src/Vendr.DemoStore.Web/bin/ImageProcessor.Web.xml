@@ -341,14 +341,6 @@
             An enumerable collection of directories that matches searchPattern and searchOption.
             </returns>
         </member>
-        <member name="M:ImageProcessor.Web.Caching.DiskCache.RecursivelyDeleteEmptyDirectories(System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-            Recursively delete the directories in the folder.
-            </summary>
-            <param name="directory">The current directory.</param>
-            <param name="root">The root path.</param>
-            <param name="token">The cancellation token.</param>
-        </member>
         <member name="M:ImageProcessor.Web.Caching.DiskCache.SetETagHeader(System.Web.HttpContext)">
             <summary>
             Sets the ETag Header
@@ -1875,6 +1867,16 @@
             Encapsulates a series of time saving extension methods to the <see cref="T:System.String"/> class.
             </summary>
         </member>
+        <member name="F:ImageProcessor.Web.Extensions.StringExtensions.PositiveFloatArrayRegex">
+            <summary>
+            The regular expression to search strings for an array of positive floats.
+            </summary>
+        </member>
+        <member name="F:ImageProcessor.Web.Extensions.StringExtensions.PositiveIntegerArrayRegex">
+            <summary>
+            The regular expression to search strings for an array of positive integers.
+            </summary>
+        </member>
         <member name="M:ImageProcessor.Web.Extensions.StringExtensions.ToMD5Fingerprint(System.String)">
             <summary>
             Creates an MD5 fingerprint of the String.
@@ -2066,6 +2068,26 @@
             <returns>
             An <see cref="T:System.Object"/> that represents the converted value.
             </returns>
+        </member>
+        <member name="T:ImageProcessor.Web.Helpers.PointFConverter">
+            <summary>
+            The PointF converter.
+            </summary>
+        </member>
+        <member name="M:ImageProcessor.Web.Helpers.PointFConverter.ConvertFrom(System.Globalization.CultureInfo,System.Object,System.Type)">
+            <summary>
+            Converts the given object to the type of this converter, using the specified context and culture 
+            information.
+            </summary>
+            <returns>
+            An <see cref="T:System.Object"/> that represents the converted value.
+            </returns>
+            <param name="culture">
+            The <see cref="T:System.Globalization.CultureInfo"/> to use as the current culture. 
+            </param>
+            <param name="value">The <see cref="T:System.Object"/> to convert. </param>
+            <param name="propertyType">The property type that the converter will convert to.</param>
+            <exception cref="T:System.NotSupportedException">The conversion cannot be performed.</exception>
         </member>
         <member name="T:ImageProcessor.Web.Helpers.SizeConverter">
             <summary>
@@ -2396,48 +2418,41 @@
         </member>
         <member name="F:ImageProcessor.Web.Helpers.QueryParamParser.Lazy">
             <summary>
-            A new instance of the <see cref="T:ImageProcessor.Web.Helpers.QueryParamParser"/> class.
+            A new instance of the <see cref="T:ImageProcessor.Web.Helpers.QueryParamParser" /> class.
             with lazy initialization.
             </summary>
         </member>
         <member name="M:ImageProcessor.Web.Helpers.QueryParamParser.#ctor">
             <summary>
-            Prevents a default instance of the <see cref="T:ImageProcessor.Web.Helpers.QueryParamParser"/> class from being created.
+            Prevents a default instance of the <see cref="T:ImageProcessor.Web.Helpers.QueryParamParser" /> class from being created.
             </summary>
         </member>
         <member name="P:ImageProcessor.Web.Helpers.QueryParamParser.Instance">
             <summary>
-            Gets the current <see cref="T:ImageProcessor.Web.Helpers.QueryParamParser"/> instance.
+            Gets the current <see cref="T:ImageProcessor.Web.Helpers.QueryParamParser" /> instance.
             </summary>
+            <value>
+            The <see cref="T:ImageProcessor.Web.Helpers.QueryParamParser" /> instance.
+            </value>
         </member>
         <member name="M:ImageProcessor.Web.Helpers.QueryParamParser.ParseValue``1(System.String,System.Globalization.CultureInfo)">
             <summary>
             Parses the given string value converting it to the given type.
             </summary>
-            <param name="value">
-            The <see cref="T:System.String"/> value to parse.
-            </param>
-            <param name="culture">
-            The <see cref="T:System.Globalization.CultureInfo"/> to use as the current culture.
-            <remarks>If not set will parse using <see cref="P:System.Globalization.CultureInfo.InvariantCulture"/></remarks>
-            </param>
-            <typeparam name="T">
-            The <see cref="T:System.Type"/> to convert the string to.
-            </typeparam>
+            <typeparam name="T">The <see cref="T:System.Type" /> to convert the string to.</typeparam>
+            <param name="value">The <see cref="T:System.String" /> value to parse.</param>
+            <param name="culture">The <see cref="T:System.Globalization.CultureInfo" /> to use as the current culture.
+            <remarks>If not set will parse using <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /></remarks></param>
             <returns>
-            The <typeparamref name="T"/>.
+            The <typeparamref name="T" />.
             </returns>
         </member>
         <member name="M:ImageProcessor.Web.Helpers.QueryParamParser.AddTypeConverter(System.Type,System.Type)">
             <summary>
             Adds a type converter to the parser.
             </summary>
-            <param name="type">
-            The <see cref="T:System.Type"/> to add a converter for.
-            </param>
-            <param name="converterType">
-            The type of <see cref="T:ImageProcessor.Web.Helpers.IQueryParamConverter"/> to add.
-            </param>
+            <param name="type">The <see cref="T:System.Type" /> to add a converter for.</param>
+            <param name="converterType">The type of <see cref="T:ImageProcessor.Web.Helpers.IQueryParamConverter" /> to add.</param>
         </member>
         <member name="M:ImageProcessor.Web.Helpers.QueryParamParser.AddColorConverters">
             <summary>
@@ -2456,12 +2471,12 @@
         </member>
         <member name="M:ImageProcessor.Web.Helpers.QueryParamParser.AddSizeConverters">
             <summary>
-            Adds point converters.
+            Adds size converters.
             </summary>
         </member>
         <member name="M:ImageProcessor.Web.Helpers.QueryParamParser.AddGenericConverters">
             <summary>
-            Add the generic converters
+            Add the generic converters.
             </summary>
         </member>
         <member name="M:ImageProcessor.Web.Helpers.QueryParamParser.AddListConverters">
@@ -3790,14 +3805,6 @@
             </param>
             <returns>
             The zero-based starting position in the original string where the captured substring was found.
-            </returns>
-        </member>
-        <member name="M:ImageProcessor.Web.Processors.Format.BuildRegex">
-            <summary>
-            Builds a regular expression from the <see cref="T:ImageProcessor.Imaging.Formats.ISupportedImageFormat"/> type, this allows extensibility.
-            </summary>
-            <returns>
-            The <see cref="T:System.Text.RegularExpressions.Regex"/> to match matrix filters.
             </returns>
         </member>
         <member name="M:ImageProcessor.Web.Processors.Format.ParseFormat(System.String)">

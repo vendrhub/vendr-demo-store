@@ -457,6 +457,33 @@
             <param name="predicate">The predicate to apply.</param>
             <returns>The resulting parser.</returns>
         </member>
+        <member name="M:Superpower.Combinators.Chain``3(Superpower.TextParser{``0},Superpower.TextParser{``1},Superpower.TextParser{``2},System.Func{``1,``0,``2,``0})">
+            <summary>
+            Parse a sequence of operands connected by left-associative operators.
+            </summary>
+            <typeparam name="TResult">The type of the leftmost operand and of the ultimate result.</typeparam>
+            <typeparam name="TOperator">The type of the operator.</typeparam>
+            <typeparam name="TOperand">The type of subsequent operands.</typeparam>
+            <param name="parser">The parser for the leftmost operand.</param>
+            <param name="operator">A parser matching operators.</param>
+            <param name="operand">A parser matching operands.</param>
+            <param name="apply">A function combining the operator, left operand, and right operand, into the result.</param>
+            <returns>The result of calling <paramref name="apply"/> successively on pairs of operands.</returns>
+        </member>
+        <member name="M:Superpower.Combinators.Chain``4(Superpower.TokenListParser{``0,``1},Superpower.TokenListParser{``0,``2},Superpower.TokenListParser{``0,``3},System.Func{``2,``1,``3,``1})">
+            <summary>
+            Parse a sequence of operands connected by left-associative operators.
+            </summary>
+            <typeparam name="TKind">The kind of the tokens being parsed.</typeparam>
+            <typeparam name="TResult">The type of the leftmost operand and of the ultimate result.</typeparam>
+            <typeparam name="TOperator">The type of the operator.</typeparam>
+            <typeparam name="TOperand">The type of subsequent operands.</typeparam>
+            <param name="parser">The parser for the leftmost operand.</param>
+            <param name="operator">A parser matching operators.</param>
+            <param name="operand">A parser matching operands.</param>
+            <param name="apply">A function combining the operator, left operand, and right operand, into the result.</param>
+            <returns>The result of calling <paramref name="apply"/> successively on pairs of operands.</returns>
+        </member>
         <member name="T:Superpower.Display.TokenAttribute">
             <summary>
             Applied to enum members representing tokens to control how they are rendered.
@@ -705,7 +732,8 @@
         </member>
         <member name="M:Superpower.Model.TextSpan.Equals(Superpower.Model.TextSpan)">
             <summary>
-            Compare a string span with another using source identity semantics - same source, same position, same length.
+            Compare a string span with another using source identity
+            semantics - same source, same position, same length.
             </summary>
             <param name="other">The other span.</param>
             <returns>True if the spans are the same.</returns>
@@ -1056,7 +1084,7 @@
         </member>
         <member name="M:Superpower.Parse.Chain``2(Superpower.TextParser{``1},Superpower.TextParser{``0},System.Func{``1,``0,``0,``0})">
             <summary>
-            Parse a sequence of operands connected by left-associative operators.
+            Parse a sequence of similar operands connected by left-associative operators.
             </summary>
             <typeparam name="T">The type being parsed.</typeparam>
             <typeparam name="TOperator">The type of the operator.</typeparam>
@@ -1064,6 +1092,7 @@
             <param name="operand">A parser matching operands.</param>
             <param name="apply">A function combining an operator and two operands into the result.</param>
             <returns>The result of calling <paramref name="apply"/> successively on pairs of operands.</returns>
+            <seealso cref="M:Superpower.Combinators.Chain``3(Superpower.TextParser{``0},Superpower.TextParser{``1},Superpower.TextParser{``2},System.Func{``1,``0,``2,``0})"/>
         </member>
         <member name="M:Superpower.Parse.ChainRight``2(Superpower.TextParser{``1},Superpower.TextParser{``0},System.Func{``1,``0,``0,``0})">
             <summary>
@@ -1078,7 +1107,7 @@
         </member>
         <member name="M:Superpower.Parse.Chain``3(Superpower.TokenListParser{``0,``2},Superpower.TokenListParser{``0,``1},System.Func{``2,``1,``1,``1})">
             <summary>
-            Parse a sequence of operands connected by left-associative operators.
+            Parse a sequence of similar operands connected by left-associative operators.
             </summary>
             <typeparam name="T">The type being parsed.</typeparam>
             <typeparam name="TOperator">The type of the operator.</typeparam>
@@ -1087,6 +1116,7 @@
             <param name="operand">A parser matching operands.</param>
             <param name="apply">A function combining an operator and two operands into the result.</param>
             <returns>The result of calling <paramref name="apply"/> successively on pairs of operands.</returns>
+            <seealso cref="M:Superpower.Combinators.Chain``4(Superpower.TokenListParser{``0,``1},Superpower.TokenListParser{``0,``2},Superpower.TokenListParser{``0,``3},System.Func{``2,``1,``3,``1})"/>
         </member>
         <member name="M:Superpower.Parse.ChainRight``3(Superpower.TokenListParser{``0,``2},Superpower.TokenListParser{``0,``1},System.Func{``2,``1,``1,``1})">
             <summary>
@@ -1164,7 +1194,7 @@
         </member>
         <member name="M:Superpower.ParseException.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Superpower.ParseException" /> class.
+            Initializes a new instance of the <see cref="T:Superpower.ParseException" /> class with a default error message.
             </summary>
         </member>
         <member name="M:Superpower.ParseException.#ctor(System.String)">
@@ -1175,12 +1205,30 @@
         </member>
         <member name="M:Superpower.ParseException.#ctor(System.String,System.Exception)">
             <summary>
-            Initializes a new instance of the <see cref="T:Superpower.ParseException" /> class with a specified error message 
-            and a reference to the inner exception that is the cause of this exception.
+            Initializes a new instance of the <see cref="T:Superpower.ParseException" /> class with a specified error message.
             </summary>
-            <param name="message">The error message that explains the reason for the exception.</param>
-            <param name="innerException">The exception that is the cause of the current exception, 
-            or a null reference (Nothing in Visual Basic) if no inner exception is specified.</param>
+            <param name="message">The message that describes the error.</param>
+            <param name="innerException">The exception that is the cause of the current exception.</param>
+        </member>
+        <member name="M:Superpower.ParseException.#ctor(System.String,Superpower.Model.Position)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Superpower.ParseException" /> class with a specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="errorPosition">The position of the error in the input text.</param>
+        </member>
+        <member name="M:Superpower.ParseException.#ctor(System.String,Superpower.Model.Position,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Superpower.ParseException" /> class with a specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="errorPosition">The position of the error in the input text.</param>
+            <param name="innerException">The exception that is the cause of the current exception.</param>
+        </member>
+        <member name="P:Superpower.ParseException.ErrorPosition">
+            <summary>
+            The position of the error in the input text, or <see cref="P:Superpower.Model.Position.Empty"/> if no position is specified.
+            </summary>
         </member>
         <member name="T:Superpower.ParserExtensions">
             <summary>
@@ -1428,6 +1476,16 @@
             Matches decimal numbers, for example <code>-1.23</code>.
             </summary>
         </member>
+        <member name="P:Superpower.Parsers.Numerics.DecimalDecimal">
+            <summary>
+            Matches decimal numbers, for example <code>-1.23</code>, converted into a <see cref="T:System.Decimal"/>.
+            </summary>
+        </member>
+        <member name="P:Superpower.Parsers.Numerics.DecimalDouble">
+            <summary>
+            Matches decimal numbers, for example <code>-1.23</code>, converted into a <see cref="T:System.Double"/>.
+            </summary>
+        </member>
         <member name="P:Superpower.Parsers.Numerics.HexDigits">
             <summary>
             Matches hexadecimal numbers.
@@ -1518,6 +1576,9 @@
             <summary>
             Parse until a non-whitespace character is encountered, returning the matched span of whitespace.
             </summary>
+            <remarks>
+            Requires at least one whitespace character.
+            </remarks>
         </member>
         <member name="P:Superpower.Parsers.Span.NonWhiteSpace">
             <summary>
@@ -1633,7 +1694,7 @@
             <inheritdoc/>
             <remarks>
             The complexity in this method is due to the desire to distinguish between (e.g. in C#)
-            the keyworkd `null` vs the identifier `nullability`. The tokenizer, when it encounters
+            the keyword `null` vs the identifier `nullability`. The tokenizer, when it encounters
             a non-delimiter match (like `null`), looks ahead to see whether it's immediately followed
             by a delimiter or end-of-input. If not, the match is discarded and subsequent recognizers
             are tested.

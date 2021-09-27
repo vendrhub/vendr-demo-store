@@ -4,6 +4,41 @@
         <name>ImageProcessor</name>
     </assembly>
     <members>
+        <member name="T:ImageProcessor.BitDepth">
+            <summary>
+            Provides enumeration for the available bit depths.
+            </summary>
+        </member>
+        <member name="F:ImageProcessor.BitDepth.Bit1">
+            <summary>
+            1 bit per pixel
+            </summary>
+        </member>
+        <member name="F:ImageProcessor.BitDepth.Bit4">
+            <summary>
+            4 bits per pixel
+            </summary>
+        </member>
+        <member name="F:ImageProcessor.BitDepth.Bit8">
+            <summary>
+            8 bits per pixel
+            </summary>
+        </member>
+        <member name="F:ImageProcessor.BitDepth.Bit16">
+            <summary>
+            16 bits per pixel
+            </summary>
+        </member>
+        <member name="F:ImageProcessor.BitDepth.Bit24">
+            <summary>
+            24 bits per pixel
+            </summary>
+        </member>
+        <member name="F:ImageProcessor.BitDepth.Bit32">
+            <summary>
+            32 bits per pixel
+            </summary>
+        </member>
         <member name="T:ImageProcessor.Common.Exceptions.DefaultLogger">
             <summary>
             The default logger which logs messages to the trace listeners.
@@ -1340,12 +1375,21 @@
               <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
             </returns>
         </member>
+        <member name="M:ImageProcessor.Imaging.Formats.FormatBase.Equals(ImageProcessor.Imaging.Formats.ISupportedImageFormat)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>
+            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+            </returns>
+        </member>
         <member name="M:ImageProcessor.Imaging.Formats.FormatBase.GetHashCode">
             <summary>
-            Returns the hash code for this instance.
+            Returns a hash code for this instance.
             </summary>
             <returns>
-            A 32-bit signed integer that is the hash code for this instance.
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
             </returns>
         </member>
         <member name="T:ImageProcessor.Imaging.Formats.ISupportedImageFormat">
@@ -2723,7 +2767,7 @@
             The <see cref="T:byte[]"/>.
             </returns>
         </member>
-        <member name="M:ImageProcessor.Imaging.Helpers.Adjustments.SRGBToLinear(System.Single)">
+        <member name="M:ImageProcessor.Imaging.Helpers.Adjustments.SRGBToLinear(System.Double)">
             <summary>
             Gets the correct linear value from an sRGB signal.
             <see href="http://www.4p8.com/eric.brasseur/gamma.html#formulas"/>
@@ -2734,7 +2778,7 @@
             The <see cref="T:System.Single"/>.
             </returns>
         </member>
-        <member name="M:ImageProcessor.Imaging.Helpers.Adjustments.LinearToSRGB(System.Single)">
+        <member name="M:ImageProcessor.Imaging.Helpers.Adjustments.LinearToSRGB(System.Double)">
             <summary>
             Gets the correct sRGB value from an linear signal.
             <see href="http://www.4p8.com/eric.brasseur/gamma.html#formulas"/>
@@ -2742,7 +2786,7 @@
             </summary>
             <param name="signal">The signal value to convert.</param>
             <returns>
-            The <see cref="T:System.Single"/>.
+            The <see cref="T:System.Double"/>.
             </returns>
         </member>
         <member name="T:ImageProcessor.Imaging.Helpers.Effects">
@@ -3066,45 +3110,45 @@
         </member>
         <member name="M:ImageProcessor.Imaging.Colors.CmykColor.Equals(System.Object)">
             <summary>
-            Indicates whether this instance and a specified object are equal.
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
             </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
             <returns>
-            true if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, false.
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
             </returns>
-            <param name="obj">Another object to compare to. </param>
         </member>
         <member name="M:ImageProcessor.Imaging.Colors.CmykColor.Equals(ImageProcessor.Imaging.Colors.CmykColor)">
             <summary>
             Indicates whether the current object is equal to another object of the same type.
             </summary>
             <param name="other">An object to compare with this object.</param>
-            <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
+            <returns>
+            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+            </returns>
         </member>
         <member name="M:ImageProcessor.Imaging.Colors.CmykColor.GetHashCode">
             <summary>
-            Returns the hash code for this instance.
+            Returns a hash code for this instance.
             </summary>
             <returns>
-            A 32-bit signed integer that is the hash code for this instance.
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
             </returns>
         </member>
         <member name="M:ImageProcessor.Imaging.Colors.CmykColor.Clamp(System.Single)">
             <summary>
             Checks the range of the given value to ensure that it remains within the acceptable boundaries.
             </summary>
-            <param name="value">
-            The value to check.
-            </param>
+            <param name="value">The value to check.</param>
             <returns>
-            The sanitized <see cref="T:System.Single"/>.
+            The sanitized <see cref="T:System.Single" />.
             </returns>
         </member>
         <member name="M:ImageProcessor.Imaging.Colors.CmykColor.IsEmpty">
             <summary>
-            Returns a value indicating whether the current instance is empty.
+            Determines whether this instance is empty.
             </summary>
             <returns>
-            The true if this instance is empty; otherwise, false.
+              <c>true</c> if this instance is empty; otherwise, <c>false</c>.
             </returns>
         </member>
         <member name="T:ImageProcessor.Imaging.Colors.Color32">
@@ -3166,37 +3210,28 @@
         </member>
         <member name="M:ImageProcessor.Imaging.Colors.Color32.Equals(System.Object)">
             <summary>
-            Indicates whether this instance and a specified object are equal.
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
             </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
             <returns>
-            true if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, false.
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
             </returns>
-            <param name="obj">Another object to compare to. </param>
         </member>
         <member name="M:ImageProcessor.Imaging.Colors.Color32.Equals(ImageProcessor.Imaging.Colors.Color32)">
             <summary>
             Indicates whether the current object is equal to another object of the same type.
             </summary>
             <param name="other">An object to compare with this object.</param>
-            <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
+            <returns>
+            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+            </returns>
         </member>
         <member name="M:ImageProcessor.Imaging.Colors.Color32.GetHashCode">
             <summary>
-            Returns the hash code for this instance.
+            Returns a hash code for this instance.
             </summary>
             <returns>
-            A 32-bit signed integer that is the hash code for this instance.
-            </returns>
-        </member>
-        <member name="M:ImageProcessor.Imaging.Colors.Color32.GetHashCode(ImageProcessor.Imaging.Colors.Color32)">
-            <summary>
-            Returns the hash code for the given instance.
-            </summary>
-            <param name="obj">
-            The instance of <see cref="T:ImageProcessor.Imaging.Colors.Color32"/> to return the hash code for.
-            </param>
-            <returns>
-            A 32-bit signed integer that is the hash code for this instance.
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
             </returns>
         </member>
         <member name="T:ImageProcessor.Imaging.Colors.ColorExtensions">
@@ -3398,26 +3433,28 @@
         </member>
         <member name="M:ImageProcessor.Imaging.Colors.HslaColor.Equals(System.Object)">
             <summary>
-            Indicates whether this instance and a specified object are equal.
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
             </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
             <returns>
-            true if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, false.
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
             </returns>
-            <param name="obj">Another object to compare to. </param>
         </member>
         <member name="M:ImageProcessor.Imaging.Colors.HslaColor.Equals(ImageProcessor.Imaging.Colors.HslaColor)">
             <summary>
             Indicates whether the current object is equal to another object of the same type.
             </summary>
             <param name="other">An object to compare with this object.</param>
-            <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
+            <returns>
+            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+            </returns>
         </member>
         <member name="M:ImageProcessor.Imaging.Colors.HslaColor.GetHashCode">
             <summary>
-            Returns the hash code for this instance.
+            Returns a hash code for this instance.
             </summary>
             <returns>
-            A 32-bit signed integer that is the hash code for this instance.
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
             </returns>
         </member>
         <member name="M:ImageProcessor.Imaging.Colors.HslaColor.GetColorComponent(System.Single,System.Single,System.Single)">
@@ -3639,26 +3676,28 @@
         </member>
         <member name="M:ImageProcessor.Imaging.Colors.RgbaColor.Equals(System.Object)">
             <summary>
-            Indicates whether this instance and a specified object are equal.
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
             </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
             <returns>
-            true if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, false.
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
             </returns>
-            <param name="obj">Another object to compare to. </param>
         </member>
         <member name="M:ImageProcessor.Imaging.Colors.RgbaColor.Equals(ImageProcessor.Imaging.Colors.RgbaColor)">
             <summary>
             Indicates whether the current object is equal to another object of the same type.
             </summary>
             <param name="other">An object to compare with this object.</param>
-            <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
+            <returns>
+            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+            </returns>
         </member>
         <member name="M:ImageProcessor.Imaging.Colors.RgbaColor.GetHashCode">
             <summary>
-            Returns the hash code for this instance.
+            Returns a hash code for this instance.
             </summary>
             <returns>
-            A 32-bit signed integer that is the hash code for this instance.
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
             </returns>
         </member>
         <member name="T:ImageProcessor.Imaging.Colors.RgbaComponent">
@@ -3804,26 +3843,28 @@
         </member>
         <member name="M:ImageProcessor.Imaging.Colors.YCbCrColor.Equals(System.Object)">
             <summary>
-            Indicates whether this instance and a specified object are equal.
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
             </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
             <returns>
-            true if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, false.
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
             </returns>
-            <param name="obj">Another object to compare to. </param>
         </member>
         <member name="M:ImageProcessor.Imaging.Colors.YCbCrColor.Equals(ImageProcessor.Imaging.Colors.YCbCrColor)">
             <summary>
             Indicates whether the current object is equal to another object of the same type.
             </summary>
             <param name="other">An object to compare with this object.</param>
-            <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
+            <returns>
+            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+            </returns>
         </member>
         <member name="M:ImageProcessor.Imaging.Colors.YCbCrColor.GetHashCode">
             <summary>
-            Returns the hash code for this instance.
+            Returns a hash code for this instance.
             </summary>
             <returns>
-            A 32-bit signed integer that is the hash code for this instance.
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
             </returns>
         </member>
         <member name="M:ImageProcessor.Imaging.Colors.YCbCrColor.IsEmpty">
@@ -4155,24 +4196,33 @@
             <param name="source">The current image to process</param>
             <param name="destination">The new image to return</param>
             <returns>
-            The processed <see cref="T:System.Drawing.Bitmap"/>.
+            The processed <see cref="T:System.Drawing.Bitmap" />.
             </returns>
         </member>
         <member name="M:ImageProcessor.Imaging.Filters.Photo.MatrixFilterBase.Equals(System.Object)">
             <summary>
-            Determines whether the specified <see cref="T:ImageProcessor.Imaging.Filters.Photo.IMatrixFilter" />, is equal to this instance.
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
             </summary>
-            <param name="obj">The <see cref="T:ImageProcessor.Imaging.Filters.Photo.IMatrixFilter" /> to compare with this instance.</param>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
             <returns>
-              <c>true</c> if the specified <see cref="T:ImageProcessor.Imaging.Filters.Photo.IMatrixFilter" /> is equal to this instance; otherwise, <c>false</c>.
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ImageProcessor.Imaging.Filters.Photo.MatrixFilterBase.Equals(ImageProcessor.Imaging.Filters.Photo.IMatrixFilter)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>
+            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
             </returns>
         </member>
         <member name="M:ImageProcessor.Imaging.Filters.Photo.MatrixFilterBase.GetHashCode">
             <summary>
-            Returns the hash code for this instance.
+            Returns a hash code for this instance.
             </summary>
             <returns>
-            A 32-bit signed integer that is the hash code for this instance.
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
             </returns>
         </member>
         <member name="T:ImageProcessor.Imaging.Filters.Photo.MatrixFilters">
@@ -4876,19 +4926,28 @@
         </member>
         <member name="M:ImageProcessor.Imaging.FastBitmap.Equals(System.Object)">
             <summary>
-            Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
             </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
             <returns>
-            true if the specified object  is equal to the current object; otherwise, false.
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
             </returns>
-            <param name="obj">The object to compare with the current object. </param>
+        </member>
+        <member name="M:ImageProcessor.Imaging.FastBitmap.Equals(ImageProcessor.Imaging.FastBitmap)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>
+            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+            </returns>
         </member>
         <member name="M:ImageProcessor.Imaging.FastBitmap.GetHashCode">
             <summary>
-            Serves as a hash function for a particular type. 
+            Returns a hash code for this instance.
             </summary>
             <returns>
-            A hash code for the current <see cref="T:System.Object"/>.
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
             </returns>
         </member>
         <member name="M:ImageProcessor.Imaging.FastBitmap.Dispose(System.Boolean)">
@@ -5002,24 +5061,28 @@
         </member>
         <member name="M:ImageProcessor.Imaging.ImageLayer.Equals(System.Object)">
             <summary>
-            Returns a value that indicates whether the specified object is an
-            <see cref="T:ImageProcessor.Imaging.ImageLayer"/> object that is equivalent to
-            this <see cref="T:ImageProcessor.Imaging.ImageLayer"/> object.
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
             </summary>
-            <param name="obj">
-            The object to test.
-            </param>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
             <returns>
-            True if the given object  is an <see cref="T:ImageProcessor.Imaging.ImageLayer"/> object that is equivalent to
-            this <see cref="T:ImageProcessor.Imaging.ImageLayer"/> object; otherwise, false.
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ImageProcessor.Imaging.ImageLayer.Equals(ImageProcessor.Imaging.ImageLayer)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>
+            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
             </returns>
         </member>
         <member name="M:ImageProcessor.Imaging.ImageLayer.GetHashCode">
             <summary>
-            Returns the hash code for this instance.
+            Returns a hash code for this instance.
             </summary>
             <returns>
-            A 32-bit signed integer that is the hash code for this instance.
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
             </returns>
         </member>
         <member name="M:ImageProcessor.Imaging.ImageLayer.Dispose">
@@ -5061,6 +5124,11 @@
         <member name="F:ImageProcessor.Imaging.MetaData.ExifPropertyTagConstants.All">
             <summary>
             Gets all known property items
+            </summary>
+        </member>
+        <member name="F:ImageProcessor.Imaging.MetaData.ExifPropertyTagConstants.Ids">
+            <summary>
+            Gets the ids of all valid EXIF property items.
             </summary>
         </member>
         <member name="T:ImageProcessor.Imaging.MetaData.Rational`1">
@@ -5622,20 +5690,19 @@
         </member>
         <member name="M:ImageProcessor.Imaging.MetaData.Rational`1.Equals(System.Object)">
             <summary>
-            Indicates whether this instance and a specified object are equal.
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
             </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
             <returns>
-            true if <paramref name="obj"/> and this instance are the same type and represent the same value; 
-            otherwise, false. 
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
             </returns>
-            <param name="obj">The object to compare with the current instance. </param>
         </member>
         <member name="M:ImageProcessor.Imaging.MetaData.Rational`1.GetHashCode">
             <summary>
-            Returns the hash code for this instance.
+            Returns a hash code for this instance.
             </summary>
             <returns>
-            A 32-bit signed integer that is the hash code for this instance.
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
             </returns>
         </member>
         <member name="T:ImageProcessor.Imaging.MetaData.ExifBitConverter">
@@ -7330,23 +7397,28 @@
         </member>
         <member name="M:ImageProcessor.Imaging.CropLayer.Equals(System.Object)">
             <summary>
-            Determines whether the specified <see cref="T:System.Object" />, is 
-            equal to this instance.
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
             </summary>
-            <param name="obj">
-            The <see cref="T:System.Object" /> to compare with this instance.
-            </param>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
             <returns>
-              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to 
-              this instance; otherwise, <c>false</c>.
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ImageProcessor.Imaging.CropLayer.Equals(ImageProcessor.Imaging.CropLayer)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>
+            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
             </returns>
         </member>
         <member name="M:ImageProcessor.Imaging.CropLayer.GetHashCode">
             <summary>
-            Serves as a hash function for a particular type. 
+            Returns a hash code for this instance.
             </summary>
             <returns>
-            A hash code for the current <see cref="T:System.Object"/>.
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
             </returns>
         </member>
         <member name="T:ImageProcessor.Imaging.CropMode">
@@ -7435,24 +7507,28 @@
         </member>
         <member name="M:ImageProcessor.Imaging.GaussianLayer.Equals(System.Object)">
             <summary>
-            Returns a value that indicates whether the specified object is an 
-            <see cref="T:ImageProcessor.Imaging.GaussianLayer"/> object that is equivalent to 
-            this <see cref="T:ImageProcessor.Imaging.GaussianLayer"/> object.
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
             </summary>
-            <param name="obj">
-            The object to test.
-            </param>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
             <returns>
-            True if the given object  is an <see cref="T:ImageProcessor.Imaging.GaussianLayer"/> object that is equivalent to 
-            this <see cref="T:ImageProcessor.Imaging.GaussianLayer"/> object; otherwise, false.
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ImageProcessor.Imaging.GaussianLayer.Equals(ImageProcessor.Imaging.GaussianLayer)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>
+            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
             </returns>
         </member>
         <member name="M:ImageProcessor.Imaging.GaussianLayer.GetHashCode">
             <summary>
-            Serves as a hash function for a particular type. 
+            Returns a hash code for this instance.
             </summary>
             <returns>
-            A hash code for the current <see cref="T:System.Object"/>.
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
             </returns>
         </member>
         <member name="T:ImageProcessor.Imaging.Quantizers.IQuantizer">
@@ -8644,103 +8720,140 @@
             The array of <see cref="T:ImageProcessor.Imaging.Colors.Color32"/>.
             </returns>
         </member>
+        <member name="T:ImageProcessor.Imaging.ResizeHelper">
+            <summary>
+            Provides methods to help calculate the target rectangle when resizing using the
+            <see cref="T:ImageProcessor.Imaging.ResizeMode"/> enumeration.
+            </summary>
+        </member>
+        <member name="M:ImageProcessor.Imaging.ResizeHelper.CalculateTargetLocationAndBounds(System.Drawing.Size,ImageProcessor.Imaging.ResizeLayer,System.Int32,System.Int32)">
+            <summary>
+            Calculates the target location and bounds to perform the resize operation against.
+            </summary>
+            <param name="sourceSize">The source image size.</param>
+            <param name="options">The resize options.</param>
+            <param name="width">The target width.</param>
+            <param name="height">The target height.</param>
+            <returns>
+            The tuple representing the location and the bounds.
+            </returns>
+        </member>
         <member name="T:ImageProcessor.Imaging.ResizeLayer">
             <summary>
             Encapsulates the properties required to resize an image.
             </summary>
+            <seealso cref="T:System.IEquatable{ImageProcessor.Imaging.ResizeLayer}" />
         </member>
         <member name="M:ImageProcessor.Imaging.ResizeLayer.#ctor(System.Drawing.Size,ImageProcessor.Imaging.ResizeMode,ImageProcessor.Imaging.AnchorPosition,System.Boolean,System.Single[],System.Nullable{System.Drawing.Size},System.Collections.Generic.List{System.Drawing.Size},System.Nullable{System.Drawing.Point})">
             <summary>
-            Initializes a new instance of the <see cref="T:ImageProcessor.Imaging.ResizeLayer"/> class.
+            Initializes a new instance of the <see cref="T:ImageProcessor.Imaging.ResizeLayer" /> class.
             </summary>
-            <param name="size">
-            The <see cref="T:System.Drawing.Size"/> containing the width and height to set the image to.
-            </param>
-            <param name="resizeMode">
-            The resize mode to apply to resized image. (Default ResizeMode.Pad)
-            </param>
-            <param name="anchorPosition">
-            The <see cref="P:ImageProcessor.Imaging.ResizeLayer.AnchorPosition"/> to apply to resized image. (Default AnchorPosition.Center)
-            </param>
-            <param name="upscale">
-            Whether to allow up-scaling of images. (Default true)
-            </param>
-            <param name="centerCoordinates">
-            The center coordinates (Default null)
-            </param>
-            <param name="maxSize">
-            The maximum size to resize an image to. 
-            Used to restrict resizing based on calculated resizing
-            </param>
-            <param name="restrictedSizes">
-            The range of sizes to restrict resizing an image to. 
-            Used to restrict resizing based on calculated resizing
-            </param>
-            <param name="anchorPoint">
-            The anchor point (Default null)
-            </param>
+            <param name="size">The <see cref="T:System.Drawing.Size" /> containing the width and height to resize the image to.</param>
+            <param name="resizeMode">The resize mode to apply to the resized image.</param>
+            <param name="anchorPosition">The anchor position to apply to the resized image.</param>
+            <param name="upscale">Whether to allow up-scaling of images.</param>
+            <param name="centerCoordinates">The center coordinates (Y,X).</param>
+            <param name="maxSize">The maximum size to resize an image to. Used to restrict resizing based on calculated resizing.</param>
+            <param name="restrictedSizes">The range of sizes to restrict resizing an image to. Used to restrict resizing based on calculated resizing.</param>
+            <param name="anchorPoint">The anchor point.</param>
         </member>
         <member name="P:ImageProcessor.Imaging.ResizeLayer.Size">
             <summary>
             Gets or sets the size.
             </summary>
+            <value>
+            The size.
+            </value>
         </member>
         <member name="P:ImageProcessor.Imaging.ResizeLayer.MaxSize">
             <summary>
-            Gets or sets the max size.
+            Gets or sets the maximum size.
             </summary>
+            <value>
+            The maximum size.
+            </value>
         </member>
         <member name="P:ImageProcessor.Imaging.ResizeLayer.RestrictedSizes">
             <summary>
-            Gets or sets the restricted range of sizes. to restrict resizing methods to.
+            Gets or sets the restricted range of sizes to restrict resizing methods to.
             </summary>
+            <value>
+            The restricted sizes.
+            </value>
         </member>
         <member name="P:ImageProcessor.Imaging.ResizeLayer.ResizeMode">
             <summary>
             Gets or sets the resize mode.
             </summary>
+            <value>
+            The resize mode.
+            </value>
         </member>
         <member name="P:ImageProcessor.Imaging.ResizeLayer.AnchorPosition">
             <summary>
             Gets or sets the anchor position.
             </summary>
+            <value>
+            The anchor position.
+            </value>
         </member>
         <member name="P:ImageProcessor.Imaging.ResizeLayer.Upscale">
             <summary>
             Gets or sets a value indicating whether to allow up-scaling of images.
-            For <see cref="T:ResizeMode.BoxPad"/> this is always true.
+            For <see cref="T:ResizeMode.BoxPad" /> this is always true.
             </summary>
+            <value>
+              <c>true</c> if up-scaling is allowed; otherwise, <c>false</c>.
+            </value>
         </member>
         <member name="P:ImageProcessor.Imaging.ResizeLayer.CenterCoordinates">
             <summary>
-            Gets or sets the center coordinates.
+            Gets or sets the center coordinates (Y,X).
             </summary>
+            <value>
+            The center coordinates (Y,X).
+            </value>
+        </member>
+        <member name="P:ImageProcessor.Imaging.ResizeLayer.Center">
+            <summary>
+            Gets the center coordinates as <see cref="T:System.Nullable`1" />.
+            </summary>
+            <value>
+            The center coordinates as <see cref="T:System.Nullable`1" />.
+            </value>
         </member>
         <member name="P:ImageProcessor.Imaging.ResizeLayer.AnchorPoint">
             <summary>
             Gets or sets the anchor point.
             </summary>
+            <value>
+            The anchor point.
+            </value>
         </member>
         <member name="M:ImageProcessor.Imaging.ResizeLayer.Equals(System.Object)">
             <summary>
-            Returns a value that indicates whether the specified object is an 
-            <see cref="T:ImageProcessor.Imaging.ResizeLayer"/> object that is equivalent to 
-            this <see cref="T:ImageProcessor.Imaging.ResizeLayer"/> object.
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
             </summary>
-            <param name="obj">
-            The object to test.
-            </param>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
             <returns>
-            True if the given object  is an <see cref="T:ImageProcessor.Imaging.ResizeLayer"/> object that is equivalent to 
-            this <see cref="T:ImageProcessor.Imaging.ResizeLayer"/> object; otherwise, false.
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ImageProcessor.Imaging.ResizeLayer.Equals(ImageProcessor.Imaging.ResizeLayer)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>
+            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
             </returns>
         </member>
         <member name="M:ImageProcessor.Imaging.ResizeLayer.GetHashCode">
             <summary>
-            Returns the hash code for this instance.
+            Returns a hash code for this instance.
             </summary>
             <returns>
-            A 32-bit signed integer that is the hash code for this instance.
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
             </returns>
         </member>
         <member name="T:ImageProcessor.Imaging.ResizeMode">
@@ -8834,8 +8947,8 @@
             Gets an image resized using the composite color space without any gamma correction adjustments.
             </summary>
             <param name="source">The source image.</param>
-            <param name="width">The width to resize to.</param>
-            <param name="height">The height to resize to.</param>
+            <param name="width">The target width to resize to.</param>
+            <param name="height">The target height to resize to.</param>
             <param name="destination">The destination rectangle.</param>
             <returns>
             The <see cref="T:System.Drawing.Bitmap"/>.
@@ -8846,8 +8959,8 @@
             Gets an image resized using the linear color space with gamma correction adjustments.
             </summary>
             <param name="source">The source image.</param>
-            <param name="width">The width to resize to.</param>
-            <param name="height">The height to resize to.</param>
+            <param name="targetWidth">The width to resize to.</param>
+            <param name="targetHeight">The height to resize to.</param>
             <param name="destination">The destination rectangle.</param>
             <returns>
             The <see cref="T:System.Drawing.Bitmap"/>.
@@ -8864,30 +8977,6 @@
             <param name="animationProcessMode">The process mode for frames in animated images.</param>
             <returns>
             The <see cref="T:System.Drawing.Bitmap"/>.
-            </returns>
-        </member>
-        <member name="M:ImageProcessor.Imaging.Resizer.ResizeImage(System.Drawing.Image,System.Int32,System.Int32,System.Int32,System.Int32,System.Collections.Generic.List{System.Drawing.Size},ImageProcessor.Imaging.ResizeMode,ImageProcessor.Imaging.AnchorPosition,System.Boolean,System.Single[],System.Boolean,System.Nullable{System.Drawing.Point})">
-            <summary>
-            Resizes the given image.
-            </summary>
-            <param name="source">The source <see cref="T:System.Drawing.Image"/> to resize</param>
-            <param name="width">The width to resize the image to.</param>
-            <param name="height">The height to resize the image to.</param>
-            <param name="maxWidth">The default max width to resize the image to.</param>
-            <param name="maxHeight">The default max height to resize the image to.</param>
-            <param name="restrictedSizes">A <see cref="T:System.Collections.Generic.List`1"/> containing image resizing restrictions.</param>
-            <param name="resizeMode">The mode with which to resize the image.</param>
-            <param name="anchorPosition">The anchor position to place the image at.</param>
-            <param name="upscale">Whether to allow up-scaling of images. (Default true)</param>
-            <param name="centerCoordinates">
-            If the resize mode is crop, you can set a specific center coordinate, use as alternative to anchorPosition
-            </param>
-            <param name="linear">Whether to resize the image using the linear color space.</param>
-            <param name="anchorPoint">
-            If resize mode is box pad, you can set a specific anchor coordinate, use as alternative to anchorPosition.
-            </param>
-            <returns>
-            The resized <see cref="T:System.Drawing.Image"/>.
             </returns>
         </member>
         <member name="T:ImageProcessor.Imaging.RoundedCornerLayer">
@@ -8942,24 +9031,28 @@
         </member>
         <member name="M:ImageProcessor.Imaging.RoundedCornerLayer.Equals(System.Object)">
             <summary>
-            Returns a value that indicates whether the specified object is an 
-            <see cref="T:ImageProcessor.Imaging.RoundedCornerLayer"/> object that is equivalent to 
-            this <see cref="T:ImageProcessor.Imaging.RoundedCornerLayer"/> object.
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
             </summary>
-            <param name="obj">
-            The object to test.
-            </param>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
             <returns>
-            True if the given object is an <see cref="T:ImageProcessor.Imaging.RoundedCornerLayer"/> object that is equivalent to 
-            this <see cref="T:ImageProcessor.Imaging.RoundedCornerLayer"/> object; otherwise, false.
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ImageProcessor.Imaging.RoundedCornerLayer.Equals(ImageProcessor.Imaging.RoundedCornerLayer)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>
+            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
             </returns>
         </member>
         <member name="M:ImageProcessor.Imaging.RoundedCornerLayer.GetHashCode">
             <summary>
-            Returns the hash code for this instance.
+            Returns a hash code for this instance.
             </summary>
             <returns>
-            A 32-bit signed integer that is the hash code for this instance.
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
             </returns>
         </member>
         <member name="T:ImageProcessor.Imaging.TextLayer">
@@ -9044,24 +9137,28 @@
         </member>
         <member name="M:ImageProcessor.Imaging.TextLayer.Equals(System.Object)">
             <summary>
-            Returns a value that indicates whether the specified object is an 
-            <see cref="T:ImageProcessor.Imaging.TextLayer"/> object that is equivalent to 
-            this <see cref="T:ImageProcessor.Imaging.TextLayer"/> object.
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
             </summary>
-            <param name="obj">
-            The object to test.
-            </param>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
             <returns>
-            True if the given object  is an <see cref="T:ImageProcessor.Imaging.TextLayer"/> object that is equivalent to 
-            this <see cref="T:ImageProcessor.Imaging.TextLayer"/> object; otherwise, false.
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ImageProcessor.Imaging.TextLayer.Equals(ImageProcessor.Imaging.TextLayer)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>
+            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
             </returns>
         </member>
         <member name="M:ImageProcessor.Imaging.TextLayer.GetHashCode">
             <summary>
-            Returns the hash code for this instance.
+            Returns a hash code for this instance.
             </summary>
             <returns>
-            A 32-bit signed integer that is the hash code for this instance.
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
             </returns>
         </member>
         <member name="M:ImageProcessor.Imaging.TextLayer.Dispose">
@@ -9147,7 +9244,7 @@
         </member>
         <member name="M:ImageProcessor.ImageFactory.Finalize">
             <summary>
-            Finalizes an instance of the <see cref="T:ImageProcessor.ImageFactory">ImageFactory</see> class.
+            Finalizes an instance of the <see cref="T:ImageProcessor.ImageFactory"/> class.
             </summary>
             <remarks>
             Use C# destructor syntax for finalization code.

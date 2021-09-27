@@ -231,7 +231,7 @@ div [ng-controller*=MemberGroupPickerController] .umb-box-content > .umb-tree {
     .vendr-layout--layout1 .vendr-layout__right {
         flex: 0 0 350px;
         margin-top: 0;
-        align-self: end
+        align-self: start;
     }
 
     .vendr-layout--layout2 .vendr-layout__left {

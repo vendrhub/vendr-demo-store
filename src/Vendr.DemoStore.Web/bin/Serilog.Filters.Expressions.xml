@@ -76,9 +76,25 @@
         <member name="M:Serilog.Filters.Expressions.LoggingFilterSwitch.ToString">
             <inheritdoc/>
         </member>
+        <member name="T:Serilog.LoggerEnrichmentConfigurationExtensions">
+            <summary>
+            Extends logger enrichment configuration with methods for filtering with expressions.
+            </summary>
+        </member>
+        <member name="M:Serilog.LoggerEnrichmentConfigurationExtensions.When(Serilog.Configuration.LoggerEnrichmentConfiguration,System.String,System.Action{Serilog.Configuration.LoggerEnrichmentConfiguration})">
+            <summary>
+            Write to a sink only when <paramref name="expression" /> evaluates to <c>true</c>.
+            </summary>
+            <param name="loggerEnrichmentConfiguration">Enrichment configuration.</param>
+            <param name="expression">An expression that evaluates to <c>true</c> when the supplied
+            <see cref="T:Serilog.Events.LogEvent" /> should be enriched.</param>
+            <param name="configureEnricher">An action that configures the wrapped enricher.</param>
+            <returns>Configuration object allowing method chaining.</returns>
+            <returns>The underlying <see cref="T:Serilog.LoggerConfiguration"/>.</returns>
+        </member>
         <member name="T:Serilog.LoggerFilterConfigurationExtensions">
             <summary>
-            Extends logger configuration with methods for filtering with expressions.
+            Extends logger filter configuration with methods for filtering with expressions.
             </summary>
         </member>
         <member name="M:Serilog.LoggerFilterConfigurationExtensions.ByIncludingOnly(Serilog.Configuration.LoggerFilterConfiguration,System.String)">
@@ -104,6 +120,23 @@
             <param name="loggerFilterConfiguration">Filter configuration.</param>
             <param name="switch">A <see cref="T:Serilog.Filters.Expressions.LoggingFilterSwitch"/> that can be used to dynamically control
             log filtering.</param>
+            <returns>The underlying <see cref="T:Serilog.LoggerConfiguration"/>.</returns>
+        </member>
+        <member name="T:Serilog.LoggerSinkConfigurationExtensions">
+            <summary>
+            Extends logger sink configuration with methods for filtering with expressions.
+            </summary>
+        </member>
+        <member name="M:Serilog.LoggerSinkConfigurationExtensions.Conditional(Serilog.Configuration.LoggerSinkConfiguration,System.String,System.Action{Serilog.Configuration.LoggerSinkConfiguration})">
+            <summary>
+            Write to a sink only when <paramref name="expression" /> evaluates to <c>true</c>.
+            </summary>
+            <param name="loggerSinkConfiguration">Sink configuration.</param>
+            <param name="expression">An expression that evaluates to <c>true</c> when the
+            supplied <see cref="T:Serilog.Events.LogEvent" />
+            should be written to the configured sink.</param>
+            <param name="configureSink">An action that configures the wrapped sink.</param>
+            <returns>Configuration object allowing method chaining.</returns>
             <returns>The underlying <see cref="T:Serilog.LoggerConfiguration"/>.</returns>
         </member>
     </members>

@@ -292,6 +292,11 @@
             Defines a unique instance ID for this instance of Vendr.
             </summary>
         </member>
+        <member name="F:Vendr.Core.Constants.DefaultMonetaryPrecision">
+            <summary>
+            The default precision of monetary values
+            </summary>
+        </member>
         <member name="T:Vendr.Core.Constants.System">
             <summary>
             System constants
@@ -442,11 +447,6 @@
             Gets the ID of the <see cref="T:Vendr.Core.Models.Currency"/> of the amount
             </summary>
         </member>
-        <member name="P:Vendr.Core.Models.Amount.CultureName">
-            <summary>
-            Gets the Culture Name of the <see cref="T:Vendr.Core.Models.Currency"/> of the amount
-            </summary>
-        </member>
         <member name="P:Vendr.Core.Models.Amount.Value">
             <summary>
             Gets the value of the amount
@@ -473,6 +473,12 @@
             <param name="existingAmount">The existing <see cref="T:Vendr.Core.Models.Amount"/> instance</param>
             <param name="value">The value of the new amount</param>
             <returns>A new <see cref="T:Vendr.Core.Models.Amount"/> instance</returns>
+        </member>
+        <member name="M:Vendr.Core.Models.Amount.Rounded(System.Int32)">
+            <summary>
+            Round the price to the given preceission
+            </summary>
+            <returns>A rounded price value</returns>
         </member>
         <member name="M:Vendr.Core.Models.Amount.DeepClone">
             <inheritdoc />
@@ -517,6 +523,16 @@
             </summary>
             <param name="obj">The entity to compare against</param>
             <returns>Returns <see langword="true"/> if the two entities are equal, otherwise returns <see langword="false"/>.</returns>
+        </member>
+        <member name="P:Vendr.Core.Models.EntityCacheIntegrityCheckOptions.FixIssues">
+            <summary>
+            Set to true to try to automatically resolve data integrity issues
+            </summary>
+        </member>
+        <member name="F:Vendr.Core.Models.EntityCacheIntegrityCheckResult.IssueType.InconsistentCacheCount">
+            <summary>
+            The number of items in the entity cache is inconsistent with the number items in the database
+            </summary>
         </member>
         <member name="T:Vendr.Core.Models.FormattedAmount">
             <summary>
@@ -1473,11 +1489,6 @@
             Gets the ID of the <see cref="T:Vendr.Core.Models.Currency"/> of the price
             </summary>
         </member>
-        <member name="P:Vendr.Core.Models.Price.CultureName">
-            <summary>
-            Gets the Culture Name of the <see cref="T:Vendr.Core.Models.Currency"/> of the price
-            </summary>
-        </member>
         <member name="P:Vendr.Core.Models.Price.WithoutTax">
             <summary>
             Gets the value of the price without tax
@@ -1505,7 +1516,7 @@
             <summary>
             Instantiates a new <see cref="T:Vendr.Core.Models.Price"/> instance
             </summary>
-            <param name="valueWithoutTax">The value of the price without tax</param>
+            <param name="value">The value of the price</param>
             <param name="tax">The tax value of the price</param>
             <param name="currency">The <see cref="T:Vendr.Core.Models.Currency"/> of the price</param>
         </member>
@@ -1565,6 +1576,12 @@
             <param name="tax">The tax value of the new price</param>
             <param name="valueWithTax">The value of the new price with tax</param>
             <returns>A new <see cref="T:Vendr.Core.Models.Price"/> instance</returns>
+        </member>
+        <member name="M:Vendr.Core.Models.Price.Rounded(System.Int32)">
+            <summary>
+            Round the price to the given preceission
+            </summary>
+            <returns>A rounded price value</returns>
         </member>
         <member name="M:Vendr.Core.Models.Price.DeepClone">
             <inheritdoc />
@@ -1814,6 +1831,11 @@
         <member name="M:Vendr.Core.Services.ICachedEntityService`1.InvalidateEntityCache">
             <summary>
             Invalidates the entire services entity cache
+            </summary>
+        </member>
+        <member name="M:Vendr.Core.Services.ICachedEntityService`1.CheckEntityCacheIntegrity(Vendr.Core.Models.EntityCacheIntegrityCheckOptions)">
+            <summary>
+            Checks/fixes the integrity of the entity cache
             </summary>
         </member>
         <member name="T:Vendr.Core.Services.ICountryService">
@@ -3665,17 +3687,39 @@
             <param price="value">The <see cref="T:Vendr.Core.Models.AdjustedPrice"/> to format</param>
             <returns>A <see cref="T:Vendr.Core.Models.FormattedAmount"/> instance</returns>
         </member>
-        <member name="T:Vendr.Extensions.IAmountExtensions">
+        <member name="T:Vendr.Extensions.AmountExtensions">
             <summary>
             Extensions methods for <see cref="T:Vendr.Core.Models.IAmount"/> entities
             </summary>
         </member>
-        <member name="M:Vendr.Extensions.IAmountExtensions.Formatted(Vendr.Core.Models.IAmount)">
+        <member name="M:Vendr.Extensions.AmountExtensions.Formatted(Vendr.Core.Models.IAmount)">
             <summary>
             Formats the <see cref="T:Vendr.Core.Models.IAmount"/> value for the given amounts <see cref="T:Vendr.Core.Models.Currency"/>
             </summary>
             <param name="value">The <see cref="T:Vendr.Core.Models.IAmount"/> to format</param>
             <returns>A <see cref="T:Vendr.Core.Models.FormattedAmount"/> instance</returns>
+        </member>
+        <member name="M:Vendr.Extensions.AmountExtensions.Formatted(Vendr.Core.Models.IAmount,System.Int32)">
+            <summary>
+            Formats the <see cref="T:Vendr.Core.Models.IAmount"/> value for the given amounts <see cref="T:Vendr.Core.Models.Currency"/>
+            </summary>
+            <param name="value">The <see cref="T:Vendr.Core.Models.IAmount"/> to format</param>
+            <param name="decimalPlaces">The number of decimal places to format to</param>
+            <returns>A <see cref="T:Vendr.Core.Models.FormattedAmount"/> instance</returns>
+        </member>
+        <member name="M:Vendr.Extensions.AmountExtensions.Rounded(Vendr.Core.Models.Amount)">
+            <summary>
+            Round the amount to the presission of the amounts culture number format
+            </summary>
+            <returns>A rounded amount value</returns>
+        </member>
+        <member name="M:Vendr.Extensions.AmountExtensions.RoundedIf(Vendr.Core.Models.Amount,System.Predicate{Vendr.Core.Models.Amount})">
+            <summary>
+            Round the amount to the presission of the amounts culture number format if the given predicate is true
+            </summary>
+            <param name="amount">The amount to be rounded</param>
+            <param name="test">The predicate to determine if the amount should be rounded or not</param>
+            <returns>A rounded amount value</returns>
         </member>
         <member name="T:Vendr.Extensions.OrderExtensions">
             <summary>
@@ -4044,6 +4088,28 @@
             </summary>
             <param name="value">The <see cref="T:Vendr.Core.Models.IPrice"/> to format</param>
             <returns>A <see cref="T:Vendr.Core.Models.FormattedPrice"/> instance</returns>
+        </member>
+        <member name="M:Vendr.Extensions.PriceExtensions.Formatted(Vendr.Core.Models.IPrice,System.Int32)">
+            <summary>
+            Formats the <see cref="T:Vendr.Core.Models.IPrice"/> values for the given prices <see cref="T:Vendr.Core.Models.Currency"/>
+            </summary>
+            <param name="value">The <see cref="T:Vendr.Core.Models.IPrice"/> to format</param>
+            <param name="decimalPlaces">The number of decimal places to format to</param>
+            <returns>A <see cref="T:Vendr.Core.Models.FormattedPrice"/> instance</returns>
+        </member>
+        <member name="M:Vendr.Extensions.PriceExtensions.Rounded(Vendr.Core.Models.Price)">
+            <summary>
+            Round the price to the presission of the prices culture number format
+            </summary>
+            <returns>A rounded price value</returns>
+        </member>
+        <member name="M:Vendr.Extensions.PriceExtensions.RoundedIf(Vendr.Core.Models.Price,System.Predicate{Vendr.Core.Models.Price})">
+            <summary>
+            Round the price to the presission of the prices culture number format if the given predicate is true
+            </summary>
+            <param name="price">The price to be rounded</param>
+            <param name="test">The predicate to determine if the price should be rounded or not</param>
+            <returns>A rounded price value</returns>
         </member>
         <member name="T:Vendr.Extensions.IProductServiceExtensions">
             <summary>

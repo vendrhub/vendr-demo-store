@@ -102,6 +102,14 @@
                 console.log('Could not connect to SignalR preview hub.');
             });
         }
+        function fixExternalLinks(iframe) {
+            // Make sure external links don't open inside the iframe
+            Array.from(iframe.contentDocument.getElementsByTagName('a')).filter(function (a) {
+                return a.hostname !== location.hostname && !a.target;
+            }).forEach(function (a) {
+                return a.target = '_top';
+            });
+        }
         var isInit = getParameterByName('init');
         if (isInit === 'true') {
             //do not continue, this is the first load of this new window, if this is passed in it means it's been
@@ -345,6 +353,7 @@
         $scope.onFrameLoaded = function (iframe) {
             $scope.frameLoaded = true;
             configureSignalR(iframe);
+            fixExternalLinks(iframe);
             $scope.currentCultureIso = $location.search().culture || null;
         };
         /*****************************************************************************/
