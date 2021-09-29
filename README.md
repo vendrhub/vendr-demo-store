@@ -17,7 +17,7 @@ In the back office you'll find a suggested content structure for a working Vendr
 To get started with the Vendr demo store you will need:
 
 * Visual Studio 2017 (15.9.7+)
-* .NET SDK 4.7.2 or newer
+* .NET SDK 4.7.2 or .NET 5.0
 
 ## Getting Started
 
