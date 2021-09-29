@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models.PublishedContent;
+using Umbraco.Cms.Core.Web;
 using Umbraco.Extensions;
 using Vendr.Common.Models;
 using Vendr.DemoStore.Web.Extensions;
@@ -17,13 +17,13 @@ namespace Vendr.DemoStore.Web.ViewComponents
     public class SearchViewComponent : ViewComponent
     {
         private readonly IExamineManager _examineManager;
-        private readonly IPublishedContentQuery _publishedContentQuery;
+        private readonly IUmbracoContextAccessor _umbracoContextAccessor;
 
         public SearchViewComponent(IExamineManager examineManager,
-            IPublishedContentQuery publishedContentQuery)
+            IUmbracoContextAccessor umbracoContextAccessor)
         {
             _examineManager = examineManager;
-            _publishedContentQuery = publishedContentQuery;
+            _umbracoContextAccessor = umbracoContextAccessor;
         }
 
         public IViewComponentResult Invoke()
@@ -77,9 +77,12 @@ namespace Vendr.DemoStore.Web.ViewComponents
                 var results = examineQuery.Execute(new QueryOptions(ps * (p - 1), ps * p));
                 var totalResults = results.TotalItemCount;
 
+                var items = results.ToPublishedSearchResults(_umbracoContextAccessor.GetRequiredUmbracoContext().Content)
+                    .Select(x => x.Content);
+
                 result = new PagedResult<IPublishedContent>(totalResults, p, ps)
                 {
-                    Items = results.Select(x => _publishedContentQuery.Content(int.Parse(x.Id)))
+                    Items = items
                 };
             }
 
