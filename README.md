@@ -1,12 +1,12 @@
 # Vendr Demo Store
 
-Welcome to the Vendr Demo Store, an example webstore setup using [Vendr](http://getvendr.net) in [Umbraco v8](https://umbraco.com).
+Welcome to the Vendr Demo Store, an example webstore setup using [Vendr](http://getvendr.net) in [Umbraco v8 or v9](https://umbraco.com).
 
 ![Screenshot](assets/screenshot.png)
 
 ## About this Demo
 
-In this demo you will find a fully configured basic webstore using Vendr on Umbraco v8.2. The store is based around a fictitious tea retailer called Blendid which lists a variety of teas from multiple companies and also displays them in categories. Where products have multiple pricing options, variant nodes are used to provide buying options for those particular product choices.
+In this repo you will find a fully configured basic webstore using Vendr on Umbraco. There are two branches with build for both v8 (.NET Framework) and v9 (.NET Core). The store is based around a fictitious tea retailer called Blendid which lists a variety of teas from multiple companies and also displays them in categories. Where products have multiple pricing options, variant nodes are used to provide buying options for those particular product choices.
 
 The site also showcases a basic shopping cart setup with cart management features via the Vendr API as well as a checkout flow following all the main steps required for a Vendr order entity. On checkout, there will also be examples of order confirmation emails that will be sent (**TIP** Use something like [Papercut](https://github.com/ChangemakerStudios/Papercut) to capture these without them needing to be actually sent).
 
@@ -27,7 +27,7 @@ Clone or download this repository locally (it includes all the files you will ne
 git clone https://github.com/vendrhub/vendr-demo-store.git
 ````
 
-Once you have all the files downloaded you can open the `Vendr.DemoStore.sln` solution file in the root of the repository in Visual Studio. Make sure the `Vendr.DemoStore.Web` project is the startup project by right clicking the project in the Solution Explorer and choosing `Set as StartUp Project`, and then press `Ctrl + F5` to launch the site.
+Once you have the repository cloned, switch to the branch for the version of Vendr/Umbraco you wish to use (either `v2/netframework/main` or `v2/netcore/main`). You can then open the `Vendr.DemoStore.sln` solution file in the root of the repository in Visual Studio. Make sure the `Vendr.DemoStore.Web` project is the startup project by right clicking the project in the Solution Explorer and choosing `Set as StartUp Project`, and then press `Ctrl + F5` to launch the site.
 
 To login to the back office you can do so using the credentails:
 
