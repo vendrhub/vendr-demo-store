@@ -39,7 +39,7 @@ namespace Vendr.DemoStore.Web.ViewComponents
                 var searcher = index.Searcher;
                 var query = searcher.CreateQuery().NativeQuery(q);
                 var results = query.OrderBy(new SortableField("name", SortType.String))
-                    .Execute(QueryOptions.SkipTake(pageSize * (page - 1), pageSize * page));
+                    .Execute(QueryOptions.SkipTake(pageSize * (page - 1), pageSize));
                 var totalResults = results.TotalItemCount;
 
                 using (var ctx = _umbracoContextFactory.EnsureUmbracoContext())
