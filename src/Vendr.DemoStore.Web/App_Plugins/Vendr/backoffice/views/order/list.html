@@ -1,8 +1,8 @@
 ﻿<div ng-controller="Vendr.Controllers.OrderListController as vm" class="vendr">
 
-    <umb-load-indicator ng-if="vm.page.loading"></umb-load-indicator>
+    <umb-load-indicator ng-show="vm.page.loading"></umb-load-indicator>
 
-    <umb-editor-view ng-if="!vm.page.loading">
+    <umb-editor-view ng-show="!vm.page.loading">
 
         <umb-editor-header name="vm.page.menu.currentNode.name"
             name-locked="true"
@@ -16,13 +16,14 @@
         <umb-editor-container class="form-horizontal">
             <vendr-license-check></vendr-license-check>
             <vendr-table-view create-actions="vm.options.createActions"
-                              bulk-actions="vm.options.bulkActions"
-                              filters="vm.options.filters"
-                              items="vm.options.items"
-                              item-properties="vm.options.itemProperties"
-                              paginated="true"
-                              item-click="vm.options.itemClick"
-                              on-load-items="vm.loadItems">
+              bulk-actions="vm.options.bulkActions"
+              filters="vm.options.filters"
+              advanced-filter-properties="vm.options.advancedFilters"
+              items="vm.options.items"
+              item-properties="vm.options.itemProperties"
+              paginated="true"
+              item-click="vm.options.itemClick"
+              on-load-items="vm.loadItems">
             </vendr-table-view>
         </umb-editor-container>
 

@@ -72,9 +72,9 @@
                                     <umb-badge color="grey" size="s" ng-if="!license.isActive">Inactive</umb-badge>
                                 </umb-control-group>
                                 <umb-control-group label="Plan" ng-if="license.plan">{{license.plan}}</umb-control-group>
-                                <umb-control-group label="Domains">
+                                <umb-control-group label="Domains" ng-if="license.fingerprintType == 'Domain'">
                                     <ul>
-                                        <li ng-repeat="domain in license.domains">{{domain}}</li>
+                                        <li ng-repeat="fp in license.fingerprints">{{fp}}</li>
                                     </ul>
                                 </umb-control-group>
                                 <umb-control-group label="Expires" ng-if="license.expiryDate">{{license.expiryDate}}</umb-control-group>
