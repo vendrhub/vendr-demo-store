@@ -220,6 +220,8 @@
 
     function vendrUtils() {
 
+        var regexGuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
         return {
             getSettings: function (key) {
                 if (!Umbraco || !Umbraco.Sys || !Umbraco.Sys.ServerVariables || !Umbraco.Sys.ServerVariables["vendr"] || !Umbraco.Sys.ServerVariables["vendr"][key]) {
@@ -266,6 +268,15 @@
                     var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
                     return v.toString(16);
                 });
+            },
+            isGuid: function(stringToTest) {
+                if (stringToTest[0] === "{") {
+                    stringToTest = stringToTest.substring(1, stringToTest.length - 1);
+                }
+                return regexGuid.test(stringToTest);
+            },
+            isUmbracoV8: function () {
+                return Umbraco.Sys.ServerVariables.application.version.indexOf("8.") == 0;
             }
         };
 
