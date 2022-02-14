@@ -29,6 +29,9 @@ namespace Vendr.DemoStore.Web.Controllers
             if (productNode == null)
                 return null;
 
+            // Get the store from the product node
+            var store = productNode.GetStore();
+
             // Find the variant with the matching attributes
             var variant = productNode.Variants.FindByAttributes(model.Attributes);
 
@@ -36,7 +39,7 @@ namespace Vendr.DemoStore.Web.Controllers
             if (variant != null)
             {
                 // Convert variant into product snapshot
-                var snapshot = _productService.GetProduct(productNode.Key.ToString("D"), variant.Content.Key.ToString("D"), Thread.CurrentThread.CurrentCulture.Name);
+                var snapshot = _productService.GetProduct(store.Id, productNode.Key.ToString("D"), variant.Content.Key.ToString("D"), Thread.CurrentThread.CurrentCulture.Name);
                 if (snapshot != null)
                 {
                     var multiVariantContent = variant.Content as ProductMultiVariant;

@@ -1,0 +1,10 @@
+﻿<div ng-controller="Vendr.Controllers.TagsController as vm" class="umb-property-editor umb-tags">
+
+    <vendr-tags-editor store-id="vm.store.id"
+        value="vm.value"
+        on-value-changed="vm.valueChanged(value)"
+        ng-if="vm.store"
+        class="block mb-10">
+    </vendr-tags-editor>
+
+</div>

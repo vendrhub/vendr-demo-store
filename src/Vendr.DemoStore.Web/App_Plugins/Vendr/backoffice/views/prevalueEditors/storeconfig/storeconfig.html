@@ -1,8 +1,8 @@
-﻿<div ng-controller="Vendr.Controllers.StoreConfigController as vm">
+﻿<div ng-controller="Vendr.Controllers.StoreConfigController as vm" class="vendr" style="margin-bottom: -21px;">
     <umb-control-group label="Store Mode" description="Select the mode for resolving the store">
         <div class="flex" style="margin-bottom: 5px; padding: 10px;">
             <div>
-                <input type="radio" id="storemode_search" value="Search" ng-model="vm.model.value.storeMode" />
+                <input type="radio" id="storemode_search" value="Search" ng-model="vm.model.value.storeMode" class="mr-10" />
             </div>
             <div>
                 <label for="storemode_search" style="margin: 0;"><strong>Search</strong><br /><small style="padding: 0;">Search for the store by looking up the content tree for a store picker</small></label>
@@ -10,7 +10,7 @@
         </div>
         <div class="flex" style="border-top: solid 1px #f6f6f7; margin-bottom: 5px; padding: 10px;">
             <div>
-                <input type="radio" id="storemode_explicit" value="Explicit" ng-model="vm.model.value.storeMode" />
+                <input type="radio" id="storemode_explicit" value="Explicit" ng-model="vm.model.value.storeMode" class="mr-10" />
             </div>
             <div>
                 <label for="storemode_explicit" style="margin: 0;"><strong>Explicit</strong><br /><small style="padding: 0;">Define an explicit store to pick entities from</small></label>
@@ -18,7 +18,7 @@
         </div>
         <div class="flex" style="border-top: solid 1px #f6f6f7; margin-bottom: 5px; padding: 10px;">
             <div>
-                <input type="radio" id="storemode_all" value="All" ng-model="vm.model.value.storeMode" />
+                <input type="radio" id="storemode_all" value="All" ng-model="vm.model.value.storeMode" class="mr-10" />
             </div>
             <div>
                 <label for="storemode_all" style="margin: 0;"><strong>All</strong><br /><small style="padding: 0;">Pick entities from across all available stores</small></label>

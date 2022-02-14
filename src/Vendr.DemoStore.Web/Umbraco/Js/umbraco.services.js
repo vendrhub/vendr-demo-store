@@ -3523,6 +3523,41 @@
                     'id': id
                 };
                 array.push(placeholder);
+            },
+            rebindSavedContentType: function rebindSavedContentType(contentType, savedContentType) {
+                // The saved content type might have updated values (eg. new IDs/keys), so make sure the view model is updated
+                contentType.ModelState = savedContentType.ModelState;
+                contentType.id = savedContentType.id;
+                contentType.groups.forEach(function (group) {
+                    if (!group.alias)
+                        return;
+                    var k = 0;
+                    while (k < savedContentType.groups.length && savedContentType.groups[k].alias != group.alias) {
+                        k++;
+                    }
+                    if (k == savedContentType.groups.length) {
+                        group.id = 0;
+                        return;
+                    }
+                    var savedGroup = savedContentType.groups[k];
+                    group.id = savedGroup.id;
+                    group.key = savedGroup.key;
+                    group.contentTypeId = savedGroup.contentTypeId;
+                    group.properties.forEach(function (property) {
+                        if (property.id || !property.alias)
+                            return;
+                        k = 0;
+                        while (k < savedGroup.properties.length && savedGroup.properties[k].alias != property.alias) {
+                            k++;
+                        }
+                        if (k == savedGroup.properties.length) {
+                            property.id = 0;
+                            return;
+                        }
+                        var savedProperty = savedGroup.properties[k];
+                        property.id = savedProperty.id;
+                    });
+                });
             }
         };
         return contentTypeHelperService;
@@ -13279,21 +13314,20 @@ When building a custom infinite editor view you can use the same components as a
                     return trimmed;
                 },
                 formatContentTypePostData: function formatContentTypePostData(displayModel, action) {
-                    //create the save model from the display model
+                    // Create the save model from the display model
                     var saveModel = _.pick(displayModel, 'compositeContentTypes', 'isContainer', 'allowAsRoot', 'allowedTemplates', 'allowedContentTypes', 'alias', 'description', 'thumbnail', 'name', 'id', 'icon', 'trashed', 'key', 'parentId', 'alias', 'path', 'allowCultureVariant', 'allowSegmentVariant', 'isElement');
-                    // TODO: Map these
                     saveModel.allowedTemplates = _.map(displayModel.allowedTemplates, function (t) {
                         return t.alias;
                     });
                     saveModel.defaultTemplate = displayModel.defaultTemplate ? displayModel.defaultTemplate.alias : null;
                     var realGroups = _.reject(displayModel.groups, function (g) {
-                        //do not include these tabs
+                        // Do not include groups with init state
                         return g.tabState === 'init';
                     });
                     saveModel.groups = _.map(realGroups, function (g) {
-                        var saveGroup = _.pick(g, 'inherited', 'id', 'sortOrder', 'name', 'key', 'alias', 'type');
+                        var saveGroup = _.pick(g, 'id', 'sortOrder', 'name', 'key', 'alias', 'type');
                         var realProperties = _.reject(g.properties, function (p) {
-                            //do not include these properties
+                            // Do not include properties with init state or inherited from a composition
                             return p.propertyState === 'init' || p.inherited === true;
                         });
                         var saveProperties = _.map(realProperties, function (p) {
@@ -13301,14 +13335,19 @@ When building a custom infinite editor view you can use the same components as a
                             return saveProperty;
                         });
                         saveGroup.properties = saveProperties;
-                        //if this is an inherited group and there are not non-inherited properties on it, then don't send up the data
-                        if (saveGroup.inherited === true && saveProperties.length === 0) {
-                            return null;
+                        if (g.inherited === true) {
+                            if (saveProperties.length === 0) {
+                                // All properties are inherited from the compositions, no need to save this group
+                                return null;
+                            } else if (g.contentTypeId != saveModel.id) {
+                                // We have local properties, but the group id is not local, ensure a new id/key is generated on save
+                                saveGroup = _.omit(saveGroup, 'id', 'key');
+                            }
                         }
                         return saveGroup;
                     });
-                    //we don't want any null groups
                     saveModel.groups = _.reject(saveModel.groups, function (g) {
+                        // Do not include empty/null groups
                         return !g;
                     });
                     return saveModel;

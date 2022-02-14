@@ -224,6 +224,11 @@
             The Translated Value database table name
             </summary>
         </member>
+        <member name="F:Vendr.Infrastructure.Constants.DatabaseSchema.Tables.StoreEntityTag">
+            <summary>
+            The Store Entity Tag database table name
+            </summary>
+        </member>
         <member name="T:Vendr.Infrastructure.IDatabaseUnitOfWork">
             <summary>
             Defines a Unit of Work that holds an <see cref="T:NPoco.IDatabase"/> reference

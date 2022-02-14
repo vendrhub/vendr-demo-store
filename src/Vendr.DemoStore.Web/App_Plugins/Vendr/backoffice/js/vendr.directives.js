@@ -1249,7 +1249,7 @@
 
                 scope.labelView = scope.discountRewardDefinition.labelView.endsWith(".html")
                     ? scope.discountRewardDefinition.labelView
-                    : "/App_Plugins/Vendr/backoffice/views/discount/rewards/labelViews/" + scope.discountRewardDefinition.labelView + ".html";
+                    : "/App_Plugins/Vendr/backoffice/views/discount/rewards/labelviews/" + scope.discountRewardDefinition.labelView.toLowerCase() + ".html";
 
                 settingsEditorDialogOptions.config.name = "Edit " + scope.discountRewardDefinition.name;
 
@@ -1593,7 +1593,7 @@
 
                 scope.labelView = scope.discountRuleDefinition.labelView.endsWith(".html")
                     ? scope.discountRuleDefinition.labelView
-                    : "/App_Plugins/Vendr/backoffice/views/discount/rules/labelViews/" + scope.discountRuleDefinition.labelView + ".html";
+                    : "/App_Plugins/Vendr/backoffice/views/discount/rules/labelviews/" + scope.discountRuleDefinition.labelView.toLowerCase() + ".html";
 
                 settingsEditorDialogOptions.config.name = "Edit " + scope.discountRuleDefinition.name;
 
@@ -1739,7 +1739,7 @@
 
     'use strict';
 
-    function vendrTableView($q, $routeParams, $timeout, listViewHelper, localizationService, notificationsService, overlayService) {
+    function vendrTableView($q, $rootScope, $routeParams, $timeout, listViewHelper, localizationService, notificationsService, editorService, overlayService, vendrLocalStorage) {
 
         function link(scope, el, attr, ctrl) {
 
@@ -1828,9 +1828,11 @@
                                 $timeout(function () {
                                     configure(selectedItems).then(function (config) {
                                         performBulkActionInner(selectedItems, config, fn, getStatusMsg, getSuccessMsg, isBulkAction);
+                                    }).catch(function (e) {
+                                        notifyAndReload(e, false, null);
                                     });
                                 }, 1);
-                            },
+                            }, 
                             close: function () {
                                 overlayService.close();
                             }
@@ -1839,6 +1841,8 @@
                     } else {
                         configure(selectedItems).then(function (config) {
                             performBulkActionInner(selectedItems, config, fn, getStatusMsg, getSuccessMsg, isBulkAction);
+                        }).catch(function (e) {
+                            notifyAndReload(e, false, null);
                         });
                     }
                 });
@@ -1865,15 +1869,24 @@
                 });
             }
 
+            var advancedFiltersCacheKey = $routeParams.section + "-"+ $routeParams.method + "-advancedFilter";
+            
             scope.options = {
                 filterTerm: '',
                 filteredItems: scope.items || [],
+                advancedFilters: vendrLocalStorage.get(advancedFiltersCacheKey) || [],
                 orderBy: "name",
-                orderDirection: "asc",
-                bulkActionsAllowed: scope.bulkActions && scope.bulkActions.length > 0,
-                allowSorting: scope.allowSorting
+                orderDirection: "asc"
             };
 
+            Object.defineProperty(scope.options, "bulkActionsAllowed", {
+                get: () => { return scope.bulkActions && scope.bulkActions.length > 0 }
+            });
+
+            Object.defineProperty(scope.options, "allowSorting", {
+                get: () => { return scope.allowSorting }
+            });
+            
             scope.pagination = { pageNumber: 1, totalPages: 1, pageSize: 30 };
             scope.selection = [];
             scope.bulkActionStatus = '';
@@ -2028,19 +2041,66 @@
                 scope.pagination.pageNumber = pageNumber;
                 scope.loadItems();
             };
+            
+            scope.openAdvancedFilterDialog = function () {
+                if (scope.advancedFilterProperties) {                    
+                    editorService.open({
+                        view: '/App_Plugins/Vendr/backoffice/views/dialogs/advancedfilter.html',
+                        size: 'small',
+                        config: {
+                            properties: scope.advancedFilterProperties,
+                            values: scope.options.advancedFilters.reduce((o, v) => {
+                                o[v.alias] = v.value;
+                                return o;
+                            }, {})
+                        },
+                        submit: function(model) {
+                            scope.options.advancedFilters = Object.keys(model).map(key => {
+                                return { alias: key, value: model[key] }
+                            });
+                            vendrLocalStorage.set(advancedFiltersCacheKey, scope.options.advancedFilters);
+                            scope.pagination.pageNumber = 1;
+                            scope.loadItems();
+                            editorService.close();
+                        },
+                        close: function () {
+                            editorService.close();
+                        }
+                    });
+                }
+            }
 
-            scope.loadItems = function () {
+            scope.loadItems = function (opts) {
+                
                 scope.loading = true;
                 scope.clearSelection();
-                scope.onLoadItems({
+
+                opts = opts || {};
+                opts = angular.extend({}, {
                     searchTerm: scope.options.filterTerm,
                     pageNumber: scope.pagination.pageNumber,
                     pageSize: scope.pagination.pageSize,
                     orderBy: scope.options.orderBy,
                     orderDirection: scope.options.orderDirection
+                }, opts);
+
+                scope.options.advancedFilters.forEach(fltr => {
+                    if (fltr.value && fltr.value !== "") {
+                        opts[fltr.alias] = fltr.value;
+                    } else {
+                        delete opts[fltr.alias];
+                    }
                 });
+                
+                scope.onLoadItems(opts);
             };
 
+            var unsubscribe = [
+                $rootScope.$on("vendrReloadTableViewItems", function (evt, opts) {
+                    scope.loadItems(opts);
+                })
+            ];
+            
             scope.$watch('items', function () {
                 scope.loading = false;
 
@@ -2066,17 +2126,26 @@
                 });
             }
 
+            // When the element is disposed we need to unsubscribe!
+            // NOTE: this is very important otherwise if this is part of a modal, the listener still exists because the dom
+            // element might still be there even after the modal has been hidden.
+            scope.$on('$destroy', function () {
+                unsubscribe.forEach(function (u) {
+                    u();
+                });
+            });
         }
 
         var directive = {
             restrict: 'E',
             replace: true,
-            template:'<div class="vendr"><div class="umb-property-editor umb-listview"><umb-editor-sub-header ng-class="{\'--state-selection\':(selection.length > 0)}"><umb-editor-sub-header-content-left><umb-editor-sub-header-section ng-if="(createActions && createActions.length > 0 && (selection.length == 0))"><div class="btn-group" ng-show="createActions.length == 1"><button type="button" class="btn btn-outline umb-outline" ng-click="createActions[0].doAction()"><i class="{{createActions[0].icon}}" aria-hidden="true"></i> {{createActions[0].name}}</button></div><div class="btn-group" ng-show="createActions.length > 1"><button type="button" class="btn btn-outline umb-outline dropdown-toggle" data-toggle="dropdown"><span ng-click="createActions[0].doAction()"><i class="{{createActions[0].icon}}" aria-hidden="true"></i> {{createActions[0].name}}</span> <span class="caret" ng-click="page.createDropdownOpen = !page.createDropdownOpen"></span></button><umb-dropdown ng-if="page.createDropdownOpen" on-close="page.createDropdownOpen = false"><umb-dropdown-item ng-repeat="createAction in createActions" ng-if="$index > 0"><a ng-click="createAction.doAction()"><i class="{{createAction.icon}}" aria-hidden="true"></i> {{createAction.name}}</a></umb-dropdown-item></umb-dropdown></div></umb-editor-sub-header-section><vendr-filter ng-repeat="fltr in filters track by fltr.alias" ng-show="!selection || selection.length == 0" filter="fltr" on-change="doFilter()"></vendr-filter><umb-editor-sub-header-section ng-show="(selection.length > 0)"><umb-button type="button" label="Clear selection" label-key="buttons_clearSelection" button-style="white" action="clearSelection()" disabled="bulkActionInProgress"></umb-button></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length > 0)"><strong ng-show="!bulkActionInProgress">{{ selection.length }}&nbsp;<localize key="general_of">of</localize>&nbsp;{{ options.filteredItems.length }}&nbsp;<localize key="general_selected">items selected</localize></strong> <strong ng-show="bulkActionInProgress" ng-bind="bulkActionStatus"></strong><umb-loader position="bottom" ng-show="bulkActionInProgress"></umb-loader></umb-editor-sub-header-section></umb-editor-sub-header-content-left><umb-editor-sub-header-content-right><umb-editor-sub-header-section ng-show="(selection.length == 0)"><div class="form-search -no-margin-bottom pull-right" novalidate><div class="inner-addon left-addon"><i class="icon icon-search" ng-click="doFilter()" aria-hidden="true"></i> <input class="form-control search-input" type="text" localize="placeholder" placeholder="@general_typeToSearch" ng-model="options.filterTerm" ng-change="doFilter()" ng-keydown="doFilter()" prevent-enter-submit no-dirty-check></div></div></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length > 0) && (options.bulkActionsAllowed)"><umb-button ng-repeat="bulkAction in bulkActions" type="button" button-style="white" label="{{ bulkAction.name }}" icon="{{ bulkAction.icon }}" action="doBulkAction(bulkAction)" disabled="bulkActionInProgress" size="xs" add-ellipsis="true"></umb-button></umb-editor-sub-header-section></umb-editor-sub-header-content-right></umb-editor-sub-header><div ng-if="!loading"><vendr-table ng-if="options.filteredItems && options.filteredItems.length > 0" items="options.filteredItems" allow-select-all="options.bulkActionsAllowed" allow-sorting="options.allowSorting" item-properties="itemProperties" on-select="selectItem(item, $index, $event)" on-click="itemClick(item, $index, $event)" on-select-all="selectAll($event)" on-selected-all="areAllSelected()" on-sorting-direction="setSortDirection(col, direction)" on-sort="sortItems(field, allow, isSystem)"></vendr-table><umb-empty-state ng-if="!options.filteredItems || options.filteredItems.length === 0" position="center"><div>No items found</div></umb-empty-state></div><umb-load-indicator ng-show="loading"></umb-load-indicator><div class="flex justify-center" ng-show="!loading && paginated && pagination.totalPages"><umb-pagination page-number="pagination.pageNumber" total-pages="pagination.totalPages" on-next="goToPage" on-prev="goToPage" on-go-to-page="goToPage"></umb-pagination><vendr-page-size page-sizes="[30,75,150,300,600]" page-size="pagination.pageSize" on-change="setPageSize(pageSize)"></vendr-page-size></div></div></div>',
+            template:'<div class="vendr"><div class="umb-property-editor umb-listview"><umb-editor-sub-header ng-class="{\'--state-selection\':(selection.length > 0)}"><umb-editor-sub-header-content-left><umb-editor-sub-header-section ng-if="(createActions && createActions.length > 0 && (selection.length == 0))"><div class="btn-group" ng-show="createActions.length == 1"><button type="button" class="btn btn-outline umb-outline" ng-click="createActions[0].doAction()"><i class="{{createActions[0].icon}}" aria-hidden="true"></i> {{createActions[0].name}}</button></div><div class="btn-group" ng-show="createActions.length > 1"><button type="button" class="btn btn-outline umb-outline dropdown-toggle" data-toggle="dropdown"><span ng-click="createActions[0].doAction()"><i class="{{createActions[0].icon}}" aria-hidden="true"></i> {{createActions[0].name}}</span> <span class="caret" ng-click="page.createDropdownOpen = !page.createDropdownOpen"></span></button><umb-dropdown ng-if="page.createDropdownOpen" on-close="page.createDropdownOpen = false"><umb-dropdown-item ng-repeat="createAction in createActions" ng-if="$index > 0"><a ng-click="createAction.doAction()"><i class="{{createAction.icon}}" aria-hidden="true"></i> {{createAction.name}}</a></umb-dropdown-item></umb-dropdown></div></umb-editor-sub-header-section><vendr-filter ng-repeat="fltr in filters track by fltr.alias" ng-show="!selection || selection.length == 0" filter="fltr" on-change="doFilter()"></vendr-filter><umb-editor-sub-header-section ng-show="(selection.length > 0)"><umb-button type="button" label="Clear selection" label-key="buttons_clearSelection" button-style="white" action="clearSelection()" disabled="bulkActionInProgress"></umb-button></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length > 0)"><strong ng-show="!bulkActionInProgress">{{ selection.length }}&nbsp;<localize key="general_of">of</localize>&nbsp;{{ options.filteredItems.length }}&nbsp;<localize key="general_selected">items selected</localize></strong> <strong ng-show="bulkActionInProgress" ng-bind="bulkActionStatus"></strong><umb-loader position="bottom" ng-show="bulkActionInProgress"></umb-loader></umb-editor-sub-header-section></umb-editor-sub-header-content-left><umb-editor-sub-header-content-right><umb-editor-sub-header-section ng-if="advancedFilterProperties" ng-show="(selection.length == 0)"><div class="inline-block relative" aria-hidden="false"><button type="button" aria-expanded="false" class="btn-filter" ng-class="{ \'btn-filter--has-filter\' : options.advancedFilters.length > 0 }" ng-click="openAdvancedFilterDialog()"><umb-icon icon="icon-filter"></umb-icon></button></div></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length == 0)"><div class="form-search -no-margin-bottom pull-right" novalidate><div class="inner-addon left-addon"><i class="icon icon-search" ng-click="doFilter()" aria-hidden="true"></i> <input class="form-control search-input" type="text" localize="placeholder" placeholder="@general_typeToSearch" ng-model="options.filterTerm" ng-change="doFilter()" ng-keydown="doFilter()" prevent-enter-submit no-dirty-check></div></div></umb-editor-sub-header-section><umb-editor-sub-header-section ng-show="(selection.length > 0) && (options.bulkActionsAllowed)"><umb-button ng-repeat="bulkAction in bulkActions" type="button" button-style="white" label="{{ bulkAction.name }}" icon="{{ bulkAction.icon }}" action="doBulkAction(bulkAction)" disabled="bulkActionInProgress" size="xs" add-ellipsis="true"></umb-button></umb-editor-sub-header-section></umb-editor-sub-header-content-right></umb-editor-sub-header><div ng-if="!loading"><vendr-table ng-if="options.filteredItems && options.filteredItems.length > 0" items="options.filteredItems" allow-select-all="options.bulkActionsAllowed" allow-sorting="options.allowSorting" item-properties="itemProperties" on-select="selectItem(item, $index, $event)" on-click="itemClick(item, $index, $event)" on-select-all="selectAll($event)" on-selected-all="areAllSelected()" on-sorting-direction="setSortDirection(col, direction)" on-sort="sortItems(field, allow, isSystem)"></vendr-table><umb-empty-state ng-if="!options.filteredItems || options.filteredItems.length === 0" position="center"><div>No items found</div></umb-empty-state></div><umb-load-indicator ng-show="loading"></umb-load-indicator><div class="flex justify-center" ng-show="!loading && paginated && pagination.totalPages"><umb-pagination page-number="pagination.pageNumber" total-pages="pagination.totalPages" on-next="goToPage" on-prev="goToPage" on-go-to-page="goToPage"></umb-pagination><vendr-page-size page-sizes="[30,75,150,300,600]" page-size="pagination.pageSize" on-change="setPageSize(pageSize)"></vendr-page-size></div></div></div>',
             scope: {
                 loading: "<",
                 createActions: "<",
                 bulkActions: "<",
                 filters: "<",
+                advancedFilterProperties: "<",
                 items: "<",
                 itemProperties: "<",
                 paginated: "<",
@@ -2093,6 +2162,243 @@
     };
 
     angular.module('vendr.directives').directive('vendrTableView', vendrTableView);
+
+}());
+(function () {
+
+    'use strict';
+
+    function vendrTagsEditorController($rootScope, $timeout, $element, assetsService, angularHelper, vendrRequestHelper) {
+
+        let vm = this;
+
+        let typeahead;
+        let tagsHound;
+
+        vm.$onInit = onInit;
+        vm.$onChanges = onChanges;
+        vm.$onDestroy = onDestroy;
+
+        vm.addTagOnEnter = addTagOnEnter;
+        vm.addTag = addTag;
+        vm.removeTag = removeTag;
+        vm.onKeyUpOnTag = onKeyUpOnTag;
+
+        vm.isLoading = true;
+        vm.tagToAdd = "";
+        vm.viewModel = [];
+
+        function onInit() 
+        {
+            vm.inputId = vm.inputId || "t" + String.CreateGuid();
+
+            assetsService.loadJs("lib/typeahead.js/typeahead.bundle.min.js").then(function () {
+
+                vm.isLoading = false;
+
+                //ensure that the models are formatted correctly
+                configureViewModel(true);
+
+                tagsHound = new Bloodhound({
+                    initialize: false,
+                    datumTokenizer: Bloodhound.tokenizers.whitespace,
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    //pre-fetch the tags for this category
+                    prefetch: {
+                        url: vendrRequestHelper.getApiUrl("tagApiBaseUrl", "GetTags", { storeId: vm.storeId }),
+                        //TTL = 5 minutes
+                        ttl: 300000
+                    },
+                    //dynamically get the tags for this category (they may have changed on the server)
+                    remote: {
+                        url: vendrRequestHelper.getApiUrl("tagApiBaseUrl", "GetTags", { storeId: vm.storeId, query: "%QUERY" }),
+                        wildcard: "%QUERY"
+                    }
+                });
+
+                tagsHound.initialize().then(function() {
+
+                    //configure the type ahead
+
+                    var sources = {
+                        //see: https://github.com/twitter/typeahead.js/blob/master/doc/jquery_typeahead.md#options
+                        name: vm.storeId,
+                        source: function (query, syncCallback, asyncCallback) {
+                            tagsHound.search(query,
+                                function(suggestions) {
+                                    syncCallback(removeCurrentTagsFromSuggestions(suggestions));
+                                }, function(suggestions) {
+                                    asyncCallback(removeCurrentTagsFromSuggestions(suggestions));
+                                });
+                        }
+                    };
+
+                    var opts = {
+                        hint: true,
+                        highlight: true,
+                        cacheKey: new Date(),  // Force a cache refresh each time the control is initialized
+                        minLength: 1
+                    };
+
+                    typeahead = $element.find('.tags-' + vm.inputId).typeahead(opts, sources)
+                        .bind("typeahead:selected", function (obj, datum, name) {
+                            angularHelper.safeApply($rootScope, function () {
+                                addTagInternal(datum.toLowerCase());
+                                vm.tagToAdd = "";
+                                // clear the typed text
+                                typeahead.typeahead('val', '');
+                            });
+                        }).bind("typeahead:autocompleted", function (obj, datum, name) {
+                            angularHelper.safeApply($rootScope, function () {
+                                addTagInternal(datum.toLowerCase());
+                                vm.tagToAdd = "";
+                                // clear the typed text
+                                typeahead.typeahead('val', '');
+                            });
+
+                        }).bind("typeahead:opened", function (obj) {
+
+                        });
+
+                });
+
+            });
+        }
+
+        /**
+         * Watch for value changes
+         * @param {any} changes
+         */
+        function onChanges(changes) {
+            //when the model 'value' changes, sync the viewModel object
+            if (changes.value) {
+                if (!changes.value.isFirstChange() && changes.value.currentValue !== changes.value.previousValue) {
+                    configureViewModel();
+                }
+            }
+        }
+
+        function onDestroy() {
+            if (tagsHound) {
+                tagsHound.clearPrefetchCache();
+                tagsHound.clearRemoteCache();
+                tagsHound = null;
+            }
+            $element.find('.tags-' + vm.inputId).typeahead('destroy');
+        }
+
+        function configureViewModel(isInitLoad) {
+            if (vm.value) {
+                if (Utilities.isString(vm.value) && vm.value.length > 0) {
+                    if (vm.config.storageType === "Json") {
+                        //json storage
+                        vm.viewModel = JSON.parse(vm.value);
+
+                        //if this is the first load, we are just re-formatting the underlying model to be consistent
+                        //we don't want to notify the component parent of any changes, that will occur if the user actually
+                        //changes a value. If we notify at this point it will signal a form dirty change which we don't want.
+                        if (!isInitLoad) {
+                            updateModelValue(vm.viewModel);
+                        }
+                    }
+                    else {
+                        //csv storage
+
+                        // split the csv string, and remove any duplicate values
+                        let tempArray = vm.value.split(',').map(function (v) {
+                            return v.trim();
+                        });
+
+                        vm.viewModel = tempArray.filter(function (v, i, self) {
+                            return self.indexOf(v) === i;
+                        });
+
+                        //if this is the first load, we are just re-formatting the underlying model to be consistent
+                        //we don't want to notify the component parent of any changes, that will occur if the user actually
+                        //changes a value. If we notify at this point it will signal a form dirty change which we don't want.
+                        if (!isInitLoad) {
+                            updateModelValue(vm.viewModel);
+                        }
+                    }
+                }
+                else if (Utilities.isArray(vm.value)) {
+                    vm.viewModel = vm.value;
+                }
+            }
+        }
+
+        function updateModelValue(val) {
+            val = val ? val : [];
+            vm.onValueChanged({ value: val });
+        }
+
+        function addTagInternal(tagToAdd) {
+            if (tagToAdd != null && tagToAdd.length > 0) {
+                if (vm.viewModel.indexOf(tagToAdd) < 0) {
+                    vm.viewModel.push(tagToAdd);
+                    updateModelValue(vm.viewModel);
+                }
+            }
+        }
+
+        function addTagOnEnter(e) {
+            var code = e.keyCode || e.which;
+            if (code == 13) { //Enter keycode
+                if ($element.find('.tags-' + vm.inputId).parent().find(".tt-menu .tt-cursor").length === 0) {
+                    //this is required, otherwise the html form will attempt to submit.
+                    e.preventDefault();
+                    addTag();
+                }
+            }
+        }
+        function addTag() {
+            //ensure that we're not pressing the enter key whilst selecting a typeahead value from the drop down
+            //we need to use jquery because typeahead duplicates the text box
+            addTagInternal(vm.tagToAdd);
+            vm.tagToAdd = "";
+            //this clears the value stored in typeahead so it doesn't try to add the text again
+            // https://issues.umbraco.org/issue/U4-4947
+            typeahead.typeahead('val', '');
+        }
+
+        function removeTag(tag) {
+            var i = vm.viewModel.indexOf(tag);
+            if (i >= 0) {
+                // Remove the tag from the index
+                vm.viewModel.splice(i, 1);
+                updateModelValue(vm.viewModel);
+            }
+        }
+
+        function onKeyUpOnTag(tag, $event) {
+            if ($event.keyCode === 8 || $event.keyCode === 46) {
+                removeTag(tag);
+            }
+        }
+
+        // helper method to remove current tags
+        function removeCurrentTagsFromSuggestions(suggestions) {
+            return $.grep(suggestions, function (suggestion) {
+                return ($.inArray(suggestion, vm.viewModel) === -1);
+            });
+        }
+
+    }
+
+    angular.module('vendr.directives').component('vendrTagsEditor', {
+        replace: true,
+        transclude: true,
+        template:'<div class="vendr-tags-editor vendr"><ng-form name="vm.tagEditorForm"><div ng-if="vm.isLoading"><localize key="loading">Loading</localize>...</div><div ng-if="!isLoading" class="vendr-tags-editor__container"><button ng-repeat="tag in vm.viewModel track by $index" type="button" class="btn btn-action" style="margin: 5px;" ng-click="vm.removeTag(tag)" ng-keyup="vm.onKeyUpOnTag(tag, $event)">{{tag}} <i class="fa fa-remove ml-5" aria-hidden="true"></i></button> <input type="text" id="{{vm.inputId}}" class="typeahead tags-{{vm.inputId}}" ng-model="vm.tagToAdd" ng-keydown="vm.addTagOnEnter($event)" ng-blur="vm.addTag()" ng-maxlength="200" maxlength="200" localize="placeholder" placeholder="@placeholders_enterTags"></div></ng-form></div>',
+        controller: vendrTagsEditorController,
+        controllerAs: 'vm',
+        bindings: {
+            value: "<",
+            storeId: "<",
+            config: "<",
+            inputId: "@?",
+            onValueChanged: "&"
+        }
+    });
 
 }());
 (function () {

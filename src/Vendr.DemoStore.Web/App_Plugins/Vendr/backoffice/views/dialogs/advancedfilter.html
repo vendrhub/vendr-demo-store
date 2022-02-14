@@ -1,0 +1,59 @@
+﻿<div ng-controller="Vendr.Controllers.AdvancedFilterDialogController as vm" class="vendr " noDirtyCheck>
+
+    <form name="contentForm"
+          ng-submit="vm.save()"
+          novalidate
+          val-form-manager>
+    
+        <umb-editor-view>
+    
+            <umb-editor-header name="vm.title"
+                name-locked="true"
+                hide-alias="true"
+                hide-icon="true"
+                hide-description="true">
+            </umb-editor-header>
+    
+            <umb-editor-container class="form-vertical">
+    
+                <umb-box ng-repeat="group in vm.properties track by group.name">
+                    <umb-box-header title="{{group.name}}"></umb-box-header>
+                    <umb-box-content>
+                        <umb-property ng-repeat="property in group.properties track by property.alias" property="property">
+                            <umb-property-editor model="property"></umb-property-editor>
+                        </umb-property>
+                    </umb-box-content>
+                </umb-box>
+    
+            </umb-editor-container>
+    
+            <umb-editor-footer>
+                <umb-editor-footer-content-right>
+                    
+                    <umb-button type="button"
+                        button-style="link"
+                        label-key="general_close"
+                        shortcut="esc"
+                        action="vm.close()">
+                    </umb-button>
+    
+                    <umb-button type="button"
+                        button-style="info"
+                        label="Reset"
+                        action="vm.reset()">
+                    </umb-button>
+    
+                    <umb-button type="button"
+                        button-style="success"
+                        label="Apply"
+                        action="vm.submit()">
+                    </umb-button>
+                    
+                </umb-editor-footer-content-right>
+            </umb-editor-footer>
+    
+        </umb-editor-view>
+        
+    </form>
+
+</div>
