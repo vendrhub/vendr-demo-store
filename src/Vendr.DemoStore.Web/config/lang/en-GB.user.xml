@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<language>
+    <area alias="login">
+        <key alias="greeting0">admin@admin.com / password1234</key>
+        <key alias="greeting1">admin@admin.com / password1234</key>
+        <key alias="greeting2">admin@admin.com / password1234</key>
+        <key alias="greeting3">admin@admin.com / password1234</key>
+        <key alias="greeting4">admin@admin.com / password1234</key>
+        <key alias="greeting5">admin@admin.com / password1234</key>
+        <key alias="greeting6">admin@admin.com / password1234</key>
+    </area>
+</language>

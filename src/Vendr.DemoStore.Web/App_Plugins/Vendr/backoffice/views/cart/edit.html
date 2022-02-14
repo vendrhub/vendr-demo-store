@@ -1,0 +1,73 @@
+﻿<div id="vendr-order-edit" ng-controller="Vendr.Controllers.CartEditController as vm" class="vendr">
+
+    <umb-load-indicator ng-if="vm.page.loading"></umb-load-indicator>
+
+    <style>
+      .vendr-header--order-status .umb-panel-header-name:before { content: '{{ vm.content.orderStatus.name.replace("'","\\'") }}'; }
+      .vendr-header--payment-status .umb-panel-header-name:after { content: '{{ vm.content.paymentStatusName.replace("'","\\'") }}'; }
+    </style>
+
+    <form name="contentForm"
+          ng-submit="vm.save()"
+          novalidate
+          val-form-manager>
+
+        <umb-editor-view ng-if="!vm.page.loading">
+
+            <umb-editor-header name="'#' + (vm.content.orderNumber  || vm.content.cartNumber)"
+                description="vm.content.finalizedDate | date: 'MMMM d, yyyy h:mm a'"
+                name-locked="true"
+                description-locked="true"
+                hide-icon="true"
+                hide-description="false"
+                hide-alias="true"
+                show-back-button="!vm.page.isInfiniteMode"
+                on-back="vm.back()"
+                menu="vm.page.menu"
+                hide-menu="vm.page.isInfiniteMode"
+                class="vendr-header vendr-header--order vendr-header--order-status vendr-header--order-status-{{ vm.content.orderStatus.color }} vendr-header--payment-status vendr-header--payment-status-{{ vm.content.paymentStatus.toLowerCase() }}">
+            </umb-editor-header>
+
+            <umb-editor-container class="form-horizontal">
+
+                <vendr-license-check></vendr-license-check>
+
+                <!-- TODO: Show error block if order has error status code -->
+
+                <ng-include ng-if="vm.editorConfig.view" src="vm.editorConfig.view"></ng-include>
+            </umb-editor-container>
+
+            <umb-editor-footer>
+
+                <umb-editor-footer-content-left>
+                    <umb-breadcrumbs ng-if="!vm.page.isInfiniteMode && vm.page.breadcrumb && vm.page.breadcrumb.items && vm.page.breadcrumb.items.length > 0"
+                        ancestors="vm.page.breadcrumb.items"
+                        on-open="vm.page.breadcrumb.itemClick(ancestor)">
+                    </umb-breadcrumbs>
+                </umb-editor-footer-content-left>
+
+                <umb-editor-footer-content-right>
+
+                    <umb-button type="button"
+                                ng-if="vm.page.isInfiniteMode"
+                                button-style="link"
+                                label-key="general_close"
+                                shortcut="esc"
+                                action="vm.close()">
+                    </umb-button>
+
+                    <umb-button type="submit"
+                                button-style="success"
+                                state="vm.page.saveButtonState"
+                                shortcut="ctrl+s"
+                                label="Save"
+                                label-key="buttons_save">
+                    </umb-button>
+
+                </umb-editor-footer-content-right>
+
+            </umb-editor-footer>
+        </umb-editor-view>
+    </form>
+
+</div>

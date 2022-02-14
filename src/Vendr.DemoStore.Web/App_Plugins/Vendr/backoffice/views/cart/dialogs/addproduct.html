@@ -1,0 +1,121 @@
+﻿<div ng-controller="Vendr.Controllers.AddProductDialogController as vm" class="vendr " noDirtyCheck>
+
+    <umb-load-indicator ng-if="vm.loading"></umb-load-indicator>
+
+    <umb-editor-view>
+
+        <umb-editor-header name="vm.title"
+            name-locked="true"
+            hide-alias="true"
+            hide-icon="true"
+            hide-description="true">
+        </umb-editor-header>
+
+        <umb-editor-container class="form-vertical">
+
+            <umb-box>
+                <umb-box-content>
+
+                    <div style="display: flex; margin-bottom: 20px;" ng-if="vm.parentProduct">
+                        <button type="button" class="umb-editor-header__back" style="width: 30px;" ng-click="vm.back()">
+                            <i class="fa fa-arrow-left" aria-hidden="true"></i> <span class="sr-only">Go back</span>
+                        </button>
+                        <div style="padding-left: 10px;">
+                            <h4 style="margin: 0; font-weight: bold; font-size: 16px;">{{ vm.parentProduct.name }}</h4>
+                            <small style="margin: 0; font-size: 12px; color: #a2a1a6;">{{ vm.parentProduct.sku }}</small>
+                        </div>
+                    </div>
+
+                    <div ng-class="{ 'umb-control-group' : (!vm.parentProduct && vm.products.items.length > 0) || (vm.parentProduct && vm.filters.length == 0 && vm.variants.items.length > 0) }" ng-if="vm.filter.enabled">
+                        <div class="form-search">
+                            <i class="icon-search" aria-hidden="true"></i>
+                            <input type="text"
+                                   ng-model="vm.filter.term"
+                                   ng-model-options="{ debounce: 500 }"
+                                   ng-change="vm.applySearchFilter()"
+                                   class="umb-search-field search-query input-block-level -full-width-input"
+                                   placeholder="Enter the SKU or name to search for"
+                                   umb-auto-focus
+                                   no-dirty-check />
+                        </div>
+                    </div>
+
+                    <div ng-if="vm.parentProduct && vm.filters.length > 0" ng-class="{ 'umb-control-group' : vm.variants.items.length > 0 }">
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; margin-bottom: -5px;">
+                            <vendr-filter ng-repeat="fltr in vm.filters track by fltr.alias"
+                                  filter="fltr"
+                                  on-change="vm.loadProductVariants()"
+                                  style="background-color: #f5f5f5;">
+                            </vendr-filter>
+                        </div>
+                    </div>
+                    
+                    <ul class="umb-actions umb-actions-child" ng-if="!vm.parentProduct">
+                        <li class="umb-action" ng-repeat="item in vm.products.items">
+                            <a class="umb-action-link" ng-click="vm.selectItem(item)">
+                                <i class="large icon icon-check color-green" aria-hidden="true" ng-if="vm.selectedProduct.reference == item.reference"></i>
+                                <i class="large icon icon-barcode" aria-hidden="true" ng-if="vm.selectedProduct.reference != item.reference"></i>
+                                <i class="icon icon-network-alt icon--overlay" aria-hidden="true" ng-if="item.hasVariants"></i>
+                                <span class="menu-label">
+                                    <span ng-bind="item.name"></span>
+                                    <small ng-bind="item.sku"></small>
+                                </span>
+                                <span class="menu-label text-right flex-1">
+                                    <span>{{ item.price }}</span>
+                                    <small>{{ item.stockLevel >= 0 ? item.stockLevel + ' in stock' : 'Undefined stock' }}</small>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="umb-actions umb-actions-child" ng-if="vm.parentProduct">
+                        <li class="umb-action" ng-repeat="item in vm.variants.items">
+                            <a class="umb-action-link" ng-click="vm.selectItem(item)">
+                                <i class="large icon icon-check color-green" aria-hidden="true" ng-if="vm.selectedProduct.reference == item.reference"></i>
+                                <i class="large icon icon-barcode" aria-hidden="true" ng-if="vm.selectedProduct.reference != item.reference"></i>
+                                <span class="menu-label">
+                                    <span ng-bind="item.name"></span>
+                                    <small ng-bind="item.sku"></small>
+                                </span>
+                                <span class="menu-label text-right flex-1">
+                                    <span>{{ item.price }}</span>
+                                    <small>{{ item.stockLevel >= 0 ? item.stockLevel + ' in stock' : 'Undefined stock' }}</small>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+
+                </umb-box-content>
+            </umb-box>
+
+            <umb-empty-state ng-if="!loading && ((!vm.parentProduct && vm.products.items.length == 0) || (vm.parentProduct && vm.variants.items.length == 0))" position="center">
+                <p ng-if="!vm.filter.hasFilter && !vm.parentProduct">Search for a product via the searchbox above</p>
+                <p ng-if="!vm.filter.hasFilter && vm.parentProduct">Search for a product variant via the searchbox and/or filters above</p>
+                <p ng-if="vm.filter.hasFilter">There are no items that match your current criteria</p>
+            </umb-empty-state>
+
+        </umb-editor-container>
+
+        <umb-editor-footer>
+            <umb-editor-footer-content-right>
+                
+                <umb-button type="button"
+                    button-style="link"
+                    label-key="general_close"
+                    shortcut="esc"
+                    action="vm.close()">
+                </umb-button>
+
+                <umb-button type="button"
+                    button-style="success"
+                    label="Select"
+                    disabled="!vm.selectedProduct"
+                    action="vm.submit()">
+                </umb-button>
+                
+            </umb-editor-footer-content-right>
+        </umb-editor-footer>
+
+    </umb-editor-view>
+
+</div>

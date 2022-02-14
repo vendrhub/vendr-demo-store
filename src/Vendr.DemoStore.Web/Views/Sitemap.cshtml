@@ -1,0 +1,14 @@
+﻿@inherits UmbracoViewPage
+@{
+    Layout = null;
+
+    // New
+    Context.Response.ContentType = "text/xml";
+
+    // Old
+    //Response.ContentType = "text/xml";
+}
+
+<xml>
+    @(await Html.PartialAsync("TestPartial"))
+</xml>

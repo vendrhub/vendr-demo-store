@@ -106,7 +106,7 @@
 
             foreach (var orderLine in order.OrderLines)
             {
-                @Environment.NewLine;
+                @Html.Raw(Environment.NewLine);
 
                 var values = new[]
                 {
