@@ -1,18 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<language alias="en" intName="English (UK)" localName="English (UK)" lcid="" culture="en-GB">
-	<creator>
-		<name>Vendr</name>
-		<link>https://vendr.net</link>
-	</creator>
+<language alias="en" intName="English (US)" localName="English (US)" lcid="" culture="en-US">
+    <creator>
+        <name>Vendr</name>
+        <link>https://vendr.net</link>
+    </creator>
     <area alias="sections">
         <key alias="commerce">Commerce</key>
     </area>
-	<area alias="treeHeaders">
-		<key alias="commerceSettingsGroup">Commerce</key>
-	</area>
+    <area alias="treeHeaders">
+        <key alias="commerceSettingsGroup">Commerce</key>
+    </area>
     <area alias="actions">
         <key alias="manageStoreSettings">Manage Store Settings</key>
         <key alias="manageStorePermissions">Manage Store Permissions</key>
+        <key alias="cancelPayment">Cancel Payment</key>
+        <key alias="capturePayment">Capture Payment</key>
+        <key alias="refundPayment">Refund Payment</key>
+        <key alias="removePaymentMethod">Remove Payment Method</key>
+        <key alias="removeShippingMethod">Remove Shipping Method</key>
+        <key alias="deleteOrderLine">Delete Order Line</key>
+        <key alias="removeDiscountOrGiftCardCode">Remove Discount / Gift Card Code</key>
     </area>
     <area alias="actionCategories">
         <key alias="commerce">Commerce</key>
@@ -30,5 +37,7 @@
         <key alias="deleteVariant">Delete</key>
         <key alias="setDefaultVariant">Set as Default</key>
         <key alias="unsetDefaultVariant">Remove as Default</key>
+        <key alias="delete">Delete</key>
+        <key alias="convertToBundle">Convert to Bundle</key>
     </area>
 </language>

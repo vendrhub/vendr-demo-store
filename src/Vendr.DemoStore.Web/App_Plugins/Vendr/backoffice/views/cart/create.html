@@ -1,0 +1,58 @@
+﻿<div ng-controller="Vendr.Controllers.CartCreateController as vm" class="vendr" ng-cloak>
+
+    <umb-load-indicator ng-if="vm.loading"></umb-load-indicator>
+
+    <div ng-if="!vm.loading">
+
+        <div class="umbracoDialog umb-dialog-body with-footer">
+
+            <div class="umb-pane">
+
+                <h5 class="mt-5">Create a Cart</h5>
+                <p>To create a cart, we first need to know the <strong>language</strong> and <strong>currency</strong> of the cart to be created.</p>
+
+                <div ng-if="vm.options.languages.length > 0">
+                    <hr />
+                    <umb-control-group label="Language">
+                        <select class="umb-property-editor umb-dropdown mb-0"
+                                ng-model="vm.languageIsoCode"
+                                ng-options="itm.culture as itm.name for itm in vm.options.languages"
+                                required>
+                            <option value="" disabled selected ng-hide="vm.languageIsoCode">-- Select a Language --</option>
+                        </select>
+                    </umb-control-group>
+                </div>
+
+                <div ng-if="vm.options.currencies.length > 0">
+                    <hr />
+                    <umb-control-group label="Currency">
+                        <select class="umb-property-editor umb-dropdown mb-0"
+                                ng-model="vm.currencyId"
+                                ng-options="itm.id as itm.name for itm in vm.options.currencies"
+                                required>
+                            <option value="" disabled selected ng-hide="vm.currencyId">-- Select a Currency --</option>
+                        </select>
+                    </umb-control-group>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Dialog footer -->
+        <div class="umb-dialog-footer btn-toolbar umb-btn-toolbar">
+
+            <umb-button type="button"
+                button-style="success"
+                shortcut="ctrl+s"
+                label="OK"
+                label-key="general_ok"
+                action="vm.confirm()"
+                disabled="!vm.currencyId || !vm.languageIsoCode">
+            </umb-button>
+
+        </div>
+
+    </div>
+
+</div>

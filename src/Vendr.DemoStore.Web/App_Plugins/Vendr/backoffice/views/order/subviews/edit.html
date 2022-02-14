@@ -3,158 +3,148 @@
 
         <umb-box>
             <umb-box-header title="Order Details"></umb-box-header>
-            <umb-box-content class="flex flex-column">
-                <div class="vendr-order-table">
+            <umb-box-content class="flex flex-column p-0">
 
-                    <div ng-repeat="ol in vm.content.orderLines" data-order-line-id="{{ ol.id }}">
-
-                        <!-- Order Line -->
-                        <div class="vendr-order-table__line-item">
-                            <div class="flex items-baseline">
-                                <i class="vendr-order-table__bundle-toggle fa"
-                                   title="Expand / Collapse Bundle"
-                                   ng-class="{ 'fa-plus-square-o': !vm.bundleIsExpanded(ol.bundleId), 'fa-minus-square-o': vm.bundleIsExpanded(ol.bundleId) }"
-                                   ng-click="vm.toggleBundle(ol.bundleId)"
-                                   ng-if="ol.bundleId && ol.orderLines.length > 0"
-                                   aria-hidden="true"></i>
-                                <div class="flex flex-column w-full">
-                                    <div class="flex items-baseline w-full">
-                                        <strong title="{{ ol.name }}" class="truncate">{{ ol.name }}</strong>
-                                        <button type="button" class="btn-link hover:text-light-blue" title="Edit Order Line Properties"
-                                                ng-if="vm.hasEditableOrderLineProperties(ol)"
-                                                ng-click="vm.editOrderLineProperties(ol)">
-                                            <i class="fa fa-pencil-square-o" style="font-weight:normal; vertical-align: middle;" aria-hidden="true"></i>
-                                        </button>
-                                    </div>
-                                    <div class="color-grey text-12 block">
-                                        <span title="Sku: {{ ol.sku }}">{{ ol.sku }}</span>
-                                        <span ng-repeat="attr in ol.attributes">&nbsp;/&nbsp;{{ attr.value.name }}</span>
-                                        <span ng-repeat="olp in vm.editorConfig.orderLine.properties"
-                                              ng-if="olp.showInOrderLineSummary !== false && ol.properties[olp.alias]">&nbsp;/&nbsp;{{ ol.properties[olp.alias].value }}</span>
+                <table class="vendr-order-table2 vendr-order-table--editable">
+                    <tbody>
+                        <tr ng-repeat-start="ol in vm.content.orderLines" data-order-line-id="{{ ol.id }}">
+                            <td>
+                                <div  class="flex items-baseline">
+                                    <i class="vendr-order-table__bundle-toggle fa"
+                                       title="Expand / Collapse Bundle"
+                                       ng-class="{ 'fa-plus-square-o': !vm.bundleIsExpanded(ol.bundleId), 'fa-minus-square-o': vm.bundleIsExpanded(ol.bundleId) }"
+                                       ng-click="vm.toggleBundle(ol.bundleId)"
+                                       ng-if="ol.bundleId && ol.orderLines.length > 0"
+                                       aria-hidden="true"></i>
+                                    <div class="flex flex-column">
+                                        <div class="flex items-baseline">
+                                            <strong title="{{ ol.name }}">{{ ol.name }}</strong>
+                                            <button type="button" class="btn-link hover:text-light-blue" title="Edit Order Line Properties"
+                                                    ng-if="vm.hasEditableOrderLineProperties(ol)"
+                                                    ng-click="vm.editOrderLineProperties(ol)">
+                                                <i class="fa fa-pencil-square-o" style="font-weight:normal; vertical-align: middle;" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                        <div class="color-grey text-12 block">
+                                            <span title="Sku: {{ ol.sku }}">{{ ol.sku }}</span>
+                                            <span ng-repeat="attr in ol.attributes">&nbsp;/&nbsp;{{ attr.value.name }}</span>
+                                            <span ng-repeat="olp in vm.editorConfig.orderLine.properties"
+                                                  ng-if="olp.showInOrderLineSummary !== false && ol.properties[olp.alias]">&nbsp;/&nbsp;{{ ol.properties[olp.alias].value }}</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div>
+                            </td>
+                            <td></td>
+                            <td class="text-right nowrap">
                                 <span class="color-grey text-12 strikethrough block" ng-if="ol.unitPriceWithoutAdjustments != ol.unitPrice">{{ol.unitPriceWithoutAdjustments}}</span>
-                                {{ ol.quantity }} x {{ ol.unitPrice }}
-
-                            </div>
-                            <div>
+                                {{ol.quantity}} x {{ ol.unitPrice }}
+                            </td>
+                            <td class="text-right">
                                 <span class="color-grey text-12 strikethrough block" ng-if="ol.totalPriceWithoutAdjustments != ol.totalPrice">{{ol.totalPriceWithoutAdjustments}}</span>
                                 {{ ol.totalPrice }}
-                            </div>
-                        </div>
-
-                        <!-- Bundle Order Lines (we assume a single level) -->
-                        <div class="vendr-order-table__bundle" ng-if="ol.bundleId && ol.orderLines.length > 0 && vm.bundleIsExpanded(ol.bundleId)">
-                            <div class="vendr-order-table__bundle--inner">
-
-                                <div class="vendr-order-table__line-item" ng-if="ol.unitPriceBase != vm.content.zeroAmount">
-                                    <div>
-                                        <strong>Base Price</strong>
-                                    </div>
-                                    <div>
-                                        <strong>{{ol.unitPriceBase}}</strong>
-                                    </div>
-                                    <div></div>
-                                </div>
-
-                                <div class="vendr-order-table__line-item" ng-repeat="sol in ol.orderLines" data-order-line-id="{{ sol.id }}">
-                                    <div class="flex flex-column w-2/5">
-                                        <div class="flex items-baseline w-full">
-                                            <strong>{{ sol.name }}</strong>
+                            </td>
+                        </tr>
+    
+                        <tr class="vendr-order-table2__line-item vendr-order-table2__line-item--bundle"
+                            ng-if="ol.bundleId && ol.orderLines.length > 0 && ol.unitPriceBase != vm.content.zeroAmount && vm.bundleIsExpanded(ol.bundleId)">
+                            <td colspan="2">
+                                <i class="vendr-order-table__bundle-toggle fa fa-plus-square-o" aria-hidden="true" style="visibility: hidden;"></i><strong>Base Price</strong>
+                            </td>
+                            <td class="text-right">
+                                <strong>{{ol.unitPriceBase}}</strong>
+                            </td>
+                            <td></td>
+                        </tr>
+    
+                        <tr ng-repeat="sol in ol.orderLines" ng-repeat-end data-order-line-id="{{ sol.id }}"
+                            ng-if="ol.bundleId && ol.orderLines.length > 0 && vm.bundleIsExpanded(ol.bundleId)"
+                            class="vendr-order-table2__line-item vendr-order-table2__line-item--bundle">
+                            <td>
+                                <div  class="flex items-baseline">
+                                    <i class="vendr-order-table__bundle-toggle fa fa-plus-square-o" aria-hidden="true" style="visibility: hidden;"></i>
+                                    <div class="flex flex-column">
+                                        <div class="flex items-baseline">
+                                            <strong title="{{ sol.name }}">{{ sol.name }}</strong>
                                             <button type="button" class="btn-link hover:text-light-blue" title="Edit Order Line Properties"
-                                                    ng-if="vm.hadEditableOrderLineProperties(sol)"
-                                                    ng-click="vm.editOrderLineProperties(ol)">
-                                                <i class="fa fa-pencil-square-o" style="font-weight:normal; margin-left: 5px; vertical-align: middle;" aria-hidden="true"></i>
+                                                    ng-if="vm.hasEditableOrderLineProperties(sol)"
+                                                    ng-click="vm.editOrderLineProperties(sol)">
+                                                <i class="fa fa-pencil-square-o" style="font-weight:normal; vertical-align: middle;" aria-hidden="true"></i>
                                             </button>
                                         </div>
                                         <div class="color-grey text-12 block">
                                             <span title="Sku: {{ sol.sku }}">{{ sol.sku }}</span>
                                             <span ng-repeat="attr in sol.attributes">&nbsp;/&nbsp;{{ attr.value.name }}</span>
-                                            <span ng-repeat="solp in vm.editorConfig.orderLine.properties"
-                                                  ng-if="solp.showInOrderLineSummary !== false  && sol.properties[solp.alias]">&nbsp;/&nbsp;{{ sol.properties[solp.alias].value }}</span>
+                                            <span ng-repeat="olp in vm.editorConfig.orderLine.properties"
+                                                  ng-if="olp.showInOrderLineSummary !== false && sol.properties[olp.alias]">&nbsp;/&nbsp;{{ sol.properties[olp.alias].value }}</span>
                                         </div>
                                     </div>
-                                    <div>
-                                        <span class="color-grey text-12 strikethrough block" ng-if="sol.unitPriceWithoutAdjustments != sol.unitPrice">{{sol.unitPriceWithoutAdjustments}}</span>
-                                        {{ sol.quantity }} x {{ sol.unitPrice }}
-
-                                    </div>
-                                    <div class="bold">
-                                        <span class="color-grey text-12 strikethrough block" ng-if="sol.totalPriceWithoutAdjustments != sol.totalPrice">{{sol.totalPriceWithoutAdjustments}}</span>
-                                        {{ sol.totalPrice }}
-                                    </div>
-                                    <div></div>
                                 </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="vendr-order-table__total">
-                        <div>Subtotal</div>
-                        <div>
-                            {{ vm.content.subtotalPriceWithPreviousAdjustments }}
-                        </div>
-                    </div>
-                    <div class="vendr-order-table__subtotal" ng-if="vm.content.subtotalPriceFeesAdjustment != vm.content.zeroAmount">
-                        <div>Subtotal Fees</div>
-                        <div>{{ vm.content.subtotalPriceFeesAdjustment }}</div>
-                    </div>
-                    <div class="vendr-order-table__subtotal" ng-if="vm.content.subtotalPriceDiscountAdjustment != vm.content.zeroAmount">
-                        <div>Subtotal Discount</div>
-                        <div>{{ vm.content.subtotalPriceDiscountAdjustment }}</div>
-                    </div>
-
-                    <div class="vendr-order-table__subtotal">
-                        <div>Shipping<span ng-if="vm.content.shippingMethod"> via {{ vm.content.shippingMethod.name }}</span></div>
-                        <div>
-                            <span class="color-grey text-12 strikethrough mr-5" ng-if="vm.content.shippingMethodPriceWithoutAdjustments != vm.content.shippingMethodPrice">{{ vm.content.shippingMethodPriceWithoutAdjustments }}</span>
-                            {{ vm.content.shippingMethodPrice }}
-                        </div>
-                    </div>
-                    <div class="vendr-order-table__subtotal">
-                        <div>Payment<span ng-if="vm.content.paymentMethod"> via {{ vm.content.paymentMethod.name }}</span></div>
-                        <div>
-                            <span class="color-grey text-12 strikethrough mr-5" ng-if="vm.content.paymentMethodPriceWithoutAdjustments != vm.content.paymentMethodPrice">{{ vm.content.paymentMethodPriceWithoutAdjustments }}</span>
-                            {{ vm.content.paymentMethodPrice }}
-                        </div>
-                    </div>
-
-                    <hr class="w-2/5 self-end" />
-
-                    <div class="vendr-order-table__total">
-                        <div>Net Total</div>
-                        <div>{{ vm.content.totalPriceWithPreviousAdjustments }}</div>
-                    </div>
-                    <div class="vendr-order-table__subtotal" ng-if="vm.content.totalPriceFeesAdjustment != vm.content.zeroAmount">
-                        <div>Net Total Fees</div>
-                        <div>{{ vm.content.totalPriceFeesAdjustment }}</div>
-                    </div>
-                    <div class="vendr-order-table__subtotal" ng-if="vm.content.totalPriceDiscountAdjustment != vm.content.zeroAmount">
-                        <div>Net Total Discount</div>
-                        <div>{{ vm.content.totalPriceDiscountAdjustment }}</div>
-                    </div>
-
-                    <div class="vendr-order-table__subtotal">
-                        <div>TAX</div>
-                        <div>{{ vm.content.totalPriceTax }}</div>
-                    </div>
-
-                    <div class="vendr-order-table__subtotal" ng-if="vm.content.totalGiftCardAdjustment != vm.content.zeroAmount">
-                        <div>Gift Card <span class="color-grey text-12 block">{{ vm.content.appliedGiftCards.join(', ') }}</span></div>
-                        <div>{{ vm.content.totalGiftCardAdjustment }}</div>
-                    </div>
-
-                    <hr class="w-2/5 self-end" />
-
-                    <div class="vendr-order-table__total mb-0">
-                        <div>Order Total</div>
-                        <div>{{ vm.content.transactionAmount }}</div>
-                    </div>
-
-                </div>
+                            </td>
+                            <td class="text-right nowrap">
+                                <span class="color-grey text-12 strikethrough block" ng-if="ol.unitPriceWithoutAdjustments != ol.unitPrice">{{sol.unitPriceWithoutAdjustments}}</span>
+                                {{sol.quantity}} x {{ sol.unitPrice }}
+                            </td>
+                            <td class="text-right">
+                                <span class="color-grey text-12 strikethrough block" ng-if="ol.totalPriceWithoutAdjustments != ol.totalPrice">{{sol.totalPriceWithoutAdjustments}}</span>
+                                {{ sol.totalPrice }}
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" class="bold text-right nowrap">Subtotal</td>
+                            <td class="bold text-right nowrap">{{ vm.content.subtotalPriceWithPreviousAdjustments }}</td>
+                        </tr>
+                        <tr ng-if="vm.content.subtotalPriceFeesAdjustment != vm.content.zeroAmount">
+                            <td colspan="3" class="text-right nowrap">Subtotal Fees</td>
+                            <td class="text-right nowrap">{{ vm.content.subtotalPriceFeesAdjustment }}</td>
+                        </tr>
+                        <tr ng-if="vm.content.subtotalPriceDiscountAdjustment != vm.content.zeroAmount">
+                            <td colspan="3" class="text-right nowrap">Subtotal Discount</td>
+                            <td class="text-right nowrap">{{ vm.content.subtotalPriceDiscountAdjustment }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right nowrap">Shipping<span ng-if="vm.content.shippingMethod"> via {{ vm.content.shippingMethod.name }}</span></td>
+                            <td class="text-right nowrap">
+                                <span class="color-grey text-12 strikethrough mr-5" ng-if="vm.content.shippingMethodPriceWithoutAdjustments != vm.content.shippingMethodPrice">{{ vm.content.shippingMethodPriceWithoutAdjustments }}</span>
+                                {{ vm.content.shippingMethodPrice }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right nowrap">Payment<span ng-if="vm.content.paymentMethod"> via {{ vm.content.paymentMethod.name }}</span></td>
+                            <td class="text-right nowrap">
+                                <span class="color-grey text-12 strikethrough mr-5" ng-if="vm.content.paymentMethodPriceWithoutAdjustments != vm.content.paymentMethodPrice">{{ vm.content.paymentMethodPriceWithoutAdjustments }}</span>
+                                {{ vm.content.paymentMethodPrice }}
+                            </td>
+                        </tr>
+    
+                        <tr class="divide">
+                            <td colspan="3" class="bold text-right nowrap">Net Total</td>
+                            <td class="bold text-right nowrap">{{ vm.content.totalPriceWithPreviousAdjustments }}</td>
+                        </tr>
+                        <tr ng-if="vm.content.totalPriceFeesAdjustment != vm.content.zeroAmount">
+                            <td colspan="3" class="text-right nowrap">Net Total Fees</td>
+                            <td class="text-right nowrap">{{ vm.content.totalPriceFeesAdjustment }}</td>
+                        </tr>
+                        <tr ng-if="vm.content.totalPriceDiscountAdjustment != vm.content.zeroAmount">
+                            <td colspan="3" class="text-right nowrap">Net Total Discount</td>
+                            <td class="text-right nowrap">{{ vm.content.totalPriceDiscountAdjustment }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right nowrap">TAX</td>
+                            <td class="text-right nowrap">{{ vm.content.totalPriceTax }}</td>
+                        </tr>
+                        <tr ng-if="vm.content.totalGiftCardAdjustment != vm.content.zeroAmount">
+                            <td colspan="3" class="text-right nowrap">Gift Card <span class="color-grey text-12 block">{{ vm.content.appliedGiftCardCodes.join(', ') }}</span></td>
+                            <td class="text-right nowrap">{{ vm.content.totalGiftCardAdjustment }}</td>
+                        </tr>
+                        <tr class="divide">
+                            <td colspan="3" class="bold text-right nowrap">Order Total</td>
+                            <td class="bold text-right nowrap">{{ vm.content.transactionAmount }}</td>
+                        </tr>
+                    </tfoot>
+                </table>
 
             </umb-box-content>
         </umb-box>
@@ -423,6 +413,16 @@
                 <p ng-repeat="ai in vm.editorConfig.additionalInfo">
                     <strong>{{ ai.label }}:</strong><br />{{vm.content.properties[ai.alias] && vm.content.properties[ai.alias].value && vm.content.properties[ai.alias].value != '' ? vm.content.properties[ai.alias].value : 'No value'}}
                 </p>
+            </umb-box-content>
+        </umb-box>
+
+        <umb-box>
+            <umb-box-header title="Tags"></umb-box-header>
+            <umb-box-content>
+                <vendr-tags-editor store-id="vm.storeId"
+                    value="vm.content.tags"
+                    on-value-changed="vm.updateTags(value)">
+                </vendr-tags-editor>
             </umb-box-content>
         </umb-box>
     </div>

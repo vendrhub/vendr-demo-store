@@ -95,15 +95,20 @@
 
                                 <!-- Country -->
                                 <umb-control-group label="Country">
-                                    <select class="umb-property-editor umb-dropdown" disabled>
-                                        <option value="" disabled selected>{{vm.content.paymentCountry.name}}</option>
+                                    <select class="umb-property-editor umb-dropdown" 
+                                            ng-model="vm.content.paymentCountryId"
+                                            ng-options="itm.id as itm.name for itm in vm.options.countries"
+                                            ng-change="vm.clearPaymentRegion()">
+                                        <option value="" disabled selected ng-hide="vm.content.paymentCountryId">-- Select a Country --</option>
                                     </select>
                                 </umb-control-group>
 
                                 <!-- Region -->
-                                <umb-control-group label="Region" ng-if="vm.content.paymentRegion">
-                                    <select class="umb-property-editor umb-dropdown" disabled>
-                                        <option value="" disabled selected>{{vm.content.paymentRegion.name}}</option>
+                                <umb-control-group label="Region" ng-if="vm.content.paymentCountryId && vm.options.countryRegionMap[vm.content.paymentCountryId].length > 0">
+                                    <select class="umb-property-editor umb-dropdown"
+                                            ng-model="vm.content.paymentRegionId"
+                                            ng-options="itm.id as itm.name for itm in vm.options.countryRegionMap[vm.content.paymentCountryId]">
+                                        <option value="" disabled selected ng-hide="vm.content.paymentRegionId">-- Select a Region --</option>
                                     </select>
                                 </umb-control-group>
 
@@ -161,18 +166,18 @@
                                                ng-model="vm.content.properties[vm.editorConfig.shipping.lastName.alias].value" />
                                     </umb-control-group>
 
-                                    <umb-control-group label="{{ vm.editorConfig.shipping.email.label }}"
-                                                       description="{{ vm.editorConfig.shipping.email.description }}"
-                                                       ng-if="vm.editorConfig.shipping.email">
-                                        <input type="email" class="umb-property-editor umb-textstring textstring"
-                                               ng-model="vm.content.properties[vm.editorConfig.shipping.email.alias].value" />
-                                    </umb-control-group>
-
                                     <umb-control-group label="{{ vm.editorConfig.shipping.company.label }}"
                                                        description="{{ vm.editorConfig.shipping.company.description }}"
                                                        ng-if="vm.editorConfig.shipping.company">
                                         <input type="text" class="umb-property-editor umb-textstring textstring"
                                                ng-model="vm.content.properties[vm.editorConfig.shipping.company.alias].value" />
+                                    </umb-control-group>
+
+                                    <umb-control-group label="{{ vm.editorConfig.shipping.email.label }}"
+                                                       description="{{ vm.editorConfig.shipping.email.description }}"
+                                                       ng-if="vm.editorConfig.shipping.email">
+                                        <input type="email" class="umb-property-editor umb-textstring textstring"
+                                               ng-model="vm.content.properties[vm.editorConfig.shipping.email.alias].value" />
                                     </umb-control-group>
 
                                 </umb-box-content>
@@ -207,20 +212,25 @@
                                     </umb-control-group>
 
                                     <umb-control-group label="Country">
-                                        <select class="umb-property-editor umb-dropdown" disabled>
-                                            <option value="" disabled selected>{{vm.content.shippingCountry.name}}</option>
+                                        <select class="umb-property-editor umb-dropdown"
+                                                ng-model="vm.content.shippingCountryId"
+                                                ng-options="itm.id as itm.name for itm in vm.options.countries"
+                                                ng-change="vm.shippingRegion()">
+                                            <option value="" disabled selected ng-hide="vm.content.shippingCountryId">-- Select a Country --</option>
                                         </select>
                                     </umb-control-group>
 
-                                    <umb-control-group label="Region" ng-if="vm.content.shippingRegion">
-                                        <select class="umb-property-editor umb-dropdown" disabled>
-                                            <option value="" disabled selected>{{vm.content.shippingRegion.name}}</option>
+                                    <umb-control-group label="Region" ng-if="vm.content.shippingCountryId && vm.options.countryRegionMap[vm.content.shippingCountryId].length > 0">
+                                        <select class="umb-property-editor umb-dropdown"
+                                                ng-model="vm.content.shippingRegionId"
+                                                ng-options="itm.id as itm.name for itm in vm.options.countryRegionMap[vm.content.shippingCountryId]">
+                                            <option value="" disabled selected ng-hide="vm.content.shippingRegionId">-- Select a Region --</option>
                                         </select>
                                     </umb-control-group>
 
                                     <umb-control-group label="{{ vm.editorConfig.shipping.zipCode.label }}"
-                                                       description="{{ vm.editorConfig.shipping.zipCode.description }}"
-                                                       ng-if="vm.editorConfig.shipping.zipCode">
+                                               description="{{ vm.editorConfig.shipping.zipCode.description }}"
+                                               ng-if="vm.editorConfig.shipping.zipCode">
                                         <input type="text" class="umb-property-editor umb-textstring textstring"
                                                ng-model="vm.content.properties[vm.editorConfig.shipping.zipCode.alias].value" />
                                     </umb-control-group>

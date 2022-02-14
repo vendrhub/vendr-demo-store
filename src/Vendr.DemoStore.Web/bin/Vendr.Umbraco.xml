@@ -330,6 +330,16 @@
             Alias for a single order node.
             </summary>
         </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Stores.NodeType.Carts">
+            <summary>
+            Alias for the carts node.
+            </summary>
+        </member>
+        <member name="F:Vendr.Umbraco.Constants.Trees.Stores.NodeType.Cart">
+            <summary>
+            Alias for a single cart node.
+            </summary>
+        </member>
         <member name="F:Vendr.Umbraco.Constants.Trees.Stores.NodeType.Discounts">
             <summary>
             Alias for the discounts node.

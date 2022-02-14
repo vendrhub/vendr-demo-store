@@ -4,18 +4,20 @@
         <name>Vendr.Core</name>
     </assembly>
     <members>
-        <member name="M:Vendr.Core.Adapters.IProductAdapter.GetProductSnapshot(System.String,System.String)">
+        <member name="M:Vendr.Core.Adapters.IProductAdapter.GetProductSnapshot(System.Guid,System.String,System.String)">
             <summary>
             Get a product snapshot for the supplied product reference in the given culture.
             </summary>
+            <param name="storeId">The ID of the store this product belongs to</param>
             <param name="productReference">The product reference of the product</param>
             <param name="languageIsoCode">The language ISO code of the culture</param>
             <returns></returns>
         </member>
-        <member name="M:Vendr.Core.Adapters.IProductAdapter.GetProductSnapshot(System.String,System.String,System.String)">
+        <member name="M:Vendr.Core.Adapters.IProductAdapter.GetProductSnapshot(System.Guid,System.String,System.String,System.String)">
             <summary>
             Get a product snapshot for the supplied product reference in the given culture.
             </summary>
+            <param name="storeId">The ID of the store this product belongs to</param>
             <param name="productReference">The product reference of the product</param>
             <param name="productVariantReference">The product variant reference of the product</param>
             <param name="languageIsoCode">The language ISO code of the culture</param>
@@ -30,6 +32,38 @@
             <param name="productReference">The product reference of the found product, or null</param>
             <param name="productVariantReference">The product variant reference of the found product, or null</param>
             <returns>Boolean indicating whether a product reference was found for the given SKU</returns>
+        </member>
+        <member name="M:Vendr.Core.Adapters.IProductAdapter.SearchProductSummaries(System.Guid,System.String,System.String,System.Int64,System.Int64)">
+            <summary>
+            Searches for product summaries matching the given search term.
+            </summary>
+            <param name="storeId">The id of the store to search in</param>
+            <param name="languageIsoCode">The language ISO code of the culture</param>
+            <param name="searchTerm">The term to search for</param>
+            <param name="currentPage">The current page of items to return</param>
+            <param name="itemsPerPage">The number of items per page to return</param>
+            <returns>A paged collection of product summaries</returns>
+        </member>
+        <member name="M:Vendr.Core.Adapters.IProductAdapter.GetProductVariantAttributes(System.Guid,System.String,System.String)">
+            <summary>
+            Gets a list of attributes in use by the product variants of the given primary product.
+            </summary>
+            <param name="storeId">The ID of the store this product belongs to</param>
+            <param name="productReference">The product reference of the product</param>
+            <param name="languageIsoCode">The language ISO code of the culture</param>
+        </member>
+        <member name="M:Vendr.Core.Adapters.IProductAdapter.SearchProductVariantSummaries(System.Guid,System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{System.String}},System.Int64,System.Int64)">
+            <summary>
+            Searches for the product variant summaries of a primary product matching the given search term / attributes.
+            </summary>
+            <param name="storeId">The ID of the store this product belongs to</param>
+            <param name="productReference">The product reference of the product</param>
+            <param name="languageIsoCode">The language ISO code of the culture</param>
+            <param name="searchTerm">The term to search for</param>
+            <param name="attributes">The attributes of the product variant</param>
+            <param name="currentPage">The current page of items to return</param>
+            <param name="itemsPerPage">The number of items per page to return</param>
+            <returns></returns>
         </member>
         <member name="T:Vendr.Core.Api.VendrApi">
             <summary>
@@ -214,6 +248,11 @@
         <member name="F:Vendr.Core.Constants.Entities.EntityTypes.Order">
             <summary>
             Order entity type
+            </summary>
+        </member>
+        <member name="F:Vendr.Core.Constants.Entities.EntityTypes.Cart">
+            <summary>
+            Cart entity type
             </summary>
         </member>
         <member name="F:Vendr.Core.Constants.Entities.EntityTypes.Discount">
@@ -786,6 +825,11 @@
             Gets a boolean flag indicating whether the order is finalized
             </summary>
         </member>
+        <member name="P:Vendr.Core.Models.OrderReadOnly.Tags">
+            <summary>
+            Gets the list of tags assigned to this order
+            </summary>
+        </member>
         <member name="P:Vendr.Core.Models.OrderReadOnly.CopiedFromOrderId">
             <summary>
             Gets the ID of a parent order this order was copied from
@@ -1189,6 +1233,48 @@
         <member name="M:Vendr.Core.Models.Order.UnassignFromCustomer">
             <summary>
             Unassigns the order from a customer
+            </summary>
+            <returns>The updated <see cref="T:Vendr.Core.Models.Order"/> entity</returns>
+        </member>
+        <member name="M:Vendr.Core.Models.Order.AddTag(System.String)">
+            <summary>
+            Adds a tag to the order
+            </summary>
+            <param name="tag">The tag to add</param>
+            <returns>The updated <see cref="T:Vendr.Core.Models.Order"/> entity</returns>
+        </member>
+        <member name="M:Vendr.Core.Models.Order.AddTags(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Adds a series of tag to the order
+            </summary>
+            <param name="tags">The tags to add</param>
+            <returns>The updated <see cref="T:Vendr.Core.Models.Order"/> entity</returns>
+        </member>
+        <member name="M:Vendr.Core.Models.Order.RemoveTag(System.String)">
+            <summary>
+            Removes a tag from the order
+            </summary>
+            <param name="tag">The tags to remove</param>
+            <returns>The updated <see cref="T:Vendr.Core.Models.Order"/> entity</returns>
+        </member>
+        <member name="M:Vendr.Core.Models.Order.RemoveTags(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Removes a series of from the order
+            </summary>
+            <param name="tags">The tags to remove</param>
+            <returns>The updated <see cref="T:Vendr.Core.Models.Order"/> entity</returns>
+        </member>
+        <member name="M:Vendr.Core.Models.Order.SetTags(System.Collections.Generic.IEnumerable{System.String},Vendr.Core.Models.SetBehavior)">
+            <summary>
+            Sets the rags of the order
+            </summary>
+            <param name="tags">The tags to remove</param>
+            <param name="setBehavior">The behavior of the set operation, whether to <c>Merge</c> the tags into the orders existing tags collection or <c>Replace</c> the orders tags collection entirely</param>
+            <returns>The updated <see cref="T:Vendr.Core.Models.Order"/> entity</returns>
+        </member>
+        <member name="M:Vendr.Core.Models.Order.ClearTags">
+            <summary>
+            Clears all the tags assigned to this order
             </summary>
             <returns>The updated <see cref="T:Vendr.Core.Models.Order"/> entity</returns>
         </member>
@@ -2356,6 +2442,13 @@
             </summary>
             <param name="sortedIds">The IDs of the <see cref="T:Vendr.Core.Models.ExportTemplate"/> entities to sort, in the order by which to sort them</param>
         </member>
+        <member name="M:Vendr.Core.Services.IOrderFinderService.FindOrder(System.String)">
+            <summary>
+            Find an active order for the given customer.
+            </summary>
+            <param name="customerReference">The reference of the customer to find the order of</param>
+            <returns></returns>
+        </member>
         <member name="T:Vendr.Core.Services.IOrderService">
             <summary>
             Defines the Vendr Order service
@@ -2986,146 +3079,196 @@
             Defines the Vendr Product service
             </summary>
         </member>
-        <member name="M:Vendr.Core.Services.IProductService.GetProduct(System.String,System.String)">
+        <member name="M:Vendr.Core.Services.IProductService.GetProduct(System.Guid,System.String,System.String)">
             <summary>
             Get a <see cref="T:Vendr.Core.Models.IProductSnapshot"/> of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product to snapshot</param>
             <param name="languageIsoCode">The ISO Code of the language of the snapshot to create</param>
             <returns>An <see cref="T:Vendr.Core.Models.IProductSnapshot"/> of the given product</returns>
         </member>
-        <member name="M:Vendr.Core.Services.IProductService.GetProduct(System.String,System.String,System.String)">
+        <member name="M:Vendr.Core.Services.IProductService.GetProduct(System.Guid,System.String,System.String,System.String)">
             <summary>
             Get a <see cref="T:Vendr.Core.Models.IProductSnapshot"/> of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product to snapshot</param>
             <param name="productVariantReference">The unique reference of the variant of the product to snapshot</param>
             <param name="languageIsoCode">The ISO Code of the language of the snapshot to create</param>
             <returns>An <see cref="T:Vendr.Core.Models.IProductSnapshot"/> of the given product</returns>
         </member>
-        <member name="M:Vendr.Core.Services.IProductService.GetProductStock(System.String)">
+        <member name="M:Vendr.Core.Services.IProductService.SearchProductSummaries(System.Guid,System.String,System.String,System.Int64,System.Int64)">
+            <summary>
+            Searches for product summaries matching the given search term.
+            </summary>
+            <param name="storeId">The id of the store to search in</param>
+            <param name="languageIsoCode">The language ISO code of the culture</param>
+            <param name="searchTerm">The term to search for</param>
+            <param name="currentPage">The current page of items to return</param>
+            <param name="itemsPerPage">The number of items per page to return</param>
+            <returns>A paged collection of product summaries</returns>
+        </member>
+        <member name="M:Vendr.Core.Services.IProductService.GetProductVariantAttributes(System.Guid,System.String,System.String)">
+            <summary>
+            Gets a list of attributes in use by the product variants of the given primary product.
+            </summary>
+            <param name="storeId">The ID of the store this product belongs to</param>
+            <param name="productReference">The product reference of the product</param>
+            <param name="languageIsoCode">The language ISO code of the culture</param>
+        </member>
+        <member name="M:Vendr.Core.Services.IProductService.SearchProductVariantSummaries(System.Guid,System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{System.String}},System.Int64,System.Int64)">
+            <summary>
+            Searches for the product variant summaries of a primary product matching the given search term / attributes.
+            </summary>
+            <param name="storeId">The ID of the store this product belongs to</param>
+            <param name="productReference">The product reference of the product</param>
+            <param name="languageIsoCode">The language ISO code of the culture</param>
+            <param name="searchTerm">The term to search for</param>
+            <param name="attributes">The attributes of the product variant</param>
+            <param name="currentPage">The current page of items to return</param>
+            <param name="itemsPerPage">The number of items per page to return</param>
+            <returns></returns>
+        </member>
+        <member name="M:Vendr.Core.Services.IProductService.GetProductStock(System.Guid,System.String)">
             <summary>
             Gets the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to retrieve</param>
             <returns>The stock level of the product</returns>
         </member>
-        <member name="M:Vendr.Core.Services.IProductService.TryGetProductStock(System.String,System.Nullable{System.Decimal}@)">
+        <member name="M:Vendr.Core.Services.IProductService.TryGetProductStock(System.Guid,System.String,System.Nullable{System.Decimal}@)">
             <summary>
             Try to get the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to retrieve</param>
             <param name="stock">The output stock level of the product</param>
             <returns>True if the stock level was retrieved, false if not</returns>
         </member>
-        <member name="M:Vendr.Core.Services.IProductService.GetProductStock(System.String,System.String)">
+        <member name="M:Vendr.Core.Services.IProductService.GetProductStock(System.Guid,System.String,System.String)">
             <summary>
             Gets the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to retrieve</param>
             <param name="productVariantReference">The unique reference of the variant of the product who's stock level to retrieve</param>
             <returns>The stock level of the product</returns>
         </member>
-        <member name="M:Vendr.Core.Services.IProductService.TryGetProductStock(System.String,System.String,System.Nullable{System.Decimal}@)">
+        <member name="M:Vendr.Core.Services.IProductService.TryGetProductStock(System.Guid,System.String,System.String,System.Nullable{System.Decimal}@)">
             <summary>
             Try to get the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to retrieve</param>
             <param name="productVariantReference">The unique reference of the variant of the product who's stock level to retrieve</param>
             <param name="stock">The output stock level of the product</param>
             <returns>True if the stock level was retrieved, false if not</returns>
         </member>
-        <member name="M:Vendr.Core.Services.IProductService.SetProductStock(System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IProductService.SetProductStock(System.Guid,System.String,System.Decimal)">
             <summary>
             Sets the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to set</param>
             <param name="value">The value to set the stock level to</param>
         </member>
-        <member name="M:Vendr.Core.Services.IProductService.TrySetProductStock(System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IProductService.TrySetProductStock(System.Guid,System.String,System.Decimal)">
             <summary>
             Try to set the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to retrieve</param>
             <param name="value">The value to set the stock level to</param>
             <returns>True if the stock level was set, false if not</returns>
         </member>
-        <member name="M:Vendr.Core.Services.IProductService.SetProductStock(System.String,System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IProductService.SetProductStock(System.Guid,System.String,System.String,System.Decimal)">
             <summary>
             Sets the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to set</param>
             <param name="productVariantReference">The unique reference of the variant of the product who's stock level to set</param>
             <param name="value">The value to set the stock level to</param>
         </member>
-        <member name="M:Vendr.Core.Services.IProductService.TrySetProductStock(System.String,System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IProductService.TrySetProductStock(System.Guid,System.String,System.String,System.Decimal)">
             <summary>
             Try to set the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to retrieve</param>
             <param name="productVariantReference">The unique reference of the variant of the product who's stock level to set</param>
             <param name="value">The value to set the stock level to</param>
             <returns>True if the stock level was set, false if not</returns>
         </member>
-        <member name="M:Vendr.Core.Services.IProductService.ReduceProductStock(System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IProductService.ReduceProductStock(System.Guid,System.String,System.Decimal)">
             <summary>
             Reduces the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to reduce</param>
             <param name="reduceBy">The amount to reduce the stock level by</param>
         </member>
-        <member name="M:Vendr.Core.Services.IProductService.TryReduceProductStock(System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IProductService.TryReduceProductStock(System.Guid,System.String,System.Decimal)">
             <summary>
             Try to reduce the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to retrieve</param>
             <param name="reduceBy">The amount to reduce the stock level by</param>
             <returns>True if the stock level was reduced, false if not</returns>
         </member>
-        <member name="M:Vendr.Core.Services.IProductService.ReduceProductStock(System.String,System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IProductService.ReduceProductStock(System.Guid,System.String,System.String,System.Decimal)">
             <summary>
             Reduces the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to reduce</param>
             <param name="productVariantReference">The unique reference of the variant of the product who's stock level to reduce</param>
             <param name="reduceBy">The amount to reduce the stock level by</param>
         </member>
-        <member name="M:Vendr.Core.Services.IProductService.TryReduceProductStock(System.String,System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IProductService.TryReduceProductStock(System.Guid,System.String,System.String,System.Decimal)">
             <summary>
             Try to reduce the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to retrieve</param>
             <param name="productVariantReference">The unique reference of the variant of the product who's stock level to reduce</param>
             <param name="reduceBy">The amount to reduce the stock level by</param>
             <returns>True if the stock level was reduced, false if not</returns>
         </member>
-        <member name="M:Vendr.Core.Services.IProductService.IncreaseProductStock(System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IProductService.IncreaseProductStock(System.Guid,System.String,System.Decimal)">
             <summary>
             Increases the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to increase</param>
             <param name="increaseBy">The amount to increase the stock level by</param>
         </member>
-        <member name="M:Vendr.Core.Services.IProductService.TryIncreaseProductStock(System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IProductService.TryIncreaseProductStock(System.Guid,System.String,System.Decimal)">
             <summary>
             Try to increase the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to retrieve</param>
             <param name="increaseBy">The amount to increase the stock level by</param>
             <returns>True if the stock level was increased, false if not</returns>
         </member>
-        <member name="M:Vendr.Core.Services.IProductService.IncreaseProductStock(System.String,System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IProductService.IncreaseProductStock(System.Guid,System.String,System.String,System.Decimal)">
             <summary>
             Increases the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to increase</param>
             <param name="productVariantReference">The unique reference of variant of the product who's stock level to increase</param>
             <param name="increaseBy">The amount to increase the stock level by</param>
         </member>
-        <member name="M:Vendr.Core.Services.IProductService.TryIncreaseProductStock(System.String,System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IProductService.TryIncreaseProductStock(System.Guid,System.String,System.String,System.Decimal)">
             <summary>
             Try to increase the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to retrieve</param>
             <param name="productVariantReference">The unique reference of variant of the product who's stock level to increase</param>
             <param name="increaseBy">The amount to increase the stock level by</param>
@@ -3210,138 +3353,155 @@
             </summary>
             <param name="sortedIds">The IDs of the <see cref="T:Vendr.Core.Models.ShippingMethod"/> entities to sort, in the order by which to sort them</param>
         </member>
-        <member name="M:Vendr.Core.Services.IStockService.GetStock(System.String)">
+        <member name="M:Vendr.Core.Services.IStockService.GetStock(System.Guid,System.String)">
             <summary>
             Gets the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to retrieve</param>
             <returns>The stock level of the product</returns>
         </member>
-        <member name="M:Vendr.Core.Services.IStockService.TryGetStock(System.String,System.Nullable{System.Decimal}@)">
+        <member name="M:Vendr.Core.Services.IStockService.TryGetStock(System.Guid,System.String,System.Nullable{System.Decimal}@)">
             <summary>
             Trys to get the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to retrieve</param>
             <param name="stock">The stock level of the product</param>
             <returns>True if the stock level was retrieved, false if not</returns>
         </member>
-        <member name="M:Vendr.Core.Services.IStockService.GetStock(System.String,System.String)">
+        <member name="M:Vendr.Core.Services.IStockService.GetStock(System.Guid,System.String,System.String)">
             <summary>
             Gets the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to retrieve</param>
             <param name="productVariantReference">The unique reference of the variant of the product who's stock level to retrieve</param>
             <returns>The stock level of the product</returns>
         </member>
-        <member name="M:Vendr.Core.Services.IStockService.TryGetStock(System.String,System.String,System.Nullable{System.Decimal}@)">
+        <member name="M:Vendr.Core.Services.IStockService.TryGetStock(System.Guid,System.String,System.String,System.Nullable{System.Decimal}@)">
             <summary>
             Trys to get the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to retrieve</param>
             <param name="productVariantReference">The unique reference of the variant of the product who's stock level to retrieve</param>
             <param name="stock">The stock level of the product</param>
             <returns>True if the stock level was retrieved, false if not</returns>
         </member>
-        <member name="M:Vendr.Core.Services.IStockService.SetStock(System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IStockService.SetStock(System.Guid,System.String,System.Decimal)">
             <summary>
             Sets the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to set</param>
             <param name="value">The value to set the stock level to</param>
         </member>
-        <member name="M:Vendr.Core.Services.IStockService.TrySetStock(System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IStockService.TrySetStock(System.Guid,System.String,System.Decimal)">
             <summary>
             Trys to set the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to retrieve</param>
             <param name="value">The value to set the stock level to</param>
             <returns>True if the stock level was set, false if not</returns>
         </member>
-        <member name="M:Vendr.Core.Services.IStockService.SetStock(System.String,System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IStockService.SetStock(System.Guid,System.String,System.String,System.Decimal)">
             <summary>
             Sets the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to set</param>
             <param name="productVariantReference">The unique reference of the variant of the product who's stock level to set</param>
             <param name="value">The value to set the stock level to</param>
         </member>
-        <member name="M:Vendr.Core.Services.IStockService.TrySetStock(System.String,System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IStockService.TrySetStock(System.Guid,System.String,System.String,System.Decimal)">
             <summary>
             Trys to set the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to retrieve</param>
             <param name="productVariantReference">The unique reference of the variant of the product who's stock level to set</param>
             <param name="value">The value to set the stock level to</param>
             <returns>True if the stock level was set, false if not</returns>
         </member>
-        <member name="M:Vendr.Core.Services.IStockService.ReduceStock(System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IStockService.ReduceStock(System.Guid,System.String,System.Decimal)">
             <summary>
             Reduces the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to reduce</param>
             <param name="reduceBy">The amount to reduce the stock level by</param>
         </member>
-        <member name="M:Vendr.Core.Services.IStockService.TryReduceStock(System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IStockService.TryReduceStock(System.Guid,System.String,System.Decimal)">
             <summary>
             Trys to reduce the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to retrieve</param>
             <param name="reduceBy">The amount to reduce the stock level by</param>
             <returns>True if the stock level was reduced, false if not</returns>
         </member>
-        <member name="M:Vendr.Core.Services.IStockService.ReduceStock(System.String,System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IStockService.ReduceStock(System.Guid,System.String,System.String,System.Decimal)">
             <summary>
             Reduces the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to reduce</param>
             <param name="productVariantReference">The unique reference of the variant of the product who's stock level to reduce</param>
             <param name="reduceBy">The amount to reduce the stock level by</param>
         </member>
-        <member name="M:Vendr.Core.Services.IStockService.TryReduceStock(System.String,System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IStockService.TryReduceStock(System.Guid,System.String,System.String,System.Decimal)">
             <summary>
             Trys to reduce the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to retrieve</param>
             <param name="productVariantReference">The unique reference of the variant of the product who's stock level to reduce</param>
             <param name="reduceBy">The amount to reduce the stock level by</param>
             <returns>True if the stock level was reduced, false if not</returns>
         </member>
-        <member name="M:Vendr.Core.Services.IStockService.IncreaseStock(System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IStockService.IncreaseStock(System.Guid,System.String,System.Decimal)">
             <summary>
             Increases the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to increase</param>
             <param name="increaseBy">The amount to increase the stock level by</param>
         </member>
-        <member name="M:Vendr.Core.Services.IStockService.TryIncreaseStock(System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IStockService.TryIncreaseStock(System.Guid,System.String,System.Decimal)">
             <summary>
             Trys to increase the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to retrieve</param>
             <param name="increaseBy">The amount to increase the stock level by</param>
             <returns>True if the stock level was increased, false if not</returns>
         </member>
-        <member name="M:Vendr.Core.Services.IStockService.IncreaseStock(System.String,System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IStockService.IncreaseStock(System.Guid,System.String,System.String,System.Decimal)">
             <summary>
             Increases the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to increase</param>
             <param name="productVariantReference">The unique reference of variant of the product who's stock level to increase</param>
             <param name="increaseBy">The amount to increase the stock level by</param>
         </member>
-        <member name="M:Vendr.Core.Services.IStockService.TryIncreaseStock(System.String,System.String,System.Decimal)">
+        <member name="M:Vendr.Core.Services.IStockService.TryIncreaseStock(System.Guid,System.String,System.String,System.Decimal)">
             <summary>
             Trys to increase the stock level of a given product
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to retrieve</param>
             <param name="productVariantReference">The unique reference of variant of the product who's stock level to increase</param>
             <param name="increaseBy">The amount to increase the stock level by</param>
             <returns>True if the stock level was increased, false if not</returns>
         </member>
-        <member name="M:Vendr.Core.Services.IStockService.InvalidateStockCache(System.String,System.String)">
+        <member name="M:Vendr.Core.Services.IStockService.InvalidateStockCache(System.Guid,System.String,System.String)">
             <summary>
             Invalidates the stock cache for the given product / product variant
             </summary>
+            <param name="storeId">The ID of the store the product belongs to</param>
             <param name="productReference">The unique reference of the product who's stock level to increase</param>
             <param name="productVariantReference">The unique reference of variant of the product who's stock level to increase</param>
         </member>
@@ -3412,6 +3572,32 @@
             Sorts a list of <see cref="T:Vendr.Core.Models.Store"/> entities by ID according to the order of those IDs
             </summary>
             <param name="sortedIds">The IDs of the <see cref="T:Vendr.Core.Models.Store"/> entities to sort, in the order by which to sort them</param>
+        </member>
+        <member name="M:Vendr.Core.Services.ITagService.GetTags(System.Guid,System.String)">
+            <summary>
+            Get a list of all tags for a given store
+            </summary>
+            <param name="storeId">The ID of the store the tags belong to</param>
+            <param name="startsWith">A string to use to find results that start with a given query</param>
+            <returns>A list of tags</returns>
+        </member>
+        <member name="M:Vendr.Core.Services.ITagService.GetTagsByEntityType(System.Guid,System.String,System.String)">
+            <summary>
+            Get a list of all tags for a given store / entity type
+            </summary>
+            <param name="storeId">The ID of the store the tags belong to</param>
+            <param name="entityType">The type of the entity</param>
+            <param name="startsWith">A string to use to find results that start with a given query</param>
+            <returns>A list of tags</returns>
+        </member>
+        <member name="M:Vendr.Core.Services.ITagService.GetEntityTags(System.Guid,System.Guid,System.String)">
+            <summary>
+            Get a list of all the tags for a given entity
+            </summary>
+            <param name="storeId">The ID of the store the tags belong to</param>
+            <param name="entityId">The ID of the entity the tags belong to</param>
+            <param name="startsWith">A string to use to find results that start with a given query</param>
+            <returns>A list of tags</returns>
         </member>
         <member name="T:Vendr.Core.Services.ITaxService">
             <summary>
@@ -3522,7 +3708,7 @@
             A central service context for easy access to all of Vendr's services
             </summary>
         </member>
-        <member name="M:Vendr.Core.Services.VendrServiceContext.#ctor(System.Lazy{Vendr.Core.Services.ICountryService},System.Lazy{Vendr.Core.Services.ICurrencyService},System.Lazy{Vendr.Core.Services.IEmailTemplateService},System.Lazy{Vendr.Core.Services.IPrintTemplateService},System.Lazy{Vendr.Core.Services.IExportTemplateService},System.Lazy{Vendr.Core.Services.IOrderService},System.Lazy{Vendr.Core.Services.IOrderStatusService},System.Lazy{Vendr.Core.Services.IPaymentMethodService},System.Lazy{Vendr.Core.Services.IPaymentService},System.Lazy{Vendr.Core.Services.IPaymentProviderService},System.Lazy{Vendr.Core.Services.IShippingMethodService},System.Lazy{Vendr.Core.Services.IStoreService},System.Lazy{Vendr.Core.Services.ITaxService},System.Lazy{Vendr.Core.Services.IProductService},System.Lazy{Vendr.Core.Services.IDiscountService},System.Lazy{Vendr.Core.Services.IGiftCardService},System.Lazy{Vendr.Core.Services.ITranslationService},System.Lazy{Vendr.Core.Services.IProductAttributeService},System.Lazy{Vendr.Core.Services.IEntityService},System.Lazy{Vendr.Core.Services.IActivityLogService},System.Lazy{Vendr.Core.Services.IAnalyticsService},System.Lazy{Vendr.Core.Licensing.LicensingService},System.Lazy{Vendr.Core.Services.IRegisteredCustomerInfoService})">
+        <member name="M:Vendr.Core.Services.VendrServiceContext.#ctor(System.Lazy{Vendr.Core.Services.ICountryService},System.Lazy{Vendr.Core.Services.ICurrencyService},System.Lazy{Vendr.Core.Services.IEmailTemplateService},System.Lazy{Vendr.Core.Services.IPrintTemplateService},System.Lazy{Vendr.Core.Services.IExportTemplateService},System.Lazy{Vendr.Core.Services.IOrderService},System.Lazy{Vendr.Core.Services.IOrderStatusService},System.Lazy{Vendr.Core.Services.IPaymentMethodService},System.Lazy{Vendr.Core.Services.IPaymentService},System.Lazy{Vendr.Core.Services.IPaymentProviderService},System.Lazy{Vendr.Core.Services.IShippingMethodService},System.Lazy{Vendr.Core.Services.IStoreService},System.Lazy{Vendr.Core.Services.ITaxService},System.Lazy{Vendr.Core.Services.IProductService},System.Lazy{Vendr.Core.Services.IDiscountService},System.Lazy{Vendr.Core.Services.IGiftCardService},System.Lazy{Vendr.Core.Services.ITranslationService},System.Lazy{Vendr.Core.Services.IProductAttributeService},System.Lazy{Vendr.Core.Services.IEntityService},System.Lazy{Vendr.Core.Services.IActivityLogService},System.Lazy{Vendr.Core.Services.IAnalyticsService},System.Lazy{Vendr.Core.Licensing.LicensingService},System.Lazy{Vendr.Core.Services.IRegisteredCustomerInfoService},System.Lazy{Vendr.Core.Services.ITagService})">
             <summary>
             Instantiates a new VendrServiceContext instance
             </summary>
@@ -3549,6 +3735,7 @@
             <param name="analyticsService"></param>
             <param name="licensingService"></param>
             <param name="registeredCustomerInfoService"></param>
+            <param name="tagService"></param>
         </member>
         <member name="P:Vendr.Core.Services.VendrServiceContext.CountryService">
             <summary>
@@ -3663,6 +3850,11 @@
         <member name="P:Vendr.Core.Services.VendrServiceContext.RegisteredCustomerInfoService">
             <summary>
             Gets the <see cref="T:Vendr.Core.Services.IRegisteredCustomerInfoService"/>
+            </summary>
+        </member>
+        <member name="P:Vendr.Core.Services.VendrServiceContext.TagService">
+            <summary>
+            Gets the <see cref="T:Vendr.Core.Services.ITagService"/>
             </summary>
         </member>
         <member name="T:Vendr.Extensions.DictionaryExtensions">
