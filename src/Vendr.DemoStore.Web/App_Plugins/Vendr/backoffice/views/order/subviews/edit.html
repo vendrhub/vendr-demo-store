@@ -81,11 +81,11 @@
                                 </div>
                             </td>
                             <td class="text-right nowrap">
-                                <span class="color-grey text-12 strikethrough block" ng-if="ol.unitPriceWithoutAdjustments != ol.unitPrice">{{sol.unitPriceWithoutAdjustments}}</span>
+                                <span class="color-grey text-12 strikethrough block" ng-if="sol.unitPriceWithoutAdjustments != sol.unitPrice">{{sol.unitPriceWithoutAdjustments}}</span>
                                 {{sol.quantity}} x {{ sol.unitPrice }}
                             </td>
                             <td class="text-right">
-                                <span class="color-grey text-12 strikethrough block" ng-if="ol.totalPriceWithoutAdjustments != ol.totalPrice">{{sol.totalPriceWithoutAdjustments}}</span>
+                                <span class="color-grey text-12 strikethrough block" ng-if="sol.totalPriceWithoutAdjustments != sol.totalPrice">{{sol.totalPriceWithoutAdjustments}}</span>
                                 {{ sol.totalPrice }}
                             </td>
                             <td></td>
@@ -93,7 +93,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="4" class="bold text-right nowrap">Subtotal</td>
+                            <td colspan="3" class="bold text-right nowrap">Subtotal</td>
                             <td class="bold text-right nowrap">{{ vm.content.subtotalPriceWithPreviousAdjustments }}</td>
                         </tr>
                         <tr ng-if="vm.content.subtotalPriceFeesAdjustment != vm.content.zeroAmount">
@@ -244,48 +244,39 @@
             </umb-box-content>
         </umb-box>
 
-        <!--<umb-box>
-            <umb-box-header title="Timeline"></umb-box-header>
-            <umb-box-content>
+        <umb-box class="mt-20">
+            <umb-box-header title="Recent Activity"></umb-box-header>
+            <umb-box-content class="block-form relative" style="min-height: 40px;">
 
-                <div class="history">
+                <umb-load-indicator ng-if="vm.activityLog.loading"></umb-load-indicator>
 
-                    <div class="history-line history-line--s"></div>
+                <table class="vendr-activity-list" ng-if="!vm.activityLog.loading">
+                    <tr ng-repeat="log in vm.activityLog.entries.items">
+                        <td class="mr-20">
+                            <span class="vendr-activity-list__pill {{log.badgeColorClass}}">{{ log.badgeLabel }}</span>
+                        </td>
+                        <td>
+                            <strong><a ng-href="{{log.routePath}}">{{ log.eventSummary }}</a></strong><br />
+                            <span class="color-midgrey">By {{ log.userName }} on {{ log.eventDateUtc  | date:'MMMM d, yyyy h:mm a' }}</span>
+                        </td>
+                    </tr>
+                </table>
 
-                    <div class="history-item">
-
-                        <div class="history-item__break">
-                            <div class="history-item__avatar">
-                                <div class="umb-avatar umb-avatar--s vendr-bg--grey"><span>E</span></div>
-                            </div>
-
-                            <div>
-                                <div>Confirmation Email Sent</div>
-                                <div class="history-item__date">October 9, 2019 1:18 PM</div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="history-item">
-
-                        <div class="history-item__break">
-                            <div class="history-item__avatar">
-                                <div class="umb-avatar umb-avatar--s vendr-bg--grey"><span>O</span></div>
-                            </div>
-
-                            <div>
-                                <div>Order Placed</div>
-                                <div class="history-item__date">October 9, 2019 1:18 PM</div>
-                            </div>
-                        </div>
-
-                    </div>
-
+                <div class="flex justify-center">
+                    <umb-pagination ng-if="vm.activityLog.entries.totalPages > 0 && !vm.activityLog.loading"
+                        page-number="vm.activityLog.entries.pageNumber"
+                        total-pages="vm.activityLog.entries.totalPages"
+                        on-change="vm.loadActivityLog(pageNumber)"
+                        class="mb-0">
+                    </umb-pagination>
                 </div>
 
+                <umb-empty-state ng-if="!vm.activityLog.loading && vm.activityLog.entries.totalItems === 0" position="center">
+                    No activity log entries found
+                </umb-empty-state>
+
             </umb-box-content>
-        </umb-box>-->
+        </umb-box>
 
     </div>
     <div class="vendr-layout__right">

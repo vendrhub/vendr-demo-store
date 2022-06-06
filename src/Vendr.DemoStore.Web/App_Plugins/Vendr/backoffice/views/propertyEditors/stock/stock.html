@@ -3,7 +3,8 @@
     <ng-include ng-if="!vm.loading && !vm.store" src="'/App_Plugins/Vendr/backoffice/views/common/nostorefound.html'"></ng-include>
 
     <div class="vendr-input vendr-input--short" ng-if="!vm.loading && vm.store">
-        <input id="{{vm.model.alias}}" type="number" ng-model="vm.stockLevel" fix-number ng-change="vm.syncStockLevel()" />
+        <input id="{{vm.model.alias}}" type="text" ng-model="vm.stockLevel" ng-change="vm.syncStockLevel()" ng-focus="vm.unformatValue()" ng-blur="vm.reformatValue()"
+               ng-pattern-restrict="{{ vm.options.numberPattern }}" />
     </div>
 
 </div>
