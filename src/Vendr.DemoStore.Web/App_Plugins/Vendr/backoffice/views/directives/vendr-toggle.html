@@ -1,0 +1,10 @@
+﻿<div class="vendr-toggle">
+    <umb-toggle checked="checked" on-click="toggle()"></umb-toggle>
+    <div class="vendr-toggle__content" ng-click="toggle()">
+        <div>{{ name }}</div>
+        <div class="vendr-toggle__description">{{ description }}</div>
+    </div>
+    <div class="vendr-toggle__action" ng-if="checkedActionLabel && onCheckedAction && checked">
+        <button type="button" class="vendr-toggle__action-btn btn btn-info" ng-click="onCheckedAction()">{{ checkedActionLabel }}</button>
+    </div>
+</div>

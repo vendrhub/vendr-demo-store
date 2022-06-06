@@ -5,7 +5,7 @@
 
     <ItemGroup>
         <PackageReference Include="Umbraco.Cms" Version="10.0.0-rc5" />
-        <PackageReference Include="Vendr" Version="2.3.0-beta0036" />
+        <PackageReference Include="Vendr.Umbraco.Startup" Version="3.0.0-alpha0132" />
     </ItemGroup>
 
 
@@ -17,7 +17,7 @@
     <ItemGroup>
         <EmbeddedResource Remove="umbraco\Data\**" />
         <EmbeddedResource Remove="umbraco\logs\**" />
-        <EmbeddedResource Remove="umbraco\MediaCache\**" />
+        <EmbeddedResource Remove="umbraco\MediaCache\**" /> 
     </ItemGroup>
     <ItemGroup>
         <None Remove="umbraco\Data\**" />
@@ -45,4 +45,13 @@
     <PropertyGroup>
         <RazorCompileOnBuild>false</RazorCompileOnBuild>
     </PropertyGroup>
+
+    <!--
+    <Target Name="CopyUiFiles" BeforeTargets="Build">
+        <ItemGroup>
+            <VendrUiFiles Include="$(MSBuildProjectDirectory)\..\..\..\Vendr_v3\src\Vendr.Umbraco.Web.UI\App_Plugins\Vendr\**\*.*" />
+        </ItemGroup>
+        <Copy SourceFiles="@(VendrUiFiles)" DestinationFiles="@(VendrUiFiles->'$(MSBuildProjectDirectory)\App_Plugins\Vendr\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+    </Target>
+    -->
 </Project>

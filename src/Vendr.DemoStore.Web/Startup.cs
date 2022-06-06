@@ -43,6 +43,7 @@ namespace Vendr.DemoStore.Web
             services.AddUmbraco(_env, _config)
                 .AddBackOffice()
                 .AddWebsite()
+                .AddDemoStore()
                 .AddComposers()
                 .Build();
 #pragma warning restore IDE0022 // Use expression body for methods

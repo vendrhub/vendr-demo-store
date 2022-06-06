@@ -1,4 +1,4 @@
-/****** Object:  Table [dbo].[cmsContentNu]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[cmsContentNu]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -16,7 +16,7 @@ CREATE TABLE [dbo].[cmsContentNu](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[cmsContentType]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[cmsContentType]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -38,7 +38,7 @@ CREATE TABLE [dbo].[cmsContentType](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[cmsContentType2ContentType]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[cmsContentType2ContentType]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -53,7 +53,7 @@ CREATE TABLE [dbo].[cmsContentType2ContentType](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[cmsContentTypeAllowedContentType]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[cmsContentTypeAllowedContentType]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -69,7 +69,7 @@ CREATE TABLE [dbo].[cmsContentTypeAllowedContentType](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[cmsDictionary]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[cmsDictionary]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -85,7 +85,7 @@ CREATE TABLE [dbo].[cmsDictionary](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[cmsDocumentType]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[cmsDocumentType]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -101,7 +101,7 @@ CREATE TABLE [dbo].[cmsDocumentType](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[cmsLanguageText]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[cmsLanguageText]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -117,7 +117,7 @@ CREATE TABLE [dbo].[cmsLanguageText](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[cmsMacro]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[cmsMacro]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -140,7 +140,7 @@ CREATE TABLE [dbo].[cmsMacro](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[cmsMacroProperty]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[cmsMacroProperty]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -159,7 +159,7 @@ CREATE TABLE [dbo].[cmsMacroProperty](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[cmsMember]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[cmsMember]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -184,7 +184,7 @@ CREATE TABLE [dbo].[cmsMember](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[cmsMember2MemberGroup]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[cmsMember2MemberGroup]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -199,7 +199,7 @@ CREATE TABLE [dbo].[cmsMember2MemberGroup](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[cmsMemberType]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[cmsMemberType]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -217,7 +217,7 @@ CREATE TABLE [dbo].[cmsMemberType](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[cmsPropertyType]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[cmsPropertyType]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -244,7 +244,7 @@ CREATE TABLE [dbo].[cmsPropertyType](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[cmsPropertyTypeGroup]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[cmsPropertyTypeGroup]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -263,7 +263,7 @@ CREATE TABLE [dbo].[cmsPropertyTypeGroup](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[cmsTagRelationship]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[cmsTagRelationship]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -280,7 +280,7 @@ CREATE TABLE [dbo].[cmsTagRelationship](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[cmsTags]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[cmsTags]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -296,7 +296,7 @@ CREATE TABLE [dbo].[cmsTags](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[cmsTemplate]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[cmsTemplate]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -311,7 +311,7 @@ CREATE TABLE [dbo].[cmsTemplate](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoAccess]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoAccess]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -329,7 +329,7 @@ CREATE TABLE [dbo].[umbracoAccess](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoAccessRule]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoAccessRule]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -347,7 +347,7 @@ CREATE TABLE [dbo].[umbracoAccessRule](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoAudit]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoAudit]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -368,7 +368,7 @@ CREATE TABLE [dbo].[umbracoAudit](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoCacheInstruction]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoCacheInstruction]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -385,7 +385,7 @@ CREATE TABLE [dbo].[umbracoCacheInstruction](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoConsent]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoConsent]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -405,7 +405,7 @@ CREATE TABLE [dbo].[umbracoConsent](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoContent]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoContent]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -419,7 +419,7 @@ CREATE TABLE [dbo].[umbracoContent](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoContentSchedule]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoContentSchedule]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -436,7 +436,7 @@ CREATE TABLE [dbo].[umbracoContentSchedule](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoContentVersion]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoContentVersion]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -455,7 +455,7 @@ CREATE TABLE [dbo].[umbracoContentVersion](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoContentVersionCleanupPolicy]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoContentVersionCleanupPolicy]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -468,7 +468,7 @@ CREATE TABLE [dbo].[umbracoContentVersionCleanupPolicy](
 	[updated] [datetime] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoContentVersionCultureVariation]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoContentVersionCultureVariation]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -486,7 +486,7 @@ CREATE TABLE [dbo].[umbracoContentVersionCultureVariation](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoCreatedPackageSchema]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoCreatedPackageSchema]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -503,7 +503,7 @@ CREATE TABLE [dbo].[umbracoCreatedPackageSchema](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoDataType]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoDataType]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -519,7 +519,7 @@ CREATE TABLE [dbo].[umbracoDataType](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoDocument]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoDocument]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -534,7 +534,7 @@ CREATE TABLE [dbo].[umbracoDocument](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoDocumentCultureVariation]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoDocumentCultureVariation]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -553,7 +553,7 @@ CREATE TABLE [dbo].[umbracoDocumentCultureVariation](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoDocumentVersion]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoDocumentVersion]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -568,7 +568,7 @@ CREATE TABLE [dbo].[umbracoDocumentVersion](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoDomain]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoDomain]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -584,7 +584,7 @@ CREATE TABLE [dbo].[umbracoDomain](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoExternalLogin]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoExternalLogin]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -602,7 +602,7 @@ CREATE TABLE [dbo].[umbracoExternalLogin](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoExternalLoginToken]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoExternalLoginToken]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -619,7 +619,7 @@ CREATE TABLE [dbo].[umbracoExternalLoginToken](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoKeyValue]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoKeyValue]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -634,7 +634,7 @@ CREATE TABLE [dbo].[umbracoKeyValue](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoLanguage]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoLanguage]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -652,7 +652,7 @@ CREATE TABLE [dbo].[umbracoLanguage](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoLock]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoLock]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -667,7 +667,7 @@ CREATE TABLE [dbo].[umbracoLock](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoLog]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoLog]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -687,7 +687,7 @@ CREATE TABLE [dbo].[umbracoLog](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoLogViewerQuery]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoLogViewerQuery]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -702,7 +702,7 @@ CREATE TABLE [dbo].[umbracoLogViewerQuery](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoMediaVersion]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoMediaVersion]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -716,7 +716,7 @@ CREATE TABLE [dbo].[umbracoMediaVersion](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoNode]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoNode]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -739,7 +739,7 @@ CREATE TABLE [dbo].[umbracoNode](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoPropertyData]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoPropertyData]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -761,7 +761,7 @@ CREATE TABLE [dbo].[umbracoPropertyData](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoRedirectUrl]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoRedirectUrl]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -779,7 +779,7 @@ CREATE TABLE [dbo].[umbracoRedirectUrl](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoRelation]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoRelation]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -797,7 +797,7 @@ CREATE TABLE [dbo].[umbracoRelation](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoRelationType]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoRelationType]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -817,7 +817,7 @@ CREATE TABLE [dbo].[umbracoRelationType](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoServer]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoServer]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -836,7 +836,7 @@ CREATE TABLE [dbo].[umbracoServer](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoTwoFactorLogin]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoTwoFactorLogin]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -852,7 +852,7 @@ CREATE TABLE [dbo].[umbracoTwoFactorLogin](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoUser]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoUser]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -884,7 +884,7 @@ CREATE TABLE [dbo].[umbracoUser](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoUser2NodeNotify]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoUser2NodeNotify]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -901,7 +901,7 @@ CREATE TABLE [dbo].[umbracoUser2NodeNotify](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoUser2UserGroup]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoUser2UserGroup]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -916,7 +916,7 @@ CREATE TABLE [dbo].[umbracoUser2UserGroup](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoUserGroup]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoUserGroup]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -937,7 +937,7 @@ CREATE TABLE [dbo].[umbracoUserGroup](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoUserGroup2App]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoUserGroup2App]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -952,7 +952,7 @@ CREATE TABLE [dbo].[umbracoUserGroup2App](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoUserGroup2Node]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoUserGroup2Node]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -967,7 +967,7 @@ CREATE TABLE [dbo].[umbracoUserGroup2Node](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoUserGroup2NodePermission]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoUserGroup2NodePermission]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -984,7 +984,7 @@ CREATE TABLE [dbo].[umbracoUserGroup2NodePermission](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoUserLogin]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoUserLogin]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1002,7 +1002,7 @@ CREATE TABLE [dbo].[umbracoUserLogin](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[umbracoUserStartNode]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[umbracoUserStartNode]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1018,7 +1018,7 @@ CREATE TABLE [dbo].[umbracoUserStartNode](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrActivityLog]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrActivityLog]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1039,7 +1039,7 @@ CREATE TABLE [dbo].[vendrActivityLog](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrCountry]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrCountry]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1054,13 +1054,14 @@ CREATE TABLE [dbo].[vendrCountry](
 	[defaultPaymentMethodId] [uniqueidentifier] NULL,
 	[sortOrder] [int] NOT NULL,
 	[deletedTimestamp] [bigint] NOT NULL,
+	[version] [bigint] NOT NULL,
  CONSTRAINT [PK_vendrCountry] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrCurrency]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrCurrency]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1074,13 +1075,14 @@ CREATE TABLE [dbo].[vendrCurrency](
 	[formatTemplate] [nvarchar](255) NULL,
 	[sortOrder] [int] NOT NULL,
 	[deletedTimestamp] [bigint] NOT NULL,
+	[version] [bigint] NOT NULL,
  CONSTRAINT [PK_vendrCurrency] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrCurrencyAllowedCountry]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrCurrencyAllowedCountry]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1095,7 +1097,7 @@ CREATE TABLE [dbo].[vendrCurrencyAllowedCountry](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrDiscount]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrDiscount]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1112,16 +1114,17 @@ CREATE TABLE [dbo].[vendrDiscount](
 	[sortOrder] [int] NOT NULL,
 	[deletedTimestamp] [bigint] NOT NULL,
 	[alias] [nvarchar](255) NOT NULL,
-	[rules] [ntext] NULL,
-	[rewards] [ntext] NULL,
+	[rules] [nvarchar](max) NULL,
+	[rewards] [nvarchar](max) NULL,
 	[blockFurtherDiscounts] [bit] NOT NULL,
+	[version] [bigint] NOT NULL,
  CONSTRAINT [PK_vendrDiscount] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrDiscountCode]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrDiscountCode]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1141,7 +1144,7 @@ CREATE TABLE [dbo].[vendrDiscountCode](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrEmailTemplate]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrEmailTemplate]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1163,13 +1166,14 @@ CREATE TABLE [dbo].[vendrEmailTemplate](
 	[deletedTimestamp] [bigint] NOT NULL,
 	[category] [int] NOT NULL,
 	[ReplyToAddresses] [nvarchar](255) NULL,
+	[version] [bigint] NOT NULL,
  CONSTRAINT [PK_vendrEmailTemplate] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrExportTemplate]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrExportTemplate]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1186,13 +1190,14 @@ CREATE TABLE [dbo].[vendrExportTemplate](
 	[templateView] [nvarchar](255) NULL,
 	[sortOrder] [int] NOT NULL,
 	[deletedTimestamp] [bigint] NOT NULL,
+	[version] [bigint] NOT NULL,
  CONSTRAINT [PK_vendrExportTemplate] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrFrozenPrice]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrFrozenPrice]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1212,7 +1217,7 @@ CREATE TABLE [dbo].[vendrFrozenPrice](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrGiftCard]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrGiftCard]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1229,13 +1234,14 @@ CREATE TABLE [dbo].[vendrGiftCard](
 	[expiryDate] [datetime] NULL,
 	[deletedTimestamp] [bigint] NOT NULL,
 	[isActive] [bit] NOT NULL,
+	[version] [bigint] NOT NULL,
  CONSTRAINT [PK_vendrGiftCard] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrGiftCardProperty]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrGiftCardProperty]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1253,7 +1259,22 @@ CREATE TABLE [dbo].[vendrGiftCardProperty](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrOrder]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrMigrations]    Script Date: 06/06/2022 16:48:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[vendrMigrations](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[migration] [nvarchar](255) NOT NULL,
+	[applied] [datetime] NOT NULL,
+ CONSTRAINT [PK_vendrMigrations_Id] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[vendrOrder]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1297,13 +1318,14 @@ CREATE TABLE [dbo].[vendrOrder](
 	[deletedTimestamp] [bigint] NOT NULL,
 	[orderStatusCode] [int] NULL,
 	[baseCurrencyExchangeRate] [numeric](19, 4) NULL,
+	[version] [bigint] NOT NULL,
  CONSTRAINT [PK_vendrOrder] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrOrderAmountAdjustment]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrOrderAmountAdjustment]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1315,7 +1337,7 @@ CREATE TABLE [dbo].[vendrOrderAmountAdjustment](
 	[type] [nvarchar](255) NOT NULL,
 	[originalValue] [numeric](19, 4) NOT NULL,
 	[value] [numeric](19, 4) NOT NULL,
-	[metaData] [ntext] NOT NULL,
+	[metaData] [nvarchar](max) NOT NULL,
 	[name] [nvarchar](255) NULL,
  CONSTRAINT [PK_vendrOrderAmountAdjustment] PRIMARY KEY CLUSTERED 
 (
@@ -1323,7 +1345,7 @@ CREATE TABLE [dbo].[vendrOrderAmountAdjustment](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrOrderAppliedDiscountCode]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrOrderAppliedDiscountCode]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1340,7 +1362,7 @@ CREATE TABLE [dbo].[vendrOrderAppliedDiscountCode](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrOrderAppliedGiftCard]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrOrderAppliedGiftCard]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1356,7 +1378,7 @@ CREATE TABLE [dbo].[vendrOrderAppliedGiftCard](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrOrderLine]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrOrderLine]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1384,7 +1406,7 @@ CREATE TABLE [dbo].[vendrOrderLine](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrOrderLineAttribute]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrOrderLineAttribute]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1404,7 +1426,7 @@ CREATE TABLE [dbo].[vendrOrderLineAttribute](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrOrderLineProperty]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrOrderLineProperty]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1423,7 +1445,7 @@ CREATE TABLE [dbo].[vendrOrderLineProperty](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrOrderPriceAdjustment]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrOrderPriceAdjustment]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1438,7 +1460,7 @@ CREATE TABLE [dbo].[vendrOrderPriceAdjustment](
 	[originalTax] [numeric](19, 4) NOT NULL,
 	[value] [numeric](19, 4) NOT NULL,
 	[tax] [numeric](19, 4) NOT NULL,
-	[metaData] [ntext] NOT NULL,
+	[metaData] [nvarchar](max) NOT NULL,
 	[name] [nvarchar](255) NULL,
  CONSTRAINT [PK_vendrOrderPriceAdjustment] PRIMARY KEY CLUSTERED 
 (
@@ -1446,7 +1468,7 @@ CREATE TABLE [dbo].[vendrOrderPriceAdjustment](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrOrderProperty]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrOrderProperty]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1464,7 +1486,7 @@ CREATE TABLE [dbo].[vendrOrderProperty](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrOrderStatus]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrOrderStatus]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1477,13 +1499,14 @@ CREATE TABLE [dbo].[vendrOrderStatus](
 	[color] [nvarchar](255) NULL,
 	[sortOrder] [int] NOT NULL,
 	[deletedTimestamp] [bigint] NOT NULL,
+	[version] [bigint] NOT NULL,
  CONSTRAINT [PK_vendrOrderStatus] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrPaymentMethod]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrPaymentMethod]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1503,13 +1526,14 @@ CREATE TABLE [dbo].[vendrPaymentMethod](
 	[canCancelPayments] [bit] NOT NULL,
 	[sortOrder] [int] NOT NULL,
 	[deletedTimestamp] [bigint] NOT NULL,
+	[version] [bigint] NOT NULL,
  CONSTRAINT [PK_vendrPaymentMethod] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrPaymentMethodAllowedCountryRegion]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrPaymentMethodAllowedCountryRegion]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1525,7 +1549,7 @@ CREATE TABLE [dbo].[vendrPaymentMethodAllowedCountryRegion](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrPaymentMethodCountryRegionPrice]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrPaymentMethodCountryRegionPrice]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1543,7 +1567,7 @@ CREATE TABLE [dbo].[vendrPaymentMethodCountryRegionPrice](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrPaymentMethodPaymentProviderSetting]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrPaymentMethodPaymentProviderSetting]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1559,7 +1583,7 @@ CREATE TABLE [dbo].[vendrPaymentMethodPaymentProviderSetting](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrPrintTemplate]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrPrintTemplate]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1573,13 +1597,14 @@ CREATE TABLE [dbo].[vendrPrintTemplate](
 	[templateView] [nvarchar](255) NULL,
 	[sortOrder] [int] NOT NULL,
 	[deletedTimestamp] [bigint] NOT NULL,
+	[version] [bigint] NOT NULL,
  CONSTRAINT [PK_vendrPrintTemplate] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrProductAttribute]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrProductAttribute]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1591,13 +1616,14 @@ CREATE TABLE [dbo].[vendrProductAttribute](
 	[name] [nvarchar](255) NOT NULL,
 	[sortOrder] [int] NOT NULL,
 	[deletedTimestamp] [bigint] NOT NULL,
+	[version] [bigint] NOT NULL,
  CONSTRAINT [PK_vendrProductAttribute] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrProductAttributePreset]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrProductAttributePreset]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1611,13 +1637,14 @@ CREATE TABLE [dbo].[vendrProductAttributePreset](
 	[description] [nvarchar](255) NULL,
 	[sortOrder] [int] NOT NULL,
 	[deletedTimestamp] [bigint] NOT NULL,
+	[version] [bigint] NOT NULL,
  CONSTRAINT [PK_vendrProductAttributePreset] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrProductAttributePresetAllowedAttribute]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrProductAttributePresetAllowedAttribute]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1633,7 +1660,7 @@ CREATE TABLE [dbo].[vendrProductAttributePresetAllowedAttribute](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrProductAttributeValue]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrProductAttributeValue]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1650,7 +1677,7 @@ CREATE TABLE [dbo].[vendrProductAttributeValue](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrRegion]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrRegion]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1665,13 +1692,14 @@ CREATE TABLE [dbo].[vendrRegion](
 	[defaultPaymentMethodId] [uniqueidentifier] NULL,
 	[sortOrder] [int] NOT NULL,
 	[deletedTimestamp] [bigint] NOT NULL,
+	[version] [bigint] NOT NULL,
  CONSTRAINT [PK_vendrRegion] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrShippingMethod]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrShippingMethod]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1686,13 +1714,14 @@ CREATE TABLE [dbo].[vendrShippingMethod](
 	[imageId] [nvarchar](255) NULL,
 	[sortOrder] [int] NOT NULL,
 	[deletedTimestamp] [bigint] NOT NULL,
+	[version] [bigint] NOT NULL,
  CONSTRAINT [PK_vendrShippingMethod] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrShippingMethodAllowedCountryRegion]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrShippingMethodAllowedCountryRegion]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1708,7 +1737,7 @@ CREATE TABLE [dbo].[vendrShippingMethodAllowedCountryRegion](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrShippingMethodCountryRegionPrice]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrShippingMethodCountryRegionPrice]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1726,7 +1755,7 @@ CREATE TABLE [dbo].[vendrShippingMethodCountryRegionPrice](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrStock]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrStock]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1737,7 +1766,7 @@ CREATE TABLE [dbo].[vendrStock](
 	[productVariantReference] [nvarchar](255) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrStore]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrStore]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1773,13 +1802,14 @@ CREATE TABLE [dbo].[vendrStore](
 	[giftCardPropertyAliases] [nvarchar](255) NULL,
 	[baseCurrencyId] [uniqueidentifier] NULL,
 	[orderRoundingMethod] [int] NOT NULL,
+	[version] [bigint] NOT NULL,
  CONSTRAINT [PK_vendrStore] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrStoreAllowedUser]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrStoreAllowedUser]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1794,7 +1824,7 @@ CREATE TABLE [dbo].[vendrStoreAllowedUser](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrStoreAllowedUserRole]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrStoreAllowedUserRole]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1809,7 +1839,7 @@ CREATE TABLE [dbo].[vendrStoreAllowedUserRole](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrStoreEntityTag]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrStoreEntityTag]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1821,7 +1851,7 @@ CREATE TABLE [dbo].[vendrStoreEntityTag](
 	[tag] [nvarchar](255) NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrTaxClass]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrTaxClass]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1834,13 +1864,14 @@ CREATE TABLE [dbo].[vendrTaxClass](
 	[defaultTaxRate] [numeric](10, 8) NOT NULL,
 	[sortOrder] [int] NOT NULL,
 	[deletedTimestamp] [bigint] NOT NULL,
+	[version] [bigint] NOT NULL,
  CONSTRAINT [PK_vendrTaxClass] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrTaxClassCountryRegionTaxRate]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrTaxClassCountryRegionTaxRate]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1857,7 +1888,7 @@ CREATE TABLE [dbo].[vendrTaxClassCountryRegionTaxRate](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vendrTranslatedValue]    Script Date: 06/06/2022 14:12:00 ******/
+/****** Object:  Table [dbo].[vendrTranslatedValue]    Script Date: 06/06/2022 16:48:35 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4153,6 +4184,14 @@ INSERT [dbo].[umbracoAudit] ([id], [performingUserId], [performingDetails], [per
 GO
 INSERT [dbo].[umbracoAudit] ([id], [performingUserId], [performingDetails], [performingIp], [eventDateUtc], [affectedUserId], [affectedDetails], [eventType], [eventDetails]) VALUES (329, -1, N'User "Admin" <admin@admin.com>', N'::1', CAST(N'2022-06-06T13:01:48.253' AS DateTime), -1, N'User "Admin" <admin@admin.com>', N'umbraco/user/sign-in/login', N'login success')
 GO
+INSERT [dbo].[umbracoAudit] ([id], [performingUserId], [performingDetails], [performingIp], [eventDateUtc], [affectedUserId], [affectedDetails], [eventType], [eventDetails]) VALUES (330, 0, N'User "SYSTEM" ', N'::1', CAST(N'2022-06-06T15:47:22.043' AS DateTime), -1, N'User "Admin" <admin@admin.com>', N'umbraco/user/save', N'updating LastLoginDate, UpdateDate')
+GO
+INSERT [dbo].[umbracoAudit] ([id], [performingUserId], [performingDetails], [performingIp], [eventDateUtc], [affectedUserId], [affectedDetails], [eventType], [eventDetails]) VALUES (331, -1, N'User "Admin" <admin@admin.com>', N'::1', CAST(N'2022-06-06T15:47:22.063' AS DateTime), -1, N'User "Admin" <admin@admin.com>', N'umbraco/user/sign-in/login', N'login success')
+GO
+INSERT [dbo].[umbracoAudit] ([id], [performingUserId], [performingDetails], [performingIp], [eventDateUtc], [affectedUserId], [affectedDetails], [eventType], [eventDetails]) VALUES (332, -1, N'User "Admin" <admin@admin.com>', N'::1', CAST(N'2022-06-06T15:47:22.103' AS DateTime), -1, N'User "Admin" <admin@admin.com>', N'umbraco/user/save', N'updating LastLoginDate, UpdateDate')
+GO
+INSERT [dbo].[umbracoAudit] ([id], [performingUserId], [performingDetails], [performingIp], [eventDateUtc], [affectedUserId], [affectedDetails], [eventType], [eventDetails]) VALUES (333, -1, N'User "Admin" <admin@admin.com>', N'::1', CAST(N'2022-06-06T15:47:22.107' AS DateTime), -1, N'User "Admin" <admin@admin.com>', N'umbraco/user/sign-in/login', N'login success')
+GO
 SET IDENTITY_INSERT [dbo].[umbracoAudit] OFF
 GO
 SET IDENTITY_INSERT [dbo].[umbracoCacheInstruction] ON 
@@ -4172,6 +4211,70 @@ GO
 INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1753, CAST(N'2022-06-06T13:10:52.517' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"0FB51F0C63D043319CAAA8DEA6E88AB5\",\"entityId\":\"9c023bae-d1bd-4e60-a6fd-0181391c70e9\",\"action\":1}]"},{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"0FB51F0C63D043319CAAA8DEA6E88AB5\",\"entityId\":\"9c023bae-d1bd-4e60-a6fd-0181391c70e9\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P65008/D1] 2C2DB6FFA92A41D299E07DEBCF487CD1', 2)
 GO
 INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1754, CAST(N'2022-06-06T13:10:57.920' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"0FB51F0C63D043319CAAA8DEA6E88AB5\",\"entityId\":\"9c023bae-d1bd-4e60-a6fd-0181391c70e9\",\"action\":1}]"},{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"0FB51F0C63D043319CAAA8DEA6E88AB5\",\"entityId\":\"9c023bae-d1bd-4e60-a6fd-0181391c70e9\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P65008/D1] 2C2DB6FFA92A41D299E07DEBCF487CD1', 2)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1755, CAST(N'2022-06-06T14:29:04.377' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"FE6969ACBE6B4C91BBFE8106D16680BD\",\"entityId\":\"9e463690-1ee7-4376-bdfe-0181396b5400\",\"action\":0}]"},{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"FE6969ACBE6B4C91BBFE8106D16680BD\",\"entityId\":\"9e463690-1ee7-4376-bdfe-0181396b5400\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P15788/D1] 502F7BD5DEB94399AC6B3EBD017EF60E', 2)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1756, CAST(N'2022-06-06T14:29:26.723' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"FE6969ACBE6B4C91BBFE8106D16680BD\",\"entityId\":\"9e463690-1ee7-4376-bdfe-0181396b5400\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P15788/D1] 502F7BD5DEB94399AC6B3EBD017EF60E', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1757, CAST(N'2022-06-06T14:29:28.177' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"FE6969ACBE6B4C91BBFE8106D16680BD\",\"entityId\":\"9e463690-1ee7-4376-bdfe-0181396b5400\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P15788/D1] 502F7BD5DEB94399AC6B3EBD017EF60E', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1758, CAST(N'2022-06-06T14:29:29.057' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"FE6969ACBE6B4C91BBFE8106D16680BD\",\"entityId\":\"9e463690-1ee7-4376-bdfe-0181396b5400\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P15788/D1] 502F7BD5DEB94399AC6B3EBD017EF60E', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1759, CAST(N'2022-06-06T14:29:29.283' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"FE6969ACBE6B4C91BBFE8106D16680BD\",\"entityId\":\"9e463690-1ee7-4376-bdfe-0181396b5400\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P15788/D1] 502F7BD5DEB94399AC6B3EBD017EF60E', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1760, CAST(N'2022-06-06T14:45:38.783' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"B8F48800DE1943408FA0998963806128\",\"entityId\":\"9e463690-1ee7-4376-bdfe-0181396b5400\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P14704/D1] 69FF04CA2AD74D68B56177D16518DDAA', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1761, CAST(N'2022-06-06T14:45:39.823' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"B8F48800DE1943408FA0998963806128\",\"entityId\":\"9e463690-1ee7-4376-bdfe-0181396b5400\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P14704/D1] 69FF04CA2AD74D68B56177D16518DDAA', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1762, CAST(N'2022-06-06T14:45:41.147' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"B8F48800DE1943408FA0998963806128\",\"entityId\":\"9e463690-1ee7-4376-bdfe-0181396b5400\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P14704/D1] 69FF04CA2AD74D68B56177D16518DDAA', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1763, CAST(N'2022-06-06T14:45:41.420' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"B8F48800DE1943408FA0998963806128\",\"entityId\":\"9e463690-1ee7-4376-bdfe-0181396b5400\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P14704/D1] 69FF04CA2AD74D68B56177D16518DDAA', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1764, CAST(N'2022-06-06T15:03:47.070' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"F8BBBC7FDF8643AEAA37FEA5FE7F317A\",\"entityId\":\"9e463690-1ee7-4376-bdfe-0181396b5400\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P28720/D1] CCEDD4D5B93248A09A20D70204656BBA', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1765, CAST(N'2022-06-06T15:03:48.203' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"F8BBBC7FDF8643AEAA37FEA5FE7F317A\",\"entityId\":\"9e463690-1ee7-4376-bdfe-0181396b5400\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P28720/D1] CCEDD4D5B93248A09A20D70204656BBA', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1766, CAST(N'2022-06-06T15:03:49.207' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"F8BBBC7FDF8643AEAA37FEA5FE7F317A\",\"entityId\":\"9e463690-1ee7-4376-bdfe-0181396b5400\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P28720/D1] CCEDD4D5B93248A09A20D70204656BBA', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1767, CAST(N'2022-06-06T15:03:49.473' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"F8BBBC7FDF8643AEAA37FEA5FE7F317A\",\"entityId\":\"9e463690-1ee7-4376-bdfe-0181396b5400\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P28720/D1] CCEDD4D5B93248A09A20D70204656BBA', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1768, CAST(N'2022-06-06T15:34:40.570' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"137F41B20BEC4327AE575EAAAA37CD41\",\"entityId\":\"3ef030cc-ee1f-4456-953b-018139a763cd\",\"action\":0}]"},{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"137F41B20BEC4327AE575EAAAA37CD41\",\"entityId\":\"3ef030cc-ee1f-4456-953b-018139a763cd\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P19148/D1] 98CABFE670A444D29EA583DF2CDF8B6C', 2)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1769, CAST(N'2022-06-06T15:35:08.527' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"137F41B20BEC4327AE575EAAAA37CD41\",\"entityId\":\"3ef030cc-ee1f-4456-953b-018139a763cd\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P19148/D1] 98CABFE670A444D29EA583DF2CDF8B6C', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1770, CAST(N'2022-06-06T15:35:09.677' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"137F41B20BEC4327AE575EAAAA37CD41\",\"entityId\":\"3ef030cc-ee1f-4456-953b-018139a763cd\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P19148/D1] 98CABFE670A444D29EA583DF2CDF8B6C', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1771, CAST(N'2022-06-06T15:35:11.140' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"137F41B20BEC4327AE575EAAAA37CD41\",\"entityId\":\"3ef030cc-ee1f-4456-953b-018139a763cd\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P19148/D1] 98CABFE670A444D29EA583DF2CDF8B6C', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1772, CAST(N'2022-06-06T15:35:11.427' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"137F41B20BEC4327AE575EAAAA37CD41\",\"entityId\":\"3ef030cc-ee1f-4456-953b-018139a763cd\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P19148/D1] 98CABFE670A444D29EA583DF2CDF8B6C', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1773, CAST(N'2022-06-06T15:38:10.633' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"9C0760EDC5F748FDBCE5773B73362FD6\",\"entityId\":\"88dc9840-2a9e-4dca-a57f-018139aa98a4\",\"action\":0}]"},{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"9C0760EDC5F748FDBCE5773B73362FD6\",\"entityId\":\"88dc9840-2a9e-4dca-a57f-018139aa98a4\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P66288/D1] 7B8287E802A84C8AAA519B09BB66E43A', 2)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1774, CAST(N'2022-06-06T15:38:30.077' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"9C0760EDC5F748FDBCE5773B73362FD6\",\"entityId\":\"88dc9840-2a9e-4dca-a57f-018139aa98a4\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P66288/D1] 7B8287E802A84C8AAA519B09BB66E43A', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1775, CAST(N'2022-06-06T15:38:31.413' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"9C0760EDC5F748FDBCE5773B73362FD6\",\"entityId\":\"88dc9840-2a9e-4dca-a57f-018139aa98a4\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P66288/D1] 7B8287E802A84C8AAA519B09BB66E43A', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1776, CAST(N'2022-06-06T15:38:32.400' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"9C0760EDC5F748FDBCE5773B73362FD6\",\"entityId\":\"88dc9840-2a9e-4dca-a57f-018139aa98a4\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P66288/D1] 7B8287E802A84C8AAA519B09BB66E43A', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1777, CAST(N'2022-06-06T15:38:32.700' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"9C0760EDC5F748FDBCE5773B73362FD6\",\"entityId\":\"88dc9840-2a9e-4dca-a57f-018139aa98a4\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P66288/D1] 7B8287E802A84C8AAA519B09BB66E43A', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1778, CAST(N'2022-06-06T15:38:38.223' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"9C0760EDC5F748FDBCE5773B73362FD6\",\"entityId\":\"88dc9840-2a9e-4dca-a57f-018139aa98a4\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P66288/D1] 7B8287E802A84C8AAA519B09BB66E43A', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1779, CAST(N'2022-06-06T15:46:48.850' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"1339AB93E2AA4D039EA5329219404D57\",\"entityId\":\"f48f8d9c-b0c3-445e-ba92-018139b280e0\",\"action\":0}]"},{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"1339AB93E2AA4D039EA5329219404D57\",\"entityId\":\"f48f8d9c-b0c3-445e-ba92-018139b280e0\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P26488/D1] 20136C1C145B4A7F8635E1FBFC31D8D1', 2)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1780, CAST(N'2022-06-06T15:47:07.870' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"1339AB93E2AA4D039EA5329219404D57\",\"entityId\":\"f48f8d9c-b0c3-445e-ba92-018139b280e0\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P26488/D1] 20136C1C145B4A7F8635E1FBFC31D8D1', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1781, CAST(N'2022-06-06T15:47:09.033' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"1339AB93E2AA4D039EA5329219404D57\",\"entityId\":\"f48f8d9c-b0c3-445e-ba92-018139b280e0\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P26488/D1] 20136C1C145B4A7F8635E1FBFC31D8D1', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1782, CAST(N'2022-06-06T15:47:09.920' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"1339AB93E2AA4D039EA5329219404D57\",\"entityId\":\"f48f8d9c-b0c3-445e-ba92-018139b280e0\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P26488/D1] 20136C1C145B4A7F8635E1FBFC31D8D1', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1783, CAST(N'2022-06-06T15:47:10.153' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"1339AB93E2AA4D039EA5329219404D57\",\"entityId\":\"f48f8d9c-b0c3-445e-ba92-018139b280e0\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P26488/D1] 20136C1C145B4A7F8635E1FBFC31D8D1', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1784, CAST(N'2022-06-06T15:47:14.690' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"1339AB93E2AA4D039EA5329219404D57\",\"entityId\":\"f48f8d9c-b0c3-445e-ba92-018139b280e0\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P26488/D1] 20136C1C145B4A7F8635E1FBFC31D8D1', 1)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1785, CAST(N'2022-06-06T15:47:22.340' AS DateTime), N'[{"RefreshType":3,"RefresherId":"e057af6d-2ee6-41f4-8045-3694010f0aa6","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":"[-1]","JsonIdCount":1,"JsonPayload":null},{"RefreshType":3,"RefresherId":"e057af6d-2ee6-41f4-8045-3694010f0aa6","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":"[-1]","JsonIdCount":1,"JsonPayload":null}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P26488/D1] 20136C1C145B4A7F8635E1FBFC31D8D1', 2)
+GO
+INSERT [dbo].[umbracoCacheInstruction] ([id], [utcStamp], [jsonInstruction], [originated], [instructionCount]) VALUES (1786, CAST(N'2022-06-06T15:47:42.433' AS DateTime), N'[{"RefreshType":4,"RefresherId":"56617306-ca17-4d79-ae6a-bf0501ea1301","GuidId":"00000000-0000-0000-0000-000000000000","IntId":0,"JsonIds":null,"JsonIdCount":1,"JsonPayload":"[{\"instanceId\":\"1339AB93E2AA4D039EA5329219404D57\",\"entityId\":\"f48f8d9c-b0c3-445e-ba92-018139b280e0\",\"action\":1}]"}]', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b [P26488/D1] 20136C1C145B4A7F8635E1FBFC31D8D1', 1)
 GO
 SET IDENTITY_INSERT [dbo].[umbracoCacheInstruction] OFF
 GO
@@ -8489,7 +8592,7 @@ SET IDENTITY_INSERT [dbo].[umbracoLanguage] OFF
 GO
 INSERT [dbo].[umbracoLock] ([id], [value], [name]) VALUES (-1000, 1, N'MainDom')
 GO
-INSERT [dbo].[umbracoLock] ([id], [value], [name]) VALUES (-341, 1, N'ScheduledPublishing')
+INSERT [dbo].[umbracoLock] ([id], [value], [name]) VALUES (-341, -1, N'ScheduledPublishing')
 GO
 INSERT [dbo].[umbracoLock] ([id], [value], [name]) VALUES (-340, 1, N'Languages')
 GO
@@ -8509,7 +8612,7 @@ INSERT [dbo].[umbracoLock] ([id], [value], [name]) VALUES (-333, -1, N'ContentTr
 GO
 INSERT [dbo].[umbracoLock] ([id], [value], [name]) VALUES (-332, -1, N'ContentTypes')
 GO
-INSERT [dbo].[umbracoLock] ([id], [value], [name]) VALUES (-331, 1, N'Servers')
+INSERT [dbo].[umbracoLock] ([id], [value], [name]) VALUES (-331, -1, N'Servers')
 GO
 SET IDENTITY_INSERT [dbo].[umbracoLog] ON 
 GO
@@ -20886,13 +20989,13 @@ INSERT [dbo].[umbracoServer] ([id], [address], [computerName], [registeredDate],
 GO
 INSERT [dbo].[umbracoServer] ([id], [address], [computerName], [registeredDate], [lastNotifiedDate], [isActive], [isSchedulingPublisher]) VALUES (5, N'https://localhost:44322/', N'DESKTOP-ESFKU58/97b8e4b8a9ef664c8a16fc01771b747a6fbfdc86', CAST(N'2021-07-07T14:09:33.430' AS DateTime), CAST(N'2021-10-11T13:59:27.957' AS DateTime), 0, 0)
 GO
-INSERT [dbo].[umbracoServer] ([id], [address], [computerName], [registeredDate], [lastNotifiedDate], [isActive], [isSchedulingPublisher]) VALUES (6, N'https://localhost:44322/', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b', CAST(N'2022-02-08T09:16:46.097' AS DateTime), CAST(N'2022-06-06T14:11:23.880' AS DateTime), 1, 1)
+INSERT [dbo].[umbracoServer] ([id], [address], [computerName], [registeredDate], [lastNotifiedDate], [isActive], [isSchedulingPublisher]) VALUES (6, N'https://localhost:44322/', N'MB-DT-001/c472ded733fcd35921667d3edb588b39f9f63e1b', CAST(N'2022-02-08T09:16:46.097' AS DateTime), CAST(N'2022-06-06T16:47:56.920' AS DateTime), 1, 1)
 GO
 SET IDENTITY_INSERT [dbo].[umbracoServer] OFF
 GO
 SET IDENTITY_INSERT [dbo].[umbracoUser] ON 
 GO
-INSERT [dbo].[umbracoUser] ([id], [userDisabled], [userNoConsole], [userName], [userLogin], [userPassword], [passwordConfig], [userEmail], [userLanguage], [securityStampToken], [failedLoginAttempts], [lastLockoutDate], [lastPasswordChangeDate], [lastLoginDate], [emailConfirmedDate], [invitedDate], [createDate], [updateDate], [avatar], [tourData]) VALUES (-1, 0, 0, N'Admin', N'admin@admin.com', N'AQAAAAEAACcQAAAAEHY7/wbc1mRYZ1xGEFVb5mStB8ZmEDGigVlMudpjK7Vfub/wd3fW9fbIQdKOJNnCfQ==', N'{"hashAlgorithm":"PBKDF2.ASPNETCORE.V3"}', N'admin@admin.com', N'en-US', N'KCP3LFHAH4V72JA3SMS3HZUFRYOV2XR2', 0, NULL, CAST(N'2021-07-07T10:38:09.297' AS DateTime), CAST(N'2022-06-06T14:01:48.153' AS DateTime), NULL, NULL, CAST(N'2019-11-04T15:09:03.500' AS DateTime), CAST(N'2022-06-06T14:01:48.207' AS DateTime), NULL, N'[{"alias":"umbIntroIntroduction","completed":false,"disabled":true},{"alias":"umbEmailMarketing","completed":false,"disabled":true}]')
+INSERT [dbo].[umbracoUser] ([id], [userDisabled], [userNoConsole], [userName], [userLogin], [userPassword], [passwordConfig], [userEmail], [userLanguage], [securityStampToken], [failedLoginAttempts], [lastLockoutDate], [lastPasswordChangeDate], [lastLoginDate], [emailConfirmedDate], [invitedDate], [createDate], [updateDate], [avatar], [tourData]) VALUES (-1, 0, 0, N'Admin', N'admin@admin.com', N'AQAAAAEAACcQAAAAEHY7/wbc1mRYZ1xGEFVb5mStB8ZmEDGigVlMudpjK7Vfub/wd3fW9fbIQdKOJNnCfQ==', N'{"hashAlgorithm":"PBKDF2.ASPNETCORE.V3"}', N'admin@admin.com', N'en-US', N'KCP3LFHAH4V72JA3SMS3HZUFRYOV2XR2', 0, NULL, CAST(N'2021-07-07T10:38:09.297' AS DateTime), CAST(N'2022-06-06T16:47:22.080' AS DateTime), NULL, NULL, CAST(N'2019-11-04T15:09:03.500' AS DateTime), CAST(N'2022-06-06T16:47:22.093' AS DateTime), NULL, N'[{"alias":"umbIntroIntroduction","completed":false,"disabled":true},{"alias":"umbEmailMarketing","completed":false,"disabled":true}]')
 GO
 SET IDENTITY_INSERT [dbo].[umbracoUser] OFF
 GO
@@ -20946,6 +21049,8 @@ INSERT [dbo].[umbracoUserGroup2App] ([userGroupId], [app]) VALUES (4, N'translat
 GO
 INSERT [dbo].[umbracoUserGroup2App] ([userGroupId], [app]) VALUES (6, N'commerce')
 GO
+INSERT [dbo].[umbracoUserLogin] ([sessionId], [userId], [loggedInUtc], [lastValidatedUtc], [loggedOutUtc], [ipAddress]) VALUES (N'dc29213b-2711-4a8e-b9b3-8952ae855592', -1, CAST(N'2022-06-06T15:47:22.070' AS DateTime), CAST(N'2022-06-06T15:47:22.367' AS DateTime), NULL, N'::1')
+GO
 INSERT [dbo].[umbracoUserLogin] ([sessionId], [userId], [loggedInUtc], [lastValidatedUtc], [loggedOutUtc], [ipAddress]) VALUES (N'5d9d35ad-58fa-4319-925d-d6a66ce8bb65', -1, CAST(N'2022-06-06T13:01:48.263' AS DateTime), CAST(N'2022-06-06T13:01:48.393' AS DateTime), NULL, N'::1')
 GO
 INSERT [dbo].[umbracoUserLogin] ([sessionId], [userId], [loggedInUtc], [lastValidatedUtc], [loggedOutUtc], [ipAddress]) VALUES (N'b355b867-1e03-4143-ab46-e2e2669c1bfb', -1, CAST(N'2022-06-06T12:46:56.430' AS DateTime), CAST(N'2022-06-06T12:46:56.430' AS DateTime), NULL, N'::1')
@@ -20979,6 +21084,24 @@ GO
 INSERT [dbo].[vendrActivityLog] ([id], [storeId], [entityId], [entityType], [entitySummary], [eventType], [eventSummary], [eventDateUtc], [userId]) VALUES (N'f6938281-cea3-4050-bc3c-01813923c88e', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'9c023bae-d1bd-4e60-a6fd-0181391c70e9', N'Order', N'ORDER-00888-47452-BLS43', N'vendr/order/new', N'New Order ORDER-00888-47452-BLS43 placed by Test Test', CAST(N'2022-06-06T13:10:55.373' AS DateTime), -1)
 GO
 INSERT [dbo].[vendrActivityLog] ([id], [storeId], [entityId], [entityType], [entitySummary], [eventType], [eventSummary], [eventDateUtc], [userId]) VALUES (N'57aa0af5-8be5-4cfc-ae1e-01813923c892', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'9c023bae-d1bd-4e60-a6fd-0181391c70e9', N'Order', N'ORDER-00888-47452-BLS43', N'vendr/order/payment/authorize', N'Payment of £8.00 authorized for order ORDER-00888-47452-BLS43', CAST(N'2022-06-06T13:10:55.377' AS DateTime), -1)
+GO
+INSERT [dbo].[vendrActivityLog] ([id], [storeId], [entityId], [entityType], [entitySummary], [eventType], [eventSummary], [eventDateUtc], [userId]) VALUES (N'8f397533-361d-49c3-b1af-0181399beb4a', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'9e463690-1ee7-4376-bdfe-0181396b5400', N'Order', N'ORDER-00888-54229-FR6SH', N'vendr/order/new', N'New Order ORDER-00888-54229-FR6SH placed by Test Test', CAST(N'2022-06-06T15:22:08.583' AS DateTime), -1)
+GO
+INSERT [dbo].[vendrActivityLog] ([id], [storeId], [entityId], [entityType], [entitySummary], [eventType], [eventSummary], [eventDateUtc], [userId]) VALUES (N'a4a6f63a-527d-4493-965e-0181399beb52', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'9e463690-1ee7-4376-bdfe-0181396b5400', N'Order', N'ORDER-00888-54229-FR6SH', N'vendr/order/payment/authorize', N'Payment of £8.00 authorized for order ORDER-00888-54229-FR6SH', CAST(N'2022-06-06T15:22:08.593' AS DateTime), -1)
+GO
+INSERT [dbo].[vendrActivityLog] ([id], [storeId], [entityId], [entityType], [entitySummary], [eventType], [eventSummary], [eventDateUtc], [userId]) VALUES (N'fbd6678f-de5f-46dd-8a08-018139a7fa7e', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'3ef030cc-ee1f-4456-953b-018139a763cd', N'Order', N'ORDER-00888-56111-DSWDD', N'vendr/order/payment/authorize', N'Payment of £8.00 authorized for order ORDER-00888-56111-DSWDD', CAST(N'2022-06-06T15:35:18.907' AS DateTime), -1)
+GO
+INSERT [dbo].[vendrActivityLog] ([id], [storeId], [entityId], [entityType], [entitySummary], [eventType], [eventSummary], [eventDateUtc], [userId]) VALUES (N'd293d747-908f-46e9-82a4-018139a7fa8c', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'3ef030cc-ee1f-4456-953b-018139a763cd', N'Order', N'ORDER-00888-56111-DSWDD', N'vendr/order/new', N'New Order ORDER-00888-56111-DSWDD placed by Test Test', CAST(N'2022-06-06T15:35:18.923' AS DateTime), -1)
+GO
+INSERT [dbo].[vendrActivityLog] ([id], [storeId], [entityId], [entityType], [entitySummary], [eventType], [eventSummary], [eventDateUtc], [userId]) VALUES (N'4fe54525-76a2-44e0-9e8d-018139aafb4f', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'88dc9840-2a9e-4dca-a57f-018139aa98a4', N'Order', N'ORDER-00888-56312-D4767', N'vendr/order/new', N'New Order ORDER-00888-56312-D4767 placed by Test Test', CAST(N'2022-06-06T15:38:35.727' AS DateTime), -1)
+GO
+INSERT [dbo].[vendrActivityLog] ([id], [storeId], [entityId], [entityType], [entitySummary], [eventType], [eventSummary], [eventDateUtc], [userId]) VALUES (N'4d1463a9-0411-4fd3-aa9d-018139aafb53', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'88dc9840-2a9e-4dca-a57f-018139aa98a4', N'Order', N'ORDER-00888-56312-D4767', N'vendr/order/payment/authorize', N'Payment of £8.00 authorized for order ORDER-00888-56312-D4767', CAST(N'2022-06-06T15:38:35.730' AS DateTime), -1)
+GO
+INSERT [dbo].[vendrActivityLog] ([id], [storeId], [entityId], [entityType], [entitySummary], [eventType], [eventSummary], [eventDateUtc], [userId]) VALUES (N'7cd01f2b-a070-4ad2-a958-018139b2dd80', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'Order', N'ORDER-00888-56830-884PC', N'vendr/order/new', N'New Order ORDER-00888-56830-884PC placed by Test Test', CAST(N'2022-06-06T15:47:12.383' AS DateTime), -1)
+GO
+INSERT [dbo].[vendrActivityLog] ([id], [storeId], [entityId], [entityType], [entitySummary], [eventType], [eventSummary], [eventDateUtc], [userId]) VALUES (N'2ff6bbb2-3d39-4f55-8533-018139b2dd83', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'Order', N'ORDER-00888-56830-884PC', N'vendr/order/payment/authorize', N'Payment of £8.00 authorized for order ORDER-00888-56830-884PC', CAST(N'2022-06-06T15:47:12.387' AS DateTime), -1)
+GO
+INSERT [dbo].[vendrActivityLog] ([id], [storeId], [entityId], [entityType], [entitySummary], [eventType], [eventSummary], [eventDateUtc], [userId]) VALUES (N'cb1af66b-5828-449d-a1b2-018139b352d5', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'Order', N'ORDER-00888-56830-884PC', N'vendr/order/payment/capture', N'Payment of £8.00 captured for order ORDER-00888-56830-884PC', CAST(N'2022-06-06T15:47:42.420' AS DateTime), -1)
 GO
 INSERT [dbo].[vendrActivityLog] ([id], [storeId], [entityId], [entityType], [entitySummary], [eventType], [eventSummary], [eventDateUtc], [userId]) VALUES (N'52d22a52-8455-4dd3-9a04-0a0704d860cd', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'076f926f-69a0-4dd1-aacf-50c63a8ef631', N'Order', N'ORDER-0379-0928-MYKK', N'vendr/order/payment/authorize', N'Payment of £20.00 authorized for order ORDER-0379-0928-MYKK', CAST(N'2021-01-13T15:28:22.800' AS DateTime), -1)
 GO
@@ -21022,39 +21145,39 @@ INSERT [dbo].[vendrActivityLog] ([id], [storeId], [entityId], [entityType], [ent
 GO
 INSERT [dbo].[vendrActivityLog] ([id], [storeId], [entityId], [entityType], [entitySummary], [eventType], [eventSummary], [eventDateUtc], [userId]) VALUES (N'5e349145-6037-4551-ab47-f57090b61082', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'a64a4521-614f-4069-936c-12cd2d7f7986', N'Order', N'ORDER-0555-0834-9K6J', N'vendr/order/new', N'New Order ORDER-0555-0834-9K6J placed by Matt Brailsford', CAST(N'2021-07-08T13:54:22.863' AS DateTime), -1)
 GO
-INSERT [dbo].[vendrCountry] ([id], [storeId], [name], [code], [defaultCurrencyId], [defaultShippingMethodId], [defaultPaymentMethodId], [sortOrder], [deletedTimestamp]) VALUES (N'e72c724b-44fd-4b1a-9a4d-017a7c16e207', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'United Kingdom', N'GB', N'5a6b51a3-4a44-4dd3-b61c-017a7c16e1cb', N'c64c93ea-b159-439f-a162-017a7c16e2c9', N'2d698f56-a24b-43c5-a790-017a7c16e28b', 0, 0)
+INSERT [dbo].[vendrCountry] ([id], [storeId], [name], [code], [defaultCurrencyId], [defaultShippingMethodId], [defaultPaymentMethodId], [sortOrder], [deletedTimestamp], [version]) VALUES (N'e72c724b-44fd-4b1a-9a4d-017a7c16e207', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'United Kingdom', N'GB', N'5a6b51a3-4a44-4dd3-b61c-017a7c16e1cb', N'c64c93ea-b159-439f-a162-017a7c16e2c9', N'2d698f56-a24b-43c5-a790-017a7c16e28b', 0, 0, 1)
 GO
-INSERT [dbo].[vendrCountry] ([id], [storeId], [name], [code], [defaultCurrencyId], [defaultShippingMethodId], [defaultPaymentMethodId], [sortOrder], [deletedTimestamp]) VALUES (N'af697207-d370-4aee-824c-15711d43a9f2', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'United Kingdom', N'GB', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', 0, 0)
+INSERT [dbo].[vendrCountry] ([id], [storeId], [name], [code], [defaultCurrencyId], [defaultShippingMethodId], [defaultPaymentMethodId], [sortOrder], [deletedTimestamp], [version]) VALUES (N'af697207-d370-4aee-824c-15711d43a9f2', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'United Kingdom', N'GB', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', 0, 0, 1)
 GO
-INSERT [dbo].[vendrCurrency] ([id], [storeId], [name], [code], [cultureName], [formatTemplate], [sortOrder], [deletedTimestamp]) VALUES (N'5a6b51a3-4a44-4dd3-b61c-017a7c16e1cb', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'GBP', N'GBP', N'en-GB', NULL, 0, 0)
+INSERT [dbo].[vendrCurrency] ([id], [storeId], [name], [code], [cultureName], [formatTemplate], [sortOrder], [deletedTimestamp], [version]) VALUES (N'5a6b51a3-4a44-4dd3-b61c-017a7c16e1cb', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'GBP', N'GBP', N'en-GB', NULL, 0, 0, 1)
 GO
-INSERT [dbo].[vendrCurrency] ([id], [storeId], [name], [code], [cultureName], [formatTemplate], [sortOrder], [deletedTimestamp]) VALUES (N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'GBP', N'GBP', N'en-GB', NULL, 0, 0)
+INSERT [dbo].[vendrCurrency] ([id], [storeId], [name], [code], [cultureName], [formatTemplate], [sortOrder], [deletedTimestamp], [version]) VALUES (N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'GBP', N'GBP', N'en-GB', NULL, 0, 0, 1)
 GO
 INSERT [dbo].[vendrCurrencyAllowedCountry] ([id], [currencyId], [countryId]) VALUES (N'92f4e237-3bf7-4a49-b440-017a7c16e2f7', N'5a6b51a3-4a44-4dd3-b61c-017a7c16e1cb', N'e72c724b-44fd-4b1a-9a4d-017a7c16e207')
 GO
 INSERT [dbo].[vendrCurrencyAllowedCountry] ([id], [currencyId], [countryId]) VALUES (N'fd3902cb-5add-474d-86db-55f826a49df2', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'af697207-d370-4aee-824c-15711d43a9f2')
 GO
-INSERT [dbo].[vendrDiscount] ([id], [storeId], [name], [type], [startDate], [expiryDate], [blockIfPreviousDiscounts], [isActive], [sortOrder], [deletedTimestamp], [alias], [rules], [rewards], [blockFurtherDiscounts]) VALUES (N'ec13048b-4102-4d7a-82f1-342762e3ca46', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'10OFF', 1, NULL, NULL, 0, 1, 0, 0, N'tenOff', N'{"ruleProviderAlias":"groupDiscountRule","settings":{"matchType":"All"},"children":[]}', N'[{"rewardProviderAlias":"orderAmountDiscountReward","settings":{"priceType":"SubtotalPrice","adjustmentType":"Percentage","percentage":"10","amounts":"{\"30b62176-6a9e-4a51-b2f0-7ce6c80a461a\":\"\"}","amountsIncludeTax":"True"}}]', 0)
+INSERT [dbo].[vendrDiscount] ([id], [storeId], [name], [type], [startDate], [expiryDate], [blockIfPreviousDiscounts], [isActive], [sortOrder], [deletedTimestamp], [alias], [rules], [rewards], [blockFurtherDiscounts], [version]) VALUES (N'ec13048b-4102-4d7a-82f1-342762e3ca46', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'10OFF', 1, NULL, NULL, 0, 1, 0, 0, N'tenOff', N'{"ruleProviderAlias":"groupDiscountRule","settings":{"matchType":"All"},"children":[]}', N'[{"rewardProviderAlias":"orderAmountDiscountReward","settings":{"priceType":"SubtotalPrice","adjustmentType":"Percentage","percentage":"10","amounts":"{\"30b62176-6a9e-4a51-b2f0-7ce6c80a461a\":\"\"}","amountsIncludeTax":"True"}}]', 0, 1)
 GO
 INSERT [dbo].[vendrDiscountCode] ([id], [storeId], [discountId], [code], [usageLimit], [usageCount], [isUnlimited], [deletedTimestamp]) VALUES (N'ac958f4e-13c5-43fe-a303-4eaa5b1277fc', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'ec13048b-4102-4d7a-82f1-342762e3ca46', N'10OFF', 0, 1, 1, 0)
 GO
-INSERT [dbo].[vendrEmailTemplate] ([id], [storeId], [alias], [name], [sendToCustomer], [subject], [senderName], [senderAddress], [toAddresses], [ccAddresses], [bccAddresses], [templateView], [sortOrder], [deletedTimestamp], [category], [ReplyToAddresses]) VALUES (N'19b60fec-fd2b-46d1-9fcc-012a5faeb72c', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'confirmation', N'Order Confirmation', 1, N'Blendid - Order Confirmation', N'Vendr', N'info@getvendr.net', N'', N'', N'', N'~/App_Plugins/Vendr/templates/email/BlendidOrderConfirmationEmail.cshtml', 0, 0, 0, N'')
+INSERT [dbo].[vendrEmailTemplate] ([id], [storeId], [alias], [name], [sendToCustomer], [subject], [senderName], [senderAddress], [toAddresses], [ccAddresses], [bccAddresses], [templateView], [sortOrder], [deletedTimestamp], [category], [ReplyToAddresses], [version]) VALUES (N'19b60fec-fd2b-46d1-9fcc-012a5faeb72c', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'confirmation', N'Order Confirmation', 1, N'Blendid - Order Confirmation', N'Vendr', N'info@getvendr.net', N'', N'', N'', N'~/App_Plugins/Vendr/templates/email/BlendidOrderConfirmationEmail.cshtml', 0, 0, 0, N'', 1)
 GO
-INSERT [dbo].[vendrEmailTemplate] ([id], [storeId], [alias], [name], [sendToCustomer], [subject], [senderName], [senderAddress], [toAddresses], [ccAddresses], [bccAddresses], [templateView], [sortOrder], [deletedTimestamp], [category], [ReplyToAddresses]) VALUES (N'969f7567-52b0-4c7a-be06-017a7c16e249', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'orderConfirmation', N'Order Confirmation', 1, N'Order Confirmation', N'Vendr', N'info@vendr.net', NULL, NULL, NULL, N'~/App_Plugins/Vendr/templates/email/OrderConfirmationEmail.cshtml', 0, 0, 0, NULL)
+INSERT [dbo].[vendrEmailTemplate] ([id], [storeId], [alias], [name], [sendToCustomer], [subject], [senderName], [senderAddress], [toAddresses], [ccAddresses], [bccAddresses], [templateView], [sortOrder], [deletedTimestamp], [category], [ReplyToAddresses], [version]) VALUES (N'969f7567-52b0-4c7a-be06-017a7c16e249', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'orderConfirmation', N'Order Confirmation', 1, N'Order Confirmation', N'Vendr', N'info@vendr.net', NULL, NULL, NULL, N'~/App_Plugins/Vendr/templates/email/OrderConfirmationEmail.cshtml', 0, 0, 0, NULL, 1)
 GO
-INSERT [dbo].[vendrEmailTemplate] ([id], [storeId], [alias], [name], [sendToCustomer], [subject], [senderName], [senderAddress], [toAddresses], [ccAddresses], [bccAddresses], [templateView], [sortOrder], [deletedTimestamp], [category], [ReplyToAddresses]) VALUES (N'9e4eb1f8-02f1-4d6e-96db-017a7c16e262', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'orderError', N'Order Error', 1, N'Order Error', N'Vendr', N'info@vendr.net', NULL, NULL, NULL, N'~/App_Plugins/Vendr/templates/email/OrderErrorEmail.cshtml', 1, 0, 0, NULL)
+INSERT [dbo].[vendrEmailTemplate] ([id], [storeId], [alias], [name], [sendToCustomer], [subject], [senderName], [senderAddress], [toAddresses], [ccAddresses], [bccAddresses], [templateView], [sortOrder], [deletedTimestamp], [category], [ReplyToAddresses], [version]) VALUES (N'9e4eb1f8-02f1-4d6e-96db-017a7c16e262', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'orderError', N'Order Error', 1, N'Order Error', N'Vendr', N'info@vendr.net', NULL, NULL, NULL, N'~/App_Plugins/Vendr/templates/email/OrderErrorEmail.cshtml', 1, 0, 0, NULL, 1)
 GO
-INSERT [dbo].[vendrEmailTemplate] ([id], [storeId], [alias], [name], [sendToCustomer], [subject], [senderName], [senderAddress], [toAddresses], [ccAddresses], [bccAddresses], [templateView], [sortOrder], [deletedTimestamp], [category], [ReplyToAddresses]) VALUES (N'8e25ad4d-6107-4ba1-86d8-017a7c16e265', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'giftCard', N'Gift Card', 1, N'Gift Card', N'Vendr', N'info@vendr.net', NULL, NULL, NULL, N'~/App_Plugins/Vendr/templates/email/GiftCardEmail.cshtml', 2, 0, 1, NULL)
+INSERT [dbo].[vendrEmailTemplate] ([id], [storeId], [alias], [name], [sendToCustomer], [subject], [senderName], [senderAddress], [toAddresses], [ccAddresses], [bccAddresses], [templateView], [sortOrder], [deletedTimestamp], [category], [ReplyToAddresses], [version]) VALUES (N'8e25ad4d-6107-4ba1-86d8-017a7c16e265', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'giftCard', N'Gift Card', 1, N'Gift Card', N'Vendr', N'info@vendr.net', NULL, NULL, NULL, N'~/App_Plugins/Vendr/templates/email/GiftCardEmail.cshtml', 2, 0, 1, NULL, 1)
 GO
-INSERT [dbo].[vendrEmailTemplate] ([id], [storeId], [alias], [name], [sendToCustomer], [subject], [senderName], [senderAddress], [toAddresses], [ccAddresses], [bccAddresses], [templateView], [sortOrder], [deletedTimestamp], [category], [ReplyToAddresses]) VALUES (N'8453f7fc-dd15-4989-b836-a7a141256b66', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'paymentInconsistency', N'Order Error', 1, N'Blendid - Order Error', N'Vendr', N'info@getvendr.net', N'', N'', N'', N'~/App_Plugins/Vendr/templates/email/BlendidOrderErrorEmail.cshtml', 1, 0, 0, N'')
+INSERT [dbo].[vendrEmailTemplate] ([id], [storeId], [alias], [name], [sendToCustomer], [subject], [senderName], [senderAddress], [toAddresses], [ccAddresses], [bccAddresses], [templateView], [sortOrder], [deletedTimestamp], [category], [ReplyToAddresses], [version]) VALUES (N'8453f7fc-dd15-4989-b836-a7a141256b66', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'paymentInconsistency', N'Order Error', 1, N'Blendid - Order Error', N'Vendr', N'info@getvendr.net', N'', N'', N'', N'~/App_Plugins/Vendr/templates/email/BlendidOrderErrorEmail.cshtml', 1, 0, 0, N'', 1)
 GO
-INSERT [dbo].[vendrEmailTemplate] ([id], [storeId], [alias], [name], [sendToCustomer], [subject], [senderName], [senderAddress], [toAddresses], [ccAddresses], [bccAddresses], [templateView], [sortOrder], [deletedTimestamp], [category], [ReplyToAddresses]) VALUES (N'4730bec8-c539-4a22-85fe-ceffcb3d9b69', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'giftCard', N'Gift Card', 1, N'Gift Card', N'Vendr', N'info@vendr.net', N'', N'', N'', N'~/App_Plugins/Vendr/templates/email/BlendidGiftCardEmail.cshtml', 2, 0, 1, N'')
+INSERT [dbo].[vendrEmailTemplate] ([id], [storeId], [alias], [name], [sendToCustomer], [subject], [senderName], [senderAddress], [toAddresses], [ccAddresses], [bccAddresses], [templateView], [sortOrder], [deletedTimestamp], [category], [ReplyToAddresses], [version]) VALUES (N'4730bec8-c539-4a22-85fe-ceffcb3d9b69', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'giftCard', N'Gift Card', 1, N'Gift Card', N'Vendr', N'info@vendr.net', N'', N'', N'', N'~/App_Plugins/Vendr/templates/email/BlendidGiftCardEmail.cshtml', 2, 0, 1, N'', 1)
 GO
-INSERT [dbo].[vendrExportTemplate] ([id], [storeId], [alias], [name], [category], [fileMimeType], [fileExtension], [exportStrategy], [templateView], [sortOrder], [deletedTimestamp]) VALUES (N'dae28e3c-1a06-4851-9cb4-017a7c16e278', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'orderCsvExport', N'Order CSV Export', 0, N'text/csv', N'csv', 0, N'~/App_Plugins/Vendr/templates/export/OrderCsvExport.cshtml', 0, 0)
+INSERT [dbo].[vendrExportTemplate] ([id], [storeId], [alias], [name], [category], [fileMimeType], [fileExtension], [exportStrategy], [templateView], [sortOrder], [deletedTimestamp], [version]) VALUES (N'dae28e3c-1a06-4851-9cb4-017a7c16e278', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'orderCsvExport', N'Order CSV Export', 0, N'text/csv', N'csv', 0, N'~/App_Plugins/Vendr/templates/export/OrderCsvExport.cshtml', 0, 0, 1)
 GO
-INSERT [dbo].[vendrExportTemplate] ([id], [storeId], [alias], [name], [category], [fileMimeType], [fileExtension], [exportStrategy], [templateView], [sortOrder], [deletedTimestamp]) VALUES (N'eb773b40-1b3b-485c-a8e0-017ef8a71cf3', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'cartCsvExport', N'Cart CSV Export', 3, N'text/csv', N'csv', 0, N'~/App_Plugins/Vendr/templates/export/CartCsvExport.cshtml', 1, 0)
+INSERT [dbo].[vendrExportTemplate] ([id], [storeId], [alias], [name], [category], [fileMimeType], [fileExtension], [exportStrategy], [templateView], [sortOrder], [deletedTimestamp], [version]) VALUES (N'eb773b40-1b3b-485c-a8e0-017ef8a71cf3', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'cartCsvExport', N'Cart CSV Export', 3, N'text/csv', N'csv', 0, N'~/App_Plugins/Vendr/templates/export/CartCsvExport.cshtml', 1, 0, 1)
 GO
-INSERT [dbo].[vendrExportTemplate] ([id], [storeId], [alias], [name], [category], [fileMimeType], [fileExtension], [exportStrategy], [templateView], [sortOrder], [deletedTimestamp]) VALUES (N'6095f313-bdbf-4d2a-994f-51fd93707c44', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'orderCSVExport', N'Order CSV Export', 0, N'text/csv', N'csv', 0, N'~/App_Plugins/Vendr/templates/export/OrderCsvExport.cshtml', 0, 0)
+INSERT [dbo].[vendrExportTemplate] ([id], [storeId], [alias], [name], [category], [fileMimeType], [fileExtension], [exportStrategy], [templateView], [sortOrder], [deletedTimestamp], [version]) VALUES (N'6095f313-bdbf-4d2a-994f-51fd93707c44', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'orderCSVExport', N'Order CSV Export', 0, N'text/csv', N'csv', 0, N'~/App_Plugins/Vendr/templates/export/OrderCsvExport.cshtml', 0, 0, 1)
 GO
 INSERT [dbo].[vendrFrozenPrice] ([id], [orderId], [key], [currencyId], [countryId], [regionId], [value], [createDate]) VALUES (N'a3033f88-fe08-4f24-95fd-015747fececa', N'13211327-364a-4899-9685-2bb34f84c262', N'b1e61994-b83b-420a-903e-63a7a15942dc_13211327-364a-4899-9685-2bb34f84c262_4e19cd12-1573-4e91-9ea0-60362bdcbf8b', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', NULL, NULL, CAST(8.0000 AS Numeric(19, 4)), CAST(N'2021-07-08T13:58:49.917' AS DateTime))
 GO
@@ -21236,6 +21359,14 @@ INSERT [dbo].[vendrFrozenPrice] ([id], [orderId], [key], [currencyId], [countryI
 GO
 INSERT [dbo].[vendrFrozenPrice] ([id], [orderId], [key], [currencyId], [countryId], [regionId], [value], [createDate]) VALUES (N'de2ecb11-48cb-41b6-bcd0-0181391c7168', N'9c023bae-d1bd-4e60-a6fd-0181391c70e9', N'b1e61994-b83b-420a-903e-63a7a15942dc_9c023bae-d1bd-4e60-a6fd-0181391c70e9_629eeb28-ed18-43db-bc90-ff8ff9c94ef7', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', NULL, NULL, CAST(8.0000 AS Numeric(19, 4)), CAST(N'2022-06-06T13:02:54.313' AS DateTime))
 GO
+INSERT [dbo].[vendrFrozenPrice] ([id], [orderId], [key], [currencyId], [countryId], [regionId], [value], [createDate]) VALUES (N'b57b6846-60a7-4201-b74f-0181396b54b5', N'9e463690-1ee7-4376-bdfe-0181396b5400', N'b1e61994-b83b-420a-903e-63a7a15942dc_9e463690-1ee7-4376-bdfe-0181396b5400_4e19cd12-1573-4e91-9ea0-60362bdcbf8b', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', NULL, NULL, CAST(8.0000 AS Numeric(19, 4)), CAST(N'2022-06-06T14:29:04.310' AS DateTime))
+GO
+INSERT [dbo].[vendrFrozenPrice] ([id], [orderId], [key], [currencyId], [countryId], [regionId], [value], [createDate]) VALUES (N'c59a78a2-efe7-413c-86fc-018139a7646b', N'3ef030cc-ee1f-4456-953b-018139a763cd', N'b1e61994-b83b-420a-903e-63a7a15942dc_3ef030cc-ee1f-4456-953b-018139a763cd_4e19cd12-1573-4e91-9ea0-60362bdcbf8b', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', NULL, NULL, CAST(8.0000 AS Numeric(19, 4)), CAST(N'2022-06-06T15:34:40.490' AS DateTime))
+GO
+INSERT [dbo].[vendrFrozenPrice] ([id], [orderId], [key], [currencyId], [countryId], [regionId], [value], [createDate]) VALUES (N'fc1325c9-31a3-4131-966f-018139aa9913', N'88dc9840-2a9e-4dca-a57f-018139aa98a4', N'b1e61994-b83b-420a-903e-63a7a15942dc_88dc9840-2a9e-4dca-a57f-018139aa98a4_4e19cd12-1573-4e91-9ea0-60362bdcbf8b', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', NULL, NULL, CAST(8.0000 AS Numeric(19, 4)), CAST(N'2022-06-06T15:38:10.580' AS DateTime))
+GO
+INSERT [dbo].[vendrFrozenPrice] ([id], [orderId], [key], [currencyId], [countryId], [regionId], [value], [createDate]) VALUES (N'bcca3889-a561-44fd-8268-018139b28158', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'b1e61994-b83b-420a-903e-63a7a15942dc_f48f8d9c-b0c3-445e-ba92-018139b280e0_4e19cd12-1573-4e91-9ea0-60362bdcbf8b', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', NULL, NULL, CAST(8.0000 AS Numeric(19, 4)), CAST(N'2022-06-06T15:46:48.793' AS DateTime))
+GO
 INSERT [dbo].[vendrFrozenPrice] ([id], [orderId], [key], [currencyId], [countryId], [regionId], [value], [createDate]) VALUES (N'eefe24b7-2772-4b8c-a5b1-04c2d2355647', N'02b99d77-9d59-4f15-8be4-20f2674ecfe4', N'b1e61994-b83b-420a-903e-63a7a15942dc_02b99d77-9d59-4f15-8be4-20f2674ecfe4_7e934d09-3906-4245-875c-b3560c11c323', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', NULL, NULL, CAST(8.0000 AS Numeric(19, 4)), CAST(N'2019-11-27T16:37:58.057' AS DateTime))
 GO
 INSERT [dbo].[vendrFrozenPrice] ([id], [orderId], [key], [currencyId], [countryId], [regionId], [value], [createDate]) VALUES (N'20502347-3565-4e1d-954e-070cf8621568', N'02b99d77-9d59-4f15-8be4-20f2674ecfe4', N'b1e61994-b83b-420a-903e-63a7a15942dc_02b99d77-9d59-4f15-8be4-20f2674ecfe4_381f0962-e6a0-41dc-88cd-3a9fda5a15df', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', NULL, NULL, CAST(3.9500 AS Numeric(19, 4)), CAST(N'2019-12-02T10:17:22.407' AS DateTime))
@@ -21358,183 +21489,331 @@ INSERT [dbo].[vendrFrozenPrice] ([id], [orderId], [key], [currencyId], [countryI
 GO
 INSERT [dbo].[vendrFrozenPrice] ([id], [orderId], [key], [currencyId], [countryId], [regionId], [value], [createDate]) VALUES (N'bccfb89c-2eb2-449f-a163-fd0e37658f14', N'eff45efb-2360-49fc-a6e0-0fb2b8a09519', N'b1e61994-b83b-420a-903e-63a7a15942dc_eff45efb-2360-49fc-a6e0-0fb2b8a09519_4e19cd12-1573-4e91-9ea0-60362bdcbf8b', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', NULL, NULL, CAST(8.0000 AS Numeric(19, 4)), CAST(N'2020-06-12T13:53:00.420' AS DateTime))
 GO
-INSERT [dbo].[vendrGiftCard] ([id], [storeId], [currencyId], [orderId], [code], [originalAmount], [remainingAmount], [createDate], [expiryDate], [deletedTimestamp], [isActive]) VALUES (N'7235ff4f-0d34-4cdb-b896-017b35912912', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'6cba487d-5190-4dfb-b360-017b3058cf13', N'GC-A87tqhZd7X', CAST(50.0000 AS Numeric(19, 4)), CAST(50.0000 AS Numeric(19, 4)), CAST(N'2021-08-11T14:15:10.877' AS DateTime), CAST(N'2024-08-10T14:15:10.870' AS DateTime), 0, 1)
+INSERT [dbo].[vendrGiftCard] ([id], [storeId], [currencyId], [orderId], [code], [originalAmount], [remainingAmount], [createDate], [expiryDate], [deletedTimestamp], [isActive], [version]) VALUES (N'7235ff4f-0d34-4cdb-b896-017b35912912', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'6cba487d-5190-4dfb-b360-017b3058cf13', N'GC-A87tqhZd7X', CAST(50.0000 AS Numeric(19, 4)), CAST(50.0000 AS Numeric(19, 4)), CAST(N'2021-08-11T14:15:10.877' AS DateTime), CAST(N'2024-08-10T14:15:10.870' AS DateTime), 0, 1, 1)
 GO
-INSERT [dbo].[vendrGiftCard] ([id], [storeId], [currencyId], [orderId], [code], [originalAmount], [remainingAmount], [createDate], [expiryDate], [deletedTimestamp], [isActive]) VALUES (N'5ecdd2a4-acb3-48ca-8573-017b35912927', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'6cba487d-5190-4dfb-b360-017b3058cf13', N'GC-zFzpvwDgcq', CAST(100.0000 AS Numeric(19, 4)), CAST(100.0000 AS Numeric(19, 4)), CAST(N'2021-08-11T14:15:10.887' AS DateTime), CAST(N'2024-08-10T14:15:10.887' AS DateTime), 0, 1)
+INSERT [dbo].[vendrGiftCard] ([id], [storeId], [currencyId], [orderId], [code], [originalAmount], [remainingAmount], [createDate], [expiryDate], [deletedTimestamp], [isActive], [version]) VALUES (N'5ecdd2a4-acb3-48ca-8573-017b35912927', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'6cba487d-5190-4dfb-b360-017b3058cf13', N'GC-zFzpvwDgcq', CAST(100.0000 AS Numeric(19, 4)), CAST(100.0000 AS Numeric(19, 4)), CAST(N'2021-08-11T14:15:10.887' AS DateTime), CAST(N'2024-08-10T14:15:10.887' AS DateTime), 0, 1, 1)
 GO
-INSERT [dbo].[vendrGiftCard] ([id], [storeId], [currencyId], [orderId], [code], [originalAmount], [remainingAmount], [createDate], [expiryDate], [deletedTimestamp], [isActive]) VALUES (N'436b1aa7-c9da-45e2-a65e-3b2d84f62f0e', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'caa440ac-63a6-4477-a142-44bba1dad2b9', N'GC-80w3gQT3AA', CAST(10.0000 AS Numeric(19, 4)), CAST(10.0000 AS Numeric(19, 4)), CAST(N'2020-05-28T13:52:25.143' AS DateTime), CAST(N'2023-05-28T13:52:25.140' AS DateTime), 0, 1)
+INSERT [dbo].[vendrGiftCard] ([id], [storeId], [currencyId], [orderId], [code], [originalAmount], [remainingAmount], [createDate], [expiryDate], [deletedTimestamp], [isActive], [version]) VALUES (N'436b1aa7-c9da-45e2-a65e-3b2d84f62f0e', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'caa440ac-63a6-4477-a142-44bba1dad2b9', N'GC-80w3gQT3AA', CAST(10.0000 AS Numeric(19, 4)), CAST(10.0000 AS Numeric(19, 4)), CAST(N'2020-05-28T13:52:25.143' AS DateTime), CAST(N'2023-05-28T13:52:25.140' AS DateTime), 0, 1, 1)
 GO
-INSERT [dbo].[vendrGiftCard] ([id], [storeId], [currencyId], [orderId], [code], [originalAmount], [remainingAmount], [createDate], [expiryDate], [deletedTimestamp], [isActive]) VALUES (N'b64de0b1-0d4d-4177-b6a7-f9ebe98b057a', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', NULL, N'GC-fSuOZeaFMl', CAST(10.0000 AS Numeric(19, 4)), CAST(2.0000 AS Numeric(19, 4)), CAST(N'2020-05-28T13:19:31.907' AS DateTime), NULL, 0, 1)
+INSERT [dbo].[vendrGiftCard] ([id], [storeId], [currencyId], [orderId], [code], [originalAmount], [remainingAmount], [createDate], [expiryDate], [deletedTimestamp], [isActive], [version]) VALUES (N'b64de0b1-0d4d-4177-b6a7-f9ebe98b057a', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', NULL, N'GC-fSuOZeaFMl', CAST(10.0000 AS Numeric(19, 4)), CAST(2.0000 AS Numeric(19, 4)), CAST(N'2020-05-28T13:19:31.907' AS DateTime), NULL, 0, 1, 1)
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'4eef617b-16d6-4c9f-b1ee-017a7c2e8286', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0857-9PGG', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T14:17:40.927' AS DateTime), CAST(N'2021-07-06T14:18:57.187' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+SET IDENTITY_INSERT [dbo].[vendrMigrations] ON 
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'37bb17ba-9df2-45fa-b029-017a7c2ea44d', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0857-9Q8Q', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T14:17:49.390' AS DateTime), CAST(N'2021-07-06T14:17:49.467' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (1, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090000_CreateStoreTable.sql', CAST(N'2022-06-06T15:05:05.283' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'108317b4-0deb-4618-b490-017a7c318491', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0860-9KN7', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T14:20:57.877' AS DateTime), CAST(N'2021-07-06T14:20:57.947' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (2, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090001_CreateCurrencyTable.sql', CAST(N'2022-06-06T15:05:05.313' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'878f3ee8-8ada-4d4d-9e1a-017a7c31a09a', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0861-9G3Y', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T14:21:05.053' AS DateTime), CAST(N'2021-07-06T14:21:05.117' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (3, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090002_CreateTaxClassTable.sql', CAST(N'2022-06-06T15:05:05.323' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'8b7439b5-a187-4233-9056-017a7c386e03', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0868-M757', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T14:28:30.857' AS DateTime), CAST(N'2021-07-06T14:32:13.593' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (4, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090003_CreateStockTable.sql', CAST(N'2022-06-06T15:05:05.330' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'cb5c288e-c0e1-4d93-be70-017a7c6ab119', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0923-MJJQ', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T15:23:25.103' AS DateTime), CAST(N'2021-07-06T15:24:44.643' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (5, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090004_CreateOrderStatusTable.sql', CAST(N'2022-06-06T15:05:05.337' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'93bf0c34-24d6-4fa9-9e1d-017a7c729e89', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0932-MGR6', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T15:32:04.430' AS DateTime), CAST(N'2021-07-06T15:32:04.537' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (6, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090005_CreateEmailTemplateTable.sql', CAST(N'2022-06-06T15:05:05.343' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'a81b8113-2714-458a-a8c8-017a7c72df5f', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0932-MYKK', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T15:32:20.960' AS DateTime), CAST(N'2021-07-06T15:32:20.987' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (7, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090006_CreatePaymentMethodTable.sql', CAST(N'2022-06-06T15:05:05.350' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'e3f84139-b335-4a4e-8172-017a7c7371a6', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0932-9PNY', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T15:32:58.407' AS DateTime), CAST(N'2021-07-06T15:33:40.627' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (8, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090007_CreateShippingMethodTable.sql', CAST(N'2022-06-06T15:05:05.357' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'91567f56-2f7f-4ebe-ba20-017a7c745a98', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0933-M53N', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T15:33:58.043' AS DateTime), CAST(N'2021-07-06T15:33:58.070' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (9, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090008_CreateCountryTable.sql', CAST(N'2022-06-06T15:05:05.367' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'2ba419cb-d782-46c7-ad5b-017a7c746294', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0934-9P88', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T15:34:00.087' AS DateTime), CAST(N'2021-07-06T15:34:00.130' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (10, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090009_CreateRegionTable.sql', CAST(N'2022-06-06T15:05:05.377' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'85dd0f11-d35d-46d8-9e76-017a7c74cfdf', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0934-Q338', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T15:34:28.067' AS DateTime), CAST(N'2021-07-06T15:49:41.287' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (11, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090010_CreateCurrencyAllowedCountryTable.sql', CAST(N'2022-06-06T15:05:05.383' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'aadbc03d-b01e-4705-81aa-017a7c8a1813', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0957-95KZ', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T15:57:43.027' AS DateTime), CAST(N'2021-07-06T16:03:47.527' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (12, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090011_CreatePaymentMethodAllowedCountryRegionTable.sql', CAST(N'2022-06-06T15:05:05.390' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'8e12601b-9dae-4888-a992-017a7c93703c', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0967-9K7J', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T16:07:55.197' AS DateTime), CAST(N'2021-07-06T16:09:47.843' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (13, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090012_CreatePaymentMethodCountryRegionPriceTable.sql', CAST(N'2022-06-06T15:05:05.400' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'a9f0580b-e17a-463b-a6b0-017a7ca589e0', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0987-MVQZ', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T16:27:41.583' AS DateTime), CAST(N'2021-07-06T16:28:01.500' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (14, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090013_CreatePaymentMethodPaymentProviderSettingTable.sql', CAST(N'2022-06-06T15:05:05.407' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'750482e2-e006-4aa7-a9f2-017a7ca5ed38', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0988-MGJ3', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T16:28:06.843' AS DateTime), CAST(N'2021-07-06T16:28:06.867' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (15, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090014_CreateShippingMethodAllowedCountryRegionTable.sql', CAST(N'2022-06-06T15:05:05.413' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'ceb588a4-c4ad-4742-bb0b-017a7cad4c38', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0996-MX35', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T16:36:13.930' AS DateTime), CAST(N'2021-07-06T16:36:22.810' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (16, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090015_CreateShippingMethodCountryRegionPriceTable.sql', CAST(N'2022-06-06T15:05:05.420' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'dbcc372d-7cf0-4b92-b47b-017a7caff9bf', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0999-93YG', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T16:39:05.590' AS DateTime), CAST(N'2021-07-06T16:39:05.737' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (17, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090016_CreateTaxClassCountryRegionTaxRateTable.sql', CAST(N'2022-06-06T15:05:05.427' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'e4a9a615-2506-4ae8-af9b-017a7cb02bdf', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0999-9PRG', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T16:39:18.240' AS DateTime), CAST(N'2021-07-06T16:39:18.267' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (18, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090017_CreateDiscountTable.sql', CAST(N'2022-06-06T15:05:05.433' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'f0a34369-edbb-4abf-9deb-017a7cb0ae43', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0999-MRNR', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T16:39:53.697' AS DateTime), CAST(N'2021-07-06T16:41:55.517' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (19, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090018_CreateDiscountCodeTable.sql', CAST(N'2022-06-06T15:05:05.440' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'a4fe4e56-d04c-46b6-8756-017a7cb4e82d', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-1004-MQXN', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T16:44:28.767' AS DateTime), CAST(N'2021-07-06T16:53:11.957' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (20, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090019_CreateOrderTable.sql', CAST(N'2022-06-06T15:05:05.450' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'2e1cab37-faaf-4440-bf41-017a7cbcfa60', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-1013-9K6J', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T16:53:17.537' AS DateTime), CAST(N'2021-07-06T16:53:17.590' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (21, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090020_CreateOrderPropertyTable.sql', CAST(N'2022-06-06T15:05:05.457' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'5f916a6b-5a43-408d-992a-017a7cc4b834', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-1021-98L7', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T17:01:44.887' AS DateTime), CAST(N'2021-07-06T17:02:39.740' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (22, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090021_CreateOrderLineTable.sql', CAST(N'2022-06-06T15:05:05.467' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'fcb2bb8e-353d-44a4-9af2-017a7cd6494f', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-1040-9V75', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T17:20:56.147' AS DateTime), CAST(N'2021-07-06T17:25:37.473' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (23, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090022_CreateOrderLinePropertyTable.sql', CAST(N'2022-06-06T15:05:05.473' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'fb3555c1-1fee-44ca-80f8-017a8003e5d9', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0489-9Y4P', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-07T08:09:37.167' AS DateTime), CAST(N'2021-07-07T08:12:31.873' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (24, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090023_CreateGiftCardTable.sql', CAST(N'2022-06-06T15:05:05.480' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'e5644ae4-0df0-4936-8be2-017a800874d5', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0494-MZ63', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-07T08:14:35.737' AS DateTime), CAST(N'2021-07-07T08:15:07.780' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (25, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090025_CreateOrderAppliedDiscountCodeTable.sql', CAST(N'2022-06-06T15:05:05.487' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'cb039b2b-84ae-46c4-8413-017a800b560b', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0497-MW7L', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-07T08:17:44.660' AS DateTime), CAST(N'2021-07-07T08:18:06.887' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (26, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090026_CreateOrderAppliedGiftCardTable.sql', CAST(N'2022-06-06T15:05:05.493' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'b43a1e01-432e-4fe0-9db1-017a8012ffac', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0506-9JXQ', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-07T08:26:06.797' AS DateTime), CAST(N'2021-07-07T08:26:06.967' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (27, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090027_CreateStoreTableConstraints.sql', CAST(N'2022-06-06T15:05:05.993' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'47d49746-19f5-4928-adcc-017a801334ee', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0506-MYKK', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-07T08:26:20.273' AS DateTime), CAST(N'2021-07-07T08:37:41.953' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (28, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090028_CreateStoreAllowedUserRoleTable.sql', CAST(N'2022-06-06T15:05:06.000' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'6cba487d-5190-4dfb-b360-017b3058cf13', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'fd0c6eec-ba3f-41c2-87c4-4bd2201e9921', N'CART-0588-0835-MNR5', N'ORDER-0589-0854-MPGQ', NULL, N'Test', N'Test', N'hi@outfield.digital', CAST(N'2021-08-10T13:55:31.863' AS DateTime), CAST(N'2022-02-14T14:12:03.460' AS DateTime), CAST(N'2021-08-11T14:15:10.743' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'b12dc9ab-fa47-49be-9ee5-bc0d069d6ca6', CAST(0.20000000 AS Numeric(10, 8)), CAST(2.0800 AS Numeric(19, 4)), CAST(0.4200 AS Numeric(19, 4)), N'65df2760a48341aba3f8fec6a93b77dd', CAST(0.0000 AS Numeric(19, 4)), 2, CAST(160.5000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)))
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (29, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090029_CreateStoreAllowedUserTable.sql', CAST(N'2022-06-06T15:05:06.010' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'43de27e9-59e9-48ff-8a50-017b5dcdbc1d', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-00596-035169-LXFR9', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-08-19T09:46:09.423' AS DateTime), CAST(N'2021-08-19T09:46:09.577' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (30, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_00.M20200330090030_CreateFrozenPriceTable.sql', CAST(N'2022-06-06T15:05:06.013' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'14c8d202-46b2-4f4e-bdb3-017ba5f1d2fe', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-00610-035894-X53VN', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-09-02T09:58:14.173' AS DateTime), CAST(N'2021-09-02T11:01:05.517' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (31, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_00_01.M20200406090000_ChangeStockTableStockDbTypeToDecimal186.sql', CAST(N'2022-06-06T15:05:06.040' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'd7bbc984-2f61-481d-b8cd-017c26c1acb1', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'fd0c6eec-ba3f-41c2-87c4-4bd2201e9921', N'CART-00635-036999-JYSBR', N'ORDER-00635-37018-ZQDBG', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-09-27T10:16:39.573' AS DateTime), CAST(N'2022-02-14T14:12:11.480' AS DateTime), CAST(N'2021-09-27T10:17:11.077' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'a3faae4de218416b98c920fc924a17fc', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)))
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (32, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_01_00.M20200429090000_AddDiscountCodeIsUnlimitedColumn.sql', CAST(N'2022-06-06T15:05:06.053' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'c3d5d20e-fbbd-4a4b-9a53-017c27812746', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'fd0c6eec-ba3f-41c2-87c4-4bd2201e9921', N'CART-00636-049548-L44Q5', N'ORDER-00636-49565-HBNGS', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-09-27T13:45:48.260' AS DateTime), CAST(N'2022-02-14T14:12:11.377' AS DateTime), CAST(N'2021-09-27T13:46:08.450' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'68fb8f3546eb488dbda48c208ffb9375', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)))
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (33, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_01_02.M20200505090000_AddDiscountCodeDeletedTimestampColumn.sql', CAST(N'2022-06-06T15:05:06.070' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'a61843df-9924-4469-af21-017c2782730f', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'fd0c6eec-ba3f-41c2-87c4-4bd2201e9921', N'CART-00636-049633-KSPG3', N'ORDER-00636-49642-478DS', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-09-27T13:47:13.113' AS DateTime), CAST(N'2022-02-14T14:12:11.257' AS DateTime), CAST(N'2021-09-27T13:47:24.870' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'68f8feba0c0f4917ad46405dc766c236', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(26.0000 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)))
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (34, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_01_04.M20200519090000_ChangeOrderLineTableQuantityDbTypeToDecimal184.sql', CAST(N'2022-06-06T15:05:06.087' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'c582b351-527e-4c18-a1c1-017ed89f97a3', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-00769-033444-M35CQ', NULL, NULL, NULL, NULL, NULL, CAST(N'2022-02-08T09:17:24.877' AS DateTime), CAST(N'2022-02-14T14:15:26.833' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (35, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_02_00.M20200528090000_AddGiftCardIsActiveColumn.sql', CAST(N'2022-06-06T15:05:06.100' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'9c023bae-d1bd-4e60-a6fd-0181391c70e9', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-00888-046974-9RZRS', N'ORDER-00888-47452-BLS43', NULL, N'Test', N'Test', N'test@test.com', CAST(N'2022-06-06T13:02:54.253' AS DateTime), CAST(N'2022-06-06T13:10:55.350' AS DateTime), CAST(N'2022-06-06T13:10:55.350' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'2f677ff306d7416487a96917eeeffc79', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)))
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (36, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_02_00.M20200528090001_AddGiftCardRemainingAmountColumnDefault.sql', CAST(N'2022-06-06T15:05:06.110' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'a7e6c6fa-991a-464f-bb24-0368ce2db1b7', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0174-0727-M6XP', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-06-22T12:07:53.140' AS DateTime), CAST(N'2020-06-22T12:07:53.243' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (37, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_02_00.M20200528090002_AddStoreGiftCardActivationMethodColumn.sql', CAST(N'2022-06-06T15:05:06.123' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'90f46d0f-ebbd-4835-9409-049476f73db6', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0125-0559-9NX5', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-05-05T10:19:12.877' AS DateTime), CAST(N'2020-05-05T10:19:16.077' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (38, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_02_00.M20200528090003_AddStoreGiftCardActivationOrderStatusIdColumn.sql', CAST(N'2022-06-06T15:05:06.133' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'eab03851-5980-470a-a4b3-0e0f68f11864', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0316-0954-M63N', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-11-11T15:54:29.963' AS DateTime), CAST(N'2020-11-11T15:54:30.107' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (39, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_02_00.M20200528090004_AddStoreDefaultGiftCardEmailTemplateIdColumn.sql', CAST(N'2022-06-06T15:05:06.147' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'eff45efb-2360-49fc-a6e0-0fb2b8a09519', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0164-0773-M5WW', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-06-12T13:53:00.323' AS DateTime), CAST(N'2020-06-12T13:53:00.433' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (40, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_02_00.M20200528090005_CreateGiftCardPropertyTable.sql', CAST(N'2022-06-06T15:05:06.153' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'a64a4521-614f-4069-936c-12cd2d7f7986', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0555-0834-MLJY', N'ORDER-0555-0834-9K6J', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-07-08T13:54:03.853' AS DateTime), CAST(N'2021-07-08T13:54:22.773' AS DateTime), CAST(N'2021-07-08T13:54:22.773' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'96d9ba4ff7614033830a0ae1cc89f98a', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)))
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (41, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_02_00.M20200528090006_AddStoreGiftCardPropertyAliasesColumn.sql', CAST(N'2022-06-06T15:05:06.163' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'c9edfce8-348c-49b2-9db5-1981ff30c0b0', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0555-0831-9RK8', N'ORDER-0555-0832-MLYW', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-07-08T13:51:54.310' AS DateTime), CAST(N'2021-07-08T13:52:07.760' AS DateTime), CAST(N'2021-07-08T13:52:07.760' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'a04fc809f4fa4bbb911cebcfe748b107', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)))
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (42, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_02_00.M20200528090007_AddEmailTemplateCategoryColumn.sql', CAST(N'2022-06-06T15:05:06.177' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'02b99d77-9d59-4f15-8be4-20f2674ecfe4', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-4', N'ORDER-0039-0649-H43Q', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2019-11-26T15:02:50.957' AS DateTime), CAST(N'2020-01-09T12:05:08.657' AS DateTime), CAST(N'2019-12-06T09:36:05.820' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'b12dc9ab-fa47-49be-9ee5-bc0d069d6ca6', CAST(0.20000000 AS Numeric(10, 8)), CAST(2.0833 AS Numeric(19, 4)), CAST(0.4167 AS Numeric(19, 4)), N'a0bbbbf5c8254992b8f503afafe26975', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(72.5000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)))
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (43, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_02_05.M20200617090000_ChangeDiscountRulesDbTypeToNvarcharMax.sql', CAST(N'2022-06-06T15:05:06.190' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'349a2c34-6836-4152-8aa1-2313053f528d', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0554-0532-97XK', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-08T08:52:51.627' AS DateTime), CAST(N'2021-07-08T08:52:51.757' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (44, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_02_05.M20200617090001_ChangeDiscountRewardsDbTypeToNvarcharMax.sql', CAST(N'2022-06-06T15:05:06.210' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'14bc787e-2c9e-4e9f-b535-24f68d5be4a1', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0554-1211-MLJY', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-07T20:11:03.067' AS DateTime), CAST(N'2021-07-07T20:11:03.360' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (45, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_02_05.M20200617090002_FixAmountsIncludeTaxSpellingMistake.sql', CAST(N'2022-06-06T15:05:06.223' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'2c4cd7db-f691-4f5d-8221-2b81c17d8972', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0554-0551-9R3Q', N'ORDER-0555-0787-9L4Y', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-07-08T09:11:30.847' AS DateTime), CAST(N'2021-07-08T13:07:24.193' AS DateTime), CAST(N'2021-07-08T13:07:24.190' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'2f55b864e99a4132bd9ff606dfdaac02', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(51.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)))
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (46, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_03_00.M20200917090000_AddBaseCurrencyIdColumnToStoreTable.sql', CAST(N'2022-06-06T15:05:06.237' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'13211327-364a-4899-9685-2bb34f84c262', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0555-0838-MJVK', N'ORDER-0555-0838-956Z', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-07-08T13:58:49.743' AS DateTime), CAST(N'2021-07-08T13:59:01.923' AS DateTime), CAST(N'2021-07-08T13:59:01.920' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'ac1ebd1c70b844fe9927f4ac16eff6e4', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)))
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (47, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_03_00.M20200917090001_AddBaseCurrencyExchangeRateColumnToOrderTable.sql', CAST(N'2022-06-06T15:05:06.250' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'927d33c6-c923-4649-972d-31d05e895b8f', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-5', NULL, NULL, NULL, NULL, NULL, CAST(N'2019-12-17T10:54:31.240' AS DateTime), CAST(N'2019-12-17T10:54:31.287' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (48, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_03_00.M20200917090002_CreateActivityLogTable.sql', CAST(N'2022-06-06T15:05:06.260' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'e196d9cc-3e2e-467b-a061-327ae37bb8ed', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0302-0885-MGR6', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-10-28T14:45:04.153' AS DateTime), CAST(N'2020-10-28T14:45:04.297' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (49, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_04_00.M20201210090000_CreateOrderPriceAdjustmentTable.sql', CAST(N'2022-06-06T15:05:06.267' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'0e57fac4-b877-4f0e-8faf-3b0ff50c9084', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0555-0830-9V55', N'ORDER-0555-0830-M6J3', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-07-08T13:50:40.577' AS DateTime), CAST(N'2021-07-08T13:50:54.827' AS DateTime), CAST(N'2021-07-08T13:50:54.827' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'df0671c7027b40dbb53702ee86fe8e49', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)))
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (50, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_04_00.M20201210090001_CreateOrderAmountAdjustmentTable.sql', CAST(N'2022-06-06T15:05:06.273' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'92336361-0f05-401d-8f0c-40bcc40e94af', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0471-0803-9NX5', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-04-15T13:23:12.953' AS DateTime), CAST(N'2021-04-15T13:23:13.127' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (51, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_04_00.M20201210090002_ConvertAppliedDiscountsToPriceAdjustments.sql', CAST(N'2022-06-06T15:05:06.280' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'0c4f1bf2-0832-44fb-bfcd-43adc500f26a', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0040-0592-MZ7W', N'ORDER-0040-0689-M63N', NULL, NULL, NULL, NULL, CAST(N'2020-02-10T09:52:33.443' AS DateTime), CAST(N'2020-04-15T10:02:33.797' AS DateTime), CAST(N'2020-02-10T11:30:11.283' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'b12dc9ab-fa47-49be-9ee5-bc0d069d6ca6', CAST(0.20000000 AS Numeric(10, 8)), CAST(2.0833 AS Numeric(19, 4)), CAST(0.4167 AS Numeric(19, 4)), N'929c4cba4fe1479fa42dfc77b47251dc', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(20.4100 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)))
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (52, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_04_00.M20201210090003_ConvertAppliedGiftCardsToAmountAdjustments.sql', CAST(N'2022-06-06T15:05:06.293' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'caa440ac-63a6-4477-a142-44bba1dad2b9', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0149-0828-MYJP', N'ORDER-0149-0832-MXXQ', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2020-05-28T14:48:18.257' AS DateTime), CAST(N'2020-05-28T14:52:25.033' AS DateTime), CAST(N'2020-05-28T14:52:25.030' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'8365386fab7a4a1bb707d1c392fdb96b', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(18.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)))
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (53, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_04_00.M20201210090004_AddNameColumnToOrderPriceAdjustmentTable.sql', CAST(N'2022-06-06T15:11:31.973' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'b7bc3739-d873-43b9-8c82-4b0b6a6fb901', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0379-0929-MZG6', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-01-13T15:29:37.560' AS DateTime), CAST(N'2021-01-13T15:29:37.620' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (54, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_04_00.M20201210090005_AddNameColumnToOrderAmountAdjustmentTable.sql', CAST(N'2022-06-06T15:11:32.010' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'076f926f-69a0-4dd1-aacf-50c63a8ef631', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0379-0924-MVQZ', N'ORDER-0379-0928-MYKK', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-01-13T15:24:41.387' AS DateTime), CAST(N'2021-01-13T15:28:22.707' AS DateTime), CAST(N'2021-01-13T15:28:22.707' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'2be00ede267c4fd8b55e4daaad81637d', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(20.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)))
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (55, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_05_00.M20210211090000_CreateProductAttributeTable.sql', CAST(N'2022-06-06T15:11:32.017' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'93560907-5e53-4da8-baa1-542c3b6424db', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0255-0769-M6XP', NULL, NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2020-09-11T12:49:53.900' AS DateTime), CAST(N'2020-09-11T12:50:01.280' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (56, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_05_00.M20210211090001_CreateProductAttributeValueTable.sql', CAST(N'2022-06-06T15:28:54.783' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'36f1bced-75ce-434b-804c-6102fdd53444', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0149-0799-9W6L', N'ORDER-0149-0804-M38G', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2020-05-28T14:19:41.893' AS DateTime), CAST(N'2020-05-28T14:26:22.327' AS DateTime), CAST(N'2020-05-28T14:26:22.327' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'6b8cab01-91cc-4edb-b270-ff5d96dd3f08', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'922edb89ba034e81ba029c55a2f34073', CAST(0.0000 AS Numeric(19, 4)), 2, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)))
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (57, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_05_00.M20210211090002_CreateTranslatedValueTable.sql', CAST(N'2022-06-06T15:28:54.810' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'4b921eeb-ae23-4f10-81d4-6a23e040d884', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0554-1184-947G', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-07T19:44:28.033' AS DateTime), CAST(N'2021-07-07T19:44:28.093' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (58, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_05_00.M20210211090003_CreateProductAttributePresetTable.sql', CAST(N'2022-06-06T15:28:54.817' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'78820ae0-fefa-4a50-afb8-6e0a69d58a23', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0554-1184-MP3Y', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-07T19:44:39.877' AS DateTime), CAST(N'2021-07-07T19:44:39.933' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (59, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_05_00.M20210211090004_CreateProductAttributePresetAllowedAttributeTable.sql', CAST(N'2022-06-06T15:28:54.823' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'ae7cf608-a2c6-4709-9b68-7521f1ba27bd', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0554-0536-M38G', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-08T08:56:24.520' AS DateTime), CAST(N'2021-07-08T08:56:24.693' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (60, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_05_00.M20210211090005_AddProductVariantReferenceColumnToStockTable.sql', CAST(N'2022-06-06T15:28:54.837' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'0239d257-807c-4f09-8282-7531a799bd7e', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0554-0525-MJVK', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-08T08:45:49.877' AS DateTime), CAST(N'2021-07-08T08:46:17.867' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (61, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_05_00.M20210211090006_AddProductVariantReferenceColumnToOrderLineTable.sql', CAST(N'2022-06-06T15:28:54.850' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'e05a13ec-04b7-4939-b167-84b2600d393d', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0377-0929-MJVK', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-01-11T15:29:49.127' AS DateTime), CAST(N'2021-01-11T15:47:39.837' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (62, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_05_00.M20210211090007_CreateOrderLineAttributeTable.sql', CAST(N'2022-06-06T15:28:54.857' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'dd19bdb6-c080-4a2f-9b98-8619c7edfc35', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0555-0821-M34N', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-08T13:41:48.607' AS DateTime), CAST(N'2021-07-08T13:41:48.733' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (63, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_06_00.M20210406090000_CreatePrintTemplateTable.sql', CAST(N'2022-06-06T15:28:54.863' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'96b7b7c3-c8d5-4aae-a8e4-8b6647f1720f', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0307-0611-MQGQ', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-11-03T10:11:52.457' AS DateTime), CAST(N'2020-11-03T14:03:45.903' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (64, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_08_00.M20210505090000_CreateExportTemplateTable.sql', CAST(N'2022-06-06T15:28:54.870' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'3080cba7-dd51-45d1-a597-8eabb4cf5433', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0210-0452-MY4K', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-07-29T07:32:42.570' AS DateTime), CAST(N'2020-07-29T07:32:42.713' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (65, N'Vendr.Persistence.SqlServer.Migrations.Implement.v01_08_03.M20210621090000_AddReplyToAddressesColumnToEmailTemplateTable.sql', CAST(N'2022-06-06T15:28:54.883' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'8b49f85f-7252-40ce-bf9b-96f4e4b6c6bc', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-1', NULL, NULL, NULL, NULL, NULL, CAST(N'2019-11-19T13:31:04.200' AS DateTime), CAST(N'2019-11-19T13:31:04.200' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.00000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, NULL, NULL, CAST(0.00000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.00000000 AS Numeric(10, 8)), 0, NULL, 0, 0, NULL, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (66, N'Vendr.Persistence.SqlServer.Migrations.Implement.v02_00_00.M20211007090000_AddStoreOrderRoundingMethodColumn.sql', CAST(N'2022-06-06T15:28:54.897' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'7076de99-1331-48a2-8903-a3eef3a9f243', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'fd0c6eec-ba3f-41c2-87c4-4bd2201e9921', N'CART-3', N'ORDER-0038-0781-K61C', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2019-11-26T14:43:12.793' AS DateTime), CAST(N'2019-11-29T14:05:17.427' AS DateTime), CAST(N'2019-11-26T14:44:16.560' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'25f33524-f522-4687-917a-68f83330e868', CAST(0.20000000 AS Numeric(10, 8)), CAST(1.2500 AS Numeric(19, 4)), CAST(0.2500 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'b12dc9ab-fa47-49be-9ee5-bc0d069d6ca6', CAST(0.20000000 AS Numeric(10, 8)), CAST(2.0833 AS Numeric(19, 4)), CAST(0.4167 AS Numeric(19, 4)), N'601d442903294a92b051b92068922646', CAST(0.0000 AS Numeric(19, 4)), 2, CAST(12.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, NULL, CAST(1.0000 AS Numeric(19, 4)))
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (67, N'Vendr.Persistence.SqlServer.Migrations.Implement.v02_01_00.M20220214090000_CreateStoreEntityTagTable.sql', CAST(N'2022-06-06T15:28:54.903' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'5d08cce2-da18-4639-9ac6-a7aa2d5d9946', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0345-0852-9KRL', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-12-10T14:12:15.253' AS DateTime), CAST(N'2020-12-10T14:12:15.467' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrMigrations] ([id], [migration], [applied]) VALUES (68, N'Vendr.Persistence.SqlServer.Migrations.Implement.v03_00_00.M20220520143700_AddEntityVersionColumns.sql', CAST(N'2022-06-06T15:28:55.073' AS DateTime))
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'768b9c5f-d63a-4eed-b181-a94e493684a4', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0555-0813-9KRL', N'ORDER-0555-0813-977K', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-07-08T13:33:15.837' AS DateTime), CAST(N'2021-07-08T13:33:57.947' AS DateTime), CAST(N'2021-07-08T13:33:57.947' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'09ec2c8370d74c0daede96a2fdc79492', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)))
+SET IDENTITY_INSERT [dbo].[vendrMigrations] OFF
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'cd6c1bc7-5822-4fbc-87db-adecf733a9dd', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0183-0567-9Y4P', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-07-02T09:27:37.540' AS DateTime), CAST(N'2020-07-02T09:28:26.943' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'4eef617b-16d6-4c9f-b1ee-017a7c2e8286', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0857-9PGG', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T14:17:40.927' AS DateTime), CAST(N'2021-07-06T14:18:57.187' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'1f4e4902-9262-46de-bb8f-b0af65ef3d9e', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0555-0833-M36N', N'ORDER-0555-0833-MNGW', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-07-08T13:53:04.003' AS DateTime), CAST(N'2021-07-08T13:53:15.963' AS DateTime), CAST(N'2021-07-08T13:53:15.963' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'be609fd0056940a4bf6579c79d1f2c30', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)))
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'37bb17ba-9df2-45fa-b029-017a7c2ea44d', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0857-9Q8Q', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T14:17:49.390' AS DateTime), CAST(N'2021-07-06T14:17:49.467' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'9ea33948-1fab-430e-8d73-bab4cba0b439', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0041-0822-9KRL', N'ORDER-0041-0857-98R3', NULL, NULL, NULL, NULL, CAST(N'2020-02-10T13:42:15.220' AS DateTime), CAST(N'2020-02-10T14:17:04.187' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), 0, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'108317b4-0deb-4618-b490-017a7c318491', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0860-9KN7', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T14:20:57.877' AS DateTime), CAST(N'2021-07-06T14:20:57.947' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'cfb6d616-0709-4ad7-9388-d0330ff77666', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0096-0619-9Z3W', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-04-06T11:19:14.300' AS DateTime), CAST(N'2020-04-06T11:19:18.670' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'878f3ee8-8ada-4d4d-9e1a-017a7c31a09a', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0861-9G3Y', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T14:21:05.053' AS DateTime), CAST(N'2021-07-06T14:21:05.117' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'e9971644-dd59-4c4b-96cb-d9d8dfb6f9df', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0344-0699-9G86', N'ORDER-0344-0700-MXXQ', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2020-12-10T11:39:23.510' AS DateTime), CAST(N'2020-12-10T11:41:24.037' AS DateTime), CAST(N'2020-12-10T11:40:18.377' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'b12dc9ab-fa47-49be-9ee5-bc0d069d6ca6', CAST(0.20000000 AS Numeric(10, 8)), CAST(2.0800 AS Numeric(19, 4)), CAST(0.4200 AS Numeric(19, 4)), N'd7d24604590a4fee8a27d388cd3a399b', CAST(0.0000 AS Numeric(19, 4)), 2, CAST(7.5000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)))
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'8b7439b5-a187-4233-9056-017a7c386e03', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0868-M757', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T14:28:30.857' AS DateTime), CAST(N'2021-07-06T14:32:13.593' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'b8425941-24d3-4997-b264-d9dc3573af4f', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-2', N'ORDER-0037-0129-J83B', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2019-11-19T13:31:42.783' AS DateTime), CAST(N'2019-11-29T14:04:52.440' AS DateTime), CAST(N'2019-11-26T14:41:57.003' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'25f33524-f522-4687-917a-68f83330e868', CAST(0.20000000 AS Numeric(10, 8)), CAST(1.2500 AS Numeric(19, 4)), CAST(0.2500 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'b12dc9ab-fa47-49be-9ee5-bc0d069d6ca6', CAST(0.20000000 AS Numeric(10, 8)), CAST(2.0833 AS Numeric(19, 4)), CAST(0.4167 AS Numeric(19, 4)), N'562766e71e4843ada1465d28a79545cb', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(52.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, NULL, CAST(1.0000 AS Numeric(19, 4)))
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'cb5c288e-c0e1-4d93-be70-017a7c6ab119', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0923-MJJQ', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T15:23:25.103' AS DateTime), CAST(N'2021-07-06T15:24:44.643' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'0b6059af-94dd-4882-bdac-dc4f7c5b1d6b', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0555-0869-MGR6', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-08T14:29:04.310' AS DateTime), CAST(N'2021-07-08T15:27:43.810' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'93bf0c34-24d6-4fa9-9e1d-017a7c729e89', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0932-MGR6', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T15:32:04.430' AS DateTime), CAST(N'2021-07-06T15:32:04.537' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'5fd7a1d3-f6db-474b-8e51-e35ba98cf2fe', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0407-0595-MRPQ', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-02-11T09:55:11.543' AS DateTime), CAST(N'2021-02-11T09:55:11.697' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'a81b8113-2714-458a-a8c8-017a7c72df5f', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0932-MYKK', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T15:32:20.960' AS DateTime), CAST(N'2021-07-06T15:32:20.987' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'59fb80da-76e7-4e62-99d8-ed31c03e4ac5', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0233-0617-943W', N'ORDER-0233-0617-MK4J', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2020-08-21T10:17:26.370' AS DateTime), CAST(N'2020-08-21T10:17:36.300' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), 0, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'e3f84139-b335-4a4e-8172-017a7c7371a6', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0932-9PNY', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T15:32:58.407' AS DateTime), CAST(N'2021-07-06T15:33:40.627' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'0b1fa440-b2b3-42ac-a2e0-ee85f58f698e', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0345-0872-9738', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-12-10T14:32:27.560' AS DateTime), CAST(N'2020-12-10T14:32:27.870' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'91567f56-2f7f-4ebe-ba20-017a7c745a98', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0933-M53N', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T15:33:58.043' AS DateTime), CAST(N'2021-07-06T15:33:58.070' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'452cedad-c4d7-4353-aaaa-f0f4ba11c385', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0149-0791-9JXQ', N'ORDER-0149-0797-M5WW', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2020-05-28T14:11:06.510' AS DateTime), CAST(N'2020-05-28T14:18:49.013' AS DateTime), CAST(N'2020-05-28T14:17:11.997' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'e71f0bac84c6439c8ff3f907b880c715', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)))
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'2ba419cb-d782-46c7-ad5b-017a7c746294', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0934-9P88', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T15:34:00.087' AS DateTime), CAST(N'2021-07-06T15:34:00.130' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'42408765-0493-42dd-a093-f30fade0113e', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0554-1184-MVKL', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-07T19:44:17.507' AS DateTime), CAST(N'2021-07-07T19:44:17.653' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'85dd0f11-d35d-46d8-9e76-017a7c74cfdf', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0934-Q338', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T15:34:28.067' AS DateTime), CAST(N'2021-07-06T15:49:41.287' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'21f7763c-7d03-46cc-8609-f6604a1956ba', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0555-0827-9PGG', N'ORDER-0555-0827-MY3K', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-07-08T13:47:40.690' AS DateTime), CAST(N'2021-07-08T13:48:00.277' AS DateTime), CAST(N'2021-07-08T13:48:00.277' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'649a2bdc56ef49e9ba4e40b85d620bf7', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)))
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'aadbc03d-b01e-4705-81aa-017a7c8a1813', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0957-95KZ', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T15:57:43.027' AS DateTime), CAST(N'2021-07-06T16:03:47.527' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'8a89fba3-ea1e-4ce4-913e-fd2ab5d5a207', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0554-0547-93YG', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-08T09:07:05.130' AS DateTime), CAST(N'2021-07-08T09:07:05.253' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'8e12601b-9dae-4888-a992-017a7c93703c', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0967-9K7J', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T16:07:55.197' AS DateTime), CAST(N'2021-07-06T16:09:47.843' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
 GO
-INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate]) VALUES (N'351dfaa5-e506-400d-8249-ff4f2c8ee26b', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0498-0493-M7P8', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-05-13T08:13:08.417' AS DateTime), CAST(N'2021-05-13T08:33:35.160' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL)
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'a9f0580b-e17a-463b-a6b0-017a7ca589e0', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0987-MVQZ', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T16:27:41.583' AS DateTime), CAST(N'2021-07-06T16:28:01.500' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'750482e2-e006-4aa7-a9f2-017a7ca5ed38', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0988-MGJ3', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T16:28:06.843' AS DateTime), CAST(N'2021-07-06T16:28:06.867' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'ceb588a4-c4ad-4742-bb0b-017a7cad4c38', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0996-MX35', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T16:36:13.930' AS DateTime), CAST(N'2021-07-06T16:36:22.810' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'dbcc372d-7cf0-4b92-b47b-017a7caff9bf', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0999-93YG', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T16:39:05.590' AS DateTime), CAST(N'2021-07-06T16:39:05.737' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'e4a9a615-2506-4ae8-af9b-017a7cb02bdf', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0999-9PRG', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T16:39:18.240' AS DateTime), CAST(N'2021-07-06T16:39:18.267' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'f0a34369-edbb-4abf-9deb-017a7cb0ae43', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0999-MRNR', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T16:39:53.697' AS DateTime), CAST(N'2021-07-06T16:41:55.517' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'a4fe4e56-d04c-46b6-8756-017a7cb4e82d', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-1004-MQXN', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T16:44:28.767' AS DateTime), CAST(N'2021-07-06T16:53:11.957' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'2e1cab37-faaf-4440-bf41-017a7cbcfa60', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-1013-9K6J', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T16:53:17.537' AS DateTime), CAST(N'2021-07-06T16:53:17.590' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'5f916a6b-5a43-408d-992a-017a7cc4b834', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-1021-98L7', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T17:01:44.887' AS DateTime), CAST(N'2021-07-06T17:02:39.740' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'fcb2bb8e-353d-44a4-9af2-017a7cd6494f', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-1040-9V75', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-06T17:20:56.147' AS DateTime), CAST(N'2021-07-06T17:25:37.473' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'fb3555c1-1fee-44ca-80f8-017a8003e5d9', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0489-9Y4P', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-07T08:09:37.167' AS DateTime), CAST(N'2021-07-07T08:12:31.873' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'e5644ae4-0df0-4936-8be2-017a800874d5', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0494-MZ63', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-07T08:14:35.737' AS DateTime), CAST(N'2021-07-07T08:15:07.780' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'cb039b2b-84ae-46c4-8413-017a800b560b', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0497-MW7L', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-07T08:17:44.660' AS DateTime), CAST(N'2021-07-07T08:18:06.887' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'b43a1e01-432e-4fe0-9db1-017a8012ffac', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0506-9JXQ', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-07T08:26:06.797' AS DateTime), CAST(N'2021-07-07T08:26:06.967' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'47d49746-19f5-4928-adcc-017a801334ee', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0553-0506-MYKK', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-07T08:26:20.273' AS DateTime), CAST(N'2021-07-07T08:37:41.953' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'6cba487d-5190-4dfb-b360-017b3058cf13', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'fd0c6eec-ba3f-41c2-87c4-4bd2201e9921', N'CART-0588-0835-MNR5', N'ORDER-0589-0854-MPGQ', NULL, N'Test', N'Test', N'hi@outfield.digital', CAST(N'2021-08-10T13:55:31.863' AS DateTime), CAST(N'2022-02-14T14:12:03.460' AS DateTime), CAST(N'2021-08-11T14:15:10.743' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'b12dc9ab-fa47-49be-9ee5-bc0d069d6ca6', CAST(0.20000000 AS Numeric(10, 8)), CAST(2.0800 AS Numeric(19, 4)), CAST(0.4200 AS Numeric(19, 4)), N'65df2760a48341aba3f8fec6a93b77dd', CAST(0.0000 AS Numeric(19, 4)), 2, CAST(160.5000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'43de27e9-59e9-48ff-8a50-017b5dcdbc1d', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-00596-035169-LXFR9', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-08-19T09:46:09.423' AS DateTime), CAST(N'2021-08-19T09:46:09.577' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'14c8d202-46b2-4f4e-bdb3-017ba5f1d2fe', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-00610-035894-X53VN', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-09-02T09:58:14.173' AS DateTime), CAST(N'2021-09-02T11:01:05.517' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'd7bbc984-2f61-481d-b8cd-017c26c1acb1', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'fd0c6eec-ba3f-41c2-87c4-4bd2201e9921', N'CART-00635-036999-JYSBR', N'ORDER-00635-37018-ZQDBG', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-09-27T10:16:39.573' AS DateTime), CAST(N'2022-02-14T14:12:11.480' AS DateTime), CAST(N'2021-09-27T10:17:11.077' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'a3faae4de218416b98c920fc924a17fc', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'c3d5d20e-fbbd-4a4b-9a53-017c27812746', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'fd0c6eec-ba3f-41c2-87c4-4bd2201e9921', N'CART-00636-049548-L44Q5', N'ORDER-00636-49565-HBNGS', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-09-27T13:45:48.260' AS DateTime), CAST(N'2022-02-14T14:12:11.377' AS DateTime), CAST(N'2021-09-27T13:46:08.450' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'68fb8f3546eb488dbda48c208ffb9375', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'a61843df-9924-4469-af21-017c2782730f', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'fd0c6eec-ba3f-41c2-87c4-4bd2201e9921', N'CART-00636-049633-KSPG3', N'ORDER-00636-49642-478DS', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-09-27T13:47:13.113' AS DateTime), CAST(N'2022-02-14T14:12:11.257' AS DateTime), CAST(N'2021-09-27T13:47:24.870' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'68f8feba0c0f4917ad46405dc766c236', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(26.0000 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'c582b351-527e-4c18-a1c1-017ed89f97a3', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-00769-033444-M35CQ', NULL, NULL, NULL, NULL, NULL, CAST(N'2022-02-08T09:17:24.877' AS DateTime), CAST(N'2022-02-14T14:15:26.833' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'9c023bae-d1bd-4e60-a6fd-0181391c70e9', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-00888-046974-9RZRS', N'ORDER-00888-47452-BLS43', NULL, N'Test', N'Test', N'test@test.com', CAST(N'2022-06-06T13:02:54.253' AS DateTime), CAST(N'2022-06-06T13:10:55.350' AS DateTime), CAST(N'2022-06-06T13:10:55.350' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'2f677ff306d7416487a96917eeeffc79', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'9e463690-1ee7-4376-bdfe-0181396b5400', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-00888-052144-5D9F4', N'ORDER-00888-54229-FR6SH', NULL, N'Test', N'Test', N'test@test.com', CAST(N'2022-06-06T14:29:04.193' AS DateTime), CAST(N'2022-06-06T15:22:08.540' AS DateTime), CAST(N'2022-06-06T15:22:07.360' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'7f15dc0d60a24816a8d423f17104d6d5', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 16)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'3ef030cc-ee1f-4456-953b-018139a763cd', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-00888-056080-7S5NN', N'ORDER-00888-56111-DSWDD', NULL, N'Test', N'Test', N'test@test.com', CAST(N'2022-06-06T15:34:40.410' AS DateTime), CAST(N'2022-06-06T15:35:18.903' AS DateTime), CAST(N'2022-06-06T15:35:18.900' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'7300f03f688340f4a60a81cf74ae1d45', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 8)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'88dc9840-2a9e-4dca-a57f-018139aa98a4', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-00888-056290-T46WX', N'ORDER-00888-56312-D4767', NULL, N'Test', N'Test', N'test@test.com', CAST(N'2022-06-06T15:38:10.517' AS DateTime), CAST(N'2022-06-06T15:38:35.707' AS DateTime), CAST(N'2022-06-06T15:38:35.707' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'9bfd629f286b4501880d32abce36d8c0', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 8)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-00888-056808-NCZWL', N'ORDER-00888-56830-884PC', NULL, N'Test', N'Test', N'test@test.com', CAST(N'2022-06-06T15:46:48.733' AS DateTime), CAST(N'2022-06-06T15:47:42.407' AS DateTime), CAST(N'2022-06-06T15:47:12.370' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.21000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'a1a9b784d31b41d0baec35f8d6e61b02', CAST(0.0000 AS Numeric(19, 4)), 2, CAST(8.0000 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 9)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'a7e6c6fa-991a-464f-bb24-0368ce2db1b7', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0174-0727-M6XP', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-06-22T12:07:53.140' AS DateTime), CAST(N'2020-06-22T12:07:53.243' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'90f46d0f-ebbd-4835-9409-049476f73db6', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0125-0559-9NX5', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-05-05T10:19:12.877' AS DateTime), CAST(N'2020-05-05T10:19:16.077' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'eab03851-5980-470a-a4b3-0e0f68f11864', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0316-0954-M63N', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-11-11T15:54:29.963' AS DateTime), CAST(N'2020-11-11T15:54:30.107' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'eff45efb-2360-49fc-a6e0-0fb2b8a09519', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0164-0773-M5WW', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-06-12T13:53:00.323' AS DateTime), CAST(N'2020-06-12T13:53:00.433' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'a64a4521-614f-4069-936c-12cd2d7f7986', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0555-0834-MLJY', N'ORDER-0555-0834-9K6J', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-07-08T13:54:03.853' AS DateTime), CAST(N'2021-07-08T13:54:22.773' AS DateTime), CAST(N'2021-07-08T13:54:22.773' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'96d9ba4ff7614033830a0ae1cc89f98a', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'c9edfce8-348c-49b2-9db5-1981ff30c0b0', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0555-0831-9RK8', N'ORDER-0555-0832-MLYW', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-07-08T13:51:54.310' AS DateTime), CAST(N'2021-07-08T13:52:07.760' AS DateTime), CAST(N'2021-07-08T13:52:07.760' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'a04fc809f4fa4bbb911cebcfe748b107', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'02b99d77-9d59-4f15-8be4-20f2674ecfe4', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-4', N'ORDER-0039-0649-H43Q', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2019-11-26T15:02:50.957' AS DateTime), CAST(N'2020-01-09T12:05:08.657' AS DateTime), CAST(N'2019-12-06T09:36:05.820' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'b12dc9ab-fa47-49be-9ee5-bc0d069d6ca6', CAST(0.20000000 AS Numeric(10, 8)), CAST(2.0833 AS Numeric(19, 4)), CAST(0.4167 AS Numeric(19, 4)), N'a0bbbbf5c8254992b8f503afafe26975', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(72.5000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'349a2c34-6836-4152-8aa1-2313053f528d', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0554-0532-97XK', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-08T08:52:51.627' AS DateTime), CAST(N'2021-07-08T08:52:51.757' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'14bc787e-2c9e-4e9f-b535-24f68d5be4a1', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0554-1211-MLJY', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-07T20:11:03.067' AS DateTime), CAST(N'2021-07-07T20:11:03.360' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'2c4cd7db-f691-4f5d-8221-2b81c17d8972', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0554-0551-9R3Q', N'ORDER-0555-0787-9L4Y', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-07-08T09:11:30.847' AS DateTime), CAST(N'2021-07-08T13:07:24.193' AS DateTime), CAST(N'2021-07-08T13:07:24.190' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'2f55b864e99a4132bd9ff606dfdaac02', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(51.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'13211327-364a-4899-9685-2bb34f84c262', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0555-0838-MJVK', N'ORDER-0555-0838-956Z', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-07-08T13:58:49.743' AS DateTime), CAST(N'2021-07-08T13:59:01.923' AS DateTime), CAST(N'2021-07-08T13:59:01.920' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'ac1ebd1c70b844fe9927f4ac16eff6e4', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'927d33c6-c923-4649-972d-31d05e895b8f', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-5', NULL, NULL, NULL, NULL, NULL, CAST(N'2019-12-17T10:54:31.240' AS DateTime), CAST(N'2019-12-17T10:54:31.287' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'e196d9cc-3e2e-467b-a061-327ae37bb8ed', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0302-0885-MGR6', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-10-28T14:45:04.153' AS DateTime), CAST(N'2020-10-28T14:45:04.297' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'0e57fac4-b877-4f0e-8faf-3b0ff50c9084', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0555-0830-9V55', N'ORDER-0555-0830-M6J3', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-07-08T13:50:40.577' AS DateTime), CAST(N'2021-07-08T13:50:54.827' AS DateTime), CAST(N'2021-07-08T13:50:54.827' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'df0671c7027b40dbb53702ee86fe8e49', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'92336361-0f05-401d-8f0c-40bcc40e94af', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0471-0803-9NX5', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-04-15T13:23:12.953' AS DateTime), CAST(N'2021-04-15T13:23:13.127' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'0c4f1bf2-0832-44fb-bfcd-43adc500f26a', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0040-0592-MZ7W', N'ORDER-0040-0689-M63N', NULL, NULL, NULL, NULL, CAST(N'2020-02-10T09:52:33.443' AS DateTime), CAST(N'2020-04-15T10:02:33.797' AS DateTime), CAST(N'2020-02-10T11:30:11.283' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'b12dc9ab-fa47-49be-9ee5-bc0d069d6ca6', CAST(0.20000000 AS Numeric(10, 8)), CAST(2.0833 AS Numeric(19, 4)), CAST(0.4167 AS Numeric(19, 4)), N'929c4cba4fe1479fa42dfc77b47251dc', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(20.4100 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'caa440ac-63a6-4477-a142-44bba1dad2b9', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0149-0828-MYJP', N'ORDER-0149-0832-MXXQ', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2020-05-28T14:48:18.257' AS DateTime), CAST(N'2020-05-28T14:52:25.033' AS DateTime), CAST(N'2020-05-28T14:52:25.030' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'8365386fab7a4a1bb707d1c392fdb96b', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(18.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'b7bc3739-d873-43b9-8c82-4b0b6a6fb901', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0379-0929-MZG6', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-01-13T15:29:37.560' AS DateTime), CAST(N'2021-01-13T15:29:37.620' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'076f926f-69a0-4dd1-aacf-50c63a8ef631', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0379-0924-MVQZ', N'ORDER-0379-0928-MYKK', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-01-13T15:24:41.387' AS DateTime), CAST(N'2021-01-13T15:28:22.707' AS DateTime), CAST(N'2021-01-13T15:28:22.707' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'2be00ede267c4fd8b55e4daaad81637d', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(20.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'93560907-5e53-4da8-baa1-542c3b6424db', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0255-0769-M6XP', NULL, NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2020-09-11T12:49:53.900' AS DateTime), CAST(N'2020-09-11T12:50:01.280' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'36f1bced-75ce-434b-804c-6102fdd53444', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0149-0799-9W6L', N'ORDER-0149-0804-M38G', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2020-05-28T14:19:41.893' AS DateTime), CAST(N'2020-05-28T14:26:22.327' AS DateTime), CAST(N'2020-05-28T14:26:22.327' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'6b8cab01-91cc-4edb-b270-ff5d96dd3f08', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'922edb89ba034e81ba029c55a2f34073', CAST(0.0000 AS Numeric(19, 4)), 2, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'4b921eeb-ae23-4f10-81d4-6a23e040d884', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0554-1184-947G', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-07T19:44:28.033' AS DateTime), CAST(N'2021-07-07T19:44:28.093' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'78820ae0-fefa-4a50-afb8-6e0a69d58a23', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0554-1184-MP3Y', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-07T19:44:39.877' AS DateTime), CAST(N'2021-07-07T19:44:39.933' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'ae7cf608-a2c6-4709-9b68-7521f1ba27bd', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0554-0536-M38G', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-08T08:56:24.520' AS DateTime), CAST(N'2021-07-08T08:56:24.693' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'0239d257-807c-4f09-8282-7531a799bd7e', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0554-0525-MJVK', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-08T08:45:49.877' AS DateTime), CAST(N'2021-07-08T08:46:17.867' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'e05a13ec-04b7-4939-b167-84b2600d393d', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0377-0929-MJVK', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-01-11T15:29:49.127' AS DateTime), CAST(N'2021-01-11T15:47:39.837' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'dd19bdb6-c080-4a2f-9b98-8619c7edfc35', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0555-0821-M34N', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-08T13:41:48.607' AS DateTime), CAST(N'2021-07-08T13:41:48.733' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'96b7b7c3-c8d5-4aae-a8e4-8b6647f1720f', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0307-0611-MQGQ', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-11-03T10:11:52.457' AS DateTime), CAST(N'2020-11-03T14:03:45.903' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'3080cba7-dd51-45d1-a597-8eabb4cf5433', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0210-0452-MY4K', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-07-29T07:32:42.570' AS DateTime), CAST(N'2020-07-29T07:32:42.713' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'8b49f85f-7252-40ce-bf9b-96f4e4b6c6bc', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-1', NULL, NULL, NULL, NULL, NULL, CAST(N'2019-11-19T13:31:04.200' AS DateTime), CAST(N'2019-11-19T13:31:04.200' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.00000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, NULL, NULL, CAST(0.00000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.00000000 AS Numeric(10, 8)), 0, NULL, 0, 0, NULL, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'7076de99-1331-48a2-8903-a3eef3a9f243', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'fd0c6eec-ba3f-41c2-87c4-4bd2201e9921', N'CART-3', N'ORDER-0038-0781-K61C', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2019-11-26T14:43:12.793' AS DateTime), CAST(N'2019-11-29T14:05:17.427' AS DateTime), CAST(N'2019-11-26T14:44:16.560' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'25f33524-f522-4687-917a-68f83330e868', CAST(0.20000000 AS Numeric(10, 8)), CAST(1.2500 AS Numeric(19, 4)), CAST(0.2500 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'b12dc9ab-fa47-49be-9ee5-bc0d069d6ca6', CAST(0.20000000 AS Numeric(10, 8)), CAST(2.0833 AS Numeric(19, 4)), CAST(0.4167 AS Numeric(19, 4)), N'601d442903294a92b051b92068922646', CAST(0.0000 AS Numeric(19, 4)), 2, CAST(12.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, NULL, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'5d08cce2-da18-4639-9ac6-a7aa2d5d9946', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0345-0852-9KRL', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-12-10T14:12:15.253' AS DateTime), CAST(N'2020-12-10T14:12:15.467' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'768b9c5f-d63a-4eed-b181-a94e493684a4', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0555-0813-9KRL', N'ORDER-0555-0813-977K', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-07-08T13:33:15.837' AS DateTime), CAST(N'2021-07-08T13:33:57.947' AS DateTime), CAST(N'2021-07-08T13:33:57.947' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'09ec2c8370d74c0daede96a2fdc79492', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'cd6c1bc7-5822-4fbc-87db-adecf733a9dd', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0183-0567-9Y4P', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-07-02T09:27:37.540' AS DateTime), CAST(N'2020-07-02T09:28:26.943' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'1f4e4902-9262-46de-bb8f-b0af65ef3d9e', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0555-0833-M36N', N'ORDER-0555-0833-MNGW', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-07-08T13:53:04.003' AS DateTime), CAST(N'2021-07-08T13:53:15.963' AS DateTime), CAST(N'2021-07-08T13:53:15.963' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'be609fd0056940a4bf6579c79d1f2c30', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'9ea33948-1fab-430e-8d73-bab4cba0b439', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0041-0822-9KRL', N'ORDER-0041-0857-98R3', NULL, NULL, NULL, NULL, CAST(N'2020-02-10T13:42:15.220' AS DateTime), CAST(N'2020-02-10T14:17:04.187' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), 0, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'cfb6d616-0709-4ad7-9388-d0330ff77666', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0096-0619-9Z3W', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-04-06T11:19:14.300' AS DateTime), CAST(N'2020-04-06T11:19:18.670' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'e9971644-dd59-4c4b-96cb-d9d8dfb6f9df', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0344-0699-9G86', N'ORDER-0344-0700-MXXQ', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2020-12-10T11:39:23.510' AS DateTime), CAST(N'2020-12-10T11:41:24.037' AS DateTime), CAST(N'2020-12-10T11:40:18.377' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'b12dc9ab-fa47-49be-9ee5-bc0d069d6ca6', CAST(0.20000000 AS Numeric(10, 8)), CAST(2.0800 AS Numeric(19, 4)), CAST(0.4200 AS Numeric(19, 4)), N'd7d24604590a4fee8a27d388cd3a399b', CAST(0.0000 AS Numeric(19, 4)), 2, CAST(7.5000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'b8425941-24d3-4997-b264-d9dc3573af4f', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-2', N'ORDER-0037-0129-J83B', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2019-11-19T13:31:42.783' AS DateTime), CAST(N'2019-11-29T14:04:52.440' AS DateTime), CAST(N'2019-11-26T14:41:57.003' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'25f33524-f522-4687-917a-68f83330e868', CAST(0.20000000 AS Numeric(10, 8)), CAST(1.2500 AS Numeric(19, 4)), CAST(0.2500 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'b12dc9ab-fa47-49be-9ee5-bc0d069d6ca6', CAST(0.20000000 AS Numeric(10, 8)), CAST(2.0833 AS Numeric(19, 4)), CAST(0.4167 AS Numeric(19, 4)), N'562766e71e4843ada1465d28a79545cb', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(52.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, NULL, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'0b6059af-94dd-4882-bdac-dc4f7c5b1d6b', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0555-0869-MGR6', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-08T14:29:04.310' AS DateTime), CAST(N'2021-07-08T15:27:43.810' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'5fd7a1d3-f6db-474b-8e51-e35ba98cf2fe', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0407-0595-MRPQ', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-02-11T09:55:11.543' AS DateTime), CAST(N'2021-02-11T09:55:11.697' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'59fb80da-76e7-4e62-99d8-ed31c03e4ac5', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0233-0617-943W', N'ORDER-0233-0617-MK4J', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2020-08-21T10:17:26.370' AS DateTime), CAST(N'2020-08-21T10:17:36.300' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), 0, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'0b1fa440-b2b3-42ac-a2e0-ee85f58f698e', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0345-0872-9738', NULL, NULL, NULL, NULL, NULL, CAST(N'2020-12-10T14:32:27.560' AS DateTime), CAST(N'2020-12-10T14:32:27.870' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'452cedad-c4d7-4353-aaaa-f0f4ba11c385', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0149-0791-9JXQ', N'ORDER-0149-0797-M5WW', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2020-05-28T14:11:06.510' AS DateTime), CAST(N'2020-05-28T14:18:49.013' AS DateTime), CAST(N'2020-05-28T14:17:11.997' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'e71f0bac84c6439c8ff3f907b880c715', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'42408765-0493-42dd-a093-f30fade0113e', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0554-1184-MVKL', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-07T19:44:17.507' AS DateTime), CAST(N'2021-07-07T19:44:17.653' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'21f7763c-7d03-46cc-8609-f6604a1956ba', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0555-0827-9PGG', N'ORDER-0555-0827-MY3K', NULL, N'Matt', N'Brailsford', N'hi@outfield.digital', CAST(N'2021-07-08T13:47:40.690' AS DateTime), CAST(N'2021-07-08T13:48:00.277' AS DateTime), CAST(N'2021-07-08T13:48:00.277' AS DateTime), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'649a2bdc56ef49e9ba4e40b85d620bf7', CAST(0.0000 AS Numeric(19, 4)), 1, CAST(8.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, CAST(1.0000 AS Numeric(19, 4)), 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'8a89fba3-ea1e-4ce4-913e-fd2ab5d5a207', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0554-0547-93YG', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-07-08T09:07:05.130' AS DateTime), CAST(N'2021-07-08T09:07:05.253' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
+GO
+INSERT [dbo].[vendrOrder] ([id], [storeId], [currencyId], [taxClassId], [languageIsoCode], [orderStatusId], [cartNumber], [orderNumber], [customerReference], [customerFirstName], [customerLastName], [customerEmail], [createDate], [updateDate], [finalizedDate], [paymentCountryId], [paymentRegionId], [paymentMethodId], [paymentTaxRate], [paymentTotalPrice], [paymentTotalPriceTax], [shippingCountryId], [shippingRegionId], [shippingMethodId], [shippingTaxRate], [shippingTotalPrice], [shippingTotalPriceTax], [transactionId], [transactionFee], [paymentStatus], [amountAuthorized], [taxRate], [inconsistentPayment], [copiedFromOrderId], [sortOrder], [deletedTimestamp], [orderStatusCode], [baseCurrencyExchangeRate], [version]) VALUES (N'351dfaa5-e506-400d-8249-ff4f2c8ee26b', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'en-US', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'CART-0498-0493-M7P8', NULL, NULL, NULL, NULL, NULL, CAST(N'2021-05-13T08:13:08.417' AS DateTime), CAST(N'2021-05-13T08:33:35.160' AS DateTime), NULL, N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), N'af697207-d370-4aee-824c-15711d43a9f2', NULL, NULL, CAST(0.20000000 AS Numeric(10, 8)), CAST(0.0000 AS Numeric(19, 4)), CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), NULL, CAST(0.0000 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), 0, NULL, 0, 0, 200, NULL, 1)
 GO
 INSERT [dbo].[vendrOrderAmountAdjustment] ([id], [orderId], [amountType], [type], [originalValue], [value], [metaData], [name]) VALUES (N'86bc31a2-5284-427e-93a8-873a5773dcee', N'36f1bced-75ce-434b-804c-6102fdd53444', 0, N'Vendr.Core.Models.GiftCardAdjustment, Vendr.Core', CAST(-8.0000 AS Numeric(19, 4)), CAST(-8.0000 AS Numeric(19, 4)), N'{"GiftCardId":"b64de0b1-0d4d-4177-b6a7-f9ebe98b057a","GiftCardCode":"GC-fSuOZeaFMl"}', NULL)
 GO
@@ -21721,6 +22000,14 @@ GO
 INSERT [dbo].[vendrOrderLine] ([id], [orderId], [parentOrderLineId], [taxClassId], [sku], [name], [productReference], [quantity], [unitPriceBase], [unitPriceBaseTax], [unitPrice], [unitPriceTax], [taxRate], [bundleId], [copiedFromOrderLineId], [productVariantReference]) VALUES (N'61cd882f-013f-4fd1-81b5-017ef8969b4f', N'c582b351-527e-4c18-a1c1-017ed89f97a3', NULL, NULL, N'AC004-RED', N'Accessories - Stump Teapot - Red', N'7e934d09-3906-4245-875c-b3560c11c323', CAST(1.0000 AS Numeric(18, 4)), CAST(24.7934 AS Numeric(19, 4)), CAST(5.2066 AS Numeric(19, 4)), CAST(24.7900 AS Numeric(19, 4)), CAST(5.2100 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), NULL, NULL, NULL)
 GO
 INSERT [dbo].[vendrOrderLine] ([id], [orderId], [parentOrderLineId], [taxClassId], [sku], [name], [productReference], [quantity], [unitPriceBase], [unitPriceBaseTax], [unitPrice], [unitPriceTax], [taxRate], [bundleId], [copiedFromOrderLineId], [productVariantReference]) VALUES (N'6eaa1c86-270f-4884-b950-0181391c7158', N'9c023bae-d1bd-4e60-a6fd-0181391c70e9', NULL, NULL, N'GP007-30', N'Good and Proper - Jasmine Pearls - 30g', N'629eeb28-ed18-43db-bc90-ff8ff9c94ef7', CAST(1.0000 AS Numeric(18, 4)), CAST(6.6116 AS Numeric(19, 4)), CAST(1.3884 AS Numeric(19, 4)), CAST(6.6100 AS Numeric(19, 4)), CAST(1.3900 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), NULL, NULL, NULL)
+GO
+INSERT [dbo].[vendrOrderLine] ([id], [orderId], [parentOrderLineId], [taxClassId], [sku], [name], [productReference], [quantity], [unitPriceBase], [unitPriceBaseTax], [unitPrice], [unitPriceTax], [taxRate], [bundleId], [copiedFromOrderLineId], [productVariantReference]) VALUES (N'681f383c-bdf1-4104-8004-0181396b5473', N'9e463690-1ee7-4376-bdfe-0181396b5400', NULL, NULL, N'GP020-50', N'Good and Proper - Iron Buddha - 50g', N'4e19cd12-1573-4e91-9ea0-60362bdcbf8b', CAST(1.0000 AS Numeric(18, 4)), CAST(6.6116 AS Numeric(19, 4)), CAST(1.3884 AS Numeric(19, 4)), CAST(6.6100 AS Numeric(19, 4)), CAST(1.3900 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), NULL, NULL, NULL)
+GO
+INSERT [dbo].[vendrOrderLine] ([id], [orderId], [parentOrderLineId], [taxClassId], [sku], [name], [productReference], [quantity], [unitPriceBase], [unitPriceBaseTax], [unitPrice], [unitPriceTax], [taxRate], [bundleId], [copiedFromOrderLineId], [productVariantReference]) VALUES (N'e3ff0f7e-4687-461f-b4b0-018139a76453', N'3ef030cc-ee1f-4456-953b-018139a763cd', NULL, NULL, N'GP020-50', N'Good and Proper - Iron Buddha - 50g', N'4e19cd12-1573-4e91-9ea0-60362bdcbf8b', CAST(1.0000 AS Numeric(18, 4)), CAST(6.6116 AS Numeric(19, 4)), CAST(1.3884 AS Numeric(19, 4)), CAST(6.6100 AS Numeric(19, 4)), CAST(1.3900 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), NULL, NULL, NULL)
+GO
+INSERT [dbo].[vendrOrderLine] ([id], [orderId], [parentOrderLineId], [taxClassId], [sku], [name], [productReference], [quantity], [unitPriceBase], [unitPriceBaseTax], [unitPrice], [unitPriceTax], [taxRate], [bundleId], [copiedFromOrderLineId], [productVariantReference]) VALUES (N'2d853423-9b24-42a6-93cb-018139aa9903', N'88dc9840-2a9e-4dca-a57f-018139aa98a4', NULL, NULL, N'GP020-50', N'Good and Proper - Iron Buddha - 50g', N'4e19cd12-1573-4e91-9ea0-60362bdcbf8b', CAST(1.0000 AS Numeric(18, 4)), CAST(6.6116 AS Numeric(19, 4)), CAST(1.3884 AS Numeric(19, 4)), CAST(6.6100 AS Numeric(19, 4)), CAST(1.3900 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), NULL, NULL, NULL)
+GO
+INSERT [dbo].[vendrOrderLine] ([id], [orderId], [parentOrderLineId], [taxClassId], [sku], [name], [productReference], [quantity], [unitPriceBase], [unitPriceBaseTax], [unitPrice], [unitPriceTax], [taxRate], [bundleId], [copiedFromOrderLineId], [productVariantReference]) VALUES (N'65005d1e-552d-4633-8f77-018139b28148', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', NULL, NULL, N'GP020-50', N'Good and Proper - Iron Buddha - 50g', N'4e19cd12-1573-4e91-9ea0-60362bdcbf8b', CAST(1.0000 AS Numeric(18, 4)), CAST(6.6100 AS Numeric(19, 4)), CAST(1.3900 AS Numeric(19, 4)), CAST(6.6100 AS Numeric(19, 4)), CAST(1.3900 AS Numeric(19, 4)), CAST(0.21000000 AS Numeric(10, 8)), NULL, NULL, NULL)
 GO
 INSERT [dbo].[vendrOrderLine] ([id], [orderId], [parentOrderLineId], [taxClassId], [sku], [name], [productReference], [quantity], [unitPriceBase], [unitPriceBaseTax], [unitPrice], [unitPriceTax], [taxRate], [bundleId], [copiedFromOrderLineId], [productVariantReference]) VALUES (N'7f2d3d33-1df5-4b80-9800-018ea965ae46', N'92336361-0f05-401d-8f0c-40bcc40e94af', NULL, NULL, N'GP002', N'Good and Proper - Breakfast Tea Set', N'385c4bc0-21e1-4369-9846-c0c9208aba7c', CAST(1.0000 AS Numeric(18, 4)), CAST(21.6700 AS Numeric(19, 4)), CAST(4.3300 AS Numeric(19, 4)), CAST(21.6700 AS Numeric(19, 4)), CAST(4.3300 AS Numeric(19, 4)), CAST(0.20000000 AS Numeric(10, 8)), NULL, NULL, NULL)
 GO
@@ -22041,6 +22328,142 @@ GO
 INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'091c1ded-804d-42c8-be53-01813923c895', N'9c023bae-d1bd-4e60-a6fd-0181391c70e9', N'billingAddressLine2', N'Test', 0, 0)
 GO
 INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'f95051d4-d8bf-4010-beb2-01813923c895', N'9c023bae-d1bd-4e60-a6fd-0181391c70e9', N'billingAddressLine1', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'3e689e00-b243-46da-816f-0181399beb6f', N'9e463690-1ee7-4376-bdfe-0181396b5400', N'shippingAddressLine1', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'a3509b20-8f76-4882-8179-0181399beb6f', N'9e463690-1ee7-4376-bdfe-0181396b5400', N'marketingOptIn', N'0', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'c31b8df9-d8e6-40b5-865c-0181399beb6f', N'9e463690-1ee7-4376-bdfe-0181396b5400', N'shippingZipCode', N'T23 32T', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'271dbf98-4ab2-4dbf-8cc6-0181399beb6f', N'9e463690-1ee7-4376-bdfe-0181396b5400', N'billingCity', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'43e81f28-3394-43ea-903f-0181399beb6f', N'9e463690-1ee7-4376-bdfe-0181396b5400', N'shippingLastName', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'7a773da1-c964-434a-9126-0181399beb6f', N'9e463690-1ee7-4376-bdfe-0181396b5400', N'billingZipCode', N'T23 32T', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'eaba9954-605d-4621-912d-0181399beb6f', N'9e463690-1ee7-4376-bdfe-0181396b5400', N'billingTelephone', N'0123456789', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'31d117d7-d465-488e-92e7-0181399beb6f', N'9e463690-1ee7-4376-bdfe-0181396b5400', N'shippingCity', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'2b68ecbe-34bf-4eee-931a-0181399beb6f', N'9e463690-1ee7-4376-bdfe-0181396b5400', N'lastName', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'0cf3f724-3b2c-4845-98ce-0181399beb6f', N'9e463690-1ee7-4376-bdfe-0181396b5400', N'billingAddressLine2', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'4fd9219d-0755-44e0-990e-0181399beb6f', N'9e463690-1ee7-4376-bdfe-0181396b5400', N'firstName', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'e0effe4a-54d6-4cb2-9de2-0181399beb6f', N'9e463690-1ee7-4376-bdfe-0181396b5400', N'shippingFirstName', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'72657f2f-5782-43c5-a499-0181399beb6f', N'9e463690-1ee7-4376-bdfe-0181396b5400', N'billingAddressLine1', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'8b39f1a8-66d3-4c03-a939-0181399beb6f', N'9e463690-1ee7-4376-bdfe-0181396b5400', N'shippingSameAsBilling', N'1', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'd263a06a-8696-40b8-aae7-0181399beb6f', N'9e463690-1ee7-4376-bdfe-0181396b5400', N'shippingAddressLine2', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'daf4bd1e-1634-4788-acb0-0181399beb6f', N'9e463690-1ee7-4376-bdfe-0181396b5400', N'email', N'test@test.com', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'9dfe506a-0c27-4b8d-adde-0181399beb6f', N'9e463690-1ee7-4376-bdfe-0181396b5400', N'shippingTelephone', N'0123456789', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'9d2dcb6d-d257-4baa-8091-018139a7fa91', N'3ef030cc-ee1f-4456-953b-018139a763cd', N'billingCity', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'558c1deb-dade-4a6f-817b-018139a7fa91', N'3ef030cc-ee1f-4456-953b-018139a763cd', N'shippingZipCode', N'T32 32T', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'43946d14-bfba-4a9d-858d-018139a7fa91', N'3ef030cc-ee1f-4456-953b-018139a763cd', N'marketingOptIn', N'0', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'90b3b8c4-82df-4568-878e-018139a7fa91', N'3ef030cc-ee1f-4456-953b-018139a763cd', N'email', N'test@test.com', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'bea04222-c9d4-43a4-896e-018139a7fa91', N'3ef030cc-ee1f-4456-953b-018139a763cd', N'shippingAddressLine2', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'7737bb88-8748-4e63-93ae-018139a7fa91', N'3ef030cc-ee1f-4456-953b-018139a763cd', N'billingTelephone', N'0123456789', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'2a23496c-da62-48d0-9579-018139a7fa91', N'3ef030cc-ee1f-4456-953b-018139a763cd', N'shippingAddressLine1', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'8c9bb814-33e1-4762-9593-018139a7fa91', N'3ef030cc-ee1f-4456-953b-018139a763cd', N'billingZipCode', N'T32 32T', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'cf5b5e47-d3e3-48c0-9d79-018139a7fa91', N'3ef030cc-ee1f-4456-953b-018139a763cd', N'shippingFirstName', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'5d240c88-d638-4394-a005-018139a7fa91', N'3ef030cc-ee1f-4456-953b-018139a763cd', N'shippingLastName', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'a96c4021-35e8-41d4-a0c2-018139a7fa91', N'3ef030cc-ee1f-4456-953b-018139a763cd', N'firstName', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'e4e684f6-44e6-47ca-a41f-018139a7fa91', N'3ef030cc-ee1f-4456-953b-018139a763cd', N'shippingCity', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'4432b942-fd87-48d4-b000-018139a7fa91', N'3ef030cc-ee1f-4456-953b-018139a763cd', N'shippingSameAsBilling', N'1', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'f4c480dd-acc3-4667-b0e7-018139a7fa91', N'3ef030cc-ee1f-4456-953b-018139a763cd', N'billingAddressLine2', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'3ce230fd-5ce4-485e-b1b1-018139a7fa91', N'3ef030cc-ee1f-4456-953b-018139a763cd', N'shippingTelephone', N'0123456789', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'e40c51f6-a064-44df-b458-018139a7fa91', N'3ef030cc-ee1f-4456-953b-018139a763cd', N'lastName', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'c656574f-1157-4485-bfe0-018139a7fa91', N'3ef030cc-ee1f-4456-953b-018139a763cd', N'billingAddressLine1', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'906bfba8-2cb3-40b9-815f-018139aafb90', N'88dc9840-2a9e-4dca-a57f-018139aa98a4', N'billingCity', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'4ba195d5-b01f-4c01-834e-018139aafb90', N'88dc9840-2a9e-4dca-a57f-018139aa98a4', N'shippingTelephone', N'0123456789', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'db5bb002-5baa-47c4-8513-018139aafb90', N'88dc9840-2a9e-4dca-a57f-018139aa98a4', N'marketingOptIn', N'0', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'9be2dd7b-8997-496f-8ecc-018139aafb90', N'88dc9840-2a9e-4dca-a57f-018139aa98a4', N'billingZipCode', N'T21 12T', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'738fb2d3-ade2-4299-931c-018139aafb90', N'88dc9840-2a9e-4dca-a57f-018139aa98a4', N'billingAddressLine2', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'ff298418-06ca-4bad-9ba1-018139aafb90', N'88dc9840-2a9e-4dca-a57f-018139aa98a4', N'shippingCity', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'919eff1c-fb47-444b-9f52-018139aafb90', N'88dc9840-2a9e-4dca-a57f-018139aa98a4', N'shippingZipCode', N'T21 12T', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'd211fb07-03a3-4adb-a1f7-018139aafb90', N'88dc9840-2a9e-4dca-a57f-018139aa98a4', N'shippingFirstName', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'c3004aac-6852-4e61-a421-018139aafb90', N'88dc9840-2a9e-4dca-a57f-018139aa98a4', N'email', N'test@test.com', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'9a1f76e6-25f4-41ea-a497-018139aafb90', N'88dc9840-2a9e-4dca-a57f-018139aa98a4', N'shippingLastName', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'b1215dc1-dfda-419c-a621-018139aafb90', N'88dc9840-2a9e-4dca-a57f-018139aa98a4', N'billingAddressLine1', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'754d1967-5194-47a5-a990-018139aafb90', N'88dc9840-2a9e-4dca-a57f-018139aa98a4', N'shippingSameAsBilling', N'1', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'715031b3-c03a-4b55-aa0e-018139aafb90', N'88dc9840-2a9e-4dca-a57f-018139aa98a4', N'shippingAddressLine2', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'55769b38-536a-41b5-b2ab-018139aafb90', N'88dc9840-2a9e-4dca-a57f-018139aa98a4', N'lastName', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'f2b3e039-1156-4e55-b5f9-018139aafb90', N'88dc9840-2a9e-4dca-a57f-018139aa98a4', N'firstName', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'87a1b59f-ed5e-4761-bd42-018139aafb90', N'88dc9840-2a9e-4dca-a57f-018139aa98a4', N'shippingAddressLine1', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'790e5c20-ec7b-4a6a-bdbe-018139aafb90', N'88dc9840-2a9e-4dca-a57f-018139aa98a4', N'billingTelephone', N'0123456789', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'6948df0d-b771-4317-8705-018139b352c7', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'billingCity', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'd9e440dc-955c-4fd2-8b77-018139b352c7', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'billingAddressLine2', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'05fdbe26-4257-4cfe-8ba7-018139b352c7', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'lastName', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'be61753d-e976-4c88-976d-018139b352c7', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'email', N'test@test.com', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'ded7534c-1fdb-462d-9777-018139b352c7', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'shippingZipCode', N'T21 12T', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'66eafdcc-8076-4637-9c71-018139b352c7', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'shippingAddressLine2', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'092e9e48-680d-4c3d-9ec4-018139b352c7', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'shippingLastName', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'd07a5602-b63e-4ea0-a0b5-018139b352c7', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'shippingSameAsBilling', N'1', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'62aa55bb-b899-4910-a16b-018139b352c7', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'shippingFirstName', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'0d3d15cd-25ec-4a86-a3e8-018139b352c7', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'firstName', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'3ebeba8e-6592-44df-a431-018139b352c7', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'shippingAddressLine1', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'c4d51de8-a83a-4e80-a7da-018139b352c7', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'marketingOptIn', N'0', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'42cf02a9-8305-4f3e-aebf-018139b352c7', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'shippingTelephone', N'0123456789', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'4bc44ee3-72d1-4410-b36d-018139b352c7', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'billingTelephone', N'0123456789', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'f5f76d2d-1f52-4c8c-b84e-018139b352c7', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'shippingCity', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'fa9bb052-19f1-442d-b90f-018139b352c7', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'billingAddressLine1', N'Test', 0, 0)
+GO
+INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'7eb8e280-0418-43bc-bc06-018139b352c7', N'f48f8d9c-b0c3-445e-ba92-018139b280e0', N'billingZipCode', N'T21 12T', 0, 0)
 GO
 INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'424b5922-41c7-48c4-8cb8-01f284186601', N'076f926f-69a0-4dd1-aacf-50c63a8ef631', N'billingAddressLine1', N'10 Some Road', 0, 0)
 GO
@@ -22724,29 +23147,29 @@ INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerS
 GO
 INSERT [dbo].[vendrOrderProperty] ([id], [orderId], [alias], [value], [isServerSideOnly], [isReadOnly]) VALUES (N'6066c3e4-a99e-42f8-8968-fe0ab41cde6e', N'b8425941-24d3-4997-b264-d9dc3573af4f', N'lastName', N'Brailsford', 0, 0)
 GO
-INSERT [dbo].[vendrOrderStatus] ([id], [storeId], [alias], [name], [color], [sortOrder], [deletedTimestamp]) VALUES (N'2ab05444-85a4-4918-8f28-017a7c16e235', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'new', N'New', N'light-blue', 0, 0)
+INSERT [dbo].[vendrOrderStatus] ([id], [storeId], [alias], [name], [color], [sortOrder], [deletedTimestamp], [version]) VALUES (N'2ab05444-85a4-4918-8f28-017a7c16e235', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'new', N'New', N'light-blue', 0, 0, 1)
 GO
-INSERT [dbo].[vendrOrderStatus] ([id], [storeId], [alias], [name], [color], [sortOrder], [deletedTimestamp]) VALUES (N'cdf67bbd-2db7-4990-bfb4-017a7c16e241', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'completed', N'Completed', N'green', 1, 0)
+INSERT [dbo].[vendrOrderStatus] ([id], [storeId], [alias], [name], [color], [sortOrder], [deletedTimestamp], [version]) VALUES (N'cdf67bbd-2db7-4990-bfb4-017a7c16e241', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'completed', N'Completed', N'green', 1, 0, 1)
 GO
-INSERT [dbo].[vendrOrderStatus] ([id], [storeId], [alias], [name], [color], [sortOrder], [deletedTimestamp]) VALUES (N'6e78cb34-346f-4297-beec-017a7c16e243', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'cancelled', N'Cancelled', N'orange', 2, 0)
+INSERT [dbo].[vendrOrderStatus] ([id], [storeId], [alias], [name], [color], [sortOrder], [deletedTimestamp], [version]) VALUES (N'6e78cb34-346f-4297-beec-017a7c16e243', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'cancelled', N'Cancelled', N'orange', 2, 0, 1)
 GO
-INSERT [dbo].[vendrOrderStatus] ([id], [storeId], [alias], [name], [color], [sortOrder], [deletedTimestamp]) VALUES (N'f81b08b2-717d-4ffb-ae28-017a7c16e244', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'error', N'Error', N'red', 3, 0)
+INSERT [dbo].[vendrOrderStatus] ([id], [storeId], [alias], [name], [color], [sortOrder], [deletedTimestamp], [version]) VALUES (N'f81b08b2-717d-4ffb-ae28-017a7c16e244', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'error', N'Error', N'red', 3, 0, 1)
 GO
-INSERT [dbo].[vendrOrderStatus] ([id], [storeId], [alias], [name], [color], [sortOrder], [deletedTimestamp]) VALUES (N'fd0c6eec-ba3f-41c2-87c4-4bd2201e9921', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'completed', N'Completed', N'green', 1, 0)
+INSERT [dbo].[vendrOrderStatus] ([id], [storeId], [alias], [name], [color], [sortOrder], [deletedTimestamp], [version]) VALUES (N'fd0c6eec-ba3f-41c2-87c4-4bd2201e9921', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'completed', N'Completed', N'green', 1, 0, 1)
 GO
-INSERT [dbo].[vendrOrderStatus] ([id], [storeId], [alias], [name], [color], [sortOrder], [deletedTimestamp]) VALUES (N'9425f477-4676-435e-aa8c-897ee42b48bc', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'cancelled', N'Cancelled', N'orange', 2, 0)
+INSERT [dbo].[vendrOrderStatus] ([id], [storeId], [alias], [name], [color], [sortOrder], [deletedTimestamp], [version]) VALUES (N'9425f477-4676-435e-aa8c-897ee42b48bc', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'cancelled', N'Cancelled', N'orange', 2, 0, 1)
 GO
-INSERT [dbo].[vendrOrderStatus] ([id], [storeId], [alias], [name], [color], [sortOrder], [deletedTimestamp]) VALUES (N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'new', N'New', N'light-blue', 0, 0)
+INSERT [dbo].[vendrOrderStatus] ([id], [storeId], [alias], [name], [color], [sortOrder], [deletedTimestamp], [version]) VALUES (N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'new', N'New', N'light-blue', 0, 0, 1)
 GO
-INSERT [dbo].[vendrOrderStatus] ([id], [storeId], [alias], [name], [color], [sortOrder], [deletedTimestamp]) VALUES (N'47c84cb5-cfda-4935-830e-df4fe38df9de', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'error', N'Error', N'red', 3, 0)
+INSERT [dbo].[vendrOrderStatus] ([id], [storeId], [alias], [name], [color], [sortOrder], [deletedTimestamp], [version]) VALUES (N'47c84cb5-cfda-4935-830e-df4fe38df9de', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'error', N'Error', N'red', 3, 0, 1)
 GO
-INSERT [dbo].[vendrPaymentMethod] ([id], [alias], [storeId], [name], [sku], [taxClassId], [imageId], [paymentProviderAlias], [canFetchPaymentStatuses], [canCapturePayments], [canRefundPayments], [canCancelPayments], [sortOrder], [deletedTimestamp]) VALUES (N'2d698f56-a24b-43c5-a790-017a7c16e28b', N'invoicing', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'Invoicing', N'4815', NULL, NULL, N'invoicing', 0, 0, 0, 0, 0, 0)
+INSERT [dbo].[vendrPaymentMethod] ([id], [alias], [storeId], [name], [sku], [taxClassId], [imageId], [paymentProviderAlias], [canFetchPaymentStatuses], [canCapturePayments], [canRefundPayments], [canCancelPayments], [sortOrder], [deletedTimestamp], [version]) VALUES (N'2d698f56-a24b-43c5-a790-017a7c16e28b', N'invoicing', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'Invoicing', N'4815', NULL, NULL, N'invoicing', 0, 0, 0, 0, 0, 0, 1)
 GO
-INSERT [dbo].[vendrPaymentMethod] ([id], [alias], [storeId], [name], [sku], [taxClassId], [imageId], [paymentProviderAlias], [canFetchPaymentStatuses], [canCapturePayments], [canRefundPayments], [canCancelPayments], [sortOrder], [deletedTimestamp]) VALUES (N'25f33524-f522-4687-917a-68f83330e868', N'credit', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'Credit', N'4816', NULL, NULL, N'invoicing', 0, 1, 0, 1, 1, 1625579708)
+INSERT [dbo].[vendrPaymentMethod] ([id], [alias], [storeId], [name], [sku], [taxClassId], [imageId], [paymentProviderAlias], [canFetchPaymentStatuses], [canCapturePayments], [canRefundPayments], [canCancelPayments], [sortOrder], [deletedTimestamp], [version]) VALUES (N'25f33524-f522-4687-917a-68f83330e868', N'credit', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'Credit', N'4816', NULL, NULL, N'invoicing', 0, 1, 0, 1, 1, 1625579708, 1)
 GO
-INSERT [dbo].[vendrPaymentMethod] ([id], [alias], [storeId], [name], [sku], [taxClassId], [imageId], [paymentProviderAlias], [canFetchPaymentStatuses], [canCapturePayments], [canRefundPayments], [canCancelPayments], [sortOrder], [deletedTimestamp]) VALUES (N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', N'invoicing', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'Invoicing', N'4815', NULL, NULL, N'invoicing', 0, 1, 0, 1, 0, 0)
+INSERT [dbo].[vendrPaymentMethod] ([id], [alias], [storeId], [name], [sku], [taxClassId], [imageId], [paymentProviderAlias], [canFetchPaymentStatuses], [canCapturePayments], [canRefundPayments], [canCancelPayments], [sortOrder], [deletedTimestamp], [version]) VALUES (N'e35677ac-a544-45a0-ba4a-a78dd43dbaf2', N'invoicing', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'Invoicing', N'4815', NULL, NULL, N'invoicing', 0, 1, 0, 1, 0, 0, 1)
 GO
-INSERT [dbo].[vendrPaymentMethod] ([id], [alias], [storeId], [name], [sku], [taxClassId], [imageId], [paymentProviderAlias], [canFetchPaymentStatuses], [canCapturePayments], [canRefundPayments], [canCancelPayments], [sortOrder], [deletedTimestamp]) VALUES (N'6b8cab01-91cc-4edb-b270-ff5d96dd3f08', N'zeroValue', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'Zero Value', N'ZV001', N'17a2eca0-d21f-462a-8915-8b2606661efd', NULL, N'zeroValue', 0, 0, 0, 0, 2, 0)
+INSERT [dbo].[vendrPaymentMethod] ([id], [alias], [storeId], [name], [sku], [taxClassId], [imageId], [paymentProviderAlias], [canFetchPaymentStatuses], [canCapturePayments], [canRefundPayments], [canCancelPayments], [sortOrder], [deletedTimestamp], [version]) VALUES (N'6b8cab01-91cc-4edb-b270-ff5d96dd3f08', N'zeroValue', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'Zero Value', N'ZV001', N'17a2eca0-d21f-462a-8915-8b2606661efd', NULL, N'zeroValue', 0, 0, 0, 0, 2, 0, 1)
 GO
 INSERT [dbo].[vendrPaymentMethodAllowedCountryRegion] ([id], [paymentMethodId], [countryId], [regionId]) VALUES (N'ea9baea8-8376-413f-91c5-017a7c16e2a1', N'2d698f56-a24b-43c5-a790-017a7c16e28b', N'e72c724b-44fd-4b1a-9a4d-017a7c16e207', NULL)
 GO
@@ -22764,17 +23187,17 @@ INSERT [dbo].[vendrPaymentMethodPaymentProviderSetting] ([id], [paymentMethodId]
 GO
 INSERT [dbo].[vendrPaymentMethodPaymentProviderSetting] ([id], [paymentMethodId], [key], [value]) VALUES (N'24ff1cba-8e5e-45ce-8b91-fa0af479f72a', N'25f33524-f522-4687-917a-68f83330e868', N'ContinueUrl', N'/checkout/order-confirmation/')
 GO
-INSERT [dbo].[vendrPrintTemplate] ([id], [storeId], [alias], [name], [category], [templateView], [sortOrder], [deletedTimestamp]) VALUES (N'9e84bd63-1652-42f2-b3f3-017a7c16e268', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'orderReceipt', N'Order Receipt', 0, N'~/App_Plugins/Vendr/templates/print/OrderReceipt.cshtml', 0, 0)
+INSERT [dbo].[vendrPrintTemplate] ([id], [storeId], [alias], [name], [category], [templateView], [sortOrder], [deletedTimestamp], [version]) VALUES (N'9e84bd63-1652-42f2-b3f3-017a7c16e268', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'orderReceipt', N'Order Receipt', 0, N'~/App_Plugins/Vendr/templates/print/OrderReceipt.cshtml', 0, 0, 1)
 GO
-INSERT [dbo].[vendrPrintTemplate] ([id], [storeId], [alias], [name], [category], [templateView], [sortOrder], [deletedTimestamp]) VALUES (N'cb18dd40-b578-4629-aaa8-017a7c16e276', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'orderPackingSlip', N'Order Packing Slip', 0, N'~/App_Plugins/Vendr/templates/print/OrderPackingSlip.cshtml', 1, 0)
+INSERT [dbo].[vendrPrintTemplate] ([id], [storeId], [alias], [name], [category], [templateView], [sortOrder], [deletedTimestamp], [version]) VALUES (N'cb18dd40-b578-4629-aaa8-017a7c16e276', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'orderPackingSlip', N'Order Packing Slip', 0, N'~/App_Plugins/Vendr/templates/print/OrderPackingSlip.cshtml', 1, 0, 1)
 GO
-INSERT [dbo].[vendrPrintTemplate] ([id], [storeId], [alias], [name], [category], [templateView], [sortOrder], [deletedTimestamp]) VALUES (N'111e967f-f745-46d1-902f-7c1be2f0bb33', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'orderPackingSlip', N'Order Packing Slip', 0, N'~/App_Plugins/Vendr/templates/print/OrderPackingSlip.cshtml', 1, 0)
+INSERT [dbo].[vendrPrintTemplate] ([id], [storeId], [alias], [name], [category], [templateView], [sortOrder], [deletedTimestamp], [version]) VALUES (N'111e967f-f745-46d1-902f-7c1be2f0bb33', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'orderPackingSlip', N'Order Packing Slip', 0, N'~/App_Plugins/Vendr/templates/print/OrderPackingSlip.cshtml', 1, 0, 1)
 GO
-INSERT [dbo].[vendrPrintTemplate] ([id], [storeId], [alias], [name], [category], [templateView], [sortOrder], [deletedTimestamp]) VALUES (N'73e0fe6a-e098-407e-85fa-ae5a6dcf7180', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'orderReceipt', N'Order Receipt', 0, N'~/App_Plugins/Vendr/templates/print/OrderReceipt.cshtml', 0, 0)
+INSERT [dbo].[vendrPrintTemplate] ([id], [storeId], [alias], [name], [category], [templateView], [sortOrder], [deletedTimestamp], [version]) VALUES (N'73e0fe6a-e098-407e-85fa-ae5a6dcf7180', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'orderReceipt', N'Order Receipt', 0, N'~/App_Plugins/Vendr/templates/print/OrderReceipt.cshtml', 0, 0, 1)
 GO
-INSERT [dbo].[vendrProductAttribute] ([id], [storeId], [alias], [name], [sortOrder], [deletedTimestamp]) VALUES (N'606d28c7-ab40-483d-b721-8f5600a49b21', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'volume', N'Volume', 0, 0)
+INSERT [dbo].[vendrProductAttribute] ([id], [storeId], [alias], [name], [sortOrder], [deletedTimestamp], [version]) VALUES (N'606d28c7-ab40-483d-b721-8f5600a49b21', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'volume', N'Volume', 0, 0, 1)
 GO
-INSERT [dbo].[vendrProductAttribute] ([id], [storeId], [alias], [name], [sortOrder], [deletedTimestamp]) VALUES (N'af952594-e71b-4e5a-9d29-ca622f629c9e', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'color', N'Color', 1, 0)
+INSERT [dbo].[vendrProductAttribute] ([id], [storeId], [alias], [name], [sortOrder], [deletedTimestamp], [version]) VALUES (N'af952594-e71b-4e5a-9d29-ca622f629c9e', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'color', N'Color', 1, 0, 1)
 GO
 INSERT [dbo].[vendrProductAttributeValue] ([id], [productAttributeId], [alias], [name], [sortOrder]) VALUES (N'96aa8f26-c576-4b32-bf85-027db6458a44', N'606d28c7-ab40-483d-b721-8f5600a49b21', N'500ml', N'500ml', 1)
 GO
@@ -22796,11 +23219,11 @@ INSERT [dbo].[vendrProductAttributeValue] ([id], [productAttributeId], [alias], 
 GO
 INSERT [dbo].[vendrProductAttributeValue] ([id], [productAttributeId], [alias], [name], [sortOrder]) VALUES (N'21574b0b-b88a-48fb-a97b-e0219fd5af5c', N'af952594-e71b-4e5a-9d29-ca622f629c9e', N'black', N'Black', 0)
 GO
-INSERT [dbo].[vendrShippingMethod] ([id], [alias], [storeId], [name], [sku], [taxClassId], [imageId], [sortOrder], [deletedTimestamp]) VALUES (N'c64c93ea-b159-439f-a162-017a7c16e2c9', N'pickup', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'Pickup', N'1623', NULL, NULL, 0, 0)
+INSERT [dbo].[vendrShippingMethod] ([id], [alias], [storeId], [name], [sku], [taxClassId], [imageId], [sortOrder], [deletedTimestamp], [version]) VALUES (N'c64c93ea-b159-439f-a162-017a7c16e2c9', N'pickup', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'Pickup', N'1623', NULL, NULL, 0, 0, 1)
 GO
-INSERT [dbo].[vendrShippingMethod] ([id], [alias], [storeId], [name], [sku], [taxClassId], [imageId], [sortOrder], [deletedTimestamp]) VALUES (N'b12dc9ab-fa47-49be-9ee5-bc0d069d6ca6', N'royalMail', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'Royal Mail', N'1624', NULL, NULL, 1, 0)
+INSERT [dbo].[vendrShippingMethod] ([id], [alias], [storeId], [name], [sku], [taxClassId], [imageId], [sortOrder], [deletedTimestamp], [version]) VALUES (N'b12dc9ab-fa47-49be-9ee5-bc0d069d6ca6', N'royalMail', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'Royal Mail', N'1624', NULL, NULL, 1, 0, 1)
 GO
-INSERT [dbo].[vendrShippingMethod] ([id], [alias], [storeId], [name], [sku], [taxClassId], [imageId], [sortOrder], [deletedTimestamp]) VALUES (N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', N'pickup', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'Pickup', N'1623', NULL, NULL, 0, 0)
+INSERT [dbo].[vendrShippingMethod] ([id], [alias], [storeId], [name], [sku], [taxClassId], [imageId], [sortOrder], [deletedTimestamp], [version]) VALUES (N'2ecb73ed-1b13-4ca4-8502-c1c4a8df533d', N'pickup', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'Pickup', N'1623', NULL, NULL, 0, 0, 1)
 GO
 INSERT [dbo].[vendrShippingMethodAllowedCountryRegion] ([id], [shippingMethodId], [countryId], [regionId]) VALUES (N'd2ce1f91-e759-4635-b145-017a7c16e2d9', N'c64c93ea-b159-439f-a162-017a7c16e2c9', N'e72c724b-44fd-4b1a-9a4d-017a7c16e207', NULL)
 GO
@@ -22810,9 +23233,9 @@ INSERT [dbo].[vendrShippingMethodAllowedCountryRegion] ([id], [shippingMethodId]
 GO
 INSERT [dbo].[vendrShippingMethodCountryRegionPrice] ([id], [shippingMethodId], [countryId], [regionId], [currencyId], [price]) VALUES (N'442d82d0-acd1-4da5-8185-2627621d68d4', N'b12dc9ab-fa47-49be-9ee5-bc0d069d6ca6', NULL, NULL, N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', CAST(2.5000 AS Numeric(19, 4)))
 GO
-INSERT [dbo].[vendrStore] ([id], [alias], [name], [defaultCountryId], [defaultTaxClassId], [defaultOrderStatusId], [pricesIncludeTax], [cookieTimeoutInMinutes], [confirmationEmailTemplateId], [currentCartNumber], [currentOrderNumber], [cartNumberTemplate], [orderNumberTemplate], [productPropertyAliases], [productUniquenessPropertyAliases], [shareStockFromStoreId], [giftCardCodeTemplate], [giftCardCodeLength], [giftCardDaysValid], [sortOrder], [deletedTimestamp], [orderEditorConfig], [errorOrderStatusId], [errorEmailTemplateId], [giftCardActivationMethod], [giftCardActivationOrderStatusId], [defaultGiftCardEmailTemplateId], [giftCardPropertyAliases], [baseCurrencyId], [orderRoundingMethod]) VALUES (N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'test', N'Test', N'e72c724b-44fd-4b1a-9a4d-017a7c16e207', N'f5afa7b6-98c9-4461-89bc-017a7c16e21e', N'2ab05444-85a4-4918-8f28-017a7c16e235', 0, 525600, N'969f7567-52b0-4c7a-be06-017a7c16e249', 0, 0, N'CART-{0}', N'ORDER-{0}', NULL, NULL, NULL, NULL, 10, 1095, 1, 1625579518, NULL, N'f81b08b2-717d-4ffb-ae28-017a7c16e244', N'9e4eb1f8-02f1-4d6e-96db-017a7c16e262', 0, NULL, N'8e25ad4d-6107-4ba1-86d8-017a7c16e265', N'giftCardRecipientName,giftCardRecipientEmail,giftCardMessage', N'5a6b51a3-4a44-4dd3-b61c-017a7c16e1cb', 0)
+INSERT [dbo].[vendrStore] ([id], [alias], [name], [defaultCountryId], [defaultTaxClassId], [defaultOrderStatusId], [pricesIncludeTax], [cookieTimeoutInMinutes], [confirmationEmailTemplateId], [currentCartNumber], [currentOrderNumber], [cartNumberTemplate], [orderNumberTemplate], [productPropertyAliases], [productUniquenessPropertyAliases], [shareStockFromStoreId], [giftCardCodeTemplate], [giftCardCodeLength], [giftCardDaysValid], [sortOrder], [deletedTimestamp], [orderEditorConfig], [errorOrderStatusId], [errorEmailTemplateId], [giftCardActivationMethod], [giftCardActivationOrderStatusId], [defaultGiftCardEmailTemplateId], [giftCardPropertyAliases], [baseCurrencyId], [orderRoundingMethod], [version]) VALUES (N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'test', N'Test', N'e72c724b-44fd-4b1a-9a4d-017a7c16e207', N'f5afa7b6-98c9-4461-89bc-017a7c16e21e', N'2ab05444-85a4-4918-8f28-017a7c16e235', 0, 525600, N'969f7567-52b0-4c7a-be06-017a7c16e249', 0, 0, N'CART-{0}', N'ORDER-{0}', NULL, NULL, NULL, NULL, 10, 1095, 1, 1625579518, NULL, N'f81b08b2-717d-4ffb-ae28-017a7c16e244', N'9e4eb1f8-02f1-4d6e-96db-017a7c16e262', 0, NULL, N'8e25ad4d-6107-4ba1-86d8-017a7c16e265', N'giftCardRecipientName,giftCardRecipientEmail,giftCardMessage', N'5a6b51a3-4a44-4dd3-b61c-017a7c16e1cb', 0, 1)
 GO
-INSERT [dbo].[vendrStore] ([id], [alias], [name], [defaultCountryId], [defaultTaxClassId], [defaultOrderStatusId], [pricesIncludeTax], [cookieTimeoutInMinutes], [confirmationEmailTemplateId], [currentCartNumber], [currentOrderNumber], [cartNumberTemplate], [orderNumberTemplate], [productPropertyAliases], [productUniquenessPropertyAliases], [shareStockFromStoreId], [giftCardCodeTemplate], [giftCardCodeLength], [giftCardDaysValid], [sortOrder], [deletedTimestamp], [orderEditorConfig], [errorOrderStatusId], [errorEmailTemplateId], [giftCardActivationMethod], [giftCardActivationOrderStatusId], [defaultGiftCardEmailTemplateId], [giftCardPropertyAliases], [baseCurrencyId], [orderRoundingMethod]) VALUES (N'b1e61994-b83b-420a-903e-63a7a15942dc', N'blendid', N'Blendid', N'af697207-d370-4aee-824c-15711d43a9f2', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', 1, 525600, N'19b60fec-fd2b-46d1-9fcc-012a5faeb72c', 5, 3, N'CART-{0}', N'ORDER-{0}', NULL, NULL, NULL, N'GC-{0}', 10, 1095, 0, 0, N'~/app_plugins/vendr/config/blendid.order.editor.config.js', N'47c84cb5-cfda-4935-830e-df4fe38df9de', N'8453f7fc-dd15-4989-b836-a7a141256b66', 1, NULL, N'4730bec8-c539-4a22-85fe-ceffcb3d9b69', NULL, N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', 0)
+INSERT [dbo].[vendrStore] ([id], [alias], [name], [defaultCountryId], [defaultTaxClassId], [defaultOrderStatusId], [pricesIncludeTax], [cookieTimeoutInMinutes], [confirmationEmailTemplateId], [currentCartNumber], [currentOrderNumber], [cartNumberTemplate], [orderNumberTemplate], [productPropertyAliases], [productUniquenessPropertyAliases], [shareStockFromStoreId], [giftCardCodeTemplate], [giftCardCodeLength], [giftCardDaysValid], [sortOrder], [deletedTimestamp], [orderEditorConfig], [errorOrderStatusId], [errorEmailTemplateId], [giftCardActivationMethod], [giftCardActivationOrderStatusId], [defaultGiftCardEmailTemplateId], [giftCardPropertyAliases], [baseCurrencyId], [orderRoundingMethod], [version]) VALUES (N'b1e61994-b83b-420a-903e-63a7a15942dc', N'blendid', N'Blendid', N'af697207-d370-4aee-824c-15711d43a9f2', N'17a2eca0-d21f-462a-8915-8b2606661efd', N'37cd2c8f-48d8-4416-bb37-b2c7d7bb992f', 1, 525600, N'19b60fec-fd2b-46d1-9fcc-012a5faeb72c', 5, 3, N'CART-{0}', N'ORDER-{0}', NULL, NULL, NULL, N'GC-{0}', 10, 1095, 0, 0, N'~/app_plugins/vendr/config/blendid.order.editor.config.js', N'47c84cb5-cfda-4935-830e-df4fe38df9de', N'8453f7fc-dd15-4989-b836-a7a141256b66', 1, NULL, N'4730bec8-c539-4a22-85fe-ceffcb3d9b69', NULL, N'30b62176-6a9e-4a51-b2f0-7ce6c80a461a', 0, 1)
 GO
 INSERT [dbo].[vendrStoreAllowedUserRole] ([id], [storeId], [role]) VALUES (N'f328c452-6987-4d17-a48f-aaeaa120e0b8', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'admin')
 GO
@@ -22824,17 +23247,17 @@ INSERT [dbo].[vendrStoreEntityTag] ([storeId], [entityId], [entityType], [tag]) 
 GO
 INSERT [dbo].[vendrStoreEntityTag] ([storeId], [entityId], [entityType], [tag]) VALUES (N'b1e61994-b83b-420a-903e-63a7a15942dc', N'6cba487d-5190-4dfb-b360-017b3058cf13', N'Order', N'specialbuy')
 GO
-INSERT [dbo].[vendrTaxClass] ([id], [alias], [storeId], [name], [defaultTaxRate], [sortOrder], [deletedTimestamp]) VALUES (N'f5afa7b6-98c9-4461-89bc-017a7c16e21e', N'standard', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'Standard', CAST(0.20000000 AS Numeric(10, 8)), 0, 0)
+INSERT [dbo].[vendrTaxClass] ([id], [alias], [storeId], [name], [defaultTaxRate], [sortOrder], [deletedTimestamp], [version]) VALUES (N'f5afa7b6-98c9-4461-89bc-017a7c16e21e', N'standard', N'3fa4eee8-5c10-4f5e-9263-017a7c16e149', N'Standard', CAST(0.20000000 AS Numeric(10, 8)), 0, 0, 1)
 GO
-INSERT [dbo].[vendrTaxClass] ([id], [alias], [storeId], [name], [defaultTaxRate], [sortOrder], [deletedTimestamp]) VALUES (N'17a2eca0-d21f-462a-8915-8b2606661efd', N'standard', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'Standard', CAST(0.21000000 AS Numeric(10, 8)), 0, 0)
+INSERT [dbo].[vendrTaxClass] ([id], [alias], [storeId], [name], [defaultTaxRate], [sortOrder], [deletedTimestamp], [version]) VALUES (N'17a2eca0-d21f-462a-8915-8b2606661efd', N'standard', N'b1e61994-b83b-420a-903e-63a7a15942dc', N'Standard', CAST(0.21000000 AS Numeric(10, 8)), 0, 0, 1)
 GO
-/****** Object:  Index [IX_cmsContentType]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_cmsContentType]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[cmsContentType] ADD  CONSTRAINT [IX_cmsContentType] UNIQUE NONCLUSTERED 
 (
 	[nodeId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_cmsDictionary_id]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_cmsDictionary_id]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[cmsDictionary] ADD  CONSTRAINT [IX_cmsDictionary_id] UNIQUE NONCLUSTERED 
 (
 	[id] ASC
@@ -22842,20 +23265,20 @@ ALTER TABLE [dbo].[cmsDictionary] ADD  CONSTRAINT [IX_cmsDictionary_id] UNIQUE N
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_cmsDictionary_key]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_cmsDictionary_key]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[cmsDictionary] ADD  CONSTRAINT [IX_cmsDictionary_key] UNIQUE NONCLUSTERED 
 (
 	[key] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_cmsLanguageText_languageId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_cmsLanguageText_languageId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[cmsLanguageText] ADD  CONSTRAINT [IX_cmsLanguageText_languageId] UNIQUE NONCLUSTERED 
 (
 	[languageId] ASC,
 	[UniqueId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_cmsMacro_UniqueId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_cmsMacro_UniqueId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[cmsMacro] ADD  CONSTRAINT [IX_cmsMacro_UniqueId] UNIQUE NONCLUSTERED 
 (
 	[uniqueId] ASC
@@ -22863,7 +23286,7 @@ ALTER TABLE [dbo].[cmsMacro] ADD  CONSTRAINT [IX_cmsMacro_UniqueId] UNIQUE NONCL
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_cmsMacroPropertyAlias]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_cmsMacroPropertyAlias]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[cmsMacro] ADD  CONSTRAINT [IX_cmsMacroPropertyAlias] UNIQUE NONCLUSTERED 
 (
 	[macroAlias] ASC
@@ -22871,26 +23294,26 @@ ALTER TABLE [dbo].[cmsMacro] ADD  CONSTRAINT [IX_cmsMacroPropertyAlias] UNIQUE N
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_cmsMacroProperty_Alias]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_cmsMacroProperty_Alias]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[cmsMacroProperty] ADD  CONSTRAINT [IX_cmsMacroProperty_Alias] UNIQUE NONCLUSTERED 
 (
 	[macro] ASC,
 	[macroPropertyAlias] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_cmsMacroProperty_UniquePropertyId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_cmsMacroProperty_UniquePropertyId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[cmsMacroProperty] ADD  CONSTRAINT [IX_cmsMacroProperty_UniquePropertyId] UNIQUE NONCLUSTERED 
 (
 	[uniquePropertyId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_cmsPropertyTypeUniqueID]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_cmsPropertyTypeUniqueID]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[cmsPropertyType] ADD  CONSTRAINT [IX_cmsPropertyTypeUniqueID] UNIQUE NONCLUSTERED 
 (
 	[UniqueID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_cmsPropertyTypeGroupUniqueID]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_cmsPropertyTypeGroupUniqueID]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[cmsPropertyTypeGroup] ADD  CONSTRAINT [IX_cmsPropertyTypeGroupUniqueID] UNIQUE NONCLUSTERED 
 (
 	[uniqueID] ASC
@@ -22898,7 +23321,7 @@ ALTER TABLE [dbo].[cmsPropertyTypeGroup] ADD  CONSTRAINT [IX_cmsPropertyTypeGrou
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_cmsTags]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_cmsTags]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[cmsTags] ADD  CONSTRAINT [IX_cmsTags] UNIQUE NONCLUSTERED 
 (
 	[group] ASC,
@@ -22906,13 +23329,13 @@ ALTER TABLE [dbo].[cmsTags] ADD  CONSTRAINT [IX_cmsTags] UNIQUE NONCLUSTERED
 	[languageId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_cmsTemplate_nodeId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_cmsTemplate_nodeId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[cmsTemplate] ADD  CONSTRAINT [IX_cmsTemplate_nodeId] UNIQUE NONCLUSTERED 
 (
 	[nodeId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_umbracoAccess_nodeId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_umbracoAccess_nodeId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[umbracoAccess] ADD  CONSTRAINT [IX_umbracoAccess_nodeId] UNIQUE NONCLUSTERED 
 (
 	[nodeId] ASC
@@ -22920,7 +23343,7 @@ ALTER TABLE [dbo].[umbracoAccess] ADD  CONSTRAINT [IX_umbracoAccess_nodeId] UNIQ
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_umbracoAccessRule]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_umbracoAccessRule]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[umbracoAccessRule] ADD  CONSTRAINT [IX_umbracoAccessRule] UNIQUE NONCLUSTERED 
 (
 	[ruleValue] ASC,
@@ -22928,14 +23351,14 @@ ALTER TABLE [dbo].[umbracoAccessRule] ADD  CONSTRAINT [IX_umbracoAccessRule] UNI
 	[accessId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_umbracoContentVersionCultureVariation_VersionId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_umbracoContentVersionCultureVariation_VersionId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[umbracoContentVersionCultureVariation] ADD  CONSTRAINT [IX_umbracoContentVersionCultureVariation_VersionId] UNIQUE NONCLUSTERED 
 (
 	[versionId] ASC,
 	[languageId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_umbracoDocumentCultureVariation_NodeId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_umbracoDocumentCultureVariation_NodeId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[umbracoDocumentCultureVariation] ADD  CONSTRAINT [IX_umbracoDocumentCultureVariation_NodeId] UNIQUE NONCLUSTERED 
 (
 	[nodeId] ASC,
@@ -22944,7 +23367,7 @@ ALTER TABLE [dbo].[umbracoDocumentCultureVariation] ADD  CONSTRAINT [IX_umbracoD
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_umbracoExternalLoginToken_Name]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_umbracoExternalLoginToken_Name]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[umbracoExternalLoginToken] ADD  CONSTRAINT [IX_umbracoExternalLoginToken_Name] UNIQUE NONCLUSTERED 
 (
 	[externalLoginId] ASC,
@@ -22953,7 +23376,7 @@ ALTER TABLE [dbo].[umbracoExternalLoginToken] ADD  CONSTRAINT [IX_umbracoExterna
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_umbracoLanguage_languageISOCode]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_umbracoLanguage_languageISOCode]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[umbracoLanguage] ADD  CONSTRAINT [IX_umbracoLanguage_languageISOCode] UNIQUE NONCLUSTERED 
 (
 	[languageISOCode] ASC
@@ -22961,7 +23384,7 @@ ALTER TABLE [dbo].[umbracoLanguage] ADD  CONSTRAINT [IX_umbracoLanguage_language
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_LogViewerQuery_name]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_LogViewerQuery_name]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[umbracoLogViewerQuery] ADD  CONSTRAINT [IX_LogViewerQuery_name] UNIQUE NONCLUSTERED 
 (
 	[name] ASC
@@ -22969,14 +23392,14 @@ ALTER TABLE [dbo].[umbracoLogViewerQuery] ADD  CONSTRAINT [IX_LogViewerQuery_nam
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_umbracoMediaVersion]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_umbracoMediaVersion]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[umbracoMediaVersion] ADD  CONSTRAINT [IX_umbracoMediaVersion] UNIQUE NONCLUSTERED 
 (
 	[id] ASC,
 	[path] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_umbracoNode_UniqueId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_umbracoNode_UniqueId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[umbracoNode] ADD  CONSTRAINT [IX_umbracoNode_UniqueId] UNIQUE NONCLUSTERED 
 (
 	[uniqueId] ASC
@@ -22984,7 +23407,7 @@ ALTER TABLE [dbo].[umbracoNode] ADD  CONSTRAINT [IX_umbracoNode_UniqueId] UNIQUE
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_umbracoPropertyData_VersionId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_umbracoPropertyData_VersionId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[umbracoPropertyData] ADD  CONSTRAINT [IX_umbracoPropertyData_VersionId] UNIQUE NONCLUSTERED 
 (
 	[versionId] ASC,
@@ -22995,7 +23418,7 @@ ALTER TABLE [dbo].[umbracoPropertyData] ADD  CONSTRAINT [IX_umbracoPropertyData_
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_umbracoRedirectUrl]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_umbracoRedirectUrl]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[umbracoRedirectUrl] ADD  CONSTRAINT [IX_umbracoRedirectUrl] UNIQUE NONCLUSTERED 
 (
 	[urlHash] ASC,
@@ -23004,7 +23427,7 @@ ALTER TABLE [dbo].[umbracoRedirectUrl] ADD  CONSTRAINT [IX_umbracoRedirectUrl] U
 	[createDateUtc] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_umbracoRelation_parentChildType]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_umbracoRelation_parentChildType]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[umbracoRelation] ADD  CONSTRAINT [IX_umbracoRelation_parentChildType] UNIQUE NONCLUSTERED 
 (
 	[parentId] ASC,
@@ -23014,13 +23437,13 @@ ALTER TABLE [dbo].[umbracoRelation] ADD  CONSTRAINT [IX_umbracoRelation_parentCh
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_umbracoRelationType_name]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_umbracoRelationType_name]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[umbracoRelationType] ADD  CONSTRAINT [IX_umbracoRelationType_name] UNIQUE NONCLUSTERED 
 (
 	[name] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_umbracoRelationType_UniqueId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_umbracoRelationType_UniqueId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[umbracoRelationType] ADD  CONSTRAINT [IX_umbracoRelationType_UniqueId] UNIQUE NONCLUSTERED 
 (
 	[typeUniqueId] ASC
@@ -23028,7 +23451,7 @@ ALTER TABLE [dbo].[umbracoRelationType] ADD  CONSTRAINT [IX_umbracoRelationType_
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_computerName]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_computerName]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[umbracoServer] ADD  CONSTRAINT [IX_computerName] UNIQUE NONCLUSTERED 
 (
 	[computerName] ASC
@@ -23036,7 +23459,7 @@ ALTER TABLE [dbo].[umbracoServer] ADD  CONSTRAINT [IX_computerName] UNIQUE NONCL
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_umbracoUserGroup_userGroupAlias]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_umbracoUserGroup_userGroupAlias]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[umbracoUserGroup] ADD  CONSTRAINT [IX_umbracoUserGroup_userGroupAlias] UNIQUE NONCLUSTERED 
 (
 	[userGroupAlias] ASC
@@ -23044,13 +23467,13 @@ ALTER TABLE [dbo].[umbracoUserGroup] ADD  CONSTRAINT [IX_umbracoUserGroup_userGr
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_umbracoUserGroup_userGroupName]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_umbracoUserGroup_userGroupName]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[umbracoUserGroup] ADD  CONSTRAINT [IX_umbracoUserGroup_userGroupName] UNIQUE NONCLUSTERED 
 (
 	[userGroupName] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_umbracoUserStartNode_startNodeType]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_umbracoUserStartNode_startNodeType]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[umbracoUserStartNode] ADD  CONSTRAINT [IX_umbracoUserStartNode_startNodeType] UNIQUE NONCLUSTERED 
 (
 	[startNodeType] ASC,
@@ -23060,7 +23483,7 @@ ALTER TABLE [dbo].[umbracoUserStartNode] ADD  CONSTRAINT [IX_umbracoUserStartNod
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrCountry_code]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrCountry_code]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrCountry] ADD  CONSTRAINT [IX_vendrCountry_code] UNIQUE NONCLUSTERED 
 (
 	[storeId] ASC,
@@ -23070,7 +23493,7 @@ ALTER TABLE [dbo].[vendrCountry] ADD  CONSTRAINT [IX_vendrCountry_code] UNIQUE N
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrCurrency_code]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrCurrency_code]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrCurrency] ADD  CONSTRAINT [IX_vendrCurrency_code] UNIQUE NONCLUSTERED 
 (
 	[storeId] ASC,
@@ -23078,7 +23501,7 @@ ALTER TABLE [dbo].[vendrCurrency] ADD  CONSTRAINT [IX_vendrCurrency_code] UNIQUE
 	[deletedTimestamp] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_vendrCurrencyAllowedCountry_compositeId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrCurrencyAllowedCountry_compositeId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrCurrencyAllowedCountry] ADD  CONSTRAINT [IX_vendrCurrencyAllowedCountry_compositeId] UNIQUE NONCLUSTERED 
 (
 	[currencyId] ASC,
@@ -23087,7 +23510,7 @@ ALTER TABLE [dbo].[vendrCurrencyAllowedCountry] ADD  CONSTRAINT [IX_vendrCurrenc
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrDiscount_alias]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrDiscount_alias]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrDiscount] ADD  CONSTRAINT [IX_vendrDiscount_alias] UNIQUE NONCLUSTERED 
 (
 	[storeId] ASC,
@@ -23097,7 +23520,7 @@ ALTER TABLE [dbo].[vendrDiscount] ADD  CONSTRAINT [IX_vendrDiscount_alias] UNIQU
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrDiscountCode_code]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrDiscountCode_code]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrDiscountCode] ADD  CONSTRAINT [IX_vendrDiscountCode_code] UNIQUE NONCLUSTERED 
 (
 	[storeId] ASC,
@@ -23107,7 +23530,7 @@ ALTER TABLE [dbo].[vendrDiscountCode] ADD  CONSTRAINT [IX_vendrDiscountCode_code
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrEmailTemplate_alias]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrEmailTemplate_alias]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrEmailTemplate] ADD  CONSTRAINT [IX_vendrEmailTemplate_alias] UNIQUE NONCLUSTERED 
 (
 	[storeId] ASC,
@@ -23117,7 +23540,7 @@ ALTER TABLE [dbo].[vendrEmailTemplate] ADD  CONSTRAINT [IX_vendrEmailTemplate_al
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrExportTemplate_alias]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrExportTemplate_alias]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrExportTemplate] ADD  CONSTRAINT [IX_vendrExportTemplate_alias] UNIQUE NONCLUSTERED 
 (
 	[storeId] ASC,
@@ -23127,7 +23550,7 @@ ALTER TABLE [dbo].[vendrExportTemplate] ADD  CONSTRAINT [IX_vendrExportTemplate_
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrFrozenPrice_compositeId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrFrozenPrice_compositeId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrFrozenPrice] ADD  CONSTRAINT [IX_vendrFrozenPrice_compositeId] UNIQUE NONCLUSTERED 
 (
 	[orderId] ASC,
@@ -23139,7 +23562,7 @@ ALTER TABLE [dbo].[vendrFrozenPrice] ADD  CONSTRAINT [IX_vendrFrozenPrice_compos
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrGiftCard_code]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrGiftCard_code]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrGiftCard] ADD  CONSTRAINT [IX_vendrGiftCard_code] UNIQUE NONCLUSTERED 
 (
 	[code] ASC,
@@ -23148,7 +23571,7 @@ ALTER TABLE [dbo].[vendrGiftCard] ADD  CONSTRAINT [IX_vendrGiftCard_code] UNIQUE
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrGiftCardProperty_compositeId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrGiftCardProperty_compositeId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrGiftCardProperty] ADD  CONSTRAINT [IX_vendrGiftCardProperty_compositeId] UNIQUE NONCLUSTERED 
 (
 	[giftCardId] ASC,
@@ -23157,7 +23580,7 @@ ALTER TABLE [dbo].[vendrGiftCardProperty] ADD  CONSTRAINT [IX_vendrGiftCardPrope
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrOrderAppliedDiscountCode_compositeId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrOrderAppliedDiscountCode_compositeId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrOrderAppliedDiscountCode] ADD  CONSTRAINT [IX_vendrOrderAppliedDiscountCode_compositeId] UNIQUE NONCLUSTERED 
 (
 	[orderId] ASC,
@@ -23166,7 +23589,7 @@ ALTER TABLE [dbo].[vendrOrderAppliedDiscountCode] ADD  CONSTRAINT [IX_vendrOrder
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrOrderAppliedGiftCard_compositeId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrOrderAppliedGiftCard_compositeId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrOrderAppliedGiftCard] ADD  CONSTRAINT [IX_vendrOrderAppliedGiftCard_compositeId] UNIQUE NONCLUSTERED 
 (
 	[orderId] ASC,
@@ -23175,7 +23598,7 @@ ALTER TABLE [dbo].[vendrOrderAppliedGiftCard] ADD  CONSTRAINT [IX_vendrOrderAppl
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrOrderLineAttribute_compositeId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrOrderLineAttribute_compositeId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrOrderLineAttribute] ADD  CONSTRAINT [IX_vendrOrderLineAttribute_compositeId] UNIQUE NONCLUSTERED 
 (
 	[orderId] ASC,
@@ -23185,7 +23608,7 @@ ALTER TABLE [dbo].[vendrOrderLineAttribute] ADD  CONSTRAINT [IX_vendrOrderLineAt
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrOrderLineProperty_compositeId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrOrderLineProperty_compositeId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrOrderLineProperty] ADD  CONSTRAINT [IX_vendrOrderLineProperty_compositeId] UNIQUE NONCLUSTERED 
 (
 	[orderId] ASC,
@@ -23195,7 +23618,7 @@ ALTER TABLE [dbo].[vendrOrderLineProperty] ADD  CONSTRAINT [IX_vendrOrderLinePro
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrOrderProperty_compositeId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrOrderProperty_compositeId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrOrderProperty] ADD  CONSTRAINT [IX_vendrOrderProperty_compositeId] UNIQUE NONCLUSTERED 
 (
 	[orderId] ASC,
@@ -23204,7 +23627,7 @@ ALTER TABLE [dbo].[vendrOrderProperty] ADD  CONSTRAINT [IX_vendrOrderProperty_co
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrOrderStatus_alias]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrOrderStatus_alias]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrOrderStatus] ADD  CONSTRAINT [IX_vendrOrderStatus_alias] UNIQUE NONCLUSTERED 
 (
 	[storeId] ASC,
@@ -23214,7 +23637,7 @@ ALTER TABLE [dbo].[vendrOrderStatus] ADD  CONSTRAINT [IX_vendrOrderStatus_alias]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrPaymentMethod_alias]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrPaymentMethod_alias]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrPaymentMethod] ADD  CONSTRAINT [IX_vendrPaymentMethod_alias] UNIQUE NONCLUSTERED 
 (
 	[storeId] ASC,
@@ -23224,7 +23647,7 @@ ALTER TABLE [dbo].[vendrPaymentMethod] ADD  CONSTRAINT [IX_vendrPaymentMethod_al
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrPaymentMethod_sku]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrPaymentMethod_sku]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrPaymentMethod] ADD  CONSTRAINT [IX_vendrPaymentMethod_sku] UNIQUE NONCLUSTERED 
 (
 	[storeId] ASC,
@@ -23232,7 +23655,7 @@ ALTER TABLE [dbo].[vendrPaymentMethod] ADD  CONSTRAINT [IX_vendrPaymentMethod_sk
 	[deletedTimestamp] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_vendrPaymentMethodAllowedCountryRegion_compositeId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrPaymentMethodAllowedCountryRegion_compositeId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrPaymentMethodAllowedCountryRegion] ADD  CONSTRAINT [IX_vendrPaymentMethodAllowedCountryRegion_compositeId] UNIQUE NONCLUSTERED 
 (
 	[paymentMethodId] ASC,
@@ -23240,7 +23663,7 @@ ALTER TABLE [dbo].[vendrPaymentMethodAllowedCountryRegion] ADD  CONSTRAINT [IX_v
 	[regionId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_vendrPaymentMethodCountryRegionPrice_compositeId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrPaymentMethodCountryRegionPrice_compositeId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrPaymentMethodCountryRegionPrice] ADD  CONSTRAINT [IX_vendrPaymentMethodCountryRegionPrice_compositeId] UNIQUE NONCLUSTERED 
 (
 	[paymentMethodId] ASC,
@@ -23251,7 +23674,7 @@ ALTER TABLE [dbo].[vendrPaymentMethodCountryRegionPrice] ADD  CONSTRAINT [IX_ven
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrPaymentMethodPaymentProviderSetting_compositeId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrPaymentMethodPaymentProviderSetting_compositeId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrPaymentMethodPaymentProviderSetting] ADD  CONSTRAINT [IX_vendrPaymentMethodPaymentProviderSetting_compositeId] UNIQUE NONCLUSTERED 
 (
 	[paymentMethodId] ASC,
@@ -23260,7 +23683,7 @@ ALTER TABLE [dbo].[vendrPaymentMethodPaymentProviderSetting] ADD  CONSTRAINT [IX
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrPrintTemplate_alias]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrPrintTemplate_alias]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrPrintTemplate] ADD  CONSTRAINT [IX_vendrPrintTemplate_alias] UNIQUE NONCLUSTERED 
 (
 	[storeId] ASC,
@@ -23270,7 +23693,7 @@ ALTER TABLE [dbo].[vendrPrintTemplate] ADD  CONSTRAINT [IX_vendrPrintTemplate_al
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrProductAttribute_alias]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrProductAttribute_alias]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrProductAttribute] ADD  CONSTRAINT [IX_vendrProductAttribute_alias] UNIQUE NONCLUSTERED 
 (
 	[storeId] ASC,
@@ -23280,7 +23703,7 @@ ALTER TABLE [dbo].[vendrProductAttribute] ADD  CONSTRAINT [IX_vendrProductAttrib
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrProductAttributePreset_alias]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrProductAttributePreset_alias]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrProductAttributePreset] ADD  CONSTRAINT [IX_vendrProductAttributePreset_alias] UNIQUE NONCLUSTERED 
 (
 	[storeId] ASC,
@@ -23290,7 +23713,7 @@ ALTER TABLE [dbo].[vendrProductAttributePreset] ADD  CONSTRAINT [IX_vendrProduct
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrProductAttributePresetAllowedAttribute_alias]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrProductAttributePresetAllowedAttribute_alias]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrProductAttributePresetAllowedAttribute] ADD  CONSTRAINT [IX_vendrProductAttributePresetAllowedAttribute_alias] UNIQUE NONCLUSTERED 
 (
 	[productAttributePresetId] ASC,
@@ -23299,7 +23722,7 @@ ALTER TABLE [dbo].[vendrProductAttributePresetAllowedAttribute] ADD  CONSTRAINT 
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrProductAttributeValue_alias]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrProductAttributeValue_alias]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrProductAttributeValue] ADD  CONSTRAINT [IX_vendrProductAttributeValue_alias] UNIQUE NONCLUSTERED 
 (
 	[productAttributeId] ASC,
@@ -23308,7 +23731,7 @@ ALTER TABLE [dbo].[vendrProductAttributeValue] ADD  CONSTRAINT [IX_vendrProductA
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrRegion_code]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrRegion_code]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrRegion] ADD  CONSTRAINT [IX_vendrRegion_code] UNIQUE NONCLUSTERED 
 (
 	[storeId] ASC,
@@ -23318,7 +23741,7 @@ ALTER TABLE [dbo].[vendrRegion] ADD  CONSTRAINT [IX_vendrRegion_code] UNIQUE NON
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrShippingMethod_alias]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrShippingMethod_alias]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrShippingMethod] ADD  CONSTRAINT [IX_vendrShippingMethod_alias] UNIQUE NONCLUSTERED 
 (
 	[storeId] ASC,
@@ -23328,7 +23751,7 @@ ALTER TABLE [dbo].[vendrShippingMethod] ADD  CONSTRAINT [IX_vendrShippingMethod_
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrShippingMethod_sku]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrShippingMethod_sku]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrShippingMethod] ADD  CONSTRAINT [IX_vendrShippingMethod_sku] UNIQUE NONCLUSTERED 
 (
 	[storeId] ASC,
@@ -23336,7 +23759,7 @@ ALTER TABLE [dbo].[vendrShippingMethod] ADD  CONSTRAINT [IX_vendrShippingMethod_
 	[deletedTimestamp] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_vendrShippingMethodAllowedCountryRegion_compositeId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrShippingMethodAllowedCountryRegion_compositeId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrShippingMethodAllowedCountryRegion] ADD  CONSTRAINT [IX_vendrShippingMethodAllowedCountryRegion_compositeId] UNIQUE NONCLUSTERED 
 (
 	[shippingMethodId] ASC,
@@ -23344,7 +23767,7 @@ ALTER TABLE [dbo].[vendrShippingMethodAllowedCountryRegion] ADD  CONSTRAINT [IX_
 	[regionId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_vendrShippingMethodCountryRegionPrice_compositeId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrShippingMethodCountryRegionPrice_compositeId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrShippingMethodCountryRegionPrice] ADD  CONSTRAINT [IX_vendrShippingMethodCountryRegionPrice_compositeId] UNIQUE NONCLUSTERED 
 (
 	[shippingMethodId] ASC,
@@ -23355,7 +23778,7 @@ ALTER TABLE [dbo].[vendrShippingMethodCountryRegionPrice] ADD  CONSTRAINT [IX_ve
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrStock_ref]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrStock_ref]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrStock] ADD  CONSTRAINT [IX_vendrStock_ref] UNIQUE NONCLUSTERED 
 (
 	[productReference] ASC,
@@ -23364,7 +23787,7 @@ ALTER TABLE [dbo].[vendrStock] ADD  CONSTRAINT [IX_vendrStock_ref] UNIQUE NONCLU
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrStore_alias]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrStore_alias]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrStore] ADD  CONSTRAINT [IX_vendrStore_alias] UNIQUE NONCLUSTERED 
 (
 	[alias] ASC,
@@ -23373,7 +23796,7 @@ ALTER TABLE [dbo].[vendrStore] ADD  CONSTRAINT [IX_vendrStore_alias] UNIQUE NONC
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrStoreAllowedUser_compositeId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrStoreAllowedUser_compositeId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrStoreAllowedUser] ADD  CONSTRAINT [IX_vendrStoreAllowedUser_compositeId] UNIQUE NONCLUSTERED 
 (
 	[storeId] ASC,
@@ -23382,7 +23805,7 @@ ALTER TABLE [dbo].[vendrStoreAllowedUser] ADD  CONSTRAINT [IX_vendrStoreAllowedU
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrStoreAllowedUserRole_compositeId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrStoreAllowedUserRole_compositeId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrStoreAllowedUserRole] ADD  CONSTRAINT [IX_vendrStoreAllowedUserRole_compositeId] UNIQUE NONCLUSTERED 
 (
 	[storeId] ASC,
@@ -23391,7 +23814,7 @@ ALTER TABLE [dbo].[vendrStoreAllowedUserRole] ADD  CONSTRAINT [IX_vendrStoreAllo
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrStoreEntityTag_tag]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrStoreEntityTag_tag]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrStoreEntityTag] ADD  CONSTRAINT [IX_vendrStoreEntityTag_tag] UNIQUE NONCLUSTERED 
 (
 	[storeId] ASC,
@@ -23401,7 +23824,7 @@ ALTER TABLE [dbo].[vendrStoreEntityTag] ADD  CONSTRAINT [IX_vendrStoreEntityTag_
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrTaxClass_alias]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrTaxClass_alias]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrTaxClass] ADD  CONSTRAINT [IX_vendrTaxClass_alias] UNIQUE NONCLUSTERED 
 (
 	[storeId] ASC,
@@ -23409,7 +23832,7 @@ ALTER TABLE [dbo].[vendrTaxClass] ADD  CONSTRAINT [IX_vendrTaxClass_alias] UNIQU
 	[deletedTimestamp] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_vendrTaxClassCountryRegionTaxRate_compositeId]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrTaxClassCountryRegionTaxRate_compositeId]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrTaxClassCountryRegionTaxRate] ADD  CONSTRAINT [IX_vendrTaxClassCountryRegionTaxRate_compositeId] UNIQUE NONCLUSTERED 
 (
 	[taxClassId] ASC,
@@ -23419,7 +23842,7 @@ ALTER TABLE [dbo].[vendrTaxClassCountryRegionTaxRate] ADD  CONSTRAINT [IX_vendrT
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_vendrTranslatedValue_value]    Script Date: 06/06/2022 14:12:01 ******/
+/****** Object:  Index [IX_vendrTranslatedValue_value]    Script Date: 06/06/2022 16:48:36 ******/
 ALTER TABLE [dbo].[vendrTranslatedValue] ADD  CONSTRAINT [IX_vendrTranslatedValue_value] UNIQUE NONCLUSTERED 
 (
 	[entityId] ASC,
@@ -23546,9 +23969,13 @@ ALTER TABLE [dbo].[vendrCountry] ADD  DEFAULT ('0') FOR [sortOrder]
 GO
 ALTER TABLE [dbo].[vendrCountry] ADD  DEFAULT ('0') FOR [deletedTimestamp]
 GO
+ALTER TABLE [dbo].[vendrCountry] ADD  CONSTRAINT [DF_vendrCountry_version]  DEFAULT ((1)) FOR [version]
+GO
 ALTER TABLE [dbo].[vendrCurrency] ADD  DEFAULT ('0') FOR [sortOrder]
 GO
 ALTER TABLE [dbo].[vendrCurrency] ADD  DEFAULT ('0') FOR [deletedTimestamp]
+GO
+ALTER TABLE [dbo].[vendrCurrency] ADD  CONSTRAINT [DF_vendrCurrency_version]  DEFAULT ((1)) FOR [version]
 GO
 ALTER TABLE [dbo].[vendrCurrencyAllowedCountry] ADD  DEFAULT (newid()) FOR [id]
 GO
@@ -23562,6 +23989,8 @@ ALTER TABLE [dbo].[vendrDiscount] ADD  DEFAULT ('0') FOR [deletedTimestamp]
 GO
 ALTER TABLE [dbo].[vendrDiscount] ADD  DEFAULT ('False') FOR [blockFurtherDiscounts]
 GO
+ALTER TABLE [dbo].[vendrDiscount] ADD  CONSTRAINT [DF_vendrDiscount_version]  DEFAULT ((1)) FOR [version]
+GO
 ALTER TABLE [dbo].[vendrDiscountCode] ADD  DEFAULT ('0') FOR [usageCount]
 GO
 ALTER TABLE [dbo].[vendrDiscountCode] ADD  DEFAULT ('0') FOR [deletedTimestamp]
@@ -23572,9 +24001,13 @@ ALTER TABLE [dbo].[vendrEmailTemplate] ADD  DEFAULT ('0') FOR [sortOrder]
 GO
 ALTER TABLE [dbo].[vendrEmailTemplate] ADD  DEFAULT ('0') FOR [deletedTimestamp]
 GO
+ALTER TABLE [dbo].[vendrEmailTemplate] ADD  CONSTRAINT [DF_vendrEmailTemplate_version]  DEFAULT ((1)) FOR [version]
+GO
 ALTER TABLE [dbo].[vendrExportTemplate] ADD  DEFAULT ('0') FOR [sortOrder]
 GO
 ALTER TABLE [dbo].[vendrExportTemplate] ADD  DEFAULT ('0') FOR [deletedTimestamp]
+GO
+ALTER TABLE [dbo].[vendrExportTemplate] ADD  CONSTRAINT [DF_vendrExportTemplate_version]  DEFAULT ((1)) FOR [version]
 GO
 ALTER TABLE [dbo].[vendrFrozenPrice] ADD  DEFAULT (newid()) FOR [id]
 GO
@@ -23587,6 +24020,8 @@ GO
 ALTER TABLE [dbo].[vendrGiftCard] ADD  DEFAULT ('0') FOR [deletedTimestamp]
 GO
 ALTER TABLE [dbo].[vendrGiftCard] ADD  DEFAULT ('False') FOR [isActive]
+GO
+ALTER TABLE [dbo].[vendrGiftCard] ADD  CONSTRAINT [DF_vendrGiftCard_version]  DEFAULT ((1)) FOR [version]
 GO
 ALTER TABLE [dbo].[vendrGiftCardProperty] ADD  DEFAULT (newid()) FOR [id]
 GO
@@ -23615,6 +24050,8 @@ GO
 ALTER TABLE [dbo].[vendrOrder] ADD  DEFAULT ('0') FOR [sortOrder]
 GO
 ALTER TABLE [dbo].[vendrOrder] ADD  DEFAULT ('0') FOR [deletedTimestamp]
+GO
+ALTER TABLE [dbo].[vendrOrder] ADD  CONSTRAINT [DF_vendrOrder_version]  DEFAULT ((1)) FOR [version]
 GO
 ALTER TABLE [dbo].[vendrOrderAmountAdjustment] ADD  DEFAULT (newid()) FOR [id]
 GO
@@ -23656,6 +24093,8 @@ ALTER TABLE [dbo].[vendrOrderStatus] ADD  DEFAULT ('0') FOR [sortOrder]
 GO
 ALTER TABLE [dbo].[vendrOrderStatus] ADD  DEFAULT ('0') FOR [deletedTimestamp]
 GO
+ALTER TABLE [dbo].[vendrOrderStatus] ADD  CONSTRAINT [DF_vendrOrderStatus_version]  DEFAULT ((1)) FOR [version]
+GO
 ALTER TABLE [dbo].[vendrPaymentMethod] ADD  DEFAULT ('False') FOR [canFetchPaymentStatuses]
 GO
 ALTER TABLE [dbo].[vendrPaymentMethod] ADD  DEFAULT ('False') FOR [canCapturePayments]
@@ -23668,6 +24107,8 @@ ALTER TABLE [dbo].[vendrPaymentMethod] ADD  DEFAULT ('0') FOR [sortOrder]
 GO
 ALTER TABLE [dbo].[vendrPaymentMethod] ADD  DEFAULT ('0') FOR [deletedTimestamp]
 GO
+ALTER TABLE [dbo].[vendrPaymentMethod] ADD  CONSTRAINT [DF_vendrPaymentMethod_version]  DEFAULT ((1)) FOR [version]
+GO
 ALTER TABLE [dbo].[vendrPaymentMethodAllowedCountryRegion] ADD  DEFAULT (newid()) FOR [id]
 GO
 ALTER TABLE [dbo].[vendrPaymentMethodCountryRegionPrice] ADD  DEFAULT (newid()) FOR [id]
@@ -23678,17 +24119,23 @@ ALTER TABLE [dbo].[vendrPrintTemplate] ADD  DEFAULT ('0') FOR [sortOrder]
 GO
 ALTER TABLE [dbo].[vendrPrintTemplate] ADD  DEFAULT ('0') FOR [deletedTimestamp]
 GO
+ALTER TABLE [dbo].[vendrPrintTemplate] ADD  CONSTRAINT [DF_vendrPrintTemplate_version]  DEFAULT ((1)) FOR [version]
+GO
 ALTER TABLE [dbo].[vendrProductAttribute] ADD  DEFAULT (newid()) FOR [id]
 GO
 ALTER TABLE [dbo].[vendrProductAttribute] ADD  DEFAULT ('0') FOR [sortOrder]
 GO
 ALTER TABLE [dbo].[vendrProductAttribute] ADD  DEFAULT ('0') FOR [deletedTimestamp]
 GO
+ALTER TABLE [dbo].[vendrProductAttribute] ADD  CONSTRAINT [DF_vendrProductAttribute_version]  DEFAULT ((1)) FOR [version]
+GO
 ALTER TABLE [dbo].[vendrProductAttributePreset] ADD  DEFAULT (newid()) FOR [id]
 GO
 ALTER TABLE [dbo].[vendrProductAttributePreset] ADD  DEFAULT ('0') FOR [sortOrder]
 GO
 ALTER TABLE [dbo].[vendrProductAttributePreset] ADD  DEFAULT ('0') FOR [deletedTimestamp]
+GO
+ALTER TABLE [dbo].[vendrProductAttributePreset] ADD  CONSTRAINT [DF_vendrProductAttributePreset_version]  DEFAULT ((1)) FOR [version]
 GO
 ALTER TABLE [dbo].[vendrProductAttributePresetAllowedAttribute] ADD  DEFAULT (newid()) FOR [id]
 GO
@@ -23700,9 +24147,13 @@ ALTER TABLE [dbo].[vendrRegion] ADD  DEFAULT ('0') FOR [sortOrder]
 GO
 ALTER TABLE [dbo].[vendrRegion] ADD  DEFAULT ('0') FOR [deletedTimestamp]
 GO
+ALTER TABLE [dbo].[vendrRegion] ADD  CONSTRAINT [DF_vendrRegion_version]  DEFAULT ((1)) FOR [version]
+GO
 ALTER TABLE [dbo].[vendrShippingMethod] ADD  DEFAULT ('0') FOR [sortOrder]
 GO
 ALTER TABLE [dbo].[vendrShippingMethod] ADD  DEFAULT ('0') FOR [deletedTimestamp]
+GO
+ALTER TABLE [dbo].[vendrShippingMethod] ADD  CONSTRAINT [DF_vendrShippingMethod_version]  DEFAULT ((1)) FOR [version]
 GO
 ALTER TABLE [dbo].[vendrShippingMethodAllowedCountryRegion] ADD  DEFAULT (newid()) FOR [id]
 GO
@@ -23726,6 +24177,8 @@ ALTER TABLE [dbo].[vendrStore] ADD  DEFAULT ('0') FOR [sortOrder]
 GO
 ALTER TABLE [dbo].[vendrStore] ADD  DEFAULT ('0') FOR [deletedTimestamp]
 GO
+ALTER TABLE [dbo].[vendrStore] ADD  CONSTRAINT [DF_vendrStore_version]  DEFAULT ((1)) FOR [version]
+GO
 ALTER TABLE [dbo].[vendrStoreAllowedUser] ADD  DEFAULT (newid()) FOR [id]
 GO
 ALTER TABLE [dbo].[vendrStoreAllowedUserRole] ADD  DEFAULT (newid()) FOR [id]
@@ -23733,6 +24186,8 @@ GO
 ALTER TABLE [dbo].[vendrTaxClass] ADD  DEFAULT ('0') FOR [sortOrder]
 GO
 ALTER TABLE [dbo].[vendrTaxClass] ADD  DEFAULT ('0') FOR [deletedTimestamp]
+GO
+ALTER TABLE [dbo].[vendrTaxClass] ADD  CONSTRAINT [DF_vendrTaxClass_version]  DEFAULT ((1)) FOR [version]
 GO
 ALTER TABLE [dbo].[vendrTaxClassCountryRegionTaxRate] ADD  DEFAULT (newid()) FOR [id]
 GO
@@ -24420,10 +24875,25 @@ REFERENCES [dbo].[vendrCountry] ([id])
 GO
 ALTER TABLE [dbo].[vendrStore] CHECK CONSTRAINT [FK_vendrStore_vendrCountry]
 GO
+ALTER TABLE [dbo].[vendrStore]  WITH CHECK ADD  CONSTRAINT [FK_vendrStore_vendrCountry_defaultCountry] FOREIGN KEY([defaultCountryId])
+REFERENCES [dbo].[vendrCountry] ([id])
+GO
+ALTER TABLE [dbo].[vendrStore] CHECK CONSTRAINT [FK_vendrStore_vendrCountry_defaultCountry]
+GO
+ALTER TABLE [dbo].[vendrStore]  WITH CHECK ADD  CONSTRAINT [FK_vendrStore_vendrCurrency_baseCurrency] FOREIGN KEY([baseCurrencyId])
+REFERENCES [dbo].[vendrCurrency] ([id])
+GO
+ALTER TABLE [dbo].[vendrStore] CHECK CONSTRAINT [FK_vendrStore_vendrCurrency_baseCurrency]
+GO
 ALTER TABLE [dbo].[vendrStore]  WITH CHECK ADD  CONSTRAINT [FK_vendrStore_vendrEmailTemplate_confirmation] FOREIGN KEY([confirmationEmailTemplateId])
 REFERENCES [dbo].[vendrEmailTemplate] ([id])
 GO
 ALTER TABLE [dbo].[vendrStore] CHECK CONSTRAINT [FK_vendrStore_vendrEmailTemplate_confirmation]
+GO
+ALTER TABLE [dbo].[vendrStore]  WITH CHECK ADD  CONSTRAINT [FK_vendrStore_vendrEmailTemplate_confirmationEmailTemplate] FOREIGN KEY([confirmationEmailTemplateId])
+REFERENCES [dbo].[vendrEmailTemplate] ([id])
+GO
+ALTER TABLE [dbo].[vendrStore] CHECK CONSTRAINT [FK_vendrStore_vendrEmailTemplate_confirmationEmailTemplate]
 GO
 ALTER TABLE [dbo].[vendrStore]  WITH CHECK ADD  CONSTRAINT [FK_vendrStore_vendrEmailTemplate_defaultGiftCardEmailTemplate] FOREIGN KEY([defaultGiftCardEmailTemplateId])
 REFERENCES [dbo].[vendrEmailTemplate] ([id])
@@ -24435,10 +24905,25 @@ REFERENCES [dbo].[vendrEmailTemplate] ([id])
 GO
 ALTER TABLE [dbo].[vendrStore] CHECK CONSTRAINT [FK_vendrStore_vendrEmailTemplate_error]
 GO
+ALTER TABLE [dbo].[vendrStore]  WITH CHECK ADD  CONSTRAINT [FK_vendrStore_vendrEmailTemplate_errorEmailTemplate] FOREIGN KEY([errorEmailTemplateId])
+REFERENCES [dbo].[vendrEmailTemplate] ([id])
+GO
+ALTER TABLE [dbo].[vendrStore] CHECK CONSTRAINT [FK_vendrStore_vendrEmailTemplate_errorEmailTemplate]
+GO
 ALTER TABLE [dbo].[vendrStore]  WITH CHECK ADD  CONSTRAINT [FK_vendrStore_vendrOrderStatus] FOREIGN KEY([defaultOrderStatusId])
 REFERENCES [dbo].[vendrOrderStatus] ([id])
 GO
 ALTER TABLE [dbo].[vendrStore] CHECK CONSTRAINT [FK_vendrStore_vendrOrderStatus]
+GO
+ALTER TABLE [dbo].[vendrStore]  WITH CHECK ADD  CONSTRAINT [FK_vendrStore_vendrOrderStatus_defaultOrderStatus] FOREIGN KEY([defaultOrderStatusId])
+REFERENCES [dbo].[vendrOrderStatus] ([id])
+GO
+ALTER TABLE [dbo].[vendrStore] CHECK CONSTRAINT [FK_vendrStore_vendrOrderStatus_defaultOrderStatus]
+GO
+ALTER TABLE [dbo].[vendrStore]  WITH CHECK ADD  CONSTRAINT [FK_vendrStore_vendrOrderStatus_errorOrderStatus] FOREIGN KEY([errorOrderStatusId])
+REFERENCES [dbo].[vendrOrderStatus] ([id])
+GO
+ALTER TABLE [dbo].[vendrStore] CHECK CONSTRAINT [FK_vendrStore_vendrOrderStatus_errorOrderStatus]
 GO
 ALTER TABLE [dbo].[vendrStore]  WITH CHECK ADD  CONSTRAINT [FK_vendrStore_vendrOrderStatus_giftCardActivationOrderStatus] FOREIGN KEY([giftCardActivationOrderStatusId])
 REFERENCES [dbo].[vendrOrderStatus] ([id])
@@ -24454,6 +24939,11 @@ ALTER TABLE [dbo].[vendrStore]  WITH CHECK ADD  CONSTRAINT [FK_vendrStore_vendrT
 REFERENCES [dbo].[vendrTaxClass] ([id])
 GO
 ALTER TABLE [dbo].[vendrStore] CHECK CONSTRAINT [FK_vendrStore_vendrTaxClass]
+GO
+ALTER TABLE [dbo].[vendrStore]  WITH CHECK ADD  CONSTRAINT [FK_vendrStore_vendrTaxClass_defaultTaxClass] FOREIGN KEY([defaultTaxClassId])
+REFERENCES [dbo].[vendrTaxClass] ([id])
+GO
+ALTER TABLE [dbo].[vendrStore] CHECK CONSTRAINT [FK_vendrStore_vendrTaxClass_defaultTaxClass]
 GO
 ALTER TABLE [dbo].[vendrStoreAllowedUser]  WITH CHECK ADD  CONSTRAINT [FK_vendrStoreAllowedUser_vendrStore] FOREIGN KEY([storeId])
 REFERENCES [dbo].[vendrStore] ([id])

@@ -1,0 +1,18 @@
+﻿<div class="vendr-toggle-list">
+    <vendr-toggle name="'All'" checked="allChecked" ng-if="toggleAll"></vendr-toggle>
+    <vendr-toggle ng-repeat-start="item in ngModel" 
+                  checked="item.checked"
+                  name="item.name"
+                  description="item.description"
+                  checked-action-label="checkedActionLabel"
+                  on-checked-action="onCheckedAction(item)"></vendr-toggle>
+    <vendr-toggle ng-repeat="item2 in item[itemsKey || 'items']" 
+                  ng-if="item.checked"
+                  checked="item2.checked"
+                  name="item2.name"  
+                  description="item2.description"
+                  checked-action-label="checkedActionLabel"
+                  on-checked-action="onCheckedAction(item2)"
+                  class="vendr-toggle--indented"
+                  ng-repeat-end></vendr-toggle>
+</div>

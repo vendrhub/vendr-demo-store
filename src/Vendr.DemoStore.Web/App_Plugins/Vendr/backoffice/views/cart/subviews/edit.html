@@ -54,14 +54,15 @@
                                 -->
                             </td>
                         </tr>
-                        
-                        <tr class="vendr-order-table2__line-item vendr-order-table2__line-item--bundle" 
-                            ng-if="ol.bundleId && ol.unitPriceBase != vm.content.zeroAmount && vm.bundleIsExpanded(ol.bundleId)">
+
+                        <tr class="vendr-order-table2__line-item vendr-order-table2__line-item--bundle"
+                            ng-if="ol.bundleId && ol.orderLines.length > 0 && ol.basePrice != vm.content.zeroAmount && vm.bundleIsExpanded(ol.bundleId)">
                             <td colspan="3">
                                 <i class="vendr-order-table__bundle-toggle fa fa-plus-square-o" aria-hidden="true" style="visibility: hidden;"></i><strong>Base Price</strong>
                             </td>
                             <td class="text-right">
-                                <strong>{{ol.unitPriceBase}}</strong>
+                                <strong class="color-grey text-12 strikethrough block" ng-if="ol.basePriceWithoutAdjustments != ol.basePrice">{{ol.basePriceWithoutAdjustments}}</strong>
+                                <strong>{{ol.basePrice}}</strong>
                             </td>
                             <td colspan="2"></td>
                         </tr>

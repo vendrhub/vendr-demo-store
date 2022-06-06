@@ -6,7 +6,7 @@
 
 @await Html.PartialAsync("OrderInformationSummary")
 
-@using (Html.BeginPaymentForm(Model.Order))
+@using (await Html.BeginPaymentFormAsync(Model.Order)) 
 {
     <div class="border border-gray-300 rounded">
         <label class="flex items-center py-4 px-4 cursor-pointer hover:bg-gray-100">

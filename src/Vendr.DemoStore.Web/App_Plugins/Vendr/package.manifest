@@ -1,123 +1,326 @@
 ﻿{
-  "propertyEditors": [
-    {
-      "alias": "Vendr.StorePicker",
-      "name": "Vendr: Store Picker",
-      "editor": {
-        "view": "~/App_Plugins/Vendr/backoffice/views/propertyeditors/storepicker/storepicker.html",
-        "hideLabel": false,
-        "valueType": "STRING"
-      }
-    },
-    {
-      "alias": "Vendr.TaxClassPicker",
-      "name": "Vendr: Tax Class Picker [Obsolete, use Store Entity Picker instead]",
-      "editor": {
-        "view": "~/App_Plugins/Vendr/backoffice/views/propertyeditors/taxclasspicker/taxclasspicker.html",
-        "hideLabel": false,
-        "valueType": "STRING"
-      }
-    },
-    {
-      "alias": "Vendr.StoreEntityPicker",
-      "name": "Vendr: Store Entity Picker",
-      "editor": {
-        "view": "~/App_Plugins/Vendr/backoffice/views/propertyeditors/storeentitypicker/storeentitypicker.html",
-        "hideLabel": false,
-        "valueType": "STRING"
-      },
-      "prevalues": {
-        "fields": [
-          {
-            "label": "Store Config",
-            "key": "storeConfig",
-            "view": "~/App_Plugins/Vendr/backoffice/views/prevalueeditors/storeconfig/storeconfig.html",
-            "hideLabel": true
-          },
-          {
-            "label": "Store Entity Type",
-            "description": "The type of store entity to pick from",
-            "key": "entityType",
-            "view": "~/App_Plugins/Vendr/backoffice/views/propertyeditors/dropdown/dropdown.html",
-            "config": {
-              "items": {
-                "OrderStatus": "Order Status",
-                "Country": "Country",
-                "ShippingMethod": "Shipping Method",
-                "PaymentMethod": "Payment Method",
-                "Currency": "Currency",
-                "TaxClass": "Tax Class",
-                "EmailTemplate": "Email Template",
-                "Discount": "Discount"
-              }
+    "propertyEditors": [
+        {
+            "alias": "Vendr.StorePicker",
+            "name": "Vendr: Store Picker",
+            "editor": {
+                "view": "~/App_Plugins/Vendr/backoffice/views/propertyeditors/storepicker/storepicker.html",
+                "hideLabel": false,
+                "valueType": "STRING"
             }
-          }
-        ]
-      }
-    },
-    {
-      "alias": "Vendr.Stock",
-      "name": "Vendr: Stock",
-      "editor": {
-        "view": "~/App_Plugins/Vendr/backoffice/views/propertyeditors/stock/stock.html",
-        "hideLabel": false,
-        "valueType": "DECIMAL"
-      },
-      "prevalues": {
-        "fields": [
-          {
-            "label": "Decimal places",
-            "description": "Number of decimal places to allow. Default/Max is 6.",
-            "key": "fraction",
-            "view": "number"
-          }
-        ]
-      }
-    },
-    {
-      "alias": "Vendr.Price",
-      "name": "Vendr: Price",
-      "editor": {
-        "view": "~/App_Plugins/Vendr/backoffice/views/propertyeditors/price/price.html",
-        "hideLabel": false,
-        "valueType": "JSON"
-      },
-      "prevalues": {
-        "fields": [
-          {
-            "label": "Decimal places",
-            "description": "Number of decimal places to allow. Default is 2, Max is 4.",
-            "key": "fraction",
-            "view": "number"
-          }
-        ]
-      }
-    }
-  ],
-  "dashboards": [
-    {
-      "alias": "CommerceDashboard",
-      "view": "~/App_Plugins/Vendr/backoffice/views/dashboards/commerce.dashboard.html",
-      "sections": [
-        "commerce"
-      ],
-      "weight": -10
-    }
-  ],
-  "javascript": [
-    "~/App_Plugins/Vendr/backoffice/js/vendr.modules.js",
-    "~/App_Plugins/Vendr/backoffice/js/vendr.vendor.js",
-    "~/App_Plugins/Vendr/backoffice/js/vendr.extensions.js",
-    "~/App_Plugins/Vendr/backoffice/js/vendr.providers.js",
-    "~/App_Plugins/Vendr/backoffice/js/vendr.interceptors.js",
-    "~/App_Plugins/Vendr/backoffice/js/vendr.decorators.js",
-    "~/App_Plugins/Vendr/backoffice/js/vendr.filters.js",
-    "~/App_Plugins/Vendr/backoffice/js/vendr.directives.js",
-    "~/App_Plugins/Vendr/backoffice/js/vendr.resources.js",
-    "~/App_Plugins/Vendr/backoffice/js/vendr.services.js",
-    "~/App_Plugins/Vendr/backoffice/js/vendr.controllers.js"
-  ],
-  "css": [
-    "~/App_Plugins/Vendr/backoffice/css/vendr.css"
-  ]
+        },
+        {
+            "alias": "Vendr.TaxClassPicker",
+            "name": "Vendr: Tax Class Picker [Obsolete, use Store Entity Picker instead]",
+            "editor": {
+                "view": "~/App_Plugins/Vendr/backoffice/views/propertyeditors/taxclasspicker/taxclasspicker.html",
+                "hideLabel": false,
+                "valueType": "STRING"
+            }
+        },
+        {
+            "alias": "Vendr.StoreEntityPicker",
+            "name": "Vendr: Store Entity Picker",
+            "editor": {
+                "view": "~/App_Plugins/Vendr/backoffice/views/propertyeditors/storeentitypicker/storeentitypicker.html",
+                "hideLabel": false,
+                "valueType": "STRING"
+            },
+            "prevalues": {
+                "fields": [
+                    {
+                        "label": "Store Config",
+                        "key": "storeConfig",
+                        "view": "~/App_Plugins/Vendr/backoffice/views/prevalueeditors/storeconfig/storeconfig.html",
+                        "hideLabel": true
+                    },
+                    {
+                        "label": "Store Entity Type",
+                        "description": "The type of store entity to pick from",
+                        "key": "entityType",
+                        "view": "~/App_Plugins/Vendr/backoffice/views/propertyeditors/dropdown/dropdown.html",
+                        "config": {
+                            "items": {
+                                "OrderStatus": "Order Status",
+                                "Country": "Country",
+                                "ShippingMethod": "Shipping Method",
+                                "PaymentMethod": "Payment Method",
+                                "Currency": "Currency",
+                                "TaxClass": "Tax Class",
+                                "EmailTemplate": "Email Template",
+                                "Discount": "Discount"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "alias": "Vendr.Stock",
+            "name": "Vendr: Stock",
+            "editor": {
+                "view": "~/App_Plugins/Vendr/backoffice/views/propertyeditors/stock/stock.html",
+                "hideLabel": false,
+                "valueType": "DECIMAL"
+            },
+            "prevalues": {
+                "fields": [
+                    {
+                        "label": "Decimal places",
+                        "description": "Number of decimal places to allow. Default/Max is 6.",
+                        "key": "fraction",
+                        "view": "number"
+                    }
+                ]
+            }
+        },
+        {
+            "alias": "Vendr.Price",
+            "name": "Vendr: Price",
+            "editor": {
+                "view": "~/App_Plugins/Vendr/backoffice/views/propertyeditors/price/price.html",
+                "hideLabel": false,
+                "valueType": "JSON"
+            },
+            "prevalues": {
+                "fields": [
+                    {
+                        "label": "Decimal places",
+                        "description": "Number of decimal places to allow. Default is 2, Max is 4.",
+                        "key": "fraction",
+                        "view": "number"
+                    }
+                ]
+            }
+        }
+    ],
+
+    "dashboards": [
+        {
+            "alias": "CommerceDashboard",
+            "view": "~/App_Plugins/Vendr/backoffice/views/dashboards/commerce.dashboard.html",
+            "sections": [ "commerce" ],
+            "weight": -10
+        }
+    ],
+
+    "javascript": [
+
+        // Modules
+        "~/App_Plugins/Vendr/backoffice/_module.js",
+        "~/App_Plugins/Vendr/backoffice/decorators/_module.js",
+        "~/App_Plugins/Vendr/backoffice/interceptors/_module.js",
+        "~/App_Plugins/Vendr/backoffice/directives/_module.js",
+        "~/App_Plugins/Vendr/backoffice/filters/_module.js",
+        "~/App_Plugins/Vendr/backoffice/resources/_module.js",
+        "~/App_Plugins/Vendr/backoffice/services/_module.js",
+        "~/App_Plugins/Vendr/backoffice/vendor/_module.js",
+
+        // Extensions
+        "~/App_Plugins/Vendr/backoffice/extensions/date.extensions.js",
+
+        // Vendor
+        "~/App_Plugins/Vendr/backoffice/vendor/angular-auto-complete.js",
+        "~/App_Plugins/Vendr/backoffice/vendor/ng-currency.min.js",
+        "~/App_Plugins/Vendr/backoffice/vendor/minimasonry.min.js",
+        "~/App_Plugins/Vendr/backoffice/vendor/ng-pattern-restrict.min.js",
+
+        // Providers
+        "~/App_Plugins/Vendr/backoffice/providers/actions.provider.js",
+
+        // Decorators
+        "~/App_Plugins/Vendr/backoffice/decorators/contentapphelper.decorator.js",
+
+        // Interceptors
+        "~/App_Plugins/Vendr/backoffice/interceptors/routerewrites.interceptor.js",
+        "~/App_Plugins/Vendr/backoffice/interceptors/menuactions.interceptor.js",
+
+        // Directives
+        "~/App_Plugins/Vendr/backoffice/directives/vendrcompile.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendrtable.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendrtableview.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendrcolorpicker.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendrdictionaryinput.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendrtoggle.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendrtogglelist.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendrmediapicker.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendrmessage.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendrlicensecheck.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendritempicker.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendridlabel.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendruppercase.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendrlowercase.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendrscopedinclude.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendrrulebuilder.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendrrewardbuilder.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendrfilter.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendrmasonrygrid.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendranalyticswidget.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendranalyticschartwidget.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendrordersearch.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendrpagesize.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendreditoractions.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendrautosizeiframe.directive.js",
+        "~/App_Plugins/Vendr/backoffice/directives/vendrtagseditor.directive.js",
+
+        // Filters
+        "~/App_Plugins/Vendr/backoffice/filters/operatorsymbol.filter.js",
+        "~/App_Plugins/Vendr/backoffice/filters/splitcamelcase.filter.js",
+        "~/App_Plugins/Vendr/backoffice/filters/nodename.filter.js",
+        "~/App_Plugins/Vendr/backoffice/filters/entityname.filter.js",
+        "~/App_Plugins/Vendr/backoffice/filters/currencycode.filter.js",
+        "~/App_Plugins/Vendr/backoffice/filters/groupby.filter.js",
+
+        // Prevalue Editors
+        "~/App_Plugins/Vendr/backoffice/views/prevalueeditors/storeconfig/storeconfig.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/prevalueeditors/elementtypepicker/elementtypepicker.controller.js",
+
+        // Property Editors
+        "~/App_Plugins/Vendr/backoffice/views/propertyeditors/dictionaryinput/dictionaryinput.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/propertyeditors/storepicker/storepicker.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/propertyeditors/storeentitypicker/storeentitypicker.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/propertyeditors/taxclasspicker/taxclasspicker.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/propertyeditors/price/price.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/propertyeditors/stock/stock.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/propertyeditors/conditionalinput/conditionalinput.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/propertyeditors/umbracomembergroupspicker/umbracomembergroupspicker.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/propertyeditors/pricesincludetax/pricesincludetax.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/propertyeditors/variantseditor/variantseditor.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/propertyeditors/tags/tags.controller.js",
+
+        // Resources
+        "~/App_Plugins/Vendr/backoffice/resources/entity.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/culture.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/country.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/currency.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/dictionary.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/emailtemplate.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/printtemplate.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/exporttemplate.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/email.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/cart.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/order.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/orderstatus.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/paymentmethod.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/productattribute.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/shippingmethod.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/store.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/tax.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/product.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/discount.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/giftcard.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/activitylog.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/analytics.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/utils.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/licensing.resource.js",
+        "~/App_Plugins/Vendr/backoffice/resources/tag.resource.js",
+
+        // Services
+        "~/App_Plugins/Vendr/backoffice/services/vendrutils.service.js",
+        "~/App_Plugins/Vendr/backoffice/services/vendrrequesthelper.service.js",
+        "~/App_Plugins/Vendr/backoffice/services/vendrroutecache.service.js",
+        "~/App_Plugins/Vendr/backoffice/services/vendrlocalstorage.service.js",
+        "~/App_Plugins/Vendr/backoffice/services/vendrdatehelper.service.js",
+        "~/App_Plugins/Vendr/backoffice/services/vendrvariantseditorstate.service.js",
+
+        // Dialogs
+        "~/App_Plugins/Vendr/backoffice/views/dialogs/dictionaryedit.dialog.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/dialogs/custompricingedit.dialog.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/dialogs/storepicker.dialog.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/dialogs/storeentitypicker.dialog.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/dialogs/emailtemplatepicker.dialog.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/dialogs/orderstatuspicker.dialog.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/dialogs/taxclasspicker.dialog.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/dialogs/discountruleproviderpicker.dialog.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/dialogs/discountrewardproviderpicker.dialog.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/dialogs/settingseditor.dialog.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/dialogs/sendemail.dialog.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/dialogs/elementtypepicker.dialog.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/dialogs/translatedvalueeditor.dialog.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/dialogs/productattributepicker.dialog.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/dialogs/printoptions.dialog.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/dialogs/exporttemplatepicker.dialog.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/dialogs/export.dialog.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/dialogs/advancedfilter.dialog.controller.js",
+
+        // Controllers
+        "~/App_Plugins/Vendr/backoffice/views/entity/entity.delete.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/entity/entity.sort.controller.js",
+
+        "~/App_Plugins/Vendr/backoffice/views/country/country.create.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/country/country.edit.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/country/country.list.controller.js",
+
+        "~/App_Plugins/Vendr/backoffice/views/region/region.edit.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/region/region.list.controller.js",
+
+        "~/App_Plugins/Vendr/backoffice/views/currency/currency.edit.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/currency/currency.list.controller.js",
+
+        "~/App_Plugins/Vendr/backoffice/views/discount/discount.list.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/discount/discount.edit.controller.js",
+
+        "~/App_Plugins/Vendr/backoffice/views/emailtemplate/emailtemplate.edit.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/emailtemplate/emailtemplate.list.controller.js",
+
+        "~/App_Plugins/Vendr/backoffice/views/printtemplate/printtemplate.edit.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/printtemplate/printtemplate.list.controller.js",
+
+        "~/App_Plugins/Vendr/backoffice/views/exporttemplate/exporttemplate.edit.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/exporttemplate/exporttemplate.list.controller.js",
+
+        "~/App_Plugins/Vendr/backoffice/views/giftcard/giftcard.list.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/giftcard/giftcard.edit.controller.js",
+
+        "~/App_Plugins/Vendr/backoffice/views/order/order.edit.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/order/order.list.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/order/dialogs/transactioninfo.dialog.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/order/dialogs/customerinfo.dialog.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/order/dialogs/editcustomerdetails.dialog.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/order/dialogs/editproperties.dialog.controller.js",
+
+        "~/App_Plugins/Vendr/backoffice/views/cart/cart.create.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/cart/cart.edit.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/cart/cart.list.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/cart/dialogs/addproduct.dialog.controller.js",
+
+        "~/App_Plugins/Vendr/backoffice/views/orderstatus/orderstatus.edit.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/orderstatus/orderstatus.list.controller.js",
+
+        "~/App_Plugins/Vendr/backoffice/views/paymentmethod/paymentmethod.create.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/paymentmethod/paymentmethod.edit.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/paymentmethod/paymentmethod.list.controller.js",
+
+        "~/App_Plugins/Vendr/backoffice/views/productattribute/productattribute.edit.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/productattribute/productattribute.list.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/productattributepreset/productattributepreset.edit.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/productattributepreset/productattributepreset.list.controller.js",
+
+        "~/App_Plugins/Vendr/backoffice/views/settings/settings.view.controller.js",
+
+        "~/App_Plugins/Vendr/backoffice/views/shippingmethod/shippingmethod.edit.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/shippingmethod/shippingmethod.list.controller.js",
+
+        "~/App_Plugins/Vendr/backoffice/views/store/store.view.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/store/store.edit.controller.js",
+
+        "~/App_Plugins/Vendr/backoffice/views/taxclass/taxclass.edit.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/taxclass/taxclass.list.controller.js",
+
+        "~/App_Plugins/Vendr/backoffice/views/analytics/analytics.view.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/analytics/dialogs/timeframe.dialog.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/analytics/widgets/totalrevenue.widget.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/analytics/widgets/totalorders.widget.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/analytics/widgets/avgordervalue.widget.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/analytics/widgets/cartconversionrates.widget.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/analytics/widgets/repeatcustomerrates.widget.controller.js",
+        "~/App_Plugins/Vendr/backoffice/views/analytics/widgets/topsellingproducts.widget.controller.js",
+
+        "~/App_Plugins/Vendr/backoffice/views/dashboards/commerce.dashboard.controller.js",
+
+        "~/App_Plugins/Vendr/backoffice/views/apps/variantsapp/variantsapp.controller.js"
+    ],
+    "css": [
+        "~/App_Plugins/Vendr/backoffice/css/vendr.css"
+    ]
 }

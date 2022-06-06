@@ -1,0 +1,23 @@
+﻿<div>
+    <div ng-if="licensingInfo">
+
+        <!-- Probably a local install with a live license that has expired or an install with multiple licenses where one has expired -->
+        <vendr-message ng-if="licensingInfo.hasInactive && licensingInfo.isLicensed" type="'warn'" heading="'Invalid License for Vendr Version'" icon="'exclamation-triangle'">
+            <p>There are currently one or more inactive licenses installed in this solution which usually means they aren't valid for this Vendr version. If you attempt to use this solution on an inactive licenses domain then Vendr will revert back to trial mode. To re-active a license you will need to purchase an upgrade license from <a href="https://vendr.net?ref=lic-check" target="_blank">the Vendr website</a>.</p>
+        </vendr-message>
+
+        <!-- Probably a live environment with a license that has expired -->
+        <vendr-message ng-if="licensingInfo.hasInactive && !licensingInfo.isLicensed" type="'warn'" heading="'Trial Mode'" icon="'exclamation-triangle'">
+            <p>Vendr is currently running in unlicensed mode and will be limited to a maximum of {{licensingInfo.limitations.maxFinalizedOrders}} finalized orders. This is due to the installed license being invalid for this Vendr version. To re-active a license you will need to purchase an upgrade license from <a href="https://vendr.net?ref=lic-check" target="_blank">the Vendr website</a>.</p>
+        </vendr-message>
+
+        <!-- Probably a live environment with no license installed -->
+        <vendr-message ng-if="!licensingInfo.hasInactive  && !licensingInfo.isLicensed" type="'warn'" heading="'Trial Mode'" icon="'exclamation-triangle'">
+            <p>Vendr is currently running in unlicensed mode and will be limited to a maximum of {{licensingInfo.limitations.maxFinalizedOrders}} finalized orders. You can purchase a license from <a href="https://vendr.net?ref=lic-check" target="_blank">the Vendr website</a>.</p>
+        </vendr-message>
+
+        <vendr-message ng-if="licensingInfo.isLicensed && licensingInfo.isExpiring" type="'warn'" heading="'License Expiring'" icon="'exclamation-triangle'">
+            <p>You are currently using Vendr with a license that is due to expire. If you have a trial license, please purchase a full license from <a href="https://vendr.net?ref=lic-check" target="_blank">the Vendr website</a>. If you are using a subscription license, this should have renewed by now so please review your error log for any issues with the renewal process.</p>
+        </vendr-message>
+    </div>
+</div>

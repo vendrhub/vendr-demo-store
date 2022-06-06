@@ -30,7 +30,7 @@ namespace Vendr.DemoStore.Web.Controllers
         {
             try
             {
-                using (var uow = _vendrApi.Uow.Create())
+                _vendrApi.Uow.Execute(uow =>
                 {
                     var store = CurrentPage.GetStore();
                     var order = _vendrApi.GetOrCreateCurrentOrder(store.Id)
@@ -40,7 +40,7 @@ namespace Vendr.DemoStore.Web.Controllers
                     _vendrApi.SaveOrder(order);
 
                     uow.Complete();
-                }
+                });
             }
             catch (ValidationException ex)
             {
@@ -59,7 +59,7 @@ namespace Vendr.DemoStore.Web.Controllers
         {
             try
             {
-                using (var uow = _vendrApi.Uow.Create())
+                _vendrApi.Uow.Execute(uow =>
                 {
                     var store = CurrentPage.GetStore();
                     var order = _vendrApi.GetOrCreateCurrentOrder(store.Id)
@@ -74,7 +74,7 @@ namespace Vendr.DemoStore.Web.Controllers
                     _vendrApi.SaveOrder(order);
 
                     uow.Complete();
-                }
+                });
             }
             catch (ValidationException ex)
             {
@@ -93,7 +93,7 @@ namespace Vendr.DemoStore.Web.Controllers
         {
             try
             {
-                using (var uow = _vendrApi.Uow.Create())
+                _vendrApi.Uow.Execute(uow =>
                 {
                     var store = CurrentPage.GetStore();
                     var order = _vendrApi.GetOrCreateCurrentOrder(store.Id)
@@ -103,7 +103,7 @@ namespace Vendr.DemoStore.Web.Controllers
                     _vendrApi.SaveOrder(order);
 
                     uow.Complete();
-                }
+                });
             }
             catch (ValidationException ex)
             {

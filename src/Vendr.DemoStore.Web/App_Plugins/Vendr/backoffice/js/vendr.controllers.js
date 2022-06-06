@@ -8514,11 +8514,8 @@
         vm.store = null;
         vm.prices = null;
         vm.options = {
-            fraction: 2
+            fraction: $scope.model.config.fraction || 2
         }
-
-        if ($scope.model && $scope.model.config && $scope.model.fraction)
-            vm.options.fraction = $scope.model.fraction;
 
         var initStore = function (store, value) {
             if (store) {
