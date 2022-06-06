@@ -1658,11 +1658,13 @@
             return $q(function (resolve, reject) {
 
                 // Ensure notes properties
-                if (vm.editorConfig.notes.customerNotes && !cart.properties[vm.editorConfig.notes.customerNotes.alias]) {
-                    cart.properties[vm.editorConfig.notes.customerNotes.alias] = { value: "" };
-                }
-                if (vm.editorConfig.notes.internalNotes && !cart.properties[vm.editorConfig.notes.internalNotes.alias]) {
-                    cart.properties[vm.editorConfig.notes.internalNotes.alias] = { value: "" };
+                if (vm.editorConfig.notes) {
+                    if (vm.editorConfig.notes.customerNotes && !cart.properties[vm.editorConfig.notes.customerNotes.alias]) {
+                        cart.properties[vm.editorConfig.notes.customerNotes.alias] = { value: "" };
+                    }
+                    if (vm.editorConfig.notes.internalNotes && !cart.properties[vm.editorConfig.notes.internalNotes.alias]) {
+                        cart.properties[vm.editorConfig.notes.internalNotes.alias] = { value: "" };
+                    }
                 }
                 
                 // Fetch stock levels 
@@ -5665,7 +5667,7 @@
 
     function OrderEditController($scope, $routeParams, $location, formHelper, angularHelper,
         appState, editorState, editorService, localizationService, notificationsService, navigationService, overlayService,
-        vendrUtils, vendrOrderResource, vendrEmailResource, vendrActions) {
+        vendrUtils, vendrOrderResource, vendrActivityLogResource, vendrActions) {
 
         var infiniteMode = editorService.getNumberOfEditors() > 0 ? true : false;
         var compositeId = infiniteMode
@@ -5778,6 +5780,23 @@
         };
         vm.content = {};
         vm.storeId = storeId;
+
+        vm.activityLog = {
+            loading: true,
+            entries: {
+                items: [],
+                pageNumber: 1,
+                pageSize: 10
+            }
+        }
+
+        vm.loadActivityLog = function (page) {
+            vm.activityLog.loading = true;
+            vendrActivityLogResource.getActivityLogsByEntity(id, "Order", page, vm.activityLog.entries.pageSize).then(function (activityLogs) {
+                vm.activityLog.entries = activityLogs;
+                vm.activityLog.loading = false;
+            });
+        }
 
         vm.close = function () {
             if ($scope.model.close) {
@@ -5894,11 +5913,13 @@
                 vendrOrderResource.getOrder(id).then(function (order) {
 
                     // Ensure notes properties
-                    if (vm.editorConfig.notes.customerNotes && !order.properties[vm.editorConfig.notes.customerNotes.alias]) {
-                        order.properties[vm.editorConfig.notes.customerNotes.alias] = { value: "" };
-                    }
-                    if (vm.editorConfig.notes.internalNotes && !order.properties[vm.editorConfig.notes.internalNotes.alias]) {
-                        order.properties[vm.editorConfig.notes.internalNotes.alias] = { value: "" };
+                    if (vm.editorConfig.notes) {
+                        if (vm.editorConfig.notes.customerNotes && !order.properties[vm.editorConfig.notes.customerNotes.alias]) {
+                            order.properties[vm.editorConfig.notes.customerNotes.alias] = { value: "" };
+                        }
+                        if (vm.editorConfig.notes.internalNotes && !order.properties[vm.editorConfig.notes.internalNotes.alias]) {
+                            order.properties[vm.editorConfig.notes.internalNotes.alias] = { value: "" };
+                        }
                     }
 
                     vm.ready(order);
@@ -5908,6 +5929,9 @@
                         vm.content.paymentStatus = order.paymentStatus;
                         vm.content.paymentStatusName = order.paymentStatusName;
                     });
+
+                    // Load activity log
+                    vm.loadActivityLog(1);
                 });
             });
         };
@@ -5962,6 +5986,7 @@
                 notificationsService.success("Payment Cancelled", "Pending payment successfully cancelled.");
             }, function (err) {
                 vm.cancelPaymentButtonState = 'error';
+                notificationsService.error("Payment Cancellation Failed", err.data.message || err.data.Message || err.errorMsg);
             });
         };
 
@@ -5974,10 +5999,12 @@
             vendrOrderResource.capturePayment(id).then(function(order) {
                 vm.content.paymentStatus = order.paymentStatus;
                 vm.content.paymentStatusName = order.paymentStatusName;
-                vm.capturePaymentButtonState = 'success';
+                vm.capturePaymentButtonState = 'success'; 
                 notificationsService.success("Payment Captured", "Pending payment successfully captured.");
+                vm.loadActivityLog(1);
             }, function (err) {
-                    vm.capturePaymentButtonState = 'error';
+                vm.capturePaymentButtonState = 'error';
+                notificationsService.error("Payment Capture Failed", err.data.message || err.data.Message || err.errorMsg);
             });
         };
 
@@ -5992,8 +6019,10 @@
                 vm.content.paymentStatusName = order.paymentStatusName;
                 vm.refundPaymentButtonState = 'success';
                 notificationsService.success("Payment Refunded", "Captured payment successfully refunded.");
+                vm.loadActivityLog(1);
             }, function (err) {
                 vm.refundPaymentButtonState = 'error';
+                notificationsService.error("Payment Refund Failed", err.data.message || err.data.Message || err.errorMsg);
             });
         };
 
@@ -6082,6 +6111,16 @@
         };
 
         vm.init();
+
+        $scope.$on("vendrEntityChanged", function (evt, args) {
+            if (args.entityType === 'Order' && args.storeId === storeId && args.entityId === id) {
+                vendrOrderResource.getOrder(id).then(function (order) {
+                    vm.content.orderStatusId = order.orderStatusId;
+                    vm.content.orderStatus = order.orderStatus;
+                });
+                vm.loadActivityLog(1);
+            }
+        });
 
         $scope.$on("vendrEntityDeleted", function (evt, args) {
             if ((args.entityType === 'Cart' || args.entityType === 'Order') && args.storeId === storeId && args.entityId === id) {
@@ -8474,6 +8513,12 @@
         vm.loading = true;
         vm.store = null;
         vm.prices = null;
+        vm.options = {
+            fraction: 2
+        }
+
+        if ($scope.model && $scope.model.config && $scope.model.fraction)
+            vm.options.fraction = $scope.model.fraction;
 
         var initStore = function (store, value) {
             if (store) {
@@ -8604,7 +8649,7 @@
 
     'use strict';
 
-    function StockController($scope, $routeParams, $timeout, editorState, editorService, vendrUtils, vendrStoreResource, vendrProductResource, vendrRouteCache)
+    function StockController($scope, $locale, $routeParams, editorState, editorService, vendrUtils, vendrStoreResource, vendrProductResource, vendrRouteCache)
     {
         var compositeId = vendrUtils.parseCompositeId($routeParams.id);
         var storeId = compositeId.length > 1 ? compositeId[0] : null;
@@ -8618,6 +8663,15 @@
 
         var vm = this;
         vm.model = $scope.model;
+        vm.options = {
+            numberPattern: `^\-?[\\${$locale.NUMBER_FORMATS.GROUP_SEP}0-9]*$`
+        };
+
+        var fraction = $scope.model.config.fraction || 6;
+        if (fraction > 0) {
+            vm.options.numberPattern = vm.options.numberPattern.substr(0, vm.options.numberPattern.length - 1)
+                + `(\\${($locale.NUMBER_FORMATS.DECIMAL_SEP)}[0-9]{0,${$scope.model.config.fraction}})?$`;
+        }
 
         var vendrVariantEditor = editorService.getEditors().find(e => e.vendrVariantEditor);
         if (vendrVariantEditor) {
@@ -8644,12 +8698,18 @@
         // to ensure it's only handled in the backend
         // if it's value is different.
         vm.model.value = hasUnpersistedValue ? vm.model.value : -1;
-        vm.stockLevel = hasUnpersistedValue ? vm.model.value : 0;
+        vm.stockLevel = hasUnpersistedValue ? toUiCulture(vm.model.value) : 0;
         vm.syncStockLevel = function () {
             if (!vm.loading) {
-                vm.model.value = vm.stockLevel;
+                vm.model.value = fromUiCulture(vm.stockLevel);
             }
         };
+        vm.unformatValue = function () {
+            vm.stockLevel = fromUiCulture(vm.stockLevel).toString().replaceAll('.', $locale.NUMBER_FORMATS.DECIMAL_SEP);
+        }
+        vm.reformatValue = function () {
+            vm.stockLevel = toUiCulture(fromUiCulture(vm.stockLevel));
+        }
 
         vm.loading = true;
 
@@ -8658,7 +8718,7 @@
                 vm.store = store;
                 if (productReference && !hasUnpersistedValue) {
                     vendrProductResource.getStock(vm.store.id, productReference, productVariantReference).then(function (stock) {
-                        vm.stockLevel = stock || 0;
+                        vm.stockLevel = toUiCulture(stock || 0);
                         vm.loading = false;
                     });
                 } else {
@@ -8688,6 +8748,14 @@
         };
 
         init();
+
+        function toUiCulture(num) {
+            return num.toLocaleString($locale.id); // .replaceAll('.', $locale.NUMBER_FORMATS.DECIMAL_SEP).replaceAll(',', $locale.NUMBER_FORMATS.GROUP_SEP);
+        }
+
+        function fromUiCulture(num) {
+            return parseFloat(num.replaceAll($locale.NUMBER_FORMATS.GROUP_SEP, '').replaceAll($locale.NUMBER_FORMATS.DECIMAL_SEP, '.'));
+        }
     }
 
     angular.module('vendr').controller('Vendr.Controllers.StockController', StockController);

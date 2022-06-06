@@ -31,6 +31,8 @@ namespace Vendr.DemoStore.Events
             {
                 ((BaseIndexProvider)index).TransformingIndexValues += (object sender, IndexingItemEventArgs e) =>
                 {
+                    var values = e.ValueSet.Values.ToDictionary(x => x.Key, x => (IEnumerable<object>)x.Value);
+
                     // ================================================================
                     // Make product categories searchable
                     // ================================================================
@@ -67,7 +69,7 @@ namespace Vendr.DemoStore.Events
                             // If we have some aliases, add these to the lucene index in a searchable way
                             if (categoryAliases.Count > 0)
                             {
-                                e.ValueSet.Add("categoryAliases", string.Join(" ", categoryAliases));
+                                values.Add("categoryAliases", new[] { string.Join(" ", categoryAliases) });
                             }
                         }
                     }
@@ -79,7 +81,7 @@ namespace Vendr.DemoStore.Events
                     // Create searchable path
                     if (e.ValueSet.Values.ContainsKey("path"))
                     {
-                        e.ValueSet.Add("searchPath", e.ValueSet.GetValue("path").ToString().Replace(',', ' '));
+                        values.Add("searchPath", new[] { e.ValueSet.GetValue("path").ToString().Replace(',', ' ') });
                     }
 
                     // Stuff all the fields into a single field for easier searching
@@ -93,7 +95,10 @@ namespace Vendr.DemoStore.Events
                         }
                     }
 
-                    e.ValueSet.Add("contents", combinedFields.ToString());
+                    values.Add("contents", new[] { combinedFields.ToString() });
+
+                    // Update the value
+                    e.SetValues(values);
                 };
             }
         }

@@ -62,6 +62,16 @@
         "view": "~/App_Plugins/Vendr/backoffice/views/propertyeditors/stock/stock.html",
         "hideLabel": false,
         "valueType": "DECIMAL"
+      },
+      "prevalues": {
+        "fields": [
+          {
+            "label": "Decimal places",
+            "description": "Number of decimal places to allow. Default/Max is 6.",
+            "key": "fraction",
+            "view": "number"
+          }
+        ]
       }
     },
     {
@@ -71,6 +81,16 @@
         "view": "~/App_Plugins/Vendr/backoffice/views/propertyeditors/price/price.html",
         "hideLabel": false,
         "valueType": "JSON"
+      },
+      "prevalues": {
+        "fields": [
+          {
+            "label": "Decimal places",
+            "description": "Number of decimal places to allow. Default is 2, Max is 4.",
+            "key": "fraction",
+            "view": "number"
+          }
+        ]
       }
     }
   ],

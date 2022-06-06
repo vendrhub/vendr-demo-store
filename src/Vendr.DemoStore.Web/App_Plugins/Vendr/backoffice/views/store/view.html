@@ -42,17 +42,17 @@
                             </td>
                             <td>
                                 <strong><a ng-href="{{log.routePath}}">{{ log.eventSummary }}</a></strong><br />
-                                <span class="color-midgrey">{{ log.eventDateUtc  | date:'MMMM d, yyyy h:mm a' }}</span>
+                                <span class="color-midgrey">By {{ log.userName }} on {{ log.eventDateUtc  | date:'MMMM d, yyyy h:mm a' }}</span>
                             </td>
                         </tr>
                     </table>
 
                     <div class="flex justify-center">
                         <umb-pagination ng-if="vm.activityLogs.totalPages > 0 && !vm.activityLogLoading"
-                                        page-number="vm.activityLogs.pageNumber"
-                                        total-pages="vm.activityLogs.totalPages"
-                                        on-change="vm.loadActivityLog(pageNumber)"
-                                        class="mb-0">
+                            page-number="vm.activityLogs.pageNumber"
+                            total-pages="vm.activityLogs.totalPages"
+                            on-change="vm.loadActivityLog(pageNumber)"
+                            class="mb-0">
                         </umb-pagination>
                     </div>
 
