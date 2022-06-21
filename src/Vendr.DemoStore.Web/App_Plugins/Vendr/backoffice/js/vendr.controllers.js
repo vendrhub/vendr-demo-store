@@ -4846,7 +4846,13 @@
             }
         };
 
-        vm.loadItems = function (callback) {
+        vm.loadItems = function (opts, callback) {
+
+            if (typeof opts === "function") {
+                callback = opts;
+                opts = undefined;
+            }
+
             vendrEmailTemplateResource.getEmailTemplates(storeId).then(function (entities) {
                 entities.forEach(function (itm) {
                     itm.routePath = '/settings/vendrsettings/emailtemplate-edit/' + vendrUtils.createCompositeId([storeId, itm.id]);
@@ -4854,6 +4860,7 @@
                 vm.options.items = entities;
                 if (callback) callback();
             });
+
         };
 
         vm.init = function () {
@@ -5284,7 +5291,13 @@
             }
         };
 
-        vm.loadItems = function (callback) {
+        vm.loadItems = function (opts, callback) {
+
+            if (typeof opts === "function") {
+                callback = opts;
+                opts = undefined;
+            }
+
             vendrExportTemplateResource.getExportTemplates(storeId).then(function (entities) {
                 entities.forEach(function (itm) {
                     itm.routePath = '/settings/vendrsettings/exporttemplate-edit/' + vendrUtils.createCompositeId([storeId, itm.id]);
@@ -5292,6 +5305,7 @@
                 vm.options.items = entities;
                 if (callback) callback();
             });
+
         };
 
         vm.init = function () {
@@ -7075,9 +7089,12 @@
                             return vm.content.paymentProviderSettings[itm.key];
                         },
                         set: function (value) {
-                            vm.content.paymentProviderSettings[itm.key] = value;                            
+                            vm.content.paymentProviderSettings[itm.key] = value;
                         }
                     });
+
+                    if (create && itm.defaultValue)
+                        property.value = itm.defaultValue;
 
                     return property;
                 });
@@ -7688,7 +7705,13 @@
             }
         };
 
-        vm.loadItems = function (callback) {
+        vm.loadItems = function (opts, callback) {
+
+            if (typeof opts === "function") {
+                callback = opts;
+                opts = undefined;
+            }
+
             vendrPrintTemplateResource.getPrintTemplates(storeId).then(function (entities) {
                 entities.forEach(function (itm) {
                     itm.routePath = '/settings/vendrsettings/printtemplate-edit/' + vendrUtils.createCompositeId([storeId, itm.id]);
@@ -7696,6 +7719,7 @@
                 vm.options.items = entities;
                 if (callback) callback();
             });
+
         };
 
         vm.init = function () {
