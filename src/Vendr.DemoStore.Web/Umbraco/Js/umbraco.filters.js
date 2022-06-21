@@ -113,6 +113,21 @@
         }
     ]);
     'use strict';
+    /**
+* @ngdoc filter
+* @name umbraco.filters.simpleMarkdown
+* @description 
+* Used when rendering a string as Markdown as HTML (i.e. with ng-bind-html). Allows use of **bold**, *italics*, ![images](url) and [links](url)
+**/
+    angular.module('umbraco.filters').filter('simpleMarkdown', function () {
+        return function (text) {
+            if (!text) {
+                return '';
+            }
+            return text.replace(/\*\*(.*)\*\*/gim, '<b>$1</b>').replace(/\*(.*)\*/gim, '<i>$1</i>').replace(/!\[(.*?)\]\((.*?)\)/gim, '<img alt=\'$1\' src=\'$2\' />').replace(/\[(.*?)\]\((.*?)\)/gim, '<a href=\'$2\' target=\'_blank\' rel=\'noopener\' class=\'underline\'>$1</a>').replace(/\n/g, '<br />').trim();
+        };
+    });
+    'use strict';
     angular.module('umbraco.filters').filter('timespan', function () {
         return function (input) {
             var sec_num = parseInt(input, 10);
@@ -188,24 +203,41 @@
         };
     });
     'use strict';
+    function _typeof(obj) {
+        if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') {
+            _typeof = function _typeof(obj) {
+                return typeof obj;
+            };
+        } else {
+            _typeof = function _typeof(obj) {
+                return obj && typeof Symbol === 'function' && obj.constructor === Symbol && obj !== Symbol.prototype ? 'symbol' : typeof obj;
+            };
+        }
+        return _typeof(obj);
+    }
     /**
  * @ngdoc filter
  * @name umbraco.filters.filter:umbCmsJoinArray
  * @namespace umbCmsJoinArray
  * 
  * param {array} array of string or objects, if an object use the third argument to specify which prop to list.
- * param {seperator} string containing the seperator to add between joined values.
+ * param {separator} string containing the separator to add between joined values.
  * param {prop} string used if joining an array of objects, set the name of properties to join.
  * 
  * @description
- * Join an array of string or an array of objects, with a costum seperator.
- * 
+ * Join an array of string or an array of objects, with a custom separator.
+ * If the array is null or empty, returns an empty string
+ * If the array is not actually an array (ie a string or number), returns the value of the array
  */
     angular.module('umbraco.filters').filter('umbCmsJoinArray', function () {
         return function join(array, separator, prop) {
+            if (_typeof(array) !== 'object' || !array) {
+                return array || '';
+            }
+            separator = separator || '';
             return (!Utilities.isUndefined(prop) ? array.map(function (item) {
                 return item[prop];
-            }) : array).join(separator || '');
+            }) : array).join(separator);
         };
     });
     'use strict';

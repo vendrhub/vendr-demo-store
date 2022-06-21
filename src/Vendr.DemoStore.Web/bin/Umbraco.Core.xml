@@ -377,6 +377,97 @@
             <param name="reverse">A value indicating whether to reverse the order.</param>
             <returns>The (topologically) sorted items.</returns>
         </member>
+        <member name="M:Umbraco.Core.Configuration.UmbracoSettings.ContentSectionExtensions.IsImageFile(Umbraco.Core.Configuration.UmbracoSettings.IContentSection,System.String)">
+            <summary>
+            Gets a value indicating whether the file extension corresponds to an image.
+            </summary>
+            <param name="extension">The file extension.</param>
+            <param name="contentConfig"></param>
+            <returns>A value indicating whether the file extension corresponds to an image.</returns>
+        </member>
+        <member name="M:Umbraco.Core.Configuration.UmbracoSettings.ContentSectionExtensions.IsFileAllowedForUpload(Umbraco.Core.Configuration.UmbracoSettings.IContentSection,System.String)">
+            <summary>
+            Determines if file extension is allowed for upload based on (optional) white list and black list
+            held in settings.
+            Allow upload if extension is whitelisted OR if there is no whitelist and extension is NOT blacklisted.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Configuration.UmbracoSettings.ContentSectionExtensions.GetConfig(Umbraco.Core.Configuration.UmbracoSettings.IContentSection,System.String)">
+            <summary>
+            Gets the auto-fill configuration for a specified property alias.
+            </summary>
+            <param name="contentSection"></param>
+            <param name="propertyTypeAlias">The property type alias.</param>
+            <returns>The auto-fill configuration for the specified property alias, or null.</returns>
+        </member>
+        <member name="P:Umbraco.Core.Configuration.UmbracoSettings.IContentSection.ShowDeprecatedPropertyEditors">
+            <summary>
+            Gets a value indicating whether to show deprecated property editors in
+            a datatype list of available editors.
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Configuration.UmbracoSettings.IImagingAutoFillUploadField.Alias">
+            <summary>
+            Allow setting internally so we can create a default
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Configuration.UmbracoSettings.ImagingAutoFillUploadFieldElement.Alias">
+            <summary>
+            Allow setting internally so we can create a default
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Configuration.UmbracoSettings.ISecuritySection.AllowPasswordReset">
+            <summary>
+            Used to enable/disable the forgot password functionality on the back office login screen
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Configuration.UmbracoSettings.ISecuritySection.UsernameIsEmail">
+            <summary>
+            A boolean indicating that by default the email address will be the username
+            </summary>
+            <remarks>
+            Even if this is true and the username is different from the email in the database, the username field will still be shown.
+            When this is false, the username and email fields will be shown in the user section.
+            </remarks>
+        </member>
+        <member name="P:Umbraco.Core.Configuration.UmbracoSettings.SecurityElement.AllowPasswordReset">
+            <summary>
+            Used to enable/disable the forgot password functionality on the back office login screen
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Configuration.UmbracoSettings.SecurityElement.UsernameIsEmail">
+            <summary>
+            A boolean indicating that by default the email address will be the username
+            </summary>
+            <remarks>
+            Even if this is true and the username is different from the email in the database, the username field will still be shown.
+            When this is false, the username and email fields will be shown in the user section.
+            </remarks>
+        </member>
+        <member name="P:Umbraco.Core.Configuration.UmbracoSettings.SecurityElement.Umbraco#Core#Configuration#UmbracoSettings#ISecuritySection#AllowPasswordReset">
+            <summary>
+            Used to enable/disable the forgot password functionality on the back office login screen
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Configuration.UmbracoSettings.SecurityElement.Umbraco#Core#Configuration#UmbracoSettings#ISecuritySection#UsernameIsEmail">
+            <summary>
+            A boolean indicating that by default the email address will be the username
+            </summary>
+            <remarks>
+            Even if this is true and the username is different from the email in the database, the username field will still be shown.
+            When this is false, the username and email fields will be shown in the user section.
+            </remarks>
+        </member>
+        <member name="T:Umbraco.Core.Configuration.UmbracoSettings.UmbracoConfigurationElement">
+            <summary>
+            Base class with shared helper methods
+            </summary>
+        </member>
+        <member name="F:Umbraco.Core.Configuration.UmbracoSettings.UmbracoConfigurationElement._rawElements">
+            <summary>
+            Used so the RawElement types are not re-created every time they are accessed
+            </summary>
+        </member>
         <member name="T:Umbraco.Core.Configuration.CaseInsensitiveEnumConfigConverter`1">
             <summary>
             A case-insensitive configuration converter for enumerations.
@@ -543,6 +634,14 @@
             Gets a value indicating whether umbraco should force a secure (https) connection to the backoffice.
             </summary>
         </member>
+        <member name="P:Umbraco.Core.Configuration.GlobalSettings.SanitizeTinyMce">
+            <summary>
+            Returns true if TinyMCE scripting sanitization should be applied
+            </summary>
+            <remarks>
+            The default value is false
+            </remarks>
+        </member>
         <member name="P:Umbraco.Core.Configuration.GlobalSettings.SqlWriteLockTimeOut">
             <summary>
             An int value representing the time in milliseconds to lock the database for a write operation
@@ -642,6 +741,11 @@
             Gets the write lock timeout.
             </summary>
         </member>
+        <member name="P:Umbraco.Core.Configuration.IGlobalSettings.SanitizeTinyMce">
+            <summary>
+            Returns true if TinyMCE scripting sanitization should be applied
+            </summary>
+        </member>
         <member name="T:Umbraco.Core.Configuration.InnerTextConfigurationElement`1">
             <summary>
             A full config section is required for any full element and we have some elements that are defined like this:
@@ -705,97 +809,6 @@
         <member name="P:Umbraco.Core.Configuration.UmbracoConfigurationSection.IsPresent">
             <summary>
             Gets a value indicating whether the section actually is in the configuration file.
-            </summary>
-        </member>
-        <member name="M:Umbraco.Core.Configuration.UmbracoSettings.ContentSectionExtensions.IsImageFile(Umbraco.Core.Configuration.UmbracoSettings.IContentSection,System.String)">
-            <summary>
-            Gets a value indicating whether the file extension corresponds to an image.
-            </summary>
-            <param name="extension">The file extension.</param>
-            <param name="contentConfig"></param>
-            <returns>A value indicating whether the file extension corresponds to an image.</returns>
-        </member>
-        <member name="M:Umbraco.Core.Configuration.UmbracoSettings.ContentSectionExtensions.IsFileAllowedForUpload(Umbraco.Core.Configuration.UmbracoSettings.IContentSection,System.String)">
-            <summary>
-            Determines if file extension is allowed for upload based on (optional) white list and black list
-            held in settings.
-            Allow upload if extension is whitelisted OR if there is no whitelist and extension is NOT blacklisted.
-            </summary>
-        </member>
-        <member name="M:Umbraco.Core.Configuration.UmbracoSettings.ContentSectionExtensions.GetConfig(Umbraco.Core.Configuration.UmbracoSettings.IContentSection,System.String)">
-            <summary>
-            Gets the auto-fill configuration for a specified property alias.
-            </summary>
-            <param name="contentSection"></param>
-            <param name="propertyTypeAlias">The property type alias.</param>
-            <returns>The auto-fill configuration for the specified property alias, or null.</returns>
-        </member>
-        <member name="P:Umbraco.Core.Configuration.UmbracoSettings.IContentSection.ShowDeprecatedPropertyEditors">
-            <summary>
-            Gets a value indicating whether to show deprecated property editors in
-            a datatype list of available editors.
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Configuration.UmbracoSettings.IImagingAutoFillUploadField.Alias">
-            <summary>
-            Allow setting internally so we can create a default
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Configuration.UmbracoSettings.ImagingAutoFillUploadFieldElement.Alias">
-            <summary>
-            Allow setting internally so we can create a default
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Configuration.UmbracoSettings.ISecuritySection.AllowPasswordReset">
-            <summary>
-            Used to enable/disable the forgot password functionality on the back office login screen
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Configuration.UmbracoSettings.ISecuritySection.UsernameIsEmail">
-            <summary>
-            A boolean indicating that by default the email address will be the username
-            </summary>
-            <remarks>
-            Even if this is true and the username is different from the email in the database, the username field will still be shown.
-            When this is false, the username and email fields will be shown in the user section.
-            </remarks>
-        </member>
-        <member name="P:Umbraco.Core.Configuration.UmbracoSettings.SecurityElement.AllowPasswordReset">
-            <summary>
-            Used to enable/disable the forgot password functionality on the back office login screen
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Configuration.UmbracoSettings.SecurityElement.UsernameIsEmail">
-            <summary>
-            A boolean indicating that by default the email address will be the username
-            </summary>
-            <remarks>
-            Even if this is true and the username is different from the email in the database, the username field will still be shown.
-            When this is false, the username and email fields will be shown in the user section.
-            </remarks>
-        </member>
-        <member name="P:Umbraco.Core.Configuration.UmbracoSettings.SecurityElement.Umbraco#Core#Configuration#UmbracoSettings#ISecuritySection#AllowPasswordReset">
-            <summary>
-            Used to enable/disable the forgot password functionality on the back office login screen
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Configuration.UmbracoSettings.SecurityElement.Umbraco#Core#Configuration#UmbracoSettings#ISecuritySection#UsernameIsEmail">
-            <summary>
-            A boolean indicating that by default the email address will be the username
-            </summary>
-            <remarks>
-            Even if this is true and the username is different from the email in the database, the username field will still be shown.
-            When this is false, the username and email fields will be shown in the user section.
-            </remarks>
-        </member>
-        <member name="T:Umbraco.Core.Configuration.UmbracoSettings.UmbracoConfigurationElement">
-            <summary>
-            Base class with shared helper methods
-            </summary>
-        </member>
-        <member name="F:Umbraco.Core.Configuration.UmbracoSettings.UmbracoConfigurationElement._rawElements">
-            <summary>
-            Used so the RawElement types are not re-created every time they are accessed
             </summary>
         </member>
         <member name="T:Umbraco.Core.Configuration.UmbracoVersion">
@@ -975,6 +988,15 @@
             <summary>
             Char array containing |
             </summary>
+        </member>
+        <member name="F:Umbraco.Core.Constants.Sql.MaxParameterCount">
+            <summary>
+            The maximum amount of parameters that can be used in a query.
+            </summary>
+            <remarks>
+            The actual limit is 2100 (https://docs.microsoft.com/en-us/sql/sql-server/maximum-capacity-specifications-for-sql-server),
+            but we want to ensure there's room for additional parameters if this value is used to create groups/batches.
+            </remarks>
         </member>
         <member name="T:Umbraco.Core.Constants.Applications">
             <summary>
@@ -1296,9 +1318,14 @@
             Property alias for the number of failed login attempts
             </summary>
         </member>
+        <member name="F:Umbraco.Core.Constants.Conventions.Member.StandardPropertiesGroupAlias">
+            <summary>
+            The standard properties group alias for membership properties.
+            </summary>
+        </member>
         <member name="F:Umbraco.Core.Constants.Conventions.Member.StandardPropertiesGroupName">
             <summary>
-            Group name to put the membership properties on
+            The standard properties group name for membership properties.
             </summary>
         </member>
         <member name="T:Umbraco.Core.Constants.Conventions.MemberTypes">
@@ -2354,6 +2381,16 @@
             The path to use when constructing the URL for retrieving data for the content dashboard.
             </summary>
         </member>
+        <member name="F:Umbraco.Core.Constants.AppSettings.ContentDashboardUrlAllowlist">
+            <summary>
+            A list of allowed addresses to fetch content for the content dashboard.
+            </summary>
+        </member>
+        <member name="F:Umbraco.Core.Constants.AppSettings.HelpPageUrlAllowList">
+            <summary>
+            A list of allowed addresses to fetch content for the help page.
+            </summary>
+        </member>
         <member name="F:Umbraco.Core.Constants.AppSettings.DisableElectionForSingleServer">
             <summary>
             TODO: FILL ME IN
@@ -2387,6 +2424,11 @@
         <member name="F:Umbraco.Core.Constants.AppSettings.SqlWriteLockTimeOut">
             <summary>
             An int value representing the time in milliseconds to lock the database for a write operation
+            </summary>
+        </member>
+        <member name="F:Umbraco.Core.Constants.AppSettings.SanitizeTinyMce">
+            <summary>
+            Returns true if TinyMCE scripting sanitization should be applied
             </summary>
         </member>
         <member name="T:Umbraco.Core.Constants.Web">
@@ -3288,6 +3330,11 @@
         <member name="T:Umbraco.Core.Events.TransientEventMessagesFactory">
             <summary>
             A simple/default transient messages factory
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Help.IHelpPageSettings.HelpPageUrlAllowList">
+            <summary>
+            Gets the allowed addresses to retrieve data for the help page.
             </summary>
         </member>
         <member name="M:Umbraco.Core.Logging.ILogger2.Fatal``3(System.Type,System.Exception,System.String,``0,``1,``2)">
@@ -4485,6 +4532,12 @@
             </summary>
             <value>The URL path.</value>
         </member>
+        <member name="P:Umbraco.Core.Dashboards.ContentDashboardSettings.ContentDashboardUrlAllowlist">
+            <summary>
+            Gets the allowed addresses to retrieve data for the content dashboard.
+            </summary>
+            <value>The URLs.</value>
+        </member>
         <member name="P:Umbraco.Core.Dashboards.IContentDashboardSettings.AllowContentDashboardAccessToAllUsers">
             <summary>
             Gets a value indicating whether the content dashboard should be available to all users.
@@ -4499,6 +4552,12 @@
             Gets the path to use when constructing the URL for retrieving data for the content dashboard.
             </summary>
             <value>The URL path.</value>
+        </member>
+        <member name="P:Umbraco.Core.Dashboards.IContentDashboardSettings.ContentDashboardUrlAllowlist">
+            <summary>
+            Gets the allowed addresses to retrieve data for the content dashboard.
+            </summary>
+            <value>The URLs.</value>
         </member>
         <member name="T:Umbraco.Core.Dashboards.AccessRule">
             <summary>
@@ -5036,6 +5095,12 @@
             <summary>
             Creates/Updates non mandatory FK columns to the user table
             </summary>
+        </member>
+        <member name="M:Umbraco.Core.Migrations.Upgrade.V_8_18_0.AddContentVersionCleanupFeature.Migrate">
+            <remarks>
+            The conditionals are useful to enable the same migration to be used in multiple
+            migration paths x.x -> 8.18 and x.x -> 9.x
+            </remarks>
         </member>
         <member name="M:Umbraco.Core.Migrations.Upgrade.V_8_9_0.ExternalLoginTableUserData.Migrate">
             <summary>
@@ -7089,6 +7154,117 @@
             <summary>
             Set to true to try to automatically resolve data integrity issues
             </summary>
+        </member>
+        <member name="T:Umbraco.Core.Models.ContentEditing.ContentAppBadge">
+            <summary>
+            Represents a content app badge
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Models.ContentEditing.ContentAppBadge.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umbraco.Core.Models.ContentEditing.ContentAppBadge"/> class.
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.ContentEditing.ContentAppBadge.Count">
+            <summary>
+            Gets or sets the number displayed in the badge
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.ContentEditing.ContentAppBadge.Type">
+            <summary>
+            Gets or sets the type of badge to display
+            </summary>
+            <remarks>
+            <para>This controls the background color of the badge.</para>
+            <para>Warning will display a dark yellow badge</para>
+            <para>Alert will display a red badge</para>
+            <para>Default will display a turquoise badge</para>
+            </remarks>
+        </member>
+        <member name="T:Umbraco.Core.Models.ContentEditing.ContentAppBadgeType">
+            <summary>
+            Represent the content app badge types
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Models.ContentEditing.ContentApp">
+            <summary>
+            Represents a content app.
+            </summary>
+            <remarks>
+            <para>Content apps are editor extensions.</para>
+            </remarks>
+        </member>
+        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Name">
+            <summary>
+            Gets the name of the content app.
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Alias">
+            <summary>
+            Gets the unique alias of the content app.
+            </summary>
+            <remarks>
+            <para>Must be a valid javascript identifier, ie no spaces etc.</para>
+            </remarks>
+        </member>
+        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Weight">
+            <summary>
+            Gets or sets the weight of the content app.
+            </summary>
+            <remarks>
+            <para>Content apps are ordered by weight, from left (lowest values) to right (highest values).</para>
+            <para>Some built-in apps have special weights: listview is -666, content is -100 and infos is +100.</para>
+            <para>The default weight is 0, meaning somewhere in-between content and infos, but weight could
+            be used for ordering between user-level apps, or anything really.</para>
+            </remarks>
+        </member>
+        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Icon">
+            <summary>
+            Gets the icon of the content app.
+            </summary>
+            <remarks>
+            <para>Must be a valid helveticons class name (see http://hlvticons.ch/).</para>
+            </remarks>
+        </member>
+        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.View">
+            <summary>
+            Gets the view for rendering the content app.
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.ViewModel">
+            <summary>
+            The view model specific to this app
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Active">
+            <summary>
+            Gets a value indicating whether the app is active.
+            </summary>
+            <remarks>
+            <para>Normally reserved for Angular to deal with but in some cases this can be set on the server side.</para>
+            </remarks>
+        </member>
+        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Badge">
+            <summary>
+            Gets or sets the content app badge.
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Models.ContentEditing.IContentAppFactory">
+            <summary>
+            Represents a content app factory.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Models.ContentEditing.IContentAppFactory.GetContentAppFor(System.Object,System.Collections.Generic.IEnumerable{Umbraco.Core.Models.Membership.IReadOnlyUserGroup})">
+            <summary>
+            Gets the content app for an object.
+            </summary>
+            <param name="source">The source object.</param>
+            <returns>The content app for the object, or null.</returns>
+            <remarks>
+            <para>The definition must determine, based on <paramref name="source"/>, whether
+            the content app should be displayed or not, and return either a <see cref="T:Umbraco.Core.Models.ContentEditing.ContentApp"/>
+            instance, or null.</para>
+            </remarks>
         </member>
         <member name="T:Umbraco.Core.Models.Identity.ExternalLogin">
             <inheritdoc />
@@ -9553,117 +9729,6 @@
             Gets or sets the uploaded files.
             </summary>
         </member>
-        <member name="T:Umbraco.Core.Models.ContentEditing.ContentAppBadge">
-            <summary>
-            Represents a content app badge
-            </summary>
-        </member>
-        <member name="M:Umbraco.Core.Models.ContentEditing.ContentAppBadge.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Umbraco.Core.Models.ContentEditing.ContentAppBadge"/> class.
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.ContentEditing.ContentAppBadge.Count">
-            <summary>
-            Gets or sets the number displayed in the badge
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.ContentEditing.ContentAppBadge.Type">
-            <summary>
-            Gets or sets the type of badge to display
-            </summary>
-            <remarks>
-            <para>This controls the background color of the badge.</para>
-            <para>Warning will display a dark yellow badge</para>
-            <para>Alert will display a red badge</para>
-            <para>Default will display a turquoise badge</para>
-            </remarks>
-        </member>
-        <member name="T:Umbraco.Core.Models.ContentEditing.ContentAppBadgeType">
-            <summary>
-            Represent the content app badge types
-            </summary>
-        </member>
-        <member name="T:Umbraco.Core.Models.ContentEditing.ContentApp">
-            <summary>
-            Represents a content app.
-            </summary>
-            <remarks>
-            <para>Content apps are editor extensions.</para>
-            </remarks>
-        </member>
-        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Name">
-            <summary>
-            Gets the name of the content app.
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Alias">
-            <summary>
-            Gets the unique alias of the content app.
-            </summary>
-            <remarks>
-            <para>Must be a valid javascript identifier, ie no spaces etc.</para>
-            </remarks>
-        </member>
-        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Weight">
-            <summary>
-            Gets or sets the weight of the content app.
-            </summary>
-            <remarks>
-            <para>Content apps are ordered by weight, from left (lowest values) to right (highest values).</para>
-            <para>Some built-in apps have special weights: listview is -666, content is -100 and infos is +100.</para>
-            <para>The default weight is 0, meaning somewhere in-between content and infos, but weight could
-            be used for ordering between user-level apps, or anything really.</para>
-            </remarks>
-        </member>
-        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Icon">
-            <summary>
-            Gets the icon of the content app.
-            </summary>
-            <remarks>
-            <para>Must be a valid helveticons class name (see http://hlvticons.ch/).</para>
-            </remarks>
-        </member>
-        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.View">
-            <summary>
-            Gets the view for rendering the content app.
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.ViewModel">
-            <summary>
-            The view model specific to this app
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Active">
-            <summary>
-            Gets a value indicating whether the app is active.
-            </summary>
-            <remarks>
-            <para>Normally reserved for Angular to deal with but in some cases this can be set on the server side.</para>
-            </remarks>
-        </member>
-        <member name="P:Umbraco.Core.Models.ContentEditing.ContentApp.Badge">
-            <summary>
-            Gets or sets the content app badge.
-            </summary>
-        </member>
-        <member name="T:Umbraco.Core.Models.ContentEditing.IContentAppFactory">
-            <summary>
-            Represents a content app factory.
-            </summary>
-        </member>
-        <member name="M:Umbraco.Core.Models.ContentEditing.IContentAppFactory.GetContentAppFor(System.Object,System.Collections.Generic.IEnumerable{Umbraco.Core.Models.Membership.IReadOnlyUserGroup})">
-            <summary>
-            Gets the content app for an object.
-            </summary>
-            <param name="source">The source object.</param>
-            <returns>The content app for the object, or null.</returns>
-            <remarks>
-            <para>The definition must determine, based on <paramref name="source"/>, whether
-            the content app should be displayed or not, and return either a <see cref="T:Umbraco.Core.Models.ContentEditing.ContentApp"/>
-            instance, or null.</para>
-            </remarks>
-        </member>
         <member name="M:Umbraco.Core.Models.Entities.EntityExtensions.UpdatingEntity(Umbraco.Core.Models.Entities.IEntity)">
             <summary>
             Updates the entity when it is being saved.
@@ -10143,6 +10208,16 @@
         <member name="M:Umbraco.Core.Models.Entities.BeingDirtyBase.EnableChangeTracking">
             <summary>
             Enables change tracking.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Models.Entities.BeingDirtyBase.DisablePropertyChangedEvent">
+            <summary>
+            Disables the property changed event.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Models.Entities.BeingDirtyBase.EnablePropertyChangedEvent">
+            <summary>
+            Enables the property changed event.
             </summary>
         </member>
         <member name="M:Umbraco.Core.Models.Entities.BeingDirtyBase.SetPropertyValueAndDetectChanges``1(``0,``0@,System.String,System.Collections.Generic.IEqualityComparer{``0})">
@@ -11651,6 +11726,16 @@
             Custom audit message.
             </summary>
         </member>
+        <member name="F:Umbraco.Core.Models.AuditType.ContentVersionPreventCleanup">
+            <summary>
+            Content version preventCleanup set to true
+            </summary>
+        </member>
+        <member name="F:Umbraco.Core.Models.AuditType.ContentVersionEnableCleanup">
+            <summary>
+            Content version preventCleanup set to false
+            </summary>
+        </member>
         <member name="T:Umbraco.Core.Models.Content">
             <summary>
             Represents a Content object
@@ -12839,6 +12924,12 @@
             <summary>
             Gets or Sets a list of Templates which are allowed for the ContentType
             </summary>
+        </member>
+        <member name="P:Umbraco.Core.Models.IContentType.HistoryCleanup">
+            <summary>
+            Gets or sets the history cleanup configuration.
+            </summary>
+            <value>The history cleanup configuration.</value>
         </member>
         <member name="M:Umbraco.Core.Models.IContentType.IsAllowedTemplate(System.Int32)">
             <summary>
@@ -15571,6 +15662,62 @@
             This is only relevant when this column is included in the results (i.e. GetUserGroupsWithUserCounts)
             </summary>
         </member>
+        <member name="M:Umbraco.Core.Persistence.Repositories.IDocumentVersionRepository.GetDocumentVersionsEligibleForCleanup">
+            <summary>
+            Gets a list of all historic content versions.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Persistence.Repositories.IDocumentVersionRepository.GetCleanupPolicies">
+            <summary>
+            Gets cleanup policy override settings per content type.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Persistence.Repositories.IDocumentVersionRepository.GetPagedItemsByContentId(System.Int32,System.Int64,System.Int32,System.Int64@,System.Nullable{System.Int32})">
+            <summary>
+            Gets paginated content versions for given content id paginated.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Persistence.Repositories.IDocumentVersionRepository.DeleteVersions(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Deletes multiple content versions by ID.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Persistence.Repositories.IDocumentVersionRepository.SetPreventCleanup(System.Int32,System.Boolean)">
+            <summary>
+            Updates the prevent cleanup flag on a content version.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Persistence.Repositories.IDocumentVersionRepository.Get(System.Int32)">
+            <summary>
+            Gets the content version metadata for a specific version.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Persistence.Repositories.Implement.DocumentVersionRepository.GetDocumentVersionsEligibleForCleanup">
+            <inheritdoc />
+            <remarks>
+            Never includes current draft version. <br/>
+            Never includes current published version.<br/>
+            Never includes versions marked as "preventCleanup".<br/>
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Core.Persistence.Repositories.Implement.DocumentVersionRepository.GetCleanupPolicies">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Core.Persistence.Repositories.Implement.DocumentVersionRepository.GetPagedItemsByContentId(System.Int32,System.Int64,System.Int32,System.Int64@,System.Nullable{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Core.Persistence.Repositories.Implement.DocumentVersionRepository.DeleteVersions(System.Collections.Generic.IEnumerable{System.Int32})">
+            <inheritdoc />
+            <remarks>
+            Deletes in batches of <see cref="F:Umbraco.Core.Constants.Sql.MaxParameterCount"/>
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Core.Persistence.Repositories.Implement.DocumentVersionRepository.SetPreventCleanup(System.Int32,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Core.Persistence.Repositories.Implement.DocumentVersionRepository.Get(System.Int32)">
+            <inheritdoc />
+        </member>
         <member name="T:Umbraco.Core.Persistence.Repositories.Implement.ContentTypeCommonRepository">
             <summary>
             Implements <see cref="T:Umbraco.Core.Persistence.Repositories.IContentTypeCommonRepository"/>.
@@ -16107,7 +16254,7 @@
             <param name="entityIds"></param>
             <returns></returns>
             <remarks>
-            This method will not support passing in more than 2000 group Ids
+            This method will not support passing in more than 2000 group IDs when also passing in entity IDs.
             </remarks>
         </member>
         <member name="M:Umbraco.Core.Persistence.Repositories.Implement.PermissionRepository`1.GetPermissionsForEntities(System.Int32[])">
@@ -21916,6 +22063,11 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue.HasCrops">
+            <summary>
+            Determines whether the value has crops.
+            </summary>
+        </member>
         <member name="M:Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue.HasCrop(System.String)">
             <summary>
             Determines whether the value has a specified crop.
@@ -21925,6 +22077,15 @@
             <summary>
             Determines whether the value has a source image.
             </summary>
+        </member>
+        <member name="M:Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue.Prune(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Removes redundant crop data/default focal point.
+            </summary>
+            <param name="value">The image cropper value.</param>
+            <returns>
+            The cleaned up value.
+            </returns>
         </member>
         <member name="M:Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue.Equals(Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue)">
             <inheritdoc />
@@ -22966,6 +23127,853 @@
             Gets the type of the dynamic configuration provider.
             </summary>
         </member>
+        <member name="M:Umbraco.Core.Security.IHtmlSanitizer.Sanitize(System.String)">
+            <summary>
+            Sanitizes HTML
+            </summary>
+            <param name="html">HTML to be sanitized</param>
+            <returns>Sanitized HTML</returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.AuthenticationExtensions.GetUmbracoIdentity(System.Security.Principal.IPrincipal)">
+            <summary>
+            This will return the current back office identity if the IPrincipal is the correct type
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.AuthenticationExtensions.EnsureCulture(System.Security.Principal.IIdentity)">
+            <summary>
+            Ensures that the thread culture is set based on the back office user's culture
+            </summary>
+            <param name="identity"></param>
+        </member>
+        <member name="F:Umbraco.Core.Security.AuthenticationExtensions.UserCultures">
+            <summary>
+            Used so that we aren't creating a new CultureInfo object for every single request
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.DisposeResources">
+            <summary>
+            Handles the disposal of resources. Derived from abstract class <see cref="T:Umbraco.Core.DisposableObjectSlim"/> which handles common required locking logic.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.CreateAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
+            <summary>
+            Insert a new user
+            </summary>
+            <param name="user"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.UpdateAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
+            <summary>
+            Update a user
+            </summary>
+            <param name="user"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.DeleteAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
+            <summary>
+            Delete a user
+            </summary>
+            <param name="user"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.FindByIdAsync(System.Int32)">
+            <summary>
+            Finds a user
+            </summary>
+            <param name="userId"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.FindByNameAsync(System.String)">
+            <summary>
+            Find a user by name
+            </summary>
+            <param name="userName"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.SetPasswordHashAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.String)">
+            <summary>
+            Set the user password hash
+            </summary>
+            <param name="user"/><param name="passwordHash"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.GetPasswordHashAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
+            <summary>
+            Get the user password hash
+            </summary>
+            <param name="user"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.HasPasswordAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
+            <summary>
+            Returns true if a user has a password set
+            </summary>
+            <param name="user"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.SetEmailAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.String)">
+            <summary>
+            Set the user email
+            </summary>
+            <param name="user"/><param name="email"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.GetEmailAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
+            <summary>
+            Get the user email
+            </summary>
+            <param name="user"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.GetEmailConfirmedAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
+            <summary>
+            Returns true if the user email is confirmed
+            </summary>
+            <param name="user"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.SetEmailConfirmedAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.Boolean)">
+            <summary>
+            Sets whether the user email is confirmed
+            </summary>
+            <param name="user"/><param name="confirmed"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.FindByEmailAsync(System.String)">
+            <summary>
+            Returns the user associated with this email
+            </summary>
+            <param name="email"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.AddLoginAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,Microsoft.AspNet.Identity.UserLoginInfo)">
+            <summary>
+            Adds a user login with the specified provider and key
+            </summary>
+            <param name="user"/><param name="login"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.RemoveLoginAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,Microsoft.AspNet.Identity.UserLoginInfo)">
+            <summary>
+            Removes the user login with the specified combination if it exists
+            </summary>
+            <param name="user"/><param name="login"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.GetLoginsAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
+            <summary>
+            Returns the linked accounts for this user
+            </summary>
+            <param name="user"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.FindAsync(Microsoft.AspNet.Identity.UserLoginInfo)">
+            <summary>
+            Returns the user associated with this login
+            </summary>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.AddToRoleAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.String)">
+            <summary>
+            Adds a user to a role (user group)
+            </summary>
+            <param name="user"/><param name="roleName"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.RemoveFromRoleAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.String)">
+            <summary>
+            Removes the role (user group) for the user
+            </summary>
+            <param name="user"/><param name="roleName"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.GetRolesAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
+            <summary>
+            Returns the roles (user groups) for this user
+            </summary>
+            <param name="user"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.IsInRoleAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.String)">
+            <summary>
+            Returns true if a user is in the role
+            </summary>
+            <param name="user"/><param name="roleName"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.SetSecurityStampAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.String)">
+            <summary>
+            Set the security stamp for the user
+            </summary>
+            <param name="user"/><param name="stamp"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.GetSecurityStampAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
+            <summary>
+            Get the user security stamp
+            </summary>
+            <param name="user"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.SetTwoFactorEnabledAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.Boolean)">
+            <summary>
+            Sets whether two factor authentication is enabled for the user
+            </summary>
+            <param name="user"/><param name="enabled"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.GetTwoFactorEnabledAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
+            <summary>
+            Returns whether two factor authentication is enabled for the user
+            </summary>
+            <param name="user"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.GetLockoutEndDateAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
+            <summary>
+            Returns the DateTimeOffset that represents the end of a user's lockout, any time in the past should be considered not locked out.
+            </summary>
+            <param name="user"/>
+            <returns/>
+            <remarks>
+            Currently we do not support a timed lock out, when they are locked out, an admin will  have to reset the status
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.SetLockoutEndDateAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.DateTimeOffset)">
+            <summary>
+            Locks a user out until the specified end date (set to a past date, to unlock a user)
+            </summary>
+            <param name="user"/><param name="lockoutEnd"/>
+            <returns/>
+            <remarks>
+            Currently we do not support a timed lock out, when they are locked out, an admin will  have to reset the status
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.IncrementAccessFailedCountAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
+            <summary>
+            Used to record when an attempt to access the user has failed
+            </summary>
+            <param name="user"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.ResetAccessFailedCountAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
+            <summary>
+            Used to reset the access failed count, typically after the account is successfully accessed
+            </summary>
+            <param name="user"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.GetAccessFailedCountAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
+            <summary>
+            Returns the current number of failed access attempts.  This number usually will be reset whenever the password is
+                            verified or the account is locked out.
+            </summary>
+            <param name="user"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.GetLockoutEnabledAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
+            <summary>
+            Returns true
+            </summary>
+            <param name="user"/>
+            <returns/>
+        </member>
+        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.SetLockoutEnabledAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.Boolean)">
+            <summary>
+            Doesn't actually perform any function, users can always be locked out
+            </summary>
+            <param name="user"/><param name="enabled"/>
+            <returns/>
+        </member>
+        <member name="T:Umbraco.Core.Security.BackOfficeUserValidator`1">
+            <summary>
+            Custom validator to not validate a user's username or email if they haven't changed
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Umbraco.Core.Security.ContentPermissionsHelper.CheckPermissions(System.Int32,Umbraco.Core.Models.Membership.IUser,Umbraco.Core.Services.IUserService,Umbraco.Core.Services.IEntityService,Umbraco.Core.Cache.AppCaches,Umbraco.Core.Models.Entities.IUmbracoEntity@,System.Char[])">
+            <summary>
+            Checks if the user has access to the specified node and permissions set
+            </summary>
+            <param name="nodeId"></param>
+            <param name="user"></param>
+            <param name="userService"></param>
+            <param name="entityService"></param>
+            <param name="entity">The <see cref="T:Umbraco.Core.Models.Entities.IUmbracoEntity"/> item resolved if one was found for the id</param>
+            <param name="permissionsToCheck"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.ContentPermissionsHelper.CheckPermissions(System.Int32,Umbraco.Core.Models.Membership.IUser,Umbraco.Core.Services.IUserService,Umbraco.Core.Services.IContentService,Umbraco.Core.Services.IEntityService,Umbraco.Core.Cache.AppCaches,Umbraco.Core.Models.IContent@,System.Char[])">
+            <summary>
+            Checks if the user has access to the specified node and permissions set
+            </summary>
+            <param name="nodeId"></param>
+            <param name="user"></param>
+            <param name="userService"></param>
+            <param name="contentService"></param>
+            <param name="entityService"></param>
+            <param name="contentItem">The <see cref="T:Umbraco.Core.Models.IContent"/> item resolved if one was found for the id</param>
+            <param name="permissionsToCheck"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Umbraco.Core.Security.EmailService">
+            <summary>
+            The <see cref="T:Microsoft.AspNet.Identity.IIdentityMessageService"/> implementation for Umbraco
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Security.IMembershipProviderPasswordHasher">
+            <summary>
+            A password hasher that is based on the rules configured for a membership provider
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Security.IUmbracoMemberTypeMembershipProvider">
+            <summary>
+            An interface for exposing the content type properties for storing membership data in when
+            a membership provider's data is backed by an Umbraco content type.
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Security.IUserAwarePasswordHasher`2">
+            <summary>
+            A password hasher that is User aware so that it can process the hashing based on the user's settings
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TUser"></typeparam>
+        </member>
+        <member name="T:Umbraco.Core.Security.IUserSessionStore`2">
+            <summary>
+            An IUserStore interface part to implement if the store supports validating user session Ids
+            </summary>
+            <typeparam name="TUser"></typeparam>
+            <typeparam name="TKey"></typeparam>
+        </member>
+        <member name="T:Umbraco.Core.Security.IUsersMembershipProvider">
+            <summary>
+            A marker interface used internally to identify Umbraco built-in Users membership providers
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Security.MachineKeyGenerator">
+            <summary>
+            Used to generate a machine key
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Umbraco.Core.Security.MachineKeyGenerator.GenerateConfigurationBlock" -->
+        <member name="T:Umbraco.Core.Security.MembershipProviderBase">
+            <summary>
+            A base membership provider class offering much of the underlying functionality for initializing and password encryption/hashing.
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Security.MembershipProviderBase.DefaultMinPasswordLength">
+            <summary>
+            Providers can override this setting, default is 10
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Security.MembershipProviderBase.DefaultMinNonAlphanumericChars">
+            <summary>
+            Providers can override this setting, default is 0
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Security.MembershipProviderBase.DefaultUseLegacyEncoding">
+            <summary>
+            Providers can override this setting, default is false to use better security
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Security.MembershipProviderBase.AllowManuallyChangingPassword">
+            <summary>
+            Providers can override this setting, by default this is false which means that the provider will
+            authenticate the username + password when ChangePassword is called. This property exists purely for
+            backwards compatibility.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderBase.GetRawPassword(System.String)">
+            <summary>
+            Returns the raw password value for a given user
+            </summary>
+            <param name="username"></param>
+            <returns></returns>
+            <remarks>
+            By default this will return an invalid attempt, inheritors will need to override this to support it
+            </remarks>
+        </member>
+        <member name="P:Umbraco.Core.Security.MembershipProviderBase.EnablePasswordReset">
+            <summary>
+            Indicates whether the membership provider is configured to allow users to reset their passwords.
+            </summary>
+            <value></value>
+            <returns>true if the membership provider supports password reset; otherwise, false. The default is true.</returns>
+        </member>
+        <member name="P:Umbraco.Core.Security.MembershipProviderBase.EnablePasswordRetrieval">
+            <summary>
+            Indicates whether the membership provider is configured to allow users to retrieve their passwords.
+            </summary>
+            <value></value>
+            <returns>true if the membership provider is configured to support password retrieval; otherwise, false. The default is false.</returns>
+        </member>
+        <member name="P:Umbraco.Core.Security.MembershipProviderBase.MaxInvalidPasswordAttempts">
+            <summary>
+            Gets the number of invalid password or password-answer attempts allowed before the membership user is locked out.
+            </summary>
+            <value></value>
+            <returns>The number of invalid password or password-answer attempts allowed before the membership user is locked out.</returns>
+        </member>
+        <member name="P:Umbraco.Core.Security.MembershipProviderBase.MinRequiredNonAlphanumericCharacters">
+            <summary>
+            Gets the minimum number of special characters that must be present in a valid password.
+            </summary>
+            <value></value>
+            <returns>The minimum number of special characters that must be present in a valid password.</returns>
+        </member>
+        <member name="P:Umbraco.Core.Security.MembershipProviderBase.MinRequiredPasswordLength">
+            <summary>
+            Gets the minimum length required for a password.
+            </summary>
+            <value></value>
+            <returns>The minimum length required for a password. </returns>
+        </member>
+        <member name="P:Umbraco.Core.Security.MembershipProviderBase.PasswordAttemptWindow">
+            <summary>
+            Gets the number of minutes in which a maximum number of invalid password or password-answer attempts are allowed before the membership user is locked out.
+            </summary>
+            <value></value>
+            <returns>The number of minutes in which a maximum number of invalid password or password-answer attempts are allowed before the membership user is locked out.</returns>
+        </member>
+        <member name="P:Umbraco.Core.Security.MembershipProviderBase.PasswordFormat">
+            <summary>
+            Gets a value indicating the format for storing passwords in the membership data store.
+            </summary>
+            <value></value>
+            <returns>One of the <see cref="T:System.Web.Security.MembershipPasswordFormat"></see> values indicating the format for storing passwords in the data store.</returns>
+        </member>
+        <member name="P:Umbraco.Core.Security.MembershipProviderBase.PasswordStrengthRegularExpression">
+            <summary>
+            Gets the regular expression used to evaluate a password.
+            </summary>
+            <value></value>
+            <returns>A regular expression used to evaluate a password.</returns>
+        </member>
+        <member name="P:Umbraco.Core.Security.MembershipProviderBase.RequiresQuestionAndAnswer">
+            <summary>
+            Gets a value indicating whether the membership provider is configured to require the user to answer a password question for password reset and retrieval.
+            </summary>
+            <value></value>
+            <returns>true if a password answer is required for password reset and retrieval; otherwise, false. The default is true.</returns>
+        </member>
+        <member name="P:Umbraco.Core.Security.MembershipProviderBase.RequiresUniqueEmail">
+            <summary>
+            Gets a value indicating whether the membership provider is configured to require a unique e-mail address for each user name.
+            </summary>
+            <value></value>
+            <returns>true if the membership provider requires a unique e-mail address; otherwise, false. The default is true.</returns>
+        </member>
+        <member name="P:Umbraco.Core.Security.MembershipProviderBase.ApplicationName">
+            <summary>
+            The name of the application using the custom membership provider.
+            </summary>
+            <value></value>
+            <returns>The name of the application using the custom membership provider.</returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Initializes the provider.
+            </summary>
+            <param name="name">The friendly name of the provider.</param>
+            <param name="config">A collection of the name/value pairs representing the provider-specific attributes specified in the configuration for this provider.</param>
+            <exception cref="T:System.ArgumentNullException">The name of the provider is null.</exception>
+            <exception cref="T:System.InvalidOperationException">An attempt is made to call
+            <see cref="M:System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)"></see> on a provider after the provider
+            has already been initialized.</exception>
+            <exception cref="T:System.ArgumentException">The name of the provider has a length of zero.</exception>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderBase.OnValidatingPassword(System.Web.Security.ValidatePasswordEventArgs)">
+            <summary>
+            Override this method to ensure the password is valid before raising the event
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderBase.ChangePassword(System.String,System.String,System.String)">
+            <summary>
+            Processes a request to update the password for a membership user.
+            </summary>
+            <param name="username">The user to update the password for.</param>
+            <param name="oldPassword">Required to change a user password if the user is not new and AllowManuallyChangingPassword is false</param>
+            <param name="newPassword">The new password for the specified user.</param>
+            <returns>
+            true if the password was updated successfully; otherwise, false.
+            </returns>
+            <remarks>
+            Checks to ensure the AllowManuallyChangingPassword rule is adhered to
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderBase.PerformChangePassword(System.String,System.String,System.String)">
+            <summary>
+            Processes a request to update the password for a membership user.
+            </summary>
+            <param name="username">The user to update the password for.</param>
+            <param name="oldPassword">This property is ignore for this provider</param>
+            <param name="newPassword">The new password for the specified user.</param>
+            <returns>
+            true if the password was updated successfully; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderBase.ChangePasswordQuestionAndAnswer(System.String,System.String,System.String,System.String)">
+            <summary>
+            Processes a request to update the password question and answer for a membership user.
+            </summary>
+            <param name="username">The user to change the password question and answer for.</param>
+            <param name="password">The password for the specified user.</param>
+            <param name="newPasswordQuestion">The new password question for the specified user.</param>
+            <param name="newPasswordAnswer">The new password answer for the specified user.</param>
+            <returns>
+            true if the password question and answer are updated successfully; otherwise, false.
+            </returns>
+            <remarks>
+            Performs the basic validation before passing off to PerformChangePasswordQuestionAndAnswer
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderBase.PerformChangePasswordQuestionAndAnswer(System.String,System.String,System.String,System.String)">
+            <summary>
+            Processes a request to update the password question and answer for a membership user.
+            </summary>
+            <param name="username">The user to change the password question and answer for.</param>
+            <param name="password">The password for the specified user.</param>
+            <param name="newPasswordQuestion">The new password question for the specified user.</param>
+            <param name="newPasswordAnswer">The new password answer for the specified user.</param>
+            <returns>
+            true if the password question and answer are updated successfully; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderBase.CreateUser(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object,System.Web.Security.MembershipCreateStatus@)">
+            <summary>
+            Adds a new membership user to the data source.
+            </summary>
+            <param name="username">The user name for the new user.</param>
+            <param name="password">The password for the new user.</param>
+            <param name="email">The e-mail address for the new user.</param>
+            <param name="passwordQuestion">The password question for the new user.</param>
+            <param name="passwordAnswer">The password answer for the new user</param>
+            <param name="isApproved">Whether or not the new user is approved to be validated.</param>
+            <param name="providerUserKey">The unique identifier from the membership data source for the user.</param>
+            <param name="status">A <see cref="T:System.Web.Security.MembershipCreateStatus"></see> enumeration value indicating whether the user was created successfully.</param>
+            <returns>
+            A <see cref="T:System.Web.Security.MembershipUser"></see> object populated with the information for the newly created user.
+            </returns>
+            <remarks>
+            Ensures the ValidatingPassword event is executed before executing PerformCreateUser and performs basic membership provider validation of values.
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderBase.ValidateNewUser(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object)">
+            <summary>
+            Performs the validation of the information for creating a new user
+            </summary>
+            <param name="username"></param>
+            <param name="password"></param>
+            <param name="email"></param>
+            <param name="passwordQuestion"></param>
+            <param name="passwordAnswer"></param>
+            <param name="isApproved"></param>
+            <param name="providerUserKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderBase.PerformCreateUser(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object,System.Web.Security.MembershipCreateStatus@)">
+            <summary>
+            Adds a new membership user to the data source.
+            </summary>
+            <param name="username">The user name for the new user.</param>
+            <param name="password">The password for the new user.</param>
+            <param name="email">The e-mail address for the new user.</param>
+            <param name="passwordQuestion">The password question for the new user.</param>
+            <param name="passwordAnswer">The password answer for the new user</param>
+            <param name="isApproved">Whether or not the new user is approved to be validated.</param>
+            <param name="providerUserKey">The unique identifier from the membership data source for the user.</param>
+            <param name="status">A <see cref="T:System.Web.Security.MembershipCreateStatus"></see> enumeration value indicating whether the user was created successfully.</param>
+            <returns>
+            A <see cref="T:System.Web.Security.MembershipUser"></see> object populated with the information for the newly created user.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderBase.GetPassword(System.String,System.String)">
+            <summary>
+            Gets the members password if password retrieval is enabled
+            </summary>
+            <param name="username"></param>
+            <param name="answer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderBase.PerformGetPassword(System.String,System.String)">
+            <summary>
+            Gets the members password if password retrieval is enabled
+            </summary>
+            <param name="username"></param>
+            <param name="answer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderBase.GetDefaultAppName">
+            <summary>
+            Gets the name of the default app.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderBase.FormatPasswordForStorage(System.String,System.String)">
+            <summary>
+            If the password format is a hashed keyed algorithm then we will pre-pend the salt used to hash the password
+            to the hashed password itself.
+            </summary>
+            <param name="pass"></param>
+            <param name="salt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderBase.CheckPassword(System.String,System.String)">
+            <summary>
+            Checks the password.
+            </summary>
+            <param name="password">The password.</param>
+            <param name="dbPassword">The dbPassword.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderBase.EncryptOrHashNewPassword(System.String,System.String@)">
+            <summary>
+            Encrypt/hash a new password with a new salt
+            </summary>
+            <param name="newPassword"></param>
+            <param name="salt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderBase.StoredPassword(System.String,System.String@)">
+            <summary>
+            Returns the hashed password without the salt if it is hashed
+            </summary>
+            <param name="storedString"></param>
+            <param name="salt">returns the salt</param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderBase.LegacyEncodePassword(System.String)">
+            <summary>
+            Encodes the password.
+            </summary>
+            <param name="password">The password.</param>
+            <returns>The encoded password.</returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderBase.LegacyUnEncodePassword(System.String)">
+            <summary>
+            Unencode password.
+            </summary>
+            <param name="encodedPassword">The encoded password.</param>
+            <returns>The unencoded password.</returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderBase.GetCurrentRequestIpAddress">
+            <summary>
+            Returns the current request IP address for logging if there is one
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderExtensions.CanResetPassword(System.Web.Security.MembershipProvider,Umbraco.Core.Services.IUserService)">
+            <summary>
+            Extension method to check if a password can be reset based on a given provider and the current request (logged in user)
+            </summary>
+            <param name="provider"></param>
+            <param name="userService"></param>
+            <returns></returns>
+            <remarks>
+            An Admin can always reset the password
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderExtensions.GetMembersMembershipProvider">
+            <summary>
+            Method to get the Umbraco Members membership provider based on its alias
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderExtensions.GetUsersMembershipProvider">
+            <summary>
+            Method to get the Umbraco Users membership provider based on its alias
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderExtensions.GetCurrentUserOnline(System.Web.Security.MembershipProvider)">
+            <summary>
+            Returns the currently logged in MembershipUser and flags them as being online - use sparingly (i.e. login)
+            </summary>
+            <param name="membershipProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderExtensions.GetCurrentUser(System.Web.Security.MembershipProvider)">
+            <summary>
+            Returns the currently logged in MembershipUser
+            </summary>
+            <param name="membershipProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderExtensions.GetCurrentUserName(System.Web.Security.MembershipProvider)">
+            <summary>
+            Just returns the current user's login name (just a wrapper).
+            </summary>
+            <param name="membershipProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderExtensions.IsUmbracoUsersProvider(System.Web.Security.MembershipProvider)">
+            <summary>
+            Returns true if the provider specified is a built-in Umbraco users provider
+            </summary>
+            <param name="membershipProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.MembershipProviderExtensions.IsUmbracoMembershipProvider(System.Web.Security.MembershipProvider)">
+            <summary>
+            Returns true if the provider specified is a built-in Umbraco membership provider
+            </summary>
+            <param name="membershipProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Umbraco.Core.Security.MembershipProviderPasswordHasher">
+            <summary>
+            A password hasher that conforms to the password hashing done with membership providers
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Security.MembershipProviderPasswordHasher.MembershipProvider">
+            <summary>
+            Exposes the underlying MembershipProvider
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Security.MembershipProviderPasswordValidator">
+            <summary>
+            Ensure that both the normal password validator rules are processed along with the underlying membership provider rules
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Security.UmbracoBackOfficeIdentity">
+            <summary>
+            A custom user identity for the Umbraco backoffice
+            </summary>
+            <remarks>
+            This inherits from FormsIdentity for backwards compatibility reasons since we still support the forms auth cookie, in v8 we can
+            change over to 'pure' asp.net identity and just inherit from ClaimsIdentity.
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Core.Security.UmbracoBackOfficeIdentity.#ctor(System.Int32,System.String,System.String,System.Collections.Generic.IEnumerable{System.Int32},System.Collections.Generic.IEnumerable{System.Int32},System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new UmbracoBackOfficeIdentity
+            </summary>
+            <param name="userId"></param>
+            <param name="username"></param>
+            <param name="realName"></param>
+            <param name="startContentNodes"></param>
+            <param name="startMediaNodes"></param>
+            <param name="culture"></param>
+            <param name="sessionId"></param>
+            <param name="securityStamp"></param>
+            <param name="allowedApps"></param>
+            <param name="roles"></param>
+        </member>
+        <member name="M:Umbraco.Core.Security.UmbracoBackOfficeIdentity.#ctor(System.Security.Claims.ClaimsIdentity,System.Int32,System.String,System.String,System.Collections.Generic.IEnumerable{System.Int32},System.Collections.Generic.IEnumerable{System.Int32},System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new UmbracoBackOfficeIdentity
+            </summary>
+            <param name="childIdentity">
+            The original identity created by the ClaimsIdentityFactory
+            </param>
+            <param name="userId"></param>
+            <param name="username"></param>
+            <param name="realName"></param>
+            <param name="startContentNodes"></param>
+            <param name="startMediaNodes"></param>
+            <param name="culture"></param>
+            <param name="sessionId"></param>
+            <param name="securityStamp"></param>
+            <param name="allowedApps"></param>
+            <param name="roles"></param>
+        </member>
+        <member name="M:Umbraco.Core.Security.UmbracoBackOfficeIdentity.#ctor(System.Security.Claims.ClaimsIdentity)">
+            <summary>
+            Create a back office identity based on an existing claims identity
+            </summary>
+            <param name="identity"></param>
+        </member>
+        <member name="P:Umbraco.Core.Security.UmbracoBackOfficeIdentity.RequiredBackOfficeIdentityClaimTypes">
+            <summary>
+            Returns the required claim types for a back office identity
+            </summary>
+            <remarks>
+            This does not include the role claim type or allowed apps type since that is a collection and in theory could be empty
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Core.Security.UmbracoBackOfficeIdentity.AddRequiredClaims(System.Int32,System.String,System.String,System.Collections.Generic.IEnumerable{System.Int32},System.Collections.Generic.IEnumerable{System.Int32},System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Adds claims based on the ctor data
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Security.UmbracoBackOfficeIdentity.AuthenticationType">
+            <inheritdoc />
+            <summary>
+            Gets the type of authenticated identity.
+            </summary>
+            <returns>
+            The type of authenticated identity. This property always returns "UmbracoBackOffice".
+            </returns>
+        </member>
+        <member name="T:Umbraco.Core.Security.UmbracoEmailMessage">
+            <summary>
+            A custom implementation for IdentityMessage that allows the customization of how an email is sent
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Security.UmbracoMembershipProviderBase">
+            <summary>
+            A base membership provider class for umbraco providers
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Security.UmbracoMembershipProviderBase.PerformCreateUser(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object,System.Web.Security.MembershipCreateStatus@)">
+            <summary>
+            Adds a new membership user to the data source.
+            </summary>
+            <param name="username">The user name for the new user.</param>
+            <param name="password">The password for the new user.</param>
+            <param name="email">The e-mail address for the new user.</param>
+            <param name="passwordQuestion">The password question for the new user.</param>
+            <param name="passwordAnswer">The password answer for the new user</param>
+            <param name="isApproved">Whether or not the new user is approved to be validated.</param>
+            <param name="providerUserKey">The unique identifier from the membership data source for the user.</param>
+            <param name="status">A <see cref="T:System.Web.Security.MembershipCreateStatus"></see> enumeration value indicating whether the user was created successfully.</param>
+            <returns>
+            A <see cref="T:System.Web.Security.MembershipUser"></see> object populated with the information for the newly created user.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.UmbracoMembershipProviderBase.CreateUser(System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object,System.Web.Security.MembershipCreateStatus@)">
+            <summary>
+            Adds a new membership user to the data source.
+            </summary>
+            <param name="memberTypeAlias">The member type alias to use when creating the member</param>
+            <param name="username">The user name for the new user.</param>
+            <param name="password">The password for the new user.</param>
+            <param name="email">The e-mail address for the new user.</param>
+            <param name="passwordQuestion">The password question for the new user.</param>
+            <param name="passwordAnswer">The password answer for the new user</param>
+            <param name="isApproved">Whether or not the new user is approved to be validated.</param>
+            <param name="providerUserKey">The unique identifier from the membership data source for the user.</param>
+            <param name="status">A <see cref="T:System.Web.Security.MembershipCreateStatus"></see> enumeration value indicating whether the user was created successfully.</param>
+            <returns>
+            A <see cref="T:System.Web.Security.MembershipUser"></see> object populated with the information for the newly created user.
+            </returns>
+        </member>
+        <member name="M:Umbraco.Core.Security.UmbracoMembershipProviderBase.PerformCreateUser(System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object,System.Web.Security.MembershipCreateStatus@)">
+            <summary>
+            Adds a new membership user to the data source.
+            </summary>
+            <param name="memberTypeAlias">The member type alias to use when creating the member</param>
+            <param name="username">The user name for the new user.</param>
+            <param name="password">The password for the new user.</param>
+            <param name="email">The e-mail address for the new user.</param>
+            <param name="passwordQuestion">The password question for the new user.</param>
+            <param name="passwordAnswer">The password answer for the new user</param>
+            <param name="isApproved">Whether or not the new user is approved to be validated.</param>
+            <param name="providerUserKey">The unique identifier from the membership data source for the user.</param>
+            <param name="status">A <see cref="T:System.Web.Security.MembershipCreateStatus"></see> enumeration value indicating whether the user was created successfully.</param>
+            <returns>
+            A <see cref="T:System.Web.Security.MembershipUser"></see> object populated with the information for the newly created user.
+            </returns>
+        </member>
+        <member name="T:Umbraco.Core.Security.UserAwareMembershipProviderPasswordHasher">
+            <summary>
+            The default password hasher that is User aware so that it can process the hashing based on the user's settings
+            </summary>
+        </member>
         <member name="T:Umbraco.Core.Serialization.AutoInterningStringConverter">
             <summary>
             When applied to a string or string collection field will ensure the deserialized strings are interned
@@ -23093,6 +24101,32 @@
             <param name="input"> </param>
             <param name="intent"> </param>
             <returns> </returns>
+        </member>
+        <member name="T:Umbraco.Core.Services.IContentVersionCleanupPolicy">
+            <summary>
+            Used to filter historic content versions for cleanup.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Services.IContentVersionCleanupPolicy.Apply(System.DateTime,System.Collections.Generic.IEnumerable{Umbraco.Core.Models.ContentVersionMeta})">
+            <summary>
+            Filters a set of candidates historic content versions for cleanup according to policy settings.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Services.IContentVersionService.PerformContentVersionCleanup(System.DateTime)">
+            <summary>
+            Removes historic content versions according to a policy.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Services.IContentVersionService.GetPagedContentVersions(System.Int32,System.Int64,System.Int32,System.Int64@,System.String)">
+            <summary>
+            Gets paginated content versions for given content id paginated.
+            </summary>
+            <exception cref="T:System.ArgumentException">Thrown when <paramref name="culture"/> is invalid.</exception>
+        </member>
+        <member name="M:Umbraco.Core.Services.IContentVersionService.SetPreventCleanup(System.Int32,System.Boolean,System.Int32)">
+            <summary>
+            Updates preventCleanup value for given content version.
+            </summary>
         </member>
         <member name="M:Umbraco.Core.Services.IIconService.GetIcon(System.String)">
             <summary>
@@ -23805,6 +24839,24 @@
             <remarks>This needs extra care and attention as its potentially a dangerous and extensive operation</remarks>
             <param name="contentTypeId">Id of the <see cref="T:Umbraco.Core.Models.IContentType"/></param>
             <param name="userId">Optional id of the user deleting the media</param>
+        </member>
+        <member name="M:Umbraco.Core.Services.Implement.ContentService.PerformContentVersionCleanup(System.DateTime)">
+            <inheritdoc />
+            <remarks>
+            In v9 this can live in another class as we publish the notifications via IEventAggregator.
+            But for v8 must be here for access to the static events.
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Core.Services.Implement.ContentService.GetPagedContentVersions(System.Int32,System.Int64,System.Int32,System.Int64@,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Core.Services.Implement.ContentService.SetPreventCleanup(System.Int32,System.Boolean,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Umbraco.Core.Services.Implement.ContentService.CleanupDocumentVersions(System.DateTime)">
+            <remarks>
+            v9 - move to another class
+            </remarks>
         </member>
         <member name="T:Umbraco.Core.Services.Implement.ContentTypeService">
             <summary>
@@ -30873,6 +31925,15 @@
             <para>Must be assigned before resolution is frozen.</para>
             </remarks>
         </member>
+        <member name="M:Umbraco.Core.Sync.ApplicationUrlHelper.GetApplicationUriUncached(System.Web.HttpRequestBase,Umbraco.Core.Configuration.UmbracoSettings.IUmbracoSettingsSection,Umbraco.Core.Configuration.IGlobalSettings)">
+            <summary>
+            Will get the application URL from configuration, if none is specified will fall back to URL from request.
+            </summary>
+            <param name="request"></param>
+            <param name="umbracoSettingsSection"></param>
+            <param name="globalSettings"></param>
+            <returns></returns>
+        </member>
         <member name="T:Umbraco.Core.Sync.DatabaseServerMessenger">
             <summary>
             An <see cref="T:Umbraco.Core.Sync.IServerMessenger"/> that works by storing messages in the database.
@@ -35673,6 +36734,16 @@
             Gets or sets the sections listed in the manifest.
             </summary>
         </member>
+        <member name="P:Umbraco.Core.Manifest.PackageManifest.Version">
+            <summary>
+            Gets or sets the version of the package
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Manifest.PackageManifest.AllowPackageTelemetry">
+            <summary>
+            Gets or sets a value indicating whether telemetry is allowed
+            </summary>
+        </member>
         <member name="T:Umbraco.Core.Manifest.DataEditorConverter">
             <summary>
             Provides a json read converter for <see cref="T:Umbraco.Core.PropertyEditors.IDataEditor"/> in manifests.
@@ -36024,6 +37095,91 @@
             <remarks>
             This does not recompile the pure live models, only sets a flag to tell models builder to recompile when they are requested.
             </remarks>
+        </member>
+        <member name="T:Umbraco.Core.Telemetry.ISiteIdentifierService">
+            <summary>
+            Used to get and create the site identifier
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Telemetry.ISiteIdentifierService.TryGetSiteIdentifier(System.Guid@)">
+            <summary>
+            Tries to get the site identifier
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Telemetry.ISiteIdentifierService.TryGetOrCreateSiteIdentifier(System.Guid@)">
+            <summary>
+            Tries to get the site identifier or otherwise create it if it doesn't exist.
+            </summary>
+            <param name="siteIdentifier"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Core.Telemetry.ISiteIdentifierService.TryCreateSiteIdentifier(System.Guid@)">
+            <summary>
+            Creates the site identifier and writes it to config.
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Telemetry.ITelemetryService">
+            <summary>
+            Service which gathers the data for telemetry reporting
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Telemetry.ITelemetryService.TryGetTelemetryReportData(Umbraco.Core.Telemetry.Models.TelemetryReportData@)">
+            <summary>
+            Try and get the <see cref="T:Umbraco.Core.Telemetry.Models.TelemetryReportData"/>
+            </summary>
+        </member>
+        <member name="T:Umbraco.Core.Telemetry.Models.PackageTelemetry">
+            <summary>
+            Serializable class containing information about an installed package.
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Telemetry.Models.PackageTelemetry.Name">
+            <summary>
+            Gets or sets the name of the installed package.
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Telemetry.Models.PackageTelemetry.Version">
+            <summary>
+            Gets or sets the version of the installed package.
+            </summary>
+            <remarks>
+            This may be an empty string if no version is specified, or if package telemetry has been restricted.
+            </remarks>
+        </member>
+        <member name="T:Umbraco.Core.Telemetry.Models.TelemetryReportData">
+            <summary>
+            Serializable class containing telemetry information.
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Telemetry.Models.TelemetryReportData.Id">
+            <summary>
+            Gets or sets a random GUID to prevent an instance posting multiple times pr. day.
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Telemetry.Models.TelemetryReportData.Version">
+            <summary>
+            Gets or sets the Umbraco CMS version.
+            </summary>
+        </member>
+        <member name="P:Umbraco.Core.Telemetry.Models.TelemetryReportData.Packages">
+            <summary>
+            Gets or sets an enumerable containing information about packages.
+            </summary>
+            <remarks>
+            Contains only the name and version of the packages, unless no version is specified.
+            </remarks>
+        </member>
+        <member name="T:Umbraco.Core.Telemetry.TelemetryService">
+            <inheritdoc/>
+        </member>
+        <member name="M:Umbraco.Core.Telemetry.TelemetryService.#ctor(Umbraco.Core.Manifest.ManifestParser,Umbraco.Core.Telemetry.ISiteIdentifierService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umbraco.Core.Telemetry.TelemetryService"/> class.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Telemetry.TelemetryService.TryGetTelemetryReportData(Umbraco.Core.Telemetry.Models.TelemetryReportData@)">
+            <inheritdoc/>
         </member>
         <member name="M:Umbraco.Core.TypeLoaderExtensions.GetDataEditors(Umbraco.Core.Composing.TypeLoader)">
             <summary>
@@ -39607,846 +40763,6 @@
             <remarks>Should go into HttpContext to indicate there is also an IScope in context
             that needs to be disposed at the end of the request (the scope, and the entire scopes
             chain).</remarks>
-        </member>
-        <member name="M:Umbraco.Core.Security.AuthenticationExtensions.GetUmbracoIdentity(System.Security.Principal.IPrincipal)">
-            <summary>
-            This will return the current back office identity if the IPrincipal is the correct type
-            </summary>
-            <param name="user"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.AuthenticationExtensions.EnsureCulture(System.Security.Principal.IIdentity)">
-            <summary>
-            Ensures that the thread culture is set based on the back office user's culture
-            </summary>
-            <param name="identity"></param>
-        </member>
-        <member name="F:Umbraco.Core.Security.AuthenticationExtensions.UserCultures">
-            <summary>
-            Used so that we aren't creating a new CultureInfo object for every single request
-            </summary>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.DisposeResources">
-            <summary>
-            Handles the disposal of resources. Derived from abstract class <see cref="T:Umbraco.Core.DisposableObjectSlim"/> which handles common required locking logic.
-            </summary>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.CreateAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
-            <summary>
-            Insert a new user
-            </summary>
-            <param name="user"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.UpdateAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
-            <summary>
-            Update a user
-            </summary>
-            <param name="user"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.DeleteAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
-            <summary>
-            Delete a user
-            </summary>
-            <param name="user"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.FindByIdAsync(System.Int32)">
-            <summary>
-            Finds a user
-            </summary>
-            <param name="userId"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.FindByNameAsync(System.String)">
-            <summary>
-            Find a user by name
-            </summary>
-            <param name="userName"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.SetPasswordHashAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.String)">
-            <summary>
-            Set the user password hash
-            </summary>
-            <param name="user"/><param name="passwordHash"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.GetPasswordHashAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
-            <summary>
-            Get the user password hash
-            </summary>
-            <param name="user"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.HasPasswordAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
-            <summary>
-            Returns true if a user has a password set
-            </summary>
-            <param name="user"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.SetEmailAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.String)">
-            <summary>
-            Set the user email
-            </summary>
-            <param name="user"/><param name="email"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.GetEmailAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
-            <summary>
-            Get the user email
-            </summary>
-            <param name="user"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.GetEmailConfirmedAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
-            <summary>
-            Returns true if the user email is confirmed
-            </summary>
-            <param name="user"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.SetEmailConfirmedAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.Boolean)">
-            <summary>
-            Sets whether the user email is confirmed
-            </summary>
-            <param name="user"/><param name="confirmed"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.FindByEmailAsync(System.String)">
-            <summary>
-            Returns the user associated with this email
-            </summary>
-            <param name="email"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.AddLoginAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,Microsoft.AspNet.Identity.UserLoginInfo)">
-            <summary>
-            Adds a user login with the specified provider and key
-            </summary>
-            <param name="user"/><param name="login"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.RemoveLoginAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,Microsoft.AspNet.Identity.UserLoginInfo)">
-            <summary>
-            Removes the user login with the specified combination if it exists
-            </summary>
-            <param name="user"/><param name="login"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.GetLoginsAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
-            <summary>
-            Returns the linked accounts for this user
-            </summary>
-            <param name="user"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.FindAsync(Microsoft.AspNet.Identity.UserLoginInfo)">
-            <summary>
-            Returns the user associated with this login
-            </summary>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.AddToRoleAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.String)">
-            <summary>
-            Adds a user to a role (user group)
-            </summary>
-            <param name="user"/><param name="roleName"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.RemoveFromRoleAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.String)">
-            <summary>
-            Removes the role (user group) for the user
-            </summary>
-            <param name="user"/><param name="roleName"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.GetRolesAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
-            <summary>
-            Returns the roles (user groups) for this user
-            </summary>
-            <param name="user"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.IsInRoleAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.String)">
-            <summary>
-            Returns true if a user is in the role
-            </summary>
-            <param name="user"/><param name="roleName"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.SetSecurityStampAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.String)">
-            <summary>
-            Set the security stamp for the user
-            </summary>
-            <param name="user"/><param name="stamp"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.GetSecurityStampAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
-            <summary>
-            Get the user security stamp
-            </summary>
-            <param name="user"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.SetTwoFactorEnabledAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.Boolean)">
-            <summary>
-            Sets whether two factor authentication is enabled for the user
-            </summary>
-            <param name="user"/><param name="enabled"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.GetTwoFactorEnabledAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
-            <summary>
-            Returns whether two factor authentication is enabled for the user
-            </summary>
-            <param name="user"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.GetLockoutEndDateAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
-            <summary>
-            Returns the DateTimeOffset that represents the end of a user's lockout, any time in the past should be considered not locked out.
-            </summary>
-            <param name="user"/>
-            <returns/>
-            <remarks>
-            Currently we do not support a timed lock out, when they are locked out, an admin will  have to reset the status
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.SetLockoutEndDateAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.DateTimeOffset)">
-            <summary>
-            Locks a user out until the specified end date (set to a past date, to unlock a user)
-            </summary>
-            <param name="user"/><param name="lockoutEnd"/>
-            <returns/>
-            <remarks>
-            Currently we do not support a timed lock out, when they are locked out, an admin will  have to reset the status
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.IncrementAccessFailedCountAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
-            <summary>
-            Used to record when an attempt to access the user has failed
-            </summary>
-            <param name="user"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.ResetAccessFailedCountAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
-            <summary>
-            Used to reset the access failed count, typically after the account is successfully accessed
-            </summary>
-            <param name="user"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.GetAccessFailedCountAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
-            <summary>
-            Returns the current number of failed access attempts.  This number usually will be reset whenever the password is
-                            verified or the account is locked out.
-            </summary>
-            <param name="user"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.GetLockoutEnabledAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser)">
-            <summary>
-            Returns true
-            </summary>
-            <param name="user"/>
-            <returns/>
-        </member>
-        <member name="M:Umbraco.Core.Security.BackOfficeUserStore.SetLockoutEnabledAsync(Umbraco.Core.Models.Identity.BackOfficeIdentityUser,System.Boolean)">
-            <summary>
-            Doesn't actually perform any function, users can always be locked out
-            </summary>
-            <param name="user"/><param name="enabled"/>
-            <returns/>
-        </member>
-        <member name="T:Umbraco.Core.Security.BackOfficeUserValidator`1">
-            <summary>
-            Custom validator to not validate a user's username or email if they haven't changed
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:Umbraco.Core.Security.ContentPermissionsHelper.CheckPermissions(System.Int32,Umbraco.Core.Models.Membership.IUser,Umbraco.Core.Services.IUserService,Umbraco.Core.Services.IEntityService,Umbraco.Core.Cache.AppCaches,Umbraco.Core.Models.Entities.IUmbracoEntity@,System.Char[])">
-            <summary>
-            Checks if the user has access to the specified node and permissions set
-            </summary>
-            <param name="nodeId"></param>
-            <param name="user"></param>
-            <param name="userService"></param>
-            <param name="entityService"></param>
-            <param name="entity">The <see cref="T:Umbraco.Core.Models.Entities.IUmbracoEntity"/> item resolved if one was found for the id</param>
-            <param name="permissionsToCheck"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.ContentPermissionsHelper.CheckPermissions(System.Int32,Umbraco.Core.Models.Membership.IUser,Umbraco.Core.Services.IUserService,Umbraco.Core.Services.IContentService,Umbraco.Core.Services.IEntityService,Umbraco.Core.Cache.AppCaches,Umbraco.Core.Models.IContent@,System.Char[])">
-            <summary>
-            Checks if the user has access to the specified node and permissions set
-            </summary>
-            <param name="nodeId"></param>
-            <param name="user"></param>
-            <param name="userService"></param>
-            <param name="contentService"></param>
-            <param name="entityService"></param>
-            <param name="contentItem">The <see cref="T:Umbraco.Core.Models.IContent"/> item resolved if one was found for the id</param>
-            <param name="permissionsToCheck"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Umbraco.Core.Security.EmailService">
-            <summary>
-            The <see cref="T:Microsoft.AspNet.Identity.IIdentityMessageService"/> implementation for Umbraco
-            </summary>
-        </member>
-        <member name="T:Umbraco.Core.Security.IMembershipProviderPasswordHasher">
-            <summary>
-            A password hasher that is based on the rules configured for a membership provider
-            </summary>
-        </member>
-        <member name="T:Umbraco.Core.Security.IUmbracoMemberTypeMembershipProvider">
-            <summary>
-            An interface for exposing the content type properties for storing membership data in when
-            a membership provider's data is backed by an Umbraco content type.
-            </summary>
-        </member>
-        <member name="T:Umbraco.Core.Security.IUserAwarePasswordHasher`2">
-            <summary>
-            A password hasher that is User aware so that it can process the hashing based on the user's settings
-            </summary>
-            <typeparam name="TKey"></typeparam>
-            <typeparam name="TUser"></typeparam>
-        </member>
-        <member name="T:Umbraco.Core.Security.IUserSessionStore`2">
-            <summary>
-            An IUserStore interface part to implement if the store supports validating user session Ids
-            </summary>
-            <typeparam name="TUser"></typeparam>
-            <typeparam name="TKey"></typeparam>
-        </member>
-        <member name="T:Umbraco.Core.Security.IUsersMembershipProvider">
-            <summary>
-            A marker interface used internally to identify Umbraco built-in Users membership providers
-            </summary>
-        </member>
-        <member name="T:Umbraco.Core.Security.MachineKeyGenerator">
-            <summary>
-            Used to generate a machine key
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "M:Umbraco.Core.Security.MachineKeyGenerator.GenerateConfigurationBlock" -->
-        <member name="T:Umbraco.Core.Security.MembershipProviderBase">
-            <summary>
-            A base membership provider class offering much of the underlying functionality for initializing and password encryption/hashing.
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Security.MembershipProviderBase.DefaultMinPasswordLength">
-            <summary>
-            Providers can override this setting, default is 10
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Security.MembershipProviderBase.DefaultMinNonAlphanumericChars">
-            <summary>
-            Providers can override this setting, default is 0
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Security.MembershipProviderBase.DefaultUseLegacyEncoding">
-            <summary>
-            Providers can override this setting, default is false to use better security
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Security.MembershipProviderBase.AllowManuallyChangingPassword">
-            <summary>
-            Providers can override this setting, by default this is false which means that the provider will
-            authenticate the username + password when ChangePassword is called. This property exists purely for
-            backwards compatibility.
-            </summary>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderBase.GetRawPassword(System.String)">
-            <summary>
-            Returns the raw password value for a given user
-            </summary>
-            <param name="username"></param>
-            <returns></returns>
-            <remarks>
-            By default this will return an invalid attempt, inheritors will need to override this to support it
-            </remarks>
-        </member>
-        <member name="P:Umbraco.Core.Security.MembershipProviderBase.EnablePasswordReset">
-            <summary>
-            Indicates whether the membership provider is configured to allow users to reset their passwords.
-            </summary>
-            <value></value>
-            <returns>true if the membership provider supports password reset; otherwise, false. The default is true.</returns>
-        </member>
-        <member name="P:Umbraco.Core.Security.MembershipProviderBase.EnablePasswordRetrieval">
-            <summary>
-            Indicates whether the membership provider is configured to allow users to retrieve their passwords.
-            </summary>
-            <value></value>
-            <returns>true if the membership provider is configured to support password retrieval; otherwise, false. The default is false.</returns>
-        </member>
-        <member name="P:Umbraco.Core.Security.MembershipProviderBase.MaxInvalidPasswordAttempts">
-            <summary>
-            Gets the number of invalid password or password-answer attempts allowed before the membership user is locked out.
-            </summary>
-            <value></value>
-            <returns>The number of invalid password or password-answer attempts allowed before the membership user is locked out.</returns>
-        </member>
-        <member name="P:Umbraco.Core.Security.MembershipProviderBase.MinRequiredNonAlphanumericCharacters">
-            <summary>
-            Gets the minimum number of special characters that must be present in a valid password.
-            </summary>
-            <value></value>
-            <returns>The minimum number of special characters that must be present in a valid password.</returns>
-        </member>
-        <member name="P:Umbraco.Core.Security.MembershipProviderBase.MinRequiredPasswordLength">
-            <summary>
-            Gets the minimum length required for a password.
-            </summary>
-            <value></value>
-            <returns>The minimum length required for a password. </returns>
-        </member>
-        <member name="P:Umbraco.Core.Security.MembershipProviderBase.PasswordAttemptWindow">
-            <summary>
-            Gets the number of minutes in which a maximum number of invalid password or password-answer attempts are allowed before the membership user is locked out.
-            </summary>
-            <value></value>
-            <returns>The number of minutes in which a maximum number of invalid password or password-answer attempts are allowed before the membership user is locked out.</returns>
-        </member>
-        <member name="P:Umbraco.Core.Security.MembershipProviderBase.PasswordFormat">
-            <summary>
-            Gets a value indicating the format for storing passwords in the membership data store.
-            </summary>
-            <value></value>
-            <returns>One of the <see cref="T:System.Web.Security.MembershipPasswordFormat"></see> values indicating the format for storing passwords in the data store.</returns>
-        </member>
-        <member name="P:Umbraco.Core.Security.MembershipProviderBase.PasswordStrengthRegularExpression">
-            <summary>
-            Gets the regular expression used to evaluate a password.
-            </summary>
-            <value></value>
-            <returns>A regular expression used to evaluate a password.</returns>
-        </member>
-        <member name="P:Umbraco.Core.Security.MembershipProviderBase.RequiresQuestionAndAnswer">
-            <summary>
-            Gets a value indicating whether the membership provider is configured to require the user to answer a password question for password reset and retrieval.
-            </summary>
-            <value></value>
-            <returns>true if a password answer is required for password reset and retrieval; otherwise, false. The default is true.</returns>
-        </member>
-        <member name="P:Umbraco.Core.Security.MembershipProviderBase.RequiresUniqueEmail">
-            <summary>
-            Gets a value indicating whether the membership provider is configured to require a unique e-mail address for each user name.
-            </summary>
-            <value></value>
-            <returns>true if the membership provider requires a unique e-mail address; otherwise, false. The default is true.</returns>
-        </member>
-        <member name="P:Umbraco.Core.Security.MembershipProviderBase.ApplicationName">
-            <summary>
-            The name of the application using the custom membership provider.
-            </summary>
-            <value></value>
-            <returns>The name of the application using the custom membership provider.</returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)">
-            <summary>
-            Initializes the provider.
-            </summary>
-            <param name="name">The friendly name of the provider.</param>
-            <param name="config">A collection of the name/value pairs representing the provider-specific attributes specified in the configuration for this provider.</param>
-            <exception cref="T:System.ArgumentNullException">The name of the provider is null.</exception>
-            <exception cref="T:System.InvalidOperationException">An attempt is made to call
-            <see cref="M:System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)"></see> on a provider after the provider
-            has already been initialized.</exception>
-            <exception cref="T:System.ArgumentException">The name of the provider has a length of zero.</exception>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderBase.OnValidatingPassword(System.Web.Security.ValidatePasswordEventArgs)">
-            <summary>
-            Override this method to ensure the password is valid before raising the event
-            </summary>
-            <param name="e"></param>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderBase.ChangePassword(System.String,System.String,System.String)">
-            <summary>
-            Processes a request to update the password for a membership user.
-            </summary>
-            <param name="username">The user to update the password for.</param>
-            <param name="oldPassword">Required to change a user password if the user is not new and AllowManuallyChangingPassword is false</param>
-            <param name="newPassword">The new password for the specified user.</param>
-            <returns>
-            true if the password was updated successfully; otherwise, false.
-            </returns>
-            <remarks>
-            Checks to ensure the AllowManuallyChangingPassword rule is adhered to
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderBase.PerformChangePassword(System.String,System.String,System.String)">
-            <summary>
-            Processes a request to update the password for a membership user.
-            </summary>
-            <param name="username">The user to update the password for.</param>
-            <param name="oldPassword">This property is ignore for this provider</param>
-            <param name="newPassword">The new password for the specified user.</param>
-            <returns>
-            true if the password was updated successfully; otherwise, false.
-            </returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderBase.ChangePasswordQuestionAndAnswer(System.String,System.String,System.String,System.String)">
-            <summary>
-            Processes a request to update the password question and answer for a membership user.
-            </summary>
-            <param name="username">The user to change the password question and answer for.</param>
-            <param name="password">The password for the specified user.</param>
-            <param name="newPasswordQuestion">The new password question for the specified user.</param>
-            <param name="newPasswordAnswer">The new password answer for the specified user.</param>
-            <returns>
-            true if the password question and answer are updated successfully; otherwise, false.
-            </returns>
-            <remarks>
-            Performs the basic validation before passing off to PerformChangePasswordQuestionAndAnswer
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderBase.PerformChangePasswordQuestionAndAnswer(System.String,System.String,System.String,System.String)">
-            <summary>
-            Processes a request to update the password question and answer for a membership user.
-            </summary>
-            <param name="username">The user to change the password question and answer for.</param>
-            <param name="password">The password for the specified user.</param>
-            <param name="newPasswordQuestion">The new password question for the specified user.</param>
-            <param name="newPasswordAnswer">The new password answer for the specified user.</param>
-            <returns>
-            true if the password question and answer are updated successfully; otherwise, false.
-            </returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderBase.CreateUser(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object,System.Web.Security.MembershipCreateStatus@)">
-            <summary>
-            Adds a new membership user to the data source.
-            </summary>
-            <param name="username">The user name for the new user.</param>
-            <param name="password">The password for the new user.</param>
-            <param name="email">The e-mail address for the new user.</param>
-            <param name="passwordQuestion">The password question for the new user.</param>
-            <param name="passwordAnswer">The password answer for the new user</param>
-            <param name="isApproved">Whether or not the new user is approved to be validated.</param>
-            <param name="providerUserKey">The unique identifier from the membership data source for the user.</param>
-            <param name="status">A <see cref="T:System.Web.Security.MembershipCreateStatus"></see> enumeration value indicating whether the user was created successfully.</param>
-            <returns>
-            A <see cref="T:System.Web.Security.MembershipUser"></see> object populated with the information for the newly created user.
-            </returns>
-            <remarks>
-            Ensures the ValidatingPassword event is executed before executing PerformCreateUser and performs basic membership provider validation of values.
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderBase.ValidateNewUser(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object)">
-            <summary>
-            Performs the validation of the information for creating a new user
-            </summary>
-            <param name="username"></param>
-            <param name="password"></param>
-            <param name="email"></param>
-            <param name="passwordQuestion"></param>
-            <param name="passwordAnswer"></param>
-            <param name="isApproved"></param>
-            <param name="providerUserKey"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderBase.PerformCreateUser(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object,System.Web.Security.MembershipCreateStatus@)">
-            <summary>
-            Adds a new membership user to the data source.
-            </summary>
-            <param name="username">The user name for the new user.</param>
-            <param name="password">The password for the new user.</param>
-            <param name="email">The e-mail address for the new user.</param>
-            <param name="passwordQuestion">The password question for the new user.</param>
-            <param name="passwordAnswer">The password answer for the new user</param>
-            <param name="isApproved">Whether or not the new user is approved to be validated.</param>
-            <param name="providerUserKey">The unique identifier from the membership data source for the user.</param>
-            <param name="status">A <see cref="T:System.Web.Security.MembershipCreateStatus"></see> enumeration value indicating whether the user was created successfully.</param>
-            <returns>
-            A <see cref="T:System.Web.Security.MembershipUser"></see> object populated with the information for the newly created user.
-            </returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderBase.GetPassword(System.String,System.String)">
-            <summary>
-            Gets the members password if password retrieval is enabled
-            </summary>
-            <param name="username"></param>
-            <param name="answer"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderBase.PerformGetPassword(System.String,System.String)">
-            <summary>
-            Gets the members password if password retrieval is enabled
-            </summary>
-            <param name="username"></param>
-            <param name="answer"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderBase.GetDefaultAppName">
-            <summary>
-            Gets the name of the default app.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderBase.FormatPasswordForStorage(System.String,System.String)">
-            <summary>
-            If the password format is a hashed keyed algorithm then we will pre-pend the salt used to hash the password
-            to the hashed password itself.
-            </summary>
-            <param name="pass"></param>
-            <param name="salt"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderBase.CheckPassword(System.String,System.String)">
-            <summary>
-            Checks the password.
-            </summary>
-            <param name="password">The password.</param>
-            <param name="dbPassword">The dbPassword.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderBase.EncryptOrHashNewPassword(System.String,System.String@)">
-            <summary>
-            Encrypt/hash a new password with a new salt
-            </summary>
-            <param name="newPassword"></param>
-            <param name="salt"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderBase.StoredPassword(System.String,System.String@)">
-            <summary>
-            Returns the hashed password without the salt if it is hashed
-            </summary>
-            <param name="storedString"></param>
-            <param name="salt">returns the salt</param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderBase.LegacyEncodePassword(System.String)">
-            <summary>
-            Encodes the password.
-            </summary>
-            <param name="password">The password.</param>
-            <returns>The encoded password.</returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderBase.LegacyUnEncodePassword(System.String)">
-            <summary>
-            Unencode password.
-            </summary>
-            <param name="encodedPassword">The encoded password.</param>
-            <returns>The unencoded password.</returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderBase.GetCurrentRequestIpAddress">
-            <summary>
-            Returns the current request IP address for logging if there is one
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderExtensions.CanResetPassword(System.Web.Security.MembershipProvider,Umbraco.Core.Services.IUserService)">
-            <summary>
-            Extension method to check if a password can be reset based on a given provider and the current request (logged in user)
-            </summary>
-            <param name="provider"></param>
-            <param name="userService"></param>
-            <returns></returns>
-            <remarks>
-            An Admin can always reset the password
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderExtensions.GetMembersMembershipProvider">
-            <summary>
-            Method to get the Umbraco Members membership provider based on its alias
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderExtensions.GetUsersMembershipProvider">
-            <summary>
-            Method to get the Umbraco Users membership provider based on its alias
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderExtensions.GetCurrentUserOnline(System.Web.Security.MembershipProvider)">
-            <summary>
-            Returns the currently logged in MembershipUser and flags them as being online - use sparingly (i.e. login)
-            </summary>
-            <param name="membershipProvider"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderExtensions.GetCurrentUser(System.Web.Security.MembershipProvider)">
-            <summary>
-            Returns the currently logged in MembershipUser
-            </summary>
-            <param name="membershipProvider"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderExtensions.GetCurrentUserName(System.Web.Security.MembershipProvider)">
-            <summary>
-            Just returns the current user's login name (just a wrapper).
-            </summary>
-            <param name="membershipProvider"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderExtensions.IsUmbracoUsersProvider(System.Web.Security.MembershipProvider)">
-            <summary>
-            Returns true if the provider specified is a built-in Umbraco users provider
-            </summary>
-            <param name="membershipProvider"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.MembershipProviderExtensions.IsUmbracoMembershipProvider(System.Web.Security.MembershipProvider)">
-            <summary>
-            Returns true if the provider specified is a built-in Umbraco membership provider
-            </summary>
-            <param name="membershipProvider"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Umbraco.Core.Security.MembershipProviderPasswordHasher">
-            <summary>
-            A password hasher that conforms to the password hashing done with membership providers
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Security.MembershipProviderPasswordHasher.MembershipProvider">
-            <summary>
-            Exposes the underlying MembershipProvider
-            </summary>
-        </member>
-        <member name="T:Umbraco.Core.Security.MembershipProviderPasswordValidator">
-            <summary>
-            Ensure that both the normal password validator rules are processed along with the underlying membership provider rules
-            </summary>
-        </member>
-        <member name="T:Umbraco.Core.Security.UmbracoBackOfficeIdentity">
-            <summary>
-            A custom user identity for the Umbraco backoffice
-            </summary>
-            <remarks>
-            This inherits from FormsIdentity for backwards compatibility reasons since we still support the forms auth cookie, in v8 we can
-            change over to 'pure' asp.net identity and just inherit from ClaimsIdentity.
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Core.Security.UmbracoBackOfficeIdentity.#ctor(System.Int32,System.String,System.String,System.Collections.Generic.IEnumerable{System.Int32},System.Collections.Generic.IEnumerable{System.Int32},System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-            Creates a new UmbracoBackOfficeIdentity
-            </summary>
-            <param name="userId"></param>
-            <param name="username"></param>
-            <param name="realName"></param>
-            <param name="startContentNodes"></param>
-            <param name="startMediaNodes"></param>
-            <param name="culture"></param>
-            <param name="sessionId"></param>
-            <param name="securityStamp"></param>
-            <param name="allowedApps"></param>
-            <param name="roles"></param>
-        </member>
-        <member name="M:Umbraco.Core.Security.UmbracoBackOfficeIdentity.#ctor(System.Security.Claims.ClaimsIdentity,System.Int32,System.String,System.String,System.Collections.Generic.IEnumerable{System.Int32},System.Collections.Generic.IEnumerable{System.Int32},System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-            Creates a new UmbracoBackOfficeIdentity
-            </summary>
-            <param name="childIdentity">
-            The original identity created by the ClaimsIdentityFactory
-            </param>
-            <param name="userId"></param>
-            <param name="username"></param>
-            <param name="realName"></param>
-            <param name="startContentNodes"></param>
-            <param name="startMediaNodes"></param>
-            <param name="culture"></param>
-            <param name="sessionId"></param>
-            <param name="securityStamp"></param>
-            <param name="allowedApps"></param>
-            <param name="roles"></param>
-        </member>
-        <member name="M:Umbraco.Core.Security.UmbracoBackOfficeIdentity.#ctor(System.Security.Claims.ClaimsIdentity)">
-            <summary>
-            Create a back office identity based on an existing claims identity
-            </summary>
-            <param name="identity"></param>
-        </member>
-        <member name="P:Umbraco.Core.Security.UmbracoBackOfficeIdentity.RequiredBackOfficeIdentityClaimTypes">
-            <summary>
-            Returns the required claim types for a back office identity
-            </summary>
-            <remarks>
-            This does not include the role claim type or allowed apps type since that is a collection and in theory could be empty
-            </remarks>
-        </member>
-        <member name="M:Umbraco.Core.Security.UmbracoBackOfficeIdentity.AddRequiredClaims(System.Int32,System.String,System.String,System.Collections.Generic.IEnumerable{System.Int32},System.Collections.Generic.IEnumerable{System.Int32},System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-            Adds claims based on the ctor data
-            </summary>
-        </member>
-        <member name="P:Umbraco.Core.Security.UmbracoBackOfficeIdentity.AuthenticationType">
-            <inheritdoc />
-            <summary>
-            Gets the type of authenticated identity.
-            </summary>
-            <returns>
-            The type of authenticated identity. This property always returns "UmbracoBackOffice".
-            </returns>
-        </member>
-        <member name="T:Umbraco.Core.Security.UmbracoEmailMessage">
-            <summary>
-            A custom implementation for IdentityMessage that allows the customization of how an email is sent
-            </summary>
-        </member>
-        <member name="T:Umbraco.Core.Security.UmbracoMembershipProviderBase">
-            <summary>
-            A base membership provider class for umbraco providers
-            </summary>
-        </member>
-        <member name="M:Umbraco.Core.Security.UmbracoMembershipProviderBase.PerformCreateUser(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object,System.Web.Security.MembershipCreateStatus@)">
-            <summary>
-            Adds a new membership user to the data source.
-            </summary>
-            <param name="username">The user name for the new user.</param>
-            <param name="password">The password for the new user.</param>
-            <param name="email">The e-mail address for the new user.</param>
-            <param name="passwordQuestion">The password question for the new user.</param>
-            <param name="passwordAnswer">The password answer for the new user</param>
-            <param name="isApproved">Whether or not the new user is approved to be validated.</param>
-            <param name="providerUserKey">The unique identifier from the membership data source for the user.</param>
-            <param name="status">A <see cref="T:System.Web.Security.MembershipCreateStatus"></see> enumeration value indicating whether the user was created successfully.</param>
-            <returns>
-            A <see cref="T:System.Web.Security.MembershipUser"></see> object populated with the information for the newly created user.
-            </returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.UmbracoMembershipProviderBase.CreateUser(System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object,System.Web.Security.MembershipCreateStatus@)">
-            <summary>
-            Adds a new membership user to the data source.
-            </summary>
-            <param name="memberTypeAlias">The member type alias to use when creating the member</param>
-            <param name="username">The user name for the new user.</param>
-            <param name="password">The password for the new user.</param>
-            <param name="email">The e-mail address for the new user.</param>
-            <param name="passwordQuestion">The password question for the new user.</param>
-            <param name="passwordAnswer">The password answer for the new user</param>
-            <param name="isApproved">Whether or not the new user is approved to be validated.</param>
-            <param name="providerUserKey">The unique identifier from the membership data source for the user.</param>
-            <param name="status">A <see cref="T:System.Web.Security.MembershipCreateStatus"></see> enumeration value indicating whether the user was created successfully.</param>
-            <returns>
-            A <see cref="T:System.Web.Security.MembershipUser"></see> object populated with the information for the newly created user.
-            </returns>
-        </member>
-        <member name="M:Umbraco.Core.Security.UmbracoMembershipProviderBase.PerformCreateUser(System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object,System.Web.Security.MembershipCreateStatus@)">
-            <summary>
-            Adds a new membership user to the data source.
-            </summary>
-            <param name="memberTypeAlias">The member type alias to use when creating the member</param>
-            <param name="username">The user name for the new user.</param>
-            <param name="password">The password for the new user.</param>
-            <param name="email">The e-mail address for the new user.</param>
-            <param name="passwordQuestion">The password question for the new user.</param>
-            <param name="passwordAnswer">The password answer for the new user</param>
-            <param name="isApproved">Whether or not the new user is approved to be validated.</param>
-            <param name="providerUserKey">The unique identifier from the membership data source for the user.</param>
-            <param name="status">A <see cref="T:System.Web.Security.MembershipCreateStatus"></see> enumeration value indicating whether the user was created successfully.</param>
-            <returns>
-            A <see cref="T:System.Web.Security.MembershipUser"></see> object populated with the information for the newly created user.
-            </returns>
-        </member>
-        <member name="T:Umbraco.Core.Security.UserAwareMembershipProviderPasswordHasher">
-            <summary>
-            The default password hasher that is User aware so that it can process the hashing based on the user's settings
-            </summary>
         </member>
         <member name="T:Umbraco.Core.Settable`1">
             <summary>

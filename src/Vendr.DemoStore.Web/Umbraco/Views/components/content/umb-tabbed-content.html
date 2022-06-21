@@ -11,7 +11,7 @@
                     data-element="property-{{property.alias}}"
                     ng-repeat="property in tab.properties track by property.alias"
                     property="property"
-                    show-inherit="propertyEditorDisabled(property)"
+                    show-inherit="propertyEditorInherited(property)"
                     inherits-from="defaultVariant.displayName">
 
                     <div ng-class="{'o-40 cursor-not-allowed': propertyEditorDisabled(property) }">
@@ -41,7 +41,7 @@
                     data-element="property-{{property.alias}}"
                     ng-repeat="property in group.properties track by property.alias"
                     property="property"
-                    show-inherit="propertyEditorDisabled(property)"
+                    show-inherit="propertyEditorInherited(property)"
                     inherits-from="defaultVariant.displayName">
 
                     <div ng-class="{'o-40 cursor-not-allowed': propertyEditorDisabled(property) }">
@@ -58,7 +58,7 @@
         <umb-empty-state
             ng-if="content.tabs.length === 0"
             position="center">
-            <localize key="content_noProperties"></localize>
+            <localize key="content_noProperties">No content can be added for this item</localize>
         </umb-empty-state>
 
     </ng-form>

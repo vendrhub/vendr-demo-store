@@ -48,6 +48,11 @@
             Initializes a new instance of the <see cref="T:Umbraco.Web.Cache.DistributedCacheBinder"/> class.
             </summary>
         </member>
+        <member name="M:Umbraco.Web.Cache.DistributedCacheBinder.#ctor(Umbraco.Web.Cache.DistributedCache,Umbraco.Web.IUmbracoContextFactory,Umbraco.Core.Logging.ILogger,Umbraco.Core.Sync.IServerMessenger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Umbraco.Web.Cache.DistributedCacheBinder"/> class.
+            </summary>
+        </member>
         <member name="M:Umbraco.Web.Cache.DistributedCacheBinder.HandleEvents(System.Collections.Generic.IEnumerable{Umbraco.Core.Events.IEventDefinition})">
             <inheritdoc />
         </member>
@@ -1343,11 +1348,11 @@
             <returns></returns>
         </member>
         <member name="M:Umbraco.Web.Editors.UsersController.PostChangePassword(Umbraco.Web.Models.ChangingPasswordModel)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="changingPasswordModel"></param>
-            <returns></returns>
+             </summary>
+             <param name="changingPasswordModel"></param>
+             <returns></returns>
         </member>
         <member name="M:Umbraco.Web.Editors.UsersController.PostDisableUsers(System.Int32[])">
             <summary>
@@ -2018,12 +2023,13 @@
             <param name="composition"></param>
             <returns></returns>
         </member>
-        <member name="M:Umbraco.Web.Editors.ContentTypeControllerBase`1.AddCompositionValidationErrors``2(``0,System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:Umbraco.Web.Editors.ContentTypeControllerBase`1.AddCompositionValidationErrors``2(``0,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
             <summary>
             Adds errors to the model state if any invalid aliases are found then throws an error response if there are errors
             </summary>
             <param name="contentTypeSave"></param>
-            <param name="invalidPropertyAliases"></param>
+            <param name="duplicatePropertyTypeAliases"></param>
+            <param name="invalidPropertyGroupAliases"></param>
             <returns></returns>
         </member>
         <member name="M:Umbraco.Web.Editors.ContentTypeControllerBase`1.CreateInvalidCompositionResponseException``3(System.Exception,``1,`0,System.Int32)">
@@ -2049,7 +2055,7 @@
             <param name="contentTypeSave"></param>
             <param name="ct"></param>
         </member>
-        <member name="M:Umbraco.Web.Editors.DashboardController.#ctor(Umbraco.Core.Configuration.IGlobalSettings,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Core.Persistence.ISqlContext,Umbraco.Core.Services.ServiceContext,Umbraco.Core.Cache.AppCaches,Umbraco.Core.Logging.IProfilingLogger,Umbraco.Core.IRuntimeState,Umbraco.Web.Services.IDashboardService,Umbraco.Web.UmbracoHelper,Umbraco.Core.Dashboards.IContentDashboardSettings)">
+        <member name="M:Umbraco.Web.Editors.DashboardController.#ctor(Umbraco.Core.Configuration.IGlobalSettings,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Core.Persistence.ISqlContext,Umbraco.Core.Services.ServiceContext,Umbraco.Core.Cache.AppCaches,Umbraco.Core.Logging.IProfilingLogger,Umbraco.Core.IRuntimeState,Umbraco.Web.Services.IDashboardService,Umbraco.Web.UmbracoHelper,Umbraco.Core.Dashboards.IContentDashboardSettings,Umbraco.Core.Telemetry.ISiteIdentifierService)">
             <summary>
             Initializes a new instance of the <see cref="T:Umbraco.Web.Editors.DashboardController"/> with all its dependencies.
             </summary>
@@ -2495,6 +2501,48 @@
             <param name="udi">UDI of the entity to fetch URL for</param>
             <param name="culture">The culture to fetch the URL for</param>
             <returns>The URL or path to the item</returns>
+        </member>
+        <member name="M:Umbraco.Web.Editors.EntityController.GetUrlsByIds(System.Int32[],Umbraco.Web.Models.ContentEditing.UmbracoEntityTypes,System.String)">
+            <summary>
+            Get entity URLs by IDs
+            </summary>
+            <param name="ids">
+            A list of IDs to lookup items by
+            </param>
+            <param name="type">The entity type to look for.</param>
+            <param name="culture">The culture to fetch the URL for.</param>
+            <returns>Dictionary mapping Udi -> Url</returns>
+            <remarks>
+            We allow for POST because there could be quite a lot of Ids.
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.Editors.EntityController.GetUrlsByIds(System.Guid[],Umbraco.Web.Models.ContentEditing.UmbracoEntityTypes,System.String)">
+            <summary>
+            Get entity URLs by IDs
+            </summary>
+            <param name="ids">
+            A list of IDs to lookup items by
+            </param>
+            <param name="type">The entity type to look for.</param>
+            <param name="culture">The culture to fetch the URL for.</param>
+            <returns>Dictionary mapping Udi -> Url</returns>
+            <remarks>
+            We allow for POST because there could be quite a lot of Ids.
+            </remarks>
+        </member>
+        <member name="M:Umbraco.Web.Editors.EntityController.GetUrlsByIds(Umbraco.Core.Udi[],Umbraco.Web.Models.ContentEditing.UmbracoEntityTypes,System.String)">
+            <summary>
+            Get entity URLs by IDs
+            </summary>
+            <param name="ids">
+            A list of IDs to lookup items by
+            </param>
+            <param name="type">The entity type to look for.</param>
+            <param name="culture">The culture to fetch the URL for.</param>
+            <returns>Dictionary mapping Udi -> Url</returns>
+            <remarks>
+            We allow for POST because there could be quite a lot of Ids.
+            </remarks>
         </member>
         <member name="M:Umbraco.Web.Editors.EntityController.GetUrl(System.Int32,Umbraco.Web.Models.ContentEditing.UmbracoEntityTypes,System.String)">
             <summary>
@@ -3392,6 +3440,13 @@
             <summary>
             Get the status for this health check
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Umbraco.Web.HealthCheck.Checks.Security.UmbracoApplicationUrlCheck.ExecuteAction(Umbraco.Web.HealthCheck.HealthCheckAction)">
+            <summary>
+            Executes the action and returns its status
+            </summary>
+            <param name="action"></param>
             <returns></returns>
         </member>
         <member name="M:Umbraco.Web.HealthCheck.Checks.Security.BaseHttpHeaderCheck.GetStatus">
@@ -11074,6 +11129,24 @@
             Model/DTO that represents the JSON that the MediaPicker3 stores.
             </summary>
         </member>
+        <member name="M:Umbraco.Web.PropertyEditors.MediaPicker3PropertyEditor.MediaPicker3PropertyValueEditor.MediaWithCropsDto.ApplyConfiguration(Umbraco.Web.PropertyEditors.MediaPicker3Configuration)">
+            <summary>
+            Applies the configuration to ensure only valid crops are kept and have the correct width/height.
+            </summary>
+            <param name="configuration">The configuration.</param>
+        </member>
+        <member name="M:Umbraco.Web.PropertyEditors.MediaPicker3PropertyEditor.MediaPicker3PropertyValueEditor.MediaWithCropsDto.Prune(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Removes redundant crop data/default focal point.
+            </summary>
+            <param name="value">The media with crops DTO.</param>
+            <returns>
+            The cleaned up value.
+            </returns>
+            <remarks>
+            Because the DTO uses the same JSON keys as the image cropper value for crops and focal point, we can re-use the prune method.
+            </remarks>
+        </member>
         <member name="T:Umbraco.Web.PropertyEditors.ParameterEditors.MultipleMediaPickerParameterEditor">
             <summary>
             Represents a multiple media picker macro parameter editor.
@@ -12137,7 +12210,7 @@
             The constructor will setup the property editor based on the attribute if one is found
             </summary>
         </member>
-        <member name="M:Umbraco.Web.PropertyEditors.RichTextPropertyEditor.#ctor(Umbraco.Core.Logging.ILogger,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Web.Templates.HtmlImageSourceParser,Umbraco.Web.Templates.HtmlLocalLinkParser,Umbraco.Web.PropertyEditors.RichTextEditorPastedImages,Umbraco.Core.Models.IImageUrlGenerator)">
+        <member name="M:Umbraco.Web.PropertyEditors.RichTextPropertyEditor.#ctor(Umbraco.Core.Logging.ILogger,Umbraco.Web.IUmbracoContextAccessor,Umbraco.Web.Templates.HtmlImageSourceParser,Umbraco.Web.Templates.HtmlLocalLinkParser,Umbraco.Web.PropertyEditors.RichTextEditorPastedImages,Umbraco.Core.Models.IImageUrlGenerator,Umbraco.Core.Security.IHtmlSanitizer)">
             <summary>
             The constructor will setup the property editor based on the attribute if one is found
             </summary>

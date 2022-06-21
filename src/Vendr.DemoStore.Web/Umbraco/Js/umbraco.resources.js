@@ -34,7 +34,7 @@
     * 
     */
             get2FAProviders: function get2FAProviders() {
-                return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('authenticationApiBaseUrl', 'Get2FAProviders')), 'Could not retrive two factor provider info');
+                return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('authenticationApiBaseUrl', 'Get2FAProviders')), 'Could not retrieve two factor provider info');
             },
             /**
     * @ngdoc method
@@ -1732,6 +1732,65 @@
       */
             removePublicAccess: function removePublicAccess(contentId) {
                 return umbRequestHelper.resourcePromise($http.post(umbRequestHelper.getApiUrl('contentApiBaseUrl', 'RemovePublicAccess', { contentId: contentId })), 'Failed to remove public access for content item with id ' + contentId);
+            },
+            /**
+      * @ngdoc method
+      * @name umbraco.resources.contentResource#getPagedContentVersions
+      * @methodOf umbraco.resources.contentResource
+      *
+      * @description
+      * Returns a paged array of previous version id's, given a node id, pageNumber, pageSize and a culture
+      *
+      * ##usage
+      * <pre>
+      * contentResource.getPagedContentVersions(id, pageNumber, pageSize, culture)
+      *    .then(function(versions) {
+      *        alert('its here!');
+      *    });
+      * </pre>
+      *
+      * @param {Int} id Id of node
+      * @param {Int} pageNumber page number
+      * @param {Int} pageSize page size 
+      * @param {Int} culture if provided, the results will be for this specific culture/variant
+      * @returns {Promise} resourcePromise object containing the versions
+      *
+      */
+            getPagedContentVersions: function getPagedContentVersions(contentId, pageNumber, pageSize, culture) {
+                return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('contentApiBaseUrl', 'GetPagedContentVersions', {
+                    contentId: contentId,
+                    pageNumber: pageNumber,
+                    pageSize: pageSize,
+                    culture: culture
+                })), 'Failed to get versions for content item with id ' + contentId);
+            },
+            /**
+      * @ngdoc method
+      * @name umbraco.resources.contentResource#contentVersionPreventCleanup
+      * @methodOf umbraco.resources.contentResource
+      *
+      * @description
+      * Enables or disabled clean up of a version
+      *
+      * ##usage
+      * <pre>
+      * contentResource.contentVersionPreventCleanup(contentId, versionId, preventCleanup)
+      *    .then(function() {
+      *        // do your thing
+      *    });
+      * </pre>
+      *
+      * @param {Int} contentId Id of node
+      * @param {Int} versionId Id of version
+      * @param {Int} preventCleanup Boolean to toggle clean up prevention
+      *
+      */
+            contentVersionPreventCleanup: function contentVersionPreventCleanup(contentId, versionId, preventCleanup) {
+                return umbRequestHelper.resourcePromise($http.post(umbRequestHelper.getApiUrl('contentApiBaseUrl', 'PostSetContentVersionPreventCleanup', {
+                    contentId: contentId,
+                    versionId: versionId,
+                    preventCleanup: preventCleanup
+                })), 'Failed to toggle prevent cleanup of version with id ' + versionId);
             }
         };
     }
@@ -1843,7 +1902,7 @@
      *    });
      * </pre>
      * 
-     * @param {Int} contentTypeId id of the content item to retrive allowed child types for
+     * @param {Int} contentTypeId id of the content item to retrieve allowed child types for
      * @returns {Promise} resourcePromise object.
      *
      */
@@ -2447,7 +2506,7 @@
      *    });
      * </pre>
      *
-     * @param {String} editorAlias string alias of editor type to retrive prevalues configuration for
+     * @param {String} editorAlias string alias of editor type to retrieve prevalues configuration for
      * @param {Int} id id of datatype to retrieve prevalues for
      * @returns {Promise} resourcePromise object.
      *
@@ -3004,6 +3063,10 @@
                     { culture: culture }
                 ])), 'Failed to retrieve url for id:' + id);
             },
+            getUrlsByIds: function getUrlsByIds(ids, type, culture) {
+                var query = 'type='.concat(type, '&culture=').concat(culture || '');
+                return umbRequestHelper.resourcePromise($http.post(umbRequestHelper.getApiUrl('entityApiBaseUrl', 'GetUrlsByIds', query), { ids: ids }), 'Failed to retrieve url map for ids ' + ids);
+            },
             getUrlByUdi: function getUrlByUdi(udi, culture) {
                 if (!udi) {
                     return '';
@@ -3538,7 +3601,7 @@
     /**
     * @ngdoc service
     * @name umbraco.resources.logResource
-    * @description Retrives log history from umbraco
+    * @description Retrieves log history from umbraco
     * 
     *
     **/
@@ -3760,7 +3823,7 @@
     /**
  * @ngdoc service
  * @name umbraco.resources.logViewerResource
- * @description Retrives Umbraco log items (by default from JSON files on disk)
+ * @description Retrieves Umbraco log items (by default from JSON files on disk)
  *
  *
  **/
@@ -4446,7 +4509,7 @@
      *        $scope.type = type;
      *    });
      * </pre>
-     * @param {Int} mediaId id of the media item to retrive allowed child types for
+     * @param {Int} mediaId id of the media item to retrieve allowed child types for
      * @returns {Promise} resourcePromise object.
      *
      */
@@ -5173,7 +5236,7 @@
      *    });
      * </pre>
      * @param {String} searchTerm Searh term
-     * @param {Int} pageIndex index of the page to retrive items from
+     * @param {Int} pageIndex index of the page to retrieve items from
      * @param {Int} pageSize The number of items on a page
      */
             function searchRedirectUrls(searchTerm, pageIndex, pageSize) {
