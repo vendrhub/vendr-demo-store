@@ -1052,7 +1052,7 @@
             id: vendrUtils.generateGuid(),
             rewardProviderAlias: scaffold.alias,
             settings: scaffold.settingDefinitions.reduce(function (map, obj) {
-                map[obj.key] = null;
+                map[obj.key] = obj.defaultValue ?? null;
                 return map;
             }, {})
         };
@@ -1302,7 +1302,7 @@
             id: vendrUtils.generateGuid(),
             ruleProviderAlias: scaffold.alias,
             settings: scaffold.settingDefinitions.reduce(function (map, obj) {
-                map[obj.key] = null;
+                map[obj.key] = obj.defaultValue ?? null;
                 return map;
             }, {}),
             children: []
