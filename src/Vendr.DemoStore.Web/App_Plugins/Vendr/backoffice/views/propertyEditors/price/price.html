@@ -5,7 +5,8 @@
     <div class="vendr-input vendr-input--short" ng-if="!vm.loading && vm.store"
          ng-repeat="price in vm.prices">
         <span class="vendr-input--prefix">{{ price.currencyCode }}</span>
-        <input id="{{model.alias + ($index > 0 ? '-' + ($index + 1) : '')}}" type="text" ng-model="price.value" ng-currency currency-symbol="" />
+        <input id="{{model.alias + ($index > 0 ? '-' + ($index + 1) : '')}}" type="text" ng-model="price.value" ng-currency 
+               currency-symbol="" fraction="{{ vm.options.fraction }}" />
     </div>
 
 </div>

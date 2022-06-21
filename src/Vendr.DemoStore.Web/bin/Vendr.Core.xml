@@ -280,6 +280,26 @@
             Product Attribute Preset entity type
             </summary>
         </member>
+        <member name="T:Vendr.Core.Constants.PaymentProviders">
+            <summary>
+            Payment provider related constants
+            </summary>
+        </member>
+        <member name="T:Vendr.Core.Constants.PaymentProviders.Aliases">
+            <summary>
+            Payment provider aliases
+            </summary>
+        </member>
+        <member name="F:Vendr.Core.Constants.PaymentProviders.Aliases.Invoicing">
+            <summary>
+            The invoicing payment provider alias
+            </summary>
+        </member>
+        <member name="F:Vendr.Core.Constants.PaymentProviders.Aliases.ZeroValue">
+            <summary>
+            The zero value payment provider alias
+            </summary>
+        </member>
         <member name="T:Vendr.Core.Constants.Properties">
             <summary>
             Property constants
@@ -1298,6 +1318,20 @@
             The fluent write context for a Vendr order line
             </summary>
         </member>
+        <member name="M:Vendr.Core.Models.Order.OrderLineContext.SetTaxClass(Vendr.Core.Models.TaxClassReadOnly)">
+            <summary>
+            Sets the <see cref="T:Vendr.Core.Models.TaxClass"/> of the order line
+            </summary>
+            <param name="taxClass">The <see cref="T:Vendr.Core.Models.TaxClass"/> to set the order to</param>
+            <returns>The updated <see cref="T:Vendr.Core.Models.Order.OrderLineContext"/> instance</returns>
+        </member>
+        <member name="M:Vendr.Core.Models.Order.OrderLineContext.SetTaxClass(System.Guid)">
+            <summary>
+            Sets the <see cref="T:Vendr.Core.Models.TaxClass"/> of the order line
+            </summary>
+            <param name="taxClassId">The ID of the <see cref="T:Vendr.Core.Models.TaxClass"/> to set the order to</param>
+            <returns>The updated <see cref="T:Vendr.Core.Models.Order.OrderLineContext"/> instance</returns>
+        </member>
         <member name="M:Vendr.Core.Models.Order.OrderLineContext.IncrementQuantity(System.Decimal)">
             <summary>
             Increments the quantity of the order line
@@ -1405,6 +1439,11 @@
             Gets the ID of the <see cref="T:Vendr.Core.Models.Order"/> this entity belongs to
             </summary>
         </member>
+        <member name="P:Vendr.Core.Models.OrderLineReadOnly.ParentOrderLineId">
+            <summary>
+            Gets the ID of the parent <see cref="T:Vendr.Core.Models.OrderLineReadOnly"/> this entity belongs to
+            </summary>
+        </member>
         <member name="P:Vendr.Core.Models.OrderLineReadOnly.ProductReference">
             <summary>
             Gets the unique product reference of the product of the order line
@@ -1437,7 +1476,12 @@
         </member>
         <member name="P:Vendr.Core.Models.OrderLineReadOnly.BundleId">
             <summary>
-            Gets bundle ID of the of the order line
+            Gets the bundle ID of the order line
+            </summary>
+        </member>
+        <member name="P:Vendr.Core.Models.OrderLineReadOnly.ParentBundleId">
+            <summary>
+            Gets the bundle ID of the parent order line to this order line
             </summary>
         </member>
         <member name="P:Vendr.Core.Models.OrderLineReadOnly.OrderLines">
@@ -2442,10 +2486,11 @@
             </summary>
             <param name="sortedIds">The IDs of the <see cref="T:Vendr.Core.Models.ExportTemplate"/> entities to sort, in the order by which to sort them</param>
         </member>
-        <member name="M:Vendr.Core.Services.IOrderFinderService.FindOrder(System.String)">
+        <member name="M:Vendr.Core.Services.IOrderFinderService.FindOrder(System.Guid,System.String)">
             <summary>
             Find an active order for the given customer.
             </summary>
+            <param name="storeId">The store id associated with the order</param>
             <param name="customerReference">The reference of the customer to find the order of</param>
             <returns></returns>
         </member>

@@ -156,7 +156,7 @@
         provider.menuActions = [];
 
         provider.editorActions = [
-            ['$q', 'editorService', 'vendrOrderResource', function ($q, editorService, vendrOrderResource) {
+            ['$q', '$rootScope', 'editorService', 'vendrOrderResource', function ($q, $rootScope, editorService, vendrOrderResource) {
                 return {
                     name: 'Change Status',
                     action: function (model) {
@@ -169,13 +169,23 @@
                                 },
                                 submit: function (model2) {
                                     vendrOrderResource.changeOrderStatus(model.id, model2.id).then(function (order) {
+
                                         model.orderStatusId = order.orderStatusId;
                                         model.orderStatus = order.orderStatus;
+
                                         editorService.close();
+
+                                        $rootScope.$broadcast("vendrEntityChanged", {
+                                            entityType: model.entityType,
+                                            entityId: model.id,
+                                            storeId: model.storeId
+                                        });
+
                                         resolve({
                                             success: true,
                                             message: "Order status successfully changed to " + model2.name + "."
                                         })
+
                                     }).catch(function (e) {
                                         reject({
                                             message: "Unabled to change status to " + model2.name + ". Please check the error log for details."

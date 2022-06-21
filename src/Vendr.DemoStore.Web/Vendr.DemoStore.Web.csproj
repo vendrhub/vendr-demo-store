@@ -87,6 +87,9 @@
     <Reference Include="K4os.Compression.LZ4, Version=1.1.11.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
       <HintPath>..\..\packages\K4os.Compression.LZ4.1.1.11\lib\net46\K4os.Compression.LZ4.dll</HintPath>
     </Reference>
+    <Reference Include="KellermanSoftware.Compare-NET-Objects, Version=4.75.0.0, Culture=neutral, PublicKeyToken=d970ace04cc85217, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CompareNETObjects.4.75.0\lib\net472\KellermanSoftware.Compare-NET-Objects.dll</HintPath>
+    </Reference>
     <Reference Include="LightInject, Version=5.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\LightInject.5.4.0\lib\net46\LightInject.dll</HintPath>
     </Reference>
@@ -444,26 +447,26 @@
     <Reference Include="Umbraco.Web.UI, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\UmbracoCms.Web.8.18.4\lib\net472\Umbraco.Web.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Vendr.Common, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Vendr.Common.2.1.0\lib\netstandard2.0\Vendr.Common.dll</HintPath>
+    <Reference Include="Vendr.Common, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Vendr.Common.2.3.0\lib\netstandard2.0\Vendr.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Vendr.Core, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Vendr.Core.2.1.0\lib\netstandard2.0\Vendr.Core.dll</HintPath>
+    <Reference Include="Vendr.Core, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Vendr.Core.2.3.0\lib\netstandard2.0\Vendr.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Vendr.Infrastructure, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Vendr.Infrastructure.2.1.0\lib\net472\Vendr.Infrastructure.dll</HintPath>
+    <Reference Include="Vendr.Infrastructure, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Vendr.Infrastructure.2.3.0\lib\net472\Vendr.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Vendr.Umbraco, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Vendr.Umbraco.2.1.0\lib\net472\Vendr.Umbraco.dll</HintPath>
+    <Reference Include="Vendr.Umbraco, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Vendr.Umbraco.2.3.0\lib\net472\Vendr.Umbraco.dll</HintPath>
     </Reference>
-    <Reference Include="Vendr.Umbraco.Startup, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Vendr.Umbraco.Startup.2.1.0\lib\net472\Vendr.Umbraco.Startup.dll</HintPath>
+    <Reference Include="Vendr.Umbraco.Startup, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Vendr.Umbraco.Startup.2.3.0\lib\net472\Vendr.Umbraco.Startup.dll</HintPath>
     </Reference>
-    <Reference Include="Vendr.Umbraco.Web, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Vendr.Umbraco.Web.2.1.0\lib\net472\Vendr.Umbraco.Web.dll</HintPath>
+    <Reference Include="Vendr.Umbraco.Web, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Vendr.Umbraco.Web.2.3.0\lib\net472\Vendr.Umbraco.Web.dll</HintPath>
     </Reference>
-    <Reference Include="Vendr.Web, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Vendr.Web.2.1.0\lib\net472\Vendr.Web.dll</HintPath>
+    <Reference Include="Vendr.Web, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Vendr.Web.2.3.0\lib\net472\Vendr.Web.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -513,7 +516,6 @@
     <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="scripts\ssm.min.js" />
     <Content Include="Web.config" />
-    <Content Include="VENDR_LICENSE.md" />
     <Content Include="Views\Partials\Grid\Editors\Textstring.cshtml" />
     <Content Include="Views\Partials\Grid\Editors\Rte.cshtml" />
     <Content Include="Views\Partials\Grid\Editors\Media.cshtml" />
@@ -523,6 +525,7 @@
     <Content Include="Views\Partials\Grid\Bootstrap3.cshtml" />
     <Content Include="Views\Partials\Grid\Bootstrap3-Fluid.cshtml" />
     <Content Include="Views\Partials\BlockList\Default.cshtml" />
+    <Content Include="VENDR_LICENSE.md" />
     <None Include="Web.TryVendrNet.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

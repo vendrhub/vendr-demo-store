@@ -92,11 +92,11 @@
                             </td>
                             <td><input type="number" ng-model="sol.quantity" max="{{sol.stockLevel >= 0 ? sol.stockLevel : 100000  }}" ng-model-options="{ debounce: 500 }" ng-change="vm.recalculateCart()" style="width: 75px; vertical-align: middle;" /></td>
                             <td class="text-right">
-                                <span class="color-grey text-12 strikethrough block" ng-if="ol.unitPriceWithoutAdjustments != ol.unitPrice">{{sol.unitPriceWithoutAdjustments}}</span>
+                                <span class="color-grey text-12 strikethrough block" ng-if="sol.unitPriceWithoutAdjustments != sol.unitPrice">{{sol.unitPriceWithoutAdjustments}}</span>
                                 {{ sol.unitPrice }}
                             </td>
                             <td class="text-right">
-                                <span class="color-grey text-12 strikethrough block" ng-if="ol.totalPriceWithoutAdjustments != ol.totalPrice">{{sol.totalPriceWithoutAdjustments}}</span>
+                                <span class="color-grey text-12 strikethrough block" ng-if="sol.totalPriceWithoutAdjustments != sol.totalPrice">{{sol.totalPriceWithoutAdjustments}}</span>
                                 {{ sol.totalPrice }}
                             </td>
                             <td></td>
@@ -396,7 +396,7 @@
             <umb-box-content>
                 
                 <div class="flex w-full">
-                    <input type="text" class="flex-1 mr-10" ng-model="vm.options.code"></input>
+                    <input type="text" class="flex-1 mr-10" ng-model="vm.options.code" prevent-enter-submit no-dirty-check></input>
                     <umb-button type="button" label="Apply" ng-click="vm.applyCode()"></umb-button>
                 </div>
                 
