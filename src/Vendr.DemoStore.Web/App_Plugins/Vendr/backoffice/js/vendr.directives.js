@@ -1666,6 +1666,19 @@
 
         var vm = this;
 
+        const htmlEncodeObj = (model) => {
+            var obj = angular.copy(model);
+            Object.keys(obj).forEach(key => {
+                if (typeof obj[key] === 'object' && obj[key] !== null) {
+                    htmlEncodeObj(obj[key])
+                }
+                else if (typeof obj[key] === 'string' && obj[key] !== null) {
+                    obj[key] = angular.element('<pre/>').text(obj[key]).html();
+                }
+            })
+            return obj;
+        }
+
         vm.clickItem = function (item, $index, $event) {
             if (vm.onClick && !($event.metaKey || $event.ctrlKey)) {
                 vm.onClick({ item: item, $index: $index, $event: $event });
@@ -1711,7 +1724,7 @@
 
         vm.renderTemplate = function (template, model) {
             var exp = $interpolate(template);
-            return $sce.trustAsHtml(exp(model));
+            return $sce.trustAsHtml(exp(htmlEncodeObj(model)));
         };
     }
 

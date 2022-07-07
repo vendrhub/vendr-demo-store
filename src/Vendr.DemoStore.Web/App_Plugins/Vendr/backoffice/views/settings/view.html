@@ -78,7 +78,7 @@
                                     </ul>
                                 </umb-control-group>
                                 <umb-control-group label="Expires" ng-if="license.expiryDate">{{license.expiryDate}}</umb-control-group>
-                                <umb-button ng-if="license.type == 3"
+                                <umb-button ng-if="license.type == 3 || license.type == 'Subscription'"
                                             button-style="[action,block]"
                                             size="l"
                                             type="button"
