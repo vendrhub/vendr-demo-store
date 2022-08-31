@@ -175,6 +175,14 @@
                     "Failed to create a cart");
             },
 
+            getCartListConfig: function (storeId) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("cartApiBaseUrl", "GetCartListConfig", {
+                        storeId: storeId
+                    })),
+                    "Failed to get cart list config");
+            },
+
             getCartEditorConfig: function (storeId) {
                 return umbRequestHelper.resourcePromise(
                     $http.get(vendrRequestHelper.getApiUrl("cartApiBaseUrl", "GetCartEditorConfig", {
@@ -943,6 +951,14 @@
                 return umbRequestHelper.resourcePromise(
                     $http.get(vendrRequestHelper.getApiUrl("orderApiBaseUrl", "GetOrderAdvancedFilters")),
                     "Failed to get order advanced filters");
+            },
+
+            getOrderListConfig: function (storeId) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(vendrRequestHelper.getApiUrl("orderApiBaseUrl", "GetOrderListConfig", {
+                        storeId: storeId
+                    })),
+                    "Failed to get order list config");
             },
 
             getOrderEditorConfig: function (storeId) {

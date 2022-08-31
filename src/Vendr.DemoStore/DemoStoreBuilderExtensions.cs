@@ -15,6 +15,8 @@ namespace Vendr.DemoStore
         {
             umbracoBuilder.AddVendr(v =>
             {
+                v.AddSQLite();
+
                 // Replace the umbraco product name extractor with one that supports child variants
                 v.Services.AddUnique<IUmbracoProductNameExtractor, CompositeProductNameExtractor>();
 

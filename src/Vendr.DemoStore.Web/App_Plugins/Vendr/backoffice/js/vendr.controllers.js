@@ -2056,34 +2056,50 @@
                 vm.options.advancedFilters = result;    
             });
 
-            navigationService.syncTree({ tree: "vendr", path: "-1," + storeId + ",5", forceReload: true }).then(function (syncArgs) {
-                vm.page.menu.currentNode = syncArgs.node;
-                vm.page.breadcrumb.items = vendrUtils.createBreadcrumbFromTreeNode(syncArgs.node);
+            vendrCartResource.getCartListConfig(storeId).then(function (config) {
 
-                treeService.getMenu({ treeNode: vm.page.menu.currentNode }).then(function (menu) {
+                if (config && config.properties) {
+                    config.properties.forEach((prop, idx) => {
+                        vm.options.itemProperties.splice(2 + idx, 0, {
+                            alias: prop.alias,
+                            header: prop.label,
+                            align: prop.align || "left",
+                            placeholder: prop.placeholder,
+                            template: prop.template || "{{ properties['" + prop.alias + "'].value }}"
+                        })
+                    })
+                }
 
-                    var createMenuAction = menu.menuItems.find(function (itm) {
-                        return itm.alias === 'create';
-                    });
+                navigationService.syncTree({ tree: "vendr", path: "-1," + storeId + ",5", forceReload: true }).then(function (syncArgs) {
+                    vm.page.menu.currentNode = syncArgs.node;
+                    vm.page.breadcrumb.items = vendrUtils.createBreadcrumbFromTreeNode(syncArgs.node);
 
-                    if (createMenuAction) {
-                        vm.options.createActions.push({
-                            name: 'Create Cart',
-                            doAction: function () {
-                                appState.setMenuState("currentNode", vm.page.menu.currentNode);
-                                navigationService.executeMenuAction(createMenuAction,
-                                    vm.page.menu.currentNode,
-                                    vm.page.menu.currentSection);
-                            }
+                    treeService.getMenu({ treeNode: vm.page.menu.currentNode }).then(function (menu) {
+
+                        var createMenuAction = menu.menuItems.find(function (itm) {
+                            return itm.alias === 'create';
                         });
-                    }
 
-                    $rootScope.$broadcast("vendrReloadTableViewItems", {
-                        pageNumber: 1
+                        if (createMenuAction) {
+                            vm.options.createActions.push({
+                                name: 'Create Cart',
+                                doAction: function () {
+                                    appState.setMenuState("currentNode", vm.page.menu.currentNode);
+                                    navigationService.executeMenuAction(createMenuAction,
+                                        vm.page.menu.currentNode,
+                                        vm.page.menu.currentSection);
+                                }
+                            });
+                        }
+
+                        $rootScope.$broadcast("vendrReloadTableViewItems", {
+                            pageNumber: 1
+                        });
+
                     });
 
                 });
-                
+
             });
 
         };
@@ -6309,12 +6325,28 @@
                 vm.options.advancedFilters = result;
             });
 
-            navigationService.syncTree({ tree: "vendr", path: "-1," + storeId + ",1", forceReload: true }).then(function (syncArgs) {
-                vm.page.menu.currentNode = syncArgs.node;
-                vm.page.breadcrumb.items = vendrUtils.createBreadcrumbFromTreeNode(syncArgs.node);
-                $rootScope.$broadcast("vendrReloadTableViewItems", {
-                    pageNumber: 1
+            vendrOrderResource.getOrderListConfig(storeId).then(function (config) {
+
+                if (config && config.properties) {
+                    config.properties.forEach((prop, idx) => {
+                        vm.options.itemProperties.splice(1 + idx, 0, {
+                            alias: prop.alias,
+                            header: prop.label,
+                            align: prop.align || "left",
+                            placeholder: prop.placeholder,
+                            template: prop.template || "{{ properties['" + prop.alias + "'].value }}",
+                        })
+                    })
+                }
+
+                navigationService.syncTree({ tree: "vendr", path: "-1," + storeId + ",1", forceReload: true }).then(function (syncArgs) {
+                    vm.page.menu.currentNode = syncArgs.node;
+                    vm.page.breadcrumb.items = vendrUtils.createBreadcrumbFromTreeNode(syncArgs.node);
+                    $rootScope.$broadcast("vendrReloadTableViewItems", {
+                        pageNumber: 1
+                    });
                 });
+
             });
 
         };
@@ -6582,7 +6614,7 @@
                 };
 
                 // Push some additional config into the property config
-                property.config.storeId = $scope.model.config.orderId;
+                property.config.storeId = $scope.model.config.storeId;
                 property.config.orderId = $scope.model.config.orderId;
                 property.config.orderLineId = $scope.model.config.orderLineId;
 
