@@ -186,3 +186,6 @@ Desktop.ini
 **/Umbraco/Logs/
 **/Umbraco/mediacache/
 /Vendr.DemoStore.local.sln
+
+*.sqlite.db-wal
+*.sqlite.db-shm
