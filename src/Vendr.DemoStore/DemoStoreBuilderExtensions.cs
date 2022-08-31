@@ -15,6 +15,7 @@ namespace Vendr.DemoStore
         {
             umbracoBuilder.AddVendr(v =>
             {
+                // Enable SQLite support
                 v.AddSQLite();
 
                 // Replace the umbraco product name extractor with one that supports child variants
