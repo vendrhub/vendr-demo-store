@@ -1,1 +1,1 @@
-C:\PROGRA~1\ngrok\ngrok.exe http -host-header=rewrite localhost:61191
+C:\PROGRA~1\ngrok\ngrok.exe http --host-header=rewrite https://localhost:44322
