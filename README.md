@@ -1,12 +1,12 @@
 # Vendr Demo Store
 
-Welcome to the Vendr Demo Store, an example webstore setup using [Vendr](http://getvendr.net) in [Umbraco v8](https://umbraco.com).
+Welcome to the Vendr Demo Store, an example webstore setup using [Vendr](http://getvendr.net) in [Umbraco v10](https://umbraco.com).
 
 ![Screenshot](assets/screenshot.png)
 
 ## About this Demo
 
-In this demo you will find a fully configured basic webstore using Vendr on Umbraco v8.2. The store is based around a fictitious tea retailer called Blendid which lists a variety of teas from multiple companies and also displays them in categories. Where products have multiple pricing options, variant nodes are used to provide buying options for those particular product choices.
+In this demo you will find a fully configured basic webstore using Vendr on Umbraco v10. The store is based around a fictitious tea retailer called Blendid which lists a variety of teas from multiple companies and also displays them in categories. Where products have multiple pricing options, variant nodes are used to provide buying options for those particular product choices.
 
 The site also showcases a basic shopping cart setup with cart management features via the Vendr API as well as a checkout flow following all the main steps required for a Vendr order entity. On checkout, there will also be examples of order confirmation emails that will be sent (**TIP** Use something like [Papercut](https://github.com/ChangemakerStudios/Papercut) to capture these without them needing to be actually sent).
 
@@ -16,12 +16,12 @@ In the back office you'll find a suggested content structure for a working Vendr
 
 To get started with the Vendr demo store you will need:
 
-* Visual Studio 2017 (15.9.7+)
-* .NET SDK 4.7.2 or newer
+* Visual Studio 2019
+* .NET Core SDK 6.0.0 or newer
 
 ## Getting Started
 
-Clone or download this repository locally (it includes all the files you will need including a fully configured SQL CE database)
+Clone or download this repository locally (it includes all the files you will need including a fully configured SQLlite database)
 
 ````
 git clone https://github.com/vendrhub/vendr-demo-store.git
