@@ -111,1132 +111,6 @@
 
     'use strict';
 
-    function AnalyticsTimeframeDialogController($scope, $location, vendrDateHelper)
-    {
-        var vm = this;
-
-        var currentTimeframe = $scope.model.config.currentTimeframe;
-
-        var today = vendrDateHelper.getToday();
-        var todayEod = vendrDateHelper.getToday().setHours(23, 59, 59, 999);
-
-        vm.loading = true;
-        vm.title = "Timeframe";
-
-        vm.namedDateRange = currentTimeframe && currentTimeframe.dateRange.alias ? currentTimeframe.dateRange.alias : "thisMonth";
-        vm.namedDateRanges = vendrDateHelper.getNamedDateRanges();
-
-        vm.initCustomDateRange = vm.customDateRange = currentTimeframe && (!currentTimeframe.dateRange.alias || currentTimeframe.dateRange.alias == "custom")
-            ? [new Date(currentTimeframe.dateRange.from), new Date(currentTimeframe.dateRange.to)]
-            : [vm.namedDateRanges[2].range[0], today];
-       
-        vm.compare = currentTimeframe && currentTimeframe.compareTo;
-        vm.compareType = currentTimeframe && currentTimeframe.compareTo && currentTimeframe.compareTo.type
-            ? currentTimeframe.compareTo.type
-            : "prevPeriod";
-
-        vm.datePickerConfig = {
-            mode: "range",
-            maxDate: todayEod,
-            dateFormat: "Y-m-d",
-            showMonths: 2,
-            enableTime: false
-        };
-
-        vm.datePickerChange = function (selectedDates, dateStr, instance) {
-            if (selectedDates.length == 2) {
-                vm.customDateRange = selectedDates;
-            }
-        }
-
-        vm.apply = function () {
-
-            if ($scope.model.apply) {
-
-                var model = {
-                    dateRange: { }
-                };
-
-                if (vm.namedDateRange == "custom") {
-
-                    model.dateRange = {
-                        name: vendrDateHelper.formatDateRange(vm.customDateRange),
-                        alias: "custom",
-                        from: vendrDateHelper.getISODateString(vm.customDateRange[0]),
-                        to: vendrDateHelper.getISODateString(vm.customDateRange[1])
-                    }
-
-                    if (vm.compare) {
-                        if (vm.compareType == "prevPeriod") {
-
-                            var rangeDays = vendrDateHelper.getDaysBetween(vm.customDateRange[0], vm.customDateRange[1], true);
-                            var compareFrom = vm.customDateRange[0].addDays((rangeDays + 1) * -1);
-                            var compareTo = vm.customDateRange[0].addDays(-1);
-
-                            model.compareTo = {
-                                name: vendrDateHelper.formatDateRange([compareFrom, compareTo]),
-                                type: 'prevPeriod',
-                                from: vendrDateHelper.getISODateString(compareFrom),
-                                to: vendrDateHelper.getISODateString(compareTo)
-                            }
-
-                        } else if (vm.compareType == "prevYear") {
-
-                            var compareFrom = vm.customDateRange[0].addYears(-1);
-                            var compareTo = vm.customDateRange[1].addYears(-1);
-
-                            model.compareTo = {
-                                name: vendrDateHelper.formatDateRange([compareFrom, compareTo]),
-                                type: 'prevYear',
-                                from: vendrDateHelper.getISODateString(compareFrom),
-                                to: vendrDateHelper.getISODateString(compareTo)
-                            }
-
-                        }
-                    }
-
-                } else {
-
-                    var namedDateRange = vm.namedDateRanges.find(function (itm) {
-                        return itm.alias == vm.namedDateRange;
-                    });
-
-                    model.dateRange = {
-                        name: namedDateRange.name,
-                        alias: namedDateRange.alias,
-                        from: vendrDateHelper.getISODateString(namedDateRange.range[0]),
-                        to: vendrDateHelper.getISODateString(namedDateRange.range[1])
-                    }
-
-                    if (vm.compare) {
-                        if (vm.compareType == "prevPeriod") {
-                            model.compareTo = {
-                                name: vendrDateHelper.formatDateRange(namedDateRange.prevPeriod),
-                                type: 'prevPeriod',
-                                from: vendrDateHelper.getISODateString(namedDateRange.prevPeriod[0]),
-                                to: vendrDateHelper.getISODateString(namedDateRange.prevPeriod[1])
-                            }
-                        } else if (vm.compareType == "prevYear") {
-                            model.compareTo = {
-                                name: vendrDateHelper.formatDateRange(namedDateRange.prevYear),
-                                type: 'prevYear',
-                                from: vendrDateHelper.getISODateString(namedDateRange.prevYear[0]),
-                                to: vendrDateHelper.getISODateString(namedDateRange.prevYear[1])
-                            }
-                        }
-                    }
-
-                }
-
-                $scope.model.apply(model);
-            }
-        };
-
-        vm.close = function() {
-            if ($scope.model.close) {
-                $scope.model.close();
-            }
-        };
-    }
-
-    angular.module('vendr').controller('Vendr.Controllers.AnalyticsTimeframeDialogController', AnalyticsTimeframeDialogController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function AvgOrderValueWidgetController($scope, vendrAnalyticsResource, vendrDateHelper) {
-
-        var vm = this;
-
-        vm.loadData = function (timeframe) {
-            return vendrAnalyticsResource.getAverageOrderValueReport($scope.config.storeId,
-                timeframe.dateRange.from, timeframe.dateRange.to,
-                timeframe.compareTo ? timeframe.compareTo.from : undefined,
-                timeframe.compareTo ? timeframe.compareTo.to : undefined,
-                vendrDateHelper.getLocalTimezoneOffset()
-            );
-        }
-    };
-
-    angular.module('vendr').controller('Vendr.Controllers.AvgOrderValueWidgetController', AvgOrderValueWidgetController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function CartConversionRatesWidgetController($scope, $rootScope, $timeout, vendrAnalyticsResource, vendrDateHelper) {
-
-        var vm = this;
-
-        vm.comparing = false;
-        vm.data = {};
-
-        vm.loadData = function (timeframe) {
-            return vendrAnalyticsResource.getCartConversionRatesReport($scope.config.storeId,
-                timeframe.dateRange.from, timeframe.dateRange.to,
-                timeframe.compareTo ? timeframe.compareTo.from : undefined,
-                timeframe.compareTo ? timeframe.compareTo.to : undefined,
-                vendrDateHelper.getLocalTimezoneOffset()
-            ).then(function (data) {
-
-                    vm.data = data;
-                    vm.comparing = timeframe.compareTo;
-
-                    return data;
-                });
-        }
-    };
-
-    angular.module('vendr').controller('Vendr.Controllers.CartConversionRatesWidgetController', CartConversionRatesWidgetController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function RepeatCustomerRatesWidgetController($scope, vendrAnalyticsResource, vendrDateHelper) {
-
-        var vm = this;
-
-        vm.loadData = function (timeframe) {
-            return vendrAnalyticsResource.getRepeatCustomerRatesReport($scope.config.storeId,
-                timeframe.dateRange.from, timeframe.dateRange.to,
-                timeframe.compareTo ? timeframe.compareTo.from : undefined,
-                timeframe.compareTo ? timeframe.compareTo.to : undefined,
-                vendrDateHelper.getLocalTimezoneOffset()
-            );
-        }
-    };
-
-    angular.module('vendr').controller('Vendr.Controllers.RepeatCustomerRatesWidgetController', RepeatCustomerRatesWidgetController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function TopSellingProductsWidgetController($scope, $rootScope, $timeout, vendrAnalyticsResource, vendrDateHelper) {
-
-        var vm = this;
-
-        vm.loading = true;
-        vm.comparing = false;
-        vm.timeframe = $scope.timeframe;
-        vm.data = {};
-
-        vm.init = function () {
-
-            vm.loading = true;
-
-            $timeout(function () {
-                $rootScope.$broadcast("VendrAnalyticsWidgetChanged", $scope.config);
-            }, 1);
-
-            vendrAnalyticsResource.getTopSellingProductsReport($scope.config.storeId,
-                vm.timeframe.dateRange.from, vm.timeframe.dateRange.to,
-                vm.timeframe.compareTo ? vm.timeframe.compareTo.from : undefined,
-                vm.timeframe.compareTo ? vm.timeframe.compareTo.to : undefined,
-                vendrDateHelper.getLocalTimezoneOffset()
-            ).then(function (data) {
-
-                    vm.data = data;
-
-                    vm.comparing = vm.timeframe.compareTo;
-                    vm.loading = false;
-
-                    $timeout(function () {
-                        $rootScope.$broadcast("VendrAnalyticsWidgetChanged", $scope.config);
-                    }, 1);
-
-                });
-        }
-
-        vm.init();
-
-        $rootScope.$on("VendrAnalyticsTimeframeChanged", function (evt, timeframe) {
-            vm.timeframe = timeframe;
-            vm.init();
-        });
-    };
-
-    angular.module('vendr').controller('Vendr.Controllers.TopSellingProductsWidgetController', TopSellingProductsWidgetController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function TotalOrdersWidgetController($scope, vendrAnalyticsResource, vendrDateHelper) {
-
-        var vm = this;
-
-        vm.loadData = function (timeframe) {
-            return vendrAnalyticsResource.getTotalOrdersReport($scope.config.storeId,
-                timeframe.dateRange.from, timeframe.dateRange.to,
-                timeframe.compareTo ? timeframe.compareTo.from : undefined,
-                timeframe.compareTo ? timeframe.compareTo.to : undefined,
-                vendrDateHelper.getLocalTimezoneOffset()
-            );
-        }
-    };
-
-    angular.module('vendr').controller('Vendr.Controllers.TotalOrdersWidgetController', TotalOrdersWidgetController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function TotalRevenueWidgetController($scope, vendrAnalyticsResource, vendrDateHelper) {
-
-        var vm = this;
-
-        vm.loadData = function (timeframe) {
-            return vendrAnalyticsResource.getTotalRevenueReport($scope.config.storeId,
-                timeframe.dateRange.from, timeframe.dateRange.to,
-                timeframe.compareTo ? timeframe.compareTo.from : undefined,
-                timeframe.compareTo ? timeframe.compareTo.to : undefined,
-                vendrDateHelper.getLocalTimezoneOffset()
-            );
-        }
-
-    };
-
-    angular.module('vendr').controller('Vendr.Controllers.TotalRevenueWidgetController', TotalRevenueWidgetController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function VariantsAppController($scope, $routeParams, $q, eventsService, editorService, blockEditorService, notificationsService,
-        vendrVariantsEditorState, vendrProductAttributeResource, vendrStoreResource, vendrRouteCache, vendrLocalStorage, vendrUtils) {
-
-        var currentOrParentNodeId = $routeParams.id;
-
-        var productAttributePickerDialogOptions = {
-            view: '/App_Plugins/Vendr/backoffice/views/dialogs/productattributepicker.html',
-            size: 'small',
-            config: {
-                enablePresets: true,
-                disablePreselected: true
-            },
-            submit: function (model) {
-                productAttributePickerDialogOptions.onSubmit(model);
-                editorService.close();
-            },
-            close: function () {
-                editorService.close();
-            }
-        };
-
-        var vm = this;
-        vm.loading = true;
-
-        var subs = [];
-
-        vm.store = null;
-        vm.options = {
-            productAttributes: [],
-            productAttributesLookup: {},
-            createActions: [{
-                name: 'Create Product Variants',
-                doAction: function () {
-                    pickVariantAttributes(function (model) {
-
-                        // Make sure we have come combinations to add
-                        if (!model || model.length === 0)
-                            return;
-
-                        var combos = getUniqueAttributeCombinations(model);
-
-                        // Filter out any combinations already present in the layout collection
-                        // [ [ pass ], [ fail ] ]
-                        var filtered = partition(combos, (c) => {
-                            return !vm.layout.find((l) => {
-                                return angular.equals(l.config.attributes, c);
-                            });
-                        });
-
-                        if (filtered[0].length === 0 && filtered[1].length > 0) {
-                            // TODO: Show error that all combinations already exist
-                        }
-                        else {
-                            filtered[0].forEach((c) => {
-                                addBlock({
-                                    attributes: c
-                                });
-                            });
-                        }
-                    });
-                }
-            }],
-            filters: [
-                //{
-                //    name: 'View',
-                //    alias: 'attributes',
-                //    localStorageKey: 'node_' + currentOrParentNodeId + '_attributesFilter',
-                //    getFilterOptions: function () {
-                //        var filterOptions = [];
-
-                //        vm.options.productAttributes.forEach((attr) => {
-                //            attr.values.forEach((val) => {
-
-                //                var opt = {
-                //                    id: attr.alias + ":" + val.alias,
-                //                    name: val.name,
-                //                    group: attr.name
-                //                };
-
-                //                Object.defineProperty(opt, "hidden", {
-                //                    get: function () {
-                //                        return !vm.layout.some((layout) => {
-                //                            return layout.config && layout.config.attributes
-                //                                && layout.config.attributes[attr.alias]
-                //                                && layout.config.attributes[attr.alias] === val.alias;
-                //                        });
-                //                    }
-                //                });
-
-                //                filterOptions.push(opt);
-
-                //            });
-                //        });
-
-                //        return $q.resolve(filterOptions);
-                //    }
-                //}
-            ],
-            bulkActions: [
-                {
-                    name: 'Delete',
-                    icon: 'icon-trash',
-                    doAction: function (bulkItem) {
-                        deleteBlock(bulkItem.$block)
-                        return $q.resolve({ success: true });
-                    },
-                    getConfirmMessage: function (total) {
-                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") + "?");
-                    }
-                }
-            ],
-            items: [],
-            itemProperties: [
-                {
-                    alias: 'name',
-                    getter: function (model) {
-                        return vm.getPropertyValue(model.$block.content, "sku");
-                    },
-                    header: 'SKU',
-                    placeholder: 'SKU-XXXX'
-                },
-                // Other columns will be added dynamically
-                {
-                    alias: 'actions',
-                    header: '',
-                    align: 'right',
-                    template: `<umb-property-actions actions="refScope.vm.rowActionsFactory(model)" class="umb-property-actions__right" ng-click="$event.stopPropagation();"></umb-property-actions>`,
-                    refScope: $scope
-                }
-            ],
-            itemClick: function (item, index) {
-                vm.editVariantRow(item, index)
-            }
-        };
-
-        vm.rowActions = {};
-        vm.rowActionsFactory = function (itm) {
-            if (!vm.rowActions[itm.key]) {
-                vm.rowActions[itm.key] = [
-                    {
-                        //labelKey: "vendr_toggleDefaultVariant", // Use defined property below to allow toggling label
-                        icon: "rate",
-                        method: function () {
-                            vm.toggleDefaultVariantRow(itm);
-                        }
-                    },
-                    {
-                        labelKey: "vendr_configureVariant",
-                        icon: "settings",
-                        method: function () {
-                            vm.configureVariantRow(itm);
-                        }
-                    },
-                    {
-                        labelKey: "vendr_deleteVariant",
-                        icon: "trash",
-                        method: function () {
-                            vm.removeVariantRow(itm);
-                        }
-                    }
-                ];
-                Object.defineProperty(vm.rowActions[itm.key][0], "labelKey", {
-                    get: function () {
-                        return itm.config.isDefault ? "vendr_unsetDefaultVariant" : "vendr_setDefaultVariant"
-                    }
-                })
-            }
-            return vm.rowActions[itm.key];
-        };
-
-        var pickVariantAttributes = function (callback) {
-            productAttributePickerDialogOptions.config.storeId = vm.store.id;
-            productAttributePickerDialogOptions.config.multiValuePicker = true;
-            productAttributePickerDialogOptions.config.disablePreselected = true;
-            productAttributePickerDialogOptions.value = null;
-            productAttributePickerDialogOptions.onSubmit = callback;
-            editorService.open(productAttributePickerDialogOptions);
-        }
-
-        var getUniqueAttributeCombinations = function (model) {
-
-            // Convert selected value into format
-            // { attr_alias: [ val1_alias, val2_alias ] }
-            var src = model.map((a) => {
-                var r = {};
-                r[a.alias] = a.values.map((v) => v.alias);
-                return r;
-            });
-
-            // Calculate the unique combinations
-            return cartesian(src);
-        }
-
-        // We debounce syncUI as it's called within functions like addBlock
-        // which can get called many times in fast succession when adding
-        // multiple variant rows at once
-        var syncUI = _.debounce(function () {
-            $scope.$apply(function () {
-                syncTableUI();
-            });
-        }, 10);
-
-        var syncTableUI = function () {
-
-            //  Remove all attribute columns from table config
-            if (vm.options.itemProperties.length > 2) {
-                vm.options.itemProperties.splice(1, vm.options.itemProperties.length - 2);
-            }
-
-            // Add table coluns
-            var inUseAttrs = [];
-            var attrCount = 0;
-            vm.options.productAttributes.forEach((attr) => {
-                if (vm.layout.some((layout) => layout.config.attributes.hasOwnProperty(attr.alias))) {
-                    vm.options.itemProperties.splice(attrCount + 1, 0, {
-                        alias: attr.alias,
-                        header: attr.name,
-                        getter: function (layout) {
-                            return layout.config.attributes[attr.alias]
-                                ? vm.getProductAttributeValueName(attr.alias, layout.config.attributes[attr.alias])
-                                : "";
-                        },
-                        allowSorting: true,
-                        isSystem: false,
-                        template: '<div><span ng-if="model.config.attributes[\'' + attr.alias +'\']">{{ refScope.vm.getProductAttributeValueName(\'' + attr.alias + '\', model.config.attributes[\'' + attr.alias +'\']) }}<span></div>',
-                        refScope: $scope
-                    })
-                    inUseAttrs.push(attr);
-                    attrCount++;
-                }
-            });
-
-            // Now lets loop through the layouts and validate that each row has the same number of attributes
-            vm.layout.forEach((layout) => {
-                if (!inUseAttrs.every((attr) => layout.config.attributes.hasOwnProperty(attr.alias))) {
-                    layout.config.isValid = false;
-                } else {
-                    layout.config.isValid = true;
-                }
-            });
-
-            var filterConfigs = [];
-
-            inUseAttrs.forEach(attr => {
-
-                var filterConfig = {
-                    name: attr.name,
-                    alias: attr.alias,
-                    localStorageKey: 'node_' + currentOrParentNodeId + '_' + attr.alias + 'Filter',
-                    getFilterOptions: function () {
-                        var filterOptions = [];
-                        attr.values.forEach((val) => {
-
-                            var opt = {
-                                id: val.alias,
-                                name: val.name
-                            };
-
-                            Object.defineProperty(opt, "hidden", {
-                                get: function () {
-                                    return !vm.layout.some((layout) => {
-                                        return layout.config && layout.config.attributes
-                                            && layout.config.attributes[attr.alias]
-                                            && layout.config.attributes[attr.alias] === val.alias;
-                                    });
-                                }
-                            });
-
-                            filterOptions.push(opt);
-
-                        });
-
-                        return $q.resolve(filterOptions);
-                    }
-                };
-
-                Object.defineProperty(filterConfig, "value", {
-                    get: function () {
-                        return vendrLocalStorage.get(filterConfig.localStorageKey) || [];
-                    },
-                    set: function (value) {
-                        vendrLocalStorage.set(filterConfig.localStorageKey, value);
-                    }
-                });
-
-                filterConfigs.push(filterConfig);
-
-            });
-
-
-            vm.options.filters = filterConfigs;
-        }
-
-        var ensureCultureData = function (blockContent) {
-
-            if (!blockContent) return;
-
-            if (vm.editorState.umbVariantContent.editor.content.language) {
-                // set the scaffolded content's language to the language of the current editor
-                blockContent.language = vm.editorState.umbVariantContent.editor.content.language;
-            }
-
-            // currently we only ever deal with invariant content for blocks so there's only one
-            blockContent.variants[0].tabs.forEach(tab => {
-                tab.properties.forEach(prop => {
-                    // set the scaffolded property to the culture of the containing property
-                    prop.culture = vm.editorState.umbProperty.property.culture;
-                });
-            });
-
-        }
-
-        var getBlockObject = function (layoutEntry) {
-
-            var block = vm.modelObject.getBlockObject(layoutEntry);
-
-            if (block === null) return null;
-
-            ensureCultureData(block.content);
-
-            return block;
-
-        }
-
-        var editBlock = function (blockObject, blockIndex, parentForm, options) {
-
-            options = options || {};
-
-            // this must be set
-            if (blockIndex === undefined) {
-                throw "blockIndex was not specified on call to editBlock";
-            }
-
-            var content = Utilities.copy(blockObject.content);
-
-            if (options.config && options.config.attributes)
-            {
-                // Insert the variant configuration tab
-                content.variants[0].tabs.splice(0, 0, {
-                    id: -101,
-                    alias: "vendr-configuration",
-                    label: "Attributes",
-                    type: vendrUtils.isUmbracoV8() ? 0 : "Group",
-                    open: true,
-                    properties: Object.entries(options.config.attributes).map(entry => {
-                        var attr = vm.getProductAttribute(entry[0]);
-                        return {
-                            id: 0,
-                            alias: "vendr-variant-attribute-" + attr.alias,
-                            label: attr.name,
-                            value: vm.getProductAttributeValueName(entry[0], entry[1]),
-                            config: { valueType: 'string' },
-                            editor: "Umbraco.ReadOnlyValue",
-                            hideLabel: false,
-                            readonly: true,
-                            validation: { mandatory: false, mandatoryMessage: null, pattern: null, patternMessage: null },
-                            view: "readonlyvalue",
-                        }
-                    })
-                });
-            }
-
-            var blockEditorModel = {
-                $parentScope: $scope, // pass in a $parentScope, this maintains the scope inheritance in infinite editing
-                $parentForm: parentForm || vm.editorState.propertyForm, // pass in a $parentForm, this maintains the FormController hierarchy with the infinite editing view (if it contains a form)
-                createFlow: options.createFlow === true,
-                title: options.createFlow == true ? "Create Variant" : "Edit Variant " + blockObject.label,
-                content: content,
-                view: "views/common/infiniteeditors/blockeditor/blockeditor.html",
-                size: blockObject.config.editorSize || "medium",
-                vendrVariantEditor: true,
-                submit: function (blockEditorModel) {
-
-                    // If the first tab is the configuration tab, remove it before processing
-                    if (blockEditorModel.content.variants[0].tabs[0].alias === "vendr-configuration")
-                        blockEditorModel.content.variants[0].tabs.splice(0, 1);
-
-                    // Copy values back to block
-                    blockObject.retrieveValuesFrom(blockEditorModel.content);
-
-                    editorService.close();
-                },
-                close: function (blockEditorModel) {
-                    if (blockEditorModel.createFlow) {
-                        deleteBlock(blockObject);
-                    }
-                    editorService.close();
-                }
-            };
-
-            // open property editor
-            editorService.open(blockEditorModel);
-        }
-
-        var deleteBlock = function (blockObject) {
-
-            var layoutIndex = vm.layout.findIndex(entry => entry.contentUdi === blockObject.layout.contentUdi);
-            if (layoutIndex === -1) {
-                throw new Error("Could not find layout entry of block with udi: " + blockObject.layout.contentUdi)
-            }
-
-            // setDirty();
-
-            var removed = vm.layout.splice(layoutIndex, 1);
-
-            //removed.forEach(x => {
-            //    // remove any server validation errors associated
-            //    var guids = [udiService.getKey(x.contentUdi), (x.settingsUdi ? udiService.getKey(x.settingsUdi) : null)];
-            //    guids.forEach(guid => {
-            //        if (guid) {
-            //            serverValidationManager.removePropertyError(guid, vm.umbProperty.property.culture, vm.umbProperty.property.segment, "", { matchType: "contains" });
-            //        }
-            //    })
-            //});
-
-            vm.modelObject.removeDataAndDestroyModel(blockObject);
-
-            syncUI();
-        }
-
-        var addBlock = function (config, index) {
-
-            // create layout entry. (not added to property model yet.)
-            var layoutEntry = vm.modelObject.create(vm.model.config.variantElementType);
-            if (layoutEntry === null) {
-                return false;
-            }
-
-            // add the config to the layout entry
-            layoutEntry.config = config;
-
-            // make block model
-            var blockObject = getBlockObject(layoutEntry);
-            if (blockObject === null) {
-                return false;
-            }
-
-            // If we reach this line, we are good to add the layoutEntry and blockObject to our models.
-            initLayoutEntry(layoutEntry, blockObject);
-
-            // add layout entry at the decired location in layout.
-            vm.layout.splice(index || vm.layout.length, 0, layoutEntry);
-
-            syncUI();
-
-            return true;
-        }
-
-        var initLayoutEntry = function (layout, blockObject) {
-
-            layout.$block = blockObject;
-
-            // Define a key for table bulk actions
-            Object.defineProperty(layout, "id", {
-                get: function () {
-                    return blockObject.key;
-                }
-            });
-            Object.defineProperty(layout, "key", {
-                get: function () {
-                    return blockObject.key;
-                }
-            });
-            Object.defineProperty(layout, "icon", {
-                get: function () {
-                    return layout.config && layout.config.isValid
-                        ? layout.config.isDefault ? 'icon-rate color-green' : 'icon-barcode color-blue'
-                        : 'icon-block color-red';
-                }
-            });
-
-        }
-
-        vm.canEditCulture = function () {
-            var content = $scope.variantContent || $scope.content;
-            var contentLanguage = content.language;
-            var canEditCulture = !contentLanguage || !vm.editorState ||
-                // If the property culture equals the content culture it can be edited
-                vm.editorState.culture === contentLanguage.culture ||
-                // A culture-invariant property can only be edited by the default language variant
-                (vm.editorState.culture == null && contentLanguage.isDefault);
-
-            return canEditCulture;
-        }
-
-        vm.getProductAttribute = function (attributeAlias) {
-            return vm.options.productAttributesLookup.hasOwnProperty(attributeAlias)
-                ? vm.options.productAttributesLookup[attributeAlias]
-                : null;
-        }
-
-        vm.getProductAttributeValue = function (attributeAlias, valueAlias) {
-            var attr = vm.getProductAttribute(attributeAlias);
-            if (!attr) return null;
-            return attr.valuesLookup.hasOwnProperty(valueAlias)
-                ? attr.valuesLookup[valueAlias]
-                : null;
-        }
-
-        vm.getProductAttributeName = function (attributeAlias) {
-            return vm.getProductAttribute(attributeAlias).name;
-        }
-
-        vm.getProductAttributeValueName = function (attributeAlias, valueAlias) {
-            return vm.getProductAttributeValue(attributeAlias, valueAlias).name;
-        }
-
-        vm.getProperty = function (blockContent, alias) {
-            return blockContent.variants[0].tabs.reduce((prev, curr) => {
-                return prev || curr.properties.find(prop => prop.alias === alias);
-            }, undefined);
-        };
-
-        vm.getPropertyValue = function (blockContent, alias) {
-            return vm.getProperty(blockContent, alias).value;
-        };
-
-        vm.editVariantRow = function (layoutEntry, idx) {
-            editBlock(layoutEntry.$block, idx, null, {
-                config: layoutEntry.config
-            })
-        }
-
-        vm.removeVariantRow = function (layout, $event) {
-            if ($event) {
-                $event.stopPropagation();
-                $event.preventDefault();
-            }
-            deleteBlock(layout.$block);
-        }
-
-        vm.configureVariantRow = function (layout, $event) {
-            if ($event) {
-                $event.stopPropagation();
-                $event.preventDefault();
-            }
-            productAttributePickerDialogOptions.config.storeId = vm.store.id;
-            productAttributePickerDialogOptions.config.multiValuePicker = false;
-            productAttributePickerDialogOptions.config.disablePreselected = false;
-            if (layout.config && layout.config.attributes) {
-                productAttributePickerDialogOptions.value = Object.entries(layout.config.attributes).map(function (itm) {
-                    return {
-                        alias: itm[0],
-                        values: [{ alias: itm[1] }]
-                    }
-                });
-            } else {
-                productAttributePickerDialogOptions.value = null;
-            }
-            
-            productAttributePickerDialogOptions.onSubmit = function (model) {
-
-                // Calculate target attributes config object
-                var targetAttrObj = model.reduce((obj, attr) => {
-                    obj[attr.alias] = attr.values[0].alias;
-                    return obj;
-                }, {});
-                var targetAttrObjStrArr = Object.entries(targetAttrObj).map((itm) => {
-                    return itm[0] + ":" + itm[1];
-                });
-
-                // Validate there isn't already a variant row with that config
-                var found = vm.layout.find((itm) => {
-
-                    if (!itm.config || !itm.config.attributes)
-                        return false;
-
-                    var srcAttrObjStrArr = Object.entries(itm.config.attributes).map((itm) => {
-                        return itm[0] + ":" + itm[1];
-                    });
-
-                    return srcAttrObjStrArr.length == targetAttrObjStrArr.length
-                        && srcAttrObjStrArr.every((entry) => {
-                            return targetAttrObjStrArr.indexOf(entry) !== -1;
-                        });
-                })
-
-                if (found && found.contentUdi !== layout.contentUdi) {
-                    notificationsService.error("Could not update variant configuration", "A variant with that configuration already exists");
-                    return;
-                }
-
-                // Update layout config
-                if (!layout.config) layout.config = {};
-                layout.config.attributes = targetAttrObj;
-
-                syncUI();
-            };
-            editorService.open(productAttributePickerDialogOptions);
-        }
-
-        vm.toggleDefaultVariantRow = function (model, $event) {
-            if ($event) {
-                $event.stopPropagation();
-                $event.preventDefault();
-            }
-            vm.layout.forEach(layout => {
-                if (layout.key === model.key) {
-                    layout.config.isDefault = !layout.config.isDefault;
-                } else {
-                    layout.config.isDefault = false;
-                }
-            });
-        }
-
-        vm.filterVariantRow = function (item, filters) {
-            var result = true;
-
-            if (filters) {
-                filters.filter(f => f.value.length > 0).forEach((filter) => {
-                    result &= filter.value.some(val => item.config
-                            && item.config.attributes
-                            && item.config.attributes.hasOwnProperty(filter.alias)
-                            && item.config.attributes[filter.alias] === val);
-                });
-            }
-
-            return result;
-        }
-
-        vm.syncModelToPropEditor = function () {
-            if (!vm.loading) {
-
-                // Copy the local model to the editor model
-                vm.editorState.model.value = angular.copy(vm.model.value);
-
-                // Remove any properties we don't want persisting
-                vm.editorState.model.value.layout['Vendr.VariantsEditor'].forEach(layout => {
-
-                    delete layout.$block;
-                    delete layout.id;
-                    delete layout.key;
-                    delete layout.icon;
-                    delete layout.selected;
-
-                    if (layout.config)
-                        delete layout.config.isValid;
-
-                });
-
-                // We don't have settings data, so no point persisting an empty array
-                delete vm.editorState.model.value.settingsData;
-
-            }
-        }
-
-        vm.ready = function () {
-
-            vm.layout = vm.modelObject.getLayout([]);
-
-            var invalidLayoutEntries = [];
-
-            // Append $block to layouts
-            vm.layout.forEach(layoutEntry => {
-
-                // $block must have the data property to be a valid BlockObject, if not its considered as a destroyed blockObject.
-                if (layoutEntry.$block === undefined || layoutEntry.$block === null || layoutEntry.$block.data === undefined)
-                {
-                    var block = getBlockObject(layoutEntry);
-
-                    // If this entry was not supported by our property-editor it would return 'null'.
-                    if (block !== null)
-                    {
-                        initLayoutEntry(layoutEntry, block);
-                    }
-                    else
-                    {
-                        // then we need to filter this out and also update the underlying model. This could happen if the data
-                        // is invalid for some reason or the data structure has changed.
-                        invalidLayoutEntries.push(layoutEntry);
-                    }
-                }
-
-            });
-
-            // remove the layout entries that are invalid
-            invalidLayoutEntries.forEach(layoutEntry => {
-                var index = vm.layout.findIndex(x => x === layoutEntry);
-                if (index >= 0) {
-                    vm.layout.splice(index, 1);
-                }
-            });
-
-            syncUI();
-
-            vm.loading = false;
-        }
-
-        vm.doInit = function () {
-
-            // We clone the editor state model as we only want to sync
-            // back an exact value. We'll process the local state and
-            // reformat it in formSubmitting handler
-            vm.model = angular.copy(vm.editorState.model);
-
-            // Get the current store
-            vendrRouteCache.getOrFetch("currentStore", function () {
-                return vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId);
-            })
-            .then(function (store) {
-
-                vm.store = store;
-
-                // Get all product attributes 
-                // (we'll need them to popluate attribute names, but might aswell reuse them in create dialog too)
-                vendrRouteCache.getOrFetch("store_" + store.id +"_productAttributes", function () {
-                    return vendrProductAttributeResource.getProductAttributesWithValues(store.id);
-                })
-                .then(function (productAttributes) {
-
-                    vm.options.productAttributes = productAttributes;
-                    vm.options.productAttributesLookup = productAttributes.reduce((a, c) => {
-                        a[c.alias] = c;
-                        c.valuesLookup = c.values.reduce((a2, c2) => {
-                            a2[c2.alias] = c2;
-                            return a2;
-                        }, {})
-                        return a;
-                    }, {});
-
-                    // Init model
-                    if (vm.model.config.variantElementType) {
-
-                        // Construct a block list modelObject so we can fake being a block list prop editor
-                        // We don't have fancy block configurations so we fake a single entry array and 
-                        // set it's contentElementTypeKey to our configured variants element type key.
-                        vm.modelObject = blockEditorService.createModelObject(vm.model.value,
-                            vm.model.editor,
-                            [{
-                                label: "{{sku}}",
-                                contentElementTypeKey: vm.model.config.variantElementType,
-                                settingsElementTypeKey: null // We don't use a settings element type
-                            }],
-                            vm.editorState.scopeOfExistence,
-                            vm.editorState.scope);
-
-                        vm.modelObject.load().then(function () {
-                            vm.ready();
-                        });
-
-                    }
-
-                });
-            });
-
-        }
-
-        vm.init = function () {
-
-            vm.editorState = vendrVariantsEditorState.getCurrent();
-
-            if (vm.editorState) {
-                vm.doInit();
-            }
-
-            var evt1 = eventsService.on("variantsEditorState.changed", function (e, args) {
-                vm.editorState = args.state;
-                vm.doInit();
-            });
-
-            var evt2 = eventsService.on("variantsEditor.modelValueChanged", function (e, args) {
-                vm.model = angular.copy(vm.editorState.model);
-                vm.modelObject.update(vm.model.value, $scope);
-                vm.ready();
-            });
-
-            subs.push(function () {
-                eventsService.unsubscribe(evt1);
-                eventsService.unsubscribe(evt2);
-            });
-
-        }
-
-        var cultureChanged = eventsService.on('editors.content.cultureChanged', (name, args) => vm.syncModelToPropEditor());
-        subs.push(function () {
-            eventsService.unsubscribe(cultureChanged);
-        });
-
-        subs.push($scope.$on("formSubmitting", function (ev, args) {
-            vm.syncModelToPropEditor();
-        }));
-
-        // TODO: Listen for variantsEditor.modelValueChanged for changes to the model on the server
-
-        $scope.$on('$destroy', function () {
-            subs.forEach(u => u());
-        });
-
-        vm.init();
-
-        // --- Helpers ---
-
-        var partition = function (array, isValid) {
-            return array.reduce(([pass, fail], elem) => {
-                return isValid(elem) ? [[...pass, elem], fail] : [pass, [...fail, elem]];
-            }, [[], []]);
-        }
-
-        var cartesian = function (arr) {
-            function c(part, idx) {
-                var k = Object.keys(arr[idx])[0];
-                arr[idx][k].forEach((a) => {
-                    var p = Object.assign({}, part, { [k]: a });
-                    if (idx + 1 === arr.length) {
-                        r.push(p);
-                        return;
-                    }
-                    c(p, idx + 1);
-                });
-            }
-
-            var r = [];
-            c({}, 0);
-            return r;
-        }
-
-    };
-
-    angular.module('vendr').controller('Vendr.Controllers.VariantsAppController', VariantsAppController);
-
-}());
-(function () {
-
-    'use strict';
-
     function CartCreateController($scope, $rootScope, $location, formHelper,
         languageResource, navigationService,
         vendrUtils, vendrCartResource, vendrCurrencyResource) {
@@ -1854,7 +728,7 @@
                     id: id,
                     name: cartNumber,
                     nodeType: "Cart",
-                    menuUrl: `${Umbraco.Sys.ServerVariables.umbracoSettings.umbracoPath}/backoffice/Vendr/StoresTree/GetMenu?application=${application}&tree=${tree}&nodeType=Cart&storeId=${storeId}&id=${id}`,
+                    menuUrl: `${Umbraco.Sys.ServerVariables.umbracoSettings.umbracoPath}/backoffice/Vendr/VendrStoresTree/GetMenu?application=${application}&tree=${tree}&nodeType=Cart&storeId=${storeId}&id=${id}`,
                     metaData: {
                         tree: tree,
                         storeId: storeId
@@ -2121,197 +995,6 @@
     };
 
     angular.module('vendr').controller('Vendr.Controllers.CartListController', CartListController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function AddProductDialogController($scope, $location, $q, editorService, vendrProductResource)
-    {
-        var vm = this;
-
-        vm.loading = true;
-        vm.title = "Add a Product";
-
-        vm.filter = {
-            enabled: true,
-            term: '',
-            prevTerm: '',
-            hasFilter: false
-        };
-        
-        vm.filters = [];
-        
-        var emptyPagedResult = {
-            items: [],
-            pageNumber: 1,
-            pageSize: 10,
-            totalItem: 0,
-            totalPages: 1
-        };
-
-        vm.parentProduct = null;
-        vm.selectedProduct = null;
-        vm.products = angular.copy(emptyPagedResult);
-        vm.variantAttributes = [];
-        vm.variants = angular.copy(emptyPagedResult);
-
-        vm.applySearchFilter = function () {
-            if (!vm.parentProduct) {
-                vm.loadProducts();
-            } else {
-                vm.loadProductVariants();
-            }
-        }
-
-        vm.loadProducts = function () {
-            vm.products = angular.copy(emptyPagedResult);
-            if (vm.filter.term.length > 0)
-            {
-                vm.filter.hasFilter = true;
-                vm.loading = true;
-                vendrProductResource.searchProductSummaries($scope.model.config.storeId, $scope.model.config.languageIsoCode, vm.filter.term, {
-                    itemsPerPage: 10
-                }).then(function (data) {
-                    const productReferences = data.items.map(item => {
-                        return {  productReference: item.reference }
-                    });
-                    vendrProductResource.getAllStock($scope.model.config.storeId, productReferences).then(function(data2) {
-                       data.items.forEach(itm => {
-                          itm.stockLevel = data2.find(s => s.productReference === itm.reference).stockLevel; 
-                          itm.price = 'Unpriced';
-                          if (itm.prices && itm.prices.length) {
-                              let price = itm.prices.find(p => p.currencyId === $scope.model.config.currencyId);
-                              if (price) 
-                                  itm.price = price.valueFormatted;
-                          }
-                       });
-                       vm.products = data;
-                       vm.loading = false;
-                    });
-                });
-            }
-            else
-            {
-                vm.filter.hasFilter = false;
-            }
-        };
-
-        vm.loadVariantAttributes = function () {
-            vm.variants = angular.copy(emptyPagedResult);
-            vm.variantAttributes = [];
-            vm.filters = [];
-            
-            if (vm.parentProduct) {
-                vm.loading = true;
-                vendrProductResource.getProductVariantAttributes($scope.model.config.storeId, vm.parentProduct.reference, $scope.model.config.languageIsoCode).then(function (data) {
-
-                    data.forEach(itm => {
-                        // TODO: Track selected?
-                    })
-                    
-                    vm.variantAttributes = data;
-                    
-                    vm.filters = data.map(itm => {
-                        return {
-                            name: itm.name,
-                            alias: itm.alias,
-                            value: [],
-                            getFilterOptions: function () {
-                                return $q.resolve(itm.values.map(v => {
-                                    return {
-                                        id: v.alias,
-                                        name: v.name
-                                    }
-                                }));
-                            }
-                        }
-                    });
-
-                    vm.loading = false;
-                });
-            }
-        }
-
-        vm.loadProductVariants = function () {
-            vm.variants = angular.copy(emptyPagedResult);
-
-            const attributes = vm.filters.flatMap(f => {
-                return f.value.map(fv => {
-                    return f.alias + ":" + fv;
-                });
-            });
-            
-            if (vm.filter.term.length > 0 || attributes.length > 0)
-            {
-                vm.filter.hasFilter = true;
-                vm.loading = true;
-                
-                vendrProductResource.searchProductVariantSummaries($scope.model.config.storeId, vm.parentProduct.reference, $scope.model.config.languageIsoCode, vm.filter.term, attributes, {
-                    itemsPerPage: 10
-                }).then(function (data) {
-                    const productReferences = data.items.map(item => {
-                        return { productReference: vm.parentProduct.reference, productVariantReference: item.reference }
-                    });
-                    vendrProductResource.getAllStock($scope.model.config.storeId, productReferences).then(function(data2) {
-                        data.items.forEach(itm => {
-                            itm.stockLevel = data2.find(s => s.productVariantReference === itm.reference).stockLevel;
-                            itm.price = 'Unpriced';
-                            if (itm.prices && itm.prices.length) {
-                                let price = itm.prices.find(p => p.currencyId === $scope.model.config.currencyId);
-                                if (price)
-                                    itm.price = price.valueFormatted;
-                            }
-                        });
-                        vm.variants = data;
-                        vm.loading = false;
-                    });
-                });
-            }
-            else
-            {
-                vm.filter.hasFilter = false;
-            }
-        };
-
-        vm.selectItem = function (itm) {
-            if (itm.hasVariants) {
-                vm.parentProduct = itm;
-                vm.selectedProduct = null;
-                vm.filter.prevTerm = vm.filter.term;
-                vm.filter.term = '';
-                vm.filter.hasFilter = false;
-                vm.loadVariantAttributes();
-            } else {
-                vm.selectedProduct = itm;
-            }
-        }
-
-        vm.back = function () {
-            vm.parentProduct = null;
-            vm.selectedProduct = null;
-            vm.filter.term = vm.filter.prevTerm;
-            vm.filter.prevTerm = '';
-            vm.loadProducts();
-        }
-
-        vm.submit = function () {
-            if ($scope.model.submit) {
-                $scope.model.submit(vm.parentProduct
-                ? { productReference: vm.parentProduct.reference, productVariantReference: vm.selectedProduct.reference }
-                : { productReference: vm.selectedProduct.reference });
-            }
-        }
-        
-        vm.close = function() {
-            if ($scope.model.close) {
-                $scope.model.close();
-            }
-        };
-    }
-
-    angular.module('vendr').controller('Vendr.Controllers.AddProductDialogController', AddProductDialogController);
 
 }());
 (function () {
@@ -3012,6 +1695,10 @@
                     if (prop.view === "boolean") {
                         prop.value = vm.values[prop.alias] ? "1" : "0";
                     }
+                    else if (prop.view === "datepicker") {
+                        // Make local date
+                        prop.value = moment().utc(vm.values[prop.alias]).local().format(prop.config.format);
+                    }
                     else {
                         prop.value = vm.values[prop.alias];
                     }
@@ -3038,7 +1725,12 @@
                             if (prop.value === "1")
                                 model[prop.alias] = true;
                         } else if (prop.value) {
-                            model[prop.alias] = prop.value;
+                            if (prop.view === "datepicker") {
+                                // Make UTC date
+                                model[prop.alias] = moment(prop.value).utc().format(prop.config.format);
+                            } else {
+                                model[prop.alias] = prop.value;
+                            }
                         }
                     })
                 });
@@ -6097,7 +4789,7 @@
                     id: id,
                     name: orderOrCartNumber,
                     nodeType: "Order",
-                    menuUrl: `${Umbraco.Sys.ServerVariables.umbracoSettings.umbracoPath}/backoffice/Vendr/StoresTree/GetMenu?application=${application}&tree=${tree}&nodeType=Order&storeId=${storeId}&id=${id}`,
+                    menuUrl: `${Umbraco.Sys.ServerVariables.umbracoSettings.umbracoPath}/backoffice/Vendr/VendrStoresTree/GetMenu?application=${application}&tree=${tree}&nodeType=Order&storeId=${storeId}&id=${id}`,
                     metaData: {
                         tree: tree,
                         storeId: storeId
@@ -6368,295 +5060,6 @@
     };
 
     angular.module('vendr').controller('Vendr.Controllers.OrderListController', OrderListController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function CustomerInfoDialogController($scope, $location, editorService, vendrOrderResource)
-    {
-        var vm = this;
-
-        vm.loading = true;
-        vm.title = "Customer Info";
-        vm.registeredCustomer = {
-            properties: [],
-            isUmbracoMember: false
-        };
-        vm.orderHistory = [];
-
-        vm.openMember = function (memberKey) {
-            editorService.memberEditor({
-                id: memberKey,
-                submit: function (model) {
-                    vendrOrderResource.getOrderRegisteredCustomerInfo($scope.model.config.orderId).then(function (data) {
-                        vm.registeredCustomer = data;
-                        editorService.close();
-                    });
-                },
-                close: function () {
-                    editorService.close();
-                }
-            });
-        }
-
-        vm.openOrder = function (order) {
-            if (order.id === $scope.model.config.orderId) {
-                vm.close();
-            } else {
-                editorService.open({
-                    view: '/App_Plugins/Vendr/backoffice/views/order/edit.html',
-                    infiniteMode: true,
-                    config: {
-                        storeId: order.storeId,
-                        orderId: order.id
-                    },
-                    submit: function (model) {
-                        editorService.close();
-                    },
-                    close: function () {
-                        editorService.close();
-                    }
-                });
-            }
-        }
-
-        vendrOrderResource.getOrderRegisteredCustomerInfo($scope.model.config.orderId).then(function (data) {
-            vm.registeredCustomer = data;
-            vendrOrderResource.getOrderHistoryByOrder($scope.model.config.orderId).then(function (data) {
-                vm.orderHistory = data;
-                vm.loading = false;
-            });
-        });
-
-        vm.close = function() {
-            if ($scope.model.close) {
-                $scope.model.close();
-            }
-        };
-    }
-
-    angular.module('vendr').controller('Vendr.Controllers.CustomerInfoDialogController', CustomerInfoDialogController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function EditCustomerDetailsController($scope, vendrOrderResource,
-        vendrCountryResource, vendrRouteCache)
-    {
-        var order = $scope.model.config.order;
-
-        var vm = this;
-        vm.title = "Edit Customer Details";
-        vm.editorConfig = $scope.model.config.editorConfig;
-        vm.content = {
-            customerFirstName: order.customerFirstName,
-            customerLastName: order.customerLastName,
-            customerEmail: order.customerEmail,
-            paymentCountryId: order.paymentCountryId,
-            paymentCountry: order.paymentCountry,
-            paymentRegionId: order.paymentRegionId,
-            paymentRegion: order.paymentRegion,
-            shippingCountryId: order.shippingCountryId,
-            shippingCountry: order.shippingCountry,
-            shippingRegionId: order.shippingRegionId,
-            shippingRegion: order.shippingRegion,
-            properties: {}
-        };
-
-        ensureProperties(vm.editorConfig.customer);
-        ensureProperties(vm.editorConfig.billing);
-        ensureProperties(vm.editorConfig.shipping);
-
-        vm.options = {
-            countries: [],
-            countryRegionMap: {},
-            shippingSameAsBilling: vm.editorConfig.shipping.sameAsBilling && vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value == vm.editorConfig.shipping.sameAsBilling.trueValue
-        };
-
-        vm.toggleShippingSameAsBilling = function () 
-        {
-            if (vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value == vm.editorConfig.shipping.sameAsBilling.trueValue) {
-                vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value = vm.editorConfig.shipping.sameAsBilling.falseValue;
-            } else {
-                vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value = vm.editorConfig.shipping.sameAsBilling.trueValue;
-            }
-            vm.options.shippingSameAsBilling = vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value == vm.editorConfig.shipping.sameAsBilling.trueValue;
-        };
-
-        vm.clearPaymentRegion = function () {
-            vm.content.paymentRegionId = undefined;    
-        }
-
-        vm.clearShippingRegion = function () {
-            vm.content.shippingRegionId = undefined;
-        }
-        
-        vm.save = function () {
-            if ($scope.model.submit) {
-                
-                if (vm.options.shippingSameAsBilling) 
-                {
-                    vm.content.shippingCountryId = vm.content.paymentCountryId;
-                    vm.content.shippingRegionId = vm.content.paymentRegionId;
-
-                    copyProperty(vm.editorConfig.shipping.firstName, vm.content.customerFirstName);
-                    copyProperty(vm.editorConfig.shipping.lastName, vm.content.customerLastName);
-                    copyProperty(vm.editorConfig.shipping.company, vm.editorConfig.customer.company);
-                    copyProperty(vm.editorConfig.shipping.email, vm.content.customerEmail);
-                    copyProperty(vm.editorConfig.shipping.addressLine1, vm.editorConfig.billing.addressLine1);
-                    copyProperty(vm.editorConfig.shipping.addressLine2, vm.editorConfig.billing.addressLine2);
-                    copyProperty(vm.editorConfig.shipping.city, vm.editorConfig.billing.city);
-                    copyProperty(vm.editorConfig.shipping.zipCode, vm.editorConfig.billing.zipCode);
-                    copyProperty(vm.editorConfig.shipping.telephone, vm.editorConfig.billing.telephone);
-                }
-
-                // Pass the country / region entities for easier UI updating
-                vm.content.paymentCountry = vm.options.countries.find(x => x.id === vm.content.paymentCountryId);
-                vm.content.paymentRegion = vm.content.paymentCountry && vm.content.paymentRegionId ? vm.content.paymentCountry.regions.find(x => x.id === vm.content.paymentRegionId) : null;
-                vm.content.shippingCountry = vm.options.countries.find(x => x.id === vm.content.shippingCountryId);
-                vm.content.shippingRegion = vm.content.shippingCountry && vm.content.shippingRegionId ? vm.content.shippingCountry.regions.find(x => x.id === vm.content.shippingRegionId) : null;
-
-                $scope.model.submit(vm.content);
-            }
-        };
-
-        vm.cancel = function() {
-            if ($scope.model.close) {
-                $scope.model.close();
-            }
-        };
-        
-        vendrRouteCache.getOrFetch("countriesWithRegions", function () {
-            return vendrCountryResource.getCountriesWithRegions($scope.model.config.storeId);
-        })
-        .then(function (countries) {
-            vm.options.countries = countries;
-            countries.forEach(country => {
-                vm.options.countryRegionMap[country.id] = country.regions;    
-            });
-        });
-
-        function ensureProperties (cfg) {
-            for (const prop in cfg) {
-                var alias = cfg[prop].alias;
-                vm.content.properties[alias] = order.properties[alias] || { value: "", isReadOnly: false, isServerSideOnly: false };
-            }
-        }
-        
-        function copyProperty(target, src) 
-        {
-             if (!target)
-                 return;
-
-             if (!src) {
-                 vm.content.properties[target.alias].value = "";
-             } else {
-                 vm.content.properties[target.alias].value = (typeof src === 'string' ? src : vm.content.properties[src.alias].value);
-             }
-        }
-    }
-
-    angular.module('vendr').controller('Vendr.Controllers.EditCustomerDetailsController', EditCustomerDetailsController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function EditPropertiesController($scope)
-    {
-        var order = $scope.model.config.order;
-        var orderLine = $scope.model.config.orderLine;
-        var content = orderLine || order;
-
-        var vm = this;
-        vm.title = "Edit Properties";
-        vm.editorConfig = $scope.model.config.editorConfig;
-        vm.content = {
-            properties: []
-        };
-
-        mapProperties(vm.editorConfig.properties);
-        
-        vm.save = function () {
-            if ($scope.model.submit) {
-                $scope.model.submit(vm.content);
-            }
-        };
-
-        vm.cancel = function() {
-            if ($scope.model.close) {
-                $scope.model.close();
-            }
-        };
-
-        function mapProperties (cfg) {
-            for (const cfgKey in cfg) {
-
-                var alias = cfg[cfgKey].alias;
-
-                var prop = content.properties[alias] || { value: "", isReadOnly: false, isServerSideOnly: false };
-
-                var property = {
-                    alias: alias,
-                    label: cfg[cfgKey].label || alias,
-                    description: cfg[cfgKey].description,
-                    config: cfg[cfgKey].config || {},
-                    view: cfg[cfgKey].view || 'textbox',
-
-                    value: prop.value,
-                    isReadOnly: prop.isReadOnly,
-                    isServerSideOnly: prop.isServerSideOnly
-                };
-
-                // Push some additional config into the property config
-                property.config.storeId = $scope.model.config.storeId;
-                property.config.orderId = $scope.model.config.orderId;
-                property.config.orderLineId = $scope.model.config.orderLineId;
-
-                if (prop.isReadOnly || cfg[cfgKey].isReadOnly) { // isServerSideOnly?
-                    property.view = "readonlyvalue";
-                }
-
-                if (property.view === 'dropdown') {
-                    property.view = '/App_Plugins/Vendr/backoffice/views/propertyeditors/dropdown/dropdown.html';
-                }
-
-                vm.content.properties.push(property);
-            }
-        }
-    }
-
-    angular.module('vendr').controller('Vendr.Controllers.EditPropertiesController', EditPropertiesController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function TransactionInfoDialogController($scope, vendrOrderResource)
-    {
-        var vm = this;
-
-        vm.title = "Transaction Info";
-        vm.properties = [];
-
-        vendrOrderResource.getOrderTransactionInfo($scope.model.config.orderId).then(function (data) {
-            vm.properties = data;
-        });
-
-        vm.close = function() {
-            if ($scope.model.close) {
-                $scope.model.close();
-            }
-        };
-    }
-
-    angular.module('vendr').controller('Vendr.Controllers.TransactionInfoDialogController', TransactionInfoDialogController);
 
 }());
 (function () {
@@ -7462,95 +5865,6 @@
     };
 
     angular.module('vendr').controller('Vendr.Controllers.PaymentMethodListController', PaymentMethodListController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function ElementTypePickerController($scope, editorService , elementTypeResource) {
-
-        var vm = this;
-
-        var dialogOptions = {
-            view: '/App_Plugins/Vendr/backoffice/views/dialogs/elementtypepicker.html',
-            size: 'small',
-            submit: function (model) {
-                vm.model.value = model.id;
-                vm.pickedItem = model;
-                editorService.close();
-            },
-            close: function () {
-                editorService.close();
-            }
-        };
-
-        var vm = this;
-
-        vm.model = $scope.model;
-        vm.pickedItem = false;
-
-        if (vm.model.value) {
-            elementTypeResource.getAll().then(function (elementTypes) {
-                var elementType = elementTypes.find(function (itm) {
-                    return itm.key === vm.model.value;
-                });
-                if (elementType) {
-                    vm.pickedItem = {
-                        id: elementType.key,
-                        name: elementType.name,
-                        icon: elementType.icon
-                    };
-                }
-            });
-        }
-
-        vm.openPicker = function () {
-            editorService.open(dialogOptions);
-        };
-
-        vm.removeItem = function () {
-            vm.model.value = null;
-            vm.pickedItem = false;
-        };
-
-        vm.openItem = function () {
-
-        };
-
-
-    }
-
-    angular.module('vendr').controller('Vendr.Controllers.ElementTypePickerController', ElementTypePickerController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function StoreConfigController($scope) {
-
-        var vm = this;
-
-        vm.storePickerProperty = {
-            alias: "storeId",
-            view: '/App_Plugins/Vendr/backoffice/views/propertyeditors/storepicker/storepicker.html'
-        };
-
-        Object.defineProperty(vm.storePickerProperty, "value", {
-            get: () => vm.model.value.storeId,
-            set: (value) => vm.model.value.storeId = value
-        });
-
-        vm.model = $scope.model;
-        vm.model.value = vm.model.value || {
-            storeMode: 'Search',
-            storeId: undefined
-        };
-
-    }
-
-    angular.module('vendr').controller('Vendr.Controllers.StoreConfigController', StoreConfigController);
 
 }());
 (function () {
@@ -8454,825 +6768,6 @@
     };
 
     angular.module('vendr').controller('Vendr.Controllers.ProductAttributePresetListController', ProductAttributePresetListController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function ConditionalInputController($scope, $timeout)
-    {
-        var vm = this;
-
-        vm.property = {
-            alias: $scope.model.alias + "_conitional",
-            view: $scope.model.config.propertyView,
-            config: $scope.model.config.propertyConfig
-        };
-
-        Object.defineProperty(vm.property, "value", {
-            get: function () {
-                return $scope.model.value;
-            },
-            set: function (value) {
-                $scope.model.value = value;
-                toggleProperties();
-            }
-        });
-
-        function toggleProperties()
-        {
-            if ($scope.model.value in $scope.model.config.map) {
-                doToggleProperties($scope.model.config.map[$scope.model.value]);
-            }
-            else if ("default" in $scope.model.config.map) {
-                doToggleProperties($scope.model.config.map["default"]);
-            }
-        }
-
-        function doToggleProperties(config) {
-
-            var $inputEl = $("[data-element='property-" + $scope.model.alias + "']");
-            var form = $inputEl.closest("form");
-
-            var hiddenContainer = $(form).find("> .cih");
-            if (hiddenContainer.length === 0) {
-                $(form).append("<div class='cih' style='display: none;'></div>");
-                hiddenContainer = $(form).find("> .cih");
-            }
-
-            config.show.forEach(function (toShow) {
-                var $s = $("[data-element='property-" + toShow + "']");
-                if ($s.closest(".cih").length > 0) {
-                    $(form).find(".property-" + toShow + "-placeholder").after($s);
-                    $(form).find(".property-" + toShow + "-placeholder").remove();
-                }
-            });
-
-            config.hide.forEach(function (toHide) {
-                var $s = $("[data-element='property-" + toHide + "']");
-                if ($s.closest(".cih").length === 0) {
-                    $s.after("<span class='property-" + toHide + "-placeholder'></span>");
-                    hiddenContainer.append($s);
-                }
-            });
-
-        }
-
-        $timeout(function () {
-            toggleProperties();
-        }, 10);
-        
-    }
-
-    angular.module('vendr').controller('Vendr.Controllers.ConditionalInputController', ConditionalInputController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function DictionaryInputController($scope) {
-
-        var vm = this;
-        
-        vm.model = $scope.model;
-        
-        vm.generateKey = function () {
-            return ($scope.model.config.keyPrefix + "_" + $scope.model.alias).toLowerCase();
-        };
-
-    }
-
-    angular.module('vendr').controller('Vendr.Controllers.DictionaryInputController', DictionaryInputController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function PriceController($scope, $routeParams, vendrStoreResource,
-        vendrCurrencyResource, vendrUtils, vendrRouteCache)
-    {
-        // Figure out if we are in a config area or in settings where we can
-        // parse the store ID from the querystring
-        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
-        var storeId = compositeId.length > 1 ? compositeId[0] : null;
-        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[0];
-
-        var isDocTypeEditorPreview = $routeParams.section == "settings" && $routeParams.tree == "documentTypes";
-
-        var vm = this;
-
-        vm.model = $scope.model;
-
-        vm.loading = true;
-        vm.store = null;
-        vm.prices = null;
-        vm.options = {
-            fraction: $scope.model.config.fraction || 2
-        }
-
-        var initStore = function (store, value) {
-            if (store) {
-                vm.store = store;
-                vendrRouteCache.getOrFetch("store_"+ store.id +"_currencies", function () {
-                    return vendrCurrencyResource.getCurrencies(vm.store.id);
-                })
-                .then(function (currencies) {
-                    var prices = [];
-                    currencies.forEach(function (currency) {
-                        prices.push({
-                            currencyId: currency.id,
-                            currencyCode: currency.code,
-                            value: value && value[currency.id] != undefined ? value[currency.id] : ''
-                        });
-                    });
-                    vm.prices = prices;
-                    vm.loading = false;
-                });
-            } else {
-                vm.store = null;
-                vm.prices = null;
-                vm.loading = false;
-            }
-        };
-
-        var init = function (value) {
-
-            if (!isDocTypeEditorPreview) {
-                vendrRouteCache.getOrFetch("currentStore", function () {
-                    if (!storeId) {
-                        return vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId);
-                    } else {
-                        return vendrStoreResource.getBasicStore(storeId);
-                    }
-                })
-                .then(function (store) {
-                    initStore(store, value);
-                });
-            } else {
-                initStore(null, null);
-            }
-
-        };
-
-        // Here we declare a special method which will be called whenever the value has changed from the server
-        // this is instead of doing a watch on the model.value = faster
-        $scope.model.onValueChanged = function (newVal, oldVal) {
-            //console.log(newVal);
-        };
-        
-        var unsubscribe = [
-            $scope.$on("formSubmitting", function () {
-                if (!vm.loading && vm.store && vm.prices) {
-
-                    var value = {};
-
-                    vm.prices.forEach(function (price) {
-                        if (price.value !== "" && !isNaN(price.value)) {
-                            value[price.currencyId] = price.value;
-                        }
-                    });
-
-                    if (_.isEmpty(value))
-                        value = undefined;
-
-                    $scope.model.value = value;
-                }
-            }),
-            $scope.$on("formSubmitted", function () {
-                init($scope.model.value);
-            })
-        ];
-
-        // When the element is disposed we need to unsubscribe!
-        // NOTE: this is very important otherwise if this is part of a modal, the listener still exists because the dom
-        // element might still be there even after the modal has been hidden.
-        $scope.$on('$destroy', function () {
-            unsubscribe.forEach(function (u) {
-                u();
-            });
-        });
-
-        init($scope.model.value);
-    }
-
-    angular.module('vendr').controller('Vendr.Controllers.PriceController', PriceController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function PricesIncludeTaxController($scope, $routeParams, vendrStoreResource, vendrUtils, vendrRouteCache)
-    {
-        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
-        var storeId = compositeId.length > 1 ? compositeId[0] : null;
-
-        var vm = this;
-
-        vm.property = {
-            alias: $scope.model.alias + "_wrapped",
-            view: "boolean",
-            config: $scope.model.config
-        };
-
-        Object.defineProperty(vm.property, "value", {
-            get: function () {
-                return $scope.model.value;
-            },
-            set: function (value) {
-                $scope.model.value = value;
-            }
-        });
-
-        if ($scope.model.value == null && storeId) {
-            vendrRouteCache.getOrFetch("currentStore", () => vendrStoreResource.getBasicStore(storeId)).then(function (store) {
-                vm.property.value = store.pricesIncludeTax;
-            });
-        }
-
-    }
-
-    angular.module('vendr').controller('Vendr.Controllers.PricesIncludeTaxController', PricesIncludeTaxController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function StockController($scope, $locale, $routeParams, editorState, editorService, vendrUtils, vendrStoreResource, vendrProductResource, vendrRouteCache)
-    {
-        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
-        var storeId = compositeId.length > 1 ? compositeId[0] : null;
-        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[0];
-
-        var currentNode = editorState.getCurrent();
-        var productReference = currentNode.id > 0 ? currentNode.key : undefined;
-        var productVariantReference = undefined;
-
-        var isDocTypeEditorPreview = $routeParams.section == "settings" && $routeParams.tree == "documentTypes";
-
-        var vm = this;
-        vm.model = $scope.model;
-        vm.options = {
-            numberPattern: `^\-?[\\${$locale.NUMBER_FORMATS.GROUP_SEP}0-9]*$`
-        };
-
-        var fraction = $scope.model.config.fraction || 6;
-        if (fraction > 0) {
-            vm.options.numberPattern = vm.options.numberPattern.substr(0, vm.options.numberPattern.length - 1)
-                + `(\\${($locale.NUMBER_FORMATS.DECIMAL_SEP)}[0-9]{0,${$scope.model.config.fraction}})?$`;
-        }
-
-        var vendrVariantEditor = editorService.getEditors().find(e => e.vendrVariantEditor);
-        if (vendrVariantEditor) {
-            productVariantReference = vendrVariantEditor.content.key;
-        }
-
-        // As multi variants can be loaded / unloaded within
-        // the same editing session, we have to check whether
-        // a stock level has been set previously that hasn't
-        // yet been persisted by saving the parent node. If this
-        // is the case then use this unpersisted value.
-        var hasUnpersistedValue = productVariantReference
-            && vm.model.value
-            && vm.model.value != -1
-            && vm.model.value != "-1";
-
-        vm.store = null;
-
-        // We don't use any stored stock value as we fetch it from
-        // the product service every time. 
-        // So we store a stock value in a seperate varaiable and 
-        // only submit it's value if it changes.
-        // We also set the stored model value to -1 initially 
-        // to ensure it's only handled in the backend
-        // if it's value is different.
-        vm.model.value = hasUnpersistedValue ? vm.model.value : -1;
-        vm.stockLevel = hasUnpersistedValue ? toUiCulture(vm.model.value) : 0;
-        vm.syncStockLevel = function () {
-            if (!vm.loading) {
-                vm.model.value = fromUiCulture(vm.stockLevel);
-            }
-        };
-        vm.unformatValue = function () {
-            vm.stockLevel = fromUiCulture(vm.stockLevel).toString().replaceAll('.', $locale.NUMBER_FORMATS.DECIMAL_SEP);
-        }
-        vm.reformatValue = function () {
-            vm.stockLevel = toUiCulture(fromUiCulture(vm.stockLevel));
-        }
-
-        vm.loading = true;
-
-        var initStore = function (store) {
-            if (store) {
-                vm.store = store;
-                if (productReference && !hasUnpersistedValue) {
-                    vendrProductResource.getStock(vm.store.id, productReference, productVariantReference).then(function (stock) {
-                        vm.stockLevel = toUiCulture(stock || 0);
-                        vm.loading = false;
-                    });
-                } else {
-                    vm.loading = false;
-                }
-            } else {
-                vm.store = null;
-                vm.loading = false;
-            }
-        };
-
-        var init = function () {
-            if (!isDocTypeEditorPreview) {
-                vendrRouteCache.getOrFetch("currentStore", function () {
-                    if (!storeId) {
-                        return vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId);
-                    } else {
-                        return vendrStoreResource.getBasicStore(storeId);
-                    }
-                })
-                .then(function (store) {
-                    initStore(store);
-                });
-            } else {
-                initStore(null, null);
-            }
-        };
-
-        init();
-
-        function toUiCulture(num) {
-            return num.toLocaleString($locale.id); // .replaceAll('.', $locale.NUMBER_FORMATS.DECIMAL_SEP).replaceAll(',', $locale.NUMBER_FORMATS.GROUP_SEP);
-        }
-
-        function fromUiCulture(num) {
-            return parseFloat(num.replaceAll($locale.NUMBER_FORMATS.GROUP_SEP, '').replaceAll($locale.NUMBER_FORMATS.DECIMAL_SEP, '.'));
-        }
-    }
-
-    angular.module('vendr').controller('Vendr.Controllers.StockController', StockController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function StoreEntityPickerController($scope, $routeParams, editorService,
-        vendrStoreResource, vendrEntityResource, vendrUtils, vendrRouteCache)
-    {
-        // Figure out if we are in a config area or in settings where we can
-        // parse the store ID from the querystring
-        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
-        var storeId = compositeId.length > 1 ? compositeId[0] : null;
-        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[0];
-        var entityType = $scope.model.config.entityType;
-        var storeConfig = $scope.model.config.storeConfig || { storeMode: 'Search' };
-
-        if (storeConfig.storeMode === 'All')
-            storeId = -1;
-
-        if (storeConfig.storeMode === 'Explicit')
-            storeId = storeConfig.storeId;
-
-        var dialogOptions = {
-            view: '/App_Plugins/Vendr/backoffice/views/dialogs/storeentitypicker.html',
-            size: 'small',
-            config: {
-                storeId: -1,
-                entityType: entityType
-            },
-            submit: function (model) {
-                if (model.store) {
-                    vm.store = model.store;
-                }
-                vm.model.value = model.id;
-                vm.pickedItem = model;
-                editorService.close();
-            },
-            close: function () {
-                editorService.close();
-            }
-        };
-
-        var vm = this;
-
-        vm.model = $scope.model;
-        vm.pickedItem = false;
-        vm.loading = true;
-        vm.store = null;
-        vm.showStoreInName = storeConfig.storeMode === 'All';
-
-        vm.openPicker = function () {
-            editorService.open(dialogOptions);
-        };
-
-        vm.removeItem = function () {
-            vm.model.value = null;
-            vm.pickedItem = false;
-        };
-
-        vm.openItem = function () {
-
-        };
-
-        var initStore = function (store, value) {
-            vm.store = store;
-            if (store && storeConfig.storeMode !== 'All') {
-                dialogOptions.config.storeId = store.id;
-            }
-            if (value) {
-                vendrEntityResource.getEntity(entityType, value).then(function (entity) {
-                    vm.pickedItem = entity;
-                    vm.loading = false;
-                });
-            } else {
-                vm.loading = false;
-            }
-        };
-
-        var init = function (value) {
-
-            if (!storeId) {
-                // Search for Store ID
-                vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId).then(function (store) {
-                    initStore(store, value);
-                });
-            } else if (storeId !== -1) {
-                // Explicit store
-                vendrStoreResource.getBasicStore(storeId).then(function (store) {
-                    initStore(store, value);
-                });
-            } else if (value) {
-                vendrEntityResource.getStoreByEntityId(entityType, value).then(function (store) {
-                    initStore(store, value);
-                });
-            } else {
-                // All store
-                initStore({ id: -1 }, value);
-            }
-
-        };
-
-        var unsubscribe = [
-            $scope.$on("formSubmitted", function () {
-                init($scope.model.value);
-            })
-        ];
-
-        // When the element is disposed we need to unsubscribe!
-        // NOTE: this is very important otherwise if this is part of a modal, the listener still exists because the dom
-        // element might still be there even after the modal has been hidden.
-        $scope.$on('$destroy', function () {
-            unsubscribe.forEach(function (u) {
-                u();
-            });
-        });
-
-        init(vm.model.value);
-    }
-
-    angular.module('vendr').controller('Vendr.Controllers.StoreEntityPickerController', StoreEntityPickerController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function StorePickerController($scope, editorService,
-        vendrStoreResource)
-    {
-        var dialogOptions = {
-            view: '/App_Plugins/Vendr/backoffice/views/dialogs/storepicker.html',
-            size: 'small',
-            submit: function (model) {
-                vm.model.value = model.id;
-                vm.pickedItem = model;
-                editorService.close();
-            },
-            close: function () {
-                editorService.close();
-            }
-        };
-
-        var vm = this;
-        
-        vm.model = $scope.model;
-        vm.pickedItem = false;
-
-        if (vm.model.value) {
-            vendrStoreResource.getBasicStore(vm.model.value).then(function (store) {
-                vm.pickedItem = store;
-            });
-        }
-
-        vm.openPicker = function () {
-            editorService.open(dialogOptions);
-        };
-
-        vm.removeItem = function () {
-            vm.model.value = null;
-            vm.pickedItem = false;
-        };
-
-        vm.openItem = function () {
-            
-        };
-    }
-
-    angular.module('vendr').controller('Vendr.Controllers.StorePickerController', StorePickerController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function TagsController($scope, $routeParams, vendrStoreResource,
-        vendrUtils, vendrRouteCache)
-    {        
-        // Figure out if we are in a config area or in settings where we can
-        // parse the store ID from the querystring
-        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
-        var storeId = compositeId.length > 1 || $routeParams.tree.indexOf("vendr") >= 0 ? compositeId[0] : null;
-        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[0];
-
-        var isDocTypeEditorPreview = $routeParams.section == "settings" && $routeParams.tree == "documentTypes";
-
-        var vm = this;
-        
-        vm.value = $scope.model.value 
-            ? $scope.model.value.split(',')
-            : [];
-
-        vm.valueChanged = function(value) {
-            $scope.model.value = value.join(",");
-        }
-        
-        var init = function () {
-            if (!isDocTypeEditorPreview) {
-                vendrRouteCache.getOrFetch("currentStore", function () {
-                    if (!storeId) {
-                        return vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId);
-                    } else {
-                        return vendrStoreResource.getBasicStore(storeId);
-                    }
-                })
-                .then(function (store) {
-                    vm.store = store;
-                });
-            }
-        };
-        
-        init();
-
-        var unsubscribe = [
-            $scope.$watch("model.value", function (newVal, oldVal) {
-                vm.value = newVal
-                    ? newVal.split(',')
-                    : [];
-            })
-        ];
-
-        // When the element is disposed we need to unsubscribe!
-        // NOTE: this is very important otherwise if this is part of a modal, the listener still exists because the dom
-        // element might still be there even after the modal has been hidden.
-        $scope.$on('$destroy', function () {
-            unsubscribe.forEach(function (u) {
-                u();
-            });
-        });
-    }
-
-    angular.module('vendr').controller('Vendr.Controllers.TagsController', TagsController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function TaxClassPickerController($scope, $routeParams, editorService,
-        vendrStoreResource, vendrTaxResource, vendrUtils)
-    {
-        // Figure out if we are in a config area or in settings where we can
-        // parse the store ID from the querystring
-        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
-        var storeId = compositeId.length > 1 ? compositeId[0] : null;
-        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[0];
-
-        var dialogOptions = {
-            view: '/App_Plugins/Vendr/backoffice/views/dialogs/taxclasspicker.html',
-            size: 'small',
-            config: {
-                storeId: -1
-            },
-            submit: function (model) {
-                vm.model.value = model.id;
-                vm.pickedItem = model;
-                editorService.close();
-            },
-            close: function () {
-                editorService.close();
-            }
-        };
-
-        var vm = this;
-
-        vm.model = $scope.model;
-        vm.pickedItem = false;
-        vm.loading = true;
-        vm.store = null;
-
-        vm.openPicker = function () {
-            editorService.open(dialogOptions);
-        };
-
-        vm.removeItem = function () {
-            vm.model.value = null;
-            vm.pickedItem = false;
-        };
-
-        vm.openItem = function () {
-
-        };
-
-        var initStore = function (store, value) {
-            vm.store = store;
-            dialogOptions.config.storeId = store.id;
-            if (value) {
-                vendrTaxResource.getTaxClass(value).then(function (entity) {
-                    vm.pickedItem = entity;
-                    vm.loading = false;
-                });
-            } else {
-                vm.loading = false;
-            }
-        };
-
-        var init = function (value) {
-
-            if (!storeId) {
-                vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId).then(function (store) {
-                    initStore(store, value);
-                });
-            } else {
-                vendrStoreResource.getBasicStore(storeId).then(function (store) {
-                    initStore(store, value);
-                });
-            }
-
-        };
-
-        init(vm.model.value);
-    }
-
-    angular.module('vendr').controller('Vendr.Controllers.TaxClassPickerController', TaxClassPickerController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function UmbracoMemberGroupsPickerController($scope, editorService, memberGroupResource) 
-    {
-        $scope.pickGroup = function() {
-            editorService.memberGroupPicker({
-                multiPicker: true,
-                submit: function (model) {
-                    var selectedGroupIds = _.map(model.selectedMemberGroups
-                        ? model.selectedMemberGroups
-                        : [model.selectedMemberGroup],
-                        function(id) { return parseInt(id) }
-                    );
-                    memberGroupResource.getByIds(selectedGroupIds).then(function (selectedGroups) {
-                        $scope.model.value = $scope.model.value || [];
-                        _.each(selectedGroups, function(group) {
-                            var foundIndex = $scope.model.value.findIndex(function (itm) {
-                                return itm == group.name;
-                            });
-                            if (foundIndex == -1){
-                                $scope.model.value.push(group.name);
-                            }
-                        });
-                    });
-                    editorService.close();
-                },
-                close: function () {
-                    editorService.close();
-                }
-            });
-        }
-
-        $scope.removeGroup = function (group) {
-            var foundIndex = $scope.model.value.findIndex(function (itm) {
-                return itm == group;
-            });
-            if (foundIndex > -1){
-                $scope.model.value.splice(foundIndex, 1);
-            }
-        }
-    }
-
-    angular.module('vendr').controller('Vendr.Controllers.UmbracoMemberGroupsPickerController', UmbracoMemberGroupsPickerController);
-
-}());
-(function () {
-
-    'use strict';
-
-    function VariantsEditorController($scope, $routeParams, $element, angularHelper, eventsService, vendrVariantsEditorState)
-    {
-        var vm = this;
-
-        var isDocTypeEditorPreview = $routeParams.section == "settings" && $routeParams.tree == "documentTypes";
-
-        var init = function () {
-
-            // Ensure model has a baseline value
-            if (typeof vm.model.value !== 'object' || vm.model.value === null) {
-                vm.model.value = {};
-            }
-
-            // Ensure we have an umbVariantContent
-            if (vm.umbProperty && !vm.umbVariantContent)
-            {
-                // not found, then fallback to searching the scope chain, this may be needed when DOM inheritance isn't maintained but scope
-                // inheritance is (i.e.infinite editing)
-                var found = angularHelper.traverseScopeChain($scope, s => s && s.vm && s.vm.constructor.name === "umbVariantContentController");
-                vm.umbVariantContent = found ? found.vm : null;
-                if (!vm.umbVariantContent) {
-                    throw "Could not find umbVariantContent in the $scope chain";
-                }
-            }
-
-            // If the prop editor value changes on the server, we'll need to raise an event
-            // so our content app can be notified
-            vm.model.onValueChanged = function (newVal) {
-
-                // We need to ensure that the property model value is an object, this is needed for modelObject to recive a reference and keep that updated.
-                if (typeof newVal !== 'object' || newVal === null) {
-                    vm.model.value = newVal = {};
-                }
-
-                eventsService.emit("variantsEditor.modelValueChanged", { value: newVal });
-
-            }
-
-            // For some reason the block list API needs to know the scope of existance
-            // so we work this out now to pass to the variants editor state object
-            var scopeOfExistence = $scope;
-            if (vm.umbVariantContentEditors && vm.umbVariantContentEditors.getScope) {
-                scopeOfExistence = vm.umbVariantContentEditors.getScope();
-            } else if (vm.umbElementEditorContent && vm.umbElementEditorContent.getScope) {
-                scopeOfExistence = vm.umbElementEditorContent.getScope();
-            }
-
-            // We don't actually do anything in the property editor itself,
-            // instead we register the current model with the variants editor
-            // state service such that the variants content app can gain access
-            // to it, then we leave it to the content app to do everything.
-            vendrVariantsEditorState.set({
-                model: vm.model,
-                propertyForm: vm.propertyForm,
-                umbProperty: vm.umbProperty,
-                umbVariantContent: vm.umbVariantContent,
-                umbVariantContentEditors: vm.umbVariantContentEditors,
-                umbElementEditorContent: vm.umbElementEditorContent,
-                scope: $scope,
-                scopeOfExistence: scopeOfExistence,
-            });
-
-        };
-
-        vm.$onInit = function () {
-            if (!isDocTypeEditorPreview) {
-                init();
-            }
-        }
-
-        $scope.$on("$destroy", function () {
-            vendrVariantsEditorState.reset();
-        });
-    }
-
-    angular
-        .module("vendr")
-        .component("vendrVariantsEditor", {
-            template: "<div></div>",
-            controller: VariantsEditorController,
-            controllerAs: "vm",
-            bindings: {
-                model: "="
-            },
-            require: {
-                propertyForm: "^form",
-                umbProperty: "?^umbProperty",
-                umbVariantContent: '?^^umbVariantContent',
-                umbVariantContentEditors: '?^^umbVariantContentEditors',
-                umbElementEditorContent: '?^^umbElementEditorContent'
-            }
-        });
-
-    // angular.module('vendr').controller('Vendr.Controllers.VariantsEditorController', VariantsEditorController);
 
 }());
 (function () {
@@ -10634,5 +8129,2529 @@
     };
 
     angular.module('vendr').controller('Vendr.Controllers.TaxClassListController', TaxClassListController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function AnalyticsTimeframeDialogController($scope, $location, vendrDateHelper)
+    {
+        var vm = this;
+
+        var currentTimeframe = $scope.model.config.currentTimeframe;
+
+        var today = vendrDateHelper.getToday();
+        var todayEod = vendrDateHelper.getToday().setHours(23, 59, 59, 999);
+
+        vm.loading = true;
+        vm.title = "Timeframe";
+
+        vm.namedDateRange = currentTimeframe && currentTimeframe.dateRange.alias ? currentTimeframe.dateRange.alias : "thisMonth";
+        vm.namedDateRanges = vendrDateHelper.getNamedDateRanges();
+
+        vm.initCustomDateRange = vm.customDateRange = currentTimeframe && (!currentTimeframe.dateRange.alias || currentTimeframe.dateRange.alias == "custom")
+            ? [new Date(currentTimeframe.dateRange.from), new Date(currentTimeframe.dateRange.to)]
+            : [vm.namedDateRanges[2].range[0], today];
+       
+        vm.compare = currentTimeframe && currentTimeframe.compareTo;
+        vm.compareType = currentTimeframe && currentTimeframe.compareTo && currentTimeframe.compareTo.type
+            ? currentTimeframe.compareTo.type
+            : "prevPeriod";
+
+        vm.datePickerConfig = {
+            mode: "range",
+            maxDate: todayEod,
+            dateFormat: "Y-m-d",
+            showMonths: 2,
+            enableTime: false
+        };
+
+        vm.datePickerChange = function (selectedDates, dateStr, instance) {
+            if (selectedDates.length == 2) {
+                vm.customDateRange = selectedDates;
+            }
+        }
+
+        vm.apply = function () {
+
+            if ($scope.model.apply) {
+
+                var model = {
+                    dateRange: { }
+                };
+
+                if (vm.namedDateRange == "custom") {
+
+                    model.dateRange = {
+                        name: vendrDateHelper.formatDateRange(vm.customDateRange),
+                        alias: "custom",
+                        from: vendrDateHelper.getISODateString(vm.customDateRange[0]),
+                        to: vendrDateHelper.getISODateString(vm.customDateRange[1])
+                    }
+
+                    if (vm.compare) {
+                        if (vm.compareType == "prevPeriod") {
+
+                            var rangeDays = vendrDateHelper.getDaysBetween(vm.customDateRange[0], vm.customDateRange[1], true);
+                            var compareFrom = vm.customDateRange[0].addDays((rangeDays + 1) * -1);
+                            var compareTo = vm.customDateRange[0].addDays(-1);
+
+                            model.compareTo = {
+                                name: vendrDateHelper.formatDateRange([compareFrom, compareTo]),
+                                type: 'prevPeriod',
+                                from: vendrDateHelper.getISODateString(compareFrom),
+                                to: vendrDateHelper.getISODateString(compareTo)
+                            }
+
+                        } else if (vm.compareType == "prevYear") {
+
+                            var compareFrom = vm.customDateRange[0].addYears(-1);
+                            var compareTo = vm.customDateRange[1].addYears(-1);
+
+                            model.compareTo = {
+                                name: vendrDateHelper.formatDateRange([compareFrom, compareTo]),
+                                type: 'prevYear',
+                                from: vendrDateHelper.getISODateString(compareFrom),
+                                to: vendrDateHelper.getISODateString(compareTo)
+                            }
+
+                        }
+                    }
+
+                } else {
+
+                    var namedDateRange = vm.namedDateRanges.find(function (itm) {
+                        return itm.alias == vm.namedDateRange;
+                    });
+
+                    model.dateRange = {
+                        name: namedDateRange.name,
+                        alias: namedDateRange.alias,
+                        from: vendrDateHelper.getISODateString(namedDateRange.range[0]),
+                        to: vendrDateHelper.getISODateString(namedDateRange.range[1])
+                    }
+
+                    if (vm.compare) {
+                        if (vm.compareType == "prevPeriod") {
+                            model.compareTo = {
+                                name: vendrDateHelper.formatDateRange(namedDateRange.prevPeriod),
+                                type: 'prevPeriod',
+                                from: vendrDateHelper.getISODateString(namedDateRange.prevPeriod[0]),
+                                to: vendrDateHelper.getISODateString(namedDateRange.prevPeriod[1])
+                            }
+                        } else if (vm.compareType == "prevYear") {
+                            model.compareTo = {
+                                name: vendrDateHelper.formatDateRange(namedDateRange.prevYear),
+                                type: 'prevYear',
+                                from: vendrDateHelper.getISODateString(namedDateRange.prevYear[0]),
+                                to: vendrDateHelper.getISODateString(namedDateRange.prevYear[1])
+                            }
+                        }
+                    }
+
+                }
+
+                $scope.model.apply(model);
+            }
+        };
+
+        vm.close = function() {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.AnalyticsTimeframeDialogController', AnalyticsTimeframeDialogController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function AvgOrderValueWidgetController($scope, vendrAnalyticsResource, vendrDateHelper) {
+
+        var vm = this;
+
+        vm.loadData = function (timeframe) {
+            return vendrAnalyticsResource.getAverageOrderValueReport($scope.config.storeId,
+                timeframe.dateRange.from, timeframe.dateRange.to,
+                timeframe.compareTo ? timeframe.compareTo.from : undefined,
+                timeframe.compareTo ? timeframe.compareTo.to : undefined,
+                vendrDateHelper.getLocalTimezoneOffset()
+            );
+        }
+    };
+
+    angular.module('vendr').controller('Vendr.Controllers.AvgOrderValueWidgetController', AvgOrderValueWidgetController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function CartConversionRatesWidgetController($scope, $rootScope, $timeout, vendrAnalyticsResource, vendrDateHelper) {
+
+        var vm = this;
+
+        vm.comparing = false;
+        vm.data = {};
+
+        vm.loadData = function (timeframe) {
+            return vendrAnalyticsResource.getCartConversionRatesReport($scope.config.storeId,
+                timeframe.dateRange.from, timeframe.dateRange.to,
+                timeframe.compareTo ? timeframe.compareTo.from : undefined,
+                timeframe.compareTo ? timeframe.compareTo.to : undefined,
+                vendrDateHelper.getLocalTimezoneOffset()
+            ).then(function (data) {
+
+                    vm.data = data;
+                    vm.comparing = timeframe.compareTo;
+
+                    return data;
+                });
+        }
+    };
+
+    angular.module('vendr').controller('Vendr.Controllers.CartConversionRatesWidgetController', CartConversionRatesWidgetController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function RepeatCustomerRatesWidgetController($scope, vendrAnalyticsResource, vendrDateHelper) {
+
+        var vm = this;
+
+        vm.loadData = function (timeframe) {
+            return vendrAnalyticsResource.getRepeatCustomerRatesReport($scope.config.storeId,
+                timeframe.dateRange.from, timeframe.dateRange.to,
+                timeframe.compareTo ? timeframe.compareTo.from : undefined,
+                timeframe.compareTo ? timeframe.compareTo.to : undefined,
+                vendrDateHelper.getLocalTimezoneOffset()
+            );
+        }
+    };
+
+    angular.module('vendr').controller('Vendr.Controllers.RepeatCustomerRatesWidgetController', RepeatCustomerRatesWidgetController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function TopSellingProductsWidgetController($scope, $rootScope, $timeout, vendrAnalyticsResource, vendrDateHelper) {
+
+        var vm = this;
+
+        vm.loading = true;
+        vm.comparing = false;
+        vm.timeframe = $scope.timeframe;
+        vm.data = {};
+
+        vm.init = function () {
+
+            vm.loading = true;
+
+            $timeout(function () {
+                $rootScope.$broadcast("VendrAnalyticsWidgetChanged", $scope.config);
+            }, 1);
+
+            vendrAnalyticsResource.getTopSellingProductsReport($scope.config.storeId,
+                vm.timeframe.dateRange.from, vm.timeframe.dateRange.to,
+                vm.timeframe.compareTo ? vm.timeframe.compareTo.from : undefined,
+                vm.timeframe.compareTo ? vm.timeframe.compareTo.to : undefined,
+                vendrDateHelper.getLocalTimezoneOffset()
+            ).then(function (data) {
+
+                    vm.data = data;
+
+                    vm.comparing = vm.timeframe.compareTo;
+                    vm.loading = false;
+
+                    $timeout(function () {
+                        $rootScope.$broadcast("VendrAnalyticsWidgetChanged", $scope.config);
+                    }, 1);
+
+                });
+        }
+
+        vm.init();
+
+        $rootScope.$on("VendrAnalyticsTimeframeChanged", function (evt, timeframe) {
+            vm.timeframe = timeframe;
+            vm.init();
+        });
+    };
+
+    angular.module('vendr').controller('Vendr.Controllers.TopSellingProductsWidgetController', TopSellingProductsWidgetController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function TotalOrdersWidgetController($scope, vendrAnalyticsResource, vendrDateHelper) {
+
+        var vm = this;
+
+        vm.loadData = function (timeframe) {
+            return vendrAnalyticsResource.getTotalOrdersReport($scope.config.storeId,
+                timeframe.dateRange.from, timeframe.dateRange.to,
+                timeframe.compareTo ? timeframe.compareTo.from : undefined,
+                timeframe.compareTo ? timeframe.compareTo.to : undefined,
+                vendrDateHelper.getLocalTimezoneOffset()
+            );
+        }
+    };
+
+    angular.module('vendr').controller('Vendr.Controllers.TotalOrdersWidgetController', TotalOrdersWidgetController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function TotalRevenueWidgetController($scope, vendrAnalyticsResource, vendrDateHelper) {
+
+        var vm = this;
+
+        vm.loadData = function (timeframe) {
+            return vendrAnalyticsResource.getTotalRevenueReport($scope.config.storeId,
+                timeframe.dateRange.from, timeframe.dateRange.to,
+                timeframe.compareTo ? timeframe.compareTo.from : undefined,
+                timeframe.compareTo ? timeframe.compareTo.to : undefined,
+                vendrDateHelper.getLocalTimezoneOffset()
+            );
+        }
+
+    };
+
+    angular.module('vendr').controller('Vendr.Controllers.TotalRevenueWidgetController', TotalRevenueWidgetController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function VariantsAppController($scope, $routeParams, $q, eventsService, editorService, blockEditorService, notificationsService,
+        vendrVariantsEditorState, vendrProductAttributeResource, vendrStoreResource, vendrRouteCache, vendrLocalStorage, vendrUtils) {
+
+        var currentOrParentNodeId = $routeParams.id;
+
+        var productAttributePickerDialogOptions = {
+            view: '/App_Plugins/Vendr/backoffice/views/dialogs/productattributepicker.html',
+            size: 'small',
+            config: {
+                enablePresets: true,
+                disablePreselected: true
+            },
+            submit: function (model) {
+                productAttributePickerDialogOptions.onSubmit(model);
+                editorService.close();
+            },
+            close: function () {
+                editorService.close();
+            }
+        };
+
+        var vm = this;
+        vm.loading = true;
+
+        var subs = [];
+
+        vm.store = null;
+        vm.options = {
+            productAttributes: [],
+            productAttributesLookup: {},
+            createActions: [{
+                name: 'Create Product Variants',
+                doAction: function () {
+                    pickVariantAttributes(function (model) {
+
+                        // Make sure we have come combinations to add
+                        if (!model || model.length === 0)
+                            return;
+
+                        var combos = getUniqueAttributeCombinations(model);
+
+                        // Filter out any combinations already present in the layout collection
+                        // [ [ pass ], [ fail ] ]
+                        var filtered = partition(combos, (c) => {
+                            return !vm.layout.find((l) => {
+                                return angular.equals(l.config.attributes, c);
+                            });
+                        });
+
+                        if (filtered[0].length === 0 && filtered[1].length > 0) {
+                            // TODO: Show error that all combinations already exist
+                        }
+                        else {
+                            filtered[0].forEach((c) => {
+                                addBlock({
+                                    attributes: c
+                                });
+                            });
+                        }
+                    });
+                }
+            }],
+            filters: [
+                //{
+                //    name: 'View',
+                //    alias: 'attributes',
+                //    localStorageKey: 'node_' + currentOrParentNodeId + '_attributesFilter',
+                //    getFilterOptions: function () {
+                //        var filterOptions = [];
+
+                //        vm.options.productAttributes.forEach((attr) => {
+                //            attr.values.forEach((val) => {
+
+                //                var opt = {
+                //                    id: attr.alias + ":" + val.alias,
+                //                    name: val.name,
+                //                    group: attr.name
+                //                };
+
+                //                Object.defineProperty(opt, "hidden", {
+                //                    get: function () {
+                //                        return !vm.layout.some((layout) => {
+                //                            return layout.config && layout.config.attributes
+                //                                && layout.config.attributes[attr.alias]
+                //                                && layout.config.attributes[attr.alias] === val.alias;
+                //                        });
+                //                    }
+                //                });
+
+                //                filterOptions.push(opt);
+
+                //            });
+                //        });
+
+                //        return $q.resolve(filterOptions);
+                //    }
+                //}
+            ],
+            bulkActions: [
+                {
+                    name: 'Delete',
+                    icon: 'icon-trash',
+                    doAction: function (bulkItem) {
+                        deleteBlock(bulkItem.$block)
+                        return $q.resolve({ success: true });
+                    },
+                    getConfirmMessage: function (total) {
+                        return $q.resolve("Are you sure you want to delete " + total + " " + (total > 1 ? "items" : "item") + "?");
+                    }
+                }
+            ],
+            items: [],
+            itemProperties: [
+                {
+                    alias: 'name',
+                    getter: function (model) {
+                        var sku = vm.getPropertyValue(model.$block.content, "sku");
+                        if (sku) return sku;
+
+                        sku = vm.getPropertyValue(vm.editorState.umbVariantContent.content, "sku");
+                        if (sku) {
+                            var name = vm.getPropertyValue(model.$block.content, "productName");
+                            return name ? sku + " (" + name + ")" : sku;
+                        }
+
+                        return "";
+                    },
+                    header: 'SKU',
+                    placeholder: 'SKU-XXXX'
+                },
+                // Other columns will be added dynamically
+                {
+                    alias: 'actions',
+                    header: '',
+                    align: 'right',
+                    template: `<umb-property-actions actions="refScope.vm.rowActionsFactory(model)" class="umb-property-actions__right" ng-click="$event.stopPropagation();"></umb-property-actions>`,
+                    refScope: $scope
+                }
+            ],
+            itemClick: function (item, index) {
+                vm.editVariantRow(item, index)
+            }
+        };
+
+        vm.rowActions = {};
+        vm.rowActionsFactory = function (itm) {
+            if (!vm.rowActions[itm.key]) {
+                vm.rowActions[itm.key] = [
+                    {
+                        //labelKey: "vendr_toggleDefaultVariant", // Use defined property below to allow toggling label
+                        icon: "rate",
+                        method: function () {
+                            vm.toggleDefaultVariantRow(itm);
+                        }
+                    },
+                    {
+                        labelKey: "vendr_configureVariant",
+                        icon: "settings",
+                        method: function () {
+                            vm.configureVariantRow(itm);
+                        }
+                    },
+                    {
+                        labelKey: "vendr_deleteVariant",
+                        icon: "trash",
+                        method: function () {
+                            vm.removeVariantRow(itm);
+                        }
+                    }
+                ];
+                Object.defineProperty(vm.rowActions[itm.key][0], "labelKey", {
+                    get: function () {
+                        return itm.config.isDefault ? "vendr_unsetDefaultVariant" : "vendr_setDefaultVariant"
+                    }
+                })
+            }
+            return vm.rowActions[itm.key];
+        };
+
+        var pickVariantAttributes = function (callback) {
+            productAttributePickerDialogOptions.config.storeId = vm.store.id;
+            productAttributePickerDialogOptions.config.multiValuePicker = true;
+            productAttributePickerDialogOptions.config.disablePreselected = true;
+            productAttributePickerDialogOptions.value = null;
+            productAttributePickerDialogOptions.onSubmit = callback;
+            editorService.open(productAttributePickerDialogOptions);
+        }
+
+        var getUniqueAttributeCombinations = function (model) {
+
+            // Convert selected value into format
+            // { attr_alias: [ val1_alias, val2_alias ] }
+            var src = model.map((a) => {
+                var r = {};
+                r[a.alias] = a.values.map((v) => v.alias);
+                return r;
+            });
+
+            // Calculate the unique combinations
+            return cartesian(src);
+        }
+
+        // We debounce syncUI as it's called within functions like addBlock
+        // which can get called many times in fast succession when adding
+        // multiple variant rows at once
+        var syncUI = _.debounce(function () {
+            $scope.$apply(function () {
+                syncTableUI();
+            });
+        }, 10);
+
+        var syncTableUI = function () {
+
+            //  Remove all attribute columns from table config
+            if (vm.options.itemProperties.length > 2) {
+                vm.options.itemProperties.splice(1, vm.options.itemProperties.length - 2);
+            }
+
+            // Add table coluns
+            var inUseAttrs = [];
+            var attrCount = 0;
+            vm.options.productAttributes.forEach((attr) => {
+                if (vm.layout.some((layout) => layout.config.attributes.hasOwnProperty(attr.alias))) {
+                    vm.options.itemProperties.splice(attrCount + 1, 0, {
+                        alias: attr.alias,
+                        header: attr.name,
+                        getter: function (layout) {
+                            return layout.config.attributes[attr.alias]
+                                ? vm.getProductAttributeValueName(attr.alias, layout.config.attributes[attr.alias])
+                                : "";
+                        },
+                        allowSorting: true,
+                        isSystem: false,
+                        template: '<div><span ng-if="model.config.attributes[\'' + attr.alias +'\']">{{ refScope.vm.getProductAttributeValueName(\'' + attr.alias + '\', model.config.attributes[\'' + attr.alias +'\']) }}<span></div>',
+                        refScope: $scope
+                    })
+                    inUseAttrs.push(attr);
+                    attrCount++;
+                }
+            });
+
+            // Now lets loop through the layouts and validate that each row has the same number of attributes
+            vm.layout.forEach((layout) => {
+                if (!inUseAttrs.every((attr) => layout.config.attributes.hasOwnProperty(attr.alias))) {
+                    layout.config.isValid = false;
+                } else {
+                    layout.config.isValid = true;
+                }
+            });
+
+            var filterConfigs = [];
+
+            inUseAttrs.forEach(attr => {
+
+                var filterConfig = {
+                    name: attr.name,
+                    alias: attr.alias,
+                    localStorageKey: 'node_' + currentOrParentNodeId + '_' + attr.alias + 'Filter',
+                    getFilterOptions: function () {
+                        var filterOptions = [];
+                        attr.values.forEach((val) => {
+
+                            var opt = {
+                                id: val.alias,
+                                name: val.name
+                            };
+
+                            Object.defineProperty(opt, "hidden", {
+                                get: function () {
+                                    return !vm.layout.some((layout) => {
+                                        return layout.config && layout.config.attributes
+                                            && layout.config.attributes[attr.alias]
+                                            && layout.config.attributes[attr.alias] === val.alias;
+                                    });
+                                }
+                            });
+
+                            filterOptions.push(opt);
+
+                        });
+
+                        return $q.resolve(filterOptions);
+                    }
+                };
+
+                Object.defineProperty(filterConfig, "value", {
+                    get: function () {
+                        return vendrLocalStorage.get(filterConfig.localStorageKey) || [];
+                    },
+                    set: function (value) {
+                        vendrLocalStorage.set(filterConfig.localStorageKey, value);
+                    }
+                });
+
+                filterConfigs.push(filterConfig);
+
+            });
+
+
+            vm.options.filters = filterConfigs;
+        }
+
+        var ensureCultureData = function (blockContent) {
+
+            if (!blockContent) return;
+
+            if (vm.editorState.umbVariantContent.editor.content.language) {
+                // set the scaffolded content's language to the language of the current editor
+                blockContent.language = vm.editorState.umbVariantContent.editor.content.language;
+            }
+
+            // currently we only ever deal with invariant content for blocks so there's only one
+            blockContent.variants[0].tabs.forEach(tab => {
+                tab.properties.forEach(prop => {
+                    // set the scaffolded property to the culture of the containing property
+                    prop.culture = vm.editorState.umbProperty.property.culture;
+                });
+            });
+
+        }
+
+        var getBlockObject = function (layoutEntry) {
+
+            var block = vm.modelObject.getBlockObject(layoutEntry);
+
+            if (block === null) return null;
+
+            ensureCultureData(block.content);
+
+            return block;
+
+        }
+
+        var editBlock = function (blockObject, blockIndex, parentForm, options) {
+
+            options = options || {};
+
+            // this must be set
+            if (blockIndex === undefined) {
+                throw "blockIndex was not specified on call to editBlock";
+            }
+
+            var content = Utilities.copy(blockObject.content);
+
+            if (options.config && options.config.attributes)
+            {
+                // Insert the variant configuration tab
+                content.variants[0].tabs.splice(0, 0, {
+                    id: -101,
+                    alias: "vendr-configuration",
+                    label: "Attributes",
+                    type: vendrUtils.isUmbracoV8() ? 0 : "Group",
+                    open: true,
+                    properties: Object.entries(options.config.attributes).map(entry => {
+                        var attr = vm.getProductAttribute(entry[0]);
+                        return {
+                            id: 0,
+                            alias: "vendr-variant-attribute-" + attr.alias,
+                            label: attr.name,
+                            value: vm.getProductAttributeValueName(entry[0], entry[1]),
+                            config: { valueType: 'string' },
+                            editor: "Umbraco.ReadOnlyValue",
+                            hideLabel: false,
+                            readonly: true,
+                            validation: { mandatory: false, mandatoryMessage: null, pattern: null, patternMessage: null },
+                            view: "readonlyvalue",
+                        }
+                    })
+                });
+            }
+
+            var blockEditorModel = {
+                $parentScope: $scope, // pass in a $parentScope, this maintains the scope inheritance in infinite editing
+                $parentForm: parentForm || vm.editorState.propertyForm, // pass in a $parentForm, this maintains the FormController hierarchy with the infinite editing view (if it contains a form)
+                createFlow: options.createFlow === true,
+                title: options.createFlow == true ? "Create Variant" : "Edit Variant " + blockObject.label,
+                content: content,
+                view: "views/common/infiniteeditors/blockeditor/blockeditor.html",
+                size: blockObject.config.editorSize || "medium",
+                vendrVariantEditor: true,
+                submit: function (blockEditorModel) {
+
+                    // If the first tab is the configuration tab, remove it before processing
+                    if (blockEditorModel.content.variants[0].tabs[0].alias === "vendr-configuration")
+                        blockEditorModel.content.variants[0].tabs.splice(0, 1);
+
+                    // Copy values back to block
+                    blockObject.retrieveValuesFrom(blockEditorModel.content);
+
+                    editorService.close();
+                },
+                close: function (blockEditorModel) {
+                    if (blockEditorModel.createFlow) {
+                        deleteBlock(blockObject);
+                    }
+                    editorService.close();
+                }
+            };
+
+            // open property editor
+            editorService.open(blockEditorModel);
+        }
+
+        var deleteBlock = function (blockObject) {
+
+            var layoutIndex = vm.layout.findIndex(entry => entry.contentUdi === blockObject.layout.contentUdi);
+            if (layoutIndex === -1) {
+                throw new Error("Could not find layout entry of block with udi: " + blockObject.layout.contentUdi)
+            }
+
+            // setDirty();
+
+            var removed = vm.layout.splice(layoutIndex, 1);
+
+            //removed.forEach(x => {
+            //    // remove any server validation errors associated
+            //    var guids = [udiService.getKey(x.contentUdi), (x.settingsUdi ? udiService.getKey(x.settingsUdi) : null)];
+            //    guids.forEach(guid => {
+            //        if (guid) {
+            //            serverValidationManager.removePropertyError(guid, vm.umbProperty.property.culture, vm.umbProperty.property.segment, "", { matchType: "contains" });
+            //        }
+            //    })
+            //});
+
+            vm.modelObject.removeDataAndDestroyModel(blockObject);
+
+            syncUI();
+        }
+
+        var addBlock = function (config, index) {
+
+            // create layout entry. (not added to property model yet.)
+            var layoutEntry = vm.modelObject.create(vm.model.config.variantElementType);
+            if (layoutEntry === null) {
+                return false;
+            }
+
+            // add the config to the layout entry
+            layoutEntry.config = config;
+
+            // make block model
+            var blockObject = getBlockObject(layoutEntry);
+            if (blockObject === null) {
+                return false;
+            }
+
+            // If we reach this line, we are good to add the layoutEntry and blockObject to our models.
+            initLayoutEntry(layoutEntry, blockObject);
+
+            // add layout entry at the decired location in layout.
+            vm.layout.splice(index || vm.layout.length, 0, layoutEntry);
+
+            syncUI();
+
+            return true;
+        }
+
+        var initLayoutEntry = function (layout, blockObject) {
+
+            layout.$block = blockObject;
+
+            // Define a key for table bulk actions
+            Object.defineProperty(layout, "id", {
+                get: function () {
+                    return blockObject.key;
+                }
+            });
+            Object.defineProperty(layout, "key", {
+                get: function () {
+                    return blockObject.key;
+                }
+            });
+            Object.defineProperty(layout, "icon", {
+                get: function () {
+                    return layout.config && layout.config.isValid
+                        ? layout.config.isDefault ? 'icon-rate color-green' : 'icon-barcode color-blue'
+                        : 'icon-block color-red';
+                }
+            });
+
+        }
+
+        vm.canEditCulture = function () {
+            var content = $scope.variantContent || $scope.content;
+            var contentLanguage = content.language;
+            var canEditCulture = !contentLanguage || !vm.editorState ||
+                // If the property culture equals the content culture it can be edited
+                vm.editorState.culture === contentLanguage.culture ||
+                // A culture-invariant property can only be edited by the default language variant
+                (vm.editorState.culture == null && contentLanguage.isDefault);
+
+            return canEditCulture;
+        }
+
+        vm.getProductAttribute = function (attributeAlias) {
+            return vm.options.productAttributesLookup.hasOwnProperty(attributeAlias)
+                ? vm.options.productAttributesLookup[attributeAlias]
+                : null;
+        }
+
+        vm.getProductAttributeValue = function (attributeAlias, valueAlias) {
+            var attr = vm.getProductAttribute(attributeAlias);
+            if (!attr) return null;
+            return attr.valuesLookup.hasOwnProperty(valueAlias)
+                ? attr.valuesLookup[valueAlias]
+                : null;
+        }
+
+        vm.getProductAttributeName = function (attributeAlias) {
+            return vm.getProductAttribute(attributeAlias).name;
+        }
+
+        vm.getProductAttributeValueName = function (attributeAlias, valueAlias) {
+            return vm.getProductAttributeValue(attributeAlias, valueAlias).name;
+        }
+
+        vm.getProperty = function (blockContent, alias) {
+            return blockContent.variants[0].tabs.reduce((prev, curr) => {
+                return prev || curr.properties.find(prop => prop.alias === alias);
+            }, undefined);
+        };
+
+        vm.getPropertyValue = function (blockContent, alias) {
+            var p = vm.getProperty(blockContent, alias)
+            return p ? p.value : "";
+        };
+
+        vm.editVariantRow = function (layoutEntry, idx) {
+            editBlock(layoutEntry.$block, idx, null, {
+                config: layoutEntry.config
+            })
+        }
+
+        vm.removeVariantRow = function (layout, $event) {
+            if ($event) {
+                $event.stopPropagation();
+                $event.preventDefault();
+            }
+            deleteBlock(layout.$block);
+        }
+
+        vm.configureVariantRow = function (layout, $event) {
+            if ($event) {
+                $event.stopPropagation();
+                $event.preventDefault();
+            }
+            productAttributePickerDialogOptions.config.storeId = vm.store.id;
+            productAttributePickerDialogOptions.config.multiValuePicker = false;
+            productAttributePickerDialogOptions.config.disablePreselected = false;
+            if (layout.config && layout.config.attributes) {
+                productAttributePickerDialogOptions.value = Object.entries(layout.config.attributes).map(function (itm) {
+                    return {
+                        alias: itm[0],
+                        values: [{ alias: itm[1] }]
+                    }
+                });
+            } else {
+                productAttributePickerDialogOptions.value = null;
+            }
+            
+            productAttributePickerDialogOptions.onSubmit = function (model) {
+
+                // Calculate target attributes config object
+                var targetAttrObj = model.reduce((obj, attr) => {
+                    obj[attr.alias] = attr.values[0].alias;
+                    return obj;
+                }, {});
+                var targetAttrObjStrArr = Object.entries(targetAttrObj).map((itm) => {
+                    return itm[0] + ":" + itm[1];
+                });
+
+                // Validate there isn't already a variant row with that config
+                var found = vm.layout.find((itm) => {
+
+                    if (!itm.config || !itm.config.attributes)
+                        return false;
+
+                    var srcAttrObjStrArr = Object.entries(itm.config.attributes).map((itm) => {
+                        return itm[0] + ":" + itm[1];
+                    });
+
+                    return srcAttrObjStrArr.length == targetAttrObjStrArr.length
+                        && srcAttrObjStrArr.every((entry) => {
+                            return targetAttrObjStrArr.indexOf(entry) !== -1;
+                        });
+                })
+
+                if (found && found.contentUdi !== layout.contentUdi) {
+                    notificationsService.error("Could not update variant configuration", "A variant with that configuration already exists");
+                    return;
+                }
+
+                // Update layout config
+                if (!layout.config) layout.config = {};
+                layout.config.attributes = targetAttrObj;
+
+                syncUI();
+            };
+            editorService.open(productAttributePickerDialogOptions);
+        }
+
+        vm.toggleDefaultVariantRow = function (model, $event) {
+            if ($event) {
+                $event.stopPropagation();
+                $event.preventDefault();
+            }
+            vm.layout.forEach(layout => {
+                if (layout.key === model.key) {
+                    layout.config.isDefault = !layout.config.isDefault;
+                } else {
+                    layout.config.isDefault = false;
+                }
+            });
+        }
+
+        vm.filterVariantRow = function (item, filters) {
+            var result = true;
+
+            if (filters) {
+                filters.filter(f => f.value.length > 0).forEach((filter) => {
+                    result &= filter.value.some(val => item.config
+                            && item.config.attributes
+                            && item.config.attributes.hasOwnProperty(filter.alias)
+                            && item.config.attributes[filter.alias] === val);
+                });
+            }
+
+            return result;
+        }
+
+        vm.syncModelToPropEditor = function () {
+            if (!vm.loading) {
+
+                // Copy the local model to the editor model
+                vm.editorState.model.value = angular.copy(vm.model.value);
+
+                // Remove any properties we don't want persisting
+                vm.editorState.model.value.layout['Vendr.VariantsEditor'].forEach(layout => {
+
+                    delete layout.$block;
+                    delete layout.id;
+                    delete layout.key;
+                    delete layout.icon;
+                    delete layout.selected;
+
+                    if (layout.config)
+                        delete layout.config.isValid;
+
+                });
+
+                // We don't have settings data, so no point persisting an empty array
+                delete vm.editorState.model.value.settingsData;
+
+            }
+        }
+
+        vm.ready = function () {
+
+            vm.layout = vm.modelObject.getLayout([]);
+
+            var invalidLayoutEntries = [];
+
+            // Append $block to layouts
+            vm.layout.forEach(layoutEntry => {
+
+                // $block must have the data property to be a valid BlockObject, if not its considered as a destroyed blockObject.
+                if (layoutEntry.$block === undefined || layoutEntry.$block === null || layoutEntry.$block.data === undefined)
+                {
+                    var block = getBlockObject(layoutEntry);
+
+                    // If this entry was not supported by our property-editor it would return 'null'.
+                    if (block !== null)
+                    {
+                        initLayoutEntry(layoutEntry, block);
+                    }
+                    else
+                    {
+                        // then we need to filter this out and also update the underlying model. This could happen if the data
+                        // is invalid for some reason or the data structure has changed.
+                        invalidLayoutEntries.push(layoutEntry);
+                    }
+                }
+
+            });
+
+            // remove the layout entries that are invalid
+            invalidLayoutEntries.forEach(layoutEntry => {
+                var index = vm.layout.findIndex(x => x === layoutEntry);
+                if (index >= 0) {
+                    vm.layout.splice(index, 1);
+                }
+            });
+
+            syncUI();
+
+            vm.loading = false;
+        }
+
+        vm.doInit = function () {
+
+            // We clone the editor state model as we only want to sync
+            // back an exact value. We'll process the local state and
+            // reformat it in formSubmitting handler
+            vm.model = angular.copy(vm.editorState.model);
+
+            // Get the current store
+            vendrRouteCache.getOrFetch("currentStore", function () {
+                return vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId);
+            })
+            .then(function (store) {
+
+                vm.store = store;
+
+                // Get all product attributes 
+                // (we'll need them to popluate attribute names, but might aswell reuse them in create dialog too)
+                vendrRouteCache.getOrFetch("store_" + store.id +"_productAttributes", function () {
+                    return vendrProductAttributeResource.getProductAttributesWithValues(store.id);
+                })
+                .then(function (productAttributes) {
+
+                    vm.options.productAttributes = productAttributes;
+                    vm.options.productAttributesLookup = productAttributes.reduce((a, c) => {
+                        a[c.alias] = c;
+                        c.valuesLookup = c.values.reduce((a2, c2) => {
+                            a2[c2.alias] = c2;
+                            return a2;
+                        }, {})
+                        return a;
+                    }, {});
+
+                    // Init model
+                    if (vm.model.config.variantElementType) {
+
+                        // Construct a block list modelObject so we can fake being a block list prop editor
+                        // We don't have fancy block configurations so we fake a single entry array and 
+                        // set it's contentElementTypeKey to our configured variants element type key.
+                        vm.modelObject = blockEditorService.createModelObject(vm.model.value,
+                            vm.model.editor,
+                            [{
+                                label: "{{sku}}",
+                                contentElementTypeKey: vm.model.config.variantElementType,
+                                settingsElementTypeKey: null // We don't use a settings element type
+                            }],
+                            vm.editorState.scopeOfExistence,
+                            vm.editorState.scope);
+
+                        vm.modelObject.load().then(function () {
+                            vm.ready();
+                        });
+
+                    }
+
+                });
+            });
+
+        }
+
+        vm.init = function () {
+
+            vm.editorState = vendrVariantsEditorState.getCurrent();
+
+            if (vm.editorState) {
+                vm.doInit();
+            }
+
+            var evt1 = eventsService.on("variantsEditorState.changed", function (e, args) {
+                vm.editorState = args.state;
+                vm.doInit();
+            });
+
+            var evt2 = eventsService.on("variantsEditor.modelValueChanged", function (e, args) {
+                vm.model = angular.copy(vm.editorState.model);
+                vm.modelObject.update(vm.model.value, $scope);
+                vm.ready();
+            });
+
+            subs.push(function () {
+                eventsService.unsubscribe(evt1);
+                eventsService.unsubscribe(evt2);
+            });
+
+        }
+
+        var cultureChanged = eventsService.on('editors.content.cultureChanged', (name, args) => vm.syncModelToPropEditor());
+        subs.push(function () {
+            eventsService.unsubscribe(cultureChanged);
+        });
+
+        subs.push($scope.$on("formSubmitting", function (ev, args) {
+            vm.syncModelToPropEditor();
+        }));
+
+        // TODO: Listen for variantsEditor.modelValueChanged for changes to the model on the server
+
+        $scope.$on('$destroy', function () {
+            subs.forEach(u => u());
+        });
+
+        vm.init();
+
+        // --- Helpers ---
+
+        var partition = function (array, isValid) {
+            return array.reduce(([pass, fail], elem) => {
+                return isValid(elem) ? [[...pass, elem], fail] : [pass, [...fail, elem]];
+            }, [[], []]);
+        }
+
+        var cartesian = function (arr) {
+            function c(part, idx) {
+                var k = Object.keys(arr[idx])[0];
+                arr[idx][k].forEach((a) => {
+                    var p = Object.assign({}, part, { [k]: a });
+                    if (idx + 1 === arr.length) {
+                        r.push(p);
+                        return;
+                    }
+                    c(p, idx + 1);
+                });
+            }
+
+            var r = [];
+            c({}, 0);
+            return r;
+        }
+
+    };
+
+    angular.module('vendr').controller('Vendr.Controllers.VariantsAppController', VariantsAppController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function AddProductDialogController($scope, $location, $q, editorService, vendrProductResource)
+    {
+        var vm = this;
+
+        vm.loading = true;
+        vm.title = "Add a Product";
+
+        vm.filter = {
+            enabled: true,
+            term: '',
+            prevTerm: '',
+            hasFilter: false
+        };
+        
+        vm.filters = [];
+        
+        var emptyPagedResult = {
+            items: [],
+            pageNumber: 1,
+            pageSize: 10,
+            totalItem: 0,
+            totalPages: 1
+        };
+
+        vm.parentProduct = null;
+        vm.selectedProduct = null;
+        vm.products = angular.copy(emptyPagedResult);
+        vm.variantAttributes = [];
+        vm.variants = angular.copy(emptyPagedResult);
+
+        vm.applySearchFilter = function () {
+            if (!vm.parentProduct) {
+                vm.loadProducts();
+            } else {
+                vm.loadProductVariants();
+            }
+        }
+
+        vm.loadProducts = function () {
+            vm.products = angular.copy(emptyPagedResult);
+            if (vm.filter.term.length > 0)
+            {
+                vm.filter.hasFilter = true;
+                vm.loading = true;
+                vendrProductResource.searchProductSummaries($scope.model.config.storeId, $scope.model.config.languageIsoCode, vm.filter.term, {
+                    itemsPerPage: 10
+                }).then(function (data) {
+                    const productReferences = data.items.map(item => {
+                        return {  productReference: item.reference }
+                    });
+                    vendrProductResource.getAllStock($scope.model.config.storeId, productReferences).then(function(data2) {
+                       data.items.forEach(itm => {
+                          itm.stockLevel = data2.find(s => s.productReference === itm.reference).stockLevel; 
+                          itm.price = 'Unpriced';
+                          if (itm.prices && itm.prices.length) {
+                              let price = itm.prices.find(p => p.currencyId === $scope.model.config.currencyId);
+                              if (price) 
+                                  itm.price = price.valueFormatted;
+                          }
+                       });
+                       vm.products = data;
+                       vm.loading = false;
+                    });
+                });
+            }
+            else
+            {
+                vm.filter.hasFilter = false;
+            }
+        };
+
+        vm.loadVariantAttributes = function () {
+            vm.variants = angular.copy(emptyPagedResult);
+            vm.variantAttributes = [];
+            vm.filters = [];
+            
+            if (vm.parentProduct) {
+                vm.loading = true;
+                vendrProductResource.getProductVariantAttributes($scope.model.config.storeId, vm.parentProduct.reference, $scope.model.config.languageIsoCode).then(function (data) {
+
+                    data.forEach(itm => {
+                        // TODO: Track selected?
+                    })
+                    
+                    vm.variantAttributes = data;
+                    
+                    vm.filters = data.map(itm => {
+                        return {
+                            name: itm.name,
+                            alias: itm.alias,
+                            value: [],
+                            getFilterOptions: function () {
+                                return $q.resolve(itm.values.map(v => {
+                                    return {
+                                        id: v.alias,
+                                        name: v.name
+                                    }
+                                }));
+                            }
+                        }
+                    });
+
+                    vm.loading = false;
+                });
+            }
+        }
+
+        vm.loadProductVariants = function () {
+            vm.variants = angular.copy(emptyPagedResult);
+
+            const attributes = vm.filters.flatMap(f => {
+                return f.value.map(fv => {
+                    return f.alias + ":" + fv;
+                });
+            });
+            
+            if (vm.filter.term.length > 0 || attributes.length > 0)
+            {
+                vm.filter.hasFilter = true;
+                vm.loading = true;
+                
+                vendrProductResource.searchProductVariantSummaries($scope.model.config.storeId, vm.parentProduct.reference, $scope.model.config.languageIsoCode, vm.filter.term, attributes, {
+                    itemsPerPage: 10
+                }).then(function (data) {
+                    const productReferences = data.items.map(item => {
+                        return { productReference: vm.parentProduct.reference, productVariantReference: item.reference }
+                    });
+                    vendrProductResource.getAllStock($scope.model.config.storeId, productReferences).then(function(data2) {
+                        data.items.forEach(itm => {
+                            itm.stockLevel = data2.find(s => s.productVariantReference === itm.reference).stockLevel;
+                            itm.price = 'Unpriced';
+                            if (itm.prices && itm.prices.length) {
+                                let price = itm.prices.find(p => p.currencyId === $scope.model.config.currencyId);
+                                if (price)
+                                    itm.price = price.valueFormatted;
+                            }
+                        });
+                        vm.variants = data;
+                        vm.loading = false;
+                    });
+                });
+            }
+            else
+            {
+                vm.filter.hasFilter = false;
+            }
+        };
+
+        vm.selectItem = function (itm) {
+            if (itm.hasVariants) {
+                vm.parentProduct = itm;
+                vm.selectedProduct = null;
+                vm.filter.prevTerm = vm.filter.term;
+                vm.filter.term = '';
+                vm.filter.hasFilter = false;
+                vm.loadVariantAttributes();
+            } else {
+                vm.selectedProduct = itm;
+            }
+        }
+
+        vm.back = function () {
+            vm.parentProduct = null;
+            vm.selectedProduct = null;
+            vm.filter.term = vm.filter.prevTerm;
+            vm.filter.prevTerm = '';
+            vm.loadProducts();
+        }
+
+        vm.submit = function () {
+            if ($scope.model.submit) {
+                $scope.model.submit(vm.parentProduct
+                ? { productReference: vm.parentProduct.reference, productVariantReference: vm.selectedProduct.reference }
+                : { productReference: vm.selectedProduct.reference });
+            }
+        }
+        
+        vm.close = function() {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.AddProductDialogController', AddProductDialogController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function CustomerInfoDialogController($scope, $location, editorService, vendrOrderResource)
+    {
+        var vm = this;
+
+        vm.loading = true;
+        vm.title = "Customer Info";
+        vm.registeredCustomer = {
+            properties: [],
+            isUmbracoMember: false
+        };
+        vm.orderHistory = [];
+
+        vm.openMember = function (memberKey) {
+            editorService.memberEditor({
+                id: memberKey,
+                submit: function (model) {
+                    vendrOrderResource.getOrderRegisteredCustomerInfo($scope.model.config.orderId).then(function (data) {
+                        vm.registeredCustomer = data;
+                        editorService.close();
+                    });
+                },
+                close: function () {
+                    editorService.close();
+                }
+            });
+        }
+
+        vm.openOrder = function (order) {
+            if (order.id === $scope.model.config.orderId) {
+                vm.close();
+            } else {
+                editorService.open({
+                    view: '/App_Plugins/Vendr/backoffice/views/order/edit.html',
+                    infiniteMode: true,
+                    config: {
+                        storeId: order.storeId,
+                        orderId: order.id
+                    },
+                    submit: function (model) {
+                        editorService.close();
+                    },
+                    close: function () {
+                        editorService.close();
+                    }
+                });
+            }
+        }
+
+        vendrOrderResource.getOrderRegisteredCustomerInfo($scope.model.config.orderId).then(function (data) {
+            vm.registeredCustomer = data;
+            vendrOrderResource.getOrderHistoryByOrder($scope.model.config.orderId).then(function (data) {
+                vm.orderHistory = data;
+                vm.loading = false;
+            });
+        });
+
+        vm.close = function() {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.CustomerInfoDialogController', CustomerInfoDialogController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function EditCustomerDetailsController($scope, vendrOrderResource,
+        vendrCountryResource, vendrRouteCache)
+    {
+        var order = $scope.model.config.order;
+
+        var vm = this;
+        vm.title = "Edit Customer Details";
+        vm.editorConfig = $scope.model.config.editorConfig;
+        vm.content = {
+            customerFirstName: order.customerFirstName,
+            customerLastName: order.customerLastName,
+            customerEmail: order.customerEmail,
+            paymentCountryId: order.paymentCountryId,
+            paymentCountry: order.paymentCountry,
+            paymentRegionId: order.paymentRegionId,
+            paymentRegion: order.paymentRegion,
+            shippingCountryId: order.shippingCountryId,
+            shippingCountry: order.shippingCountry,
+            shippingRegionId: order.shippingRegionId,
+            shippingRegion: order.shippingRegion,
+            properties: {}
+        };
+
+        ensureProperties(vm.editorConfig.customer);
+        ensureProperties(vm.editorConfig.billing);
+        ensureProperties(vm.editorConfig.shipping);
+
+        vm.options = {
+            countries: [],
+            countryRegionMap: {},
+            shippingSameAsBilling: vm.editorConfig.shipping.sameAsBilling && vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value == vm.editorConfig.shipping.sameAsBilling.trueValue
+        };
+
+        vm.toggleShippingSameAsBilling = function () 
+        {
+            if (vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value == vm.editorConfig.shipping.sameAsBilling.trueValue) {
+                vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value = vm.editorConfig.shipping.sameAsBilling.falseValue;
+            } else {
+                vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value = vm.editorConfig.shipping.sameAsBilling.trueValue;
+            }
+            vm.options.shippingSameAsBilling = vm.content.properties[vm.editorConfig.shipping.sameAsBilling.alias].value == vm.editorConfig.shipping.sameAsBilling.trueValue;
+        };
+
+        vm.clearPaymentRegion = function () {
+            vm.content.paymentRegionId = undefined;    
+        }
+
+        vm.clearShippingRegion = function () {
+            vm.content.shippingRegionId = undefined;
+        }
+        
+        vm.save = function () {
+            if ($scope.model.submit) {
+                
+                if (vm.options.shippingSameAsBilling) 
+                {
+                    vm.content.shippingCountryId = vm.content.paymentCountryId;
+                    vm.content.shippingRegionId = vm.content.paymentRegionId;
+
+                    copyProperty(vm.editorConfig.shipping.firstName, vm.content.customerFirstName);
+                    copyProperty(vm.editorConfig.shipping.lastName, vm.content.customerLastName);
+                    copyProperty(vm.editorConfig.shipping.company, vm.editorConfig.customer.company);
+                    copyProperty(vm.editorConfig.shipping.email, vm.content.customerEmail);
+                    copyProperty(vm.editorConfig.shipping.addressLine1, vm.editorConfig.billing.addressLine1);
+                    copyProperty(vm.editorConfig.shipping.addressLine2, vm.editorConfig.billing.addressLine2);
+                    copyProperty(vm.editorConfig.shipping.city, vm.editorConfig.billing.city);
+                    copyProperty(vm.editorConfig.shipping.zipCode, vm.editorConfig.billing.zipCode);
+                    copyProperty(vm.editorConfig.shipping.telephone, vm.editorConfig.billing.telephone);
+                }
+
+                // Pass the country / region entities for easier UI updating
+                vm.content.paymentCountry = vm.options.countries.find(x => x.id === vm.content.paymentCountryId);
+                vm.content.paymentRegion = vm.content.paymentCountry && vm.content.paymentRegionId ? vm.content.paymentCountry.regions.find(x => x.id === vm.content.paymentRegionId) : null;
+                vm.content.shippingCountry = vm.options.countries.find(x => x.id === vm.content.shippingCountryId);
+                vm.content.shippingRegion = vm.content.shippingCountry && vm.content.shippingRegionId ? vm.content.shippingCountry.regions.find(x => x.id === vm.content.shippingRegionId) : null;
+
+                $scope.model.submit(vm.content);
+            }
+        };
+
+        vm.cancel = function() {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
+        
+        vendrRouteCache.getOrFetch("countriesWithRegions", function () {
+            return vendrCountryResource.getCountriesWithRegions($scope.model.config.storeId);
+        })
+        .then(function (countries) {
+            vm.options.countries = countries;
+            countries.forEach(country => {
+                vm.options.countryRegionMap[country.id] = country.regions;    
+            });
+        });
+
+        function ensureProperties (cfg) {
+            for (const prop in cfg) {
+                var alias = cfg[prop].alias;
+                vm.content.properties[alias] = order.properties[alias] || { value: "", isReadOnly: false, isServerSideOnly: false };
+            }
+        }
+        
+        function copyProperty(target, src) 
+        {
+             if (!target)
+                 return;
+
+             if (!src) {
+                 vm.content.properties[target.alias].value = "";
+             } else {
+                 vm.content.properties[target.alias].value = (typeof src === 'string' ? src : vm.content.properties[src.alias].value);
+             }
+        }
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.EditCustomerDetailsController', EditCustomerDetailsController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function EditPropertiesController($scope)
+    {
+        var order = $scope.model.config.order;
+        var orderLine = $scope.model.config.orderLine;
+        var content = orderLine || order;
+
+        var vm = this;
+        vm.title = "Edit Properties";
+        vm.editorConfig = $scope.model.config.editorConfig;
+        vm.content = {
+            properties: []
+        };
+
+        mapProperties(vm.editorConfig.properties);
+        
+        vm.save = function () {
+            if ($scope.model.submit) {
+                $scope.model.submit(vm.content);
+            }
+        };
+
+        vm.cancel = function() {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
+
+        function mapProperties (cfg) {
+            for (const cfgKey in cfg) {
+
+                var alias = cfg[cfgKey].alias;
+
+                var prop = content.properties[alias] || { value: "", isReadOnly: false, isServerSideOnly: false };
+
+                var property = {
+                    alias: alias,
+                    label: cfg[cfgKey].label || alias,
+                    description: cfg[cfgKey].description,
+                    config: cfg[cfgKey].config || {},
+                    view: cfg[cfgKey].view || 'textbox',
+
+                    value: prop.value,
+                    isReadOnly: prop.isReadOnly,
+                    isServerSideOnly: prop.isServerSideOnly
+                };
+
+                // Push some additional config into the property config
+                property.config.storeId = $scope.model.config.storeId;
+                property.config.orderId = $scope.model.config.orderId;
+                property.config.orderLineId = $scope.model.config.orderLineId;
+
+                if (prop.isReadOnly || cfg[cfgKey].isReadOnly) { // isServerSideOnly?
+                    property.view = "readonlyvalue";
+                }
+
+                if (property.view === 'dropdown') {
+                    property.view = '/App_Plugins/Vendr/backoffice/views/propertyeditors/dropdown/dropdown.html';
+                }
+
+                vm.content.properties.push(property);
+            }
+        }
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.EditPropertiesController', EditPropertiesController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function TransactionInfoDialogController($scope, vendrOrderResource)
+    {
+        var vm = this;
+
+        vm.title = "Transaction Info";
+        vm.properties = [];
+
+        vendrOrderResource.getOrderTransactionInfo($scope.model.config.orderId).then(function (data) {
+            vm.properties = data;
+        });
+
+        vm.close = function() {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.TransactionInfoDialogController', TransactionInfoDialogController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function ElementTypePickerController($scope, editorService , elementTypeResource) {
+
+        var vm = this;
+
+        var dialogOptions = {
+            view: '/App_Plugins/Vendr/backoffice/views/dialogs/elementtypepicker.html',
+            size: 'small',
+            submit: function (model) {
+                vm.model.value = model.id;
+                vm.pickedItem = model;
+                editorService.close();
+            },
+            close: function () {
+                editorService.close();
+            }
+        };
+
+        var vm = this;
+
+        vm.model = $scope.model;
+        vm.pickedItem = false;
+
+        if (vm.model.value) {
+            elementTypeResource.getAll().then(function (elementTypes) {
+                var elementType = elementTypes.find(function (itm) {
+                    return itm.key === vm.model.value;
+                });
+                if (elementType) {
+                    vm.pickedItem = {
+                        id: elementType.key,
+                        name: elementType.name,
+                        icon: elementType.icon
+                    };
+                }
+            });
+        }
+
+        vm.openPicker = function () {
+            editorService.open(dialogOptions);
+        };
+
+        vm.removeItem = function () {
+            vm.model.value = null;
+            vm.pickedItem = false;
+        };
+
+        vm.openItem = function () {
+
+        };
+
+
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.ElementTypePickerController', ElementTypePickerController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function StoreConfigController($scope) {
+
+        var vm = this;
+
+        vm.storePickerProperty = {
+            alias: "storeId",
+            view: '/App_Plugins/Vendr/backoffice/views/propertyeditors/storepicker/storepicker.html'
+        };
+
+        Object.defineProperty(vm.storePickerProperty, "value", {
+            get: () => vm.model.value.storeId,
+            set: (value) => vm.model.value.storeId = value
+        });
+
+        vm.model = $scope.model;
+        vm.model.value = vm.model.value || {
+            storeMode: 'Search',
+            storeId: undefined
+        };
+
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.StoreConfigController', StoreConfigController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function ConditionalInputController($scope, $timeout)
+    {
+        var vm = this;
+
+        vm.property = {
+            alias: $scope.model.alias + "_conitional",
+            view: $scope.model.config.propertyView,
+            config: $scope.model.config.propertyConfig
+        };
+
+        Object.defineProperty(vm.property, "value", {
+            get: function () {
+                return $scope.model.value;
+            },
+            set: function (value) {
+                $scope.model.value = value;
+                toggleProperties();
+            }
+        });
+
+        function toggleProperties()
+        {
+            if ($scope.model.value in $scope.model.config.map) {
+                doToggleProperties($scope.model.config.map[$scope.model.value]);
+            }
+            else if ("default" in $scope.model.config.map) {
+                doToggleProperties($scope.model.config.map["default"]);
+            }
+        }
+
+        function doToggleProperties(config) {
+
+            var $inputEl = $("[data-element='property-" + $scope.model.alias + "']");
+            var form = $inputEl.closest("form");
+
+            var hiddenContainer = $(form).find("> .cih");
+            if (hiddenContainer.length === 0) {
+                $(form).append("<div class='cih' style='display: none;'></div>");
+                hiddenContainer = $(form).find("> .cih");
+            }
+
+            config.show.forEach(function (toShow) {
+                var $s = $("[data-element='property-" + toShow + "']");
+                if ($s.closest(".cih").length > 0) {
+                    $(form).find(".property-" + toShow + "-placeholder").after($s);
+                    $(form).find(".property-" + toShow + "-placeholder").remove();
+                }
+            });
+
+            config.hide.forEach(function (toHide) {
+                var $s = $("[data-element='property-" + toHide + "']");
+                if ($s.closest(".cih").length === 0) {
+                    $s.after("<span class='property-" + toHide + "-placeholder'></span>");
+                    hiddenContainer.append($s);
+                }
+            });
+
+        }
+
+        $timeout(function () {
+            toggleProperties();
+        }, 10);
+        
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.ConditionalInputController', ConditionalInputController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function DictionaryInputController($scope) {
+
+        var vm = this;
+        
+        vm.model = $scope.model;
+        
+        vm.generateKey = function () {
+            return ($scope.model.config.keyPrefix + "_" + $scope.model.alias).toLowerCase();
+        };
+
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.DictionaryInputController', DictionaryInputController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function PriceController($scope, $routeParams, vendrStoreResource,
+        vendrCurrencyResource, vendrUtils, vendrRouteCache)
+    {
+        // Figure out if we are in a config area or in settings where we can
+        // parse the store ID from the querystring
+        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
+        var storeId = compositeId.length > 1 ? compositeId[0] : null;
+        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[0];
+
+        var isDocTypeEditorPreview = $routeParams.section == "settings" && $routeParams.tree == "documentTypes";
+
+        var vm = this;
+
+        vm.model = $scope.model;
+
+        vm.loading = true;
+        vm.store = null;
+        vm.prices = null;
+        vm.options = {
+            fraction: $scope.model.config?.fraction || 2
+        }
+
+        var initStore = function (store, value) {
+            if (store) {
+                vm.store = store;
+                vendrRouteCache.getOrFetch("store_"+ store.id +"_currencies", function () {
+                    return vendrCurrencyResource.getCurrencies(vm.store.id);
+                })
+                .then(function (currencies) {
+                    var prices = [];
+                    currencies.forEach(function (currency) {
+                        prices.push({
+                            currencyId: currency.id,
+                            currencyCode: currency.code,
+                            value: value && value[currency.id] != undefined ? value[currency.id] : ''
+                        });
+                    });
+                    vm.prices = prices;
+                    vm.loading = false;
+                });
+            } else {
+                vm.store = null;
+                vm.prices = null;
+                vm.loading = false;
+            }
+        };
+
+        var init = function (value) {
+
+            if (!isDocTypeEditorPreview) {
+                vendrRouteCache.getOrFetch("currentStore", function () {
+                    if (!storeId) {
+                        return vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId);
+                    } else {
+                        return vendrStoreResource.getBasicStore(storeId);
+                    }
+                })
+                .then(function (store) {
+                    initStore(store, value);
+                });
+            } else {
+                initStore(null, null);
+            }
+
+        };
+
+        // Here we declare a special method which will be called whenever the value has changed from the server
+        // this is instead of doing a watch on the model.value = faster
+        $scope.model.onValueChanged = function (newVal, oldVal) {
+            //console.log(newVal);
+        };
+        
+        var unsubscribe = [
+            $scope.$on("formSubmitting", function () {
+                if (!vm.loading && vm.store && vm.prices) {
+
+                    var value = {};
+
+                    vm.prices.forEach(function (price) {
+                        if (price.value !== "" && !isNaN(price.value)) {
+                            value[price.currencyId] = price.value;
+                        }
+                    });
+
+                    if (_.isEmpty(value))
+                        value = undefined;
+
+                    $scope.model.value = value;
+                }
+            }),
+            $scope.$on("formSubmitted", function () {
+                init($scope.model.value);
+            })
+        ];
+
+        // When the element is disposed we need to unsubscribe!
+        // NOTE: this is very important otherwise if this is part of a modal, the listener still exists because the dom
+        // element might still be there even after the modal has been hidden.
+        $scope.$on('$destroy', function () {
+            unsubscribe.forEach(function (u) {
+                u();
+            });
+        });
+
+        init($scope.model.value);
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.PriceController', PriceController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function PricesIncludeTaxController($scope, $routeParams, vendrStoreResource, vendrUtils, vendrRouteCache)
+    {
+        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
+        var storeId = compositeId.length > 1 ? compositeId[0] : null;
+
+        var vm = this;
+
+        vm.property = {
+            alias: $scope.model.alias + "_wrapped",
+            view: "boolean",
+            config: $scope.model.config
+        };
+
+        Object.defineProperty(vm.property, "value", {
+            get: function () {
+                return $scope.model.value;
+            },
+            set: function (value) {
+                $scope.model.value = value;
+            }
+        });
+
+        if ($scope.model.value == null && storeId) {
+            vendrRouteCache.getOrFetch("currentStore", () => vendrStoreResource.getBasicStore(storeId)).then(function (store) {
+                vm.property.value = store.pricesIncludeTax;
+            });
+        }
+
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.PricesIncludeTaxController', PricesIncludeTaxController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function StockController($scope, $locale, $routeParams, editorState, editorService, vendrUtils, vendrStoreResource, vendrProductResource, vendrRouteCache)
+    {
+        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
+        var storeId = compositeId.length > 1 ? compositeId[0] : null;
+        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[0];
+
+        var currentNode = editorState.getCurrent();
+        var productReference = currentNode.id > 0 ? currentNode.key : undefined;
+        var productVariantReference = undefined;
+
+        var isDocTypeEditorPreview = $routeParams.section == "settings" && $routeParams.tree == "documentTypes";
+
+        var vm = this;
+        vm.model = $scope.model;
+        vm.options = {
+            numberPattern: `^\-?[\\${$locale.NUMBER_FORMATS.GROUP_SEP}0-9]*$`
+        };
+
+        var fraction = $scope.model.config?.fraction || 6;
+        if (fraction > 0) {
+            vm.options.numberPattern = vm.options.numberPattern.substr(0, vm.options.numberPattern.length - 1)
+                + `(\\${($locale.NUMBER_FORMATS.DECIMAL_SEP)}[0-9]{0,${fraction}})?$`;
+        }
+
+        var vendrVariantEditor = editorService.getEditors().find(e => e.vendrVariantEditor);
+        if (vendrVariantEditor) {
+            productVariantReference = vendrVariantEditor.content.key;
+        }
+
+        // As multi variants can be loaded / unloaded within
+        // the same editing session, we have to check whether
+        // a stock level has been set previously that hasn't
+        // yet been persisted by saving the parent node. If this
+        // is the case then use this unpersisted value.
+        var hasUnpersistedValue = productVariantReference
+            && vm.model.value
+            && vm.model.value != -1
+            && vm.model.value != "-1";
+
+        vm.store = null;
+
+        // We don't use any stored stock value as we fetch it from
+        // the product service every time. 
+        // So we store a stock value in a seperate varaiable and 
+        // only submit it's value if it changes.
+        // We also set the stored model value to -1 initially 
+        // to ensure it's only handled in the backend
+        // if it's value is different.
+        vm.model.value = hasUnpersistedValue ? vm.model.value : -1;
+        vm.stockLevel = hasUnpersistedValue ? toUiCulture(vm.model.value) : 0;
+        vm.syncStockLevel = function () {
+            if (!vm.loading) {
+                vm.model.value = fromUiCulture(vm.stockLevel);
+            }
+        };
+        vm.unformatValue = function () {
+            vm.stockLevel = fromUiCulture(vm.stockLevel).toString().replaceAll('.', $locale.NUMBER_FORMATS.DECIMAL_SEP);
+        }
+        vm.reformatValue = function () {
+            vm.stockLevel = toUiCulture(fromUiCulture(vm.stockLevel));
+        }
+
+        vm.loading = true;
+
+        var initStore = function (store) {
+            if (store) {
+                vm.store = store;
+                if (productReference && !hasUnpersistedValue) {
+                    vendrProductResource.getStock(vm.store.id, productReference, productVariantReference).then(function (stock) {
+                        vm.stockLevel = toUiCulture(stock || 0);
+                        vm.loading = false;
+                    });
+                } else {
+                    vm.loading = false;
+                }
+            } else {
+                vm.store = null;
+                vm.loading = false;
+            }
+        };
+
+        var init = function () {
+            if (!isDocTypeEditorPreview) {
+                vendrRouteCache.getOrFetch("currentStore", function () {
+                    if (!storeId) {
+                        return vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId);
+                    } else {
+                        return vendrStoreResource.getBasicStore(storeId);
+                    }
+                })
+                .then(function (store) {
+                    initStore(store);
+                });
+            } else {
+                initStore(null, null);
+            }
+        };
+
+        init();
+
+        function toUiCulture(num) {
+            return num.toLocaleString($locale.id); // .replaceAll('.', $locale.NUMBER_FORMATS.DECIMAL_SEP).replaceAll(',', $locale.NUMBER_FORMATS.GROUP_SEP);
+        }
+
+        function fromUiCulture(num) {
+            return parseFloat(num.replaceAll($locale.NUMBER_FORMATS.GROUP_SEP, '').replaceAll($locale.NUMBER_FORMATS.DECIMAL_SEP, '.'));
+        }
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.StockController', StockController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function StoreEntityPickerController($scope, $routeParams, editorService,
+        vendrStoreResource, vendrEntityResource, vendrUtils, vendrRouteCache)
+    {
+        // Figure out if we are in a config area or in settings where we can
+        // parse the store ID from the querystring
+        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
+        var storeId = compositeId.length > 1 ? compositeId[0] : null;
+        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[0];
+        var entityType = $scope.model.config.entityType;
+        var storeConfig = $scope.model.config.storeConfig || { storeMode: 'Search' };
+
+        if (storeConfig.storeMode === 'All')
+            storeId = -1;
+
+        if (storeConfig.storeMode === 'Explicit')
+            storeId = storeConfig.storeId;
+
+        var dialogOptions = {
+            view: '/App_Plugins/Vendr/backoffice/views/dialogs/storeentitypicker.html',
+            size: 'small',
+            config: {
+                storeId: -1,
+                entityType: entityType
+            },
+            submit: function (model) {
+                if (model.store) {
+                    vm.store = model.store;
+                }
+                vm.model.value = model.id;
+                vm.pickedItem = model;
+                editorService.close();
+            },
+            close: function () {
+                editorService.close();
+            }
+        };
+
+        var vm = this;
+
+        vm.model = $scope.model;
+        vm.pickedItem = false;
+        vm.loading = true;
+        vm.store = null;
+        vm.showStoreInName = storeConfig.storeMode === 'All';
+
+        vm.openPicker = function () {
+            editorService.open(dialogOptions);
+        };
+
+        vm.removeItem = function () {
+            vm.model.value = null;
+            vm.pickedItem = false;
+        };
+
+        vm.openItem = function () {
+
+        };
+
+        var initStore = function (store, value) {
+            vm.store = store;
+            if (store && storeConfig.storeMode !== 'All') {
+                dialogOptions.config.storeId = store.id;
+            }
+            if (value) {
+                vendrEntityResource.getEntity(entityType, value).then(function (entity) {
+                    vm.pickedItem = entity;
+                    vm.loading = false;
+                });
+            } else {
+                vm.loading = false;
+            }
+        };
+
+        var init = function (value) {
+
+            if (!storeId) {
+                // Search for Store ID
+                vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId).then(function (store) {
+                    initStore(store, value);
+                });
+            } else if (storeId !== -1) {
+                // Explicit store
+                vendrStoreResource.getBasicStore(storeId).then(function (store) {
+                    initStore(store, value);
+                });
+            } else if (value) {
+                vendrEntityResource.getStoreByEntityId(entityType, value).then(function (store) {
+                    initStore(store, value);
+                });
+            } else {
+                // All store
+                initStore({ id: -1 }, value);
+            }
+
+        };
+
+        var unsubscribe = [
+            $scope.$on("formSubmitted", function () {
+                init($scope.model.value);
+            })
+        ];
+
+        // When the element is disposed we need to unsubscribe!
+        // NOTE: this is very important otherwise if this is part of a modal, the listener still exists because the dom
+        // element might still be there even after the modal has been hidden.
+        $scope.$on('$destroy', function () {
+            unsubscribe.forEach(function (u) {
+                u();
+            });
+        });
+
+        init(vm.model.value);
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.StoreEntityPickerController', StoreEntityPickerController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function StorePickerController($scope, editorService,
+        vendrStoreResource)
+    {
+        var dialogOptions = {
+            view: '/App_Plugins/Vendr/backoffice/views/dialogs/storepicker.html',
+            size: 'small',
+            submit: function (model) {
+                vm.model.value = model.id;
+                vm.pickedItem = model;
+                editorService.close();
+            },
+            close: function () {
+                editorService.close();
+            }
+        };
+
+        var vm = this;
+        
+        vm.model = $scope.model;
+        vm.pickedItem = false;
+
+        if (vm.model.value) {
+            vendrStoreResource.getBasicStore(vm.model.value).then(function (store) {
+                vm.pickedItem = store;
+            });
+        }
+
+        vm.openPicker = function () {
+            editorService.open(dialogOptions);
+        };
+
+        vm.removeItem = function () {
+            vm.model.value = null;
+            vm.pickedItem = false;
+        };
+
+        vm.openItem = function () {
+            
+        };
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.StorePickerController', StorePickerController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function TagsController($scope, $routeParams, vendrStoreResource,
+        vendrUtils, vendrRouteCache)
+    {        
+        // Figure out if we are in a config area or in settings where we can
+        // parse the store ID from the querystring
+        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
+        var storeId = compositeId.length > 1 || $routeParams.tree.indexOf("vendr") >= 0 ? compositeId[0] : null;
+        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[0];
+
+        var isDocTypeEditorPreview = $routeParams.section == "settings" && $routeParams.tree == "documentTypes";
+
+        var vm = this;
+        
+        vm.value = $scope.model.value 
+            ? $scope.model.value.split(',')
+            : [];
+
+        vm.valueChanged = function(value) {
+            $scope.model.value = value.join(",");
+        }
+        
+        var init = function () {
+            if (!isDocTypeEditorPreview) {
+                vendrRouteCache.getOrFetch("currentStore", function () {
+                    if (!storeId) {
+                        return vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId);
+                    } else {
+                        return vendrStoreResource.getBasicStore(storeId);
+                    }
+                })
+                .then(function (store) {
+                    vm.store = store;
+                });
+            }
+        };
+        
+        init();
+
+        var unsubscribe = [
+            $scope.$watch("model.value", function (newVal, oldVal) {
+                vm.value = newVal
+                    ? newVal.split(',')
+                    : [];
+            })
+        ];
+
+        // When the element is disposed we need to unsubscribe!
+        // NOTE: this is very important otherwise if this is part of a modal, the listener still exists because the dom
+        // element might still be there even after the modal has been hidden.
+        $scope.$on('$destroy', function () {
+            unsubscribe.forEach(function (u) {
+                u();
+            });
+        });
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.TagsController', TagsController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function TaxClassPickerController($scope, $routeParams, editorService,
+        vendrStoreResource, vendrTaxResource, vendrUtils)
+    {
+        // Figure out if we are in a config area or in settings where we can
+        // parse the store ID from the querystring
+        var compositeId = vendrUtils.parseCompositeId($routeParams.id);
+        var storeId = compositeId.length > 1 ? compositeId[0] : null;
+        var currentOrParentNodeId = compositeId.length > 1 ? compositeId[1] : compositeId[0];
+
+        var dialogOptions = {
+            view: '/App_Plugins/Vendr/backoffice/views/dialogs/taxclasspicker.html',
+            size: 'small',
+            config: {
+                storeId: -1
+            },
+            submit: function (model) {
+                vm.model.value = model.id;
+                vm.pickedItem = model;
+                editorService.close();
+            },
+            close: function () {
+                editorService.close();
+            }
+        };
+
+        var vm = this;
+
+        vm.model = $scope.model;
+        vm.pickedItem = false;
+        vm.loading = true;
+        vm.store = null;
+
+        vm.openPicker = function () {
+            editorService.open(dialogOptions);
+        };
+
+        vm.removeItem = function () {
+            vm.model.value = null;
+            vm.pickedItem = false;
+        };
+
+        vm.openItem = function () {
+
+        };
+
+        var initStore = function (store, value) {
+            vm.store = store;
+            dialogOptions.config.storeId = store.id;
+            if (value) {
+                vendrTaxResource.getTaxClass(value).then(function (entity) {
+                    vm.pickedItem = entity;
+                    vm.loading = false;
+                });
+            } else {
+                vm.loading = false;
+            }
+        };
+
+        var init = function (value) {
+
+            if (!storeId) {
+                vendrStoreResource.getBasicStoreByNodeId(currentOrParentNodeId).then(function (store) {
+                    initStore(store, value);
+                });
+            } else {
+                vendrStoreResource.getBasicStore(storeId).then(function (store) {
+                    initStore(store, value);
+                });
+            }
+
+        };
+
+        init(vm.model.value);
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.TaxClassPickerController', TaxClassPickerController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function UmbracoMemberGroupsPickerController($scope, editorService, memberGroupResource) 
+    {
+        $scope.pickGroup = function() {
+            editorService.memberGroupPicker({
+                multiPicker: true,
+                submit: function (model) {
+                    var selectedGroupIds = _.map(model.selectedMemberGroups
+                        ? model.selectedMemberGroups
+                        : [model.selectedMemberGroup],
+                        function(id) { return parseInt(id) }
+                    );
+                    memberGroupResource.getByIds(selectedGroupIds).then(function (selectedGroups) {
+                        $scope.model.value = $scope.model.value || [];
+                        _.each(selectedGroups, function(group) {
+                            var foundIndex = $scope.model.value.findIndex(function (itm) {
+                                return itm == group.name;
+                            });
+                            if (foundIndex == -1){
+                                $scope.model.value.push(group.name);
+                            }
+                        });
+                    });
+                    editorService.close();
+                },
+                close: function () {
+                    editorService.close();
+                }
+            });
+        }
+
+        $scope.removeGroup = function (group) {
+            var foundIndex = $scope.model.value.findIndex(function (itm) {
+                return itm == group;
+            });
+            if (foundIndex > -1){
+                $scope.model.value.splice(foundIndex, 1);
+            }
+        }
+    }
+
+    angular.module('vendr').controller('Vendr.Controllers.UmbracoMemberGroupsPickerController', UmbracoMemberGroupsPickerController);
+
+}());
+(function () {
+
+    'use strict';
+
+    function VariantsEditorController($scope, $routeParams, $element, angularHelper, eventsService, vendrVariantsEditorState)
+    {
+        var vm = this;
+
+        var isDocTypeEditorPreview = $routeParams.section == "settings" && $routeParams.tree == "documentTypes";
+
+        var init = function () {
+
+            // Ensure model has a baseline value
+            if (typeof vm.model.value !== 'object' || vm.model.value === null) {
+                vm.model.value = {};
+            }
+
+            // Ensure we have an umbVariantContent
+            if (vm.umbProperty && !vm.umbVariantContent)
+            {
+                // not found, then fallback to searching the scope chain, this may be needed when DOM inheritance isn't maintained but scope
+                // inheritance is (i.e.infinite editing)
+                var found = angularHelper.traverseScopeChain($scope, s => s && s.vm && s.vm.constructor.name === "umbVariantContentController");
+                vm.umbVariantContent = found ? found.vm : null;
+                if (!vm.umbVariantContent) {
+                    throw "Could not find umbVariantContent in the $scope chain";
+                }
+            }
+
+            // If the prop editor value changes on the server, we'll need to raise an event
+            // so our content app can be notified
+            vm.model.onValueChanged = function (newVal) {
+
+                // We need to ensure that the property model value is an object, this is needed for modelObject to recive a reference and keep that updated.
+                if (typeof newVal !== 'object' || newVal === null) {
+                    vm.model.value = newVal = {};
+                }
+
+                eventsService.emit("variantsEditor.modelValueChanged", { value: newVal });
+
+            }
+
+            // For some reason the block list API needs to know the scope of existance
+            // so we work this out now to pass to the variants editor state object
+            var scopeOfExistence = $scope;
+            if (vm.umbVariantContentEditors && vm.umbVariantContentEditors.getScope) {
+                scopeOfExistence = vm.umbVariantContentEditors.getScope();
+            } else if (vm.umbElementEditorContent && vm.umbElementEditorContent.getScope) {
+                scopeOfExistence = vm.umbElementEditorContent.getScope();
+            }
+
+            // We don't actually do anything in the property editor itself,
+            // instead we register the current model with the variants editor
+            // state service such that the variants content app can gain access
+            // to it, then we leave it to the content app to do everything.
+            vendrVariantsEditorState.set({
+                model: vm.model,
+                propertyForm: vm.propertyForm,
+                umbProperty: vm.umbProperty,
+                umbVariantContent: vm.umbVariantContent,
+                umbVariantContentEditors: vm.umbVariantContentEditors,
+                umbElementEditorContent: vm.umbElementEditorContent,
+                scope: $scope,
+                scopeOfExistence: scopeOfExistence,
+            });
+
+        };
+
+        vm.$onInit = function () {
+            if (!isDocTypeEditorPreview) {
+                init();
+            }
+        }
+
+        $scope.$on("$destroy", function () {
+            vendrVariantsEditorState.reset();
+        });
+    }
+
+    angular
+        .module("vendr")
+        .component("vendrVariantsEditor", {
+            template: "<div></div>",
+            controller: VariantsEditorController,
+            controllerAs: "vm",
+            bindings: {
+                model: "="
+            },
+            require: {
+                propertyForm: "^form",
+                umbProperty: "?^umbProperty",
+                umbVariantContent: '?^^umbVariantContent',
+                umbVariantContentEditors: '?^^umbVariantContentEditors',
+                umbElementEditorContent: '?^^umbElementEditorContent'
+            }
+        });
+
+    // angular.module('vendr').controller('Vendr.Controllers.VariantsEditorController', VariantsEditorController);
 
 }());
